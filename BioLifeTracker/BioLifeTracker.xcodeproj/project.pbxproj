@@ -13,6 +13,9 @@
 		3205E74F1AAED9F9006F374D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3205E74E1AAED9F9006F374D /* Images.xcassets */; };
 		3205E7521AAED9F9006F374D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3205E7501AAED9F9006F374D /* LaunchScreen.xib */; };
 		3205E75E1AAED9F9006F374D /* BioLifeTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E75D1AAED9F9006F374D /* BioLifeTrackerTests.swift */; };
+		3205E76B1AAEDA4A006F374D /* facebook-login-blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 3205E7681AAEDA4A006F374D /* facebook-login-blue.png */; };
+		3205E76C1AAEDA4A006F374D /* lineGraph.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3205E7691AAEDA4A006F374D /* lineGraph.gif */; };
+		3205E76D1AAEDA4A006F374D /* pie-sample.png in Resources */ = {isa = PBXBuildFile; fileRef = 3205E76A1AAEDA4A006F374D /* pie-sample.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,9 @@
 		3205E7571AAED9F9006F374D /* BioLifeTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BioLifeTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3205E75C1AAED9F9006F374D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3205E75D1AAED9F9006F374D /* BioLifeTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioLifeTrackerTests.swift; sourceTree = "<group>"; };
+		3205E7681AAEDA4A006F374D /* facebook-login-blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "facebook-login-blue.png"; path = "../../Images/facebook-login-blue.png"; sourceTree = "<group>"; };
+		3205E7691AAEDA4A006F374D /* lineGraph.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = lineGraph.gif; path = ../../Images/lineGraph.gif; sourceTree = "<group>"; };
+		3205E76A1AAEDA4A006F374D /* pie-sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pie-sample.png"; path = "../../Images/pie-sample.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +65,7 @@
 		3205E7391AAED9F9006F374D = {
 			isa = PBXGroup;
 			children = (
+				3205E7671AAEDA38006F374D /* Images */,
 				3205E7441AAED9F9006F374D /* BioLifeTracker */,
 				3205E75A1AAED9F9006F374D /* BioLifeTrackerTests */,
 				3205E7431AAED9F9006F374D /* Products */,
@@ -110,6 +117,17 @@
 				3205E75C1AAED9F9006F374D /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3205E7671AAEDA38006F374D /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				3205E7681AAEDA4A006F374D /* facebook-login-blue.png */,
+				3205E7691AAEDA4A006F374D /* lineGraph.gif */,
+				3205E76A1AAEDA4A006F374D /* pie-sample.png */,
+			);
+			name = Images;
+			path = BioLifeTracker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,9 +210,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3205E76D1AAEDA4A006F374D /* pie-sample.png in Resources */,
 				3205E74D1AAED9F9006F374D /* Main.storyboard in Resources */,
+				3205E76C1AAEDA4A006F374D /* lineGraph.gif in Resources */,
 				3205E7521AAED9F9006F374D /* LaunchScreen.xib in Resources */,
 				3205E74F1AAED9F9006F374D /* Images.xcassets in Resources */,
+				3205E76B1AAEDA4A006F374D /* facebook-login-blue.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
