@@ -22,7 +22,7 @@ class ProjectsViewController: UITableViewController, UITableViewDataSource, UITa
     let projectCreator = "Default"
     
     override func viewDidLoad() {
-        
+        super.viewDidLoad()
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS

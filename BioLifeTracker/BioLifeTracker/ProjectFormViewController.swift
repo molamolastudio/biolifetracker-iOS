@@ -17,12 +17,15 @@ class ProjectFormViewController: UITableViewController {
     @IBOutlet weak var btnCreateEthogram: UIButton!
     @IBOutlet weak var btnSelectEthogram: UIButton!
     
-    let messageNoEthograms = "You have no ethograms saved"
+    let rowHeight: CGFloat = 44
+    
+    let messageNoEthograms = "You have no ethograms"
     let messageNoEthogramsSelected = "Select an ethogram"
     var selectedEthogram: Ethogram? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.rowHeight = rowHeight
         toggleVisibilityOfViews()
     }
     
