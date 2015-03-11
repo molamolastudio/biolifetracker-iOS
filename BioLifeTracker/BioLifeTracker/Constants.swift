@@ -30,4 +30,11 @@ struct Constants {
         static let ethogram = "E"
         static let session = "S"
     }
+    
+    struct Default {
+        static let userName = "Default User"
+        static let ethogramName = "Default ethogram"
+        static let projectName = "Activity Pattern"
+        static let animalName = "Animal"
+    }
 }

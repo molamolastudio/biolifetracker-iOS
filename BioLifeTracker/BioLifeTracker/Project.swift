@@ -13,14 +13,23 @@ class Project {
     
     var name: String
     var animal: String
-    var ethogram: String
+    var ethogram: Ethogram
     var createdTime: NSDate
     var creator: User
     var id: String?
     var members: [User] = []
     var sessions: [Session] = []
     
-    init(name: String, animal: String, ethogram: String, createdTime: NSDate, creator: User) {
+    // Default initialiser
+    init() {
+        self.name = Constants.Default.projectName
+        self.animal = Constants.Default.animalName
+        self.ethogram = Ethogram()
+        self.createdTime = NSDate()
+        self.creator = Data.currentUser
+    }
+    
+    init(name: String, animal: String, ethogram: Ethogram, createdTime: NSDate, creator: User) {
         self.name = name
         self.animal = animal
         self.ethogram = ethogram
