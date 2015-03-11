@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct Constants {
     
@@ -38,5 +38,9 @@ struct Constants {
         static let animalName = "Animal"
         
         static let ethogramCode = "E999"
+    }
+    
+    struct Table {
+        static let rowHeight: CGFloat = 44
     }
 }
