@@ -9,11 +9,11 @@
 import UIKit
 
 class ProjectFormViewController: UITableViewController, EthogramPickerDelegate {
-
+    
     @IBOutlet weak var textFieldTitle: UITextField!
     @IBOutlet weak var textFieldAnimal: UITextField!
     @IBOutlet weak var labelEthogram: UILabel!
-
+    
     @IBOutlet weak var btnCreateEthogram: UIButton!
     @IBOutlet weak var btnSelectEthogram: UIButton!
     
@@ -24,20 +24,31 @@ class ProjectFormViewController: UITableViewController, EthogramPickerDelegate {
     let messageNoEthograms = "You have no ethograms"
     let messageNoEthogramsSelected = "Select an ethogram"
     
+    let segueToProjectHome = "NewProjectToProjectHome"
     let segueToNewEthogram = "NewProjectToNewEthogram"
     let segueFromNewEthogram = "NewEthogramToNewProject"
     
     var project: Project? = nil
     var selectedEthogram: Ethogram? = nil
     
+    var alert = UIAlertController()
+    let alertTitle = "Incomplete Project"
+    let alertMessage = "All fields must be filled."
+    
     override func viewDidLoad() {
         self.tableView.rowHeight = rowHeight
-        Data.ethograms.append(Ethogram()) // For testing
+        if Data.ethograms.count == 0 {
+            Data.ethograms.append(Ethogram()) // For testing
+        }
+        setupAlertController()
         
         refreshView()
-        if project == nil {
-            project = Project() // Create a blank project
-        }
+    }
+    
+    func setupAlertController() {
+        alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let actionOk = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        alert.addAction(actionOk)
     }
     
     // Toggles visibility of views based on state data.
@@ -70,6 +81,20 @@ class ProjectFormViewController: UITableViewController, EthogramPickerDelegate {
                     // No ethogram was created
                 }
             }
+        }
+    }
+    
+    // Checks if all input is filled before creating project and moving to next page.
+    @IBAction func btnDonePressed(sender: UIBarButtonItem) {
+        if textFieldTitle.text == "" || textFieldAnimal.text == "" || selectedEthogram == nil {
+            self.presentViewController(alert, animated: true, completion: {})
+        } else {
+            let p = Project(name: textFieldTitle.text,
+                animal: textFieldAnimal.text,
+                ethogram: selectedEthogram!)
+            Data.selectedProject = p
+            Data.projects.append(p)
+            self.performSegueWithIdentifier(segueToProjectHome, sender: self)
         }
     }
     

@@ -12,14 +12,13 @@ class ProjectsViewController: UITableViewController, UITableViewDataSource, UITa
     
     let cellReuseIdentifier = "ProjectTableCell"
     
-    let numRowsInSection: [Int] = [3] //[Data.projects.count]
     let numSections = 1
-    
-    let projectTitles = ["Project 1", "Project 2", "Project 3"]
-    let projectCreator = "Default"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if Data.projects.count == 0 {
+            Data.projects.append(Project()) // For testing
+        }
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS
@@ -28,17 +27,20 @@ class ProjectsViewController: UITableViewController, UITableViewDataSource, UITa
         
         let title = cell.viewWithTag(Constants.ViewTags.projectsCellTitle) as UILabel
         let subtitle = cell.viewWithTag(Constants.ViewTags.projectsCellSubtitle) as UILabel
-        //let project = Data.projects[indexPath.row]
+        let project = Data.projects[indexPath.row]
         
-        // Default values manually inserted for testing
-        title.text = projectTitles[indexPath.row] //project.getDisplayName()
-        subtitle.text = projectCreator //project.creator.name
+        title.text = project.getDisplayName()
+        subtitle.text = project.creator.name
         
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        Data.selectedProject = Data.projects[indexPath.row]
+    }
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numRowsInSection[section]
+        return Data.projects.count
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

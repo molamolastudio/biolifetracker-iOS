@@ -135,7 +135,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="D9E-Up-27r" kind="presentation" id="9bS-E5-Y8I"/>
+                                    <segue destination="D9E-Up-27r" kind="presentation" identifier="ProjectsToProjectHome" id="9bS-E5-Y8I"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -278,7 +278,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Done" id="mQT-Cv-93d">
                             <connections>
-                                <segue destination="D9E-Up-27r" kind="presentation" identifier="ProjectHome" id="0VO-vM-dgF"/>
+                                <action selector="btnDonePressed:" destination="MJP-iA-IxS" id="VCa-C9-YnQ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -290,6 +290,7 @@
                         <outlet property="textFieldAnimal" destination="SUq-f5-VT3" id="wXv-II-nYH"/>
                         <outlet property="textFieldTitle" destination="DsW-BO-CXW" id="rK4-Ju-nWn"/>
                         <segue destination="ew2-lP-x9p" kind="presentation" identifier="NewProjectToNewEthogram" id="BOe-qX-9Ev"/>
+                        <segue destination="D9E-Up-27r" kind="presentation" identifier="NewProjectToProjectHome" id="Lrc-vc-5Pz"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7GS-V0-0hY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -432,7 +433,7 @@
         <!--Home-->
         <scene sceneID="eRZ-VT-kY9">
             <objects>
-                <viewController id="BNO-B7-2SY" sceneMemberID="viewController">
+                <viewController id="BNO-B7-2SY" customClass="ProjectHomeViewController" customModule="BioLifeTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1cG-Bj-4Gw"/>
                         <viewControllerLayoutGuide type="bottom" id="Qeg-AP-8uB"/>
@@ -444,7 +445,7 @@
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nkz-0c-E3p">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
-                                    <navigationItem title="Project Name" id="ceK-0n-Vm4">
+                                    <navigationItem title="Home" id="ceK-0n-Vm4">
                                         <barButtonItem key="leftBarButtonItem" title="&lt; Projects" id="HhD-qW-DBi">
                                             <connections>
                                                 <segue destination="CwV-GY-GDn" kind="presentation" id="Iis-Vj-qlc"/>
@@ -453,11 +454,20 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XXU-A0-4S6">
+                                <rect key="frame" x="16" y="79" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Home" id="cAL-dA-FI6"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="labelProjectName" destination="XXU-A0-4S6" id="aBA-xM-CEa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KVg-2t-e3x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -505,9 +515,9 @@
         <image name="facebook-login-blue.png" width="416" height="101"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0VO-vM-dgF"/>
         <segue reference="E55-bJ-phW"/>
         <segue reference="NMg-25-rjq"/>
+        <segue reference="Lrc-vc-5Pz"/>
         <segue reference="Iis-Vj-qlc"/>
     </inferredMetricsTieBreakers>
 </document>

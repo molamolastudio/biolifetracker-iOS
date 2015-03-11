@@ -27,14 +27,15 @@ class Project {
         self.ethogram = Ethogram()
         self.createdTime = NSDate()
         self.creator = Data.currentUser
+        self.members.append(creator)
     }
     
-    init(name: String, animal: String, ethogram: Ethogram, createdTime: NSDate, creator: User) {
+    init(name: String, animal: String, ethogram: Ethogram) {
         self.name = name
         self.animal = animal
         self.ethogram = ethogram
-        self.createdTime = createdTime
-        self.creator = creator
+        self.createdTime = NSDate()
+        self.creator = Data.currentUser
         self.id = generateProjectId()
         self.members.append(creator)
     }

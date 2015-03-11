@@ -54,6 +54,7 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
             ethogram = Ethogram()  // Create a blank ethogram to fill in.
         }
         btnAdd = createAddButton()
+        setupAlertController()
     }
     
     func refreshView() {
