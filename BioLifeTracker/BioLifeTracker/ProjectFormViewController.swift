@@ -21,12 +21,21 @@ class ProjectFormViewController: UITableViewController {
     
     let messageNoEthograms = "You have no ethograms"
     let messageNoEthogramsSelected = "Select an ethogram"
+    
+    let segueToNewEthogram = "NewProjectToNewEthogram"
+    let segueFromNewEthogram = "NewEthogramToNewProject"
+    
+    var project: Project? = nil
     var selectedEthogram: Ethogram? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.rowHeight = rowHeight
         toggleVisibilityOfViews()
+        
+        if project == nil {
+            project = Project() // Create a blank project
+        }
     }
     
     func toggleVisibilityOfViews() {
@@ -46,8 +55,24 @@ class ProjectFormViewController: UITableViewController {
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == segueFromNewEthogram {
+            if let vc = segue.sourceViewController as? EthogramFormViewController {
+                
+                // Get the ethogram created from the controller
+                if let ethogram = vc.ethogram {
+                    project?.ethogram = ethogram
+                    // Update display
+                } else {
+                    // No ethogram was created
+                }
+            }
+        }
+    }
+    
     @IBAction func btnCreateEthogramPressed(sender: UIButton) {
-        // Segue to create ethogram with this project's id
+        // Segue to create ethogram with reference to this view controller.
+        self.performSegueWithIdentifier(segueToNewEthogram, sender: self)
     }
     
     @IBAction func btnSelectEthogramPressed(sender: UIButton) {

@@ -287,7 +287,7 @@
                         <outlet property="textFieldAnimal" destination="SUq-f5-VT3" id="wXv-II-nYH"/>
                         <outlet property="textFieldEthogram" destination="49P-O4-Kd9" id="9Oh-C6-WgB"/>
                         <outlet property="textFieldTitle" destination="DsW-BO-CXW" id="rK4-Ju-nWn"/>
-                        <segue destination="ew2-lP-x9p" kind="presentation" id="BOe-qX-9Ev"/>
+                        <segue destination="ew2-lP-x9p" kind="presentation" identifier="NewProjectToNewEthogram" id="BOe-qX-9Ev"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7GS-V0-0hY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -297,7 +297,7 @@
         <!--New Ethogram-->
         <scene sceneID="iFB-6L-EFK">
             <objects>
-                <tableViewController id="Qbo-JK-X6n" sceneMemberID="viewController">
+                <tableViewController id="Qbo-JK-X6n" customClass="EthogramFormViewController" customModule="BioLifeTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="MFa-Ms-MzN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -343,9 +343,20 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="New Ethogram" id="ZVw-1W-Q7b">
-                        <barButtonItem key="leftBarButtonItem" title="&lt; Back" id="EWI-iO-mp2"/>
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="qEz-MM-Yfo"/>
+                        <barButtonItem key="leftBarButtonItem" title="&lt; Back" id="EWI-iO-mp2">
+                            <connections>
+                                <action selector="btnBackPressed:" destination="Qbo-JK-X6n" id="mnK-XL-ZtT"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="qEz-MM-Yfo">
+                            <connections>
+                                <action selector="btnDonePressed:" destination="Qbo-JK-X6n" id="82L-Mg-mw0"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="MJP-iA-IxS" kind="presentation" identifier="NewEthogramToNewProject" id="lXz-gG-kpb"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ARg-yJ-Swa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -473,6 +484,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="0VO-vM-dgF"/>
+        <segue reference="lXz-gG-kpb"/>
         <segue reference="NMg-25-rjq"/>
         <segue reference="Iis-Vj-qlc"/>
     </inferredMetricsTieBreakers>
