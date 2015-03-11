@@ -27,7 +27,8 @@
 		3205E7821AAEDB03006F374D /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E77F1AAEDB03006F374D /* ProjectsViewController.swift */; };
 		3205E7831AAEDB03006F374D /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7801AAEDB03006F374D /* StartViewController.swift */; };
 		3205E7851AAFFE98006F374D /* EthogramFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */; };
-		3205E7871AB03309006F374D /* EthogramPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3205E7861AB03309006F374D /* EthogramPicker.xib */; };
+		3205E7871AB03309006F374D /* EthogramPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3205E7861AB03309006F374D /* EthogramPickerCell.xib */; };
+		32517A1C1AB072BB00578C42 /* EthogramPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A1B1AB072BB00578C42 /* EthogramPickerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,7 +66,8 @@
 		3205E77F1AAEDB03006F374D /* ProjectsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsViewController.swift; sourceTree = "<group>"; };
 		3205E7801AAEDB03006F374D /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramFormViewController.swift; sourceTree = "<group>"; };
-		3205E7861AB03309006F374D /* EthogramPicker.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EthogramPicker.xib; sourceTree = "<group>"; };
+		3205E7861AB03309006F374D /* EthogramPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EthogramPickerCell.xib; sourceTree = "<group>"; };
+		32517A1B1AB072BB00578C42 /* EthogramPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramPickerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,8 +123,9 @@
 				3205E77E1AAEDB03006F374D /* ProjectFormViewController.swift */,
 				3205E77F1AAEDB03006F374D /* ProjectsViewController.swift */,
 				3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */,
+				32517A1B1AB072BB00578C42 /* EthogramPickerViewController.swift */,
 				3205E74B1AAED9F9006F374D /* Main.storyboard */,
-				3205E7861AB03309006F374D /* EthogramPicker.xib */,
+				3205E7861AB03309006F374D /* EthogramPickerCell.xib */,
 				3205E74E1AAED9F9006F374D /* Images.xcassets */,
 				3205E7501AAED9F9006F374D /* LaunchScreen.xib */,
 				3205E7451AAED9F9006F374D /* Supporting Files */,
@@ -250,7 +253,7 @@
 				3205E74D1AAED9F9006F374D /* Main.storyboard in Resources */,
 				3205E76C1AAEDA4A006F374D /* lineGraph.gif in Resources */,
 				3205E7521AAED9F9006F374D /* LaunchScreen.xib in Resources */,
-				3205E7871AB03309006F374D /* EthogramPicker.xib in Resources */,
+				3205E7871AB03309006F374D /* EthogramPickerCell.xib in Resources */,
 				3205E74F1AAED9F9006F374D /* Images.xcassets in Resources */,
 				3205E76B1AAEDA4A006F374D /* facebook-login-blue.png in Resources */,
 			);
@@ -282,6 +285,7 @@
 				3205E77D1AAEDA85006F374D /* User.swift in Sources */,
 				3205E77C1AAEDA85006F374D /* Session.swift in Sources */,
 				3205E7851AAFFE98006F374D /* EthogramFormViewController.swift in Sources */,
+				32517A1C1AB072BB00578C42 /* EthogramPickerViewController.swift in Sources */,
 				3205E7811AAEDB03006F374D /* ProjectFormViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -476,6 +480,7 @@
 				3205E7631AAED9F9006F374D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3205E7641AAED9F9006F374D /* Build configuration list for PBXNativeTarget "BioLifeTrackerTests" */ = {
 			isa = XCConfigurationList;
@@ -484,6 +489,7 @@
 				3205E7661AAED9F9006F374D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
