@@ -97,6 +97,7 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
             let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseNameCell) as UITableViewCell
             let textField = cell.viewWithTag(tagNameField) as UITextField
             textField.delegate = self
+            textField.addTarget(self, action: Selector("nameRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
             return cell
         } else {
             let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseCodeCell) as UITableViewCell
@@ -104,6 +105,8 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
             textField.delegate = self
             
             textField.text = ethogram?.id
+            
+            textField.addTarget(self, action: Selector("codeRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
             return cell
         }
     }
@@ -118,18 +121,37 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
         if ethogram!.behaviourStates.count < indexPath.row {
             textField.text = ethogram!.behaviourStates[indexPath.row].name
             textField.userInteractionEnabled = false
-            
+            textField.removeTarget(self, action: Selector("extraRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
         } else if ethogram!.behaviourStates.count == indexPath.row {
             textField.placeholder = messageNewState
             textField.userInteractionEnabled = true
+            textField.addTarget(self, action: Selector("extraRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
         }
         return cell
     }
     
-    func extraRowTouched(sender: UITextField) {
-        let cell = sender.superview!.superview! as UITableViewCell
-        cell.addSubview(btnAdd!)
-        btnAdd!.frame = frameBtnAdd
+    // Selectors for text fields
+    func nameRowDidChange(sender: UITextField) {
+        if sender.text != "" {
+            ethogram!.name = sender.text
+        }
+    }
+    
+    func codeRowDidChange(sender: UITextField) {
+        if sender.text != "" {
+            ethogram!.code = sender.text
+        }
+    }
+    
+    func extraRowDidChange(sender: UITextField) {
+        if sender.text != "" {
+            let cell = sender.superview!.superview! as UITableViewCell
+            cell.addSubview(btnAdd!)
+            btnAdd!.frame = frameBtnAdd
+        } else {
+            sender.placeholder = messageNewState
+            btnAdd!.removeFromSuperview()
+        }
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -164,40 +186,6 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
                 let index = indexPath.row
                 ethogram!.behaviourStates.removeAtIndex(index)
             }
-        }
-    }
-    
-    // UITextFieldDelegate METHODS
-    
-    func textFieldDidBeginEditing(textField: UITextField) {
-        switch textField.tag {
-        case tagCellFullTextField:
-            extraRowTouched(textField)
-            break
-        default:
-            break
-        }
-    }
-
-    // Updates data for the ethogram being created when user finishes keying in text
-    func textFieldDidEndEditing(textField: UITextField) {
-        switch textField.tag {
-        case tagNameField:
-            ethogram!.name = textField.text
-            break
-        case tagCodeField:
-            ethogram!.code = textField.text
-            break
-        case tagCellFullTextField:
-            if textField.text != "" {
-                extraRowTouched(textField)
-            } else {
-                textField.placeholder = messageNewState
-                btnAdd!.removeFromSuperview()
-            }
-            break
-        default:
-            break
         }
     }
     
