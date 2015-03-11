@@ -10,9 +10,9 @@ import Foundation
 
 class BehaviourState {
     var name: String
-    var id: String
+    var id: Int
     
-    init(name: String, id: String) {
+    init(name: String, id: Int) {
         self.name = name
         self.id = id
     }
