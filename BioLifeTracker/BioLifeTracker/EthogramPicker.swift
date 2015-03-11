@@ -15,10 +15,14 @@ class EthogramPicker: UIViewController, UITableViewDataSource, UITableViewDelega
     let overlay = UIView()
     let shadow = UIView()
     
-    let alphaHalf: CGFloat = 0.5
+    let alphaQuarter: Float = 0.25
+    let cornerRadius: CGFloat = 5
     
     let tableFrame = CGRectMake(10, 150, 355, 200)
-    let shadowFrame = CGRectMake(8, 152, 355, 200)
+    let shadowFrame = CGRectMake(0, 0, 355, 200)
+    
+    let tableBorderWidth: CGFloat = 0.5
+    let tableBorderColor = UIColor.lightGrayColor().CGColor
     
     let fileName = "EthogramPickerCell"
     let cellReuseIdentifier = "PickerCell"
@@ -46,9 +50,14 @@ class EthogramPicker: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func setupShadow() {
-        shadow.frame = shadowFrame
-        shadow.backgroundColor = UIColor.blackColor()
-        shadow.alpha = alphaHalf
+        shadow.frame = tableFrame
+        shadow.backgroundColor = UIColor.clearColor()
+        shadow.layer.masksToBounds = false
+        shadow.layer.shadowColor = UIColor.blackColor().CGColor
+        shadow.layer.shadowPath = UIBezierPath(roundedRect: shadowFrame, cornerRadius: cornerRadius).CGPath
+        shadow.layer.shadowOffset = CGSizeZero
+        shadow.layer.shadowOpacity = alphaQuarter
+        shadow.layer.shadowRadius = cornerRadius
         self.view.addSubview(shadow)
     }
     
@@ -56,6 +65,11 @@ class EthogramPicker: UIViewController, UITableViewDataSource, UITableViewDelega
         table.frame = tableFrame
         table.dataSource = self
         table.delegate = self
+        
+        table.layer.cornerRadius = cornerRadius
+        table.layer.borderWidth = tableBorderWidth
+        table.layer.borderColor = tableBorderColor
+            
         self.view.addSubview(table)
     }
     
