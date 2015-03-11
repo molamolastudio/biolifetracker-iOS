@@ -28,7 +28,8 @@
 		3205E7831AAEDB03006F374D /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7801AAEDB03006F374D /* StartViewController.swift */; };
 		3205E7851AAFFE98006F374D /* EthogramFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */; };
 		3205E7871AB03309006F374D /* EthogramPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3205E7861AB03309006F374D /* EthogramPickerCell.xib */; };
-		32517A1C1AB072BB00578C42 /* EthogramPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A1B1AB072BB00578C42 /* EthogramPickerViewController.swift */; };
+		32517A1C1AB072BB00578C42 /* EthogramPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A1B1AB072BB00578C42 /* EthogramPicker.swift */; };
+		32517A1E1AB0913600578C42 /* EthogramPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A1D1AB0913600578C42 /* EthogramPickerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,7 +68,8 @@
 		3205E7801AAEDB03006F374D /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramFormViewController.swift; sourceTree = "<group>"; };
 		3205E7861AB03309006F374D /* EthogramPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EthogramPickerCell.xib; sourceTree = "<group>"; };
-		32517A1B1AB072BB00578C42 /* EthogramPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramPickerViewController.swift; sourceTree = "<group>"; };
+		32517A1B1AB072BB00578C42 /* EthogramPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramPicker.swift; sourceTree = "<group>"; };
+		32517A1D1AB0913600578C42 /* EthogramPickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramPickerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,7 +125,8 @@
 				3205E77E1AAEDB03006F374D /* ProjectFormViewController.swift */,
 				3205E77F1AAEDB03006F374D /* ProjectsViewController.swift */,
 				3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */,
-				32517A1B1AB072BB00578C42 /* EthogramPickerViewController.swift */,
+				32517A1B1AB072BB00578C42 /* EthogramPicker.swift */,
+				32517A1D1AB0913600578C42 /* EthogramPickerDelegate.swift */,
 				3205E74B1AAED9F9006F374D /* Main.storyboard */,
 				3205E7861AB03309006F374D /* EthogramPickerCell.xib */,
 				3205E74E1AAED9F9006F374D /* Images.xcassets */,
@@ -285,8 +288,9 @@
 				3205E77D1AAEDA85006F374D /* User.swift in Sources */,
 				3205E77C1AAEDA85006F374D /* Session.swift in Sources */,
 				3205E7851AAFFE98006F374D /* EthogramFormViewController.swift in Sources */,
-				32517A1C1AB072BB00578C42 /* EthogramPickerViewController.swift in Sources */,
+				32517A1C1AB072BB00578C42 /* EthogramPicker.swift in Sources */,
 				3205E7811AAEDB03006F374D /* ProjectFormViewController.swift in Sources */,
+				32517A1E1AB0913600578C42 /* EthogramPickerDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

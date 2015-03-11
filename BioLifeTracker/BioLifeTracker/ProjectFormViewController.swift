@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProjectFormViewController: UITableViewController {
+class ProjectFormViewController: UITableViewController, EthogramPickerDelegate {
 
     @IBOutlet weak var textFieldTitle: UITextField!
     @IBOutlet weak var textFieldAnimal: UITextField!
@@ -17,8 +17,7 @@ class ProjectFormViewController: UITableViewController {
     @IBOutlet weak var btnCreateEthogram: UIButton!
     @IBOutlet weak var btnSelectEthogram: UIButton!
     
-
-    let framePicker = CGRectMake(10, 150, 355, 200)
+    var picker: EthogramPicker? = nil
     
     let rowHeight: CGFloat = 44
     
@@ -80,6 +79,24 @@ class ProjectFormViewController: UITableViewController {
     }
     
     @IBAction func btnSelectEthogramPressed(sender: UIButton) {
+        picker = EthogramPicker()
+        picker!.delegate = self
         
+        for e in Data.ethograms {
+            picker!.data.append(e.name)
+        }
+        
+        self.view.addSubview(picker!.view)
+        picker!.view.frame = self.view.frame
+    }
+    
+    // EthogramPickerDelegate METHOD
+    func pickerDidDismiss(selectedRow: Int?) {
+        picker!.view.removeFromSuperview()
+        
+        if selectedRow != nil {
+            selectedEthogram = Data.ethograms[selectedRow!]
+            refreshView()
+        }
     }
 }

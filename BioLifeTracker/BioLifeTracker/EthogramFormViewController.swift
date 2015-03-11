@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EthogramFormViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+class EthogramFormViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
     
     let segueToNewProject = "NewEthogramToNewProject"
     
@@ -45,7 +45,7 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
     
     // UI elements to add later
     var btnAdd: UIButton? // For the behaviour state section
-    let frameBtnAdd = CGRectMake(317, 9, 50, 30)
+    let btnAddFrame = CGRectMake(317, 9, 50, 30)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,13 +101,11 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
         if isFirstRow(indexPath.row) {
             let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseNameCell) as UITableViewCell
             let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormNameField) as UITextField
-            textField.delegate = self
             textField.addTarget(self, action: Selector("nameRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
             return cell
         } else {
             let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseCodeCell) as UITableViewCell
             let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormCodeField) as UITextField
-            textField.delegate = self
             
             textField.text = ethogram?.id
             
@@ -120,8 +118,6 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
     func getCellForSecondSection(indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseTextField) as UITableViewCell
         let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormCellFullTextField) as UITextField
-        
-        textField.delegate = self
         
         if ethogram!.behaviourStates.count < indexPath.row {
             textField.text = ethogram!.behaviourStates[indexPath.row].name
@@ -152,7 +148,7 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
         if sender.text != "" {
             let cell = sender.superview!.superview! as UITableViewCell
             cell.addSubview(btnAdd!)
-            btnAdd!.frame = frameBtnAdd
+            btnAdd!.frame = btnAddFrame
         } else {
             sender.placeholder = messageNewState
             btnAdd!.removeFromSuperview()
