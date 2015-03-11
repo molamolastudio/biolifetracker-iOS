@@ -36,4 +36,8 @@ class Ethogram {
     func generateEthogramId() -> String {
         return Constants.CodePrefixes.ethogram + String(Data.ethograms.count + 1)
     }
+    
+    func addBehaviourState(state: BehaviourState) {
+        behaviourStates.append(state)
+    }
 }
