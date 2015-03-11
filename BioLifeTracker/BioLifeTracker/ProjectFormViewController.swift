@@ -12,10 +12,13 @@ class ProjectFormViewController: UITableViewController {
 
     @IBOutlet weak var textFieldTitle: UITextField!
     @IBOutlet weak var textFieldAnimal: UITextField!
-    @IBOutlet weak var textFieldEthogram: UITextField!
+    @IBOutlet weak var labelEthogram: UILabel!
 
     @IBOutlet weak var btnCreateEthogram: UIButton!
     @IBOutlet weak var btnSelectEthogram: UIButton!
+    
+
+    let framePicker = CGRectMake(10, 150, 355, 200)
     
     let rowHeight: CGFloat = 44
     
@@ -29,28 +32,29 @@ class ProjectFormViewController: UITableViewController {
     var selectedEthogram: Ethogram? = nil
     
     override func viewDidLoad() {
-        super.viewDidLoad()
         self.tableView.rowHeight = rowHeight
-        toggleVisibilityOfViews()
+        Data.ethograms.append(Ethogram()) // For testing
         
+        refreshView()
         if project == nil {
             project = Project() // Create a blank project
         }
     }
     
-    func toggleVisibilityOfViews() {
+    // Toggles visibility of views based on state data.
+    func refreshView() {
         if Data.ethograms.isEmpty {
             btnCreateEthogram.hidden = false
             btnSelectEthogram.hidden = true
-            textFieldEthogram.text = messageNoEthograms
+            labelEthogram.text = messageNoEthograms
         } else {
             btnCreateEthogram.hidden = true
             btnSelectEthogram.hidden = false
             
             if selectedEthogram == nil {
-                textFieldEthogram.text = messageNoEthogramsSelected
+                labelEthogram.text = messageNoEthogramsSelected
             } else {
-                textFieldEthogram.text = selectedEthogram!.name
+                labelEthogram.text = selectedEthogram!.name
             }
         }
     }
@@ -76,6 +80,6 @@ class ProjectFormViewController: UITableViewController {
     }
     
     @IBAction func btnSelectEthogramPressed(sender: UIButton) {
-        // Pop up a table view picker (with xib?)
+        
     }
 }

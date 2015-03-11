@@ -12,9 +12,6 @@ class ProjectsViewController: UITableViewController, UITableViewDataSource, UITa
     
     let cellReuseIdentifier = "ProjectTableCell"
     
-    let tagCellTitle = 100
-    let tagCellSubtitle = 101
-    
     let numRowsInSection: [Int] = [3] //[Data.projects.count]
     let numSections = 1
     
@@ -29,8 +26,8 @@ class ProjectsViewController: UITableViewController, UITableViewDataSource, UITa
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell
         
-        let title = cell.viewWithTag(tagCellTitle) as UILabel
-        let subtitle = cell.viewWithTag(tagCellSubtitle) as UILabel
+        let title = cell.viewWithTag(Constants.ViewTags.projectsCellTitle) as UILabel
+        let subtitle = cell.viewWithTag(Constants.ViewTags.projectsCellSubtitle) as UILabel
         //let project = Data.projects[indexPath.row]
         
         // Default values manually inserted for testing

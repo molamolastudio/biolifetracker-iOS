@@ -43,4 +43,13 @@ struct Constants {
     struct Table {
         static let rowHeight: CGFloat = 44
     }
+    
+    struct ViewTags {
+        static let projectsCellTitle = 100
+        static let projectsCellSubtitle = 101
+        static let ethogramFormNameField = 200
+        static let ethogramFormCodeField = 201
+        static let ethogramFormCellFullTextField = 202
+        static let pickerCellLabel = 300
+    }
 }

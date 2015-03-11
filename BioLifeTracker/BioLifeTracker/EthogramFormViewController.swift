@@ -12,10 +12,6 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
     
     let segueToNewProject = "NewEthogramToNewProject"
     
-    let tagNameField = 200
-    let tagCodeField = 201
-    let tagCellFullTextField = 202
-    
     let cellReuseNameCell = "NameCell"
     let cellReuseCodeCell = "CodeCell"
     let cellReuseTextField = "TextFieldOnly"
@@ -75,7 +71,7 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
     // then refreshes the view.
     func addButtonPressed(sender: UIButton) {
         let cell = sender.superview! as UITableViewCell
-        let textField = cell.viewWithTag(tagCellFullTextField) as UITextField
+        let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormCellFullTextField) as UITextField
         
         let state = BehaviourState(name: textField.text!, id: ethogram!.behaviourStates.count)
         ethogram!.addBehaviourState(state)
@@ -104,13 +100,13 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
     func getCellForFirstSection(indexPath: NSIndexPath) -> UITableViewCell {
         if isFirstRow(indexPath.row) {
             let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseNameCell) as UITableViewCell
-            let textField = cell.viewWithTag(tagNameField) as UITextField
+            let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormNameField) as UITextField
             textField.delegate = self
             textField.addTarget(self, action: Selector("nameRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
             return cell
         } else {
             let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseCodeCell) as UITableViewCell
-            let textField = cell.viewWithTag(tagCodeField) as UITextField
+            let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormCodeField) as UITextField
             textField.delegate = self
             
             textField.text = ethogram?.id
@@ -123,7 +119,7 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
     // Populates behaviour states in second section and sets up listeners for adding new state.
     func getCellForSecondSection(indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseTextField) as UITableViewCell
-        let textField = cell.viewWithTag(tagCellFullTextField) as UITextField
+        let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormCellFullTextField) as UITextField
         
         textField.delegate = self
         
