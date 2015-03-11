@@ -10,6 +10,7 @@ import Foundation
 
 class Ethogram {
     var name: String
+    var code: String
     var createdTime: NSDate
     var creator: User
     var behaviourStates: [BehaviourState] = []
@@ -17,13 +18,16 @@ class Ethogram {
     
     init() {
         self.name = Constants.Default.ethogramName
+        self.code = Constants.Default.ethogramCode
         self.createdTime = NSDate()
         self.creator = Data.currentUser
         self.id = generateEthogramId()
+        self.code = self.id!
     }
     
-    init(name: String) {
+    init(name: String, code: String) {
         self.name = name
+        self.code = code
         self.createdTime = NSDate()
         self.creator = Data.currentUser
         self.id = generateEthogramId()

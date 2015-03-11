@@ -36,5 +36,7 @@ struct Constants {
         static let ethogramName = "Default ethogram"
         static let projectName = "Activity Pattern"
         static let animalName = "Animal"
+        
+        static let ethogramCode = "E999"
     }
 }
