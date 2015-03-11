@@ -30,13 +30,16 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
     let sectionTitles = ["Details", "Behaviour States"]
     
     let firstSectionNumRows = 2
-    let firstSectionRowTitles = ["Name", "Code"]
     let firstRow = 0
     let secondRow = 1
     
     var secondSectionNumRows = 1
     var secondSectionRowTitles = []
     let extraRow = 1
+    
+    var alert = UIAlertController()
+    let alertTitle = "Incomplete Ethogram"
+    let alertMessage = "All fields must be filled."
     
     // For segues
     var source: UIViewController? = nil
@@ -80,6 +83,12 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
         sender.removeFromSuperview()
         
         refreshView()
+    }
+    
+    func setupAlertController() {
+        alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let actionOk = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        alert.addAction(actionOk)
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS
@@ -194,8 +203,14 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
         self.performSegueWithIdentifier(segueToNewProject, sender: self)
     }
     
+    // If the form is not filled completely, presents an alert to user to finish filling the form.
+    // Else, transitions to the New Project page.
     @IBAction func btnDonePressed(sender: UIBarButtonItem) {
-        self.performSegueWithIdentifier(segueToNewProject, sender: self)
+        if ethogram!.name == "" || ethogram!.code == "" || ethogram!.behaviourStates.isEmpty {
+            self.presentViewController(alert, animated: true, completion: nil)
+        } else {
+            self.performSegueWithIdentifier(segueToNewProject, sender: self)
+        }
     }
     
     // HELPER METHODS
