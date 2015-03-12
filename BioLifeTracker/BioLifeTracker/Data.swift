@@ -14,6 +14,7 @@ struct Data {
     static var currentUser: User = User(name: Constants.Default.userName)
     
     static var selectedProject: Project? = nil
+    static var selectedEthogram: Ethogram? = nil
     static var selectedSession: Session? = nil
     
     static var projects: [Project] = []

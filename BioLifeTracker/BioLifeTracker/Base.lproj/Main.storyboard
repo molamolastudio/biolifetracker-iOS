@@ -74,7 +74,7 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L5Y-mu-VEi">
-                                <rect key="frame" x="152" y="553" width="78" height="30"/>
+                                <rect key="frame" x="152" y="501" width="78" height="30"/>
                                 <state key="normal" title="All Projects">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -87,6 +87,15 @@
                                 <state key="normal" title="Create New Session">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6hE-Pd-FAA">
+                                <rect key="frame" x="147" y="539" width="96" height="30"/>
+                                <state key="normal" title="All Ethograms">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="bku-FP-0yL" kind="presentation" id="c5z-18-CVx"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -173,6 +182,70 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yi1-sQ-xzv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="292.5" y="1172.5"/>
+        </scene>
+        <!--Ethograms-->
+        <scene sceneID="E0A-ds-Vde">
+            <objects>
+                <tableViewController id="Eha-TP-H9z" customClass="EthogramsViewController" customModule="BioLifeTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Qss-vo-GEz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EthogramTableCell" textLabel="NqX-vb-4tH" detailTextLabel="W4z-St-OqF" style="IBUITableViewCellStyleSubtitle" id="auW-PW-977">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="auW-PW-977" id="LDp-pj-AwV">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" tag="400" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NqX-vb-4tH">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" tag="401" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="W4z-St-OqF">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Eha-TP-H9z" id="Q4H-uu-xMO"/>
+                            <outlet property="delegate" destination="Eha-TP-H9z" id="Q07-HB-gza"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Ethograms" id="e1m-Pi-saw">
+                        <barButtonItem key="leftBarButtonItem" title="&lt; Back" id="zxi-p0-i4D">
+                            <connections>
+                                <segue destination="vXZ-lx-hvc" kind="presentation" id="Tjs-XI-Sbm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Yf-6s-vxh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="772.5" y="1944.5"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="T4I-Bn-beG">
+            <objects>
+                <navigationController id="bku-FP-0yL" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="I9K-VE-Cez">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Eha-TP-H9z" kind="relationship" relationship="rootViewController" id="8UG-8k-zjS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bdQ-Dh-pcI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="292.5" y="1938.5"/>
         </scene>
         <!--New Project-->
         <scene sceneID="Tn3-Bm-iBk">
@@ -503,9 +576,9 @@
         <image name="facebook-login-blue.png" width="416" height="101"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="E55-bJ-phW"/>
-        <segue reference="NMg-25-rjq"/>
+        <segue reference="IUr-zQ-LuP"/>
+        <segue reference="Tjs-XI-Sbm"/>
+        <segue reference="YOs-tm-ROu"/>
         <segue reference="Lrc-vc-5Pz"/>
-        <segue reference="Iis-Vj-qlc"/>
     </inferredMetricsTieBreakers>
 </document>

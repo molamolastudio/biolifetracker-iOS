@@ -31,6 +31,7 @@
 		32517A1C1AB072BB00578C42 /* EthogramPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A1B1AB072BB00578C42 /* EthogramPicker.swift */; };
 		32517A1E1AB0913600578C42 /* EthogramPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A1D1AB0913600578C42 /* EthogramPickerDelegate.swift */; };
 		32517A201AB09A3D00578C42 /* ProjectHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A1F1AB09A3D00578C42 /* ProjectHomeViewController.swift */; };
+		32517A221AB1789100578C42 /* EthogramsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A211AB1789100578C42 /* EthogramsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		32517A1B1AB072BB00578C42 /* EthogramPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramPicker.swift; sourceTree = "<group>"; };
 		32517A1D1AB0913600578C42 /* EthogramPickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramPickerDelegate.swift; sourceTree = "<group>"; };
 		32517A1F1AB09A3D00578C42 /* ProjectHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectHomeViewController.swift; sourceTree = "<group>"; };
+		32517A211AB1789100578C42 /* EthogramsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 				3205E77F1AAEDB03006F374D /* ProjectsViewController.swift */,
 				32517A1F1AB09A3D00578C42 /* ProjectHomeViewController.swift */,
 				3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */,
+				32517A211AB1789100578C42 /* EthogramsViewController.swift */,
 				32517A1B1AB072BB00578C42 /* EthogramPicker.swift */,
 				32517A1D1AB0913600578C42 /* EthogramPickerDelegate.swift */,
 				3205E74B1AAED9F9006F374D /* Main.storyboard */,
@@ -294,6 +297,7 @@
 				3205E7851AAFFE98006F374D /* EthogramFormViewController.swift in Sources */,
 				32517A1C1AB072BB00578C42 /* EthogramPicker.swift in Sources */,
 				3205E7811AAEDB03006F374D /* ProjectFormViewController.swift in Sources */,
+				32517A221AB1789100578C42 /* EthogramsViewController.swift in Sources */,
 				32517A1E1AB0913600578C42 /* EthogramPickerDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

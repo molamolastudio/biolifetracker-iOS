@@ -51,5 +51,7 @@ struct Constants {
         static let ethogramFormCodeField = 201
         static let ethogramFormCellFullTextField = 202
         static let pickerCellLabel = 300
+        static let ethogramsCellTitle = 400
+        static let ethogramsCellSubtitle = 401
     }
 }
