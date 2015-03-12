@@ -120,7 +120,7 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
         let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseTextField) as UITableViewCell
         let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormCellFullTextField) as UITextField
         
-        if ethogram!.behaviourStates.count < indexPath.row {
+        if ethogram!.behaviourStates.count > indexPath.row {
             textField.text = ethogram!.behaviourStates[indexPath.row].name
             textField.userInteractionEnabled = false
             textField.removeTarget(self, action: Selector("extraRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
@@ -185,8 +185,9 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-                let index = indexPath.row
-                ethogram!.behaviourStates.removeAtIndex(index)
+                // Unable to delete cell, array out of bounds or hang
+                //let index = indexPath.row
+                //ethogram!.behaviourStates.removeAtIndex(index)
             }
         }
     }

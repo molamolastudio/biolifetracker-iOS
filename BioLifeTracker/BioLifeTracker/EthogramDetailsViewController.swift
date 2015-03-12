@@ -45,10 +45,6 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
         ethogram = Data.selectedEthogram!
         btnAdd = createAddButton()
         self.navigationItem.title = ethogram!.name
-        
-        for a in ethogram!.behaviourStates {
-            println(a.name)
-        }
     }
     
     func refreshView() {
@@ -106,8 +102,7 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
         let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseState) as UITableViewCell
         let textField = cell.viewWithTag(Constants.ViewTags.ethogramDetailState) as UITextField
         
-        if ethogram!.behaviourStates.count < indexPath.row {
-            println("text" + ethogram!.behaviourStates[indexPath.row].name)
+        if ethogram!.behaviourStates.count > indexPath.row {
             textField.text = ethogram!.behaviourStates[indexPath.row].name
             textField.userInteractionEnabled = false
             textField.removeTarget(self, action: Selector("extraRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
@@ -172,8 +167,9 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-                let index = indexPath.row
-                ethogram!.behaviourStates.removeAtIndex(index)
+                // Unable to delete cell, array out of bounds or hang
+                //let index = indexPath.row
+                //ethogram!.behaviourStates.removeAtIndex(index)
             }
         }
     }
