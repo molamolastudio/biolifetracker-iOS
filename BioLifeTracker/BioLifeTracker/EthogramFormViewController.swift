@@ -174,7 +174,7 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
     
     // For deleting extra behaviour states
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return isSecondSection(indexPath.row) && !isExtraRow(indexPath.row)
+        return isSecondSection(indexPath.section) && !isExtraRow(indexPath.row)
     }
     
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {

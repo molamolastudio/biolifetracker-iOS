@@ -45,6 +45,10 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
         ethogram = Data.selectedEthogram!
         btnAdd = createAddButton()
         self.navigationItem.title = ethogram!.name
+        
+        for a in ethogram!.behaviourStates {
+            println(a.name)
+        }
     }
     
     func refreshView() {
@@ -157,7 +161,7 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
     
     // For deleting extra behaviour states
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return isSecondSection(indexPath.row) && !isExtraRow(indexPath.row)
+        return isSecondSection(indexPath.section) && !isExtraRow(indexPath.row)
     }
     
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
