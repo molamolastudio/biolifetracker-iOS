@@ -12,17 +12,15 @@ class ProjectFormViewController: UITableViewController, EthogramPickerDelegate {
     
     @IBOutlet weak var textFieldTitle: UITextField!
     @IBOutlet weak var textFieldAnimal: UITextField!
-    @IBOutlet weak var labelEthogram: UILabel!
     
-    @IBOutlet weak var btnCreateEthogram: UIButton!
-    @IBOutlet weak var btnSelectEthogram: UIButton!
+    @IBOutlet weak var labelEthogram: UILabel!
     
     var picker: EthogramPicker? = nil
     
     let rowHeight: CGFloat = 44
     
     let messageNoEthograms = "You have no ethograms"
-    let messageNoEthogramsSelected = "Select an ethogram"
+    let messageNoEthogramsSelected = "Tap here to choose one"
     
     let segueToProjectHome = "NewProjectToProjectHome"
     let segueToNewEthogram = "NewProjectToNewEthogram"
@@ -53,19 +51,19 @@ class ProjectFormViewController: UITableViewController, EthogramPickerDelegate {
     
     // Toggles visibility of views based on state data.
     func refreshView() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: Selector("showPicker"))
         if Data.ethograms.isEmpty {
-            btnCreateEthogram.hidden = false
-            btnSelectEthogram.hidden = true
             labelEthogram.text = messageNoEthograms
+            labelEthogram.userInteractionEnabled = false
+            labelEthogram.removeGestureRecognizer(tapGesture)
         } else {
-            btnCreateEthogram.hidden = true
-            btnSelectEthogram.hidden = false
-            
             if selectedEthogram == nil {
                 labelEthogram.text = messageNoEthogramsSelected
             } else {
                 labelEthogram.text = selectedEthogram!.name
             }
+            labelEthogram.userInteractionEnabled = true
+            labelEthogram.addGestureRecognizer(tapGesture)
         }
     }
     
@@ -98,12 +96,7 @@ class ProjectFormViewController: UITableViewController, EthogramPickerDelegate {
         }
     }
     
-    @IBAction func btnCreateEthogramPressed(sender: UIButton) {
-        // Segue to create ethogram with reference to this view controller.
-        self.performSegueWithIdentifier(segueToNewEthogram, sender: self)
-    }
-    
-    @IBAction func btnSelectEthogramPressed(sender: UIButton) {
+    func showPicker() {
         picker = EthogramPicker()
         picker!.delegate = self
         

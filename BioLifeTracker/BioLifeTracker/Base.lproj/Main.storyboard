@@ -190,17 +190,17 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hlh-jP-6Gx" id="KBJ-ry-2CF">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Eg: Activity Pattern" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DsW-BO-CXW">
-                                                    <rect key="frame" x="116" y="8" width="251" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ved-qn-ugj">
                                                     <rect key="frame" x="15" y="13" width="33" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Eg: Activity Pattern" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DsW-BO-CXW">
+                                                    <rect key="frame" x="97" y="8" width="270" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -209,17 +209,17 @@
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DWd-mN-Sec" id="yWh-Lc-Mmh">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Eg: Kingfisher" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SUq-f5-VT3">
-                                                    <rect key="frame" x="116" y="8" width="251" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Animal" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zgr-Xg-Nzf">
                                                     <rect key="frame" x="15" y="13" width="53" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Eg: Kingfisher" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SUq-f5-VT3">
+                                                    <rect key="frame" x="97" y="8" width="270" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                </textField>
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -240,20 +240,11 @@
                                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                     </state>
                                                     <connections>
-                                                        <action selector="btnCreateEthogramPressed:" destination="MJP-iA-IxS" eventType="touchUpInside" id="l9F-NK-3ma"/>
+                                                        <segue destination="ew2-lP-x9p" kind="presentation" id="WbA-85-LT1"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VAL-6e-6KQ">
-                                                    <rect key="frame" x="317" y="9" width="43" height="30"/>
-                                                    <state key="normal" title="Select">
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="btnSelectEthogramPressed:" destination="MJP-iA-IxS" eventType="touchUpInside" id="ekM-hF-kXE"/>
-                                                    </connections>
-                                                </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m4Y-gj-i7V">
-                                                    <rect key="frame" x="117" y="13" width="197" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tyY-zw-X8e">
+                                                    <rect key="frame" x="98" y="13" width="214" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -284,12 +275,9 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="btnCreateEthogram" destination="Pvx-Qn-YOO" id="jpW-2w-25x"/>
-                        <outlet property="btnSelectEthogram" destination="VAL-6e-6KQ" id="rA8-MZ-71H"/>
-                        <outlet property="labelEthogram" destination="m4Y-gj-i7V" id="jyy-4M-bay"/>
+                        <outlet property="labelEthogram" destination="tyY-zw-X8e" id="MOW-6f-XBw"/>
                         <outlet property="textFieldAnimal" destination="SUq-f5-VT3" id="wXv-II-nYH"/>
                         <outlet property="textFieldTitle" destination="DsW-BO-CXW" id="rK4-Ju-nWn"/>
-                        <segue destination="ew2-lP-x9p" kind="presentation" identifier="NewProjectToNewEthogram" id="BOe-qX-9Ev"/>
                         <segue destination="D9E-Up-27r" kind="presentation" identifier="NewProjectToProjectHome" id="Lrc-vc-5Pz"/>
                     </connections>
                 </tableViewController>
