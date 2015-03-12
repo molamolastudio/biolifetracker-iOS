@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		24E32D361AB19647003C4E0A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D311AB19647003C4E0A /* Bolts.framework */; };
+		24E32D371AB19647003C4E0A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D321AB19647003C4E0A /* Parse.framework */; };
+		24E32D381AB19647003C4E0A /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D331AB19647003C4E0A /* ParseCrashReporting.framework */; };
+		24E32D391AB19647003C4E0A /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D341AB19647003C4E0A /* ParseFacebookUtils.framework */; };
+		24E32D3A1AB19647003C4E0A /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D351AB19647003C4E0A /* ParseUI.framework */; };
 		3205E7481AAED9F9006F374D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7471AAED9F9006F374D /* AppDelegate.swift */; };
 		3205E74D1AAED9F9006F374D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3205E74B1AAED9F9006F374D /* Main.storyboard */; };
 		3205E74F1AAED9F9006F374D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3205E74E1AAED9F9006F374D /* Images.xcassets */; };
@@ -46,6 +51,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		24E32D311AB19647003C4E0A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		24E32D321AB19647003C4E0A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		24E32D331AB19647003C4E0A /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
+		24E32D341AB19647003C4E0A /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		24E32D351AB19647003C4E0A /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
 		3205E7421AAED9F9006F374D /* BioLifeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BioLifeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3205E7461AAED9F9006F374D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3205E7471AAED9F9006F374D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +93,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24E32D371AB19647003C4E0A /* Parse.framework in Frameworks */,
+				24E32D381AB19647003C4E0A /* ParseCrashReporting.framework in Frameworks */,
+				24E32D3A1AB19647003C4E0A /* ParseUI.framework in Frameworks */,
+				24E32D391AB19647003C4E0A /* ParseFacebookUtils.framework in Frameworks */,
+				24E32D361AB19647003C4E0A /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -118,6 +133,11 @@
 		3205E7441AAED9F9006F374D /* BioLifeTracker */ = {
 			isa = PBXGroup;
 			children = (
+				24E32D311AB19647003C4E0A /* Bolts.framework */,
+				24E32D321AB19647003C4E0A /* Parse.framework */,
+				24E32D331AB19647003C4E0A /* ParseCrashReporting.framework */,
+				24E32D341AB19647003C4E0A /* ParseFacebookUtils.framework */,
+				24E32D351AB19647003C4E0A /* ParseUI.framework */,
 				3205E76F1AAEDA85006F374D /* Constants.swift */,
 				3205E7701AAEDA85006F374D /* Data.swift */,
 				3205E7751AAEDA85006F374D /* User.swift */,
@@ -427,6 +447,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BioLifeTracker",
+				);
 				INFOPLIST_FILE = BioLifeTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -437,6 +461,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BioLifeTracker",
+				);
 				INFOPLIST_FILE = BioLifeTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
