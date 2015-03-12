@@ -25,6 +25,15 @@ class EthogramsViewController: UITableViewController, UITableViewDataSource, UIT
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == segueToEthogramDetails {
+            if let vc = segue.destinationViewController as? EthogramDetailsViewController {
+                vc.title = Data.selectedEthogram!.name
+                self.navigationController!.addChildViewController(vc)
+            }
+        }
+    }
+    
     // UITableViewDataSource and UITableViewDelegate METHODS
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell

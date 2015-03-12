@@ -192,7 +192,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EthogramTableCell" textLabel="NqX-vb-4tH" detailTextLabel="W4z-St-OqF" style="IBUITableViewCellStyleSubtitle" id="auW-PW-977">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="EthogramTableCell" textLabel="NqX-vb-4tH" detailTextLabel="W4z-St-OqF" style="IBUITableViewCellStyleSubtitle" id="auW-PW-977">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="auW-PW-977" id="LDp-pj-AwV">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -225,10 +225,74 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="WOi-31-0Rn" kind="showDetail" identifier="EthogramsToEthogramDetails" id="dS8-EU-ucS"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Yf-6s-vxh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="772.5" y="1944.5"/>
+        </scene>
+        <!--Ethogram-->
+        <scene sceneID="YBR-A1-jC4">
+            <objects>
+                <tableViewController title="Ethogram" id="xL0-kx-Ov5" customClass="EthogramDetailsViewController" customModule="BioLifeTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="abJ-NG-unN">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EthogramDetailCell" textLabel="jKL-g5-YBj" detailTextLabel="xly-7h-Cig" style="IBUITableViewCellStyleValue1" id="aA9-Fh-upJ">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aA9-Fh-upJ" id="Gi6-eg-YIC">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" tag="402" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jKL-g5-YBj">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" tag="403" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xly-7h-Cig">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BehaviourStateCell" id="wIu-vB-bTO">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wIu-vB-bTO" id="Z3O-Gr-YGw">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" tag="404" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l7l-pu-yAu">
+                                            <rect key="frame" x="16" y="7" width="351" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="xL0-kx-Ov5" id="Emr-o6-Isg"/>
+                            <outlet property="delegate" destination="xL0-kx-Ov5" id="6G6-wT-nUL"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Ethogram" id="Z1m-Q5-AWs">
+                        <barButtonItem key="leftBarButtonItem" title="&lt; Back" id="iyO-Uz-Fjv">
+                            <connections>
+                                <segue destination="bku-FP-0yL" kind="presentation" id="6LF-xl-aow"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wQ4-Gn-nqH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1688.5" y="1944.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="T4I-Bn-beG">
@@ -571,14 +635,33 @@
             </objects>
             <point key="canvasLocation" x="754.5" y="395.5"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gL2-9T-MnQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="WOi-31-0Rn" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="GDs-wc-clk">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="xL0-kx-Ov5" kind="relationship" relationship="rootViewController" id="dhk-fC-fvA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lwk-du-XK4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1237.5" y="1944.5"/>
+        </scene>
     </scenes>
     <resources>
         <image name="facebook-login-blue.png" width="416" height="101"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IUr-zQ-LuP"/>
+        <segue reference="E55-bJ-phW"/>
+        <segue reference="Lrc-vc-5Pz"/>
+        <segue reference="6LF-xl-aow"/>
         <segue reference="Tjs-XI-Sbm"/>
         <segue reference="YOs-tm-ROu"/>
-        <segue reference="Lrc-vc-5Pz"/>
     </inferredMetricsTieBreakers>
 </document>

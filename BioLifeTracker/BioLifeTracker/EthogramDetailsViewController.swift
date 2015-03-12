@@ -1,20 +1,19 @@
 //
-//  EthogramFormViewController.swift
+//  EthogramDetailsViewController.swift
 //  BioLifeTracker
 //
-//  Created by Michelle Tan on 11/3/15.
+//  Created by Michelle Tan on 12/3/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
 
 import UIKit
 
-class EthogramFormViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+class EthogramDetailsViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
     
     let segueToNewProject = "NewEthogramToNewProject"
     
-    let cellReuseNameCell = "NameCell"
-    let cellReuseCodeCell = "CodeCell"
-    let cellReuseTextField = "TextFieldOnly"
+    let cellReuseBasicCell = "EthogramDetailCell"
+    let cellReuseState = "BehaviourStateCell"
     
     let messageNewState = "+ Add new state"
     
@@ -33,13 +32,6 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
     var secondSectionRowTitles = []
     let extraRow = 1
     
-    var alert = UIAlertController()
-    let alertTitle = "Incomplete Ethogram"
-    let alertMessage = "All fields must be filled."
-    
-    // For segues
-    var source: UIViewController? = nil
-    
     // Collected data
     var ethogram: Ethogram?
     
@@ -50,11 +42,9 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.rowHeight = rowHeight
-        if ethogram == nil {
-            ethogram = Ethogram()  // Create a blank ethogram to fill in.
-        }
+        ethogram = Data.selectedEthogram!
         btnAdd = createAddButton()
-        setupAlertController()
+        self.navigationItem.title = ethogram!.name
     }
     
     func refreshView() {
@@ -72,7 +62,7 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
     // then refreshes the view.
     func addButtonPressed(sender: UIButton) {
         let cell = sender.superview! as UITableViewCell
-        let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormCellFullTextField) as UITextField
+        let textField = cell.viewWithTag(Constants.ViewTags.ethogramDetailState) as UITextField
         
         let state = BehaviourState(name: textField.text!, id: ethogram!.behaviourStates.count)
         ethogram!.addBehaviourState(state)
@@ -80,12 +70,6 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
         sender.removeFromSuperview()
         
         refreshView()
-    }
-    
-    func setupAlertController() {
-        alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
-        let actionOk = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-        alert.addAction(actionOk)
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS
@@ -97,30 +81,29 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
         }
     }
     
-    // Sets up listeners for text fields in first section
+    // Sets up data in the cells
     func getCellForFirstSection(indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseBasicCell) as UITableViewCell
+        let title = cell.viewWithTag(Constants.ViewTags.ethogramDetailTitle) as UILabel
+        let info = cell.viewWithTag(Constants.ViewTags.ethogramDetailLabel) as UILabel
+        
         if isFirstRow(indexPath.row) {
-            let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseNameCell) as UITableViewCell
-            let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormNameField) as UITextField
-            textField.addTarget(self, action: Selector("nameRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
-            return cell
+            title.text = "Name"
+            info.text = ethogram!.name
         } else {
-            let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseCodeCell) as UITableViewCell
-            let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormCodeField) as UITextField
-            
-            textField.text = ethogram?.id
-            
-            textField.addTarget(self, action: Selector("codeRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
-            return cell
+            title.text = "Code"
+            info.text = ethogram!.code
         }
+        return cell
     }
     
     // Populates behaviour states in second section and sets up listeners for adding new state.
     func getCellForSecondSection(indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseTextField) as UITableViewCell
-        let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormCellFullTextField) as UITextField
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseState) as UITableViewCell
+        let textField = cell.viewWithTag(Constants.ViewTags.ethogramDetailState) as UITextField
         
         if ethogram!.behaviourStates.count < indexPath.row {
+            println("text" + ethogram!.behaviourStates[indexPath.row].name)
             textField.text = ethogram!.behaviourStates[indexPath.row].name
             textField.userInteractionEnabled = false
             textField.removeTarget(self, action: Selector("extraRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
@@ -188,21 +171,6 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
                 let index = indexPath.row
                 ethogram!.behaviourStates.removeAtIndex(index)
             }
-        }
-    }
-    
-    @IBAction func btnBackPressed(sender: UIBarButtonItem) {
-        ethogram = nil // Clear ethogram data
-        self.performSegueWithIdentifier(segueToNewProject, sender: self)
-    }
-    
-    // If the form is not filled completely, presents an alert to user to finish filling the form.
-    // Else, transitions to the New Project page.
-    @IBAction func btnDonePressed(sender: UIBarButtonItem) {
-        if ethogram!.name == "" || ethogram!.code == "" || ethogram!.behaviourStates.isEmpty {
-            self.presentViewController(alert, animated: true, completion: nil)
-        } else {
-            self.performSegueWithIdentifier(segueToNewProject, sender: self)
         }
     }
     

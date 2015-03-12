@@ -53,5 +53,8 @@ struct Constants {
         static let pickerCellLabel = 300
         static let ethogramsCellTitle = 400
         static let ethogramsCellSubtitle = 401
+        static let ethogramDetailTitle = 402
+        static let ethogramDetailLabel = 403
+        static let ethogramDetailState = 404
     }
 }
