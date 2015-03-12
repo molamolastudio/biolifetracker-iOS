@@ -51,11 +51,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		24E32D311AB19647003C4E0A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		24E32D321AB19647003C4E0A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
-		24E32D331AB19647003C4E0A /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseCrashReporting.framework; sourceTree = "<group>"; };
-		24E32D341AB19647003C4E0A /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
-		24E32D351AB19647003C4E0A /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseUI.framework; sourceTree = "<group>"; };
+		24E32D311AB19647003C4E0A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = BioLifeTracker/Bolts.framework; sourceTree = "<group>"; };
+		24E32D321AB19647003C4E0A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = BioLifeTracker/Parse.framework; sourceTree = "<group>"; };
+		24E32D331AB19647003C4E0A /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = BioLifeTracker/ParseCrashReporting.framework; sourceTree = "<group>"; };
+		24E32D341AB19647003C4E0A /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = BioLifeTracker/ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		24E32D351AB19647003C4E0A /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = BioLifeTracker/ParseUI.framework; sourceTree = "<group>"; };
 		3205E7421AAED9F9006F374D /* BioLifeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BioLifeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3205E7461AAED9F9006F374D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3205E7471AAED9F9006F374D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -111,11 +111,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24E32D3B1AB1991C003C4E0A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				24E32D311AB19647003C4E0A /* Bolts.framework */,
+				24E32D321AB19647003C4E0A /* Parse.framework */,
+				24E32D331AB19647003C4E0A /* ParseCrashReporting.framework */,
+				24E32D341AB19647003C4E0A /* ParseFacebookUtils.framework */,
+				24E32D351AB19647003C4E0A /* ParseUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		3205E7391AAED9F9006F374D = {
 			isa = PBXGroup;
 			children = (
 				3205E7671AAEDA38006F374D /* Images */,
 				3205E7441AAED9F9006F374D /* BioLifeTracker */,
+				24E32D3B1AB1991C003C4E0A /* Frameworks */,
 				3205E75A1AAED9F9006F374D /* BioLifeTrackerTests */,
 				3205E7431AAED9F9006F374D /* Products */,
 			);
@@ -133,11 +146,6 @@
 		3205E7441AAED9F9006F374D /* BioLifeTracker */ = {
 			isa = PBXGroup;
 			children = (
-				24E32D311AB19647003C4E0A /* Bolts.framework */,
-				24E32D321AB19647003C4E0A /* Parse.framework */,
-				24E32D331AB19647003C4E0A /* ParseCrashReporting.framework */,
-				24E32D341AB19647003C4E0A /* ParseFacebookUtils.framework */,
-				24E32D351AB19647003C4E0A /* ParseUI.framework */,
 				3205E76F1AAEDA85006F374D /* Constants.swift */,
 				3205E7701AAEDA85006F374D /* Data.swift */,
 				3205E7751AAEDA85006F374D /* User.swift */,
