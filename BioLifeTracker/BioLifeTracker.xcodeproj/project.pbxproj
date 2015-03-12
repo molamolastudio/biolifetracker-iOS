@@ -123,6 +123,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		24E32D3C1AB19954003C4E0A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3205E7711AAEDA85006F374D /* Ethogram.swift */,
+				3205E76E1AAEDA85006F374D /* BehaviourState.swift */,
+				3205E7731AAEDA85006F374D /* Project.swift */,
+				3205E7741AAEDA85006F374D /* Session.swift */,
+				3205E7721AAEDA85006F374D /* Observation.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		3205E7391AAED9F9006F374D = {
 			isa = PBXGroup;
 			children = (
@@ -146,14 +158,10 @@
 		3205E7441AAED9F9006F374D /* BioLifeTracker */ = {
 			isa = PBXGroup;
 			children = (
+				24E32D3C1AB19954003C4E0A /* Model */,
 				3205E76F1AAEDA85006F374D /* Constants.swift */,
-				3205E7701AAEDA85006F374D /* Data.swift */,
 				3205E7751AAEDA85006F374D /* User.swift */,
-				3205E76E1AAEDA85006F374D /* BehaviourState.swift */,
-				3205E7711AAEDA85006F374D /* Ethogram.swift */,
-				3205E7731AAEDA85006F374D /* Project.swift */,
-				3205E7741AAEDA85006F374D /* Session.swift */,
-				3205E7721AAEDA85006F374D /* Observation.swift */,
+				3205E7701AAEDA85006F374D /* Data.swift */,
 				3205E7471AAED9F9006F374D /* AppDelegate.swift */,
 				3205E7801AAEDB03006F374D /* StartViewController.swift */,
 				3205E77E1AAEDB03006F374D /* ProjectFormViewController.swift */,
