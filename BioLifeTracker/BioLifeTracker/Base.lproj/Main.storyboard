@@ -527,10 +527,11 @@
             </objects>
             <point key="canvasLocation" x="1191.5" y="1172.5"/>
         </scene>
-        <!--Observe-->
+        <!--Sessions-->
         <scene sceneID="bUt-o4-BtF">
             <objects>
-                <viewController id="8Hk-g5-f6q" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cdl-Ko-gDM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="8Hk-g5-f6q" customClass="SessionsViewController" customModule="BioLifeTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JA0-aT-C9J"/>
                         <viewControllerLayoutGuide type="bottom" id="Obu-if-3Zg"/>
@@ -542,18 +543,48 @@
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1KE-ol-r1z">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
-                                    <navigationItem title="Observations" id="W9w-wR-Ajf"/>
+                                    <navigationItem title="Sessions" id="W9w-wR-Ajf">
+                                        <barButtonItem key="rightBarButtonItem" title="Create" id="YBz-hr-FIG"/>
+                                    </navigationItem>
                                 </items>
                             </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="GCY-RA-3G3">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SessionTableCell" textLabel="Cbk-yD-Hct" detailTextLabel="D9M-mu-DsL" style="IBUITableViewCellStyleSubtitle" id="wKR-Ws-1fI">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wKR-Ws-1fI" id="Rlv-J3-7dm">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" tag="400" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Cbk-yD-Hct">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" tag="401" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="D9M-mu-DsL">
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Observe" id="2Sv-Yx-uLg"/>
+                    <tabBarItem key="tabBarItem" title="Sessions" id="2Sv-Yx-uLg"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="tableView" destination="GCY-RA-3G3" id="nO9-r6-0ip"/>
+                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cdl-Ko-gDM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2075.5" y="712.5"/>
+            <point key="canvasLocation" x="2107.5" y="765.5"/>
         </scene>
         <!--Home-->
         <scene sceneID="eRZ-VT-kY9">
