@@ -75,8 +75,12 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
         let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormCellFullTextField) as UITextField
         
         let state = BehaviourState(name: textField.text!, id: ethogram!.behaviourStates.count)
-        ethogram!.addBehaviourState(state)
+        state.saveInBackgroundWithBlock { (success, error) in
+            println("Saving behaviour state success: \(success)\nError: \(error.debugDescription)")
+        }
         
+        ethogram!.addBehaviourState(state)
+
         sender.removeFromSuperview()
         
         refreshView()

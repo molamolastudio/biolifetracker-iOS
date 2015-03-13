@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class StartViewController: UIViewController {
     @IBOutlet weak var displaySessionTitle: UITextField!
@@ -28,6 +29,7 @@ class StartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         refreshView()
     }
     
