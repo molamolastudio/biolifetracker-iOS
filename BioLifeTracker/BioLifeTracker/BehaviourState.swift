@@ -8,7 +8,6 @@
 //
 
 import Foundation
-import Parse
 
 class BehaviourState: PFObject, PFSubclassing {
     @NSManaged var id: Int
@@ -23,19 +22,15 @@ class BehaviourState: PFObject, PFSubclassing {
         self.information = ""
     }
     
-    init(id: Int, name: String, information: String) {
-        super.init()
+    convenience init(id: Int, name: String, information: String) {
+        self.init()
         self.id = id
         self.name = name
         self.information = information
     }
     
-    convenience override init() {
-        self.init(
-            id: -1,
-            name: "[undefined]",
-            information: ""
-        )
+    override init() {
+        super.init()
     }
     
     // Parse Object Subclassing Methods

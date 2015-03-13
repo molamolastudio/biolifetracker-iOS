@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
 import Foundation
-import Parse
 
 class Ethogram {
     var name: String

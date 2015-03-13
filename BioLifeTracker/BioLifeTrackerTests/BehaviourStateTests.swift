@@ -40,14 +40,11 @@ class BehaviourStateTests: XCTestCase {
         
         // test saved data integrity
         var query = BehaviourState.query()
-        query.fromLocalDatastore()
-        query.whereKey("id", containedIn: [1])
-        query.findObjectsInBackgroundWithBlock { (objects: [AnyObject]!, error: NSError!) -> Void in
-            if error == nil {
-                for bs in objects {
-                    println((bs as BehaviourState).name)
-                }
-            }
+        query.whereKey("name", equalTo: "Sleeping")
+        var result = query.findObjects()
+        for item in result {
+            let state = item as BehaviourState
+            println("Name: \(state.name) Info: \(state.information)")
         }
     }
 
