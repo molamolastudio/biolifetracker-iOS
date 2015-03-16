@@ -42,23 +42,13 @@ class BehaviourStateTests: XCTestCase {
         var query = BehaviourState.query()
         query.whereKey("name", equalTo: "Sleeping")
         var result = query.findObjects()
-        for item in result {
-            let state = item as BehaviourState
-            println("Name: \(state.name) Info: \(state.information)")
-        }
+        XCTAssertFalse(result.isEmpty, "Query result must not be empty")
     }
 
     func testPerformanceSaveToParse() {
         self.measureBlock {
             self.bs1.save()
             self.bs2.save()
-        }
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock() {
-            // Put the code you want to measure the time of here.
         }
     }
 

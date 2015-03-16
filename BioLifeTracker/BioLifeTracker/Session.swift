@@ -8,20 +8,33 @@
 
 import Foundation
 
-class Session {
-    enum SessionType: String {
-        case Focal = "Focal Sampling"
-        case Scan = "Scan Sampling"
+enum SessionType: String {
+    case Focal = "Focal Sampling"
+    case Scan = "Scan Sampling"
+}
+
+class Session: PFObject, PFSubclassing {
+    // Stored properties
+    @NSManaged var project: Project
+    @NSManaged var type_value: String
+    @NSManaged var id: String?
+    @NSManaged var observations: [Observation]
+    @NSManaged var individuals: [Individual]
+    
+    // Calculated properties
+    var type: SessionType {
+        return SessionType(rawValue: type_value)!
     }
     
-    var project: Project
-    var type: SessionType
-    var id: String?
-    var observations: [Observation] = []
+    // Initializers
+    override init() {
+        super.init()
+    }
     
-    init(project: Project, type: SessionType) {
+    convenience init(project: Project, type: SessionType) {
+        self.init()
         self.project = project
-        self.type = type
+        self.type_value = type.rawValue
         self.id = generateSessionId()
     }
     
@@ -35,6 +48,19 @@ class Session {
         }
         return ""
     }
+    
+    // Parse Object Subclassing Methods
+    override class func initialize() {
+        var onceToken: dispatch_once_t = 0
+        dispatch_once(&onceToken) {
+            self.registerSubclass()
+        }
+    }
+    
+    class func parseClassName() -> String {
+        return "Session"
+    }
+
 }
 
 //  Returns true if `lhs` session is equal to `rhs` session.

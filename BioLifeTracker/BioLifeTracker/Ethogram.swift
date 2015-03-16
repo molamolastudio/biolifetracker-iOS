@@ -7,36 +7,43 @@
 //
 import Foundation
 
-class Ethogram {
-    var name: String
-    var code: String
-    var createdTime: NSDate
-    var creator: User
-    var behaviourStates: [BehaviourState] = []
-    var id: String?
-    
-    init() {
-        self.name = Constants.Default.ethogramName
-        self.code = Constants.Default.ethogramCode
-        self.createdTime = NSDate()
-        self.creator = Data.currentUser
-        self.id = generateEthogramId()
-        self.code = self.id!
+class Ethogram: PFObject, PFSubclassing {
+    @NSManaged var name: String
+    @NSManaged var creator: User
+    @NSManaged var behaviourStates: [BehaviourState]
+
+    override init() {
+        super.init()
     }
     
-    init(name: String, code: String) {
+//    init() {
+//        self.name = Constants.Default.ethogramName
+//        self.code = Constants.Default.ethogramCode
+//        self.createdTime = NSDate()
+//        self.creator = Data.currentUser
+//        self.id = generateEthogramId()
+//        self.code = self.id!
+//    }
+    
+    convenience init(name: String, code: String) {
+        self.init()
         self.name = name
-        self.code = code
-        self.createdTime = NSDate()
         self.creator = Data.currentUser
-        self.id = generateEthogramId()
-    }
-    
-    func generateEthogramId() -> String {
-        return Constants.CodePrefixes.ethogram + String(Data.ethograms.count + 1)
     }
     
     func addBehaviourState(state: BehaviourState) {
         behaviourStates.append(state)
+    }
+    
+    // Parse Object Subclassing Methods
+    override class func initialize() {
+        var onceToken: dispatch_once_t = 0
+        dispatch_once(&onceToken) {
+            self.registerSubclass()
+        }
+    }
+    
+    class func parseClassName() -> String {
+        return "Ethogram"
     }
 }

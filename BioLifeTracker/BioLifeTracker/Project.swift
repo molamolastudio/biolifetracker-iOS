@@ -8,44 +8,24 @@
 
 import Foundation
 
-class Project {
-    let stringWith = " with "
+class Project: PFObject, PFSubclassing {
+    @NSManaged var name: String
+    @NSManaged var ethogram: Ethogram
+    @NSManaged var admins: [User]
+    @NSManaged var members: [User]
+    @NSManaged var sessions: [Session]
     
-    var name: String
-    var animal: String
-    var ethogram: Ethogram
-    var createdTime: NSDate
-    var creator: User
-    var id: String?
-    var members: [User] = []
-    var sessions: [Session] = []
-    
-    // Default initialiser
-    init() {
-        self.name = Constants.Default.projectName
-        self.animal = Constants.Default.animalName
-        self.ethogram = Ethogram()
-        self.createdTime = NSDate()
-        self.creator = Data.currentUser
-        self.members.append(creator)
+    // Default initializer
+    override init() {
+        super.init()
     }
     
-    init(name: String, animal: String, ethogram: Ethogram) {
+    convenience init(name: String, ethogram: Ethogram) {
+        self.init()
         self.name = name
-        self.animal = animal
         self.ethogram = ethogram
-        self.createdTime = NSDate()
-        self.creator = Data.currentUser
-        self.id = generateProjectId()
-        self.members.append(creator)
-    }
-    
-    func generateProjectId() -> String {
-        return Constants.CodePrefixes.project + String(Data.projects.count + 1)
-    }
-    
-    func getDisplayName() -> String {
-        return name + stringWith + animal
+        self.admins.append(Data.currentUser)
+        self.members.append(Data.currentUser)
     }
     
     func getIndexOfSession(session: Session) -> Int? {
@@ -56,4 +36,21 @@ class Project {
         }
         return nil
     }
+    
+    func getDisplayName() -> String {
+        return name
+    }
+    
+    // Parse Object Subclassing Methods
+    override class func initialize() {
+        var onceToken: dispatch_once_t = 0
+        dispatch_once(&onceToken) {
+            self.registerSubclass()
+        }
+    }
+    
+    class func parseClassName() -> String {
+        return "Project"
+    }
+
 }
