@@ -7,6 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		240D042D1AB6D41F00D8BB9F /* EthogramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D042C1AB6D41F00D8BB9F /* EthogramTests.swift */; };
+		240D04311AB718AE00D8BB9F /* Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D04301AB718AE00D8BB9F /* Individual.swift */; };
+		240D04331AB718EF00D8BB9F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D04321AB718EF00D8BB9F /* Location.swift */; };
+		240D04351AB7190800D8BB9F /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D04341AB7190800D8BB9F /* Weather.swift */; };
+		240D04371AB7198500D8BB9F /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D04361AB7198500D8BB9F /* Photo.swift */; };
+		240D04381AB7206200D8BB9F /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7801AAEDB03006F374D /* StartViewController.swift */; };
+		24E32D361AB19647003C4E0A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D311AB19647003C4E0A /* Bolts.framework */; };
+		24E32D371AB19647003C4E0A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D321AB19647003C4E0A /* Parse.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		24E32D381AB19647003C4E0A /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D331AB19647003C4E0A /* ParseCrashReporting.framework */; };
+		24E32D391AB19647003C4E0A /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D341AB19647003C4E0A /* ParseFacebookUtils.framework */; };
+		24E32D3A1AB19647003C4E0A /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D351AB19647003C4E0A /* ParseUI.framework */; };
+		24E32D3F1AB1E86A003C4E0A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D3E1AB1E86A003C4E0A /* AudioToolbox.framework */; };
+		24E32D411AB1E88E003C4E0A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D401AB1E88E003C4E0A /* Social.framework */; };
+		24E32D431AB1E895003C4E0A /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D421AB1E895003C4E0A /* AdSupport.framework */; };
+		24E32D451AB1E89D003C4E0A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D441AB1E89D003C4E0A /* Accounts.framework */; };
+		24E32D471AB1E8B6003C4E0A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D461AB1E8B6003C4E0A /* CFNetwork.framework */; };
+		24E32D491AB1E8C3003C4E0A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D481AB1E8C3003C4E0A /* CoreGraphics.framework */; };
+		24E32D4B1AB1E8CA003C4E0A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D4A1AB1E8CA003C4E0A /* CoreLocation.framework */; };
+		24E32D4D1AB1E8D0003C4E0A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D4C1AB1E8D0003C4E0A /* Foundation.framework */; };
+		24E32D4F1AB1E92A003C4E0A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D4E1AB1E92A003C4E0A /* SystemConfiguration.framework */; };
+		24E32D511AB1E9B9003C4E0A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D501AB1E9B9003C4E0A /* MobileCoreServices.framework */; };
+		24E32D531AB1E9F2003C4E0A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D521AB1E9F2003C4E0A /* libsqlite3.dylib */; };
+		24E32D551AB1EB61003C4E0A /* BehaviourStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E32D541AB1EB61003C4E0A /* BehaviourStateTests.swift */; };
+		24E32D671AB1EC4C003C4E0A /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D501AB1E9B9003C4E0A /* MobileCoreServices.framework */; };
+		24E32D681AB1EC52003C4E0A /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D521AB1E9F2003C4E0A /* libsqlite3.dylib */; };
+		24E32D691AB1EC5A003C4E0A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D4E1AB1E92A003C4E0A /* SystemConfiguration.framework */; };
+		24E32D6A1AB1EC5A003C4E0A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D4C1AB1E8D0003C4E0A /* Foundation.framework */; };
+		24E32D6B1AB1EC5A003C4E0A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D4A1AB1E8CA003C4E0A /* CoreLocation.framework */; };
+		24E32D6C1AB1EC5A003C4E0A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D481AB1E8C3003C4E0A /* CoreGraphics.framework */; };
+		24E32D6D1AB1EC5A003C4E0A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D461AB1E8B6003C4E0A /* CFNetwork.framework */; };
+		24E32D6E1AB1EC5A003C4E0A /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D441AB1E89D003C4E0A /* Accounts.framework */; };
+		24E32D6F1AB1EC5A003C4E0A /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D421AB1E895003C4E0A /* AdSupport.framework */; };
+		24E32D701AB1EC5A003C4E0A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D401AB1E88E003C4E0A /* Social.framework */; };
+		24E32D711AB1EC5A003C4E0A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D3E1AB1E86A003C4E0A /* AudioToolbox.framework */; };
+		24E32D721AB1EC5A003C4E0A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D311AB19647003C4E0A /* Bolts.framework */; };
+		24E32D731AB1EC5A003C4E0A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D321AB19647003C4E0A /* Parse.framework */; };
+		24E32D741AB1EC5A003C4E0A /* ParseCrashReporting.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D331AB19647003C4E0A /* ParseCrashReporting.framework */; };
+		24E32D751AB1EC5A003C4E0A /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D341AB19647003C4E0A /* ParseFacebookUtils.framework */; };
+		24E32D761AB1EC5A003C4E0A /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D351AB19647003C4E0A /* ParseUI.framework */; };
+		24E32D7E1AB29DEF003C4E0A /* BehaviourState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E76E1AAEDA85006F374D /* BehaviourState.swift */; };
 		3205E7481AAED9F9006F374D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7471AAED9F9006F374D /* AppDelegate.swift */; };
 		3205E74D1AAED9F9006F374D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3205E74B1AAED9F9006F374D /* Main.storyboard */; };
 		3205E74F1AAED9F9006F374D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3205E74E1AAED9F9006F374D /* Images.xcassets */; };
@@ -23,17 +63,7 @@
 		3205E77B1AAEDA85006F374D /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7731AAEDA85006F374D /* Project.swift */; };
 		3205E77C1AAEDA85006F374D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7741AAEDA85006F374D /* Session.swift */; };
 		3205E77D1AAEDA85006F374D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7751AAEDA85006F374D /* User.swift */; };
-		3205E7811AAEDB03006F374D /* ProjectFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E77E1AAEDB03006F374D /* ProjectFormViewController.swift */; };
-		3205E7821AAEDB03006F374D /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E77F1AAEDB03006F374D /* ProjectsViewController.swift */; };
-		3205E7831AAEDB03006F374D /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7801AAEDB03006F374D /* StartViewController.swift */; };
-		3205E7851AAFFE98006F374D /* EthogramFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */; };
 		3205E7871AB03309006F374D /* EthogramPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3205E7861AB03309006F374D /* EthogramPickerCell.xib */; };
-		32517A1C1AB072BB00578C42 /* EthogramPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A1B1AB072BB00578C42 /* EthogramPicker.swift */; };
-		32517A1E1AB0913600578C42 /* EthogramPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A1D1AB0913600578C42 /* EthogramPickerDelegate.swift */; };
-		32517A201AB09A3D00578C42 /* ProjectHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A1F1AB09A3D00578C42 /* ProjectHomeViewController.swift */; };
-		32517A221AB1789100578C42 /* EthogramsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A211AB1789100578C42 /* EthogramsViewController.swift */; };
-		32517A241AB17BC900578C42 /* EthogramDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */; };
-		32517A281AB2B27400578C42 /* SessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A271AB2B27400578C42 /* SessionsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +77,29 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		240D042C1AB6D41F00D8BB9F /* EthogramTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramTests.swift; sourceTree = "<group>"; };
+		240D04301AB718AE00D8BB9F /* Individual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Individual.swift; sourceTree = "<group>"; };
+		240D04321AB718EF00D8BB9F /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		240D04341AB7190800D8BB9F /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		240D04361AB7198500D8BB9F /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		24E32D311AB19647003C4E0A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = BioLifeTracker/Bolts.framework; sourceTree = "<group>"; };
+		24E32D321AB19647003C4E0A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = BioLifeTracker/Parse.framework; sourceTree = "<group>"; };
+		24E32D331AB19647003C4E0A /* ParseCrashReporting.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseCrashReporting.framework; path = BioLifeTracker/ParseCrashReporting.framework; sourceTree = "<group>"; };
+		24E32D341AB19647003C4E0A /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = BioLifeTracker/ParseFacebookUtils.framework; sourceTree = "<group>"; };
+		24E32D351AB19647003C4E0A /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = BioLifeTracker/ParseUI.framework; sourceTree = "<group>"; };
+		24E32D3E1AB1E86A003C4E0A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		24E32D401AB1E88E003C4E0A /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		24E32D421AB1E895003C4E0A /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		24E32D441AB1E89D003C4E0A /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		24E32D461AB1E8B6003C4E0A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		24E32D481AB1E8C3003C4E0A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		24E32D4A1AB1E8CA003C4E0A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		24E32D4C1AB1E8D0003C4E0A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		24E32D4E1AB1E92A003C4E0A /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		24E32D501AB1E9B9003C4E0A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		24E32D521AB1E9F2003C4E0A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		24E32D541AB1EB61003C4E0A /* BehaviourStateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviourStateTests.swift; sourceTree = "<group>"; };
+		24E32D771AB298D8003C4E0A /* BioLifeTracker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BioLifeTracker-Bridging-Header.h"; sourceTree = "<group>"; };
 		3205E7421AAED9F9006F374D /* BioLifeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BioLifeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3205E7461AAED9F9006F374D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3205E7471AAED9F9006F374D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,7 +130,6 @@
 		32517A1F1AB09A3D00578C42 /* ProjectHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectHomeViewController.swift; sourceTree = "<group>"; };
 		32517A211AB1789100578C42 /* EthogramsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramsViewController.swift; sourceTree = "<group>"; };
 		32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramDetailsViewController.swift; sourceTree = "<group>"; };
-		32517A271AB2B27400578C42 /* SessionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionsViewController.swift; path = ../SessionsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +137,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24E32D531AB1E9F2003C4E0A /* libsqlite3.dylib in Frameworks */,
+				24E32D511AB1E9B9003C4E0A /* MobileCoreServices.framework in Frameworks */,
+				24E32D4F1AB1E92A003C4E0A /* SystemConfiguration.framework in Frameworks */,
+				24E32D4D1AB1E8D0003C4E0A /* Foundation.framework in Frameworks */,
+				24E32D4B1AB1E8CA003C4E0A /* CoreLocation.framework in Frameworks */,
+				24E32D491AB1E8C3003C4E0A /* CoreGraphics.framework in Frameworks */,
+				24E32D471AB1E8B6003C4E0A /* CFNetwork.framework in Frameworks */,
+				24E32D451AB1E89D003C4E0A /* Accounts.framework in Frameworks */,
+				24E32D431AB1E895003C4E0A /* AdSupport.framework in Frameworks */,
+				24E32D411AB1E88E003C4E0A /* Social.framework in Frameworks */,
+				24E32D3F1AB1E86A003C4E0A /* AudioToolbox.framework in Frameworks */,
+				24E32D371AB19647003C4E0A /* Parse.framework in Frameworks */,
+				24E32D381AB19647003C4E0A /* ParseCrashReporting.framework in Frameworks */,
+				24E32D3A1AB19647003C4E0A /* ParseUI.framework in Frameworks */,
+				24E32D391AB19647003C4E0A /* ParseFacebookUtils.framework in Frameworks */,
+				24E32D361AB19647003C4E0A /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,17 +160,98 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24E32D681AB1EC52003C4E0A /* libsqlite3.dylib in Frameworks */,
+				24E32D671AB1EC4C003C4E0A /* MobileCoreServices.framework in Frameworks */,
+				24E32D691AB1EC5A003C4E0A /* SystemConfiguration.framework in Frameworks */,
+				24E32D6A1AB1EC5A003C4E0A /* Foundation.framework in Frameworks */,
+				24E32D6B1AB1EC5A003C4E0A /* CoreLocation.framework in Frameworks */,
+				24E32D6C1AB1EC5A003C4E0A /* CoreGraphics.framework in Frameworks */,
+				24E32D6D1AB1EC5A003C4E0A /* CFNetwork.framework in Frameworks */,
+				24E32D6E1AB1EC5A003C4E0A /* Accounts.framework in Frameworks */,
+				24E32D6F1AB1EC5A003C4E0A /* AdSupport.framework in Frameworks */,
+				24E32D701AB1EC5A003C4E0A /* Social.framework in Frameworks */,
+				24E32D711AB1EC5A003C4E0A /* AudioToolbox.framework in Frameworks */,
+				24E32D721AB1EC5A003C4E0A /* Bolts.framework in Frameworks */,
+				24E32D731AB1EC5A003C4E0A /* Parse.framework in Frameworks */,
+				24E32D741AB1EC5A003C4E0A /* ParseCrashReporting.framework in Frameworks */,
+				24E32D751AB1EC5A003C4E0A /* ParseFacebookUtils.framework in Frameworks */,
+				24E32D761AB1EC5A003C4E0A /* ParseUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		240D042B1AB6CA6800D8BB9F /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				3205E7751AAEDA85006F374D /* User.swift */,
+			);
+			name = Authentication;
+			sourceTree = "<group>";
+		};
+		240D042E1AB6D43100D8BB9F /* Unit Testing */ = {
+			isa = PBXGroup;
+			children = (
+				240D042F1AB6D43B00D8BB9F /* Model */,
+			);
+			name = "Unit Testing";
+			sourceTree = "<group>";
+		};
+		240D042F1AB6D43B00D8BB9F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				24E32D541AB1EB61003C4E0A /* BehaviourStateTests.swift */,
+				240D042C1AB6D41F00D8BB9F /* EthogramTests.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		24E32D3B1AB1991C003C4E0A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				24E32D521AB1E9F2003C4E0A /* libsqlite3.dylib */,
+				24E32D501AB1E9B9003C4E0A /* MobileCoreServices.framework */,
+				24E32D4E1AB1E92A003C4E0A /* SystemConfiguration.framework */,
+				24E32D4C1AB1E8D0003C4E0A /* Foundation.framework */,
+				24E32D4A1AB1E8CA003C4E0A /* CoreLocation.framework */,
+				24E32D481AB1E8C3003C4E0A /* CoreGraphics.framework */,
+				24E32D461AB1E8B6003C4E0A /* CFNetwork.framework */,
+				24E32D441AB1E89D003C4E0A /* Accounts.framework */,
+				24E32D421AB1E895003C4E0A /* AdSupport.framework */,
+				24E32D401AB1E88E003C4E0A /* Social.framework */,
+				24E32D3E1AB1E86A003C4E0A /* AudioToolbox.framework */,
+				24E32D311AB19647003C4E0A /* Bolts.framework */,
+				24E32D321AB19647003C4E0A /* Parse.framework */,
+				24E32D331AB19647003C4E0A /* ParseCrashReporting.framework */,
+				24E32D341AB19647003C4E0A /* ParseFacebookUtils.framework */,
+				24E32D351AB19647003C4E0A /* ParseUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		24E32D3C1AB19954003C4E0A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3205E7711AAEDA85006F374D /* Ethogram.swift */,
+				3205E76E1AAEDA85006F374D /* BehaviourState.swift */,
+				3205E7731AAEDA85006F374D /* Project.swift */,
+				3205E7741AAEDA85006F374D /* Session.swift */,
+				3205E7721AAEDA85006F374D /* Observation.swift */,
+				240D04301AB718AE00D8BB9F /* Individual.swift */,
+				240D04321AB718EF00D8BB9F /* Location.swift */,
+				240D04341AB7190800D8BB9F /* Weather.swift */,
+				240D04361AB7198500D8BB9F /* Photo.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		3205E7391AAED9F9006F374D = {
 			isa = PBXGroup;
 			children = (
 				3205E7671AAEDA38006F374D /* Images */,
 				3205E7441AAED9F9006F374D /* BioLifeTracker */,
+				24E32D3B1AB1991C003C4E0A /* Frameworks */,
 				3205E75A1AAED9F9006F374D /* BioLifeTrackerTests */,
 				3205E7431AAED9F9006F374D /* Products */,
 			);
@@ -120,14 +269,11 @@
 		3205E7441AAED9F9006F374D /* BioLifeTracker */ = {
 			isa = PBXGroup;
 			children = (
+				24E32D771AB298D8003C4E0A /* BioLifeTracker-Bridging-Header.h */,
+				240D042B1AB6CA6800D8BB9F /* Authentication */,
+				24E32D3C1AB19954003C4E0A /* Model */,
 				3205E76F1AAEDA85006F374D /* Constants.swift */,
 				3205E7701AAEDA85006F374D /* Data.swift */,
-				3205E7751AAEDA85006F374D /* User.swift */,
-				3205E76E1AAEDA85006F374D /* BehaviourState.swift */,
-				3205E7711AAEDA85006F374D /* Ethogram.swift */,
-				3205E7731AAEDA85006F374D /* Project.swift */,
-				3205E7741AAEDA85006F374D /* Session.swift */,
-				3205E7721AAEDA85006F374D /* Observation.swift */,
 				3205E7471AAED9F9006F374D /* AppDelegate.swift */,
 				3205E7801AAEDB03006F374D /* StartViewController.swift */,
 				3205E77E1AAEDB03006F374D /* ProjectFormViewController.swift */,
@@ -136,7 +282,6 @@
 				3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */,
 				32517A211AB1789100578C42 /* EthogramsViewController.swift */,
 				32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */,
-				32517A271AB2B27400578C42 /* SessionsViewController.swift */,
 				32517A1B1AB072BB00578C42 /* EthogramPicker.swift */,
 				32517A1D1AB0913600578C42 /* EthogramPickerDelegate.swift */,
 				3205E74B1AAED9F9006F374D /* Main.storyboard */,
@@ -160,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				3205E75D1AAED9F9006F374D /* BioLifeTrackerTests.swift */,
+				240D042E1AB6D43100D8BB9F /* Unit Testing */,
 				3205E75B1AAED9F9006F374D /* Supporting Files */,
 			);
 			path = BioLifeTrackerTests;
@@ -288,25 +434,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3205E7821AAEDB03006F374D /* ProjectsViewController.swift in Sources */,
+				240D04381AB7206200D8BB9F /* StartViewController.swift in Sources */,
 				3205E7791AAEDA85006F374D /* Ethogram.swift in Sources */,
+				240D04331AB718EF00D8BB9F /* Location.swift in Sources */,
 				3205E7761AAEDA85006F374D /* BehaviourState.swift in Sources */,
 				3205E7781AAEDA85006F374D /* Data.swift in Sources */,
 				3205E77A1AAEDA85006F374D /* Observation.swift in Sources */,
 				3205E7481AAED9F9006F374D /* AppDelegate.swift in Sources */,
 				3205E7771AAEDA85006F374D /* Constants.swift in Sources */,
-				32517A281AB2B27400578C42 /* SessionsViewController.swift in Sources */,
-				3205E7831AAEDB03006F374D /* StartViewController.swift in Sources */,
 				3205E77B1AAEDA85006F374D /* Project.swift in Sources */,
-				32517A201AB09A3D00578C42 /* ProjectHomeViewController.swift in Sources */,
 				3205E77D1AAEDA85006F374D /* User.swift in Sources */,
 				3205E77C1AAEDA85006F374D /* Session.swift in Sources */,
-				3205E7851AAFFE98006F374D /* EthogramFormViewController.swift in Sources */,
-				32517A1C1AB072BB00578C42 /* EthogramPicker.swift in Sources */,
-				3205E7811AAEDB03006F374D /* ProjectFormViewController.swift in Sources */,
-				32517A221AB1789100578C42 /* EthogramsViewController.swift in Sources */,
-				32517A241AB17BC900578C42 /* EthogramDetailsViewController.swift in Sources */,
-				32517A1E1AB0913600578C42 /* EthogramPickerDelegate.swift in Sources */,
+				240D04351AB7190800D8BB9F /* Weather.swift in Sources */,
+				240D04311AB718AE00D8BB9F /* Individual.swift in Sources */,
+				240D04371AB7198500D8BB9F /* Photo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,7 +455,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				240D042D1AB6D41F00D8BB9F /* EthogramTests.swift in Sources */,
+				24E32D7E1AB29DEF003C4E0A /* BehaviourState.swift in Sources */,
 				3205E75E1AAED9F9006F374D /* BioLifeTrackerTests.swift in Sources */,
+				24E32D551AB1EB61003C4E0A /* BehaviourStateTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +530,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "BioLifeTracker/BioLifeTracker-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -422,6 +567,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "BioLifeTracker/BioLifeTracker-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -431,9 +577,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BioLifeTracker",
+				);
 				INFOPLIST_FILE = BioLifeTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BioLifeTracker/BioLifeTracker-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -441,9 +594,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BioLifeTracker",
+				);
 				INFOPLIST_FILE = BioLifeTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BioLifeTracker/BioLifeTracker-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -454,6 +613,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)/BioLifeTracker",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -473,6 +633,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(PROJECT_DIR)/BioLifeTracker",
 				);
 				INFOPLIST_FILE = BioLifeTrackerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
