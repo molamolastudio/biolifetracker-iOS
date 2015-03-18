@@ -112,7 +112,7 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
             let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseCodeCell) as UITableViewCell
             let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormCodeField) as UITextField
             
-            textField.text = ethogram?.id
+            //textField.text = ethogram?.id
             
             textField.addTarget(self, action: Selector("codeRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
             return cell
@@ -145,7 +145,7 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
     
     func codeRowDidChange(sender: UITextField) {
         if sender.text != "" {
-            ethogram!.code = sender.text
+            //ethogram!.code = sender.text
         }
     }
     
@@ -204,7 +204,8 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
     // If the form is not filled completely, presents an alert to user to finish filling the form.
     // Else, transitions to the New Project page.
     @IBAction func btnDonePressed(sender: UIBarButtonItem) {
-        if ethogram!.name == "" || ethogram!.code == "" || ethogram!.behaviourStates.isEmpty {
+        if ethogram!.name == "" || ethogram!.behaviourStates.isEmpty //|| ethogram!.code == ""
+        {
             self.presentViewController(alert, animated: true, completion: nil)
         } else {
             self.performSegueWithIdentifier(segueToNewProject, sender: self)

@@ -30,7 +30,7 @@ class ProjectsViewController: UITableViewController, UITableViewDataSource, UITa
         let project = Data.projects[indexPath.row]
         
         title.text = project.getDisplayName()
-        subtitle.text = project.creator.name
+        //subtitle.text = project.creator.name
         
         return cell
     }
