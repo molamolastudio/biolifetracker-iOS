@@ -92,7 +92,7 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
             info.text = ethogram!.name
         } else {
             title.text = "Code"
-            info.text = ethogram!.code
+            //info.text = ethogram!.code
         }
         return cell
     }
@@ -123,7 +123,7 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
     
     func codeRowDidChange(sender: UITextField) {
         if sender.text != "" {
-            ethogram!.code = sender.text
+            //ethogram!.code = sender.text
         }
     }
     
