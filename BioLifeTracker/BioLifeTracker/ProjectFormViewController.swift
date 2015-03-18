@@ -36,7 +36,7 @@ class ProjectFormViewController: UITableViewController, EthogramPickerDelegate {
     override func viewDidLoad() {
         self.tableView.rowHeight = rowHeight
         if Data.ethograms.count == 0 {
-            Data.ethograms.append(Ethogram()) // For testing
+            Data.ethograms.append(Ethogram.makeDefault()) // For testing
         }
         setupAlertController()
         

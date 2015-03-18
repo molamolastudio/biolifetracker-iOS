@@ -21,7 +21,7 @@ class EthogramsViewController: UITableViewController, UITableViewDataSource, UIT
     override func viewDidLoad() {
         super.viewDidLoad()
         if Data.ethograms.count == 0 {
-            Data.ethograms.append(Ethogram()) // For testing
+            Data.ethograms.append(Ethogram.makeDefault()) // For testing
         }
     }
     

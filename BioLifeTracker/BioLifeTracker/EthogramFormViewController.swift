@@ -51,7 +51,7 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
         super.viewDidLoad()
         self.tableView.rowHeight = rowHeight
         if ethogram == nil {
-            ethogram = Ethogram()  // Create a blank ethogram to fill in.
+            ethogram = Ethogram.makeDefault()  // Create a blank ethogram to fill in.
         }
         btnAdd = createAddButton()
         setupAlertController()

@@ -17,7 +17,7 @@ class ProjectsViewController: UITableViewController, UITableViewDataSource, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         if Data.projects.count == 0 {
-            Data.projects.append(Project()) // For testing
+            Data.projects.append(Project.makeDefault()) // For testing
         }
     }
     

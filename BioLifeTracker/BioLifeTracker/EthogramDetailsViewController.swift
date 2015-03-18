@@ -92,7 +92,7 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
             info.text = ethogram!.name
         } else {
             title.text = "Code"
-            //info.text = ethogram!.code
+            info.text = "E" + ethogram!.name
         }
         return cell
     }
