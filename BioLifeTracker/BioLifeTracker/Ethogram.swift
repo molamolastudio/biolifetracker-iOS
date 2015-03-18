@@ -9,7 +9,7 @@ import Foundation
 
 class Ethogram: PFObject, PFSubclassing {
     @NSManaged var name: String
-    @NSManaged var creator: User
+    @NSManaged var creator: PFUser
     @NSManaged var behaviourStates: [BehaviourState]
 
     private override init() {
@@ -19,7 +19,7 @@ class Ethogram: PFObject, PFSubclassing {
     convenience init(name: String, code: String) {
         self.init()
         self.name = name
-        self.creator = Data.currentUser
+        self.creator = PFUser.currentUser()
         self.behaviourStates = []
     }
     
@@ -27,7 +27,7 @@ class Ethogram: PFObject, PFSubclassing {
     class func makeDefault() -> Ethogram {
         var ethogram = Ethogram()
         ethogram.name = ""
-        ethogram.creator = Data.currentUser
+        ethogram.creator = PFUser.currentUser()
         ethogram.behaviourStates = []
         return ethogram
     }

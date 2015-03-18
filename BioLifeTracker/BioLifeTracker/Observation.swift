@@ -14,7 +14,7 @@ class Observation: PFObject, PFSubclassing {
     @NSManaged var timestamp: NSDate
     @NSManaged var location: Location
     @NSManaged var weather: Weather
-    @NSManaged var creator: User
+    @NSManaged var creator: PFUser
     @NSManaged var photoUrls: [String]
     @NSManaged var notes: String
     @NSManaged var individual: Individual
@@ -31,14 +31,14 @@ class Observation: PFObject, PFSubclassing {
         observation.timestamp = NSDate()
         observation.location = Location.makeDefault()
         observation.weather = Weather.makeDefault()
-        observation.creator = Data.currentUser
+        observation.creator = PFUser.currentUser()
         observation.photoUrls = []
         observation.notes = ""
         observation.individual = Individual.makeDefault()
         return observation
     }
     
-    convenience init(session: Session, state: BehaviourState, timestamp: NSDate, creator: User) {
+    convenience init(session: Session, state: BehaviourState, timestamp: NSDate, creator: PFUser) {
         self.init()
         self.session = session
         self.state = state
@@ -52,7 +52,7 @@ class Observation: PFObject, PFSubclassing {
         
     }
     
-    convenience init(session: Session, state: BehaviourState, timestamp: NSDate, creator: User, notes: String) {
+    convenience init(session: Session, state: BehaviourState, timestamp: NSDate, creator: PFUser, notes: String) {
         self.init()
         self.session = session
         self.state = state

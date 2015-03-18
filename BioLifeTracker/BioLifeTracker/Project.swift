@@ -11,8 +11,8 @@ import Foundation
 class Project: PFObject, PFSubclassing {
     @NSManaged var name: String
     @NSManaged var ethogram: Ethogram
-    @NSManaged var admins: [User]
-    @NSManaged var members: [User]
+    @NSManaged var admins: [PFUser]
+    @NSManaged var members: [PFUser]
     @NSManaged var sessions: [Session]
     
     // Default initializer
@@ -24,8 +24,8 @@ class Project: PFObject, PFSubclassing {
         self.init()
         self.name = name
         self.ethogram = ethogram
-        self.admins = [Data.currentUser]
-        self.members = [Data.currentUser]
+        self.admins = [PFUser.currentUser()]
+        self.members = [PFUser.currentUser()]
         self.sessions = []
     }
     
@@ -34,8 +34,9 @@ class Project: PFObject, PFSubclassing {
         var project = Project()
         project.name = ""
         project.ethogram = Ethogram.makeDefault()
-        project.admins = [Data.currentUser]
-        project.members = [Data.currentUser]
+        
+        project.admins = [PFUser.currentUser()]
+        project.members = [PFUser.currentUser()]
         project.sessions = []
         return project
     }
