@@ -31,6 +31,14 @@ class BehaviourStateTests: XCTestCase {
         XCTAssert(bs2 != nil, "Behavior state 2 is not initialized")
     }
     
+    func testDefaultMaker() {
+        var behaviourState = BehaviourState.makeDefault()
+        XCTAssertNotNil(behaviourState.id)
+        XCTAssertNotNil(behaviourState.name)
+        XCTAssertNotNil(behaviourState.information)
+        XCTAssertNotNil(behaviourState.photoUrls)
+    }
+    
     func testSaveToParse() {
         // synchronously save to Parse
         var success1 = bs1.save()

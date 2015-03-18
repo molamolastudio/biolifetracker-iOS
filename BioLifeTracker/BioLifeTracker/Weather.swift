@@ -10,6 +10,16 @@ import Foundation
 
 class Weather: PFObject, PFSubclassing {
     
+    private override init() {
+        super.init()
+    }
+    
+    // static maker method
+    class func makeDefault() -> Weather {
+        var weather = Weather()
+        return weather
+    }
+    
     // Parse Object Subclassing Methods
     override class func initialize() {
         var onceToken: dispatch_once_t = 0

@@ -15,12 +15,27 @@ class Observation: PFObject, PFSubclassing {
     @NSManaged var location: Location
     @NSManaged var weather: Weather
     @NSManaged var creator: User
-    @NSManaged var photoUrl: String?
-    @NSManaged var notes: String?
+    @NSManaged var photoUrls: [String]
+    @NSManaged var notes: String
     @NSManaged var individual: Individual
     
-    override init() {
+    private override init() {
         super.init()
+    }
+    
+    // static maker method
+    class func makeDefault() -> Observation {
+        var observation = Observation()
+        observation.session = Session.makeDefault()
+        observation.state = BehaviourState.makeDefault()
+        observation.timestamp = NSDate()
+        observation.location = Location.makeDefault()
+        observation.weather = Weather.makeDefault()
+        observation.creator = Data.currentUser
+        observation.photoUrls = []
+        observation.notes = ""
+        observation.individual = Individual.makeDefault()
+        return observation
     }
     
     convenience init(session: Session, state: BehaviourState, timestamp: NSDate, creator: User) {
@@ -29,6 +44,12 @@ class Observation: PFObject, PFSubclassing {
         self.state = state
         self.timestamp = timestamp
         self.creator = creator
+        self.location = Location.makeDefault()
+        self.weather = Weather.makeDefault()
+        self.photoUrls = []
+        self.notes = ""
+        self.individual = Individual.makeDefault()
+        
     }
     
     convenience init(session: Session, state: BehaviourState, timestamp: NSDate, creator: User, notes: String) {
@@ -38,6 +59,10 @@ class Observation: PFObject, PFSubclassing {
         self.timestamp = timestamp
         self.creator = creator
         self.notes = notes
+        self.location = Location.makeDefault()
+        self.weather = Weather.makeDefault()
+        self.photoUrls = []
+        self.individual = Individual.makeDefault()
     }
     
     // Parse Object Subclassing Methods

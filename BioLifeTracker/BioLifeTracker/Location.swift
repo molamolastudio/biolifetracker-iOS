@@ -10,6 +10,18 @@ import Foundation
 
 class Location: PFObject, PFSubclassing {
     
+    
+    private override init() {
+        super.init()
+    }
+    
+    // static maker method
+    class func makeDefault() -> Location {
+        var location = Location()
+        // assign @NSManaged variables here
+        return location
+    }
+    
     // Parse Object Subclassing Methods
     override class func initialize() {
         var onceToken: dispatch_once_t = 0

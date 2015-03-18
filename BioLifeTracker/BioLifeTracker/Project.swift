@@ -16,7 +16,7 @@ class Project: PFObject, PFSubclassing {
     @NSManaged var sessions: [Session]
     
     // Default initializer
-    override init() {
+    private override init() {
         super.init()
     }
     
@@ -24,8 +24,20 @@ class Project: PFObject, PFSubclassing {
         self.init()
         self.name = name
         self.ethogram = ethogram
-        self.admins.append(Data.currentUser)
-        self.members.append(Data.currentUser)
+        self.admins = [Data.currentUser]
+        self.members = [Data.currentUser]
+        self.sessions = []
+    }
+    
+    // static maker method
+    class func makeDefault() -> Project {
+        var project = Project()
+        project.name = ""
+        project.ethogram = Ethogram.makeDefault()
+        project.admins = [Data.currentUser]
+        project.members = [Data.currentUser]
+        project.sessions = []
+        return project
     }
     
     func getIndexOfSession(session: Session) -> Int? {

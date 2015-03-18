@@ -16,26 +16,44 @@ enum SessionType: String {
 class Session: PFObject, PFSubclassing {
     // Stored properties
     @NSManaged var project: Project
-    @NSManaged var type_value: String
+    @NSManaged var typeValue: String
     @NSManaged var id: String?
     @NSManaged var observations: [Observation]
     @NSManaged var individuals: [Individual]
     
     // Calculated properties
     var type: SessionType {
-        return SessionType(rawValue: type_value)!
+        get {
+            return SessionType(rawValue: typeValue)!
+        }
+        set(newType) {
+            typeValue = newType.rawValue
+        }
     }
     
     // Initializers
-    override init() {
+    private override init() {
         super.init()
     }
     
     convenience init(project: Project, type: SessionType) {
         self.init()
         self.project = project
-        self.type_value = type.rawValue
+        self.typeValue = type.rawValue
         self.id = generateSessionId()
+        self.observations = []
+        self.individuals = []
+    }
+    
+    // static maker method
+    class func makeDefault() -> Session {
+        var session = Session()
+        session.project = Project.makeDefault()
+        session.type = .Focal
+        session.id = session.generateSessionId()
+        session.observations = []
+        session.individuals = []
+        return session
     }
     
     func generateSessionId() -> String {

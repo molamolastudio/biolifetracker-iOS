@@ -12,23 +12,24 @@ class Ethogram: PFObject, PFSubclassing {
     @NSManaged var creator: User
     @NSManaged var behaviourStates: [BehaviourState]
 
-    override init() {
+    private override init() {
         super.init()
     }
-    
-//    init() {
-//        self.name = Constants.Default.ethogramName
-//        self.code = Constants.Default.ethogramCode
-//        self.createdTime = NSDate()
-//        self.creator = Data.currentUser
-//        self.id = generateEthogramId()
-//        self.code = self.id!
-//    }
     
     convenience init(name: String, code: String) {
         self.init()
         self.name = name
         self.creator = Data.currentUser
+        self.behaviourStates = []
+    }
+    
+    // static maker method
+    class func makeDefault() -> Ethogram {
+        var ethogram = Ethogram()
+        ethogram.name = ""
+        ethogram.creator = Data.currentUser
+        ethogram.behaviourStates = []
+        return ethogram
     }
     
     func addBehaviourState(state: BehaviourState) {

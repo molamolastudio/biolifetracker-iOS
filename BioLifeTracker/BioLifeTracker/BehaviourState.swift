@@ -14,14 +14,15 @@ class BehaviourState: PFObject, PFSubclassing {
     @NSManaged var name: String
     @NSManaged var information: String
     //@NSManaged var ethogram: Ethogram
-    @NSManaged var photoUrl: String
+    @NSManaged var photoUrls: [String]
     
     @availability(iOS, deprecated=0.1, message="use the given convenience init() instead")
     convenience init(name: String, id: Int) {
         self.init()
-        self.name = name
         self.id = id
+        self.name = name
         self.information = ""
+        self.photoUrls = []
     }
     
     convenience init(id: Int, name: String, information: String) {
@@ -29,12 +30,23 @@ class BehaviourState: PFObject, PFSubclassing {
         self.id = id
         self.name = name
         self.information = information
+        self.photoUrls = []
     }
     
-    override init() {
+    private override init() {
         super.init()
         // do not initialize @NSManaged vars here,
         // or the program will crash.
+    }
+    
+    // static maker method
+    class func makeDefault() -> BehaviourState {
+        var behaviourState = BehaviourState()
+        behaviourState.id = 0
+        behaviourState.name = ""
+        behaviourState.information = ""
+        behaviourState.photoUrls = []
+        return behaviourState
     }
     
     // Parse Object Subclassing Methods

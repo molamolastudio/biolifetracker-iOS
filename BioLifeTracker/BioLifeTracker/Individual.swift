@@ -10,9 +10,21 @@ import Foundation
 
 class Individual: PFObject, PFSubclassing {
     @NSManaged var label: String
-    @NSManaged var photoUrl: String
+    @NSManaged var photoUrls: [String]
     @NSManaged var tags: [String]
     
+    private override init() {
+        super.init()
+    }
+    
+    // static maker method
+    class func makeDefault() -> Individual {
+        var individual = Individual()
+        individual.label = ""
+        individual.photoUrls = []
+        individual.tags = []
+        return individual
+    }
     
     // Parse Object Subclassing Methods
     override class func initialize() {
