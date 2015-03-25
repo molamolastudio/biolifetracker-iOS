@@ -4,3 +4,5 @@
 #import <Parse/Parse.h>
 #import <Parse/PFObject+Subclass.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import <GooglePlus/GooglePlus.h>
+#import <GoogleOpenSource/GoogleOpenSource.h>
