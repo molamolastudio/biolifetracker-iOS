@@ -8,7 +8,8 @@
 
 import Foundation
 
-class Weather: PFObject, PFSubclassing {
+class Weather: NSObject, NSCoding {
+    var weather: String!
     
     private override init() {
         super.init()
@@ -20,15 +21,23 @@ class Weather: PFObject, PFSubclassing {
         return weather
     }
     
-    // Parse Object Subclassing Methods
-    override class func initialize() {
-        var onceToken: dispatch_once_t = 0
-        dispatch_once(&onceToken) {
-            self.registerSubclass()
-        }
+//    // Parse Object Subclassing Methods
+//    override class func initialize() {
+//        var onceToken: dispatch_once_t = 0
+//        dispatch_once(&onceToken) {
+//            self.registerSubclass()
+//        }
+//    }
+//    
+//    class func parseClassName() -> String {
+//        return "Weather"
+//    }
+    
+    required init(coder aDecoder: NSCoder) {
+        self.weather = aDecoder.decodeObjectForKey("weather") as String
     }
     
-    class func parseClassName() -> String {
-        return "Weather"
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(weather, forKey: "weather")
     }
 }

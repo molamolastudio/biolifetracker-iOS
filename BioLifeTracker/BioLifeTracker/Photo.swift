@@ -8,9 +8,19 @@
 
 import Foundation
 
-class Photo {
+class Photo: NSObject, NSCoding {
+    var url: String!
     
     init(named: String) {
         // load PFFile from server and init self
     }
+    
+    required init(coder aDecoder: NSCoder) {
+        self.url = aDecoder.decodeObjectForKey("url") as String
+    }
+    
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(url, forKey: "url")
+    }
+    
 }

@@ -8,10 +8,10 @@
 
 import Foundation
 
-class Individual: PFObject, PFSubclassing {
-    @NSManaged var label: String
-    @NSManaged var photoUrls: [String]
-    @NSManaged var tags: [String]
+class Individual: NSObject, NSCoding {
+    var label: String!
+    var photoUrls: [String]!
+    var tags: [String]!
     
     private override init() {
         super.init()
@@ -26,16 +26,53 @@ class Individual: PFObject, PFSubclassing {
         return individual
     }
     
-    // Parse Object Subclassing Methods
-    override class func initialize() {
-        var onceToken: dispatch_once_t = 0
-        dispatch_once(&onceToken) {
-            self.registerSubclass()
+//    // Parse Object Subclassing Methods
+//    override class func initialize() {
+//        var onceToken: dispatch_once_t = 0
+//        dispatch_once(&onceToken) {
+//            self.registerSubclass()
+//        }
+//    }
+//    
+//    class func parseClassName() -> String {
+//        return "Individual"
+//    }
+    
+    required init(coder aDecoder: NSCoder) {
+        
+        var enumerator: NSEnumerator
+        self.label = aDecoder.decodeObjectForKey("label") as String
+        
+        let objectPhotoUrls: AnyObject = aDecoder.decodeObjectForKey("photoUrls")!
+        enumerator = objectPhotoUrls.objectEnumerator()
+        self.photoUrls = Array<String>()
+        while true {
+            let url = enumerator.nextObject() as String?
+            if url == nil {
+                break
+            }
+            
+            self.photoUrls.append(url!)
         }
+        
+        let objectTags: AnyObject = aDecoder.decodeObjectForKey("tags")!
+        enumerator = objectTags.objectEnumerator()
+        self.tags = Array<String>()
+        while true {
+            let url = enumerator.nextObject() as String?
+            if url == nil {
+                break
+            }
+            
+            self.tags.append(url!)
+        }
+        
+        super.init()
     }
     
-    class func parseClassName() -> String {
-        return "Individual"
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(label, forKey: "label")
+        aCoder.encodeObject(photoUrls, forKey: "photoUrls")
+        aCoder.encodeObject(tags, forKey: "tags")
     }
-    
 }

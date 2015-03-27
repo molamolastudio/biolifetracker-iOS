@@ -8,8 +8,8 @@
 
 import Foundation
 
-class Location: PFObject, PFSubclassing {
-    
+class Location: NSObject, NSCoding {
+    var location: String! // to change when we determine what maps to use
     
     private override init() {
         super.init()
@@ -22,15 +22,24 @@ class Location: PFObject, PFSubclassing {
         return location
     }
     
-    // Parse Object Subclassing Methods
-    override class func initialize() {
-        var onceToken: dispatch_once_t = 0
-        dispatch_once(&onceToken) {
-            self.registerSubclass()
-        }
+//    // Parse Object Subclassing Methods
+//    override class func initialize() {
+//        var onceToken: dispatch_once_t = 0
+//        dispatch_once(&onceToken) {
+//            self.registerSubclass()
+//        }
+//    }
+//    
+//    class func parseClassName() -> String {
+//        return "Location"
+//    }
+    
+    required init(coder aDecoder: NSCoder) {
+        self.location = aDecoder.decodeObjectForKey("location") as String
     }
     
-    class func parseClassName() -> String {
-        return "Location"
+    func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(location, forKey: "location")
     }
+
 }
