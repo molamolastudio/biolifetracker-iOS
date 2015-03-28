@@ -35,6 +35,7 @@
 		32517A241AB17BC900578C42 /* EthogramDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */; };
 		32517A281AB2B27400578C42 /* SessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A271AB2B27400578C42 /* SessionsViewController.swift */; };
 		32EE15481AC65CDE0065C25C /* FormTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32EE15471AC65CDE0065C25C /* FormTextCell.xib */; };
+		32EE154A1AC65DAF0065C25C /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EE15491AC65DAF0065C25C /* FormViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramDetailsViewController.swift; sourceTree = "<group>"; };
 		32517A271AB2B27400578C42 /* SessionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionsViewController.swift; path = ../SessionsViewController.swift; sourceTree = "<group>"; };
 		32EE15471AC65CDE0065C25C /* FormTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormTextCell.xib; sourceTree = "<group>"; };
+		32EE15491AC65DAF0065C25C /* FormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +145,7 @@
 				32517A1D1AB0913600578C42 /* EthogramPickerDelegate.swift */,
 				3205E74B1AAED9F9006F374D /* Main.storyboard */,
 				32EE15471AC65CDE0065C25C /* FormTextCell.xib */,
+				32EE15491AC65DAF0065C25C /* FormViewController.swift */,
 				3205E7861AB03309006F374D /* EthogramPickerCell.xib */,
 				3205E74E1AAED9F9006F374D /* Images.xcassets */,
 				3205E7501AAED9F9006F374D /* LaunchScreen.xib */,
@@ -310,6 +313,7 @@
 				3205E7811AAEDB03006F374D /* ProjectFormViewController.swift in Sources */,
 				32517A221AB1789100578C42 /* EthogramsViewController.swift in Sources */,
 				32517A241AB17BC900578C42 /* EthogramDetailsViewController.swift in Sources */,
+				32EE154A1AC65DAF0065C25C /* FormViewController.swift in Sources */,
 				32517A1E1AB0913600578C42 /* EthogramPickerDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
