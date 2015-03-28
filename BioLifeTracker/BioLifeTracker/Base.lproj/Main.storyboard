@@ -530,7 +530,6 @@
         <!--Sessions-->
         <scene sceneID="bUt-o4-BtF">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cdl-Ko-gDM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="8Hk-g5-f6q" customClass="SessionsViewController" customModule="BioLifeTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JA0-aT-C9J"/>
@@ -583,6 +582,7 @@
                         <outlet property="tableView" destination="GCY-RA-3G3" id="nO9-r6-0ip"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cdl-Ko-gDM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2107.5" y="765.5"/>
         </scene>
@@ -691,8 +691,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="E55-bJ-phW"/>
         <segue reference="Lrc-vc-5Pz"/>
-        <segue reference="6LF-xl-aow"/>
-        <segue reference="Tjs-XI-Sbm"/>
+        <segue reference="NMg-25-rjq"/>
         <segue reference="YOs-tm-ROu"/>
+        <segue reference="6LF-xl-aow"/>
     </inferredMetricsTieBreakers>
 </document>
