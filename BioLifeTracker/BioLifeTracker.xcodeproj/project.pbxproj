@@ -14,6 +14,7 @@
 		240D04381AB7206200D8BB9F /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7801AAEDB03006F374D /* StartViewController.swift */; };
 		242C6E021AC7DFBC0024ECEF /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242C6E001AC7DFBC0024ECEF /* GoogleOpenSource.framework */; };
 		242C6E031AC7DFBC0024ECEF /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242C6E011AC7DFBC0024ECEF /* GooglePlus.framework */; };
+		242C6E071AC80F050024ECEF /* BiolifeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242C6E061AC80F050024ECEF /* BiolifeModel.swift */; };
 		2439AABA1AC7DC7900389195 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2439AAB91AC7DC7900389195 /* FacebookSDK.framework */; };
 		24E32D361AB19647003C4E0A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D311AB19647003C4E0A /* Bolts.framework */; };
 		24E32D3F1AB1E86A003C4E0A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D3E1AB1E86A003C4E0A /* AudioToolbox.framework */; };
@@ -105,6 +106,7 @@
 		240D04361AB7198500D8BB9F /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		242C6E001AC7DFBC0024ECEF /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleOpenSource.framework; path = BioLifeTracker/GoogleOpenSource.framework; sourceTree = "<group>"; };
 		242C6E011AC7DFBC0024ECEF /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlus.framework; path = BioLifeTracker/GooglePlus.framework; sourceTree = "<group>"; };
+		242C6E061AC80F050024ECEF /* BiolifeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiolifeModel.swift; sourceTree = "<group>"; };
 		2439AAB91AC7DC7900389195 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = BioLifeTracker/FacebookSDK.framework; sourceTree = "<group>"; };
 		2439AABC1AC7DD7800389195 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		2439AABE1AC7DD8900389195 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 		24E32D3C1AB19954003C4E0A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				242C6E061AC80F050024ECEF /* BiolifeModel.swift */,
 				3205E7711AAEDA85006F374D /* Ethogram.swift */,
 				3205E76E1AAEDA85006F374D /* BehaviourState.swift */,
 				3205E7731AAEDA85006F374D /* Project.swift */,
@@ -495,6 +498,7 @@
 				32850BE71AB9625500C49D33 /* EthogramPicker.swift in Sources */,
 				3205E7761AAEDA85006F374D /* BehaviourState.swift in Sources */,
 				32850BE61AB9625500C49D33 /* EthogramDetailsViewController.swift in Sources */,
+				242C6E071AC80F050024ECEF /* BiolifeModel.swift in Sources */,
 				3205E7781AAEDA85006F374D /* Data.swift in Sources */,
 				3205E77A1AAEDA85006F374D /* Observation.swift in Sources */,
 				32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */,
