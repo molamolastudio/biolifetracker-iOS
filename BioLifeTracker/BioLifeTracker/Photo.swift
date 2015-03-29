@@ -9,10 +9,10 @@
 import Foundation
 
 class Photo: NSObject, NSCoding {
-    var url: String!
+    var url: String
     
-    init(named: String) {
-        // load PFFile from server and init self
+    init(url: String) {
+        self.url = url
     }
     
     required init(coder aDecoder: NSCoder) {

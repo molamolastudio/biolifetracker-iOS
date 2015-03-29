@@ -9,22 +9,17 @@
 import Foundation
 
 class Observation: NSObject, NSCoding {
-    var session: Session!
-    var state: BehaviourState!
-    var timestamp: NSDate!
+    var session: Session
+    var state: BehaviourState
+    var timestamp: NSDate
     var location: Location?
     var weather: Weather?
-    var creator: User!
-    var photoUrls: [String]!
-    var notes: String!
-    var individual: Individual!
+    var creator: User
+    var photoUrls = [String]()
+    var notes: String
+    var individual: Individual
     
-    override init() {
-        super.init()
-    }
-    
-    convenience init(session: Session, state: BehaviourState, timestamp: NSDate, creator: User) {
-        self.init()
+    init(session: Session, state: BehaviourState, timestamp: NSDate, creator: User) {
         self.session = session
         self.state = state
         self.timestamp = timestamp
@@ -34,11 +29,10 @@ class Observation: NSObject, NSCoding {
         self.photoUrls = []
         self.notes = ""
         self.individual = Individual.makeDefault()
-        
+        super.init()
     }
     
-    convenience init(session: Session, state: BehaviourState, timestamp: NSDate, creator: User, notes: String) {
-        self.init()
+    init(session: Session, state: BehaviourState, timestamp: NSDate, creator: User, notes: String) {
         self.session = session
         self.state = state
         self.timestamp = timestamp
@@ -48,6 +42,7 @@ class Observation: NSObject, NSCoding {
         self.weather = Weather.makeDefault()
         self.photoUrls = []
         self.individual = Individual.makeDefault()
+        super.init()
     }
     
     required init(coder aDecoder: NSCoder) {

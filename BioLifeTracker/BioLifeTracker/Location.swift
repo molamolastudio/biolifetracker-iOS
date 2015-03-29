@@ -9,9 +9,10 @@
 import Foundation
 
 class Location: NSObject, NSCoding {
-    var location: String! // to change when we determine what maps to use
+    var location: String // to change when we determine what maps to use
     
-    private override init() {
+    override init() {
+        location = ""
         super.init()
     }
     

@@ -9,9 +9,10 @@
 import Foundation
 
 class Weather: NSObject, NSCoding {
-    var weather: String!
+    var weather: String
     
-    private override init() {
+    override init() {
+        weather = ""
         super.init()
     }
     

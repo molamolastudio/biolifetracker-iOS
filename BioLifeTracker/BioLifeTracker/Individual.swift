@@ -9,11 +9,12 @@
 import Foundation
 
 class Individual: NSObject, NSCoding {
-    var label: String!
-    var photoUrls: [String]!
-    var tags: [String]!
+    var label: String
+    var photoUrls = [String]()
+    var tags = [String]()
     
-    private override init() {
+    override init() {
+        self.label = ""
         super.init()
     }
     
