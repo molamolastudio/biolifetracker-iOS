@@ -9,14 +9,18 @@
 import Foundation
 
 class Project: NSObject, NSCoding {
-    var name: String!
-    var ethogram: Ethogram!
-    var admins: [User]!
-    var members: [User]!
-    var sessions: [Session]!
+    var name: String
+    var ethogram: Ethogram?
+    var admins: [User]
+    var members: [User]
+    var sessions: [Session]
     
     // Default initializer
-    private override init() {
+    override init() {
+        name = ""
+        admins = [Data.currentUser]
+        members = [Data.currentUser]
+        sessions = []
         super.init()
     }
     
@@ -27,17 +31,6 @@ class Project: NSObject, NSCoding {
         self.admins = [Data.currentUser]
         self.members = [Data.currentUser]
         self.sessions = []
-    }
-    
-    // static maker method
-    class func makeDefault() -> Project {
-        var project = Project()
-        project.name = ""
-        project.ethogram = Ethogram.makeDefault()
-        project.admins = [Data.currentUser]
-        project.members = [Data.currentUser]
-        project.sessions = []
-        return project
     }
     
     func getIndexOfSession(session: Session) -> Int? {
@@ -103,14 +96,13 @@ class Project: NSObject, NSCoding {
         return ethogram
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required convenience init(coder aDecoder: NSCoder) {
+        self.init()
         
         var enumerator: NSEnumerator
         
-        super.init()
-        
         self.name = aDecoder.decodeObjectForKey("name") as String
-        self.ethogram = aDecoder.decodeObjectForKey("ethogram") as Ethogram
+        self.ethogram = aDecoder.decodeObjectForKey("ethogram") as? Ethogram
         
         let objectAdmins: AnyObject = aDecoder.decodeObjectForKey("admins")!
         enumerator = objectAdmins.objectEnumerator()

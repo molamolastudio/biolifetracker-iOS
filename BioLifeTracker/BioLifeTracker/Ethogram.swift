@@ -8,11 +8,14 @@
 import Foundation
 
 class Ethogram: NSObject, Storable {
-    var name: String!
-    var creator: User!
-    var behaviourStates: [BehaviourState]!
+    var name: String
+    var creator: User
+    var behaviourStates: [BehaviourState]
 
-    private override init() {
+    override init() {
+        name = ""
+        creator = Data.currentUser
+        behaviourStates = []
         super.init()
     }
     
@@ -23,30 +26,9 @@ class Ethogram: NSObject, Storable {
         self.behaviourStates = []
     }
     
-    // static maker method
-    class func makeDefault() -> Ethogram {
-        var ethogram = Ethogram()
-        ethogram.name = ""
-        ethogram.creator = Data.currentUser
-        ethogram.behaviourStates = []
-        return ethogram
-    }
-    
     func addBehaviourState(state: BehaviourState) {
         behaviourStates.append(state)
     }
-    
-//    // Parse Object Subclassing Methods
-//    override class func initialize() {
-//        var onceToken: dispatch_once_t = 0
-//        dispatch_once(&onceToken) {
-//            self.registerSubclass()
-//        }
-//    }
-//    
-//    class func parseClassName() -> String {
-//        return "Ethogram"
-//    }
     
     func saveToArchives() {
         let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
@@ -104,8 +86,8 @@ class Ethogram: NSObject, Storable {
         return ethogram
     }
     
-    required init(coder aDecoder: NSCoder) {
-        super.init()
+    required convenience init(coder aDecoder: NSCoder) {
+        self.init()
         self.name = aDecoder.decodeObjectForKey("name") as String
         self.creator = aDecoder.decodeObjectForKey("creator") as User
         

@@ -12,30 +12,15 @@ class Observation: NSObject, NSCoding {
     var session: Session!
     var state: BehaviourState!
     var timestamp: NSDate!
-    var location: Location!
-    var weather: Weather!
+    var location: Location?
+    var weather: Weather?
     var creator: User!
     var photoUrls: [String]!
     var notes: String!
     var individual: Individual!
     
-    private override init() {
+    override init() {
         super.init()
-    }
-    
-    // static maker method
-    class func makeDefault() -> Observation {
-        var observation = Observation()
-        observation.session = Session.makeDefault()
-        observation.state = BehaviourState.makeDefault()
-        observation.timestamp = NSDate()
-        observation.location = Location.makeDefault()
-        observation.weather = Weather.makeDefault()
-        observation.creator = Data.currentUser
-        observation.photoUrls = []
-        observation.notes = ""
-        observation.individual = Individual.makeDefault()
-        return observation
     }
     
     convenience init(session: Session, state: BehaviourState, timestamp: NSDate, creator: User) {
@@ -84,8 +69,8 @@ class Observation: NSObject, NSCoding {
         self.session = aDecoder.decodeObjectForKey("session") as Session
         self.state = aDecoder.decodeObjectForKey("state") as BehaviourState
         self.timestamp = aDecoder.decodeObjectForKey("timestamp") as NSDate
-        self.location = aDecoder.decodeObjectForKey("location") as Location
-        self.weather = aDecoder.decodeObjectForKey("weather") as Weather
+        self.location = aDecoder.decodeObjectForKey("location") as? Location
+        self.weather = aDecoder.decodeObjectForKey("weather") as? Weather
         self.creator = aDecoder.decodeObjectForKey("creator") as User
         
         let objectPhotoUrls: AnyObject = aDecoder.decodeObjectForKey("photoUrls")!

@@ -10,59 +10,38 @@
 import Foundation
 
 class BehaviourState: NSObject, NSCoding {
-    var id: Int!
-    var name: String!
-    var information: String!
-    //@NSManaged var ethogram: Ethogram
-    var photoUrls: [String]!
+    var name: String
+    var information: String
+    var ethogram: Ethogram
+    var photoUrls: [String]
+    
+    init(ethogram: Ethogram) {
+        name = ""
+        information = ""
+        self.ethogram = ethogram
+        self.photoUrls = []
+        super.init()
+    }
     
     @availability(iOS, deprecated=0.1, message="use the given convenience init() instead")
     convenience init(name: String, id: Int) {
-        self.init()
-        self.id = id
+        self.init(ethogram: Ethogram())
         self.name = name
         self.information = ""
         self.photoUrls = []
     }
     
     convenience init(id: Int, name: String, information: String) {
-        self.init()
-        self.id = id
+        self.init(ethogram: Ethogram())
         self.name = name
         self.information = information
         self.photoUrls = []
     }
     
-    private override init() {
-        super.init()
-        // do not initialize @NSManaged vars here,
-        // or the program will crash.
-    }
-    
-    // static maker method
-    class func makeDefault() -> BehaviourState {
-        var behaviourState = BehaviourState()
-        behaviourState.id = 0
-        behaviourState.name = ""
-        behaviourState.information = ""
-        behaviourState.photoUrls = []
-        return behaviourState
-    }
-//    
-//    // Parse Object Subclassing Methods
-//    override class func initialize() {
-//        var onceToken: dispatch_once_t = 0
-//        dispatch_once(&onceToken) {
-//            self.registerSubclass()
-//        }
-//    }
-//    
-//    class func parseClassName() -> String {
-//        return "BehaviourState"
-//    }
-    
-    required init(coder aDecoder: NSCoder) {
-        self.id = aDecoder.decodeObjectForKey("id") as Int
+    required convenience init(coder aDecoder: NSCoder) {
+        var ethogram = aDecoder.decodeObjectForKey("ethogram") as Ethogram
+        self.init(ethogram: ethogram)
+        
         self.name = aDecoder.decodeObjectForKey("name") as String
         self.information = aDecoder.decodeObjectForKey("information") as String
         
@@ -74,15 +53,11 @@ class BehaviourState: NSObject, NSCoding {
             if url == nil {
                 break
             }
-            
             self.photoUrls.append(url!)
         }
-        
-        super.init()
     }
 
     func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(id, forKey: "id")
         aCoder.encodeObject(name, forKey: "name")
         aCoder.encodeObject(information, forKey: "information")
         aCoder.encodeObject(photoUrls, forKey: "photoUrls")
