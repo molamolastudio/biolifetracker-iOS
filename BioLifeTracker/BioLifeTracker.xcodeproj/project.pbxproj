@@ -16,8 +16,6 @@
 		242C6E031AC7DFBC0024ECEF /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242C6E011AC7DFBC0024ECEF /* GooglePlus.framework */; };
 		2439AABA1AC7DC7900389195 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2439AAB91AC7DC7900389195 /* FacebookSDK.framework */; };
 		24E32D361AB19647003C4E0A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D311AB19647003C4E0A /* Bolts.framework */; };
-		24E32D371AB19647003C4E0A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D321AB19647003C4E0A /* Parse.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		24E32D3A1AB19647003C4E0A /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D351AB19647003C4E0A /* ParseUI.framework */; };
 		24E32D3F1AB1E86A003C4E0A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D3E1AB1E86A003C4E0A /* AudioToolbox.framework */; };
 		24E32D411AB1E88E003C4E0A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D401AB1E88E003C4E0A /* Social.framework */; };
 		24E32D431AB1E895003C4E0A /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D421AB1E895003C4E0A /* AdSupport.framework */; };
@@ -41,8 +39,6 @@
 		24E32D701AB1EC5A003C4E0A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D401AB1E88E003C4E0A /* Social.framework */; };
 		24E32D711AB1EC5A003C4E0A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D3E1AB1E86A003C4E0A /* AudioToolbox.framework */; };
 		24E32D721AB1EC5A003C4E0A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D311AB19647003C4E0A /* Bolts.framework */; };
-		24E32D731AB1EC5A003C4E0A /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D321AB19647003C4E0A /* Parse.framework */; };
-		24E32D761AB1EC5A003C4E0A /* ParseUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D351AB19647003C4E0A /* ParseUI.framework */; };
 		24E32D7E1AB29DEF003C4E0A /* BehaviourState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E76E1AAEDA85006F374D /* BehaviourState.swift */; };
 		3205E7481AAED9F9006F374D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7471AAED9F9006F374D /* AppDelegate.swift */; };
 		3205E74D1AAED9F9006F374D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3205E74B1AAED9F9006F374D /* Main.storyboard */; };
@@ -194,9 +190,7 @@
 				24E32D431AB1E895003C4E0A /* AdSupport.framework in Frameworks */,
 				24E32D411AB1E88E003C4E0A /* Social.framework in Frameworks */,
 				24E32D3F1AB1E86A003C4E0A /* AudioToolbox.framework in Frameworks */,
-				24E32D371AB19647003C4E0A /* Parse.framework in Frameworks */,
 				2439AABA1AC7DC7900389195 /* FacebookSDK.framework in Frameworks */,
-				24E32D3A1AB19647003C4E0A /* ParseUI.framework in Frameworks */,
 				24E32D361AB19647003C4E0A /* Bolts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -217,8 +211,6 @@
 				24E32D701AB1EC5A003C4E0A /* Social.framework in Frameworks */,
 				24E32D711AB1EC5A003C4E0A /* AudioToolbox.framework in Frameworks */,
 				24E32D721AB1EC5A003C4E0A /* Bolts.framework in Frameworks */,
-				24E32D731AB1EC5A003C4E0A /* Parse.framework in Frameworks */,
-				24E32D761AB1EC5A003C4E0A /* ParseUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
