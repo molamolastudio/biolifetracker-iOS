@@ -22,18 +22,6 @@ class Location: NSObject, NSCoding {
         return location
     }
     
-//    // Parse Object Subclassing Methods
-//    override class func initialize() {
-//        var onceToken: dispatch_once_t = 0
-//        dispatch_once(&onceToken) {
-//            self.registerSubclass()
-//        }
-//    }
-//    
-//    class func parseClassName() -> String {
-//        return "Location"
-//    }
-    
     required init(coder aDecoder: NSCoder) {
         self.location = aDecoder.decodeObjectForKey("location") as String
     }

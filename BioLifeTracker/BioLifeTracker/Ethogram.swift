@@ -41,9 +41,6 @@ class Ethogram: NSObject, Storable {
             let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
             
             archiver.encodeObject(self, forKey: name)
-            //            archiver.encodeObject(self.creator, forKey: "EthogramCreator")
-            //            archiver.encodeObject(self.behaviourStates, forKey: "EthogramBehaviourStates")
-            //            archiver.finishEncoding()
             archiver.finishEncoding()
             let success = data.writeToFile(path, atomically: true)
         }
@@ -69,20 +66,7 @@ class Ethogram: NSObject, Storable {
         
         let archiver = NSKeyedUnarchiver(forReadingWithData: data!)
         let ethogram = archiver.decodeObjectForKey(identifier)! as Ethogram
-        //        let objectCreator = archiver.decodeObjectForKey("EthogramCreator")! as User // Check whether User can be stored
-        //
-        //        let objectBehavStates: AnyObject = archiver.decodeObjectForKey("EthogramBehaviourStates")!
-        //        let enumerator = objectBehavStates.objectEnumerator()
-        //
-        //        var  loadBehaviourStates = Array<BehaviourState>()  // Check whether BehaviourState can be stored
-        //        while true {
-        //            let behaviourState = enumerator.nextObject() as BehaviourState?
-        //            if behaviourState == nil {
-        //                break
-        //            }
-        //
-        //            loadBehaviourStates.append(behaviourState!)
-        //        }
+        
         return ethogram
     }
     

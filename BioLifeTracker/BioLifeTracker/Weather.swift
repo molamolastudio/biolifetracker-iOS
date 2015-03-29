@@ -21,18 +21,6 @@ class Weather: NSObject, NSCoding {
         return weather
     }
     
-//    // Parse Object Subclassing Methods
-//    override class func initialize() {
-//        var onceToken: dispatch_once_t = 0
-//        dispatch_once(&onceToken) {
-//            self.registerSubclass()
-//        }
-//    }
-//    
-//    class func parseClassName() -> String {
-//        return "Weather"
-//    }
-    
     required init(coder aDecoder: NSCoder) {
         self.weather = aDecoder.decodeObjectForKey("weather") as String
     }

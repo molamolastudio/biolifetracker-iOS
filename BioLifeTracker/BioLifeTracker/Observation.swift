@@ -50,18 +50,6 @@ class Observation: NSObject, NSCoding {
         self.individual = Individual.makeDefault()
     }
     
-//    // Parse Object Subclassing Methods
-//    override class func initialize() {
-//        var onceToken: dispatch_once_t = 0
-//        dispatch_once(&onceToken) {
-//            self.registerSubclass()
-//        }
-//    }
-//    
-//    class func parseClassName() -> String {
-//        return "Session"
-//    }
-    
     required init(coder aDecoder: NSCoder) {
         
         var enumerator: NSEnumerator
