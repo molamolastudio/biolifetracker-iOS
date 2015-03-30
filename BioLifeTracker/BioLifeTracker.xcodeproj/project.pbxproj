@@ -56,7 +56,6 @@
 		3205E77B1AAEDA85006F374D /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7731AAEDA85006F374D /* Project.swift */; };
 		3205E77C1AAEDA85006F374D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7741AAEDA85006F374D /* Session.swift */; };
 		3205E77D1AAEDA85006F374D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7751AAEDA85006F374D /* User.swift */; };
-		3205E7871AB03309006F374D /* CustomPickerPopupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3205E7861AB03309006F374D /* CustomPickerPopupCell.xib */; };
 		320920421AC92A4600E8A456 /* FormBooleanPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 320920411AC92A4600E8A456 /* FormBooleanPickerCell.xib */; };
 		320920461AC9550600E8A456 /* FormSingleLineTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 320920451AC9550600E8A456 /* FormSingleLineTextCell.xib */; };
 		320920481AC9566100E8A456 /* FormMultiLineTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 320920471AC9566100E8A456 /* FormMultiLineTextCell.xib */; };
@@ -66,6 +65,7 @@
 		3209205B1AC98E8A00E8A456 /* FormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320920571AC98E8A00E8A456 /* FormCell.swift */; };
 		3209205C1AC98E8A00E8A456 /* MultiLineTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320920581AC98E8A00E8A456 /* MultiLineTextCell.swift */; };
 		3209205D1AC98E8A00E8A456 /* SessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320920591AC98E8A00E8A456 /* SessionsViewController.swift */; };
+		320920631AC9908500E8A456 /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 320920621AC9908400E8A456 /* GooglePlus.bundle */; };
 		32850BE11AB9625500C49D33 /* ProjectFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E77E1AAEDB03006F374D /* ProjectFormViewController.swift */; };
 		32850BE21AB9625500C49D33 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E77F1AAEDB03006F374D /* ProjectsViewController.swift */; };
 		32850BE31AB9625500C49D33 /* ProjectHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A1F1AB09A3D00578C42 /* ProjectHomeViewController.swift */; };
@@ -92,8 +92,6 @@
 		ACB073ED1AC17BA3004E0BFC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073E71AC17BA3004E0BFC /* Security.framework */; };
 		ACB073EE1AC17BA3004E0BFC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073E81AC17BA3004E0BFC /* UIKit.framework */; };
 		ACB073F41AC184F5004E0BFC /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073F31AC184F5004E0BFC /* CoreMotion.framework */; };
-		ACDB7A071AC8E59E00231FF8 /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ACDB7A061AC8E59E00231FF8 /* GooglePlus.bundle */; };
-		ACDB7A081AC8E59E00231FF8 /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ACDB7A061AC8E59E00231FF8 /* GooglePlus.bundle */; };
 		ACDC54401AC3FC6B00779FAE /* LocalStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDC543F1AC3FC6B00779FAE /* LocalStorageTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -164,6 +162,7 @@
 		320920571AC98E8A00E8A456 /* FormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormCell.swift; path = BioLifeTracker/FormCell.swift; sourceTree = "<group>"; };
 		320920581AC98E8A00E8A456 /* MultiLineTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiLineTextCell.swift; path = BioLifeTracker/MultiLineTextCell.swift; sourceTree = "<group>"; };
 		320920591AC98E8A00E8A456 /* SessionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionsViewController.swift; sourceTree = "<group>"; };
+		320920621AC9908400E8A456 /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GooglePlus.bundle; path = BioLifeTracker/GooglePlus.bundle; sourceTree = "<group>"; };
 		32517A1F1AB09A3D00578C42 /* ProjectHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectHomeViewController.swift; sourceTree = "<group>"; };
 		32517A211AB1789100578C42 /* EthogramsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramsViewController.swift; sourceTree = "<group>"; };
 		32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramDetailsViewController.swift; sourceTree = "<group>"; };
@@ -177,7 +176,6 @@
 		ACB073E71AC17BA3004E0BFC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		ACB073E81AC17BA3004E0BFC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ACB073F31AC184F5004E0BFC /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		ACDB7A061AC8E59E00231FF8 /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
 		ACDC543F1AC3FC6B00779FAE /* LocalStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorageTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -260,7 +258,7 @@
 		24E32D3B1AB1991C003C4E0A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				ACDB7A061AC8E59E00231FF8 /* GooglePlus.bundle */,
+				320920621AC9908400E8A456 /* GooglePlus.bundle */,
 				242C6E001AC7DFBC0024ECEF /* GoogleOpenSource.framework */,
 				242C6E011AC7DFBC0024ECEF /* GooglePlus.framework */,
 				2439AAB91AC7DC7900389195 /* FacebookSDK.framework */,
@@ -449,7 +447,7 @@
 		3205E73A1AAED9F9006F374D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = "Mola Mola Studios";
 				TargetAttributes = {
 					3205E7411AAED9F9006F374D = {
@@ -487,10 +485,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				3205E74D1AAED9F9006F374D /* Main.storyboard in Resources */,
-				ACDB7A071AC8E59E00231FF8 /* GooglePlus.bundle in Resources */,
+				320920631AC9908500E8A456 /* GooglePlus.bundle in Resources */,
 				32850BE91AB9625500C49D33 /* CustomPickerPopupCell.xib in Resources */,
 				3205E7521AAED9F9006F374D /* LaunchScreen.xib in Resources */,
-				3205E7871AB03309006F374D /* CustomPickerPopupCell.xib in Resources */,
 				320920461AC9550600E8A456 /* FormSingleLineTextCell.xib in Resources */,
 				3205E74F1AAED9F9006F374D /* Images.xcassets in Resources */,
 				320920481AC9566100E8A456 /* FormMultiLineTextCell.xib in Resources */,
@@ -502,7 +499,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ACDB7A081AC8E59E00231FF8 /* GooglePlus.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
