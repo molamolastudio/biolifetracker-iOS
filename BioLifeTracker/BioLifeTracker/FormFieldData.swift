@@ -15,6 +15,7 @@ import Foundation
 class FormFieldData {
     // Private variables that should not be modified by the user.
     private var sections: Int
+    private var sectionTitles: [String] = []
     private var fields = [Int: [FormField]]()
     
     // Creates a FormFieldData with 1 section.
@@ -41,6 +42,14 @@ class FormFieldData {
         }
     }
     
+    // Sets the header title for the specified section.
+    // If the section does not exist, does nothing.
+    func setSectionTitle(section: Int, title: String) {
+        if section < sections {
+            sectionTitles[section] = title
+        }
+    }
+    
     // Adds a text cell to the first section of the form, unless specified.
     // If the section does not exist, does nothing.
     func addTextCell(section: Int = 0, label: String, hasSingleLine: Bool) {
@@ -61,11 +70,11 @@ class FormFieldData {
         }
     }
     
-    // Adds a date picker cell with the given dates to the first section of the form, unless specified.
+    // Adds a date picker cell to the first section of the form, unless specified.
     // If the section does not exist, does nothing.
-    func addDatePickerCell(section: Int = 0, label: String, dates: [NSDate]) {
+    func addDatePickerCell(section: Int = 0, label: String) {
         if let var array = fields[section] {
-            array.append(FormField(type: FormField.FieldType.PickerDate, label: label, values: dates))
+            array.append(FormField(type: FormField.FieldType.PickerDate, label: label))
         }
     }
     
