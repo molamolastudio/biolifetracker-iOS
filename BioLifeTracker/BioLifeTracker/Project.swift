@@ -10,7 +10,7 @@ import Foundation
 
 class Project: BiolifeModel {
     var name: String
-    var ethogram: Ethogram?
+    var ethogram: Ethogram
     var admins: [User]
     var members: [User]
     var sessions: [Session]
@@ -21,6 +21,7 @@ class Project: BiolifeModel {
         name = ""
         admins = [Data.currentUser]
         members = [Data.currentUser]
+        ethogram = Ethogram()
         sessions = []
         individuals = []
         super.init()
@@ -90,7 +91,7 @@ class Project: BiolifeModel {
         var enumerator: NSEnumerator
         
         self.name = aDecoder.decodeObjectForKey("name") as String
-        self.ethogram = aDecoder.decodeObjectForKey("ethogram") as? Ethogram
+        self.ethogram = aDecoder.decodeObjectForKey("ethogram") as Ethogram
         
         let objectAdmins: AnyObject = aDecoder.decodeObjectForKey("admins")!
         enumerator = objectAdmins.objectEnumerator()

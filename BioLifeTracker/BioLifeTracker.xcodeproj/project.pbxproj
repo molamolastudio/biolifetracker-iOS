@@ -87,6 +87,8 @@
 		ACB073ED1AC17BA3004E0BFC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073E71AC17BA3004E0BFC /* Security.framework */; };
 		ACB073EE1AC17BA3004E0BFC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073E81AC17BA3004E0BFC /* UIKit.framework */; };
 		ACB073F41AC184F5004E0BFC /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073F31AC184F5004E0BFC /* CoreMotion.framework */; };
+		ACDB7A071AC8E59E00231FF8 /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ACDB7A061AC8E59E00231FF8 /* GooglePlus.bundle */; };
+		ACDB7A081AC8E59E00231FF8 /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ACDB7A061AC8E59E00231FF8 /* GooglePlus.bundle */; };
 		ACDC54401AC3FC6B00779FAE /* LocalStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDC543F1AC3FC6B00779FAE /* LocalStorageTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -112,8 +114,6 @@
 		2439AABC1AC7DD7800389195 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		2439AABE1AC7DD8900389195 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		24E32D311AB19647003C4E0A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = BioLifeTracker/Bolts.framework; sourceTree = "<group>"; };
-		24E32D321AB19647003C4E0A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = BioLifeTracker/Parse.framework; sourceTree = "<group>"; };
-		24E32D351AB19647003C4E0A /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = BioLifeTracker/ParseUI.framework; sourceTree = "<group>"; };
 		24E32D3E1AB1E86A003C4E0A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		24E32D401AB1E88E003C4E0A /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		24E32D421AB1E895003C4E0A /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -165,6 +165,7 @@
 		ACB073E71AC17BA3004E0BFC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		ACB073E81AC17BA3004E0BFC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ACB073F31AC184F5004E0BFC /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		ACDB7A061AC8E59E00231FF8 /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
 		ACDC543F1AC3FC6B00779FAE /* LocalStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorageTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -247,6 +248,7 @@
 		24E32D3B1AB1991C003C4E0A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ACDB7A061AC8E59E00231FF8 /* GooglePlus.bundle */,
 				242C6E001AC7DFBC0024ECEF /* GoogleOpenSource.framework */,
 				242C6E011AC7DFBC0024ECEF /* GooglePlus.framework */,
 				2439AAB91AC7DC7900389195 /* FacebookSDK.framework */,
@@ -265,8 +267,6 @@
 				24E32D521AB1E9F2003C4E0A /* libsqlite3.dylib */,
 				ACB073E61AC17BA3004E0BFC /* MediaPlayer.framework */,
 				24E32D501AB1E9B9003C4E0A /* MobileCoreServices.framework */,
-				24E32D321AB19647003C4E0A /* Parse.framework */,
-				24E32D351AB19647003C4E0A /* ParseUI.framework */,
 				ACB073E71AC17BA3004E0BFC /* Security.framework */,
 				24E32D401AB1E88E003C4E0A /* Social.framework */,
 				24E32D4E1AB1E92A003C4E0A /* SystemConfiguration.framework */,
@@ -469,6 +469,7 @@
 			files = (
 				3205E76D1AAEDA4A006F374D /* pie-sample.png in Resources */,
 				3205E74D1AAED9F9006F374D /* Main.storyboard in Resources */,
+				ACDB7A071AC8E59E00231FF8 /* GooglePlus.bundle in Resources */,
 				32850BE91AB9625500C49D33 /* EthogramPickerCell.xib in Resources */,
 				3205E76C1AAEDA4A006F374D /* lineGraph.gif in Resources */,
 				3205E7521AAED9F9006F374D /* LaunchScreen.xib in Resources */,
@@ -481,6 +482,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACDB7A081AC8E59E00231FF8 /* GooglePlus.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
