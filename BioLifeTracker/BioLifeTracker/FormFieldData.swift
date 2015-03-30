@@ -50,6 +50,16 @@ class FormFieldData {
         }
     }
     
+    // Returns the header title for the specified section.
+    // If the section does not exist, does nothing.
+    func getSectionTitle(section: Int) -> String? {
+        if section < sections {
+            return sectionTitles[section]
+        } else {
+            return nil
+        }
+    }
+    
     // Adds a text cell to the first section of the form, unless specified.
     // If the section does not exist, does nothing.
     func addTextCell(section: Int = 0, label: String, hasSingleLine: Bool) {

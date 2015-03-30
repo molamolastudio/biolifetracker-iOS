@@ -17,10 +17,44 @@ class FormViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        if fields != nil {
+            switch fields!.getFieldTypeForIndex(indexPath) {
+            case .TextSingleLine:
+                break
+            case .TextMultiLine:
+                break
+            case .PickerBoolean:
+                break
+            case .PickerDate:
+                break
+            case .PickerDefault:
+                break
+            case .PickerCustom:
+                break
+            case .PickerPhoto:
+                break
+            case .Empty:
+                break
+            default:
+                break
+            }
+        }
         return UITableViewCell()
     }
     
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if fields != nil {
+            return fields!.getSectionTitle(section)
+        } else {
+            return nil
+        }
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        if fields != nil {
+            return fields!.getNumberOfRowsForSection(section)
+        } else {
+            return 0
+        }
     }
 }
