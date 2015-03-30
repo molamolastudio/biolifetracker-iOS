@@ -79,19 +79,19 @@
 		3205E7801AAEDB03006F374D /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramFormViewController.swift; sourceTree = "<group>"; };
 		3205E7861AB03309006F374D /* EthogramPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EthogramPickerCell.xib; sourceTree = "<group>"; };
-		3209203F1AC9123A00E8A456 /* FormField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormField.swift; sourceTree = "<group>"; };
-		320920411AC92A4600E8A456 /* FormBooleanCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormBooleanCell.xib; sourceTree = "<group>"; };
-		320920431AC953DD00E8A456 /* TextSingleLineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextSingleLineCell.swift; sourceTree = "<group>"; };
-		320920451AC9550600E8A456 /* FormTextSingleLineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormTextSingleLineCell.xib; sourceTree = "<group>"; };
-		320920471AC9566100E8A456 /* FormTextMultiLineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormTextMultiLineCell.xib; sourceTree = "<group>"; };
+		3209203F1AC9123A00E8A456 /* FormField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormField.swift; path = BioLifeTracker/FormField.swift; sourceTree = "<group>"; };
+		320920411AC92A4600E8A456 /* FormBooleanCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FormBooleanCell.xib; path = BioLifeTracker/FormBooleanCell.xib; sourceTree = "<group>"; };
+		320920431AC953DD00E8A456 /* TextSingleLineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextSingleLineCell.swift; path = BioLifeTracker/TextSingleLineCell.swift; sourceTree = "<group>"; };
+		320920451AC9550600E8A456 /* FormTextSingleLineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FormTextSingleLineCell.xib; path = BioLifeTracker/FormTextSingleLineCell.xib; sourceTree = "<group>"; };
+		320920471AC9566100E8A456 /* FormTextMultiLineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FormTextMultiLineCell.xib; path = BioLifeTracker/FormTextMultiLineCell.xib; sourceTree = "<group>"; };
 		32517A1B1AB072BB00578C42 /* EthogramPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramPicker.swift; sourceTree = "<group>"; };
 		32517A1D1AB0913600578C42 /* EthogramPickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramPickerDelegate.swift; sourceTree = "<group>"; };
 		32517A1F1AB09A3D00578C42 /* ProjectHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectHomeViewController.swift; sourceTree = "<group>"; };
 		32517A211AB1789100578C42 /* EthogramsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramsViewController.swift; sourceTree = "<group>"; };
 		32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramDetailsViewController.swift; sourceTree = "<group>"; };
 		32517A271AB2B27400578C42 /* SessionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionsViewController.swift; path = ../SessionsViewController.swift; sourceTree = "<group>"; };
-		32EE15491AC65DAF0065C25C /* FormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
-		32EE154B1AC65EA80065C25C /* FormFieldData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormFieldData.swift; sourceTree = "<group>"; };
+		32EE15491AC65DAF0065C25C /* FormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormViewController.swift; path = BioLifeTracker/FormViewController.swift; sourceTree = "<group>"; };
+		32EE154B1AC65EA80065C25C /* FormFieldData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormFieldData.swift; path = BioLifeTracker/FormFieldData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				3205E7671AAEDA38006F374D /* Images */,
+				320920491AC957E700E8A456 /* Form Library */,
 				3205E7441AAED9F9006F374D /* BioLifeTracker */,
 				3205E75A1AAED9F9006F374D /* BioLifeTrackerTests */,
 				3205E7431AAED9F9006F374D /* Products */,
@@ -154,13 +155,6 @@
 				32517A1B1AB072BB00578C42 /* EthogramPicker.swift */,
 				32517A1D1AB0913600578C42 /* EthogramPickerDelegate.swift */,
 				3205E74B1AAED9F9006F374D /* Main.storyboard */,
-				32EE15491AC65DAF0065C25C /* FormViewController.swift */,
-				320920431AC953DD00E8A456 /* TextSingleLineCell.swift */,
-				320920451AC9550600E8A456 /* FormTextSingleLineCell.xib */,
-				320920471AC9566100E8A456 /* FormTextMultiLineCell.xib */,
-				320920411AC92A4600E8A456 /* FormBooleanCell.xib */,
-				32EE154B1AC65EA80065C25C /* FormFieldData.swift */,
-				3209203F1AC9123A00E8A456 /* FormField.swift */,
 				3205E7861AB03309006F374D /* EthogramPickerCell.xib */,
 				3205E74E1AAED9F9006F374D /* Images.xcassets */,
 				3205E7501AAED9F9006F374D /* LaunchScreen.xib */,
@@ -203,6 +197,20 @@
 			);
 			name = Images;
 			path = BioLifeTracker;
+			sourceTree = "<group>";
+		};
+		320920491AC957E700E8A456 /* Form Library */ = {
+			isa = PBXGroup;
+			children = (
+				32EE154B1AC65EA80065C25C /* FormFieldData.swift */,
+				3209203F1AC9123A00E8A456 /* FormField.swift */,
+				32EE15491AC65DAF0065C25C /* FormViewController.swift */,
+				320920431AC953DD00E8A456 /* TextSingleLineCell.swift */,
+				320920451AC9550600E8A456 /* FormTextSingleLineCell.xib */,
+				320920471AC9566100E8A456 /* FormTextMultiLineCell.xib */,
+				320920411AC92A4600E8A456 /* FormBooleanCell.xib */,
+			);
+			name = "Form Library";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
