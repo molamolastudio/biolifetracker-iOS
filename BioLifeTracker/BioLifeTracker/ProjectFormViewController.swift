@@ -8,14 +8,14 @@
 
 import UIKit
 
-class ProjectFormViewController: UITableViewController, EthogramPickerDelegate {
+class ProjectFormViewController: UITableViewController, CustomPickerPopupDelegate {
     
     @IBOutlet weak var textFieldTitle: UITextField!
     @IBOutlet weak var textFieldAnimal: UITextField!
     
     @IBOutlet weak var labelEthogram: UILabel!
     
-    var picker: EthogramPicker? = nil
+    var picker: CustomPickerPopup? = nil
     
     let rowHeight: CGFloat = 44
     
@@ -88,7 +88,7 @@ class ProjectFormViewController: UITableViewController, EthogramPickerDelegate {
             self.presentViewController(alert, animated: true, completion: {})
         } else {
             let p = Project(name: textFieldTitle.text,
-                animal: textFieldAnimal.text,
+                //animal: textFieldAnimal.text,
                 ethogram: selectedEthogram!)
             Data.selectedProject = p
             Data.projects.append(p)
@@ -97,7 +97,7 @@ class ProjectFormViewController: UITableViewController, EthogramPickerDelegate {
     }
     
     func showPicker() {
-        picker = EthogramPicker()
+        picker = CustomPickerPopup()
         picker!.delegate = self
         
         for e in Data.ethograms {
