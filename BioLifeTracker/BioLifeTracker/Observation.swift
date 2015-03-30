@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Observation: NSObject, NSCoding {
+class Observation: BiolifeModel {
     var session: Session
     var state: BehaviourState
     var information: String
@@ -79,10 +79,13 @@ class Observation: NSObject, NSCoding {
         self.notes = aDecoder.decodeObjectForKey("notes") as String
         self.individual = aDecoder.decodeObjectForKey("individual") as Individual
         self.information = aDecoder.decodeObjectForKey("information") as String
-        super.init()
+        super.init(coder: aDecoder)
     }
-    
-    func encodeWithCoder(aCoder: NSCoder) {
+}
+
+
+extension Observation: NSCoding {
+    override func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(session, forKey: "session")
         aCoder.encodeObject(state, forKey: "state")
         aCoder.encodeObject(timestamp, forKey: "timestamp")

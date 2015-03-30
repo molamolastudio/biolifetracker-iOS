@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Location: NSObject, NSCoding {
+class Location: BiolifeModel {
     var location: String // to change when we determine what maps to use
     
     override init() {
@@ -25,10 +25,12 @@ class Location: NSObject, NSCoding {
     
     required init(coder aDecoder: NSCoder) {
         self.location = aDecoder.decodeObjectForKey("location") as String
+        super.init(coder: aDecoder)
     }
-    
-    func encodeWithCoder(aCoder: NSCoder) {
+}
+
+extension Location: NSCoding {
+    override func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(location, forKey: "location")
     }
-
 }

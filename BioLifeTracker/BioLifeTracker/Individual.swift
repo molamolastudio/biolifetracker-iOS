@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Individual: NSObject, NSCoding {
+class Individual: BiolifeModel {
     var label: String
     var tags: [Tag]
     var photo: UIImage?
@@ -63,10 +63,13 @@ class Individual: NSObject, NSCoding {
         }
         
         self.project = aDecoder.decodeObjectForKey("project") as Project
-        super.init()
+        super.init(coder: aDecoder)
     }
-    
-    func encodeWithCoder(aCoder: NSCoder) {
+}
+
+
+extension Individual: NSCoding {
+    override func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(label, forKey: "label")
         aCoder.encodeObject(photoUrls, forKey: "photoUrls")
         aCoder.encodeObject(tags, forKey: "tags")

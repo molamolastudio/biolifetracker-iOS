@@ -7,16 +7,16 @@
 //
 import Foundation
 
-class Ethogram: NSObject, Storable {
+class Ethogram: BiolifeModel, Storable {
     var name: String
     var information: String
     var behaviourStates: [BehaviourState]
+    
     @availability(iOS, deprecated=0.1, message="Use createdBy instead")
-    var creator: User
+    var creator: User { return createdBy }
     
     override init() {
         name = ""
-        creator = Data.currentUser
         behaviourStates = []
         information = ""
         super.init()
@@ -25,7 +25,6 @@ class Ethogram: NSObject, Storable {
     convenience init(name: String) {
         self.init()
         self.name = name
-        self.creator = Data.currentUser
         self.behaviourStates = []
         information = ""
     }
@@ -74,10 +73,8 @@ class Ethogram: NSObject, Storable {
         return ethogram
     }
     
-    required convenience init(coder aDecoder: NSCoder) {
-        self.init()
+    required init(coder aDecoder: NSCoder) {
         self.name = aDecoder.decodeObjectForKey("name") as String
-        self.creator = aDecoder.decodeObjectForKey("creator") as User
         
         let objectBehavStates: AnyObject = aDecoder.decodeObjectForKey("behaviourStates")!
         let enumerator = objectBehavStates.objectEnumerator()
@@ -93,12 +90,15 @@ class Ethogram: NSObject, Storable {
         
             self.behaviourStates.append(behaviourState!)
         }
+        self.information = ""
+        super.init(coder: aDecoder)
     }
-    
-    func encodeWithCoder(aCoder: NSCoder) {
+}
+
+extension Ethogram: NSCoding {
+    override func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(name, forKey: "name")
         aCoder.encodeObject(creator, forKey: "creator")
         aCoder.encodeObject(behaviourStates, forKey: "behaviourStates")
-
     }
 }

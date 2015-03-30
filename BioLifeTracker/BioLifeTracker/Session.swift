@@ -13,7 +13,7 @@ enum SessionType: String {
     case Scan = "SCN"
 }
 
-class Session: NSObject, NSCoding {
+class Session: BiolifeModel {
     // Stored properties
     var project: Project
     var typeValue: String
@@ -27,6 +27,7 @@ class Session: NSObject, NSCoding {
         self.typeValue = type.rawValue
         self.observations = []
         self.individuals = []
+        super.init()
     }
     
     func getDisplayName() -> String {
@@ -64,10 +65,13 @@ class Session: NSObject, NSCoding {
             }
             self.individuals.append(individual!)
         }
-        super.init()
+        super.init(coder: aDecoder)
     }
+}
 
-    func encodeWithCoder(aCoder: NSCoder) {
+
+extension Session: NSCoding {
+    override func encodeWithCoder(aCoder: NSCoder) {
         // project attribute is allocated when project is initialized
         aCoder.encodeObject(typeValue, forKey: "typeValue")
         aCoder.encodeObject(observations, forKey: "observations")

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Weather: NSObject, NSCoding {
+class Weather: BiolifeModel {
     var weather: String
     
     override init() {
@@ -24,9 +24,14 @@ class Weather: NSObject, NSCoding {
     
     required init(coder aDecoder: NSCoder) {
         self.weather = aDecoder.decodeObjectForKey("weather") as String
+        super.init(coder: aDecoder)
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
+}
+
+
+extension Weather: NSCoding {
+    override func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(weather, forKey: "weather")
     }
 }

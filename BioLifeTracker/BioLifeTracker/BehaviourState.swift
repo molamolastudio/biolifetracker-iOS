@@ -9,7 +9,7 @@
 
 import Foundation
 
-class BehaviourState: NSObject, NSCoding {
+class BehaviourState: BiolifeModel {
     var name: String
     var information: String
     var ethogram: Ethogram
@@ -59,12 +59,6 @@ class BehaviourState: NSObject, NSCoding {
             self.photoUrls.append(url!)
         }
     }
-
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(name, forKey: "name")
-        aCoder.encodeObject(information, forKey: "information")
-        aCoder.encodeObject(photoUrls, forKey: "photoUrls")
-    }
     
     func saveToArchives() {
         let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
@@ -107,5 +101,13 @@ class BehaviourState: NSObject, NSCoding {
 
         return ethogram
     }
-    
+}
+
+
+extension BehaviourState: NSCoding {
+    override func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(name, forKey: "name")
+        aCoder.encodeObject(information, forKey: "information")
+        aCoder.encodeObject(photoUrls, forKey: "photoUrls")
+    }
 }
