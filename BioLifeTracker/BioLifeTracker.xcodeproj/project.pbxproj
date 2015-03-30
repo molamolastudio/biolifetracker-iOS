@@ -32,6 +32,7 @@
 		320920421AC92A4600E8A456 /* FormBooleanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 320920411AC92A4600E8A456 /* FormBooleanCell.xib */; };
 		320920441AC953DD00E8A456 /* TextSingleLineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320920431AC953DD00E8A456 /* TextSingleLineCell.swift */; };
 		320920461AC9550600E8A456 /* FormTextSingleLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 320920451AC9550600E8A456 /* FormTextSingleLineCell.xib */; };
+		320920481AC9566100E8A456 /* FormTextMultiLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 320920471AC9566100E8A456 /* FormTextMultiLineCell.xib */; };
 		32517A1C1AB072BB00578C42 /* EthogramPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A1B1AB072BB00578C42 /* EthogramPicker.swift */; };
 		32517A1E1AB0913600578C42 /* EthogramPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A1D1AB0913600578C42 /* EthogramPickerDelegate.swift */; };
 		32517A201AB09A3D00578C42 /* ProjectHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A1F1AB09A3D00578C42 /* ProjectHomeViewController.swift */; };
@@ -82,6 +83,7 @@
 		320920411AC92A4600E8A456 /* FormBooleanCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormBooleanCell.xib; sourceTree = "<group>"; };
 		320920431AC953DD00E8A456 /* TextSingleLineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextSingleLineCell.swift; sourceTree = "<group>"; };
 		320920451AC9550600E8A456 /* FormTextSingleLineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormTextSingleLineCell.xib; sourceTree = "<group>"; };
+		320920471AC9566100E8A456 /* FormTextMultiLineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormTextMultiLineCell.xib; sourceTree = "<group>"; };
 		32517A1B1AB072BB00578C42 /* EthogramPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramPicker.swift; sourceTree = "<group>"; };
 		32517A1D1AB0913600578C42 /* EthogramPickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramPickerDelegate.swift; sourceTree = "<group>"; };
 		32517A1F1AB09A3D00578C42 /* ProjectHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectHomeViewController.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				32EE15491AC65DAF0065C25C /* FormViewController.swift */,
 				320920431AC953DD00E8A456 /* TextSingleLineCell.swift */,
 				320920451AC9550600E8A456 /* FormTextSingleLineCell.xib */,
+				320920471AC9566100E8A456 /* FormTextMultiLineCell.xib */,
 				320920411AC92A4600E8A456 /* FormBooleanCell.xib */,
 				32EE154B1AC65EA80065C25C /* FormFieldData.swift */,
 				3209203F1AC9123A00E8A456 /* FormField.swift */,
@@ -290,6 +293,7 @@
 				320920461AC9550600E8A456 /* FormTextSingleLineCell.xib in Resources */,
 				3205E74F1AAED9F9006F374D /* Images.xcassets in Resources */,
 				3205E76B1AAEDA4A006F374D /* facebook-login-blue.png in Resources */,
+				320920481AC9566100E8A456 /* FormTextMultiLineCell.xib in Resources */,
 				320920421AC92A4600E8A456 /* FormBooleanCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

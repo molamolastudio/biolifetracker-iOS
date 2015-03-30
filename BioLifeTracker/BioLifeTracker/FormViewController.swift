@@ -8,15 +8,16 @@
 
 import UIKit
 
-class FormViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class FormViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
     // table view
     var fields: FormFieldData? = nil
     
     override func viewDidLoad() {
+        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "")
         
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if fields != nil {
             switch fields!.getFieldTypeForIndex(indexPath) {
             case .TextSingleLine:
@@ -42,7 +43,7 @@ class FormViewController: UIViewController, UITableViewDelegate, UITableViewData
         return UITableViewCell()
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if fields != nil {
             return fields!.getSectionTitle(section)
         } else {
@@ -50,7 +51,7 @@ class FormViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if fields != nil {
             return fields!.getNumberOfRowsForSection(section)
         } else {
