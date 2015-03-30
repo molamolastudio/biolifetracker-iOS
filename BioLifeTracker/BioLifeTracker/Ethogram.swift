@@ -9,13 +9,16 @@ import Foundation
 
 class Ethogram: NSObject, Storable {
     var name: String
-    var creator: User
+    var information: String
     var behaviourStates: [BehaviourState]
-
+    @availability(iOS, deprecated=0.1, message="Use createdBy instead")
+    var creator: User
+    
     override init() {
         name = ""
         creator = Data.currentUser
         behaviourStates = []
+        information = ""
         super.init()
     }
     
@@ -24,6 +27,7 @@ class Ethogram: NSObject, Storable {
         self.name = name
         self.creator = Data.currentUser
         self.behaviourStates = []
+        information = ""
     }
     
     func addBehaviourState(state: BehaviourState) {

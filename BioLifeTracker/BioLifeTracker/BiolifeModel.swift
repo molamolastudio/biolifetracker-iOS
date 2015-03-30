@@ -22,15 +22,21 @@ class BiolifeModel: NSObject, NSCoding {
         super.init()
     }
     
-    required convenience init(coder decoder: NSCoder) {
-        self.init()
-        // read data from decoder
+    required init(coder decoder: NSCoder) {
+        createdAt = decoder.decodeObjectForKey("createdAt") as NSDate
+        updatedAt = decoder.decodeObjectForKey("updatedAt") as NSDate
+        createdBy = decoder.decodeObjectForKey("createdBy") as User
+        updatedBy = decoder.decodeObjectForKey("updatedBy") as User
+        super.init()
     }
 }
 
 
 extension BiolifeModel: NSCoding {    
     func encodeWithCoder(coder: NSCoder) {
-        // write data to coder
+        coder.encodeObject(createdAt, forKey: "createdAt")
+        coder.encodeObject(updatedAt, forKey: "updatedAt")
+        coder.encodeObject(createdBy, forKey: "createdBy")
+        coder.encodeObject(updatedBy, forKey: "updatedBy")
     }
 }

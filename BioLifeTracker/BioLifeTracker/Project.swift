@@ -14,6 +14,7 @@ class Project: NSObject, NSCoding {
     var admins: [User]
     var members: [User]
     var sessions: [Session]
+    var individuals: [Individual]
     
     // Default initializer
     override init() {
@@ -21,6 +22,7 @@ class Project: NSObject, NSCoding {
         admins = [Data.currentUser]
         members = [Data.currentUser]
         sessions = []
+        individuals = []
         super.init()
     }
     

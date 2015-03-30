@@ -13,6 +13,9 @@ class BehaviourState: NSObject, NSCoding {
     var name: String
     var information: String
     var ethogram: Ethogram
+    var photo: UIImage?
+    
+    @availability(iOS, deprecated=0.1, message="Use photo: NSImage instead")
     var photoUrls: [String]
     
     init(ethogram: Ethogram) {

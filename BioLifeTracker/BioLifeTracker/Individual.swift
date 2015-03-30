@@ -10,17 +10,23 @@ import Foundation
 
 class Individual: NSObject, NSCoding {
     var label: String
-    var photoUrls = [String]()
-    var tags = [String]()
+    var tags: [Tag]
+    var photo: UIImage?
+    var project: Project
     
-    override init() {
+    @availability(iOS, deprecated=0.1, message="Use photo: NSImage instead")
+    var photoUrls = [String]()
+    
+    init(project: Project) {
         self.label = ""
+        self.tags = []
+        self.project = project
         super.init()
     }
     
     // static maker method
     class func makeDefault() -> Individual {
-        var individual = Individual()
+        var individual = Individual(project: Project())
         individual.label = ""
         individual.photoUrls = []
         individual.tags = []
@@ -46,9 +52,9 @@ class Individual: NSObject, NSCoding {
         
         let objectTags: AnyObject = aDecoder.decodeObjectForKey("tags")!
         enumerator = objectTags.objectEnumerator()
-        self.tags = Array<String>()
+        self.tags = []
         while true {
-            let url = enumerator.nextObject() as String?
+            let url = enumerator.nextObject() as Tag?
             if url == nil {
                 break
             }
@@ -56,6 +62,7 @@ class Individual: NSObject, NSCoding {
             self.tags.append(url!)
         }
         
+        self.project = aDecoder.decodeObjectForKey("project") as Project
         super.init()
     }
     
@@ -63,5 +70,6 @@ class Individual: NSObject, NSCoding {
         aCoder.encodeObject(label, forKey: "label")
         aCoder.encodeObject(photoUrls, forKey: "photoUrls")
         aCoder.encodeObject(tags, forKey: "tags")
+        aCoder.encodeObject(project, forKey: "project")
     }
 }

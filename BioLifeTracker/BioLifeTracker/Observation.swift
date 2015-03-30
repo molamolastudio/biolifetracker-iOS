@@ -11,13 +11,19 @@ import Foundation
 class Observation: NSObject, NSCoding {
     var session: Session
     var state: BehaviourState
+    var information: String
     var timestamp: NSDate
+    var photo: UIImage?
+    var individual: Individual
     var location: Location?
     var weather: Weather?
-    var creator: User
+    
+    @availability(iOS, deprecated=0.1, message="Use photo: NSImage instead")
     var photoUrls = [String]()
+    @availability(iOS, deprecated=0.1, message="Use information instead")
     var notes: String
-    var individual: Individual
+    @availability(iOS, deprecated=0.1, message="Use createdBy instead")
+    var creator: User
     
     init(session: Session, state: BehaviourState, timestamp: NSDate, creator: User) {
         self.session = session
