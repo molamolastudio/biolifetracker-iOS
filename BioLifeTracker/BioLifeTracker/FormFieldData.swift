@@ -1,5 +1,5 @@
 //
-//  FormViewDataSource.swift
+//  FormFieldData.swift
 //  BioLifeTracker
 //
 //  Created by Michelle Tan on 28/3/15.
@@ -8,17 +8,7 @@
 
 import Foundation
 
-class FormViewDataSource {
-    
-    enum FormViewCellType {
-        case TextSingleLine
-        case TextMultiLine
-        case PickerBoolean
-        case PickerDate
-        case PickerDefault
-        case PickerCustom
-        case PickerPhoto
-    }
+class FormFieldData {
     
     var cells: [FormViewCell] = [] // AnyObject?
     

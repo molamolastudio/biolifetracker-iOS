@@ -10,7 +10,7 @@ import UIKit
 
 class FormViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     // table view
-    var dataSource: FormViewDataSource? = nil
+    var fields: FormFieldData? = nil
     
     override func viewDidLoad() {
         
