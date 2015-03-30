@@ -1,5 +1,5 @@
 //
-//  TextSingleLineCell.swift
+//  TextMultiLineCell.swift
 //  BioLifeTracker
 //
 //  Created by Michelle Tan on 30/3/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TextSingleLineCell: UITableViewCell, FormCell {
+class TextMultiLineCell: UITableViewCell, FormCell {
     func getValueFromCell() -> AnyObject? {
         return nil
     }
