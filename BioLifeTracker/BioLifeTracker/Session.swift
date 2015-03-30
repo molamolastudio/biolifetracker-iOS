@@ -72,6 +72,7 @@ class Session: BiolifeModel {
 
 extension Session: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
         // project attribute is allocated when project is initialized
         aCoder.encodeObject(typeValue, forKey: "typeValue")
         aCoder.encodeObject(observations, forKey: "observations")

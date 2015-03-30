@@ -89,7 +89,7 @@ class Project: BiolifeModel {
     
     required init(coder aDecoder: NSCoder) {
         var enumerator: NSEnumerator
-        
+
         self.name = aDecoder.decodeObjectForKey("name") as String
         self.ethogram = aDecoder.decodeObjectForKey("ethogram") as Ethogram
         
@@ -161,10 +161,12 @@ class Project: BiolifeModel {
 
 extension Project: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
         aCoder.encodeObject(name, forKey: "name")
         aCoder.encodeObject(ethogram, forKey: "ethogram")
         aCoder.encodeObject(admins, forKey: "admins")
         aCoder.encodeObject(members, forKey: "members")
         aCoder.encodeObject(sessions, forKey: "sessions")
+        aCoder.encodeObject(individuals, forKey: "individuals")
     }
 }

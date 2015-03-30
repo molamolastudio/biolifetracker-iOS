@@ -93,6 +93,8 @@
 		ACB073EE1AC17BA3004E0BFC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073E81AC17BA3004E0BFC /* UIKit.framework */; };
 		ACB073F41AC184F5004E0BFC /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073F31AC184F5004E0BFC /* CoreMotion.framework */; };
 		ACDC54401AC3FC6B00779FAE /* LocalStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDC543F1AC3FC6B00779FAE /* LocalStorageTests.swift */; };
+		ACDCFADF1AC9B68600CEA99C /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDCFADE1AC9B68600CEA99C /* GooglePlus.framework */; };
+		ACDCFAE01AC9B68600CEA99C /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDCFADE1AC9B68600CEA99C /* GooglePlus.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +179,7 @@
 		ACB073E81AC17BA3004E0BFC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ACB073F31AC184F5004E0BFC /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		ACDC543F1AC3FC6B00779FAE /* LocalStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorageTests.swift; sourceTree = "<group>"; };
+		ACDCFADE1AC9B68600CEA99C /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlus.framework; path = "../../Downloads/google-plus-ios-sdk-1.7.1 2/GooglePlus.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -206,6 +209,7 @@
 				24E32D3F1AB1E86A003C4E0A /* AudioToolbox.framework in Frameworks */,
 				2439AABA1AC7DC7900389195 /* FacebookSDK.framework in Frameworks */,
 				24E32D361AB19647003C4E0A /* Bolts.framework in Frameworks */,
+				ACDCFADF1AC9B68600CEA99C /* GooglePlus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,6 +222,7 @@
 				24E32D691AB1EC5A003C4E0A /* SystemConfiguration.framework in Frameworks */,
 				24E32D6A1AB1EC5A003C4E0A /* Foundation.framework in Frameworks */,
 				24E32D6B1AB1EC5A003C4E0A /* CoreLocation.framework in Frameworks */,
+				ACDCFAE01AC9B68600CEA99C /* GooglePlus.framework in Frameworks */,
 				24E32D6C1AB1EC5A003C4E0A /* CoreGraphics.framework in Frameworks */,
 				24E32D6D1AB1EC5A003C4E0A /* CFNetwork.framework in Frameworks */,
 				24E32D6E1AB1EC5A003C4E0A /* Accounts.framework in Frameworks */,
@@ -258,6 +263,7 @@
 		24E32D3B1AB1991C003C4E0A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ACDCFADE1AC9B68600CEA99C /* GooglePlus.framework */,
 				320920621AC9908400E8A456 /* GooglePlus.bundle */,
 				242C6E001AC7DFBC0024ECEF /* GoogleOpenSource.framework */,
 				2439AAB91AC7DC7900389195 /* FacebookSDK.framework */,
@@ -486,8 +492,7 @@
 				3205E74D1AAED9F9006F374D /* Main.storyboard in Resources */,
 				320920631AC9908500E8A456 /* GooglePlus.bundle in Resources */,
 				32850BE91AB9625500C49D33 /* CustomPickerPopupCell.xib in Resources */,
-				32850BE91AB9625500C49D33 /* EthogramPickerCell.xib in Resources */,
-				3205E76C1AAEDA4A006F374D /* lineGraph.gif in Resources */,
+				32850BE91AB9625500C49D33 /* CustomPickerPopupCell.xib in Resources */,
 				3205E7521AAED9F9006F374D /* LaunchScreen.xib in Resources */,
 				320920461AC9550600E8A456 /* FormSingleLineTextCell.xib in Resources */,
 				3205E74F1AAED9F9006F374D /* Images.xcassets in Resources */,
@@ -685,6 +690,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BioLifeTracker",
+					"$(PROJECT_DIR)",
+					"/Users/nekonekonik/Downloads/google-plus-ios-sdk-1.7.1",
+					2,
 				);
 				INFOPLIST_FILE = BioLifeTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -703,6 +711,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BioLifeTracker",
+					"$(PROJECT_DIR)",
+					"/Users/nekonekonik/Downloads/google-plus-ios-sdk-1.7.1",
+					2,
 				);
 				INFOPLIST_FILE = BioLifeTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -720,6 +731,8 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(PROJECT_DIR)/BioLifeTracker",
+					"/Users/nekonekonik/Downloads/google-plus-ios-sdk-1.7.1",
+					2,
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -741,6 +754,8 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(PROJECT_DIR)/BioLifeTracker",
+					"/Users/nekonekonik/Downloads/google-plus-ios-sdk-1.7.1",
+					2,
 				);
 				INFOPLIST_FILE = BioLifeTrackerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

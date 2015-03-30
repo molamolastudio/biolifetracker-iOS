@@ -34,7 +34,6 @@ class Individual: BiolifeModel {
     }
     
     required init(coder aDecoder: NSCoder) {
-        
         var enumerator: NSEnumerator
         self.label = aDecoder.decodeObjectForKey("label") as String
         
@@ -70,6 +69,7 @@ class Individual: BiolifeModel {
 
 extension Individual: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
         aCoder.encodeObject(label, forKey: "label")
         aCoder.encodeObject(photoUrls, forKey: "photoUrls")
         aCoder.encodeObject(tags, forKey: "tags")

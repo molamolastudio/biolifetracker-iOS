@@ -97,6 +97,7 @@ class Ethogram: BiolifeModel, Storable {
 
 extension Ethogram: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
         aCoder.encodeObject(name, forKey: "name")
         aCoder.encodeObject(creator, forKey: "creator")
         aCoder.encodeObject(behaviourStates, forKey: "behaviourStates")

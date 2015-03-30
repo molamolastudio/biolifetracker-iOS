@@ -39,9 +39,8 @@ class BehaviourState: BiolifeModel, Storable {
         self.photoUrls = []
     }
     
-    required convenience init(coder aDecoder: NSCoder) {
-        self.init()
-        
+    required init(coder aDecoder: NSCoder) {
+
         self.name = aDecoder.decodeObjectForKey("name") as String
         self.information = aDecoder.decodeObjectForKey("information") as String
         
@@ -55,6 +54,8 @@ class BehaviourState: BiolifeModel, Storable {
             }
             self.photoUrls.append(url!)
         }
+        
+        super.init(coder: aDecoder)
     }
     
     func saveToArchives() {
@@ -103,6 +104,7 @@ class BehaviourState: BiolifeModel, Storable {
 
 extension BehaviourState: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
         aCoder.encodeObject(name, forKey: "name")
         aCoder.encodeObject(information, forKey: "information")
         aCoder.encodeObject(photoUrls, forKey: "photoUrls")
