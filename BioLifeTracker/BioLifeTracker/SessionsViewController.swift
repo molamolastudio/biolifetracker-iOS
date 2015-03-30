@@ -41,7 +41,7 @@ class SessionsViewController: UIViewController, UITableViewDataSource, UITableVi
         let subtitle = cell.viewWithTag(Constants.ViewTags.ethogramsCellSubtitle) as UILabel
         let session = Data.selectedProject!.sessions[indexPath.row]
         
-        title.text = session.id
+        //title.text = session.id
         subtitle.text = messageCellSubtitle + String(session.observations.count)
         
         return cell
