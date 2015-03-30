@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Project: NSObject, NSCoding {
+class Project: BiolifeModel {
     var name: String
     var ethogram: Ethogram?
     var admins: [User]
@@ -86,9 +86,7 @@ class Project: NSObject, NSCoding {
         return ethogram
     }
     
-    required convenience init(coder aDecoder: NSCoder) {
-        self.init()
-        
+    required init(coder aDecoder: NSCoder) {
         var enumerator: NSEnumerator
         
         self.name = aDecoder.decodeObjectForKey("name") as String
@@ -131,18 +129,24 @@ class Project: NSObject, NSCoding {
             if session == nil {
                 break
             }
-            session!.project = self
-            
+            //session!.project = self
+            // Warning: There will be cyclic dependency here!
+            // Project has sessions, and Session has project.
+            // NSCoder protocol will cycle back and forth between this cyclic
+            // relationship. We need to migrate to Core Data.
             self.sessions.append(session!)
         }
+        self.individuals = []
+        super.init(coder: aDecoder)
     }
-    
-    func encodeWithCoder(aCoder: NSCoder) {
+}
+
+extension Project: NSCoding {
+    override func encodeWithCoder(aCoder: NSCoder) {
         aCoder.encodeObject(name, forKey: "name")
         aCoder.encodeObject(ethogram, forKey: "ethogram")
         aCoder.encodeObject(admins, forKey: "admins")
         aCoder.encodeObject(members, forKey: "members")
         aCoder.encodeObject(sessions, forKey: "sessions")
     }
-
 }

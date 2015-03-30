@@ -34,6 +34,7 @@ class Observation: NSObject, NSCoding {
         self.weather = Weather.makeDefault()
         self.photoUrls = []
         self.notes = ""
+        self.information = ""
         self.individual = Individual.makeDefault()
         super.init()
     }
@@ -47,6 +48,7 @@ class Observation: NSObject, NSCoding {
         self.location = Location.makeDefault()
         self.weather = Weather.makeDefault()
         self.photoUrls = []
+        self.information = ""
         self.individual = Individual.makeDefault()
         super.init()
     }
@@ -76,7 +78,7 @@ class Observation: NSObject, NSCoding {
         
         self.notes = aDecoder.decodeObjectForKey("notes") as String
         self.individual = aDecoder.decodeObjectForKey("individual") as Individual
-        
+        self.information = aDecoder.decodeObjectForKey("information") as String
         super.init()
     }
     
@@ -90,5 +92,6 @@ class Observation: NSObject, NSCoding {
         aCoder.encodeObject(photoUrls, forKey: "photoUrls")
         aCoder.encodeObject(notes, forKey: "notes")
         aCoder.encodeObject(individual, forKey: "individual")
+        aCoder.encodeObject(information, forKey: "information")
     }
 }
