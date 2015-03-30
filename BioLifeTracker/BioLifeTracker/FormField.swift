@@ -9,7 +9,7 @@
 import Foundation
 
 class FormField {
-    enum Type {
+    enum FieldType {
         case TextSingleLine
         case TextMultiLine
         case PickerBoolean
@@ -17,16 +17,25 @@ class FormField {
         case PickerDefault
         case PickerCustom
         case PickerPhoto
+        case Empty
     }
     
+    var type: FieldType
     var label: String
     var values: [AnyObject?] = []
     
-    init() {
+    init(type: FieldType) {
+        self.type = type
         label = ""
     }
     
-    init(label: String, values: [AnyObject?]) {
+    init(type: FieldType, label: String) {
+        self.type = type
+        self.label = label
+    }
+    
+    init(type: FieldType, label: String, values: [AnyObject?]) {
+        self.type = type
         self.label = label
         self.values = values
     }
