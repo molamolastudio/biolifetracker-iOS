@@ -12,35 +12,65 @@ class FormViewController: UITableViewController, UITableViewDelegate, UITableVie
     // table view
     var fields: FormFieldData? = nil
     
+    var nibNames = ["FormSingleLineTextCell", "FormMultiLineTextCell", "FormBooleanPickerCell"]
+    
     override func viewDidLoad() {
-        self.tableView.registerClass(UITableViewCell.classForCoder(), forCellReuseIdentifier: "")
-        
+        for var i = 0; i < nibNames.count; i++ {
+            self.tableView.registerNib(UINib(nibName: nibNames[i], bundle: nil), forCellReuseIdentifier: nibNames[i])
+        }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if fields != nil {
-            switch fields!.getFieldTypeForIndex(indexPath) {
-            case .TextSingleLine:
-                break
-            case .TextMultiLine:
-                break
-            case .PickerBoolean:
-                break
-            case .PickerDate:
-                break
-            case .PickerDefault:
-                break
-            case .PickerCustom:
-                break
-            case .PickerPhoto:
-                break
-            case .Empty:
-                break
-            default:
-                break
+            if let type = fields!.getFieldTypeForIndex(indexPath) {
+                switch type {
+                case .TextSingleLine:
+                    return getSingleLineTextCell(indexPath)
+                case .TextMultiLine:
+                    return getMultiLineTextCell(indexPath)
+                case .PickerBoolean:
+                    return getBooleanPickerCell(indexPath)
+                case .PickerDate:
+                    break
+                case .PickerDefault:
+                    break
+                case .PickerCustom:
+                    break
+                case .PickerPhoto:
+                    break
+                default:
+                    break
+                }
             }
         }
         return UITableViewCell()
+    }
+    
+    func getSingleLineTextCell(indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(
+            nibNames[FormField.FieldType.TextSingleLine.rawValue]) as SingleLineTextCell
+        
+        cell.label.text = fields!.getLabelForIndex(indexPath)
+        
+        return cell
+    }
+    
+    func getMultiLineTextCell(indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(
+            nibNames[FormField.FieldType.TextMultiLine.rawValue]) as MultiLineTextCell
+        
+        cell.label.text = fields!.getLabelForIndex(indexPath)
+        
+        return cell
+    }
+    
+    func getBooleanPickerCell(indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(
+            nibNames[FormField.FieldType.PickerBoolean.rawValue]) as BooleanPickerCell
+        
+        cell.label.text = fields!.getLabelForIndex(indexPath)
+        
+        return cell
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
