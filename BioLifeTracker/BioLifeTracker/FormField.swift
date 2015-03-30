@@ -14,15 +14,14 @@
 import Foundation
 
 class FormField {
-    enum FieldType {
-        case TextSingleLine
-        case TextMultiLine
-        case PickerBoolean
-        case PickerDate
-        case PickerDefault
-        case PickerCustom
-        case PickerPhoto
-        case Empty
+    enum FieldType: Int {
+        case TextSingleLine = 0
+        case TextMultiLine = 1
+        case PickerBoolean = 2
+        case PickerDate = 3
+        case PickerDefault = 4
+        case PickerCustom = 5
+        case PickerPhoto = 6
     }
     
     var type: FieldType

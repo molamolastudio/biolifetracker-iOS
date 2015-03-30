@@ -8,7 +8,7 @@
 //  This class holds data required to initialise the fields of a FormViewController.
 //  The user is expected to add fields to this object and pass it to a FormViewController
 //  to populate its view.
-//  
+//
 
 import Foundation
 
@@ -108,17 +108,44 @@ class FormFieldData {
         }
     }
     
-    // Returns the field type for the specified index path in this form.
-    // If the section or row does not exist, returns FormField.FieldType.Empty.
-    func getFieldTypeForIndex(index: NSIndexPath) -> FormField.FieldType {
+    // Returns the field for the specified index path in this form.
+    // If the section or row does not exist, returns nil.
+    func getFieldForIndex(index: NSIndexPath) -> FormField? {
         if let var array = fields[index.section] {
             if index.row < array.count {
-                return array[index.row].type
-            } else {
-                return FormField.FieldType.Empty
+                return array[index.row]
             }
+        }
+        return nil
+    }
+    
+    // Returns the field type for the specified index path in this form.
+    // If the section or row does not exist, returns nil.
+    func getFieldTypeForIndex(index: NSIndexPath) -> FormField.FieldType? {
+        if let field = getFieldForIndex(index) {
+            return field.type
         } else {
-            return FormField.FieldType.Empty
+            return nil
+        }
+    }
+    
+    // Returns the field label for the specified index path in this form.
+    // If the section or row does not exist, returns nil.
+    func getLabelForIndex(index: NSIndexPath) -> String? {
+        if let field = getFieldForIndex(index) {
+            return field.label
+        } else {
+            return nil
+        }
+    }
+    
+    // Returns the field values for the specified index path in this form.
+    // If the section or row does not exist, returns nil
+    func getValuesForIndex(index: NSIndexPath) -> [AnyObject?]? {
+        if let field = getFieldForIndex(index) {
+            return field.values
+        } else {
+            return nil
         }
     }
     
