@@ -1,5 +1,5 @@
 //
-//  EthogramPicker.swift
+//  CustomPickerPopup.swift
 //  BioLifeTracker
 //
 //  Created by Michelle Tan on 11/3/15.
@@ -8,8 +8,8 @@
 
 import UIKit
 
-class EthogramPicker: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var delegate: EthogramPickerDelegate? = nil
+class CustomPickerPopup: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    var delegate: CustomPickerPopupDelegate? = nil
     
     let table = UITableView()
     let overlay = UIView()
@@ -24,8 +24,8 @@ class EthogramPicker: UIViewController, UITableViewDataSource, UITableViewDelega
     let tableBorderWidth: CGFloat = 0.5
     let tableBorderColor = UIColor.lightGrayColor().CGColor
     
-    let fileName = "EthogramPickerCell"
-    let cellReuseIdentifier = "PickerCell"
+    let fileName = "CustomPickerPopupCell"
+    let cellReuseIdentifier = "CustomPickerPopupCell"
     
     let numSections = 1
     

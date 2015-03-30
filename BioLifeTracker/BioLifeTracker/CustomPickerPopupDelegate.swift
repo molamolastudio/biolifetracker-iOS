@@ -1,5 +1,5 @@
 //
-//  EthogramPickerDelegate.swift
+//  CustomPickerPopupDelegate.swift
 //  BioLifeTracker
 //
 //  Created by Michelle Tan on 11/3/15.
@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol EthogramPickerDelegate {
+protocol CustomPopupPickerDelegate {
     func pickerDidDismiss(selectedIndex: Int?)
 }
