@@ -68,7 +68,7 @@ class Ethogram: BiolifeModel, Storable {
         }
         
         let archiver = NSKeyedUnarchiver(forReadingWithData: data!)
-        let ethogram = archiver.decodeObjectForKey(identifier)! as Ethogram
+        let ethogram = archiver.decodeObjectForKey(identifier) as Ethogram
         
         return ethogram
     }

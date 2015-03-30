@@ -122,23 +122,40 @@ class Project: BiolifeModel {
         enumerator = objectSessions.objectEnumerator()
         
         self.sessions = Array<Session>()
-        var session: Session
+        var session: Session?
 
         while true {
-            var session = enumerator.nextObject() as Session?
+            session = enumerator.nextObject() as Session?
             
             if session == nil {
                 break
             }
-            //session!.project = self
-            // Warning: There will be cyclic dependency here!
-            // Project has sessions, and Session has project.
-            // NSCoder protocol will cycle back and forth between this cyclic
-            // relationship. We need to migrate to Core Data.
+
             self.sessions.append(session!)
         }
-        self.individuals = []
+        
+        let objectIndividuals: AnyObject = aDecoder.decodeObjectForKey("individuals")!
+        
+        enumerator = objectIndividuals.objectEnumerator()
+        
+        self.individuals = Array<Individual>()
+        var individual: Individual?
+        
+        while true {
+            individual = enumerator.nextObject() as Individual?
+            
+            if session == nil {
+                break
+            }
+            
+            self.individuals.append(individual!)
+        }
+        
         super.init(coder: aDecoder)
+        
+        for session in sessions {
+            session.project = self
+        }
     }
 }
 

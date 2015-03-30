@@ -43,6 +43,12 @@ class StartViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         self.btnLogin.delegate = self
         self.btnLogin.readPermissions = ["public_profile", "email", "user_friends"]
         
+        signIn?.trySilentAuthentication()
+        
+        if signIn? != nil && signIn!.hasAuthInKeychain() {
+            
+        }
+        
         refreshView()
     }
     

@@ -260,7 +260,6 @@
 			children = (
 				320920621AC9908400E8A456 /* GooglePlus.bundle */,
 				242C6E001AC7DFBC0024ECEF /* GoogleOpenSource.framework */,
-				242C6E011AC7DFBC0024ECEF /* GooglePlus.framework */,
 				2439AAB91AC7DC7900389195 /* FacebookSDK.framework */,
 				24E32D441AB1E89D003C4E0A /* Accounts.framework */,
 				ACB073E31AC17BA3004E0BFC /* AddressBook.framework */,
@@ -487,6 +486,8 @@
 				3205E74D1AAED9F9006F374D /* Main.storyboard in Resources */,
 				320920631AC9908500E8A456 /* GooglePlus.bundle in Resources */,
 				32850BE91AB9625500C49D33 /* CustomPickerPopupCell.xib in Resources */,
+				32850BE91AB9625500C49D33 /* EthogramPickerCell.xib in Resources */,
+				3205E76C1AAEDA4A006F374D /* lineGraph.gif in Resources */,
 				3205E7521AAED9F9006F374D /* LaunchScreen.xib in Resources */,
 				320920461AC9550600E8A456 /* FormSingleLineTextCell.xib in Resources */,
 				3205E74F1AAED9F9006F374D /* Images.xcassets in Resources */,

@@ -9,6 +9,15 @@
 import Foundation
 
 class UserAuthService {
+    private var sharedInstance: User
     
+    class func sharedInstance() -> User {
+        return sharedInstance
+    }
+    
+    func setUser(id: String, name: String) {
+        
+        
+    }
     
 }
