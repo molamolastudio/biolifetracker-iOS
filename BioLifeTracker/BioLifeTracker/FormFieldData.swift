@@ -5,6 +5,9 @@
 //  Created by Michelle Tan on 28/3/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
+//  This class holds data required to initialise the fields of a FormViewController.
+//  The user is expected to add fields to this object and pass it to a FormViewController
+//  to populate its view.
 
 import Foundation
 
@@ -12,8 +15,6 @@ class FormFieldData {
     // Private variables that should not be modified by the user.
     private var sections: Int
     private var fields = [Int: [FormField]]()
-    
-    let firstSection: Int = 0
     
     // Creates a FormFieldData with 1 section.
     init() {
@@ -40,6 +41,7 @@ class FormFieldData {
     }
     
     // Adds a text cell to the first section of the form, unless specified.
+    // If the section does not exist, does nothing.
     func addTextCell(section: Int = 0, label: String, hasSingleLine: Bool) {
         if let var array = fields[section] {
             if hasSingleLine {
@@ -50,18 +52,24 @@ class FormFieldData {
         }
     }
     
+    // Adds a boolean picker cell to the first section of the form, unless specified.
+    // If the section does not exist, does nothing.
     func addBooleanCell(section: Int = 0, label: String) {
         if let var array = fields[section] {
             array.append(FormField(type: FormField.FieldType.PickerBoolean, label: label))
         }
     }
     
+    // Adds a date picker cell with the given dates to the first section of the form, unless specified.
+    // If the section does not exist, does nothing.
     func addDatePickerCell(section: Int = 0, label: String, dates: [NSDate]) {
         if let var array = fields[section] {
             array.append(FormField(type: FormField.FieldType.PickerDate, label: label, values: dates))
         }
     }
     
+    // Adds a picker cell with the given values to the first section of the form, unless specified.
+    // If the section does not exist, does nothing.
     func addPickerCell(section: Int = 0, label: String, values: [String], isCustomPicker: Bool) {
         if let var array = fields[section] {
             if isCustomPicker {
@@ -72,24 +80,35 @@ class FormFieldData {
         }
     }
     
+    // Adds a photo picker cell to the first section of the form, unless specified.
+    // If the section does not exist, does nothing.
     func addPhotoPickerCell(section: Int = 0, label: String) {
         if let var array = fields[section] {
             array.append(FormField(type: FormField.FieldType.PickerPhoto , label: label))
         }
     }
     
+    // Returns the field type for the specified index path in this form.
+    // If the section or row does not exist, returns FormField.FieldType.Empty.
     func getFieldTypeForIndex(index: NSIndexPath) -> FormField.FieldType {
         if let var array = fields[index.section] {
-            return array[index.row].type
+            if index.row < array.count {
+                return array[index.row].type
+            } else {
+                return FormField.FieldType.Empty
+            }
         } else {
             return FormField.FieldType.Empty
         }
     }
     
+    // Returns the number of sections in this form.
     func getNumberOfSections() -> Int {
         return sections
     }
     
+    // Returns the number of rows in the specified section in this form.
+    // If the section does not exist, returns 0.
     func getNumberOfRowsForSection(section: Int) -> Int {
         if let var array = fields[section] {
             return array.count
