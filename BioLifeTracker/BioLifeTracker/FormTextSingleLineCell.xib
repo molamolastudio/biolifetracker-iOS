@@ -6,7 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="TextSingleLineCell" customModule="BioLifeTracker" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -16,8 +16,8 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="oUd-Hl-roO">
-                    <rect key="frame" x="77" y="285" width="515" height="30"/>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="oUd-Hl-roO">
+                    <rect key="frame" x="77" y="290.5" width="9" height="19"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
@@ -28,8 +28,12 @@
                 <constraint firstItem="1SJ-tq-aov" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="8AB-Fp-8hh"/>
                 <constraint firstAttribute="centerY" secondItem="oUd-Hl-roO" secondAttribute="centerY" id="Uch-sp-4fh"/>
                 <constraint firstItem="1SJ-tq-aov" firstAttribute="centerY" secondItem="oUd-Hl-roO" secondAttribute="centerY" id="kPN-kW-h5t"/>
-                <constraint firstItem="oUd-Hl-roO" firstAttribute="leading" secondItem="1SJ-tq-aov" secondAttribute="trailing" constant="15" id="o0W-WD-zzW"/>
+                <constraint firstItem="oUd-Hl-roO" firstAttribute="leading" secondItem="1SJ-tq-aov" secondAttribute="trailing" constant="20" id="o0W-WD-zzW"/>
             </constraints>
+            <connections>
+                <outlet property="label" destination="1SJ-tq-aov" id="GFN-f2-K26"/>
+                <outlet property="textField" destination="oUd-Hl-roO" id="sVm-bA-CA3"/>
+            </connections>
         </view>
     </objects>
 </document>

@@ -9,7 +9,10 @@
 import UIKit
 
 class TextSingleLineCell: UITableViewCell, FormCell {
+    @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var textField: UITextField!
+    
     func getValueFromCell() -> AnyObject? {
-        return nil
+        return textField.text
     }
 }

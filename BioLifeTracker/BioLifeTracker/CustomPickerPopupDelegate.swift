@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol CustomPopupPickerDelegate {
+protocol CustomPickerPopupDelegate {
     func pickerDidDismiss(selectedIndex: Int?)
 }

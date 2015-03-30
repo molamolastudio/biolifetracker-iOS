@@ -1,5 +1,5 @@
 //
-//  TextMultiLineCell.swift
+//  BooleanPickerCell.swift
 //  BioLifeTracker
 //
 //  Created by Michelle Tan on 30/3/15.
@@ -8,11 +8,11 @@
 
 import UIKit
 
-class TextMultiLineCell: UITableViewCell, FormCell {
+class BooleanPickerCell: UITableViewCell, FormCell {
     @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var booleanSwitch: UISwitch!
     
     func getValueFromCell() -> AnyObject? {
-        return textField.text
+        return booleanSwitch.on
     }
 }
