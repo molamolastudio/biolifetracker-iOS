@@ -5,6 +5,11 @@
 //  Created by Michelle Tan on 30/3/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
+//  This class defines a FormField object, to be used in FormFieldData.
+//  A FormField object contains a FieldType, a label and values which
+//  will be used to initialise a FormFieldCell view.
+//  Its values are publicly accessible and must not be nil.
+//
 
 import Foundation
 

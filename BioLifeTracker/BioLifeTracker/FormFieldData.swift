@@ -8,6 +8,7 @@
 //  This class holds data required to initialise the fields of a FormViewController.
 //  The user is expected to add fields to this object and pass it to a FormViewController
 //  to populate its view.
+//  
 
 import Foundation
 
