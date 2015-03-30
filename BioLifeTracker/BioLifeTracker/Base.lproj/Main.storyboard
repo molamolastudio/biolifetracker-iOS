@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
     </dependencies>
@@ -68,10 +68,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pyi-1k-EOF">
-                                <rect key="frame" x="102" y="599" width="179" height="43"/>
-                                <state key="normal" image="facebook-login-blue.png">
+                                <rect key="frame" x="98" y="562" width="179" height="43"/>
+                                <state key="normal" title="Google login">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnLoginGoogle:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="p87-RB-cPc"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L5Y-mu-VEi">
                                 <rect key="frame" x="152" y="501" width="78" height="30"/>
@@ -97,6 +100,10 @@
                                     <segue destination="bku-FP-0yL" kind="presentation" id="c5z-18-CVx"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cfJ-CH-Cky" customClass="FBLoginView">
+                                <rect key="frame" x="101" y="606" width="188" height="41"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -104,7 +111,7 @@
                     <connections>
                         <outlet property="btnAllProjects" destination="L5Y-mu-VEi" id="Pl7-AZ-wVQ"/>
                         <outlet property="btnCreateProject" destination="2HS-Kb-6aA" id="86n-GD-naX"/>
-                        <outlet property="btnLogin" destination="pyi-1k-EOF" id="S13-ah-zr4"/>
+                        <outlet property="btnLogin" destination="cfJ-CH-Cky" id="FfO-zb-OjF"/>
                         <outlet property="btnSession" destination="RXC-bM-3pq" id="O8S-wN-iEK"/>
                         <outlet property="displayProject" destination="oQx-qX-3cF" id="Vjn-nl-ve5"/>
                         <outlet property="displaySession" destination="UiH-C1-MSJ" id="nTV-NQ-nt3"/>
@@ -241,6 +248,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EthogramDetailCell" textLabel="jKL-g5-YBj" detailTextLabel="xly-7h-Cig" style="IBUITableViewCellStyleValue1" id="aA9-Fh-upJ">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aA9-Fh-upJ" id="Gi6-eg-YIC">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" tag="402" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jKL-g5-YBj">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" tag="403" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xly-7h-Cig">
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BehaviourStateCell" id="wIu-vB-bTO">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wIu-vB-bTO" id="Z3O-Gr-YGw">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" tag="404" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l7l-pu-yAu">
+                                            <rect key="frame" x="16" y="7" width="351" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="xL0-kx-Ov5" id="Emr-o6-Isg"/>
                             <outlet property="delegate" destination="xL0-kx-Ov5" id="6G6-wT-nUL"/>
@@ -279,7 +321,7 @@
         <!--New Project-->
         <scene sceneID="Tn3-Bm-iBk">
             <objects>
-                <tableViewController title="New Project" id="MJP-iA-IxS" customClass="ProjectFormViewController" customModule="BioLifeTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="New Project" id="MJP-iA-IxS" customClass="ProjectFormViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="baD-Fq-Kaz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -650,14 +692,11 @@
             <point key="canvasLocation" x="1237.5" y="1944.5"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="facebook-login-blue.png" width="416" height="101"/>
-    </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="E55-bJ-phW"/>
+        <segue reference="c5z-18-CVx"/>
+        <segue reference="NMg-25-rjq"/>
+        <segue reference="IUr-zQ-LuP"/>
         <segue reference="Lrc-vc-5Pz"/>
-        <segue reference="6LF-xl-aow"/>
-        <segue reference="Tjs-XI-Sbm"/>
         <segue reference="YOs-tm-ROu"/>
     </inferredMetricsTieBreakers>
 </document>

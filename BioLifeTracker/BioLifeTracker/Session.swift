@@ -8,25 +8,26 @@
 
 import Foundation
 
-class Session {
-    enum SessionType: String {
-        case Focal = "Focal Sampling"
-        case Scan = "Scan Sampling"
-    }
-    
+enum SessionType: String {
+    case Focal = "FCL"
+    case Scan = "SCN"
+}
+
+class Session: BiolifeModel {
+    // Stored properties
     var project: Project
-    var type: SessionType
-    var id: String?
-    var observations: [Observation] = []
+    var typeValue: String
+    var observations: [Observation]
+    var individuals: [Individual]
+    
+    var type: SessionType { return SessionType(rawValue: typeValue)! }
     
     init(project: Project, type: SessionType) {
         self.project = project
-        self.type = type
-        self.id = generateSessionId()
-    }
-    
-    func generateSessionId() -> String {
-        return Constants.CodePrefixes.session + String(project.sessions.count + 1)
+        self.typeValue = type.rawValue
+        self.observations = []
+        self.individuals = []
+        super.init()
     }
     
     func getDisplayName() -> String {
@@ -35,9 +36,45 @@ class Session {
         }
         return ""
     }
+
+    required init(coder aDecoder: NSCoder) {
+        var enumerator: NSEnumerator
+        
+        self.project = aDecoder.decodeObjectForKey("project") as Project
+        self.typeValue = aDecoder.decodeObjectForKey("typeValue") as String
+    
+        let objectObservations: AnyObject = aDecoder.decodeObjectForKey("observations")!
+        enumerator = objectObservations.objectEnumerator()
+        self.observations = Array<Observation>()
+        while true {
+            let observation = enumerator.nextObject() as Observation?
+            if observation == nil {
+                break
+            }
+            self.observations.append(observation!)
+        }
+        
+        let objectIndividuals: AnyObject = aDecoder.decodeObjectForKey("individuals")!
+        enumerator = objectIndividuals.objectEnumerator()
+        self.individuals = Array<Individual>()
+        
+        while true {
+            let individual = enumerator.nextObject() as Individual?
+            if individual == nil {
+                break
+            }
+            self.individuals.append(individual!)
+        }
+        super.init(coder: aDecoder)
+    }
 }
 
-//  Returns true if `lhs` session is equal to `rhs` session.
-func ==(lhs: Session, rhs: Session) -> Bool {
-    return lhs.id == rhs.id
+
+extension Session: NSCoding {
+    override func encodeWithCoder(aCoder: NSCoder) {
+        // project attribute is allocated when project is initialized
+        aCoder.encodeObject(typeValue, forKey: "typeValue")
+        aCoder.encodeObject(observations, forKey: "observations")
+        aCoder.encodeObject(individuals, forKey: "individuals")
+    }
 }

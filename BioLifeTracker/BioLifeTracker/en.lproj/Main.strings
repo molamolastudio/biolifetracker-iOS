@@ -1,0 +1,144 @@
+
+/* Class = "UINavigationItem"; title = "New Project"; ObjectID = "16a-SQ-Ahs"; */
+"16a-SQ-Ahs.title" = "New Project";
+
+/* Class = "UITextField"; text = "Current Project:"; ObjectID = "1SL-Cu-xxG"; */
+"1SL-Cu-xxG.text" = "Current Project:";
+
+/* Class = "UIButton"; normalTitle = "Create New Project"; ObjectID = "2HS-Kb-6aA"; */
+"2HS-Kb-6aA.normalTitle" = "Create New Project";
+
+/* Class = "UITabBarItem"; title = "Sessions"; ObjectID = "2Sv-Yx-uLg"; */
+"2Sv-Yx-uLg.title" = "Sessions";
+
+/* Class = "UITextField"; text = "Bio Life Tracker"; ObjectID = "35Z-uo-lmr"; */
+"35Z-uo-lmr.text" = "Bio Life Tracker";
+
+/* Class = "UIButton"; normalTitle = "All Ethograms"; ObjectID = "6hE-Pd-FAA"; */
+"6hE-Pd-FAA.normalTitle" = "All Ethograms";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "6lb-fA-qF7"; */
+"6lb-fA-qF7.text" = "Title";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Cbk-yD-Hct"; */
+"Cbk-yD-Hct.text" = "Title";
+
+/* Class = "UILabel"; text = "Code"; ObjectID = "CrX-2l-hT1"; */
+"CrX-2l-hT1.text" = "Code";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "D9M-mu-DsL"; */
+"D9M-mu-DsL.text" = "Subtitle";
+
+/* Class = "UITextField"; placeholder = "Eg: Activity Pattern"; ObjectID = "DsW-BO-CXW"; */
+"DsW-BO-CXW.placeholder" = "Eg: Activity Pattern";
+
+/* Class = "UIBarButtonItem"; title = "< Back"; ObjectID = "EWI-iO-mp2"; */
+"EWI-iO-mp2.title" = "< Back";
+
+/* Class = "UIBarButtonItem"; title = "< Projects"; ObjectID = "HhD-qW-DBi"; */
+"HhD-qW-DBi.title" = "< Projects";
+
+/* Class = "UIBarButtonItem"; title = "< Back"; ObjectID = "IhM-sO-XGK"; */
+"IhM-sO-XGK.title" = "< Back";
+
+/* Class = "UIButton"; normalTitle = "All Projects"; ObjectID = "L5Y-mu-VEi"; */
+"L5Y-mu-VEi.normalTitle" = "All Projects";
+
+/* Class = "UITableViewController"; title = "New Project"; ObjectID = "MJP-iA-IxS"; */
+"MJP-iA-IxS.title" = "New Project";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "NFe-X5-3CL"; */
+"NFe-X5-3CL.text" = "Subtitle";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "NqX-vb-4tH"; */
+"NqX-vb-4tH.text" = "Title";
+
+/* Class = "UIButton"; normalTitle = "Create"; ObjectID = "Pvx-Qn-YOO"; */
+"Pvx-Qn-YOO.normalTitle" = "Create";
+
+/* Class = "UITableViewController"; title = "New Ethogram"; ObjectID = "Qbo-JK-X6n"; */
+"Qbo-JK-X6n.title" = "New Ethogram";
+
+/* Class = "UIButton"; normalTitle = "Create New Session"; ObjectID = "RXC-bM-3pq"; */
+"RXC-bM-3pq.normalTitle" = "Create New Session";
+
+/* Class = "UITextField"; placeholder = "Eg: Kingfisher"; ObjectID = "SUq-f5-VT3"; */
+"SUq-f5-VT3.placeholder" = "Eg: Kingfisher";
+
+/* Class = "UITextField"; text = "You don't have any sessions."; ObjectID = "UiH-C1-MSJ"; */
+"UiH-C1-MSJ.text" = "You don't have any sessions.";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "Ved-qn-ugj"; */
+"Ved-qn-ugj.text" = "Title";
+
+/* Class = "UILabel"; text = "Subtitle"; ObjectID = "W4z-St-OqF"; */
+"W4z-St-OqF.text" = "Subtitle";
+
+/* Class = "UINavigationItem"; title = "Sessions"; ObjectID = "W9w-wR-Ajf"; */
+"W9w-wR-Ajf.title" = "Sessions";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "XXU-A0-4S6"; */
+"XXU-A0-4S6.text" = "Label";
+
+/* Class = "UIBarButtonItem"; title = "Create"; ObjectID = "YBz-hr-FIG"; */
+"YBz-hr-FIG.title" = "Create";
+
+/* Class = "UINavigationItem"; title = "Ethogram"; ObjectID = "Z1m-Q5-AWs"; */
+"Z1m-Q5-AWs.title" = "Ethogram";
+
+/* Class = "UILabel"; text = "Ethogram"; ObjectID = "ZC5-G1-3aQ"; */
+"ZC5-G1-3aQ.text" = "Ethogram";
+
+/* Class = "UINavigationItem"; title = "New Ethogram"; ObjectID = "ZVw-1W-Q7b"; */
+"ZVw-1W-Q7b.title" = "New Ethogram";
+
+/* Class = "UILabel"; text = "Animal"; ObjectID = "Zgr-Xg-Nzf"; */
+"Zgr-Xg-Nzf.text" = "Animal";
+
+/* Class = "UILabel"; text = "Name"; ObjectID = "bRj-pw-otL"; */
+"bRj-pw-otL.text" = "Name";
+
+/* Class = "UIBarButtonItem"; title = "< Back"; ObjectID = "bwe-QW-ryg"; */
+"bwe-QW-ryg.title" = "< Back";
+
+/* Class = "UITabBarItem"; title = "Home"; ObjectID = "cAL-dA-FI6"; */
+"cAL-dA-FI6.title" = "Home";
+
+/* Class = "UINavigationItem"; title = "Home"; ObjectID = "ceK-0n-Vm4"; */
+"ceK-0n-Vm4.title" = "Home";
+
+/* Class = "UINavigationItem"; title = "Ethograms"; ObjectID = "e1m-Pi-saw"; */
+"e1m-Pi-saw.title" = "Ethograms";
+
+/* Class = "UITextField"; text = "Current Session:"; ObjectID = "iaW-5L-3Fl"; */
+"iaW-5L-3Fl.text" = "Current Session:";
+
+/* Class = "UIBarButtonItem"; title = "< Back"; ObjectID = "iyO-Uz-Fjv"; */
+"iyO-Uz-Fjv.title" = "< Back";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "jKL-g5-YBj"; */
+"jKL-g5-YBj.text" = "Title";
+
+/* Class = "UINavigationItem"; title = "Projects"; ObjectID = "jnI-RX-ezL"; */
+"jnI-RX-ezL.title" = "Projects";
+
+/* Class = "UIBarButtonItem"; title = "Done"; ObjectID = "mQT-Cv-93d"; */
+"mQT-Cv-93d.title" = "Done";
+
+/* Class = "UITextField"; text = "You don't have any projects!"; ObjectID = "oQx-qX-3cF"; */
+"oQx-qX-3cF.text" = "You don't have any projects!";
+
+/* Class = "UIBarButtonItem"; title = "Done"; ObjectID = "qEz-MM-Yfo"; */
+"qEz-MM-Yfo.title" = "Done";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "tyY-zw-X8e"; */
+"tyY-zw-X8e.text" = "Label";
+
+/* Class = "UITableViewController"; title = "Ethogram"; ObjectID = "xL0-kx-Ov5"; */
+"xL0-kx-Ov5.title" = "Ethogram";
+
+/* Class = "UILabel"; text = "Detail"; ObjectID = "xly-7h-Cig"; */
+"xly-7h-Cig.text" = "Detail";
+
+/* Class = "UIBarButtonItem"; title = "< Back"; ObjectID = "zxi-p0-i4D"; */
+"zxi-p0-i4D.title" = "< Back";

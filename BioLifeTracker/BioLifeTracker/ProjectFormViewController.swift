@@ -88,7 +88,7 @@ class ProjectFormViewController: UITableViewController, CustomPickerPopupDelegat
             self.presentViewController(alert, animated: true, completion: {})
         } else {
             let p = Project(name: textFieldTitle.text,
-                animal: textFieldAnimal.text,
+                //animal: textFieldAnimal.text,
                 ethogram: selectedEthogram!)
             Data.selectedProject = p
             Data.projects.append(p)
