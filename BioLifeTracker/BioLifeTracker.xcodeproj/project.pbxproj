@@ -26,12 +26,12 @@
 		3205E7851AAFFE98006F374D /* EthogramFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */; };
 		3205E7871AB03309006F374D /* CustomPickerPopupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3205E7861AB03309006F374D /* CustomPickerPopupCell.xib */; };
 		320920401AC9123A00E8A456 /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3209203F1AC9123A00E8A456 /* FormField.swift */; };
-		320920421AC92A4600E8A456 /* FormBooleanCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 320920411AC92A4600E8A456 /* FormBooleanCell.xib */; };
-		320920441AC953DD00E8A456 /* TextSingleLineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320920431AC953DD00E8A456 /* TextSingleLineCell.swift */; };
-		320920461AC9550600E8A456 /* FormTextSingleLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 320920451AC9550600E8A456 /* FormTextSingleLineCell.xib */; };
-		320920481AC9566100E8A456 /* FormTextMultiLineCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 320920471AC9566100E8A456 /* FormTextMultiLineCell.xib */; };
+		320920421AC92A4600E8A456 /* FormBooleanPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 320920411AC92A4600E8A456 /* FormBooleanPickerCell.xib */; };
+		320920441AC953DD00E8A456 /* SingleLineTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320920431AC953DD00E8A456 /* SingleLineTextCell.swift */; };
+		320920461AC9550600E8A456 /* FormSingleLineTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 320920451AC9550600E8A456 /* FormSingleLineTextCell.xib */; };
+		320920481AC9566100E8A456 /* FormMultiLineTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 320920471AC9566100E8A456 /* FormMultiLineTextCell.xib */; };
 		3209204D1AC96AF900E8A456 /* FormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3209204C1AC96AF900E8A456 /* FormCell.swift */; };
-		3209204F1AC96CA800E8A456 /* TextMultiLineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3209204E1AC96CA800E8A456 /* TextMultiLineCell.swift */; };
+		3209204F1AC96CA800E8A456 /* MultiLineTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3209204E1AC96CA800E8A456 /* MultiLineTextCell.swift */; };
 		320920511AC96CF500E8A456 /* BooleanPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320920501AC96CF500E8A456 /* BooleanPickerCell.swift */; };
 		32517A1C1AB072BB00578C42 /* CustomPickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A1B1AB072BB00578C42 /* CustomPickerPopup.swift */; };
 		32517A1E1AB0913600578C42 /* CustomPickerPopupDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A1D1AB0913600578C42 /* CustomPickerPopupDelegate.swift */; };
@@ -77,12 +77,12 @@
 		3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramFormViewController.swift; sourceTree = "<group>"; };
 		3205E7861AB03309006F374D /* CustomPickerPopupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = CustomPickerPopupCell.xib; path = BioLifeTracker/CustomPickerPopupCell.xib; sourceTree = "<group>"; };
 		3209203F1AC9123A00E8A456 /* FormField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormField.swift; path = BioLifeTracker/FormField.swift; sourceTree = "<group>"; };
-		320920411AC92A4600E8A456 /* FormBooleanCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FormBooleanCell.xib; path = BioLifeTracker/FormBooleanCell.xib; sourceTree = "<group>"; };
-		320920431AC953DD00E8A456 /* TextSingleLineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextSingleLineCell.swift; path = BioLifeTracker/TextSingleLineCell.swift; sourceTree = "<group>"; };
-		320920451AC9550600E8A456 /* FormTextSingleLineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FormTextSingleLineCell.xib; path = BioLifeTracker/FormTextSingleLineCell.xib; sourceTree = "<group>"; };
-		320920471AC9566100E8A456 /* FormTextMultiLineCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FormTextMultiLineCell.xib; path = BioLifeTracker/FormTextMultiLineCell.xib; sourceTree = "<group>"; };
+		320920411AC92A4600E8A456 /* FormBooleanPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FormBooleanPickerCell.xib; path = BioLifeTracker/FormBooleanPickerCell.xib; sourceTree = "<group>"; };
+		320920431AC953DD00E8A456 /* SingleLineTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleLineTextCell.swift; path = BioLifeTracker/SingleLineTextCell.swift; sourceTree = "<group>"; };
+		320920451AC9550600E8A456 /* FormSingleLineTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FormSingleLineTextCell.xib; path = BioLifeTracker/FormSingleLineTextCell.xib; sourceTree = "<group>"; };
+		320920471AC9566100E8A456 /* FormMultiLineTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FormMultiLineTextCell.xib; path = BioLifeTracker/FormMultiLineTextCell.xib; sourceTree = "<group>"; };
 		3209204C1AC96AF900E8A456 /* FormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormCell.swift; sourceTree = "<group>"; };
-		3209204E1AC96CA800E8A456 /* TextMultiLineCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextMultiLineCell.swift; sourceTree = "<group>"; };
+		3209204E1AC96CA800E8A456 /* MultiLineTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiLineTextCell.swift; sourceTree = "<group>"; };
 		320920501AC96CF500E8A456 /* BooleanPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooleanPickerCell.swift; sourceTree = "<group>"; };
 		32517A1B1AB072BB00578C42 /* CustomPickerPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomPickerPopup.swift; path = BioLifeTracker/CustomPickerPopup.swift; sourceTree = "<group>"; };
 		32517A1D1AB0913600578C42 /* CustomPickerPopupDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomPickerPopupDelegate.swift; path = BioLifeTracker/CustomPickerPopupDelegate.swift; sourceTree = "<group>"; };
@@ -200,12 +200,12 @@
 				3209203F1AC9123A00E8A456 /* FormField.swift */,
 				3209204C1AC96AF900E8A456 /* FormCell.swift */,
 				32EE15491AC65DAF0065C25C /* FormViewController.swift */,
-				320920431AC953DD00E8A456 /* TextSingleLineCell.swift */,
-				3209204E1AC96CA800E8A456 /* TextMultiLineCell.swift */,
+				320920431AC953DD00E8A456 /* SingleLineTextCell.swift */,
+				3209204E1AC96CA800E8A456 /* MultiLineTextCell.swift */,
 				320920501AC96CF500E8A456 /* BooleanPickerCell.swift */,
-				320920451AC9550600E8A456 /* FormTextSingleLineCell.xib */,
-				320920471AC9566100E8A456 /* FormTextMultiLineCell.xib */,
-				320920411AC92A4600E8A456 /* FormBooleanCell.xib */,
+				320920451AC9550600E8A456 /* FormSingleLineTextCell.xib */,
+				320920471AC9566100E8A456 /* FormMultiLineTextCell.xib */,
+				320920411AC92A4600E8A456 /* FormBooleanPickerCell.xib */,
 				32517A1B1AB072BB00578C42 /* CustomPickerPopup.swift */,
 				32517A1D1AB0913600578C42 /* CustomPickerPopupDelegate.swift */,
 				3205E7861AB03309006F374D /* CustomPickerPopupCell.xib */,
@@ -296,10 +296,10 @@
 				3205E74D1AAED9F9006F374D /* Main.storyboard in Resources */,
 				3205E7521AAED9F9006F374D /* LaunchScreen.xib in Resources */,
 				3205E7871AB03309006F374D /* CustomPickerPopupCell.xib in Resources */,
-				320920461AC9550600E8A456 /* FormTextSingleLineCell.xib in Resources */,
+				320920461AC9550600E8A456 /* FormSingleLineTextCell.xib in Resources */,
 				3205E74F1AAED9F9006F374D /* Images.xcassets in Resources */,
-				320920481AC9566100E8A456 /* FormTextMultiLineCell.xib in Resources */,
-				320920421AC92A4600E8A456 /* FormBooleanCell.xib in Resources */,
+				320920481AC9566100E8A456 /* FormMultiLineTextCell.xib in Resources */,
+				320920421AC92A4600E8A456 /* FormBooleanPickerCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,14 +335,14 @@
 				3205E7851AAFFE98006F374D /* EthogramFormViewController.swift in Sources */,
 				32517A1C1AB072BB00578C42 /* CustomPickerPopup.swift in Sources */,
 				3205E7811AAEDB03006F374D /* ProjectFormViewController.swift in Sources */,
-				320920441AC953DD00E8A456 /* TextSingleLineCell.swift in Sources */,
+				320920441AC953DD00E8A456 /* SingleLineTextCell.swift in Sources */,
 				32EE154C1AC65EA80065C25C /* FormFieldData.swift in Sources */,
 				32517A221AB1789100578C42 /* EthogramsViewController.swift in Sources */,
 				320920401AC9123A00E8A456 /* FormField.swift in Sources */,
 				32517A241AB17BC900578C42 /* EthogramDetailsViewController.swift in Sources */,
 				32EE154A1AC65DAF0065C25C /* FormViewController.swift in Sources */,
 				32517A1E1AB0913600578C42 /* CustomPickerPopupDelegate.swift in Sources */,
-				3209204F1AC96CA800E8A456 /* TextMultiLineCell.swift in Sources */,
+				3209204F1AC96CA800E8A456 /* MultiLineTextCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 //
-//  TextMultiLineCell.swift
+//  MultiLineTextCell.swift
 //  BioLifeTracker
 //
 //  Created by Michelle Tan on 30/3/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TextMultiLineCell: UITableViewCell, FormCell {
+class MultiLineTextCell: UITableViewCell, FormCell {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var textField: UITextField!
     
