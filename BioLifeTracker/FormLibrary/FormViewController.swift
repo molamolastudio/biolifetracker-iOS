@@ -11,6 +11,7 @@ import UIKit
 class FormViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
 
     var fields: FormFieldData? = nil
+    var editable: Bool = true // Determines if the cells can be edited.
     
     var nibNames = ["FormSingleLineTextCell", "FormMultiLineTextCell", "FormBooleanPickerCell"]
     
@@ -53,8 +54,6 @@ class FormViewController: UITableViewController, UITableViewDelegate, UITableVie
                     break
                 }
             }
-            
-            
         }
         return UITableViewCell()
     }
@@ -64,8 +63,12 @@ class FormViewController: UITableViewController, UITableViewDelegate, UITableVie
             nibNames[FormField.FieldType.TextSingleLine.rawValue]) as SingleLineTextCell
 
         cell.label.text = field.label
-        if field.value != nil {
-            
+        if let text = field.value as? String {
+            cell.textField.text = text
+        }
+        
+        if editable {
+            cell.textField.enabled = true
         }
         
         return cell
@@ -75,7 +78,14 @@ class FormViewController: UITableViewController, UITableViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCellWithIdentifier(
             nibNames[FormField.FieldType.TextMultiLine.rawValue]) as MultiLineTextCell
         
-        cell.label.text = fields!.getLabelForIndex(indexPath)
+        cell.label.text = field.label
+        if let text = field.value as? String {
+            cell.textField.text = text
+        }
+        
+        if editable {
+            cell.textField.enabled = true
+        }
         
         return cell
     }
@@ -84,7 +94,14 @@ class FormViewController: UITableViewController, UITableViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCellWithIdentifier(
             nibNames[FormField.FieldType.PickerBoolean.rawValue]) as BooleanPickerCell
         
-        cell.label.text = fields!.getLabelForIndex(indexPath)
+        cell.label.text = field.label
+        if let value = field.value as? Bool {
+            cell.booleanSwitch.on = value
+        }
+        
+        if editable {
+            cell.booleanSwitch.enabled = true
+        }
         
         return cell
     }
