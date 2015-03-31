@@ -8,7 +8,8 @@
 
 import UIKit
 
-protocol FormCell {
-    func getValueFromCell() -> AnyObject?
-    
+class FormCell: UITableViewCell {
+    func getValueFromCell() -> AnyObject? {
+        return nil
+    }
 }

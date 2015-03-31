@@ -14,7 +14,7 @@ class MenuViewController: UITableViewController, UITableViewDelegate, UITableVie
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
+        return UITableViewCell()
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

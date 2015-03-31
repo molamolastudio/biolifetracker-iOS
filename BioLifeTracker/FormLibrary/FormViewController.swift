@@ -24,7 +24,7 @@ class FormViewController: UITableViewController, UITableViewDelegate, UITableVie
         var result: [AnyObject?] = []
         for var i = 0; i < fields!.getNumberOfSections(); i++ {
             for var j = 0; j < fields!.getNumberOfRowsForSection(i); j++ {
-                let cell = self.tableView!.cellForRowAtIndexPath(NSIndexPath(i, j)) as FormCell
+                let cell = self.tableView!.cellForRowAtIndexPath(NSIndexPath(forRow: j, inSection: i))
                 result.append(cell.getValueFromCell())
             }
         }
@@ -61,7 +61,11 @@ class FormViewController: UITableViewController, UITableViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCellWithIdentifier(
             nibNames[FormField.FieldType.TextSingleLine.rawValue]) as SingleLineTextCell
         
-        cell.label.text = fields!.getLabelForIndex(indexPath)
+        let field = fields!.getFieldForIndex(indexPath)
+        cell.label.text = field.label
+        if field.value != nil {
+            
+        }
         
         return cell
     }
