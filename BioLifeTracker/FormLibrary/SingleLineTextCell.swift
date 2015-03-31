@@ -8,19 +8,11 @@
 
 import UIKit
 
-class SingleLineTextCell: UITableViewCell, FormCell {
+class SingleLineTextCell: FormCell {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var textField: UITextField!
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String!) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-    }
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    func getValueFromCell() -> AnyObject? {
+    override func getValueFromCell() -> AnyObject? {
         return textField.text
     }
 }

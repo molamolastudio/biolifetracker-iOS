@@ -8,11 +8,11 @@
 
 import UIKit
 
-class BooleanPickerCell: UITableViewCell, FormCell {
+class BooleanPickerCell: FormCell {
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var booleanSwitch: UISwitch!
     
-    func getValueFromCell() -> AnyObject? {
+    override func getValueFromCell() -> AnyObject? {
         return booleanSwitch.on
     }
 }
