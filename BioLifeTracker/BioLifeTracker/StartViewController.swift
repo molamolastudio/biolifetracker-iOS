@@ -38,15 +38,22 @@ class StartViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     let messageNoProjects = "You don't have any projects."
     let messageNoSessions = "You don't have any sessions."
     
+    
+    let superVC = SuperController()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.btnLogin.delegate = self
         self.btnLogin.readPermissions = ["public_profile", "email", "user_friends"]
         
         refreshView()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
+        
+        println("after adding")
+        self.view.addSubview(superVC.view)
+        println("after subview")
+        superVC.view.frame = self.view.frame
+        println("what")
     }
 
     override func didReceiveMemoryWarning() {

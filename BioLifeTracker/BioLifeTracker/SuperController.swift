@@ -11,11 +11,34 @@
 
 import UIKit
 
-class SuperController: UIViewController {
-    
-    let splitVC = SplitViewController()
-    
+class SuperController: UIViewController, UISplitViewControllerDelegate {
+            let splitVC = SplitViewController()
     override func viewDidLoad() {
         
+        let master = UITableViewController()
+        master.view.backgroundColor = UIColor.redColor()
+        let masterNav = UINavigationController(rootViewController: master)
+        
+
+        
+        let data = FormFieldData()
+        data.addTextCell(label: "Text1", hasSingleLine: true)
+        data.addTextCell(label: "Text2", hasSingleLine: false)
+        data.addBooleanCell(label: "YES?")
+        
+        let detail = FormViewController(formData: data)
+        
+        let detailNav = UINavigationController(rootViewController: detail)
+        
+
+        splitVC.viewControllers = [masterNav, detailNav]
+        splitVC.delegate = self
+        
+        self.view.addSubview(splitVC.view)
+        splitVC.view.frame = self.view.frame
+    }
+    
+    func targetDisplayModeForActionInSplitViewController(svc: UISplitViewController) -> UISplitViewControllerDisplayMode {
+        return UISplitViewControllerDisplayMode.AllVisible
     }
 }

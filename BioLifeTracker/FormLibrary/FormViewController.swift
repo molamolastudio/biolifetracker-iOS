@@ -13,12 +13,17 @@ class FormViewController: UITableViewController, UITableViewDelegate, UITableVie
     var fields: FormFieldData? = nil
     var editable: Bool = true // Determines if the cells can be edited.
     
-    var nibNames = ["FormSingleLineTextCell", "FormMultiLineTextCell", "FormBooleanPickerCell"]
+    var nibNames = ["SingleLineTextCell", "MultiLineTextCell", "BooleanPickerCell"]
     
     override func viewDidLoad() {
+        println("form loaded")
         for var i = 0; i < nibNames.count; i++ {
             self.tableView.registerNib(UINib(nibName: nibNames[i], bundle: nil), forCellReuseIdentifier: nibNames[i])
         }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        self.tableView.reloadData()
     }
     
     func getFormData() -> [AnyObject?] {
@@ -34,6 +39,7 @@ class FormViewController: UITableViewController, UITableViewDelegate, UITableVie
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if fields != nil {
+            println("fields not nil")
             if let field = fields!.getFieldForIndex(indexPath) {
                 switch field.type {
                 case .TextSingleLine:

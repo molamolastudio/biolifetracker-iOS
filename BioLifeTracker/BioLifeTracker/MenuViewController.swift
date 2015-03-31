@@ -10,7 +10,7 @@ import UIKit
 
 class MenuViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
     override func viewDidLoad() {
-        
+        println("menu loaded")
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
