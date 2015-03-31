@@ -24,7 +24,7 @@ class FormViewController: UITableViewController, UITableViewDelegate, UITableVie
         var result: [AnyObject?] = []
         for var i = 0; i < fields!.getNumberOfSections(); i++ {
             for var j = 0; j < fields!.getNumberOfRowsForSection(i); j++ {
-                let cell = self.tableView!.cellForRowAtIndexPath(NSIndexPath(forRow: j, inSection: i))
+                let cell = self.tableView!.cellForRowAtIndexPath(NSIndexPath(forRow: j, inSection: i)) as FormCell
                 result.append(cell.getValueFromCell())
             }
         }
@@ -33,14 +33,14 @@ class FormViewController: UITableViewController, UITableViewDelegate, UITableVie
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if fields != nil {
-            if let type = fields!.getFieldTypeForIndex(indexPath) {
-                switch type {
+            if let field = fields!.getFieldForIndex(indexPath) {
+                switch field.type {
                 case .TextSingleLine:
-                    return getSingleLineTextCell(indexPath)
+                    return getSingleLineTextCell(field, indexPath: indexPath)
                 case .TextMultiLine:
-                    return getMultiLineTextCell(indexPath)
+                    return getMultiLineTextCell(field, indexPath: indexPath)
                 case .PickerBoolean:
-                    return getBooleanPickerCell(indexPath)
+                    return getBooleanPickerCell(field, indexPath: indexPath)
                 case .PickerDate:
                     break
                 case .PickerDefault:
@@ -53,15 +53,16 @@ class FormViewController: UITableViewController, UITableViewDelegate, UITableVie
                     break
                 }
             }
+            
+            
         }
         return UITableViewCell()
     }
     
-    func getSingleLineTextCell(indexPath: NSIndexPath) -> UITableViewCell {
+    func getSingleLineTextCell(field: FormField, indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
             nibNames[FormField.FieldType.TextSingleLine.rawValue]) as SingleLineTextCell
-        
-        let field = fields!.getFieldForIndex(indexPath)
+
         cell.label.text = field.label
         if field.value != nil {
             
@@ -70,7 +71,7 @@ class FormViewController: UITableViewController, UITableViewDelegate, UITableVie
         return cell
     }
     
-    func getMultiLineTextCell(indexPath: NSIndexPath) -> UITableViewCell {
+    func getMultiLineTextCell(field: FormField, indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
             nibNames[FormField.FieldType.TextMultiLine.rawValue]) as MultiLineTextCell
         
@@ -79,7 +80,7 @@ class FormViewController: UITableViewController, UITableViewDelegate, UITableVie
         return cell
     }
     
-    func getBooleanPickerCell(indexPath: NSIndexPath) -> UITableViewCell {
+    func getBooleanPickerCell(field: FormField, indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
             nibNames[FormField.FieldType.PickerBoolean.rawValue]) as BooleanPickerCell
         
