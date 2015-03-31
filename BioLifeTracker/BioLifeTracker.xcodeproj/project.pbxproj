@@ -68,6 +68,7 @@
 		320920631AC9908500E8A456 /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 320920621AC9908400E8A456 /* GooglePlus.bundle */; };
 		320920691ACA7E4400E8A456 /* SuperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320920681ACA7E4400E8A456 /* SuperController.swift */; };
 		3209206F1ACA868400E8A456 /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3209206E1ACA868400E8A456 /* SplitViewController.swift */; };
+		320920711ACA9A1600E8A456 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320920701ACA9A1600E8A456 /* MenuViewController.swift */; };
 		32850BE11AB9625500C49D33 /* ProjectFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E77E1AAEDB03006F374D /* ProjectFormViewController.swift */; };
 		32850BE21AB9625500C49D33 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E77F1AAEDB03006F374D /* ProjectsViewController.swift */; };
 		32850BE31AB9625500C49D33 /* ProjectHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A1F1AB09A3D00578C42 /* ProjectHomeViewController.swift */; };
@@ -167,6 +168,7 @@
 		320920621AC9908400E8A456 /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GooglePlus.bundle; path = BioLifeTracker/GooglePlus.bundle; sourceTree = "<group>"; };
 		320920681ACA7E4400E8A456 /* SuperController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperController.swift; sourceTree = "<group>"; };
 		3209206E1ACA868400E8A456 /* SplitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
+		320920701ACA9A1600E8A456 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		32517A1F1AB09A3D00578C42 /* ProjectHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectHomeViewController.swift; sourceTree = "<group>"; };
 		32517A211AB1789100578C42 /* EthogramsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramsViewController.swift; sourceTree = "<group>"; };
 		32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramDetailsViewController.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 				3205E7701AAEDA85006F374D /* Data.swift */,
 				320920681ACA7E4400E8A456 /* SuperController.swift */,
 				3209206E1ACA868400E8A456 /* SplitViewController.swift */,
+				320920701ACA9A1600E8A456 /* MenuViewController.swift */,
 				3205E7471AAED9F9006F374D /* AppDelegate.swift */,
 				3205E7801AAEDB03006F374D /* StartViewController.swift */,
 				AC188C7B1AC2B11A00CB08C0 /* Storable.swift */,
@@ -522,6 +525,7 @@
 				3205E7791AAEDA85006F374D /* Ethogram.swift in Sources */,
 				3209206F1ACA868400E8A456 /* SplitViewController.swift in Sources */,
 				320920691ACA7E4400E8A456 /* SuperController.swift in Sources */,
+				320920711ACA9A1600E8A456 /* MenuViewController.swift in Sources */,
 				240D04331AB718EF00D8BB9F /* Location.swift in Sources */,
 				32850BE41AB9625500C49D33 /* EthogramFormViewController.swift in Sources */,
 				3205E7761AAEDA85006F374D /* BehaviourState.swift in Sources */,
