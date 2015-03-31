@@ -9,7 +9,7 @@
 import UIKit
 
 class FormViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
-    // table view
+
     var fields: FormFieldData? = nil
     
     var nibNames = ["FormSingleLineTextCell", "FormMultiLineTextCell", "FormBooleanPickerCell"]
@@ -18,6 +18,17 @@ class FormViewController: UITableViewController, UITableViewDelegate, UITableVie
         for var i = 0; i < nibNames.count; i++ {
             self.tableView.registerNib(UINib(nibName: nibNames[i], bundle: nil), forCellReuseIdentifier: nibNames[i])
         }
+    }
+    
+    func getFormData() -> [AnyObject?] {
+        var result: [AnyObject?] = []
+        for var i = 0; i < fields!.getNumberOfSections(); i++ {
+            for var j = 0; j < fields!.getNumberOfRowsForSection(i); j++ {
+                let cell = self.tableView!.cellForRowAtIndexPath(NSIndexPath(i, j)) as FormCell
+                result.append(cell.getValueFromCell())
+            }
+        }
+        return result
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -71,6 +82,14 @@ class FormViewController: UITableViewController, UITableViewDelegate, UITableVie
         cell.label.text = fields!.getLabelForIndex(indexPath)
         
         return cell
+    }
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        if fields != nil {
+            return fields!.getNumberOfSections()
+        } else {
+            return 1
+        }
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
