@@ -39,6 +39,7 @@ class FormFieldData {
     func setupSections() {
         for var i = 0; i < sections; i++ {
             fields[i] = []
+            sectionTitles.append("")
         }
     }
     
