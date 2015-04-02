@@ -11,7 +11,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Ik-h3-cNU">
-                    <rect key="frame" x="15" y="289.5" width="42" height="20.5"/>
+                    <rect key="frame" x="20" y="289.5" width="42" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -24,7 +24,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Feu-lU-3vq" secondAttribute="trailing" constant="20" id="1f1-Hi-HlR"/>
                 <constraint firstAttribute="centerY" secondItem="Feu-lU-3vq" secondAttribute="centerY" id="UIP-9l-JAs"/>
-                <constraint firstItem="9Ik-h3-cNU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="bKR-V8-pO9"/>
+                <constraint firstItem="9Ik-h3-cNU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="bKR-V8-pO9"/>
                 <constraint firstAttribute="centerY" secondItem="9Ik-h3-cNU" secondAttribute="centerY" id="n37-nY-EnF"/>
             </constraints>
             <connections>

@@ -9,6 +9,8 @@
 import UIKit
 
 class FormViewController: UITableViewController {
+    
+    let defaultCellHeight: CGFloat = 44
 
     var fields: FormFieldData? = nil
     var editable: Bool = true // Determines if the cells can be edited.
@@ -61,6 +63,17 @@ class FormViewController: UITableViewController {
             }
         }
         return UITableViewCell()
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if fields != nil {
+            if let type = fields!.getFieldTypeForIndex(indexPath) {
+                if type == FormField.FieldType.TextMultiLine {
+                    return defaultCellHeight * 3
+                }
+            }
+        }
+        return defaultCellHeight
     }
     
     func getSingleLineTextCell(field: FormField, indexPath: NSIndexPath) -> UITableViewCell {

@@ -12,7 +12,9 @@
 import UIKit
 
 class SuperController: UIViewController, UISplitViewControllerDelegate {
-            let splitVC = SplitViewController()
+    
+    let splitVC = UISplitViewController()
+    
     override func viewDidLoad() {
         
         let master = MenuViewController()
@@ -28,15 +30,10 @@ class SuperController: UIViewController, UISplitViewControllerDelegate {
         
         let detailNav = UINavigationController(rootViewController: detail)
         
-
         splitVC.viewControllers = [masterNav, detailNav]
         splitVC.delegate = self
         
         self.view.addSubview(splitVC.view)
         splitVC.view.frame = self.view.frame
-    }
-    
-    func targetDisplayModeForActionInSplitViewController(svc: UISplitViewController) -> UISplitViewControllerDisplayMode {
-        return UISplitViewControllerDisplayMode.AllVisible
     }
 }

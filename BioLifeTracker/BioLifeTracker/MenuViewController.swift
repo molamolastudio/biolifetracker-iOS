@@ -9,8 +9,12 @@
 import UIKit
 
 class MenuViewController: UITableViewController {
+    
+    let sectionHeaders = ["", "", ""]
+    let sectionRowNums = [1, 2, 3]
+    
     override func viewDidLoad() {
-        println("menu loaded")
+        
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -18,15 +22,15 @@ class MenuViewController: UITableViewController {
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return sectionHeaders.count
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Header"
+        return sectionHeaders[section]
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return sectionRowNums[section]
     }
 
 }
