@@ -85,6 +85,8 @@
 		AC702EEA1AC55FAA003C50C8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7751AAEDA85006F374D /* User.swift */; };
 		AC702EEB1AC55FBC003C50C8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E76F1AAEDA85006F374D /* Constants.swift */; };
 		AC702EEC1AC55FC6003C50C8 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7701AAEDA85006F374D /* Data.swift */; };
+		AC9162AC1ACA6A0400FED714 /* CloudStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */; };
+		AC9162AD1ACA6CC300FED714 /* CloudStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */; };
 		ACB073E91AC17BA3004E0BFC /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073E31AC17BA3004E0BFC /* AddressBook.framework */; };
 		ACB073EA1AC17BA3004E0BFC /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073E41AC17BA3004E0BFC /* AssetsLibrary.framework */; };
 		ACB073EB1AC17BA3004E0BFC /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073E51AC17BA3004E0BFC /* CoreText.framework */; };
@@ -93,6 +95,8 @@
 		ACB073EE1AC17BA3004E0BFC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073E81AC17BA3004E0BFC /* UIKit.framework */; };
 		ACB073F41AC184F5004E0BFC /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073F31AC184F5004E0BFC /* CoreMotion.framework */; };
 		ACDC54401AC3FC6B00779FAE /* LocalStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDC543F1AC3FC6B00779FAE /* LocalStorageTests.swift */; };
+		ACDCC0F11ACD05E1001590B8 /* UserAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDCC0F01ACD05E1001590B8 /* UserAuthService.swift */; };
+		ACDCC0F21ACD05E1001590B8 /* UserAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDCC0F01ACD05E1001590B8 /* UserAuthService.swift */; };
 		ACDCFADF1AC9B68600CEA99C /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDCFADE1AC9B68600CEA99C /* GooglePlus.framework */; };
 		ACDCFAE01AC9B68600CEA99C /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDCFADE1AC9B68600CEA99C /* GooglePlus.framework */; };
 /* End PBXBuildFile section */
@@ -171,6 +175,7 @@
 		32EE15491AC65DAF0065C25C /* FormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormViewController.swift; path = BioLifeTracker/FormViewController.swift; sourceTree = "<group>"; };
 		32EE154B1AC65EA80065C25C /* FormFieldData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormFieldData.swift; path = BioLifeTracker/FormFieldData.swift; sourceTree = "<group>"; };
 		AC188C7B1AC2B11A00CB08C0 /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
+		AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorable.swift; sourceTree = "<group>"; };
 		ACB073E31AC17BA3004E0BFC /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		ACB073E41AC17BA3004E0BFC /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		ACB073E51AC17BA3004E0BFC /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -179,6 +184,7 @@
 		ACB073E81AC17BA3004E0BFC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ACB073F31AC184F5004E0BFC /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		ACDC543F1AC3FC6B00779FAE /* LocalStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorageTests.swift; sourceTree = "<group>"; };
+		ACDCC0F01ACD05E1001590B8 /* UserAuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthService.swift; sourceTree = "<group>"; };
 		ACDCFADE1AC9B68600CEA99C /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlus.framework; path = "../../Downloads/google-plus-ios-sdk-1.7.1 2/GooglePlus.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -331,9 +337,11 @@
 		3205E7441AAED9F9006F374D /* BioLifeTracker */ = {
 			isa = PBXGroup;
 			children = (
+				ACDCC0EF1ACD05C7001590B8 /* Services */,
 				24E32D771AB298D8003C4E0A /* BioLifeTracker-Bridging-Header.h */,
 				240D042B1AB6CA6800D8BB9F /* Authentication */,
 				24E32D3C1AB19954003C4E0A /* Model */,
+				AC9162AA1ACA69BF00FED714 /* Cloud Storage */,
 				3205E76F1AAEDA85006F374D /* Constants.swift */,
 				3205E7701AAEDA85006F374D /* Data.swift */,
 				3205E7471AAED9F9006F374D /* AppDelegate.swift */,
@@ -406,6 +414,22 @@
 				320920531AC98E1D00E8A456 /* CustomPickerPopupDelegate.swift */,
 			);
 			name = "Form Library";
+			sourceTree = "<group>";
+		};
+		AC9162AA1ACA69BF00FED714 /* Cloud Storage */ = {
+			isa = PBXGroup;
+			children = (
+				AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */,
+			);
+			name = "Cloud Storage";
+			sourceTree = "<group>";
+		};
+		ACDCC0EF1ACD05C7001590B8 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				ACDCC0F01ACD05E1001590B8 /* UserAuthService.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -521,12 +545,14 @@
 				240D04381AB7206200D8BB9F /* StartViewController.swift in Sources */,
 				3205E7791AAEDA85006F374D /* Ethogram.swift in Sources */,
 				240D04331AB718EF00D8BB9F /* Location.swift in Sources */,
+				ACDCC0F11ACD05E1001590B8 /* UserAuthService.swift in Sources */,
 				32850BE41AB9625500C49D33 /* EthogramFormViewController.swift in Sources */,
 				3205E7761AAEDA85006F374D /* BehaviourState.swift in Sources */,
 				32850BE61AB9625500C49D33 /* EthogramDetailsViewController.swift in Sources */,
 				242C6E071AC80F050024ECEF /* BiolifeModel.swift in Sources */,
 				3205E7781AAEDA85006F374D /* Data.swift in Sources */,
 				3205E77A1AAEDA85006F374D /* Observation.swift in Sources */,
+				AC9162AC1ACA6A0400FED714 /* CloudStorable.swift in Sources */,
 				32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */,
 				3205E7481AAED9F9006F374D /* AppDelegate.swift in Sources */,
 				3205E7771AAEDA85006F374D /* Constants.swift in Sources */,
@@ -556,6 +582,7 @@
 				AC702EE21AC55EA3003C50C8 /* Ethogram.swift in Sources */,
 				AC702EEA1AC55FAA003C50C8 /* User.swift in Sources */,
 				AC702EEC1AC55FC6003C50C8 /* Data.swift in Sources */,
+				ACDCC0F21ACD05E1001590B8 /* UserAuthService.swift in Sources */,
 				24E32D7E1AB29DEF003C4E0A /* BehaviourState.swift in Sources */,
 				AC702EE81AC55EB5003C50C8 /* Weather.swift in Sources */,
 				247F2FB51AC8EF220065A0D1 /* BiolifeModel.swift in Sources */,
@@ -563,6 +590,7 @@
 				AC188C7D1AC2B11A00CB08C0 /* Storable.swift in Sources */,
 				ACDC54401AC3FC6B00779FAE /* LocalStorageTests.swift in Sources */,
 				3205E75E1AAED9F9006F374D /* BioLifeTrackerTests.swift in Sources */,
+				AC9162AD1ACA6CC300FED714 /* CloudStorable.swift in Sources */,
 				247F2FB41AC8EEF90065A0D1 /* Tag.swift in Sources */,
 				AC702EE51AC55EAC003C50C8 /* Observation.swift in Sources */,
 				AC702EE31AC55EA8003C50C8 /* Project.swift in Sources */,

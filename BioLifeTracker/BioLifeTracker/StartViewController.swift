@@ -22,15 +22,31 @@ class StartViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     
     @IBAction func btnLoginGoogle(sender: UIButton) {
         // Configure Google login
-        signIn = GPPSignIn.sharedInstance()
-        signIn?.shouldFetchGooglePlusUser = true
-        signIn?.clientID = "47253329705-c8p8oqi7j036p5lakqia2jl3v3j1np2g.apps.googleusercontent.com"
-        signIn?.scopes = [kGTLAuthScopePlusLogin]
-        signIn?.delegate = self
-        signIn?.authenticate()
-        
+        if !isSignedIn {
+            isSignedIn = true
+            isSignedInGoogle = true
+            signIn = GPPSignIn.sharedInstance()
+            signIn?.shouldFetchGooglePlusUser = true
+            signIn?.shouldFetchGoogleUserID = true
+            signIn?.shouldFetchGoogleUserEmail = true
+            signIn?.clientID = "47253329705-c8p8oqi7j036p5lakqia2jl3v3j1np2g.apps.googleusercontent.com"
+            signIn?.scopes = ["profile", "email"]
+            signIn?.delegate = self
+            signIn?.authenticate()
+        } else if isSignedInGoogle {
+            isSignedIn = false
+            isSignedInGoogle = false
+            signIn!.signOut()
+            println("signed out")
+        } else {
+            println("cannot sign in to Google and Facebook")
+        }
     }
+    
     var signIn: GPPSignIn?
+    var isSignedIn = false
+    var isSignedInGoogle = false
+    var isSignedinFB = false
     
     let labelCreateSession = "Create A Session"
     let labelStartTracking = "Start Tracking"
@@ -40,14 +56,12 @@ class StartViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Facebook login
         self.btnLogin.delegate = self
         self.btnLogin.readPermissions = ["public_profile", "email", "user_friends"]
         
-        signIn?.trySilentAuthentication()
-        
-        if signIn? != nil && signIn!.hasAuthInKeychain() {
-            
-        }
+        // Google plus
+//        signIn?.trySilentAuthentication()
         
         refreshView()
     }
@@ -101,34 +115,46 @@ class StartViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     
     // Facebook Delegate Methods
     
-//    func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
-//        println("User Logged In")
-//    }
+    func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
+        println("User Logged In")
+    }
     
-//    func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
-//        println("User: \(user)")
-//        println("User ID: \(user.objectID)")
-//        println("User Name: \(user.name)")
-//        var userEmail = user.objectForKey("email") as String
-//        println("User Email: \(userEmail)")
-//    }
+    func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
+        println("User: \(user)")
+        println("User ID: \(user.objectID)")
+        println("User Name: \(user.name)")
+        var userEmail = user.objectForKey("email") as String
+        println("User Email: \(userEmail)")
+        var accessToken = FBSession.activeSession().accessTokenData
+        println(accessToken)
+    }
     
-//    func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
-//        println("User Logged Out")
-//    }
-//    
-//    func loginView(loginView : FBLoginView!, handleError:NSError) {
-//        println("Error: \(handleError.localizedDescription)")
-//    }
+    func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
+        println("User Logged Out")
+    }
+    
+    func loginView(loginView : FBLoginView!, handleError:NSError) {
+        println("Error: \(handleError.localizedDescription)")
+    }
     
     // Google Plus Sign in
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
         println(auth)
+        println("login success \(signIn!.userEmail)")
+        println("login success \(signIn!.userID)")
+        println("login success \(auth.accessToken)")
+        println("\(signIn?.googlePlusUser.displayName)")
+
+        var cc = signIn?.googlePlusUser.name.familyName
+        println("\(cc)")
+        println(error)
+
     }
     
     func didDisconnectWithError(error: NSError!) {
         println(error)
     }
+
     
 }
 

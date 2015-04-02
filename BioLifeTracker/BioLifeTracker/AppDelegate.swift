@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-        return GPPURLHandler.handleURL(url, sourceApplication: sourceApplication, annotation: annotation)
+        return FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication) || GPPURLHandler.handleURL(url, sourceApplication: sourceApplication, annotation: annotation)
     }
 
     func applicationWillResignActive(application: UIApplication) {
