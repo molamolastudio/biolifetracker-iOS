@@ -17,15 +17,21 @@ class SuperController: UIViewController, UISplitViewControllerDelegate {
     
     override func viewDidLoad() {
         
-        let master = MenuViewController()
+        let master = MenuViewController(style: UITableViewStyle.Grouped)
         let masterNav = UINavigationController(rootViewController: master)
         
-        let data = FormFieldData()
+        let data = FormFieldData(sections: 3)
         data.addTextCell(label: "Text1", hasSingleLine: true)
         data.addTextCell(label: "Text2", hasSingleLine: false)
         data.addBooleanCell(label: "YES?")
+        data.addTextCell(section: 1, label: "Sec2A", hasSingleLine: true)
+        data.addTextCell(section: 1, label: "Sec2B", hasSingleLine: true)
+        data.addTextCell(section: 1, label: "Sec2C", hasSingleLine: true)
+        data.addTextCell(section: 2, label: "Sec2A", hasSingleLine: true)
+        data.addTextCell(section: 2, label: "Sec2B", hasSingleLine: true)
+        data.addTextCell(section: 2, label: "Sec2C", hasSingleLine: true)
         
-        let detail = FormViewController()
+        let detail = FormViewController(style: UITableViewStyle.Grouped)
         detail.setFormData(data)
         
         let detailNav = UINavigationController(rootViewController: detail)

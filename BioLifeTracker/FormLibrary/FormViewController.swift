@@ -11,9 +11,13 @@ import UIKit
 class FormViewController: UITableViewController {
     
     let defaultCellHeight: CGFloat = 44
-
+    
     var fields: FormFieldData? = nil
     var editable: Bool = true // Determines if the cells can be edited.
+    
+    // Variables for the amount of cell padding.
+    var cellHorizontalPadding: CGFloat = 0
+    var cellVerticalPadding: CGFloat = 0
     
     var nibNames = ["SingleLineTextCell", "MultiLineTextCell", "BooleanPickerCell"]
     
@@ -40,15 +44,19 @@ class FormViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        var cell = FormCell()
         if fields != nil {
             if let field = fields!.getFieldForIndex(indexPath) {
                 switch field.type {
                 case .TextSingleLine:
-                    return getSingleLineTextCell(field, indexPath: indexPath)
+                    cell = getSingleLineTextCell(field, indexPath: indexPath)
+                    break
                 case .TextMultiLine:
-                    return getMultiLineTextCell(field, indexPath: indexPath)
+                    cell = getMultiLineTextCell(field, indexPath: indexPath)
+                    break
                 case .PickerBoolean:
-                    return getBooleanPickerCell(field, indexPath: indexPath)
+                    cell = getBooleanPickerCell(field, indexPath: indexPath)
+                    break
                 case .PickerDate:
                     break
                 case .PickerDefault:
@@ -62,7 +70,11 @@ class FormViewController: UITableViewController {
                 }
             }
         }
-        return UITableViewCell()
+        
+        cell.horizontalPadding = cellHorizontalPadding
+        cell.verticalPadding = cellVerticalPadding
+        
+        return cell
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -76,10 +88,10 @@ class FormViewController: UITableViewController {
         return defaultCellHeight
     }
     
-    func getSingleLineTextCell(field: FormField, indexPath: NSIndexPath) -> UITableViewCell {
+    func getSingleLineTextCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
             nibNames[FormField.FieldType.TextSingleLine.rawValue]) as SingleLineTextCell
-
+        
         cell.label.text = field.label
         if let text = field.value as? String {
             cell.textField.text = text
@@ -92,7 +104,7 @@ class FormViewController: UITableViewController {
         return cell
     }
     
-    func getMultiLineTextCell(field: FormField, indexPath: NSIndexPath) -> UITableViewCell {
+    func getMultiLineTextCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
             nibNames[FormField.FieldType.TextMultiLine.rawValue]) as MultiLineTextCell
         
@@ -108,7 +120,7 @@ class FormViewController: UITableViewController {
         return cell
     }
     
-    func getBooleanPickerCell(field: FormField, indexPath: NSIndexPath) -> UITableViewCell {
+    func getBooleanPickerCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
             nibNames[FormField.FieldType.PickerBoolean.rawValue]) as BooleanPickerCell
         
