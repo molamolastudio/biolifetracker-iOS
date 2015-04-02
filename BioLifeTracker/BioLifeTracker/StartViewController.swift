@@ -48,12 +48,9 @@ class StartViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         self.btnLogin.readPermissions = ["public_profile", "email", "user_friends"]
         
         refreshView()
-        
-        println("after adding")
+
         self.view.addSubview(superVC.view)
-        println("after subview")
         superVC.view.frame = self.view.frame
-        println("what")
     }
 
     override func didReceiveMemoryWarning() {

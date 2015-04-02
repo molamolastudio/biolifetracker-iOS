@@ -10,9 +10,9 @@ import UIKit
 
 class MultiLineTextCell: FormCell {
     @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var textView: UITextView!
     
     override func getValueFromCell() -> AnyObject? {
-        return textField.text
+        return textView.text
     }
 }

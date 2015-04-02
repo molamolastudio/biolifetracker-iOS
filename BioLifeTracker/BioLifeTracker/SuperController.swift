@@ -15,18 +15,16 @@ class SuperController: UIViewController, UISplitViewControllerDelegate {
             let splitVC = SplitViewController()
     override func viewDidLoad() {
         
-        let master = UITableViewController()
-        master.view.backgroundColor = UIColor.redColor()
+        let master = MenuViewController()
         let masterNav = UINavigationController(rootViewController: master)
-        
-
         
         let data = FormFieldData()
         data.addTextCell(label: "Text1", hasSingleLine: true)
         data.addTextCell(label: "Text2", hasSingleLine: false)
         data.addBooleanCell(label: "YES?")
         
-        let detail = FormViewController(formData: data)
+        let detail = FormViewController()
+        detail.setFormData(data)
         
         let detailNav = UINavigationController(rootViewController: detail)
         

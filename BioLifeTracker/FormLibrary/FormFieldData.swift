@@ -78,6 +78,7 @@ class FormFieldData {
                 field.value = value
             }
             array.append(field)
+            fields[section] = array
         }
     }
     
@@ -94,6 +95,7 @@ class FormFieldData {
                 field.value = value
             }
             array.append(field)
+            fields[section] = array
         }
     }
     
@@ -110,6 +112,7 @@ class FormFieldData {
                 field.value = value
             }
             array.append(field)
+            fields[section] = array
         }
     }
     
@@ -131,6 +134,7 @@ class FormFieldData {
                 field.value = value
             }
             array.append(field)
+            fields[section] = array
         }
     }
     
@@ -147,6 +151,7 @@ class FormFieldData {
                 field.value = value
             }
             array.append(field)
+            fields[section] = array
         }
     }
     

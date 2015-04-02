@@ -17,7 +17,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="oUd-Hl-roO">
-                    <rect key="frame" x="77" y="290.5" width="9" height="19"/>
+                    <rect key="frame" x="77" y="290" width="508" height="19"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
@@ -27,6 +27,7 @@
                 <constraint firstAttribute="centerY" secondItem="1SJ-tq-aov" secondAttribute="centerY" id="3MR-qq-azT"/>
                 <constraint firstItem="1SJ-tq-aov" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="8AB-Fp-8hh"/>
                 <constraint firstAttribute="centerY" secondItem="oUd-Hl-roO" secondAttribute="centerY" id="Uch-sp-4fh"/>
+                <constraint firstAttribute="trailing" secondItem="oUd-Hl-roO" secondAttribute="trailing" constant="15" id="e4m-gu-ij3"/>
                 <constraint firstItem="1SJ-tq-aov" firstAttribute="centerY" secondItem="oUd-Hl-roO" secondAttribute="centerY" id="kPN-kW-h5t"/>
                 <constraint firstItem="oUd-Hl-roO" firstAttribute="leading" secondItem="1SJ-tq-aov" secondAttribute="trailing" constant="20" id="o0W-WD-zzW"/>
             </constraints>
@@ -34,6 +35,7 @@
                 <outlet property="label" destination="1SJ-tq-aov" id="GFN-f2-K26"/>
                 <outlet property="textField" destination="oUd-Hl-roO" id="sVm-bA-CA3"/>
             </connections>
+            <point key="canvasLocation" x="316" y="241"/>
         </view>
     </objects>
 </document>

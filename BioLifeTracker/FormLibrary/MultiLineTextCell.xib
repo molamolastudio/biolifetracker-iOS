@@ -17,24 +17,28 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Kdu-jb-Hx8">
-                    <rect key="frame" x="75" y="8" width="510" height="584"/>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="azk-hP-F7A">
+                    <rect key="frame" x="77" y="8" width="503" height="585"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="585" id="nPa-wd-Rtr"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Kdu-jb-Hx8" firstAttribute="leading" secondItem="EUV-il-Mtj" secondAttribute="trailing" constant="18" id="H10-T1-1gV"/>
-                <constraint firstAttribute="bottomMargin" secondItem="Kdu-jb-Hx8" secondAttribute="bottom" id="Oeu-gn-bsJ"/>
-                <constraint firstAttribute="topMargin" secondItem="Kdu-jb-Hx8" secondAttribute="top" id="bks-t2-hTc"/>
+                <constraint firstAttribute="trailing" secondItem="azk-hP-F7A" secondAttribute="trailing" constant="20" id="EE0-UR-Tbh"/>
+                <constraint firstAttribute="bottom" secondItem="azk-hP-F7A" secondAttribute="bottom" constant="7" id="Fms-uy-D4c"/>
+                <constraint firstItem="EUV-il-Mtj" firstAttribute="top" secondItem="azk-hP-F7A" secondAttribute="top" constant="5" id="pDb-bx-Hhf"/>
                 <constraint firstAttribute="topMargin" secondItem="EUV-il-Mtj" secondAttribute="top" constant="-5" id="uP2-0K-jjO"/>
                 <constraint firstItem="EUV-il-Mtj" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="v0j-yy-5fY"/>
-                <constraint firstAttribute="trailing" secondItem="Kdu-jb-Hx8" secondAttribute="trailing" constant="15" id="vm2-F2-GvI"/>
+                <constraint firstItem="azk-hP-F7A" firstAttribute="leading" secondItem="EUV-il-Mtj" secondAttribute="trailing" constant="20" id="zgp-D6-4C0"/>
             </constraints>
             <connections>
                 <outlet property="label" destination="EUV-il-Mtj" id="pIp-u3-GEq"/>
-                <outlet property="textField" destination="Kdu-jb-Hx8" id="a9I-7f-F8x"/>
+                <outlet property="textView" destination="azk-hP-F7A" id="Wep-Vi-fT5"/>
             </connections>
         </view>
     </objects>

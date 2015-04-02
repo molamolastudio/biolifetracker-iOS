@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FormViewController: UITableViewController, UITableViewDelegate, UITableViewDataSource {
+class FormViewController: UITableViewController {
 
     var fields: FormFieldData? = nil
     var editable: Bool = true // Determines if the cells can be edited.
@@ -16,14 +16,10 @@ class FormViewController: UITableViewController, UITableViewDelegate, UITableVie
     var nibNames = ["SingleLineTextCell", "MultiLineTextCell", "BooleanPickerCell"]
     
     override func viewDidLoad() {
-        println("form loaded")
+        super.viewDidLoad()
         for var i = 0; i < nibNames.count; i++ {
             self.tableView.registerNib(UINib(nibName: nibNames[i], bundle: nil), forCellReuseIdentifier: nibNames[i])
         }
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        self.tableView.reloadData()
     }
     
     func getFormData() -> [AnyObject?] {
@@ -37,9 +33,12 @@ class FormViewController: UITableViewController, UITableViewDelegate, UITableVie
         return result
     }
     
+    func setFormData(data: FormFieldData) {
+        fields = data
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if fields != nil {
-            println("fields not nil")
             if let field = fields!.getFieldForIndex(indexPath) {
                 switch field.type {
                 case .TextSingleLine:
@@ -86,11 +85,11 @@ class FormViewController: UITableViewController, UITableViewDelegate, UITableVie
         
         cell.label.text = field.label
         if let text = field.value as? String {
-            cell.textField.text = text
+            cell.textView.text = text
         }
         
         if editable {
-            cell.textField.enabled = true
+            cell.textView.editable = true
         }
         
         return cell
