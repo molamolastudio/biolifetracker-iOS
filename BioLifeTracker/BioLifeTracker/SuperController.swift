@@ -11,7 +11,7 @@
 
 import UIKit
 
-class SuperController: UIViewController, UISplitViewControllerDelegate {
+class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewDelegate {
     
     let splitVC = UISplitViewController()
     
@@ -19,6 +19,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate {
         
         let master = MenuViewController(style: UITableViewStyle.Grouped)
         master.title = "BioLifeTracker"
+        master.delegate = self
         let masterNav = UINavigationController(rootViewController: master)
         
         let data = FormFieldData(sections: 3)
@@ -45,5 +46,45 @@ class SuperController: UIViewController, UISplitViewControllerDelegate {
         
         self.view.addSubview(splitVC.view)
         splitVC.view.frame = self.view.frame
+    }
+    
+    func userDidSelectProjects() {
+        println("projects")
+    }
+    
+    func userDidSelectEthograms() {
+        
+    }
+    
+    func userDidSelectGraphs() {
+        
+    }
+    
+    func userDidSelectData() {
+        
+    }
+    
+    func userDidSelectSettings() {
+        
+    }
+    
+    func userDidSelectFacebookLogin() {
+        
+    }
+    
+    func userDidSelectGoogleLogin() {
+        
+    }
+    
+    func userDidSelectLogout() {
+        
+    }
+    
+    func userDidSelectSessions(project: Project) {
+        
+    }
+    
+    func userDidSelectObservations(project: Project, session: Session) {
+        
     }
 }

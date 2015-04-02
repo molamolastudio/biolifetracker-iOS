@@ -10,6 +10,8 @@ import UIKit
 
 class MenuViewController: UITableViewController {
     
+    var delegate: MenuViewDelegate? = nil
+    
     let cellIdentifier = "MenuCell"
     
     let userSection = ["Welcome"]
@@ -76,6 +78,72 @@ class MenuViewController: UITableViewController {
         return cell
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if delegate != nil {
+            if loggedIn {
+                switch indexPath.section {
+                case 1:
+                    switch indexPath.row {
+                    case 0:
+                        delegate!.userDidSelectProjects()
+                        break
+                    case 1:
+                        delegate!.userDidSelectEthograms()
+                        break
+                    case 2:
+                        delegate!.userDidSelectGraphs()
+                        break
+                    case 3:
+                        delegate!.userDidSelectData()
+                        break
+                    default:
+                        break
+                    }
+                case 2:
+                    delegate!.userDidSelectSettings()
+                    break
+                case 3:
+                    if indexPath.row == 1 {
+                        delegate!.userDidSelectLogout()
+                    }
+                    break
+                default:
+                    break
+                }
+            } else {
+                switch indexPath.section {
+                case 0:
+                    switch indexPath.row {
+                    case 0:
+                        delegate!.userDidSelectProjects()
+                        break
+                    case 1:
+                        delegate!.userDidSelectEthograms()
+                        break
+                    case 2:
+                        delegate!.userDidSelectGraphs()
+                        break
+                    case 3:
+                        delegate!.userDidSelectData()
+                        break
+                    default:
+                        break
+                    }
+                case 1:
+                    delegate!.userDidSelectSettings()
+                    break
+                case 2:
+                    if indexPath.row == 1 {
+                        delegate!.userDidSelectLogout()
+                    }
+                    break
+                default:
+                    break
+                }
+            }
+        }
+    }
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if loggedIn {
             return 4
@@ -88,7 +156,7 @@ class MenuViewController: UITableViewController {
         if loggedIn {
             switch section {
             case 0:
-                return 1
+                return userSection.count
             case 1:
                 return projectSection.count
             case 2:
