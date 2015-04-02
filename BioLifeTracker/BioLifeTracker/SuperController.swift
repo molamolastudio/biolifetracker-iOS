@@ -18,6 +18,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate {
     override func viewDidLoad() {
         
         let master = MenuViewController(style: UITableViewStyle.Grouped)
+        master.title = "BioLifeTracker"
         let masterNav = UINavigationController(rootViewController: master)
         
         let data = FormFieldData(sections: 3)
@@ -32,7 +33,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate {
         data.addTextCell(section: 2, label: "Sec2C", hasSingleLine: true)
         
         let detail = FormViewController(style: UITableViewStyle.Grouped)
+        detail.title = "Form"
         detail.setFormData(data)
+        detail.cellHorizontalPadding = 10
         
         let detailNav = UINavigationController(rootViewController: detail)
         

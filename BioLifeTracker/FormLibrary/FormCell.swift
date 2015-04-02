@@ -11,6 +11,7 @@ import UIKit
 class FormCell: UITableViewCell {
     let radius: CGFloat = 10
     
+    var sizeSet: Bool = false // Make sure padding is only applied once.
     var rounded: Bool = true
     
     var horizontalPadding: CGFloat = 0
@@ -20,10 +21,20 @@ class FormCell: UITableViewCell {
         return nil
     }
     
+    // Applies padding if it has not been applied yet.
     // Adds rounded corners if the cell is the top or bottom cell.
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.frame = CGRectOffset(self.frame, horizontalPadding, verticalPadding)
+        
+        // Apply padding
+        if !sizeSet {
+            self.frame = CGRectMake(
+                self.frame.origin.x + horizontalPadding,
+                self.frame.origin.y + verticalPadding,
+                self.frame.width - 2 * horizontalPadding,
+                self.frame.height - 2 * verticalPadding)
+            sizeSet = true
+        }
         
         if rounded {
             let frame = self.frame
