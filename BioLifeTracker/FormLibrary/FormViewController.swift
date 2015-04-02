@@ -20,7 +20,7 @@ class FormViewController: UITableViewController {
     var cellHorizontalPadding: CGFloat = 0
     var cellVerticalPadding: CGFloat = 0
     
-    var nibNames = ["SingleLineTextCell", "MultiLineTextCell", "BooleanPickerCell"]
+    var nibNames = ["SingleLineTextCell", "MultiLineTextCell", "BooleanPickerCell", "DatePickerCell", "DefaultPickerCell"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,8 +59,10 @@ class FormViewController: UITableViewController {
                     cell = getBooleanPickerCell(field, indexPath: indexPath)
                     break
                 case .PickerDate:
+                    cell = getDatePickerCell(field, indexPath: indexPath)
                     break
                 case .PickerDefault:
+                    cell = getDefaultPickerCell(field, indexPath: indexPath)
                     break
                 case .PickerCustom:
                     break
@@ -81,8 +83,10 @@ class FormViewController: UITableViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if fields != nil {
             if let type = fields!.getFieldTypeForIndex(indexPath) {
-                if type == FormField.FieldType.TextMultiLine {
-                    return defaultCellHeight * 3
+                if type == FormField.FieldType.TextMultiLine ||
+                    type == FormField.FieldType.PickerDate ||
+                    type == FormField.FieldType.PickerDefault {
+                        return defaultCellHeight * 3
                 }
             }
         }
@@ -134,6 +138,41 @@ class FormViewController: UITableViewController {
             cell.booleanSwitch.enabled = true
         }
         
+        return cell
+    }
+    
+    func getDatePickerCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(
+            nibNames[FormField.FieldType.PickerDate.rawValue]) as DatePickerCell
+        
+        cell.label.text = field.label
+        if let value = field.value as? NSDate {
+            cell.datePicker.date = value
+        }
+        
+        if editable {
+            cell.datePicker.enabled = true
+        }
+        
+        return cell
+    }
+    
+    func getDefaultPickerCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(
+            nibNames[FormField.FieldType.PickerDefault.rawValue]) as DefaultPickerCell
+        
+        cell.label.text = field.label
+        cell.values = field.pickerValues
+        cell.picker.dataSource = cell
+        cell.picker.delegate = cell
+        
+        if let value = field.value as? Int {
+            cell.picker.selectRow(value, inComponent: 0, animated: true)
+        }
+        
+        if editable {
+            cell.picker.userInteractionEnabled = true
+        }
         return cell
     }
     

@@ -129,6 +129,7 @@ class FormFieldData {
             }
             
             field.label = label
+            field.pickerValues = pickerValues
             
             if value != nil {
                 field.value = value

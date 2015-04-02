@@ -18,6 +18,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     let newProject = FormViewController(style: UITableViewStyle.Grouped)
     let newIndividual = FormViewController(style: UITableViewStyle.Grouped)
     
+    let ethogramPickerValues = ["Ethogram 1", "Ethogram 2"]
+    
     override func viewDidLoad() {
         
         setupMenu()
@@ -55,7 +57,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func getFormDataForNewProject() -> FormFieldData {
         let data = FormFieldData(sections: 2)
         data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
-        data.addTextCell(section: 0, label: "Ethogram", hasSingleLine: true) // Custom picker cell
+        data.addPickerCell(section: 0, label: "Ethogram", pickerValues: ethogramPickerValues, isCustomPicker: false)
         data.setSectionTitle(1, title: "Members")
         data.addTextCell(section: 1, label: "Enter Member Here", hasSingleLine: true) // To be decided
         return data
