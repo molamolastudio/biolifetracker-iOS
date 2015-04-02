@@ -8,11 +8,11 @@
 
 import UIKit
 
-class MultiLineTextCell: UITableViewCell, FormCell {
+class MultiLineTextCell: FormCell {
     @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var textView: UITextView!
     
-    func getValueFromCell() -> AnyObject? {
-        return textField.text
+    override func getValueFromCell() -> AnyObject? {
+        return textView.text
     }
 }

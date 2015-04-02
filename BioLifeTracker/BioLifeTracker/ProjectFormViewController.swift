@@ -108,7 +108,7 @@ class ProjectFormViewController: UITableViewController, CustomPickerPopupDelegat
         picker!.view.frame = self.view.frame
     }
     
-    // EthogramPickerDelegate METHOD
+    // CustomPickerPopupDelegate METHOD
     func pickerDidDismiss(selectedRow: Int?) {
         picker!.view.removeFromSuperview()
         

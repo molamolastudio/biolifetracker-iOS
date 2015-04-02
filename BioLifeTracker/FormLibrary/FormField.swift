@@ -26,11 +26,17 @@ class FormField {
     
     var type: FieldType
     var label: String
-    var values: [AnyObject?] = []
+    var value: AnyObject?
+    var pickerValues: [AnyObject?] = []
+    
+    init() {
+        self.type = FieldType.TextSingleLine
+        self.label = ""
+    }
     
     init(type: FieldType) {
         self.type = type
-        label = ""
+        self.label = ""
     }
     
     init(type: FieldType, label: String) {
@@ -38,9 +44,9 @@ class FormField {
         self.label = label
     }
     
-    init(type: FieldType, label: String, values: [AnyObject?]) {
+    init(type: FieldType, label: String, pickerValues: [AnyObject?]) {
         self.type = type
         self.label = label
-        self.values = values
+        self.pickerValues = pickerValues
     }
 }
