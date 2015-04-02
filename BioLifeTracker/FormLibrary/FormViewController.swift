@@ -14,6 +14,7 @@ class FormViewController: UITableViewController {
     
     var fields: FormFieldData? = nil
     var editable: Bool = true // Determines if the cells can be edited.
+    var roundedCells: Bool = true // Determines if the cells have rounded corners.
     
     // Variables for the amount of cell padding.
     var cellHorizontalPadding: CGFloat = 0

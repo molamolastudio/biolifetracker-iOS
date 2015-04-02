@@ -36,6 +36,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate {
         detail.title = "Form"
         detail.setFormData(data)
         detail.cellHorizontalPadding = 10
+        detail.roundedCells = true
         
         let detailNav = UINavigationController(rootViewController: detail)
         
