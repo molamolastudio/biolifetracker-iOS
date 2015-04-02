@@ -14,32 +14,17 @@ import UIKit
 class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewDelegate {
     
     let splitVC = UISplitViewController()
+    let menu = MenuViewController(style: UITableViewStyle.Grouped)
+    let newProject = FormViewController(style: UITableViewStyle.Grouped)
+    let newIndividual = FormViewController(style: UITableViewStyle.Grouped)
     
     override func viewDidLoad() {
         
-        let master = MenuViewController(style: UITableViewStyle.Grouped)
-        master.title = "BioLifeTracker"
-        master.delegate = self
-        let masterNav = UINavigationController(rootViewController: master)
+        setupMenu()
+        setupNewProject()
         
-        let data = FormFieldData(sections: 3)
-        data.addTextCell(label: "Text1", hasSingleLine: true)
-        data.addTextCell(label: "Text2", hasSingleLine: false)
-        data.addBooleanCell(label: "YES?")
-        data.addTextCell(section: 1, label: "Sec2A", hasSingleLine: true)
-        data.addTextCell(section: 1, label: "Sec2B", hasSingleLine: true)
-        data.addTextCell(section: 1, label: "Sec2C", hasSingleLine: true)
-        data.addTextCell(section: 2, label: "Sec2A", hasSingleLine: true)
-        data.addTextCell(section: 2, label: "Sec2B", hasSingleLine: true)
-        data.addTextCell(section: 2, label: "Sec2C", hasSingleLine: true)
-        
-        let detail = FormViewController(style: UITableViewStyle.Grouped)
-        detail.title = "Form"
-        detail.setFormData(data)
-        detail.cellHorizontalPadding = 10
-        detail.roundedCells = true
-        
-        let detailNav = UINavigationController(rootViewController: detail)
+        let masterNav = UINavigationController(rootViewController: menu)
+        let detailNav = UINavigationController(rootViewController: newProject)
         
         splitVC.viewControllers = [masterNav, detailNav]
         splitVC.delegate = self
@@ -48,8 +33,48 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         splitVC.view.frame = self.view.frame
     }
     
+    func setupMenu() {
+        menu.title = "BioLifeTracker"
+        menu.delegate = self
+    }
+    
+    func setupNewProject() {
+        newProject.title = "New Project"
+        newProject.setFormData(getFormDataForNewProject())
+        newProject.cellHorizontalPadding = 10
+        newProject.roundedCells = true
+    }
+    
+    func setupNewIndividual() {
+        newIndividual.title = "New Individual"
+        newIndividual.setFormData(getFormDataForNewIndividual())
+        newIndividual.cellHorizontalPadding = 10
+        newIndividual.roundedCells = true
+    }
+    
+    func getFormDataForNewProject() -> FormFieldData {
+        let data = FormFieldData(sections: 2)
+        data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
+        data.addTextCell(section: 0, label: "Ethogram", hasSingleLine: true) // Custom picker cell
+        data.setSectionTitle(1, title: "Members")
+        data.addTextCell(section: 1, label: "Enter Member Here", hasSingleLine: true) // To be decided
+        return data
+    }
+    
+    func getFormDataForNewIndividual() -> FormFieldData {
+        let data = FormFieldData(sections: 1)
+        data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
+        data.addTextCell(section: 0, label: "Tags", hasSingleLine: false)
+        data.addTextCell(section: 1, label: "Photos", hasSingleLine: true) // Photo picker cell
+        return data
+    }
+    
     func userDidSelectProjects() {
         println("projects")
+        let data = newProject.getFormData()
+        let name = data[0] as String
+        let ethogram = Ethogram(name: data[1] as String)
+        let project = Project(name: name, ethogram: ethogram)
     }
     
     func userDidSelectEthograms() {
@@ -81,6 +106,10 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func userDidSelectSessions(project: Project) {
+        
+    }
+    
+    func userDidSelectIndividuals(project: Project) {
         
     }
     

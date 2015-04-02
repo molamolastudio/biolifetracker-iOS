@@ -18,5 +18,6 @@ protocol MenuViewDelegate {
     func userDidSelectGoogleLogin()
     func userDidSelectLogout()
     func userDidSelectSessions(project: Project)
+    func userDidSelectIndividuals(project: Project)
     func userDidSelectObservations(project: Project, session: Session)
 }
