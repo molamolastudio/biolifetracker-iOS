@@ -8,6 +8,26 @@
 
 import Foundation
 
-struct UserAuthService {
- 
+class UserAuthService {
+    private var _user: User = User(name: "Default", email: "Default")
+    private var _accessToken: String = ""
+    
+    var user: User {
+        get { return _user }
+    }
+    var accessToken: String {
+        get { return _accessToken }
+    }
+    
+    class var sharedInstance: UserAuthService {
+        struct Singleton {
+            static let instance = UserAuthService()
+        }
+        return Singleton.instance
+    }
+    
+    func setUserAuth(user: User, accessToken: String) {
+        self._user = user
+        self._accessToken = accessToken
+    }
 }
