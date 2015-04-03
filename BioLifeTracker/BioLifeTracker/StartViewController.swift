@@ -70,6 +70,10 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     let messageNoProjects = "You don't have any projects."
     let messageNoSessions = "You don't have any sessions."
     
+    
+    let superVC = SuperController()
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -83,9 +87,9 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         /************************************/
         
         refreshView()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
+
+        self.view.addSubview(superVC.view)
+        superVC.view.frame = self.view.frame
     }
 
     override func didReceiveMemoryWarning() {
