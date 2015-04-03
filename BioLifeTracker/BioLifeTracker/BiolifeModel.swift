@@ -9,14 +9,15 @@
 import Foundation
 
 class BiolifeModel: NSObject, NSCoding {
+    var id: String?
     var createdAt: NSDate
     var updatedAt: NSDate
     var createdBy: User
     var updatedBy: User
     
     override init() {
-        createdBy = Data.currentUser
-        updatedBy = Data.currentUser
+        createdBy = UserAuthService.sharedInstance.user
+        updatedBy = UserAuthService.sharedInstance.user
         createdAt = NSDate()
         updatedAt = NSDate()
         super.init()

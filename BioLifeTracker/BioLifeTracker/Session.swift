@@ -72,9 +72,16 @@ class Session: BiolifeModel {
 
 extension Session: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
         // project attribute is allocated when project is initialized
         aCoder.encodeObject(typeValue, forKey: "typeValue")
         aCoder.encodeObject(observations, forKey: "observations")
         aCoder.encodeObject(individuals, forKey: "individuals")
     }
+}
+
+extension Session: CloudStorable {
+    class var classUrl: String { return "session" }
+    func upload() { }
+    func getDependencies() -> [CloudStorable] { return [] }
 }

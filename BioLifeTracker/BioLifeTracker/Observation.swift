@@ -54,7 +54,6 @@ class Observation: BiolifeModel {
     }
     
     required init(coder aDecoder: NSCoder) {
-        
         var enumerator: NSEnumerator
         
         self.session = aDecoder.decodeObjectForKey("session") as Session
@@ -86,6 +85,7 @@ class Observation: BiolifeModel {
 
 extension Observation: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
         aCoder.encodeObject(session, forKey: "session")
         aCoder.encodeObject(state, forKey: "state")
         aCoder.encodeObject(timestamp, forKey: "timestamp")
@@ -97,4 +97,10 @@ extension Observation: NSCoding {
         aCoder.encodeObject(individual, forKey: "individual")
         aCoder.encodeObject(information, forKey: "information")
     }
+}
+
+extension Observation: CloudStorable {
+    class var classUrl: String { return "observation" }
+    func upload() { }
+    func getDependencies() -> [CloudStorable] { return [] }
 }

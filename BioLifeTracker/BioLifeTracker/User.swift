@@ -9,22 +9,22 @@
 import Foundation
 
 class User: NSObject, NSCoding {
-    var id: String          // Use email or object id
+    var email: String
     var name: String
     
-    init(id: String, name: String) {
-        self.id = id
+    init(name: String, email: String) {
         self.name = name
+        self.email = email
     }
     
     required init(coder aDecoder: NSCoder) {
-        self.id = aDecoder.decodeObjectForKey("id") as String
+        self.email = aDecoder.decodeObjectForKey("email") as String
         self.name = aDecoder.decodeObjectForKey("name") as String
         super.init()
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(id, forKey: "id")
+        aCoder.encodeObject(email, forKey: "email")
         aCoder.encodeObject(name, forKey: "name")
     }
     
