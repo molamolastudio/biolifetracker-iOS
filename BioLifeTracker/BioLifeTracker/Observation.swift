@@ -98,3 +98,9 @@ extension Observation: NSCoding {
         aCoder.encodeObject(information, forKey: "information")
     }
 }
+
+extension Observation: CloudStorable {
+    class var classUrl: String { return "observation" }
+    func upload() { }
+    func getDependencies() -> [CloudStorable] { return [] }
+}

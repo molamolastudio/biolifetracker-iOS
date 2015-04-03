@@ -76,3 +76,9 @@ extension Individual: NSCoding {
         aCoder.encodeObject(project, forKey: "project")
     }
 }
+
+extension Individual: CloudStorable {
+    class var classUrl: String { return "Individual" }
+    func upload() { }
+    func getDependencies() -> [CloudStorable] { return [] }
+}

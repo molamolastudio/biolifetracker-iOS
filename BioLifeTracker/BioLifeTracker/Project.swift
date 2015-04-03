@@ -19,8 +19,8 @@ class Project: BiolifeModel {
     // Default initializer
     override init() {
         name = ""
-        admins = [Data.currentUser]
-        members = [Data.currentUser]
+        admins = [UserAuthService.sharedInstance.user]
+        members = [UserAuthService.sharedInstance.user]
         ethogram = Ethogram()
         sessions = []
         individuals = []
@@ -31,8 +31,8 @@ class Project: BiolifeModel {
         self.init()
         self.name = name
         self.ethogram = ethogram
-        self.admins = [Data.currentUser]
-        self.members = [Data.currentUser]
+        self.admins = [UserAuthService.sharedInstance.user]
+        self.members = [UserAuthService.sharedInstance.user]
         self.sessions = []
     }
     
@@ -170,3 +170,10 @@ extension Project: NSCoding {
         aCoder.encodeObject(individuals, forKey: "individuals")
     }
 }
+
+extension Project: CloudStorable {
+    class var classUrl: String { return "project" }
+    func upload() { }
+    func getDependencies() -> [CloudStorable] { return [] }
+}
+

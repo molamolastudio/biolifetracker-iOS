@@ -110,3 +110,9 @@ extension BehaviourState: NSCoding {
         aCoder.encodeObject(photoUrls, forKey: "photoUrls")
     }
 }
+
+extension BehaviourState: CloudStorable {
+    class var classUrl: String { return "behaviourState" }
+    func upload() { }
+    func getDependencies() -> [CloudStorable] { return [] }
+}

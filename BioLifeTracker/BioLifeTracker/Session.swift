@@ -79,3 +79,9 @@ extension Session: NSCoding {
         aCoder.encodeObject(individuals, forKey: "individuals")
     }
 }
+
+extension Session: CloudStorable {
+    class var classUrl: String { return "session" }
+    func upload() { }
+    func getDependencies() -> [CloudStorable] { return [] }
+}
