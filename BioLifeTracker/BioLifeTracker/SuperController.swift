@@ -25,8 +25,27 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         setupMenu()
         setupNewProject()
         
+        let data = FormFieldData(sections: 3)
+        
+        data.setSectionTitle(0, title: "Text Cells")
+        data.setSectionTitle(1, title: "Boolean Cells")
+        data.setSectionTitle(2, title: "Picker Cells")
+        
+        data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
+        data.addTextCell(section: 0, label: "Notes", hasSingleLine: false, value: "I have no notes.")
+        
+        data.addBooleanCell(section: 1, label: "Human?")
+        
+        data.addDatePickerCell(section: 2, label: "Birthdate")
+        data.addPickerCell(section: 2, label: "Options", pickerValues: ["Good", "Neutral", "Evil"], isCustomPicker: false)
+        
+        let controller = FormViewController(style: UITableViewStyle.Grouped)
+        controller.setFormData(data)
+        controller.cellHorizontalPadding = 10
+        controller.roundedCells = true
+        
         let masterNav = UINavigationController(rootViewController: menu)
-        let detailNav = UINavigationController(rootViewController: newProject)
+        let detailNav = UINavigationController(rootViewController: controller)
         
         splitVC.viewControllers = [masterNav, detailNav]
         splitVC.delegate = self

@@ -15,7 +15,7 @@ class ButtonCell: FormCell, FormPopupDelegate {
     
     var selectedValue: AnyObject? = nil
     
-    func setSelectorForButton(target: AnyObject?, action: Selector) {
+    func setSelectorForButton(target: FormPopupController, action: Selector) {
         button.addTarget(target, action: action, forControlEvents: UIControlEvents.TouchUpInside)
     }
     

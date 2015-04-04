@@ -29,6 +29,7 @@ class FormField {
     var label: String
     var value: AnyObject?
     var pickerValues: [String] = []
+    var buttonValues: [AnyObject?] = []
     
     init() {
         self.type = FieldType.TextSingleLine

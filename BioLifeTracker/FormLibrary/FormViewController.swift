@@ -20,7 +20,7 @@ class FormViewController: UITableViewController {
     var cellHorizontalPadding: CGFloat = 0
     var cellVerticalPadding: CGFloat = 0
     
-    var nibNames = ["SingleLineTextCell", "MultiLineTextCell", "BooleanPickerCell", "DatePickerCell", "DefaultPickerCell"]
+    var nibNames = ["SingleLineTextCell", "MultiLineTextCell", "BooleanPickerCell", "DatePickerCell", "DefaultPickerCell", "CustomPickerCell", "PhotoPickerCell", "ButtonCell"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,9 +102,7 @@ class FormViewController: UITableViewController {
             cell.textField.text = text
         }
         
-        if editable {
-            cell.textField.enabled = true
-        }
+        cell.textField.enabled = editable
         
         return cell
     }
@@ -118,9 +116,7 @@ class FormViewController: UITableViewController {
             cell.textView.text = text
         }
         
-        if editable {
-            cell.textView.editable = true
-        }
+        cell.textView.editable = editable
         
         return cell
     }
@@ -134,9 +130,7 @@ class FormViewController: UITableViewController {
             cell.booleanSwitch.on = value
         }
         
-        if editable {
-            cell.booleanSwitch.enabled = true
-        }
+        cell.booleanSwitch.enabled = editable
         
         return cell
     }
@@ -150,9 +144,7 @@ class FormViewController: UITableViewController {
             cell.datePicker.date = value
         }
         
-        if editable {
-            cell.datePicker.enabled = true
-        }
+        cell.datePicker.enabled = editable
         
         return cell
     }
@@ -170,9 +162,26 @@ class FormViewController: UITableViewController {
             cell.picker.selectRow(value, inComponent: 0, animated: true)
         }
         
-        if editable {
-            cell.picker.userInteractionEnabled = true
+        cell.picker.userInteractionEnabled = editable
+        
+        return cell
+    }
+    
+    func getButtonCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(
+            nibNames[FormField.FieldType.Button.rawValue]) as ButtonCell
+        
+        cell.label.text = field.label
+        
+        if let target = field.buttonValues[1] as? FormPopupController {
+            if let action = field.buttonValues[2] as? String {
+                target.delegate = cell
+                cell.setSelectorForButton(target, action: Selector(action))
+            }
         }
+        
+        cell.button.enabled = editable
+        
         return cell
     }
     

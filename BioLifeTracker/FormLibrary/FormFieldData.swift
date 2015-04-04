@@ -156,6 +156,20 @@ class FormFieldData {
         }
     }
     
+    func addButtonCell(section: Int = 0, label: String, buttonTitle: String, target: FormPopupController? = nil, action: String? = nil) {
+        if let var array = fields[section] {
+            var field = FormField()
+            
+            field.type = FormField.FieldType.Button
+            field.label = label
+            
+            field.buttonValues = [buttonTitle, target, action]
+            
+            array.append(field)
+            fields[section] = array
+        }
+    }
+    
     // Returns the field for the specified index path in this form.
     // If the section or row does not exist, returns nil.
     func getFieldForIndex(index: NSIndexPath) -> FormField? {
