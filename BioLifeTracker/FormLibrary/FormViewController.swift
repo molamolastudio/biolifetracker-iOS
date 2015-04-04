@@ -8,9 +8,10 @@
 
 import UIKit
 
-class FormViewController: UITableViewController {
+class FormViewController: UITableViewController, CustomPickerPopupDelegate {
     
     let defaultCellHeight: CGFloat = 44
+    let popup = CustomPickerPopup()
     
     var fields: FormFieldData? = nil
     var editable: Bool = true // Determines if the cells can be edited.
@@ -44,6 +45,21 @@ class FormViewController: UITableViewController {
         fields = data
     }
     
+    func showPicker(sender: UIButton) {
+        if let cell = sender.superview as? ButtonCell {
+            popup.pickerDelegate = self
+            
+            popup.data = cell.pickerValues
+            
+            self.view.addSubview(popup.view)
+            popup.view.frame = self.view.frame
+        }
+    }
+    
+    func pickerDidDismiss(selectedIndex: Int?) {
+        popup.view.removeFromSuperview()
+    }
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = FormCell()
         if fields != nil {
@@ -65,6 +81,7 @@ class FormViewController: UITableViewController {
                     cell = getDefaultPickerCell(field, indexPath: indexPath)
                     break
                 case .PickerCustom:
+                    cell = getCustomPickerCell(field, indexPath: indexPath)
                     break
                 case .PickerPhoto:
                     break
@@ -166,6 +183,25 @@ class FormViewController: UITableViewController {
         }
         
         cell.picker.userInteractionEnabled = editable
+        
+        return cell
+    }
+    
+    // Creates a ButtonCell with label, button title and target as specified in the FormField.
+    // Sets the new cell as the given target's delegate.
+    func getCustomPickerCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(
+            nibNames[FormField.FieldType.Button.rawValue]) as ButtonCell
+        
+        cell.label.text = field.label
+        cell.button.setTitle("Select", forState: .Normal)
+        cell.pickerValues = field.pickerValues
+        
+        cell.setSelectorForButton(self, action: Selector("showPicker:"))
+        
+        popup.delegate = cell
+        
+        cell.button.enabled = editable
         
         return cell
     }

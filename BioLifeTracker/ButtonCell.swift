@@ -13,10 +13,11 @@ class ButtonCell: FormCell, FormPopupDelegate {
     @IBOutlet weak var selectedLabel: UILabel!
     @IBOutlet weak var button: UIButton!
     
+    var pickerValues: [String] = []
     var selectedValue: AnyObject? = nil
     
     func setSelectorForButton(target: AnyObject, action: Selector) {
-        button.addTarget(target, action: action, forControlEvents: UIControlEvents.TouchUpInside)
+        button.addTarget(target, action: action, forControlEvents: .TouchUpInside)
     }
     
     func userDidSelectValue(value: AnyObject?, valueAsString: String?) {
