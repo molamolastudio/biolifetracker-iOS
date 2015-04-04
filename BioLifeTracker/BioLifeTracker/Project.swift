@@ -9,36 +9,43 @@
 import Foundation
 
 class Project: BiolifeModel, Storable {
-    var name: String
-    var ethogram: Ethogram
-    var admins: [User]
-    var members: [User]
-    var sessions: [Session]
-    var individuals: [Individual]
+    private var _name: String
+    private var _ethogram: Ethogram
+    private var _admins: [User]
+    private var _members: [User]
+    private var _sessions: [Session]
+    private var _individuals: [Individual]
+    
+    var name: String { get { return _name } }
+    var ethogram: Ethogram { get { return _ethogram } }
+    var admins: [User] { get { return _admins } }
+    var members: [User] { get { return _members } }
+    var sessions: [Session] { get { return _sessions } }
+    var individual: [Individual] { get { return _individuals } }
     
     // Default initializer
     override init() {
-        name = ""
-        admins = [UserAuthService.sharedInstance.user]
-        members = [UserAuthService.sharedInstance.user]
-        ethogram = Ethogram()
-        sessions = []
-        individuals = []
+        _name = ""
+        _admins = [UserAuthService.sharedInstance.user]
+        _members = [UserAuthService.sharedInstance.user]
+        _ethogram = Ethogram()
+        _sessions = []
+        _individuals = []
         super.init()
     }
     
     convenience init(name: String, ethogram: Ethogram) {
         self.init()
-        self.name = name
-        self.ethogram = ethogram
-        self.admins = [UserAuthService.sharedInstance.user]
-        self.members = [UserAuthService.sharedInstance.user]
+        self._name = name
+        self._ethogram = ethogram
+        self._admins = [UserAuthService.sharedInstance.user]
+        self._members = [UserAuthService.sharedInstance.user]
         self.saveToArchives()
     }
     
     func getIndexOfSession(session: Session) -> Int? {
-        for var i = 0; i < sessions.count; i++ {
-            if sessions[i] == session {
+        for var i = 0; i < _sessions.count; i++ {
+            if _sessions[i] == session {
                 return i
             }
         }
@@ -46,84 +53,84 @@ class Project: BiolifeModel, Storable {
     }
     
     func getDisplayName() -> String {
-        return name
+        return _name
     }
     
     /******************Project*********************/
     func updateName(name: String) {
-        Project.deleteFromArchives(self.name)
-        self.name = name
+        Project.deleteFromArchives(self._name)
+        self._name = name
         updateProject()
     }
     
     func updateEthogram(ethogram: Ethogram) {
-        self.ethogram = ethogram
+        self._ethogram = ethogram
         updateProject()
     }
     
     /********************Admins*******************/
 
     func addAdmins(admins: [User]) {
-        self.admins += admins
+        self._admins += admins
         // Admins are naturally members of a project
-        self.members += admins
+        self._members += admins
         updateProject()
     }
     
-    func deleteAdmins(adminIndexes: [Int]) {
+    func removeAdmins(adminIndexes: [Int]) {
         for index in adminIndexes {
-            self.admins.removeAtIndex(index)
+            self._admins.removeAtIndex(index)
         }
         updateProject()
     }
     
     /********************Memberss*******************/
     func addMembers(members: [User]) {
-        self.members += members
+        self._members += members
         updateProject()
     }
     
-    func deleteMembers(memberIndexes: [Int]) {
+    func removeMembers(memberIndexes: [Int]) {
         for index in memberIndexes {
-            self.members.removeAtIndex(index)
+            self._members.removeAtIndex(index)
         }
         updateProject()
     }
     
     /******************Session*******************/
     func addSessions(sessions: [Session]) {
-        self.sessions += sessions
+        self._sessions += sessions
         updateProject()
     }
     
     func updateSession(index: Int, updatedSession: Session) {
-        self.sessions.removeAtIndex(index)
-        self.sessions.insert(updatedSession, atIndex: index)
+        self._sessions.removeAtIndex(index)
+        self._sessions.insert(updatedSession, atIndex: index)
         updateProject()
     }
     
-    func deleteSessions(sessionIndexes: [Int]) {
+    func removeSessions(sessionIndexes: [Int]) {
         for index in sessionIndexes {
-            self.sessions.removeAtIndex(index)
+            self._sessions.removeAtIndex(index)
         }
         updateProject()
     }
     
     /******************Individual*******************/
     func addIndividuals(individuals: [Individual]) {
-        self.individuals += individuals
+        self._individuals += individuals
         updateProject()
     }
     
     func updateIndividual(index: Int, updatedIndividual: Individual) {
-        self.individuals.removeAtIndex(index)
-        self.individuals.insert(updatedIndividual, atIndex: index)
+        self._individuals.removeAtIndex(index)
+        self._individuals.insert(updatedIndividual, atIndex: index)
         updateProject()
     }
     
-    func deleteIndividuals(individualIndexes: [Int]) {
+    func removeIndividuals(individualIndexes: [Int]) {
         for index in individualIndexes {
-            self.individuals.removeAtIndex(index)
+            self._individuals.removeAtIndex(index)
         }
         updateProject()
     }
@@ -144,7 +151,7 @@ class Project: BiolifeModel, Storable {
             
             let data = NSMutableData();
             let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
-            archiver.encodeObject(self, forKey: name)
+            archiver.encodeObject(self, forKey: _name)
             archiver.finishEncoding()
             let success = data.writeToFile(path, atomically: true)
         }
@@ -199,30 +206,30 @@ class Project: BiolifeModel, Storable {
     required init(coder aDecoder: NSCoder) {
         var enumerator: NSEnumerator
 
-        self.name = aDecoder.decodeObjectForKey("name") as String
-        self.ethogram = aDecoder.decodeObjectForKey("ethogram") as Ethogram
+        self._name = aDecoder.decodeObjectForKey("name") as String
+        self._ethogram = aDecoder.decodeObjectForKey("ethogram") as Ethogram
         
         let objectAdmins: AnyObject = aDecoder.decodeObjectForKey("admins")!
         enumerator = objectAdmins.objectEnumerator()
-        self.admins = Array<User>()
+        self._admins = Array<User>()
         while true {
             let admin = enumerator.nextObject() as User?
             if admin == nil {
                 break
             } else {
-                self.admins.append(admin!)
+                self._admins.append(admin!)
             }
         }
         
         let objectMembers: AnyObject = aDecoder.decodeObjectForKey("members")!
         enumerator = objectMembers.objectEnumerator()
-        self.members = Array<User>()
+        self._members = Array<User>()
         while true {
             let user = enumerator.nextObject() as User?
             if user == nil {
                 break
             } else {
-                self.members.append(user!)
+                self._members.append(user!)
             }
         }
         
@@ -230,7 +237,7 @@ class Project: BiolifeModel, Storable {
         
         enumerator = objectSessions.objectEnumerator()
         
-        self.sessions = Array<Session>()
+        self._sessions = Array<Session>()
         var session: Session?
 
         while true {
@@ -239,15 +246,15 @@ class Project: BiolifeModel, Storable {
             if session == nil {
                 break
             }
-
-            self.sessions.append(session!)
+            
+            self._sessions.append(session!)
         }
         
         let objectIndividuals: AnyObject = aDecoder.decodeObjectForKey("individuals")!
         
         enumerator = objectIndividuals.objectEnumerator()
         
-        self.individuals = Array<Individual>()
+        self._individuals = Array<Individual>()
         var individual: Individual?
         
         while true {
@@ -257,13 +264,13 @@ class Project: BiolifeModel, Storable {
                 break
             }
             
-            self.individuals.append(individual!)
+            self._individuals.append(individual!)
         }
         
         super.init(coder: aDecoder)
         
-        for session in sessions {
-            session.project = self
+        for session in self._sessions {
+            session.setProject(self)
         }
     }
 }
@@ -271,12 +278,12 @@ class Project: BiolifeModel, Storable {
 extension Project: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)
-        aCoder.encodeObject(name, forKey: "name")
-        aCoder.encodeObject(ethogram, forKey: "ethogram")
-        aCoder.encodeObject(admins, forKey: "admins")
-        aCoder.encodeObject(members, forKey: "members")
-        aCoder.encodeObject(sessions, forKey: "sessions")
-        aCoder.encodeObject(individuals, forKey: "individuals")
+        aCoder.encodeObject(_name, forKey: "name")
+        aCoder.encodeObject(_ethogram, forKey: "ethogram")
+        aCoder.encodeObject(_admins, forKey: "admins")
+        aCoder.encodeObject(_members, forKey: "members")
+        aCoder.encodeObject(_sessions, forKey: "sessions")
+        aCoder.encodeObject(_individuals, forKey: "individuals")
     }
 }
 

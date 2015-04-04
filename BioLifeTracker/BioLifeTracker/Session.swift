@@ -15,89 +15,113 @@ enum SessionType: String {
 
 class Session: BiolifeModel {
     // Stored properties
-    var project: Project
-    var typeValue: String
-    var observations: [Observation]
-    var individuals: [Individual]
+    private var _project: Project!
+    private var _typeValue: String
+    private var _observations: [Observation]
+    private var _individuals: [Individual]
     
-    var type: SessionType { return SessionType(rawValue: typeValue)! }
+    var type: SessionType { return SessionType(rawValue: _typeValue)! }
+    
+    var project: Project { get { return _project } }
+    var observations: [Observation] { get { return _observations } }
+    var individuals: [Individual] { get { return _individuals } }
     
     init(project: Project, type: SessionType) {
-        self.project = project
-        self.typeValue = type.rawValue
-        self.observations = []
-        self.individuals = []
+        self._project = project
+        self._typeValue = type.rawValue
+        self._observations = []
+        self._individuals = []
         super.init()
     }
     
     func getDisplayName() -> String {
-        if let index = project.getIndexOfSession(self) {
+        if let index = _project.getIndexOfSession(self) {
             return type.rawValue + " " + String()
         }
         return ""
     }
     
     /******************Observation*******************/
+    
+    // To be called by Project instance during decoding
+    func setProject(project: Project) {
+        self._project = project
+    }
+    
     func addObservation(observations: [Observation]) {
-        self.observations += observations
+        self._observations += observations
+        updateSession()
     }
     
     func updateObservation(index: Int, updatedObservation: Observation) {
-        self.observations.removeAtIndex(index)
-        self.observations.insert(updatedObservation, atIndex: index)
+        self._observations.removeAtIndex(index)
+        self._observations.insert(updatedObservation, atIndex: index)
+        updateSession()
     }
     
     func deleteObservations(observationIndexes: [Int]) {
         for index in observationIndexes {
-            self.observations.removeAtIndex(index)
+            self._observations.removeAtIndex(index)
         }
+        updateSession()
     }
     
     /******************Individual*******************/
     func addIndividuals(individuals: [Individual]) {
-        self.individuals += individuals
+        self._individuals += individuals
+        updateSession()
     }
     
     func updateIndividual(index: Int, updatedIndividual: Individual) {
-        self.individuals.removeAtIndex(index)
-        self.individuals.insert(updatedIndividual, atIndex: index)
+        self._individuals.removeAtIndex(index)
+        self._individuals.insert(updatedIndividual, atIndex: index)
+        updateSession()
     }
     
     func deleteIndividuals(individualIndexes: [Int]) {
         for index in individualIndexes {
-            self.individuals.removeAtIndex(index)
+            self._individuals.removeAtIndex(index)
         }
+        updateSession()
+    }
+    
+    private func updateSession() {
+        updatedBy = UserAuthService.sharedInstance.user
+        updatedAt = NSDate()
     }
 
     required init(coder aDecoder: NSCoder) {
         var enumerator: NSEnumerator
         
-        self.project = aDecoder.decodeObjectForKey("project") as Project
-        self.typeValue = aDecoder.decodeObjectForKey("typeValue") as String
+        self._typeValue = aDecoder.decodeObjectForKey("typeValue") as String
     
         let objectObservations: AnyObject = aDecoder.decodeObjectForKey("observations")!
         enumerator = objectObservations.objectEnumerator()
-        self.observations = Array<Observation>()
+        self._observations = Array<Observation>()
         while true {
-            let observation = enumerator.nextObject() as Observation?
+            var observation = enumerator.nextObject() as Observation?
             if observation == nil {
                 break
             }
-            self.observations.append(observation!)
+            self._observations.append(observation!)
         }
         
         let objectIndividuals: AnyObject = aDecoder.decodeObjectForKey("individuals")!
         enumerator = objectIndividuals.objectEnumerator()
-        self.individuals = Array<Individual>()
+        self._individuals = Array<Individual>()
         
         while true {
             let individual = enumerator.nextObject() as Individual?
             if individual == nil {
                 break
             }
-            self.individuals.append(individual!)
+            self._individuals.append(individual!)
         }
         super.init(coder: aDecoder)
+        
+        for observation in self._observations {
+            observation.setSession(self)
+        }
     }
 }
 
@@ -106,9 +130,9 @@ extension Session: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)
         // project attribute is allocated when project is initialized
-        aCoder.encodeObject(typeValue, forKey: "typeValue")
-        aCoder.encodeObject(observations, forKey: "observations")
-        aCoder.encodeObject(individuals, forKey: "individuals")
+        aCoder.encodeObject(_typeValue, forKey: "typeValue")
+        aCoder.encodeObject(_observations, forKey: "observations")
+        aCoder.encodeObject(_individuals, forKey: "individuals")
     }
 }
 

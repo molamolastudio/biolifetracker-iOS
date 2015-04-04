@@ -8,33 +8,41 @@
 import Foundation
 
 class Ethogram: BiolifeModel, Storable {
-    var name: String
-    var information: String
-    var behaviourStates: [BehaviourState]
-    
-    @availability(iOS, deprecated=0.1, message="Use createdBy instead")
+    private var _name: String
+    private var _information: String
+    private var _behaviourStates: [BehaviourState]
     var creator: User { return createdBy }
     
+    var name: String {
+        get { return _name }
+    }
+    var information: String {
+        get { return _information }
+    }
+    var behaviourStates: [BehaviourState] {
+        get { return _behaviourStates }
+    }
+    
     override init() {
-        name = ""
-        behaviourStates = []
-        information = ""
+        _name = ""
+        _behaviourStates = []
+        _information = ""
         super.init()
     }
     
     convenience init(name: String) {
         self.init()
-        self.name = name
-        self.behaviourStates = []
-        self.information = ""
+        self._name = name
+        self._behaviourStates = []
+        self._information = ""
         self.saveToArchives()
     }
     
     convenience init(name: String, information: String) {
         self.init()
-        self.name = name
-        self.behaviourStates = []
-        self.information = information
+        self._name = name
+        self._behaviourStates = []
+        self._information = information
         self.saveToArchives()
     }
     
@@ -42,45 +50,45 @@ class Ethogram: BiolifeModel, Storable {
     
     func updateName(name: String) {
         Ethogram.deleteFromArchives(self.name)
-        self.name = name
+        self._name = name
         updateEthogram()
     }
     
     func updateInformation(information: String) {
-        self.information = information
+        self._information = information
         updateEthogram()
     }
     
     /*********Behaviour State****************/
     
     func addBehaviourState(state: BehaviourState) {
-        behaviourStates.append(state)
+        self._behaviourStates.append(state)
         updateEthogram()
     }
     
     func updateBehaviourStateName(index: Int, bsName: String) {
-        behaviourStates[index].name = bsName
+        self._behaviourStates[index].updateName(bsName)
         updateEthogram()
     }
     
     func updateBehaviourStateInformation(index: Int, bsInformation: String) {
-        behaviourStates[index].information = bsInformation
+        self._behaviourStates[index].updateInformation(bsInformation)
         updateEthogram()
     }
     
     func deleteBehaviourState(index: Int) {
-        behaviourStates.removeAtIndex(index)
+        self._behaviourStates.removeAtIndex(index)
         updateEthogram()
     }
     
     /*************Photo Url in BS***************/
     func addBSPhotoUrl(bsIndex: Int, photoUrl: String) {
-        behaviourStates[bsIndex].photoUrls.append(photoUrl)
+        self._behaviourStates[bsIndex].addPhotoUrl(photoUrl)
         updateEthogram()
     }
     
     func deleteBSPhotoUrl(bsIndex: Int, photoIndex: Int) {
-        behaviourStates[bsIndex].photoUrls.removeAtIndex(photoIndex)
+        self._behaviourStates[bsIndex].removePhotoUrlAtIndex(photoIndex)
         updateEthogram()
     }
     
@@ -132,12 +140,12 @@ class Ethogram: BiolifeModel, Storable {
     }
     
     required init(coder aDecoder: NSCoder) {
-        self.name = aDecoder.decodeObjectForKey("name") as String
+        self._name = aDecoder.decodeObjectForKey("name") as String
         
         let objectBehavStates: AnyObject = aDecoder.decodeObjectForKey("behaviourStates")!
         let enumerator = objectBehavStates.objectEnumerator()
         
-        self.behaviourStates = Array<BehaviourState>()  // Check whether BehaviourState can be stored
+        self._behaviourStates = Array<BehaviourState>()  // Check whether BehaviourState can be stored
         
         while true {
             
@@ -146,9 +154,9 @@ class Ethogram: BiolifeModel, Storable {
                 break
             }
         
-            self.behaviourStates.append(behaviourState!)
+            self._behaviourStates.append(behaviourState!)
         }
-        self.information = ""
+        self._information = aDecoder.decodeObjectForKey("information") as String
         super.init(coder: aDecoder)
     }
     
@@ -179,9 +187,9 @@ class Ethogram: BiolifeModel, Storable {
 extension Ethogram: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)
-        aCoder.encodeObject(name, forKey: "name")
-        aCoder.encodeObject(creator, forKey: "creator")
-        aCoder.encodeObject(behaviourStates, forKey: "behaviourStates")
+        aCoder.encodeObject(_name, forKey: "name")
+        aCoder.encodeObject(_information, forKey: "information")
+        aCoder.encodeObject(_behaviourStates, forKey: "behaviourStates")
     }
 }
 
