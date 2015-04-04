@@ -33,7 +33,7 @@ class Observation: BiolifeModel {
     var photoUrls: [String] { get { return _photoUrls } }
     var notes: String { get { return _notes } }
     
-    init(session: Session, state: BehaviourState, timestamp: NSDate, creator: User) {
+    init(session: Session, individual: Individual, state: BehaviourState, timestamp: NSDate, creator: User, information: String) {
         self._session = session
         self._state = state
         self._timestamp = timestamp
@@ -41,12 +41,12 @@ class Observation: BiolifeModel {
         self._weather = Weather()
         self._photoUrls = []
         self._notes = ""
-        self._information = ""
-        self._individual = Individual()
+        self._information = information
+        self._individual = individual
         super.init()
     }
     
-    init(session: Session, state: BehaviourState, timestamp: NSDate, creator: User, notes: String) {
+    init(session: Session, individual: Individual, state: BehaviourState, timestamp: NSDate, creator: User, information: String, notes: String) {
         self._session = session
         self._state = state
         self._timestamp = timestamp
@@ -54,8 +54,8 @@ class Observation: BiolifeModel {
         self._location = Location()
         self._weather = Weather()
         self._photoUrls = []
-        self._information = ""
-        self._individual = Individual()
+        self._information = information
+        self._individual = individual
         super.init()
     }
     

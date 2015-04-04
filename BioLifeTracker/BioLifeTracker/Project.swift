@@ -147,7 +147,7 @@ class Project: BiolifeModel, Storable {
         
         if ((dirs) != nil) {
             let dir = dirs![0]; //documents directory
-            let path = dir.stringByAppendingPathComponent("Project");
+            let path = dir.stringByAppendingPathComponent("Project" + self._name);
             
             let data = NSMutableData();
             let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
@@ -215,8 +215,10 @@ class Project: BiolifeModel, Storable {
         while true {
             let admin = enumerator.nextObject() as User?
             if admin == nil {
+                println("/*************failadmin")
                 break
             } else {
+                println("/*************admin  \(admin!.toString())")
                 self._admins.append(admin!)
             }
         }
@@ -227,43 +229,35 @@ class Project: BiolifeModel, Storable {
         while true {
             let user = enumerator.nextObject() as User?
             if user == nil {
+                println("/*************failmember")
                 break
             } else {
+                println("/**************member \(user!.toString())")
                 self._members.append(user!)
             }
         }
         
         let objectSessions: AnyObject = aDecoder.decodeObjectForKey("sessions")!
-        
         enumerator = objectSessions.objectEnumerator()
-        
         self._sessions = Array<Session>()
         var session: Session?
-
         while true {
             session = enumerator.nextObject() as Session?
-            
             if session == nil {
                 break
             }
-            
             self._sessions.append(session!)
         }
         
         let objectIndividuals: AnyObject = aDecoder.decodeObjectForKey("individuals")!
-        
         enumerator = objectIndividuals.objectEnumerator()
-        
         self._individuals = Array<Individual>()
         var individual: Individual?
-        
         while true {
             individual = enumerator.nextObject() as Individual?
-            
             if session == nil {
                 break
             }
-            
             self._individuals.append(individual!)
         }
         

@@ -24,7 +24,7 @@ class Tag: BiolifeModel {
         super.init()
     }
     
-    func updateDescription(tag: String) {
+    func updateTag(tag: String) {
         self._tag = tag
         updateTag()
     }

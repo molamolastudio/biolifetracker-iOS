@@ -86,6 +86,13 @@
 		AC1881511ACFD0E400CE450B /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814F1ACFD05D00CE450B /* GoogleOpenSource.framework */; };
 		AC1881521ACFD0E400CE450B /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814B1ACFC84600CE450B /* GooglePlus.framework */; };
 		AC1881531ACFD0E400CE450B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2439AAB91AC7DC7900389195 /* FacebookSDK.framework */; };
+		AC1881551AD02F2400CE450B /* TagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1881541AD02F2400CE450B /* TagTests.swift */; };
+		AC1881571AD02F3100CE450B /* WeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1881561AD02F3100CE450B /* WeatherTests.swift */; };
+		AC1881591AD02F3E00CE450B /* LocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1881581AD02F3E00CE450B /* LocationTests.swift */; };
+		AC18815B1AD02F4E00CE450B /* IndividualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18815A1AD02F4E00CE450B /* IndividualTests.swift */; };
+		AC18815D1AD02F5D00CE450B /* ObservationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18815C1AD02F5D00CE450B /* ObservationTests.swift */; };
+		AC18815F1AD02F6E00CE450B /* SessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18815E1AD02F6E00CE450B /* SessionTests.swift */; };
+		AC1881611AD02F8600CE450B /* BehaviourStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1881601AD02F8600CE450B /* BehaviourStateTests.swift */; };
 		AC188C7C1AC2B11A00CB08C0 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC188C7B1AC2B11A00CB08C0 /* Storable.swift */; };
 		AC188C7D1AC2B11A00CB08C0 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC188C7B1AC2B11A00CB08C0 /* Storable.swift */; };
 		AC702EE21AC55EA3003C50C8 /* Ethogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7711AAEDA85006F374D /* Ethogram.swift */; };
@@ -195,6 +202,13 @@
 		AC18814A1ACFC84600CE450B /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
 		AC18814B1ACFC84600CE450B /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
 		AC18814F1ACFD05D00CE450B /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
+		AC1881541AD02F2400CE450B /* TagTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTests.swift; sourceTree = "<group>"; };
+		AC1881561AD02F3100CE450B /* WeatherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherTests.swift; sourceTree = "<group>"; };
+		AC1881581AD02F3E00CE450B /* LocationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTests.swift; sourceTree = "<group>"; };
+		AC18815A1AD02F4E00CE450B /* IndividualTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndividualTests.swift; sourceTree = "<group>"; };
+		AC18815C1AD02F5D00CE450B /* ObservationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservationTests.swift; sourceTree = "<group>"; };
+		AC18815E1AD02F6E00CE450B /* SessionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTests.swift; sourceTree = "<group>"; };
+		AC1881601AD02F8600CE450B /* BehaviourStateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviourStateTests.swift; sourceTree = "<group>"; };
 		AC188C7B1AC2B11A00CB08C0 /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorable.swift; sourceTree = "<group>"; };
 		AC9EE3381ACEC2C500939476 /* ProjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
@@ -287,6 +301,13 @@
 			children = (
 				AC9EE3381ACEC2C500939476 /* ProjectTests.swift */,
 				AC9EE33A1ACEC2E400939476 /* EthogramTests.swift */,
+				AC18815E1AD02F6E00CE450B /* SessionTests.swift */,
+				AC1881601AD02F8600CE450B /* BehaviourStateTests.swift */,
+				AC18815C1AD02F5D00CE450B /* ObservationTests.swift */,
+				AC18815A1AD02F4E00CE450B /* IndividualTests.swift */,
+				AC1881581AD02F3E00CE450B /* LocationTests.swift */,
+				AC1881561AD02F3100CE450B /* WeatherTests.swift */,
+				AC1881541AD02F2400CE450B /* TagTests.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -624,19 +645,26 @@
 				AC702EE21AC55EA3003C50C8 /* Ethogram.swift in Sources */,
 				AC702EEA1AC55FAA003C50C8 /* User.swift in Sources */,
 				AC702EEC1AC55FC6003C50C8 /* Data.swift in Sources */,
+				AC1881591AD02F3E00CE450B /* LocationTests.swift in Sources */,
 				ACDCC0F21ACD05E1001590B8 /* UserAuthService.swift in Sources */,
+				AC18815D1AD02F5D00CE450B /* ObservationTests.swift in Sources */,
 				AC702EE81AC55EB5003C50C8 /* Weather.swift in Sources */,
 				247F2FB51AC8EF220065A0D1 /* BiolifeModel.swift in Sources */,
 				AC702EE71AC55EB2003C50C8 /* Location.swift in Sources */,
 				AC9EE3481ACEE0F100939476 /* BehaviourState.swift in Sources */,
+				AC1881611AD02F8600CE450B /* BehaviourStateTests.swift in Sources */,
 				AC188C7D1AC2B11A00CB08C0 /* Storable.swift in Sources */,
+				AC1881551AD02F2400CE450B /* TagTests.swift in Sources */,
 				AC9EE33B1ACEC2E400939476 /* EthogramTests.swift in Sources */,
+				AC18815B1AD02F4E00CE450B /* IndividualTests.swift in Sources */,
+				AC1881571AD02F3100CE450B /* WeatherTests.swift in Sources */,
 				3205E75E1AAED9F9006F374D /* BioLifeTrackerTests.swift in Sources */,
 				AC9EE3391ACEC2C500939476 /* ProjectTests.swift in Sources */,
 				AC9162AD1ACA6CC300FED714 /* CloudStorable.swift in Sources */,
 				247F2FB41AC8EEF90065A0D1 /* Tag.swift in Sources */,
 				AC702EE51AC55EAC003C50C8 /* Observation.swift in Sources */,
 				AC702EE31AC55EA8003C50C8 /* Project.swift in Sources */,
+				AC18815F1AD02F6E00CE450B /* SessionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -26,6 +26,11 @@ class Individual: BiolifeModel {
         super.init()
     }
     
+    convenience init(label: String) {
+        self.init()
+        self._label = label
+    }
+    
     /*****************Individual*******************/
     func updateLabel(label: String) {
         self._label = label

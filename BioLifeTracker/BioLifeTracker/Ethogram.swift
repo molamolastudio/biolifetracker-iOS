@@ -104,7 +104,7 @@ class Ethogram: BiolifeModel, Storable {
     
         if ((dirs) != nil) {
             let dir = dirs![0]; //documents directory
-            let path = dir.stringByAppendingPathComponent("Ethogram");
+            let path = dir.stringByAppendingPathComponent("Ethogram" + self._name);
         
             let data = NSMutableData();
             let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
@@ -126,7 +126,7 @@ class Ethogram: BiolifeModel, Storable {
         // documents directory
         
         let dir = dirs![0]
-        let path = dir.stringByAppendingPathComponent("Ethogram")
+        let path = dir.stringByAppendingPathComponent("Ethogram" + identifier)
         let data = NSMutableData(contentsOfFile: path)?
     
         if data == nil {

@@ -32,7 +32,7 @@ class ProjectTests: XCTestCase {
         retrieved = Project.loadFromArchives("A Day in a Fiddler Crab life") as Project?
         var containsAdmin = false
         for admin in retrieved!.admins {
-            if admin == UserAuthService.sharedInstance.user {
+            if admin.toString() == UserAuthService.sharedInstance.user.toString() {
                 containsAdmin = true
             }
         }
@@ -40,7 +40,7 @@ class ProjectTests: XCTestCase {
         
         var containsMember = false
         for member in retrieved!.members {
-            if member == UserAuthService.sharedInstance.user {
+            if member.toString() == UserAuthService.sharedInstance.user.toString() {
                 containsMember = true
             }
         }
@@ -53,7 +53,7 @@ class ProjectTests: XCTestCase {
         retrieved = Project.loadFromArchives("A Day in a Fiddler Crab life") as Project?
         containsAdmin = false
         for admin in retrieved!.admins {
-            if admin == "The Hulk" {
+            if admin.toString() == "The Hulk" {
                 containsAdmin = true
             }
         }
@@ -61,15 +61,15 @@ class ProjectTests: XCTestCase {
         
         containsAdmin = false
         for admin in retrieved!.admins {
-            if admin == "Black Power Ranger" {
+            if admin.toString() == "Black Power Ranger" {
                 containsAdmin = true
             }
         }
-        XCTAssert(containsAdmin == true, "Normal user not added properly, got into admin")
+        XCTAssert(containsAdmin == false, "Normal user not added properly, got into admin")
         
         containsMember = false
         for member in retrieved!.members {
-            if member == "The Hulk" {
+            if member.toString() == "The Hulk" {
                 containsMember = true
             }
         }
@@ -77,7 +77,7 @@ class ProjectTests: XCTestCase {
         
         containsMember = false
         for member in retrieved!.members {
-            if member == "Black Power Ranger" {
+            if member.toString() == "Black Power Ranger" {
                 containsMember = true
             }
         }
