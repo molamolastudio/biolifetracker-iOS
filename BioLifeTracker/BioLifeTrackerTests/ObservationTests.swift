@@ -22,7 +22,7 @@ class ObservationTests: XCTestCase {
         
         let session = Session(project: project, type: SessionType.Scan)
         let individual = Individual(label: "M1")
-        var observation = Observation(session: session, individual: individual, state: state1, timestamp: NSDate(), creator: UserAuthService.sharedInstance.user, information: "Eating vigourously")
+        var observation = Observation(session: session, individual: individual, state: state1, timestamp: NSDate(), information: "Eating vigourously")
         
         XCTAssert(observation.session.project.name == "A Day in a Fiddler Crab life", "Observation not initialised properly")
         XCTAssert(observation.state.name == "Feeding", "Observation not initialised properly")
@@ -41,7 +41,7 @@ class ObservationTests: XCTestCase {
         
         let session = Session(project: project, type: SessionType.Scan)
         let individual = Individual(label: "M1")
-        var observation = Observation(session: session, individual: individual, state: state1, timestamp: NSDate(), creator: UserAuthService.sharedInstance.user, information: "Eating vigourously")
+        var observation = Observation(session: session, individual: individual, state: state1, timestamp: NSDate(), information: "Eating vigourously")
         
         XCTAssert(observation.state.name == "Feeding", "Observation not initialised properly")
         observation.updateBehaviourState(state2)

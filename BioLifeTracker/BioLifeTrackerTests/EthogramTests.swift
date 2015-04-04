@@ -70,5 +70,43 @@ class EthogramTests: XCTestCase {
 
     }
     
+    func testInitialization() {
+        XCTAssert(ethogram.name == "Fiddler Crabs", "Ethogram not initialized properly")
+        XCTAssert(ethogram.information == "", "Ethogram not initialized properly")
+        XCTAssert(ethogram.behaviourStates.count == 0, "Ethogram not initialized properly")
+    }
     
+    func testUpdating() {
+        XCTAssert(ethogram.name == "Fiddler Crabs", "Ethogram not updated properly")
+        ethogram.updateName("Porcelain Fiddler Crabs")
+        XCTAssert(ethogram.name == "Porcelain Fiddler Crabs", "Ethogram not updated properly")
+        
+        XCTAssert(ethogram.information == "", "Ethogram not updated properly")
+        ethogram.updateInformation("Thumb sized crabs with black stripes across the shell")
+        XCTAssert(ethogram.information == "Thumb sized crabs with black stripes across the shell", "Ethogram not updated properly")
+        
+        ethogram.addBehaviourState(state1)
+        XCTAssert(ethogram.behaviourStates[0].name == "Feeding", "Ethogram not updated properly")
+        
+        ethogram.updateBehaviourStateName(0, bsName: "Snacking")
+        XCTAssert(ethogram.behaviourStates[0].name == "Snacking", "Ethogram not updated properly")
+
+        ethogram.updateBehaviourStateInformation(0, bsInformation: "Tiny inputs of sand to the mouth")
+        XCTAssert(ethogram.behaviourStates[0].information == "Tiny inputs of sand to the mouth", "Ethogram not updated properly")
+
+        ethogram.deleteBehaviourState(0)
+        XCTAssert(ethogram.behaviourStates.count == 0, "Ethogram not updated properly")
+        
+        ethogram.addBehaviourState(state3)
+        
+        
+        ethogram.addBSPhotoUrl(0, photoUrl: "www.photo1.com")
+        XCTAssert(ethogram.behaviourStates[0].photoUrls[0] == "www.photo1.com", "Ethogram not updated properly")
+        
+        ethogram.addBSPhotoUrl(0, photoUrl: "www.photo2.com")
+        XCTAssert(ethogram.behaviourStates[0].photoUrls[1] == "www.photo2.com", "Ethogram not updated properly")
+        
+        ethogram.deleteBSPhotoUrl(0, photoIndex: 0)
+        XCTAssert(ethogram.behaviourStates[0].photoUrls[0] == "www.photo2.com", "Ethogram not updated properly")
+    }
 }

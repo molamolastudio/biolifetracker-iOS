@@ -39,12 +39,12 @@ class SessionTests: XCTestCase {
         var session = Session(project: project, type: SessionType.Scan)
         
         let individual = Individual(label: "M1")
-        let observation1 = Observation(session: session, individual: individual, state: state1, timestamp: NSDate(), creator: UserAuthService.sharedInstance.user, information: "Eating vigourously")
+        let observation1 = Observation(session: session, individual: individual, state: state1, timestamp: NSDate(), information: "Eating vigourously")
         
         session.addObservation([observation1])
         XCTAssert(session.observations[0].information == "Eating vigourously", "Session not updated properly")
         
-        let observation2 = Observation(session: session, individual: individual, state: state1, timestamp: NSDate(), creator: UserAuthService.sharedInstance.user, information: "Picking up sand")
+        let observation2 = Observation(session: session, individual: individual, state: state1, timestamp: NSDate(), information: "Picking up sand")
         session.updateObservation(0, updatedObservation: observation2)
         XCTAssert(session.observations[0].information == "Picking up sand", "Session not updated properly")
         

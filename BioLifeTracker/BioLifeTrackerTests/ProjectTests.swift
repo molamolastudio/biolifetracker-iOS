@@ -83,7 +83,18 @@ class ProjectTests: XCTestCase {
         }
         XCTAssert(containsMember == true, "Normal user not added properly")
 
-        // TODO: TESTING FOR SESSION AND OBSERVATION
+        
+        // Testing session and observation
+        var session = Session(project: project, type: SessionType.Scan)
+        let individual = Individual(label: "M1")
+        let observation1 = Observation(session: session, individual: individual, state: state1, timestamp: NSDate(), information: "Eating vigourously")
+        session.addObservation([observation1])
+        
+        project.addSessions([session])
+        retrieved = Project.loadFromArchives("A Day in a Fiddler Crab life") as Project?
+        
+        XCTAssert(retrieved?.sessions[0].observations[0].information == "Eating vigourously", "Project not saved properly")
+        XCTAssert(retrieved?.sessions[0].type == SessionType.Scan, "Project not saved properly")
         
         
         
