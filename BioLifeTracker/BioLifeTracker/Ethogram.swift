@@ -26,13 +26,71 @@ class Ethogram: BiolifeModel, Storable {
         self.init()
         self.name = name
         self.behaviourStates = []
-        information = ""
+        self.information = ""
+        self.saveToArchives()
     }
+    
+    convenience init(name: String, information: String) {
+        self.init()
+        self.name = name
+        self.behaviourStates = []
+        self.information = information
+        self.saveToArchives()
+    }
+    
+    /************Ethogram********************/
+    
+    func updateName(name: String) {
+        Ethogram.deleteFromArchives(self.name)
+        self.name = name
+        updateEthogram()
+    }
+    
+    func updateInformation(information: String) {
+        self.information = information
+        updateEthogram()
+    }
+    
+    /*********Behaviour State****************/
     
     func addBehaviourState(state: BehaviourState) {
         behaviourStates.append(state)
+        updateEthogram()
     }
     
+    func updateBehaviourStateName(index: Int, bsName: String) {
+        behaviourStates[index].name = bsName
+        updateEthogram()
+    }
+    
+    func updateBehaviourStateInformation(index: Int, bsInformation: String) {
+        behaviourStates[index].information = bsInformation
+        updateEthogram()
+    }
+    
+    func deleteBehaviourState(index: Int) {
+        behaviourStates.removeAtIndex(index)
+        updateEthogram()
+    }
+    
+    /*************Photo Url in BS***************/
+    func addBSPhotoUrl(bsIndex: Int, photoUrl: String) {
+        behaviourStates[bsIndex].photoUrls.append(photoUrl)
+        updateEthogram()
+    }
+    
+    func deleteBSPhotoUrl(bsIndex: Int, photoIndex: Int) {
+        behaviourStates[bsIndex].photoUrls.removeAtIndex(photoIndex)
+        updateEthogram()
+    }
+    
+    private func updateEthogram() {
+        updatedBy = UserAuthService.sharedInstance.user
+        updatedAt = NSDate()
+        self.saveToArchives()
+    }
+    
+    /**************Saving to Archives****************/
     func saveToArchives() {
         let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
     
@@ -68,7 +126,7 @@ class Ethogram: BiolifeModel, Storable {
         }
         
         let archiver = NSKeyedUnarchiver(forReadingWithData: data!)
-        let ethogram = archiver.decodeObjectForKey(identifier) as Ethogram
+        let ethogram = archiver.decodeObjectForKey(identifier) as Ethogram?
         
         return ethogram
     }
@@ -92,6 +150,29 @@ class Ethogram: BiolifeModel, Storable {
         }
         self.information = ""
         super.init(coder: aDecoder)
+    }
+    
+    class func deleteFromArchives(identifier: String) -> Bool {
+        
+        let dirs: [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        
+        if (dirs == nil) {
+            return false
+        }
+        
+        // documents directory
+        let dir = dirs![0]
+        let path = dir.stringByAppendingPathComponent("Ethogram" + identifier)
+        
+        // Delete the file and see if it was successful
+        var error: NSError?
+        let success :Bool = NSFileManager.defaultManager().removeItemAtPath(path, error: &error)
+        
+        if error != nil {
+            println(error)
+        }
+        
+        return success;
     }
 }
 

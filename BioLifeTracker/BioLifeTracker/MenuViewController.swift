@@ -20,7 +20,7 @@ class MenuViewController: UITableViewController {
     let socialSectionLoggedIn = ["Email", "Logout"]
     let socialSectionLoggedOut = ["Google+ Login", "Facebook Login"]
     
-    var user: User = User(id: "", name: "User")
+    var user: User = UserAuthService.sharedInstance.user
     
     var loggedIn = true
     

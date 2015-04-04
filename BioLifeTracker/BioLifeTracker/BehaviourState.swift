@@ -9,7 +9,7 @@
 
 import Foundation
 
-class BehaviourState: BiolifeModel, Storable {
+class BehaviourState: BiolifeModel {
     var name: String
     var information: String
     var photo: UIImage?
@@ -24,15 +24,7 @@ class BehaviourState: BiolifeModel, Storable {
         super.init()
     }
     
-    @availability(iOS, deprecated=0.1, message="use the given convenience init() instead")
-    convenience init(name: String, id: Int) {
-        self.init()
-        self.name = name
-        self.information = ""
-        self.photoUrls = []
-    }
-    
-    convenience init(id: Int, name: String, information: String) {
+    convenience init(name: String, information: String) {
         self.init()
         self.name = name
         self.information = information
@@ -56,48 +48,6 @@ class BehaviourState: BiolifeModel, Storable {
         }
         
         super.init(coder: aDecoder)
-    }
-    
-    func saveToArchives() {
-        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
-        
-        if ((dirs) != nil) {
-            let dir = dirs![0]; //documents directory
-            let path = dir.stringByAppendingPathComponent("BehaviourState");
-            
-            let data = NSMutableData();
-            let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
-            
-            archiver.encodeObject(self, forKey: name)
-            archiver.finishEncoding()
-
-            let success = data.writeToFile(path, atomically: true)
-            println("success + \(success)")
-        }
-    }
-    
-    class func loadFromArchives(identifier: String) -> NSObject? {
-        
-        let dirs: [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
-        
-        if (dirs == nil) {
-            return nil
-        }
-        
-        // documents directory
-        
-        let dir = dirs![0]
-        let path = dir.stringByAppendingPathComponent("BehaviourState")
-        let data = NSMutableData(contentsOfFile: path)?
-        
-        if data == nil {
-            return nil
-        }
-        
-        let archiver = NSKeyedUnarchiver(forReadingWithData: data!)
-        let behaviourState = archiver.decodeObjectForKey(identifier)! as BehaviourState
-
-        return behaviourState
     }
 }
 

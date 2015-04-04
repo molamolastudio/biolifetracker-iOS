@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Project: BiolifeModel {
+class Project: BiolifeModel, Storable {
     var name: String
     var ethogram: Ethogram
     var admins: [User]
@@ -33,7 +33,7 @@ class Project: BiolifeModel {
         self.ethogram = ethogram
         self.admins = [UserAuthService.sharedInstance.user]
         self.members = [UserAuthService.sharedInstance.user]
-        self.sessions = []
+        self.saveToArchives()
     }
     
     func getIndexOfSession(session: Session) -> Int? {
@@ -49,6 +49,92 @@ class Project: BiolifeModel {
         return name
     }
     
+    /******************Project*********************/
+    func updateName(name: String) {
+        Project.deleteFromArchives(self.name)
+        self.name = name
+        updateProject()
+    }
+    
+    func updateEthogram(ethogram: Ethogram) {
+        self.ethogram = ethogram
+        updateProject()
+    }
+    
+    /********************Admins*******************/
+
+    func addAdmins(admins: [User]) {
+        self.admins += admins
+        // Admins are naturally members of a project
+        self.members += admins
+        updateProject()
+    }
+    
+    func deleteAdmins(adminIndexes: [Int]) {
+        for index in adminIndexes {
+            self.admins.removeAtIndex(index)
+        }
+        updateProject()
+    }
+    
+    /********************Memberss*******************/
+    func addMembers(members: [User]) {
+        self.members += members
+        updateProject()
+    }
+    
+    func deleteMembers(memberIndexes: [Int]) {
+        for index in memberIndexes {
+            self.members.removeAtIndex(index)
+        }
+        updateProject()
+    }
+    
+    /******************Session*******************/
+    func addSessions(sessions: [Session]) {
+        self.sessions += sessions
+        updateProject()
+    }
+    
+    func updateSession(index: Int, updatedSession: Session) {
+        self.sessions.removeAtIndex(index)
+        self.sessions.insert(updatedSession, atIndex: index)
+        updateProject()
+    }
+    
+    func deleteSessions(sessionIndexes: [Int]) {
+        for index in sessionIndexes {
+            self.sessions.removeAtIndex(index)
+        }
+        updateProject()
+    }
+    
+    /******************Individual*******************/
+    func addIndividuals(individuals: [Individual]) {
+        self.individuals += individuals
+        updateProject()
+    }
+    
+    func updateIndividual(index: Int, updatedIndividual: Individual) {
+        self.individuals.removeAtIndex(index)
+        self.individuals.insert(updatedIndividual, atIndex: index)
+        updateProject()
+    }
+    
+    func deleteIndividuals(individualIndexes: [Int]) {
+        for index in individualIndexes {
+            self.individuals.removeAtIndex(index)
+        }
+        updateProject()
+    }
+    
+    private func updateProject() {
+        updatedBy = UserAuthService.sharedInstance.user
+        updatedAt = NSDate()
+        self.saveToArchives()
+    }
+    
+    /**************Saving to Archives****************/
     func saveToArchives() {
         let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
         
@@ -74,7 +160,7 @@ class Project: BiolifeModel {
         
         // documents directory
         let dir = dirs![0]
-        let path = dir.stringByAppendingPathComponent("Project")
+        let path = dir.stringByAppendingPathComponent("Project" + identifier)
         let data = NSMutableData(contentsOfFile: path)?
         
         if data == nil {
@@ -82,9 +168,32 @@ class Project: BiolifeModel {
         }
         
         let archiver = NSKeyedUnarchiver(forReadingWithData: data!)
-        let ethogram = archiver.decodeObjectForKey(identifier)! as Project
+        let project = archiver.decodeObjectForKey(identifier) as Project?
     
-        return ethogram
+        return project
+    }
+    
+    class func deleteFromArchives(identifier: String) -> Bool {
+        
+        let dirs: [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        
+        if (dirs == nil) {
+            return false
+        }
+        
+        // documents directory
+        let dir = dirs![0]
+        let path = dir.stringByAppendingPathComponent("Project" + identifier)
+        
+        // Delete the file and see if it was successful
+        var error: NSError?
+        let success :Bool = NSFileManager.defaultManager().removeItemAtPath(path, error: &error)
+        
+        if error != nil {
+            println(error)
+        }
+
+        return success;
     }
     
     required init(coder aDecoder: NSCoder) {

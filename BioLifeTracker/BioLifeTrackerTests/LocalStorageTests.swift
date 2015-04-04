@@ -21,7 +21,6 @@ class LocalStorageTests: XCTestCase {
         let retrieved = BehaviourState.loadFromArchives("Feeding") as BehaviourState?
         println(retrieved?.name)
         
-  //      XCTAssert(retrieved?.id == 1, "BS not saved")
         XCTAssert(retrieved?.name == "Feeding", "BS not saved")
         XCTAssert(retrieved?.information == "Small claws bringing food to mouth", "BS not saved")
     }
@@ -36,7 +35,7 @@ class LocalStorageTests: XCTestCase {
         
         XCTAssert(retrieved?.name == "Fiddler Crabs", "Ethogram not saved")
         XCTAssert(retrieved?.creator.toString() == Constants.Default.userName, "Ethogram not saved")
-  //      XCTAssert(retrieved?.behaviourStates[0].id == 1, "BS in Ethogram not saved")
+
         XCTAssert(retrieved?.behaviourStates[0].name == "Feeding", "BS in Ethogram not saved")
         XCTAssert(retrieved?.behaviourStates[0].information == "Small claws bringing food to mouth", "BS in Ethogram not saved")
     }
@@ -52,7 +51,7 @@ class LocalStorageTests: XCTestCase {
         XCTAssert(retrieved?.name == "A Day in a Fiddler Crab life", "Project not saved")
         XCTAssert(retrieved?.ethogram.name == "Fiddler Crabs", "Ethogram in project not saved")
         XCTAssert(retrieved?.ethogram.creator.toString() == Constants.Default.userName, "Ethogram not saved")
- //       XCTAssert(retrieved?.ethogram.behaviourStates[0].id == 1, "BS in Ethogram not saved")
+
         XCTAssert(retrieved?.ethogram.behaviourStates[0].name == "Feeding", "BS in Ethogram not saved")
         XCTAssert(retrieved?.ethogram.behaviourStates[0].information == "Small claws bringing food to mouth", "BS in Ethogram not saved")
     }

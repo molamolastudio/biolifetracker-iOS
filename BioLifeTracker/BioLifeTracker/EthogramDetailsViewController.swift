@@ -64,7 +64,7 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
         let cell = sender.superview! as UITableViewCell
         let textField = cell.viewWithTag(Constants.ViewTags.ethogramDetailState) as UITextField
         
-        let state = BehaviourState(name: textField.text!, id: ethogram!.behaviourStates.count)
+        let state = BehaviourState(name: textField.text!, information: "must add information")
         ethogram!.addBehaviourState(state)
         
         sender.removeFromSuperview()

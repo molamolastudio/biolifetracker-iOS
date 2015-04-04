@@ -36,6 +36,38 @@ class Session: BiolifeModel {
         }
         return ""
     }
+    
+    /******************Observation*******************/
+    func addObservation(observations: [Observation]) {
+        self.observations += observations
+    }
+    
+    func updateObservation(index: Int, updatedObservation: Observation) {
+        self.observations.removeAtIndex(index)
+        self.observations.insert(updatedObservation, atIndex: index)
+    }
+    
+    func deleteObservations(observationIndexes: [Int]) {
+        for index in observationIndexes {
+            self.observations.removeAtIndex(index)
+        }
+    }
+    
+    /******************Individual*******************/
+    func addIndividuals(individuals: [Individual]) {
+        self.individuals += individuals
+    }
+    
+    func updateIndividual(index: Int, updatedIndividual: Individual) {
+        self.individuals.removeAtIndex(index)
+        self.individuals.insert(updatedIndividual, atIndex: index)
+    }
+    
+    func deleteIndividuals(individualIndexes: [Int]) {
+        for index in individualIndexes {
+            self.individuals.removeAtIndex(index)
+        }
+    }
 
     required init(coder aDecoder: NSCoder) {
         var enumerator: NSEnumerator

@@ -74,7 +74,7 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
         let cell = sender.superview! as UITableViewCell
         let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormCellFullTextField) as UITextField
         
-        let state = BehaviourState(name: textField.text!, id: ethogram!.behaviourStates.count)
+        let state = BehaviourState(name: textField.text!, information: "Must add information")
 
 //        state.saveInBackgroundWithBlock { (success, error) in
 //            println("Saving behaviour state success: \(success)\nError: \(error.debugDescription)")
