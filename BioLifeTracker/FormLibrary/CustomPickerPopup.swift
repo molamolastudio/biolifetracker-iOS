@@ -81,6 +81,11 @@ class CustomPickerPopup: FormPopupController, UITableViewDataSource, UITableView
         self.view.addSubview(table)
     }
     
+    func setSelectedIndex(index: Int) {
+        selectedIndex = index
+        table.reloadData()
+    }
+    
     func tapDetected(sender: UITapGestureRecognizer) {
         let point = sender.locationInView(sender.view)
         if !CGRectContainsPoint(table.frame, point) {

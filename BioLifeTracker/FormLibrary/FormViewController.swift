@@ -91,6 +91,11 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
             
             popup.data = cell.pickerValues
             
+            // Sets the currently selected index if it exists.
+            if let index = cell.selectedValue as? Int {
+                popup.selectedIndex = index
+            }
+            
             self.view.addSubview(popup.view)
             popup.view.frame = self.view.frame
         }
@@ -278,6 +283,10 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
         
         popup.delegate = cell
         
+        if let index = field.value as? Int {
+            cell.userDidSelectValue(index, valueAsString: field.pickerValues[index])
+        }
+        
         cell.button.enabled = editable
         
         return cell
@@ -291,6 +300,10 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
         cell.button.setTitle("Pick Image", forState: .Normal)
         
         cell.setSelectorForButton(self, action: Selector("showPhotoPicker:"))
+        
+        if let image = field.value as? UIImage {
+            cell.setSelectedImage(image)
+        }
         
         cell.button.enabled = editable
         
@@ -316,6 +329,11 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
                 }
             }
         }
+        
+        // Set the currently selected values
+        let selectedValue: AnyObject? = field.buttonValues[4]
+        let selectedValueAsString = field.buttonValues[5] as String
+        cell.userDidSelectValue(selectedValue, valueAsString: selectedValueAsString)
         
         cell.button.enabled = editable
         
