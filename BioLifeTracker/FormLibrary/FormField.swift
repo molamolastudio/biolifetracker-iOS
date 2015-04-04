@@ -22,6 +22,7 @@ class FormField {
         case PickerDefault = 4
         case PickerCustom = 5
         case PickerPhoto = 6
+        case Button = 7
     }
     
     var type: FieldType
