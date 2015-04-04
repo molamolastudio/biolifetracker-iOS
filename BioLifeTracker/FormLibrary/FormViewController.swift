@@ -305,7 +305,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
         cell.label.text = field.label
         
         if let buttonTitle = field.buttonValues[0] as? String {
-            cell.button.titleLabel!.text = buttonTitle
+            cell.button.setTitle(buttonTitle, forState: .Normal)
         }
         
         if let target: AnyObject = field.buttonValues[1] {
