@@ -68,7 +68,7 @@ class Ethogram: BiolifeModel, Storable {
         }
         
         let archiver = NSKeyedUnarchiver(forReadingWithData: data!)
-        let ethogram = archiver.decodeObjectForKey(identifier)! as Ethogram
+        let ethogram = archiver.decodeObjectForKey(identifier) as Ethogram
         
         return ethogram
     }
@@ -97,8 +97,15 @@ class Ethogram: BiolifeModel, Storable {
 
 extension Ethogram: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
         aCoder.encodeObject(name, forKey: "name")
         aCoder.encodeObject(creator, forKey: "creator")
         aCoder.encodeObject(behaviourStates, forKey: "behaviourStates")
     }
+}
+
+extension Ethogram: CloudStorable {
+    class var classUrl: String { return "ethogram" }
+    func upload() { }
+    func getDependencies() -> [CloudStorable] { return [] }
 }

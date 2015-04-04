@@ -2,13 +2,32 @@
 //  UserAuthService.swift
 //  BioLifeTracker
 //
-//  Created by Li Jia'En, Nicholette on 25/3/15.
+//  Created by Li Jia'En, Nicholette on 2/4/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
 
 import Foundation
 
 class UserAuthService {
+    private var _user: User = User(name: "Default", email: "Default")
+    private var _accessToken: String = ""
     
+    var user: User {
+        get { return _user }
+    }
+    var accessToken: String {
+        get { return _accessToken }
+    }
     
+    class var sharedInstance: UserAuthService {
+        struct Singleton {
+            static let instance = UserAuthService()
+        }
+        return Singleton.instance
+    }
+    
+    func setUserAuth(user: User, accessToken: String) {
+        self._user = user
+        self._accessToken = accessToken
+    }
 }
