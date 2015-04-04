@@ -16,7 +16,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
     
     var alert = UIAlertController()
     let alertTitle = "Pick Photo From"
-    var alertCaller: ButtonCell? = nil
+    var alertCaller: PhotoPickerCell? = nil
     
     var fields: FormFieldData? = nil
     var editable: Bool = true // Determines if the cells can be edited.
@@ -66,7 +66,6 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
         picker.delegate = self
         picker.allowsEditing = true
         picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
-        println("gallery")
         self.presentViewController(picker, animated: true, completion: nil)
     }
     
@@ -104,11 +103,9 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
     
     // Displays the PhotoPickerViewController and sets up the values for the picker.
     func showPhotoPicker(sender: UIButton) {
-        if let cell = sender.superview as? ButtonCell {
+        if let cell = sender.superview as? PhotoPickerCell {
             alertCaller = cell
-            println("alert")
-            alert.popoverPresentationController!.sourceView = self.view
-            alert.popoverPresentationController!.sourceRect = CGRectMake(self.view.bounds.size.width / 2.0, self.view.bounds.size.height / 2.0, 1.0, 1.0)
+            alert.popoverPresentationController!.sourceView = sender
             self.parentViewController!.presentViewController(alert, animated: true, completion: nil)
         }
     }
@@ -118,7 +115,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
         
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
             if alertCaller != nil {
-                alertCaller!.selectedValue = image
+                alertCaller!.setSelectedImage(image)
             }
         }
         
@@ -178,7 +175,8 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
             if let type = fields!.getFieldTypeForIndex(indexPath) {
                 if type == FormField.FieldType.TextMultiLine ||
                     type == FormField.FieldType.PickerDate ||
-                    type == FormField.FieldType.PickerDefault {
+                    type == FormField.FieldType.PickerDefault ||
+                    type == FormField.FieldType.PickerPhoto {
                         return defaultCellHeight * 3
                 }
             }
@@ -287,14 +285,12 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
     
     func getPhotoPickerCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
-            nibNames[FormField.FieldType.Button.rawValue]) as ButtonCell
+            nibNames[FormField.FieldType.PickerPhoto.rawValue]) as PhotoPickerCell
         
         cell.label.text = field.label
         cell.button.setTitle("Pick Image", forState: .Normal)
         
         cell.setSelectorForButton(self, action: Selector("showPhotoPicker:"))
-        
-        popup.delegate = cell
         
         cell.button.enabled = editable
         
