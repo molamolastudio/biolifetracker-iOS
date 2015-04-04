@@ -8,8 +8,8 @@
 
 import UIKit
 
-class CustomPickerPopup: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var delegate: CustomPickerPopupDelegate? = nil
+class CustomPickerPopup: FormPopupController, UITableViewDataSource, UITableViewDelegate {
+    var pickerDelegate: CustomPickerPopupDelegate? = nil
     
     let table = UITableView()
     let overlay = UIView()
@@ -76,7 +76,12 @@ class CustomPickerPopup: UIViewController, UITableViewDataSource, UITableViewDel
     func tapDetected(sender: UITapGestureRecognizer) {
         let point = sender.locationInView(sender.view)
         if !CGRectContainsPoint(table.frame, point) {
-            delegate!.pickerDidDismiss(selectedIndex)
+            var message: String? = nil
+            if selectedIndex != nil {
+                message = data[selectedIndex!]
+            }
+            delegate!.userDidSelectValue(selectedIndex!, valueAsString: message)
+            pickerDelegate!.pickerDidDismiss(selectedIndex)
         }
     }
     

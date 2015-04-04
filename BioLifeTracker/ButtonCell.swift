@@ -15,11 +15,11 @@ class ButtonCell: FormCell, FormPopupDelegate {
     
     var selectedValue: AnyObject? = nil
     
-    func setSelectorForButton(target: FormPopupController, action: Selector) {
+    func setSelectorForButton(target: AnyObject, action: Selector) {
         button.addTarget(target, action: action, forControlEvents: UIControlEvents.TouchUpInside)
     }
     
-    func userDidSelectValue(value: AnyObject, valueAsString: String) {
+    func userDidSelectValue(value: AnyObject?, valueAsString: String?) {
         selectedValue = value
         selectedLabel.text = valueAsString
     }

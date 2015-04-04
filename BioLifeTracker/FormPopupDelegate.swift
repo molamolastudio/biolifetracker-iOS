@@ -9,5 +9,5 @@
 import Foundation
 
 protocol FormPopupDelegate {
-    func userDidSelectValue(value: AnyObject, valueAsString: String)
+    func userDidSelectValue(value: AnyObject?, valueAsString: String?)
 }

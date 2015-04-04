@@ -11,7 +11,7 @@
 
 import UIKit
 
-class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewDelegate {
+class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewDelegate, CustomPickerPopupDelegate {
     
     let splitVC = UISplitViewController()
     let menu = MenuViewController(style: UITableViewStyle.Grouped)
@@ -19,6 +19,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     let newIndividual = FormViewController(style: UITableViewStyle.Grouped)
     
     let ethogramPickerValues = ["Ethogram 1", "Ethogram 2"]
+    
+    let popup = CustomPickerPopup()
     
     override func viewDidLoad() {
         
@@ -35,6 +37,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         data.addTextCell(section: 0, label: "Notes", hasSingleLine: false, value: "I have no notes.")
         
         data.addBooleanCell(section: 1, label: "Human?")
+        data.addButtonCell(section: 1, label: "Button", buttonTitle: "Press", target: self, action: "showPicker", popup: popup)
         
         data.addDatePickerCell(section: 2, label: "Birthdate")
         data.addPickerCell(section: 2, label: "Options", pickerValues: ["Good", "Neutral", "Evil"], isCustomPicker: false)
@@ -52,6 +55,19 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
         self.view.addSubview(splitVC.view)
         splitVC.view.frame = self.view.frame
+    }
+    
+    func showPicker() {
+        popup.pickerDelegate = self
+        
+        popup.data = ethogramPickerValues
+        
+        self.view.addSubview(popup.view)
+        popup.view.frame = self.view.frame
+    }
+    
+    func pickerDidDismiss(selectedIndex: Int?) {
+        popup.view.removeFromSuperview()
     }
     
     func setupMenu() {

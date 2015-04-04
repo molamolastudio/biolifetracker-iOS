@@ -68,6 +68,9 @@ class FormViewController: UITableViewController {
                     break
                 case .PickerPhoto:
                     break
+                case .Button:
+                    cell = getButtonCell(field, indexPath: indexPath)
+                    break
                 default:
                     break
                 }
@@ -167,16 +170,23 @@ class FormViewController: UITableViewController {
         return cell
     }
     
+    // Creates a ButtonCell with label, button title and target as specified in the FormField.
+    // Sets the new cell as the given target's delegate.
     func getButtonCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
             nibNames[FormField.FieldType.Button.rawValue]) as ButtonCell
-        
         cell.label.text = field.label
         
-        if let target = field.buttonValues[1] as? FormPopupController {
+        if let buttonTitle = field.buttonValues[0] as? String {
+            cell.button.titleLabel!.text = buttonTitle
+        }
+        
+        if let target: AnyObject = field.buttonValues[1] {
             if let action = field.buttonValues[2] as? String {
-                target.delegate = cell
                 cell.setSelectorForButton(target, action: Selector(action))
+                if let popup = field.buttonValues[3] as? FormPopupController {
+                    popup.delegate = cell
+                }
             }
         }
         
