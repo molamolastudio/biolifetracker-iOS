@@ -88,6 +88,7 @@
 		32850BE41AB9625500C49D33 /* EthogramFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */; };
 		32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A211AB1789100578C42 /* EthogramsViewController.swift */; };
 		32850BE61AB9625500C49D33 /* EthogramDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */; };
+		329B29231ACFE357007ADC65 /* PhotoPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329B29221ACFE357007ADC65 /* PhotoPickerViewController.swift */; };
 		AC188C7C1AC2B11A00CB08C0 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC188C7B1AC2B11A00CB08C0 /* Storable.swift */; };
 		AC188C7D1AC2B11A00CB08C0 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC188C7B1AC2B11A00CB08C0 /* Storable.swift */; };
 		AC702EE21AC55EA3003C50C8 /* Ethogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7711AAEDA85006F374D /* Ethogram.swift */; };
@@ -200,6 +201,7 @@
 		326773C81ACD85BC00899745 /* DatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerCell.swift; sourceTree = "<group>"; };
 		326773CA1ACD869F00899745 /* DefaultPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultPickerCell.swift; sourceTree = "<group>"; };
 		326773CC1ACD86BB00899745 /* DefaultPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultPickerCell.xib; sourceTree = "<group>"; };
+		329B29221ACFE357007ADC65 /* PhotoPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPickerViewController.swift; sourceTree = "<group>"; };
 		AC188C7B1AC2B11A00CB08C0 /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorable.swift; sourceTree = "<group>"; };
 		ACB073E31AC17BA3004E0BFC /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
@@ -449,6 +451,7 @@
 				326773AB1ACAEFB000899745 /* CustomPickerPopupCell.xib */,
 				326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */,
 				326773AC1ACAEFB000899745 /* CustomPickerPopupDelegate.swift */,
+				329B29221ACFE357007ADC65 /* PhotoPickerViewController.swift */,
 			);
 			name = "Form Library";
 			sourceTree = "<group>";
@@ -579,6 +582,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				326773C11ACAEFB000899745 /* MultiLineTextCell.swift in Sources */,
+				329B29231ACFE357007ADC65 /* PhotoPickerViewController.swift in Sources */,
 				326773BD1ACAEFB000899745 /* FormFieldData.swift in Sources */,
 				242C6E091AC86BFD0024ECEF /* Tag.swift in Sources */,
 				32850BE21AB9625500C49D33 /* ProjectsViewController.swift in Sources */,

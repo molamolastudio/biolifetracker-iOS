@@ -8,10 +8,15 @@
 
 import UIKit
 
-class FormViewController: UITableViewController, CustomPickerPopupDelegate {
+class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let defaultCellHeight: CGFloat = 44
+    
     let popup = CustomPickerPopup()
+    
+    var alert = UIAlertController()
+    let alertTitle = "Pick Photo From"
+    var alertCaller: ButtonCell? = nil
     
     var fields: FormFieldData? = nil
     var editable: Bool = true // Determines if the cells can be edited.
@@ -28,6 +33,41 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate {
         for var i = 0; i < nibNames.count; i++ {
             self.tableView.registerNib(UINib(nibName: nibNames[i], bundle: nil), forCellReuseIdentifier: nibNames[i])
         }
+        setupAlertController()
+    }
+    
+    // Creates a UIAlertController to display a menu for choosing a source for picking photos.
+    func setupAlertController() {
+        alert = UIAlertController(title: alertTitle, message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
+            let actionCamera = UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default, handler: { UIAlertAction in self.openCameraPicker()})
+            alert.addAction(actionCamera)
+        }
+        
+        let actionGallery = UIAlertAction(title: "Gallery", style: UIAlertActionStyle.Default, handler: { UIAlertAction in self.openGalleryPicker()})
+        let actionCancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        
+        alert.addAction(actionGallery)
+        alert.addAction(actionCancel)
+    }
+    
+    func openCameraPicker() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        picker.sourceType = UIImagePickerControllerSourceType.Camera
+        
+        self.presentViewController(picker, animated: true, completion: nil)
+    }
+    
+    func openGalleryPicker() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        println("gallery")
+        self.presentViewController(picker, animated: true, completion: nil)
     }
     
     func getFormData() -> [AnyObject?] {
@@ -45,6 +85,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate {
         fields = data
     }
     
+    // Displays the CustomPickerPopup view and sets up the values for the picker.
     func showPicker(sender: UIButton) {
         if let cell = sender.superview as? ButtonCell {
             popup.pickerDelegate = self
@@ -56,10 +97,40 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate {
         }
     }
     
+    // Removes the CustomPickerPopup view from this controller's view.
     func pickerDidDismiss(selectedIndex: Int?) {
         popup.view.removeFromSuperview()
     }
     
+    // Displays the PhotoPickerViewController and sets up the values for the picker.
+    func showPhotoPicker(sender: UIButton) {
+        if let cell = sender.superview as? ButtonCell {
+            alertCaller = cell
+            println("alert")
+            alert.popoverPresentationController!.sourceView = self.view
+            alert.popoverPresentationController!.sourceRect = CGRectMake(self.view.bounds.size.width / 2.0, self.view.bounds.size.height / 2.0, 1.0, 1.0)
+            self.parentViewController!.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
+    // UIImagePickerControllerDelegate methods
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            if alertCaller != nil {
+                alertCaller!.selectedValue = image
+            }
+        }
+        
+        picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // UITableViewControllerDataSource and UITableViewDelegate methods
+    // Returns a UITableViewCell based on the type of field in the given index path.
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = FormCell()
         if fields != nil {
@@ -84,6 +155,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate {
                     cell = getCustomPickerCell(field, indexPath: indexPath)
                     break
                 case .PickerPhoto:
+                    cell = getPhotoPickerCell(field, indexPath: indexPath)
                     break
                 case .Button:
                     cell = getButtonCell(field, indexPath: indexPath)
@@ -100,6 +172,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate {
         return cell
     }
     
+    // Returns the cell height depending on the type of cell in the row.
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if fields != nil {
             if let type = fields!.getFieldTypeForIndex(indexPath) {
@@ -113,6 +186,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate {
         return defaultCellHeight
     }
     
+    // Creates a SingleLineTextCell with values as specified in the FormField.
     func getSingleLineTextCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
             nibNames[FormField.FieldType.TextSingleLine.rawValue]) as SingleLineTextCell
@@ -127,6 +201,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate {
         return cell
     }
     
+    // Creates a MultiLineTextCell with values as specified in the FormField.
     func getMultiLineTextCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
             nibNames[FormField.FieldType.TextMultiLine.rawValue]) as MultiLineTextCell
@@ -141,6 +216,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate {
         return cell
     }
     
+    // Creates a BooleanPickerCell with values as specified in the FormField.
     func getBooleanPickerCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
             nibNames[FormField.FieldType.PickerBoolean.rawValue]) as BooleanPickerCell
@@ -155,6 +231,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate {
         return cell
     }
     
+    // Creates a DatePickerCell with values as specified in the FormField.
     func getDatePickerCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
             nibNames[FormField.FieldType.PickerDate.rawValue]) as DatePickerCell
@@ -169,6 +246,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate {
         return cell
     }
     
+    // Creates a DefaultPickerCell with values as specified in the FormField.
     func getDefaultPickerCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
             nibNames[FormField.FieldType.PickerDefault.rawValue]) as DefaultPickerCell
@@ -187,7 +265,8 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate {
         return cell
     }
     
-    // Creates a ButtonCell with label, button title and target as specified in the FormField.
+    // Creates a ButtonCell with label and picker values as specified in the FormField.
+    // Sets its button action to call the 'showPicker()' method of this controller.
     // Sets the new cell as the given target's delegate.
     func getCustomPickerCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
@@ -198,6 +277,22 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate {
         cell.pickerValues = field.pickerValues
         
         cell.setSelectorForButton(self, action: Selector("showPicker:"))
+        
+        popup.delegate = cell
+        
+        cell.button.enabled = editable
+        
+        return cell
+    }
+    
+    func getPhotoPickerCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(
+            nibNames[FormField.FieldType.Button.rawValue]) as ButtonCell
+        
+        cell.label.text = field.label
+        cell.button.setTitle("Pick Image", forState: .Normal)
+        
+        cell.setSelectorForButton(self, action: Selector("showPhotoPicker:"))
         
         popup.delegate = cell
         

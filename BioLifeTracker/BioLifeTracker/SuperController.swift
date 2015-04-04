@@ -39,6 +39,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         data.addBooleanCell(section: 1, label: "Human?")
         data.addButtonCell(section: 1, label: "Button", buttonTitle: "Press", target: self, action: "showPicker", popup: popup)
         data.addPickerCell(section: 1, label: "Custom pick", pickerValues: ethogramPickerValues, isCustomPicker: true)
+        data.addPhotoPickerCell(section: 1, label: "Photo")
         
         data.addDatePickerCell(section: 2, label: "Birthdate")
         data.addPickerCell(section: 2, label: "Options", pickerValues: ["Good", "Neutral", "Evil"], isCustomPicker: false)
