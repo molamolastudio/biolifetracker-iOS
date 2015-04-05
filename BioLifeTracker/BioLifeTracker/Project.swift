@@ -19,8 +19,8 @@ class Project: BiolifeModel {
     // Default initializer
     override init() {
         name = ""
-        admins = [Data.currentUser]
-        members = [Data.currentUser]
+        admins = [UserAuthService.sharedInstance.user]
+        members = [UserAuthService.sharedInstance.user]
         ethogram = Ethogram()
         sessions = []
         individuals = []
@@ -31,8 +31,8 @@ class Project: BiolifeModel {
         self.init()
         self.name = name
         self.ethogram = ethogram
-        self.admins = [Data.currentUser]
-        self.members = [Data.currentUser]
+        self.admins = [UserAuthService.sharedInstance.user]
+        self.members = [UserAuthService.sharedInstance.user]
         self.sessions = []
     }
     
@@ -89,7 +89,7 @@ class Project: BiolifeModel {
     
     required init(coder aDecoder: NSCoder) {
         var enumerator: NSEnumerator
-        
+
         self.name = aDecoder.decodeObjectForKey("name") as String
         self.ethogram = aDecoder.decodeObjectForKey("ethogram") as Ethogram
         
@@ -122,32 +122,58 @@ class Project: BiolifeModel {
         enumerator = objectSessions.objectEnumerator()
         
         self.sessions = Array<Session>()
-        var session: Session
+        var session: Session?
 
         while true {
-            var session = enumerator.nextObject() as Session?
+            session = enumerator.nextObject() as Session?
             
             if session == nil {
                 break
             }
-            //session!.project = self
-            // Warning: There will be cyclic dependency here!
-            // Project has sessions, and Session has project.
-            // NSCoder protocol will cycle back and forth between this cyclic
-            // relationship. We need to migrate to Core Data.
+
             self.sessions.append(session!)
         }
-        self.individuals = []
+        
+        let objectIndividuals: AnyObject = aDecoder.decodeObjectForKey("individuals")!
+        
+        enumerator = objectIndividuals.objectEnumerator()
+        
+        self.individuals = Array<Individual>()
+        var individual: Individual?
+        
+        while true {
+            individual = enumerator.nextObject() as Individual?
+            
+            if session == nil {
+                break
+            }
+            
+            self.individuals.append(individual!)
+        }
+        
         super.init(coder: aDecoder)
+        
+        for session in sessions {
+            session.project = self
+        }
     }
 }
 
 extension Project: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
         aCoder.encodeObject(name, forKey: "name")
         aCoder.encodeObject(ethogram, forKey: "ethogram")
         aCoder.encodeObject(admins, forKey: "admins")
         aCoder.encodeObject(members, forKey: "members")
         aCoder.encodeObject(sessions, forKey: "sessions")
+        aCoder.encodeObject(individuals, forKey: "individuals")
     }
 }
+
+extension Project: CloudStorable {
+    class var classUrl: String { return "project" }
+    func upload() { }
+    func getDependencies() -> [CloudStorable] { return [] }
+}
+

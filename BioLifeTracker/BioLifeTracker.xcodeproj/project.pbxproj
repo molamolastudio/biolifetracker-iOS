@@ -60,6 +60,10 @@
 		320920631AC9908500E8A456 /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 320920621AC9908400E8A456 /* GooglePlus.bundle */; };
 		320920691ACA7E4400E8A456 /* SuperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320920681ACA7E4400E8A456 /* SuperController.swift */; };
 		320920711ACA9A1600E8A456 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320920701ACA9A1600E8A456 /* MenuViewController.swift */; };
+		3222E6F51ACF8F5F00E51BA1 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3222E6F41ACF8F5F00E51BA1 /* ButtonCell.swift */; };
+		3222E6F71ACF8F8000E51BA1 /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3222E6F61ACF8F8000E51BA1 /* ButtonCell.xib */; };
+		3222E6F91ACF917100E51BA1 /* FormPopupDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3222E6F81ACF917100E51BA1 /* FormPopupDelegate.swift */; };
+		3222E6FB1ACFA02900E51BA1 /* FormPopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3222E6FA1ACFA02900E51BA1 /* FormPopupController.swift */; };
 		326773B61ACAEFB000899745 /* BooleanPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773A91ACAEFB000899745 /* BooleanPickerCell.swift */; };
 		326773B71ACAEFB000899745 /* CustomPickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */; };
 		326773B81ACAEFB000899745 /* CustomPickerPopupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 326773AB1ACAEFB000899745 /* CustomPickerPopupCell.xib */; };
@@ -84,6 +88,8 @@
 		32850BE41AB9625500C49D33 /* EthogramFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */; };
 		32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A211AB1789100578C42 /* EthogramsViewController.swift */; };
 		32850BE61AB9625500C49D33 /* EthogramDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */; };
+		329B29251ACFF516007ADC65 /* PhotoPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329B29241ACFF516007ADC65 /* PhotoPickerCell.swift */; };
+		329B29271ACFF5BC007ADC65 /* PhotoPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 329B29261ACFF5BC007ADC65 /* PhotoPickerCell.xib */; };
 		AC188C7C1AC2B11A00CB08C0 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC188C7B1AC2B11A00CB08C0 /* Storable.swift */; };
 		AC188C7D1AC2B11A00CB08C0 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC188C7B1AC2B11A00CB08C0 /* Storable.swift */; };
 		AC702EE21AC55EA3003C50C8 /* Ethogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7711AAEDA85006F374D /* Ethogram.swift */; };
@@ -96,6 +102,8 @@
 		AC702EEA1AC55FAA003C50C8 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7751AAEDA85006F374D /* User.swift */; };
 		AC702EEB1AC55FBC003C50C8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E76F1AAEDA85006F374D /* Constants.swift */; };
 		AC702EEC1AC55FC6003C50C8 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7701AAEDA85006F374D /* Data.swift */; };
+		AC9162AC1ACA6A0400FED714 /* CloudStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */; };
+		AC9162AD1ACA6CC300FED714 /* CloudStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */; };
 		ACB073E91AC17BA3004E0BFC /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073E31AC17BA3004E0BFC /* AddressBook.framework */; };
 		ACB073EA1AC17BA3004E0BFC /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073E41AC17BA3004E0BFC /* AssetsLibrary.framework */; };
 		ACB073EB1AC17BA3004E0BFC /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073E51AC17BA3004E0BFC /* CoreText.framework */; };
@@ -104,6 +112,10 @@
 		ACB073EE1AC17BA3004E0BFC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073E81AC17BA3004E0BFC /* UIKit.framework */; };
 		ACB073F41AC184F5004E0BFC /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073F31AC184F5004E0BFC /* CoreMotion.framework */; };
 		ACDC54401AC3FC6B00779FAE /* LocalStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDC543F1AC3FC6B00779FAE /* LocalStorageTests.swift */; };
+		ACDCC0F11ACD05E1001590B8 /* UserAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDCC0F01ACD05E1001590B8 /* UserAuthService.swift */; };
+		ACDCC0F21ACD05E1001590B8 /* UserAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDCC0F01ACD05E1001590B8 /* UserAuthService.swift */; };
+		ACDCFADF1AC9B68600CEA99C /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDCFADE1AC9B68600CEA99C /* GooglePlus.framework */; };
+		ACDCFAE01AC9B68600CEA99C /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDCFADE1AC9B68600CEA99C /* GooglePlus.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +177,10 @@
 		320920621AC9908400E8A456 /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GooglePlus.bundle; path = BioLifeTracker/GooglePlus.bundle; sourceTree = "<group>"; };
 		320920681ACA7E4400E8A456 /* SuperController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperController.swift; sourceTree = "<group>"; };
 		320920701ACA9A1600E8A456 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		3222E6F41ACF8F5F00E51BA1 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
+		3222E6F61ACF8F8000E51BA1 /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
+		3222E6F81ACF917100E51BA1 /* FormPopupDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormPopupDelegate.swift; sourceTree = "<group>"; };
+		3222E6FA1ACFA02900E51BA1 /* FormPopupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormPopupController.swift; sourceTree = "<group>"; };
 		32517A1F1AB09A3D00578C42 /* ProjectHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectHomeViewController.swift; sourceTree = "<group>"; };
 		32517A211AB1789100578C42 /* EthogramsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramsViewController.swift; sourceTree = "<group>"; };
 		32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramDetailsViewController.swift; sourceTree = "<group>"; };
@@ -186,7 +202,10 @@
 		326773C81ACD85BC00899745 /* DatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerCell.swift; sourceTree = "<group>"; };
 		326773CA1ACD869F00899745 /* DefaultPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultPickerCell.swift; sourceTree = "<group>"; };
 		326773CC1ACD86BB00899745 /* DefaultPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultPickerCell.xib; sourceTree = "<group>"; };
+		329B29241ACFF516007ADC65 /* PhotoPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPickerCell.swift; sourceTree = "<group>"; };
+		329B29261ACFF5BC007ADC65 /* PhotoPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoPickerCell.xib; sourceTree = "<group>"; };
 		AC188C7B1AC2B11A00CB08C0 /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
+		AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorable.swift; sourceTree = "<group>"; };
 		ACB073E31AC17BA3004E0BFC /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		ACB073E41AC17BA3004E0BFC /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		ACB073E51AC17BA3004E0BFC /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -195,6 +214,8 @@
 		ACB073E81AC17BA3004E0BFC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ACB073F31AC184F5004E0BFC /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		ACDC543F1AC3FC6B00779FAE /* LocalStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorageTests.swift; sourceTree = "<group>"; };
+		ACDCC0F01ACD05E1001590B8 /* UserAuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthService.swift; sourceTree = "<group>"; };
+		ACDCFADE1AC9B68600CEA99C /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlus.framework; path = "../../Downloads/google-plus-ios-sdk-1.7.1 2/GooglePlus.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -224,6 +245,7 @@
 				24E32D3F1AB1E86A003C4E0A /* AudioToolbox.framework in Frameworks */,
 				2439AABA1AC7DC7900389195 /* FacebookSDK.framework in Frameworks */,
 				24E32D361AB19647003C4E0A /* Bolts.framework in Frameworks */,
+				ACDCFADF1AC9B68600CEA99C /* GooglePlus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +258,7 @@
 				24E32D691AB1EC5A003C4E0A /* SystemConfiguration.framework in Frameworks */,
 				24E32D6A1AB1EC5A003C4E0A /* Foundation.framework in Frameworks */,
 				24E32D6B1AB1EC5A003C4E0A /* CoreLocation.framework in Frameworks */,
+				ACDCFAE01AC9B68600CEA99C /* GooglePlus.framework in Frameworks */,
 				24E32D6C1AB1EC5A003C4E0A /* CoreGraphics.framework in Frameworks */,
 				24E32D6D1AB1EC5A003C4E0A /* CFNetwork.framework in Frameworks */,
 				24E32D6E1AB1EC5A003C4E0A /* Accounts.framework in Frameworks */,
@@ -276,9 +299,9 @@
 		24E32D3B1AB1991C003C4E0A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ACDCFADE1AC9B68600CEA99C /* GooglePlus.framework */,
 				320920621AC9908400E8A456 /* GooglePlus.bundle */,
 				242C6E001AC7DFBC0024ECEF /* GoogleOpenSource.framework */,
-				242C6E011AC7DFBC0024ECEF /* GooglePlus.framework */,
 				2439AAB91AC7DC7900389195 /* FacebookSDK.framework */,
 				24E32D441AB1E89D003C4E0A /* Accounts.framework */,
 				ACB073E31AC17BA3004E0BFC /* AddressBook.framework */,
@@ -344,9 +367,11 @@
 		3205E7441AAED9F9006F374D /* BioLifeTracker */ = {
 			isa = PBXGroup;
 			children = (
+				ACDCC0EF1ACD05C7001590B8 /* Services */,
 				24E32D771AB298D8003C4E0A /* BioLifeTracker-Bridging-Header.h */,
 				240D042B1AB6CA6800D8BB9F /* Authentication */,
 				24E32D3C1AB19954003C4E0A /* Model */,
+				AC9162AA1ACA69BF00FED714 /* Cloud Storage */,
 				3205E76F1AAEDA85006F374D /* Constants.swift */,
 				3205E7701AAEDA85006F374D /* Data.swift */,
 				320920681ACA7E4400E8A456 /* SuperController.swift */,
@@ -421,11 +446,33 @@
 				326773C61ACD851400899745 /* DatePickerCell.xib */,
 				326773CA1ACD869F00899745 /* DefaultPickerCell.swift */,
 				326773CC1ACD86BB00899745 /* DefaultPickerCell.xib */,
+				3222E6F41ACF8F5F00E51BA1 /* ButtonCell.swift */,
+				3222E6F61ACF8F8000E51BA1 /* ButtonCell.xib */,
+				329B29241ACFF516007ADC65 /* PhotoPickerCell.swift */,
+				329B29261ACFF5BC007ADC65 /* PhotoPickerCell.xib */,
+				3222E6FA1ACFA02900E51BA1 /* FormPopupController.swift */,
+				3222E6F81ACF917100E51BA1 /* FormPopupDelegate.swift */,
 				326773AB1ACAEFB000899745 /* CustomPickerPopupCell.xib */,
 				326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */,
 				326773AC1ACAEFB000899745 /* CustomPickerPopupDelegate.swift */,
 			);
 			name = "Form Library";
+			sourceTree = "<group>";
+		};
+		AC9162AA1ACA69BF00FED714 /* Cloud Storage */ = {
+			isa = PBXGroup;
+			children = (
+				AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */,
+			);
+			name = "Cloud Storage";
+			sourceTree = "<group>";
+		};
+		ACDCC0EF1ACD05C7001590B8 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				ACDCC0F01ACD05E1001590B8 /* UserAuthService.swift */,
+			);
+			name = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -514,8 +561,10 @@
 				3205E74D1AAED9F9006F374D /* Main.storyboard in Resources */,
 				326773BA1ACAEFB000899745 /* BooleanPickerCell.xib in Resources */,
 				320920631AC9908500E8A456 /* GooglePlus.bundle in Resources */,
+				3222E6F71ACF8F8000E51BA1 /* ButtonCell.xib in Resources */,
 				3205E7521AAED9F9006F374D /* LaunchScreen.xib in Resources */,
 				3205E74F1AAED9F9006F374D /* Images.xcassets in Resources */,
+				329B29271ACFF5BC007ADC65 /* PhotoPickerCell.xib in Resources */,
 				326773BF1ACAEFB000899745 /* SingleLineTextCell.xib in Resources */,
 				326773BE1ACAEFB000899745 /* MultiLineTextCell.xib in Resources */,
 				326773CD1ACD86BB00899745 /* DefaultPickerCell.xib in Resources */,
@@ -545,18 +594,23 @@
 				3205E7791AAEDA85006F374D /* Ethogram.swift in Sources */,
 				326773C51ACD7C9A00899745 /* MenuViewDelegate.swift in Sources */,
 				326773BC1ACAEFB000899745 /* FormField.swift in Sources */,
+				329B29251ACFF516007ADC65 /* PhotoPickerCell.swift in Sources */,
 				320920691ACA7E4400E8A456 /* SuperController.swift in Sources */,
 				326773B61ACAEFB000899745 /* BooleanPickerCell.swift in Sources */,
 				320920711ACA9A1600E8A456 /* MenuViewController.swift in Sources */,
 				240D04331AB718EF00D8BB9F /* Location.swift in Sources */,
+				ACDCC0F11ACD05E1001590B8 /* UserAuthService.swift in Sources */,
 				32850BE41AB9625500C49D33 /* EthogramFormViewController.swift in Sources */,
 				326773C01ACAEFB000899745 /* FormViewController.swift in Sources */,
 				3205E7761AAEDA85006F374D /* BehaviourState.swift in Sources */,
 				32850BE61AB9625500C49D33 /* EthogramDetailsViewController.swift in Sources */,
 				242C6E071AC80F050024ECEF /* BiolifeModel.swift in Sources */,
 				326773BB1ACAEFB000899745 /* FormCell.swift in Sources */,
+				3222E6F51ACF8F5F00E51BA1 /* ButtonCell.swift in Sources */,
+				3222E6F91ACF917100E51BA1 /* FormPopupDelegate.swift in Sources */,
 				3205E7781AAEDA85006F374D /* Data.swift in Sources */,
 				3205E77A1AAEDA85006F374D /* Observation.swift in Sources */,
+				AC9162AC1ACA6A0400FED714 /* CloudStorable.swift in Sources */,
 				326773B71ACAEFB000899745 /* CustomPickerPopup.swift in Sources */,
 				32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */,
 				326773C91ACD85BC00899745 /* DatePickerCell.swift in Sources */,
@@ -566,6 +620,7 @@
 				3205E77B1AAEDA85006F374D /* Project.swift in Sources */,
 				326773B91ACAEFB000899745 /* CustomPickerPopupDelegate.swift in Sources */,
 				3205E77D1AAEDA85006F374D /* User.swift in Sources */,
+				3222E6FB1ACFA02900E51BA1 /* FormPopupController.swift in Sources */,
 				3205E77C1AAEDA85006F374D /* Session.swift in Sources */,
 				326773CB1ACD869F00899745 /* DefaultPickerCell.swift in Sources */,
 				240D04351AB7190800D8BB9F /* Weather.swift in Sources */,
@@ -586,6 +641,7 @@
 				AC702EE21AC55EA3003C50C8 /* Ethogram.swift in Sources */,
 				AC702EEA1AC55FAA003C50C8 /* User.swift in Sources */,
 				AC702EEC1AC55FC6003C50C8 /* Data.swift in Sources */,
+				ACDCC0F21ACD05E1001590B8 /* UserAuthService.swift in Sources */,
 				24E32D7E1AB29DEF003C4E0A /* BehaviourState.swift in Sources */,
 				AC702EE81AC55EB5003C50C8 /* Weather.swift in Sources */,
 				247F2FB51AC8EF220065A0D1 /* BiolifeModel.swift in Sources */,
@@ -593,6 +649,7 @@
 				AC188C7D1AC2B11A00CB08C0 /* Storable.swift in Sources */,
 				ACDC54401AC3FC6B00779FAE /* LocalStorageTests.swift in Sources */,
 				3205E75E1AAED9F9006F374D /* BioLifeTrackerTests.swift in Sources */,
+				AC9162AD1ACA6CC300FED714 /* CloudStorable.swift in Sources */,
 				247F2FB41AC8EEF90065A0D1 /* Tag.swift in Sources */,
 				AC702EE51AC55EAC003C50C8 /* Observation.swift in Sources */,
 				AC702EE31AC55EA8003C50C8 /* Project.swift in Sources */,
@@ -720,6 +777,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BioLifeTracker",
+					"$(PROJECT_DIR)",
+					"/Users/nekonekonik/Downloads/google-plus-ios-sdk-1.7.1",
+					2,
 				);
 				INFOPLIST_FILE = BioLifeTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -739,6 +799,9 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BioLifeTracker",
+					"$(PROJECT_DIR)",
+					"/Users/nekonekonik/Downloads/google-plus-ios-sdk-1.7.1",
+					2,
 				);
 				INFOPLIST_FILE = BioLifeTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -757,6 +820,8 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(PROJECT_DIR)/BioLifeTracker",
+					"/Users/nekonekonik/Downloads/google-plus-ios-sdk-1.7.1",
+					2,
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -778,6 +843,8 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(PROJECT_DIR)/BioLifeTracker",
+					"/Users/nekonekonik/Downloads/google-plus-ios-sdk-1.7.1",
+					2,
 				);
 				INFOPLIST_FILE = BioLifeTrackerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

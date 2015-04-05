@@ -32,6 +32,7 @@ class Weather: BiolifeModel {
 
 extension Weather: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
         aCoder.encodeObject(weather, forKey: "weather")
     }
 }

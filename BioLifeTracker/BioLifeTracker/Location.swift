@@ -31,6 +31,7 @@ class Location: BiolifeModel {
 
 extension Location: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
         aCoder.encodeObject(location, forKey: "location")
     }
 }

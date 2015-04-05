@@ -84,7 +84,7 @@ class FormFieldData {
     
     // Adds a boolean picker cell to the first section of the form, unless specified.
     // If the section does not exist, does nothing.
-    func addBooleanCell(section: Int = 0, label: String, value: AnyObject? = nil) {
+    func addBooleanCell(section: Int = 0, label: String, value: Bool? = nil) {
         if let var array = fields[section] {
             var field = FormField()
             
@@ -101,15 +101,15 @@ class FormFieldData {
     
     // Adds a date picker cell to the first section of the form, unless specified.
     // If the section does not exist, does nothing.
-    func addDatePickerCell(section: Int = 0, label: String, value: AnyObject? = nil) {
+    func addDatePickerCell(section: Int = 0, label: String, selectedDate: NSDate? = nil) {
         if let var array = fields[section] {
             var field = FormField()
             
             field.type = FormField.FieldType.PickerDate
             field.label = label
             
-            if value != nil {
-                field.value = value
+            if selectedDate != nil {
+                field.value = selectedDate
             }
             array.append(field)
             fields[section] = array
@@ -118,7 +118,7 @@ class FormFieldData {
     
     // Adds a picker cell with the given values to the first section of the form, unless specified.
     // If the section does not exist, does nothing.
-    func addPickerCell(section: Int = 0, label: String, pickerValues: [String], isCustomPicker: Bool, value: AnyObject? = nil) {
+    func addPickerCell(section: Int = 0, label: String, pickerValues: [String], isCustomPicker: Bool, selectedIndex: Int? = nil) {
         if let var array = fields[section] {
             var field = FormField()
             
@@ -129,9 +129,10 @@ class FormFieldData {
             }
             
             field.label = label
+            field.pickerValues = pickerValues
             
-            if value != nil {
-                field.value = value
+            if selectedIndex != nil {
+                field.value = selectedIndex
             }
             array.append(field)
             fields[section] = array
@@ -140,16 +141,30 @@ class FormFieldData {
     
     // Adds a photo picker cell to the first section of the form, unless specified.
     // If the section does not exist, does nothing.
-    func addPhotoPickerCell(section: Int = 0, label: String, value: AnyObject? = nil) {
+    func addPhotoPickerCell(section: Int = 0, label: String, image: UIImage? = nil) {
         if let var array = fields[section] {
             var field = FormField()
             
             field.type = FormField.FieldType.PickerPhoto
             field.label = label
             
-            if value != nil {
-                field.value = value
+            if image != nil {
+                field.value = image
             }
+            array.append(field)
+            fields[section] = array
+        }
+    }
+    
+    func addButtonCell(section: Int = 0, label: String, buttonTitle: String, target: AnyObject? = nil, action: String? = nil,  popup: FormPopupController? = nil, selectedValue: AnyObject? = nil, selectedValueAsString: String? = nil) {
+        if let var array = fields[section] {
+            var field = FormField()
+            
+            field.type = FormField.FieldType.Button
+            field.label = label
+            
+            field.buttonValues = [buttonTitle, target, action, popup, selectedValue, selectedValueAsString]
+            
             array.append(field)
             fields[section] = array
         }

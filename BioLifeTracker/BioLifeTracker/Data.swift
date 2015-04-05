@@ -11,7 +11,7 @@ import Foundation
 struct Data {
     static var isLoggedIn = false
     
-    static var currentUser: User = User(id: "000", name: Constants.Default.userName)
+//    static var currentUser: User = User(id: "000", name: Constants.Default.userName)
     
     static var selectedProject: Project? = nil
     static var selectedEthogram: Ethogram? = nil

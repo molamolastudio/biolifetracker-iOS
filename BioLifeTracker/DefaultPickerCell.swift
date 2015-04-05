@@ -15,6 +15,10 @@ class DefaultPickerCell: FormCell, UIPickerViewDataSource, UIPickerViewDelegate 
     var values: [String] = []
     var selectedRow: Int = 0
     
+    func setPickerValues(values: [String]) {
+        self.values = values
+    }
+    
     override func getValueFromCell() -> AnyObject? {
         return values[selectedRow]
     }

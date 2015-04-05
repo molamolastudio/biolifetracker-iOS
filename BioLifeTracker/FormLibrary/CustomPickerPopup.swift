@@ -8,8 +8,8 @@
 
 import UIKit
 
-class CustomPickerPopup: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    var delegate: CustomPickerPopupDelegate? = nil
+class CustomPickerPopup: FormPopupController, UITableViewDataSource, UITableViewDelegate {
+    var pickerDelegate: CustomPickerPopupDelegate? = nil
     
     let table = UITableView()
     let overlay = UIView()
@@ -42,7 +42,8 @@ class CustomPickerPopup: UIViewController, UITableViewDataSource, UITableViewDel
     
     func setupOverlay() {
         overlay.frame = self.view.frame
-        overlay.backgroundColor = UIColor.clearColor()
+        overlay.backgroundColor = UIColor.blackColor()
+        overlay.alpha = CGFloat(alphaQuarter)
         self.view.addSubview(overlay)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: Selector("tapDetected:"))
@@ -50,11 +51,15 @@ class CustomPickerPopup: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func setupShadow() {
-        shadow.frame = tableFrame
+        let shadowWidth = self.view.frame.width/2
+        let shadowHeight = self.view.frame.height/3
+        let shadowPathFrame = CGRectMake(0, 0, shadowWidth, shadowHeight)
+        
+        shadow.frame = CGRectMake(shadowWidth/2, shadowHeight, shadowWidth, shadowHeight)
         shadow.backgroundColor = UIColor.clearColor()
         shadow.layer.masksToBounds = false
         shadow.layer.shadowColor = UIColor.blackColor().CGColor
-        shadow.layer.shadowPath = UIBezierPath(roundedRect: shadowFrame, cornerRadius: cornerRadius).CGPath
+        shadow.layer.shadowPath = UIBezierPath(roundedRect: shadowPathFrame, cornerRadius: cornerRadius).CGPath
         shadow.layer.shadowOffset = CGSizeZero
         shadow.layer.shadowOpacity = alphaQuarter
         shadow.layer.shadowRadius = cornerRadius
@@ -62,21 +67,34 @@ class CustomPickerPopup: UIViewController, UITableViewDataSource, UITableViewDel
     }
     
     func setupTableView() {
-        table.frame = tableFrame
+        let tableWidth = self.view.frame.width/2
+        let tableHeight = self.view.frame.height/3
+        
+        table.frame = CGRectMake(tableWidth/2, tableHeight, tableWidth, tableHeight)
         table.dataSource = self
         table.delegate = self
         
         table.layer.cornerRadius = cornerRadius
         table.layer.borderWidth = tableBorderWidth
         table.layer.borderColor = tableBorderColor
-            
+        
         self.view.addSubview(table)
+    }
+    
+    func setSelectedIndex(index: Int) {
+        selectedIndex = index
+        table.reloadData()
     }
     
     func tapDetected(sender: UITapGestureRecognizer) {
         let point = sender.locationInView(sender.view)
         if !CGRectContainsPoint(table.frame, point) {
-            delegate!.pickerDidDismiss(selectedIndex)
+            var message: String? = nil
+            if selectedIndex != nil {
+                message = data[selectedIndex!]
+            }
+            delegate!.userDidSelectValue(selectedIndex, valueAsString: message)
+            pickerDelegate!.pickerDidDismiss(selectedIndex)
         }
     }
     
@@ -109,5 +127,5 @@ class CustomPickerPopup: UIViewController, UITableViewDataSource, UITableViewDel
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return numSections
     }
-
+    
 }

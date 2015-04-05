@@ -9,42 +9,38 @@
 
 import Foundation
 
-class BehaviourState: BiolifeModel {
+class BehaviourState: BiolifeModel, Storable {
     var name: String
     var information: String
-    var ethogram: Ethogram
     var photo: UIImage?
     
     @availability(iOS, deprecated=0.1, message="Use photo: NSImage instead")
     var photoUrls: [String]
     
-    init(ethogram: Ethogram) {
+    override init() {
         name = ""
         information = ""
-        self.ethogram = ethogram
         self.photoUrls = []
         super.init()
     }
     
     @availability(iOS, deprecated=0.1, message="use the given convenience init() instead")
     convenience init(name: String, id: Int) {
-        self.init(ethogram: Ethogram())
+        self.init()
         self.name = name
         self.information = ""
         self.photoUrls = []
     }
     
     convenience init(id: Int, name: String, information: String) {
-        self.init(ethogram: Ethogram())
+        self.init()
         self.name = name
         self.information = information
         self.photoUrls = []
     }
     
-    required convenience init(coder aDecoder: NSCoder) {
-        var ethogram = aDecoder.decodeObjectForKey("ethogram") as Ethogram
-        self.init(ethogram: ethogram)
-        
+    required init(coder aDecoder: NSCoder) {
+
         self.name = aDecoder.decodeObjectForKey("name") as String
         self.information = aDecoder.decodeObjectForKey("information") as String
         
@@ -58,6 +54,8 @@ class BehaviourState: BiolifeModel {
             }
             self.photoUrls.append(url!)
         }
+        
+        super.init(coder: aDecoder)
     }
     
     func saveToArchives() {
@@ -97,17 +95,24 @@ class BehaviourState: BiolifeModel {
         }
         
         let archiver = NSKeyedUnarchiver(forReadingWithData: data!)
-        let ethogram = archiver.decodeObjectForKey(identifier)! as BehaviourState
+        let behaviourState = archiver.decodeObjectForKey(identifier)! as BehaviourState
 
-        return ethogram
+        return behaviourState
     }
 }
 
 
 extension BehaviourState: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
         aCoder.encodeObject(name, forKey: "name")
         aCoder.encodeObject(information, forKey: "information")
         aCoder.encodeObject(photoUrls, forKey: "photoUrls")
     }
+}
+
+extension BehaviourState: CloudStorable {
+    class var classUrl: String { return "behaviourState" }
+    func upload() { }
+    func getDependencies() -> [CloudStorable] { return [] }
 }
