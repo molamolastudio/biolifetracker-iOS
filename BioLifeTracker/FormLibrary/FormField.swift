@@ -22,12 +22,14 @@ class FormField {
         case PickerDefault = 4
         case PickerCustom = 5
         case PickerPhoto = 6
+        case Button = 7
     }
     
     var type: FieldType
     var label: String
     var value: AnyObject?
     var pickerValues: [String] = []
+    var buttonValues: [AnyObject?] = []
     
     init() {
         self.type = FieldType.TextSingleLine

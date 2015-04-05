@@ -19,7 +19,7 @@ class MenuViewController: UITableViewController {
     let settingsSection = ["Settings"]
     let socialSectionLoggedIn = ["Email", "Logout"]
     let socialSectionLoggedOut = ["Google+ Login", "Facebook Login"]
-    
+
     var user: User = UserAuthService.sharedInstance.user
     
     var loggedIn = true

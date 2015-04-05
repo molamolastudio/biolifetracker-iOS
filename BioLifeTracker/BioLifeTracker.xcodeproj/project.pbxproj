@@ -56,6 +56,10 @@
 		3209205D1AC98E8A00E8A456 /* SessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320920591AC98E8A00E8A456 /* SessionsViewController.swift */; };
 		320920691ACA7E4400E8A456 /* SuperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320920681ACA7E4400E8A456 /* SuperController.swift */; };
 		320920711ACA9A1600E8A456 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320920701ACA9A1600E8A456 /* MenuViewController.swift */; };
+		3222E6F51ACF8F5F00E51BA1 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3222E6F41ACF8F5F00E51BA1 /* ButtonCell.swift */; };
+		3222E6F71ACF8F8000E51BA1 /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3222E6F61ACF8F8000E51BA1 /* ButtonCell.xib */; };
+		3222E6F91ACF917100E51BA1 /* FormPopupDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3222E6F81ACF917100E51BA1 /* FormPopupDelegate.swift */; };
+		3222E6FB1ACFA02900E51BA1 /* FormPopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3222E6FA1ACFA02900E51BA1 /* FormPopupController.swift */; };
 		326773B61ACAEFB000899745 /* BooleanPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773A91ACAEFB000899745 /* BooleanPickerCell.swift */; };
 		326773B71ACAEFB000899745 /* CustomPickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */; };
 		326773B81ACAEFB000899745 /* CustomPickerPopupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 326773AB1ACAEFB000899745 /* CustomPickerPopupCell.xib */; };
@@ -80,6 +84,7 @@
 		32850BE41AB9625500C49D33 /* EthogramFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */; };
 		32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A211AB1789100578C42 /* EthogramsViewController.swift */; };
 		32850BE61AB9625500C49D33 /* EthogramDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */; };
+
 		AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AC18814A1ACFC84600CE450B /* GooglePlus.bundle */; };
 		AC18814E1ACFC84600CE450B /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814B1ACFC84600CE450B /* GooglePlus.framework */; };
 		AC1881501ACFD05D00CE450B /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814F1ACFD05D00CE450B /* GoogleOpenSource.framework */; };
@@ -93,6 +98,8 @@
 		AC18815D1AD02F5D00CE450B /* ObservationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18815C1AD02F5D00CE450B /* ObservationTests.swift */; };
 		AC18815F1AD02F6E00CE450B /* SessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18815E1AD02F6E00CE450B /* SessionTests.swift */; };
 		AC1881611AD02F8600CE450B /* BehaviourStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1881601AD02F8600CE450B /* BehaviourStateTests.swift */; };
+		329B29251ACFF516007ADC65 /* PhotoPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329B29241ACFF516007ADC65 /* PhotoPickerCell.swift */; };
+		329B29271ACFF5BC007ADC65 /* PhotoPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 329B29261ACFF5BC007ADC65 /* PhotoPickerCell.xib */; };
 		AC188C7C1AC2B11A00CB08C0 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC188C7B1AC2B11A00CB08C0 /* Storable.swift */; };
 		AC188C7D1AC2B11A00CB08C0 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC188C7B1AC2B11A00CB08C0 /* Storable.swift */; };
 		AC702EE21AC55EA3003C50C8 /* Ethogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7711AAEDA85006F374D /* Ethogram.swift */; };
@@ -184,6 +191,10 @@
 		320920591AC98E8A00E8A456 /* SessionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionsViewController.swift; sourceTree = "<group>"; };
 		320920681ACA7E4400E8A456 /* SuperController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperController.swift; sourceTree = "<group>"; };
 		320920701ACA9A1600E8A456 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		3222E6F41ACF8F5F00E51BA1 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
+		3222E6F61ACF8F8000E51BA1 /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ButtonCell.xib; sourceTree = "<group>"; };
+		3222E6F81ACF917100E51BA1 /* FormPopupDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormPopupDelegate.swift; sourceTree = "<group>"; };
+		3222E6FA1ACFA02900E51BA1 /* FormPopupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormPopupController.swift; sourceTree = "<group>"; };
 		32517A1F1AB09A3D00578C42 /* ProjectHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectHomeViewController.swift; sourceTree = "<group>"; };
 		32517A211AB1789100578C42 /* EthogramsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramsViewController.swift; sourceTree = "<group>"; };
 		32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramDetailsViewController.swift; sourceTree = "<group>"; };
@@ -215,6 +226,8 @@
 		AC18815C1AD02F5D00CE450B /* ObservationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservationTests.swift; sourceTree = "<group>"; };
 		AC18815E1AD02F6E00CE450B /* SessionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTests.swift; sourceTree = "<group>"; };
 		AC1881601AD02F8600CE450B /* BehaviourStateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviourStateTests.swift; sourceTree = "<group>"; };
+		329B29241ACFF516007ADC65 /* PhotoPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPickerCell.swift; sourceTree = "<group>"; };
+		329B29261ACFF5BC007ADC65 /* PhotoPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoPickerCell.xib; sourceTree = "<group>"; };
 		AC188C7B1AC2B11A00CB08C0 /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorable.swift; sourceTree = "<group>"; };
 		AC9EE3381ACEC2C500939476 /* ProjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
@@ -474,6 +487,12 @@
 				326773C61ACD851400899745 /* DatePickerCell.xib */,
 				326773CA1ACD869F00899745 /* DefaultPickerCell.swift */,
 				326773CC1ACD86BB00899745 /* DefaultPickerCell.xib */,
+				3222E6F41ACF8F5F00E51BA1 /* ButtonCell.swift */,
+				3222E6F61ACF8F8000E51BA1 /* ButtonCell.xib */,
+				329B29241ACFF516007ADC65 /* PhotoPickerCell.swift */,
+				329B29261ACFF5BC007ADC65 /* PhotoPickerCell.xib */,
+				3222E6FA1ACFA02900E51BA1 /* FormPopupController.swift */,
+				3222E6F81ACF917100E51BA1 /* FormPopupDelegate.swift */,
 				326773AB1ACAEFB000899745 /* CustomPickerPopupCell.xib */,
 				326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */,
 				326773AC1ACAEFB000899745 /* CustomPickerPopupDelegate.swift */,
@@ -603,6 +622,11 @@
 				3205E7521AAED9F9006F374D /* LaunchScreen.xib in Resources */,
 				3205E74F1AAED9F9006F374D /* Images.xcassets in Resources */,
 				AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */,
+				320920631AC9908500E8A456 /* GooglePlus.bundle in Resources */,
+				3222E6F71ACF8F8000E51BA1 /* ButtonCell.xib in Resources */,
+				3205E7521AAED9F9006F374D /* LaunchScreen.xib in Resources */,
+				3205E74F1AAED9F9006F374D /* Images.xcassets in Resources */,
+				329B29271ACFF5BC007ADC65 /* PhotoPickerCell.xib in Resources */,
 				326773BF1ACAEFB000899745 /* SingleLineTextCell.xib in Resources */,
 				326773BE1ACAEFB000899745 /* MultiLineTextCell.xib in Resources */,
 				326773CD1ACD86BB00899745 /* DefaultPickerCell.xib in Resources */,
@@ -634,6 +658,7 @@
 				326773C51ACD7C9A00899745 /* MenuViewDelegate.swift in Sources */,
 				326773BC1ACAEFB000899745 /* FormField.swift in Sources */,
 				AC9EE3471ACEC57200939476 /* BehaviourState.swift in Sources */,
+				329B29251ACFF516007ADC65 /* PhotoPickerCell.swift in Sources */,
 				320920691ACA7E4400E8A456 /* SuperController.swift in Sources */,
 				326773B61ACAEFB000899745 /* BooleanPickerCell.swift in Sources */,
 				320920711ACA9A1600E8A456 /* MenuViewController.swift in Sources */,
@@ -645,6 +670,8 @@
 				32850BE61AB9625500C49D33 /* EthogramDetailsViewController.swift in Sources */,
 				242C6E071AC80F050024ECEF /* BiolifeModel.swift in Sources */,
 				326773BB1ACAEFB000899745 /* FormCell.swift in Sources */,
+				3222E6F51ACF8F5F00E51BA1 /* ButtonCell.swift in Sources */,
+				3222E6F91ACF917100E51BA1 /* FormPopupDelegate.swift in Sources */,
 				3205E7781AAEDA85006F374D /* Data.swift in Sources */,
 				3205E77A1AAEDA85006F374D /* Observation.swift in Sources */,
 				AC9162AC1ACA6A0400FED714 /* CloudStorable.swift in Sources */,
@@ -657,6 +684,7 @@
 				3205E77B1AAEDA85006F374D /* Project.swift in Sources */,
 				326773B91ACAEFB000899745 /* CustomPickerPopupDelegate.swift in Sources */,
 				3205E77D1AAEDA85006F374D /* User.swift in Sources */,
+				3222E6FB1ACFA02900E51BA1 /* FormPopupController.swift in Sources */,
 				3205E77C1AAEDA85006F374D /* Session.swift in Sources */,
 				326773CB1ACD869F00899745 /* DefaultPickerCell.swift in Sources */,
 				240D04351AB7190800D8BB9F /* Weather.swift in Sources */,

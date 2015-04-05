@@ -98,7 +98,7 @@ class ProjectFormViewController: UITableViewController, CustomPickerPopupDelegat
     
     func showPicker() {
         picker = CustomPickerPopup()
-        picker!.delegate = self
+        //picker!.delegate = self
         
         for e in Data.ethograms {
             picker!.data.append(e.name)
