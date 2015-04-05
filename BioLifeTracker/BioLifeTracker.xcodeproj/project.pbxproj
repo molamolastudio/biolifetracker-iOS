@@ -11,6 +11,10 @@
 		240D04331AB718EF00D8BB9F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D04321AB718EF00D8BB9F /* Location.swift */; };
 		240D04351AB7190800D8BB9F /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D04341AB7190800D8BB9F /* Weather.swift */; };
 		240D04381AB7206200D8BB9F /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7801AAEDB03006F374D /* StartViewController.swift */; };
+		241208A51AD1227700778360 /* CloudStorageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241208A41AD1227700778360 /* CloudStorageWorker.swift */; };
+		241208A71AD1233B00778360 /* CloudStorageTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241208A61AD1233B00778360 /* CloudStorageTask.swift */; };
+		241208A91AD123D700778360 /* UploadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241208A81AD123D700778360 /* UploadTask.swift */; };
+		241208AB1AD124A500778360 /* DownloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241208AA1AD124A500778360 /* DownloadTask.swift */; };
 		242C6E071AC80F050024ECEF /* BiolifeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242C6E061AC80F050024ECEF /* BiolifeModel.swift */; };
 		242C6E091AC86BFD0024ECEF /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242C6E081AC86BFD0024ECEF /* Tag.swift */; };
 		2439AABA1AC7DC7900389195 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2439AAB91AC7DC7900389195 /* FacebookSDK.framework */; };
@@ -146,6 +150,10 @@
 		240D04301AB718AE00D8BB9F /* Individual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Individual.swift; sourceTree = "<group>"; };
 		240D04321AB718EF00D8BB9F /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		240D04341AB7190800D8BB9F /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		241208A41AD1227700778360 /* CloudStorageWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorageWorker.swift; sourceTree = "<group>"; };
+		241208A61AD1233B00778360 /* CloudStorageTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorageTask.swift; sourceTree = "<group>"; };
+		241208A81AD123D700778360 /* UploadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadTask.swift; sourceTree = "<group>"; };
+		241208AA1AD124A500778360 /* DownloadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTask.swift; sourceTree = "<group>"; };
 		242C6E061AC80F050024ECEF /* BiolifeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiolifeModel.swift; sourceTree = "<group>"; };
 		242C6E081AC86BFD0024ECEF /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		2439AAB91AC7DC7900389195 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = BioLifeTracker/FacebookSDK.framework; sourceTree = "<group>"; };
@@ -497,6 +505,10 @@
 			isa = PBXGroup;
 			children = (
 				AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */,
+				241208A61AD1233B00778360 /* CloudStorageTask.swift */,
+				241208A41AD1227700778360 /* CloudStorageWorker.swift */,
+				241208A81AD123D700778360 /* UploadTask.swift */,
+				241208AA1AD124A500778360 /* DownloadTask.swift */,
 			);
 			name = "Cloud Storage";
 			sourceTree = "<group>";
@@ -649,8 +661,10 @@
 				326773BC1ACAEFB000899745 /* FormField.swift in Sources */,
 				AC9EE3471ACEC57200939476 /* BehaviourState.swift in Sources */,
 				329B29251ACFF516007ADC65 /* PhotoPickerCell.swift in Sources */,
+				241208A71AD1233B00778360 /* CloudStorageTask.swift in Sources */,
 				320920691ACA7E4400E8A456 /* SuperController.swift in Sources */,
 				326773B61ACAEFB000899745 /* BooleanPickerCell.swift in Sources */,
+				241208A91AD123D700778360 /* UploadTask.swift in Sources */,
 				320920711ACA9A1600E8A456 /* MenuViewController.swift in Sources */,
 				ACDE13AB1AD0C03F0075AC35 /* ProjectManager.swift in Sources */,
 				240D04331AB718EF00D8BB9F /* Location.swift in Sources */,
@@ -662,6 +676,7 @@
 				326773BB1ACAEFB000899745 /* FormCell.swift in Sources */,
 				3222E6F51ACF8F5F00E51BA1 /* ButtonCell.swift in Sources */,
 				3222E6F91ACF917100E51BA1 /* FormPopupDelegate.swift in Sources */,
+				241208A51AD1227700778360 /* CloudStorageWorker.swift in Sources */,
 				3205E7781AAEDA85006F374D /* Data.swift in Sources */,
 				3205E77A1AAEDA85006F374D /* Observation.swift in Sources */,
 				AC9162AC1ACA6A0400FED714 /* CloudStorable.swift in Sources */,
@@ -674,6 +689,7 @@
 				3205E77B1AAEDA85006F374D /* Project.swift in Sources */,
 				326773B91ACAEFB000899745 /* CustomPickerPopupDelegate.swift in Sources */,
 				3205E77D1AAEDA85006F374D /* User.swift in Sources */,
+				241208AB1AD124A500778360 /* DownloadTask.swift in Sources */,
 				3222E6FB1ACFA02900E51BA1 /* FormPopupController.swift in Sources */,
 				3205E77C1AAEDA85006F374D /* Session.swift in Sources */,
 				326773CB1ACD869F00899745 /* DefaultPickerCell.swift in Sources */,
