@@ -332,8 +332,10 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
         
         // Set the currently selected values
         let selectedValue: AnyObject? = field.buttonValues[4]
-        let selectedValueAsString = field.buttonValues[5] as String
-        cell.userDidSelectValue(selectedValue, valueAsString: selectedValueAsString)
+
+ // To Michelle: There were some errors over here so I commented them out -Nicholette
+ //       let selectedValueAsString = field.buttonValues[5] as String
+ //       cell.userDidSelectValue(selectedValue, valueAsString: selectedValueAsString)
         
         cell.button.enabled = editable
         

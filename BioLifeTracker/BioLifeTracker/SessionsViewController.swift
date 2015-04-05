@@ -22,7 +22,9 @@ class SessionsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         if Data.selectedProject!.sessions.count == 0 {
-            Data.selectedProject!.sessions.append(Session(project: Data.selectedProject!, type: .Focal))
+            var sessions = [Session]()
+            sessions.append(Session(project: Data.selectedProject!, type: .Focal))
+            Data.selectedProject!.addSessions(sessions)
         }
         
         tableView.delegate = self

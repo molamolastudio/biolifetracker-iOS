@@ -43,7 +43,6 @@
 		24E32D721AB1EC5A003C4E0A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D311AB19647003C4E0A /* Bolts.framework */; };
 		3205E7481AAED9F9006F374D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7471AAED9F9006F374D /* AppDelegate.swift */; };
 		3205E74D1AAED9F9006F374D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3205E74B1AAED9F9006F374D /* Main.storyboard */; };
-		3205E74F1AAED9F9006F374D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3205E74E1AAED9F9006F374D /* Images.xcassets */; };
 		3205E7521AAED9F9006F374D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3205E7501AAED9F9006F374D /* LaunchScreen.xib */; };
 		3205E75E1AAED9F9006F374D /* BioLifeTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E75D1AAED9F9006F374D /* BioLifeTrackerTests.swift */; };
 		3205E7771AAEDA85006F374D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E76F1AAEDA85006F374D /* Constants.swift */; };
@@ -84,7 +83,8 @@
 		32850BE41AB9625500C49D33 /* EthogramFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */; };
 		32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A211AB1789100578C42 /* EthogramsViewController.swift */; };
 		32850BE61AB9625500C49D33 /* EthogramDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */; };
-
+		329B29251ACFF516007ADC65 /* PhotoPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329B29241ACFF516007ADC65 /* PhotoPickerCell.swift */; };
+		329B29271ACFF5BC007ADC65 /* PhotoPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 329B29261ACFF5BC007ADC65 /* PhotoPickerCell.xib */; };
 		AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AC18814A1ACFC84600CE450B /* GooglePlus.bundle */; };
 		AC18814E1ACFC84600CE450B /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814B1ACFC84600CE450B /* GooglePlus.framework */; };
 		AC1881501ACFD05D00CE450B /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814F1ACFD05D00CE450B /* GoogleOpenSource.framework */; };
@@ -98,8 +98,6 @@
 		AC18815D1AD02F5D00CE450B /* ObservationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18815C1AD02F5D00CE450B /* ObservationTests.swift */; };
 		AC18815F1AD02F6E00CE450B /* SessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18815E1AD02F6E00CE450B /* SessionTests.swift */; };
 		AC1881611AD02F8600CE450B /* BehaviourStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1881601AD02F8600CE450B /* BehaviourStateTests.swift */; };
-		329B29251ACFF516007ADC65 /* PhotoPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329B29241ACFF516007ADC65 /* PhotoPickerCell.swift */; };
-		329B29271ACFF5BC007ADC65 /* PhotoPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 329B29261ACFF5BC007ADC65 /* PhotoPickerCell.xib */; };
 		AC188C7C1AC2B11A00CB08C0 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC188C7B1AC2B11A00CB08C0 /* Storable.swift */; };
 		AC188C7D1AC2B11A00CB08C0 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC188C7B1AC2B11A00CB08C0 /* Storable.swift */; };
 		AC702EE21AC55EA3003C50C8 /* Ethogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7711AAEDA85006F374D /* Ethogram.swift */; };
@@ -172,7 +170,6 @@
 		3205E7461AAED9F9006F374D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3205E7471AAED9F9006F374D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3205E74C1AAED9F9006F374D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3205E74E1AAED9F9006F374D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3205E7511AAED9F9006F374D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		3205E7571AAED9F9006F374D /* BioLifeTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BioLifeTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3205E75C1AAED9F9006F374D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -216,6 +213,8 @@
 		326773C81ACD85BC00899745 /* DatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerCell.swift; sourceTree = "<group>"; };
 		326773CA1ACD869F00899745 /* DefaultPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultPickerCell.swift; sourceTree = "<group>"; };
 		326773CC1ACD86BB00899745 /* DefaultPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultPickerCell.xib; sourceTree = "<group>"; };
+		329B29241ACFF516007ADC65 /* PhotoPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPickerCell.swift; sourceTree = "<group>"; };
+		329B29261ACFF5BC007ADC65 /* PhotoPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoPickerCell.xib; sourceTree = "<group>"; };
 		AC18814A1ACFC84600CE450B /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
 		AC18814B1ACFC84600CE450B /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
 		AC18814F1ACFD05D00CE450B /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
@@ -226,8 +225,6 @@
 		AC18815C1AD02F5D00CE450B /* ObservationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservationTests.swift; sourceTree = "<group>"; };
 		AC18815E1AD02F6E00CE450B /* SessionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTests.swift; sourceTree = "<group>"; };
 		AC1881601AD02F8600CE450B /* BehaviourStateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviourStateTests.swift; sourceTree = "<group>"; };
-		329B29241ACFF516007ADC65 /* PhotoPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPickerCell.swift; sourceTree = "<group>"; };
-		329B29261ACFF5BC007ADC65 /* PhotoPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoPickerCell.xib; sourceTree = "<group>"; };
 		AC188C7B1AC2B11A00CB08C0 /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorable.swift; sourceTree = "<group>"; };
 		AC9EE3381ACEC2C500939476 /* ProjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
@@ -245,6 +242,7 @@
 		ACDE13AC1AD0C0540075AC35 /* EthogramManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramManager.swift; sourceTree = "<group>"; };
 		ACDE13B11AD0E6C80075AC35 /* ProjectMngTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectMngTests.swift; sourceTree = "<group>"; };
 		ACDE13B31AD0E6D60075AC35 /* EthogramMngTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramMngTests.swift; sourceTree = "<group>"; };
+		ACDE13B51AD1032F0075AC35 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = file; name = Images.xcassets; path = ../../../Desktop/Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -429,7 +427,7 @@
 				32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */,
 				320920591AC98E8A00E8A456 /* SessionsViewController.swift */,
 				3205E74B1AAED9F9006F374D /* Main.storyboard */,
-				3205E74E1AAED9F9006F374D /* Images.xcassets */,
+				ACDE13B51AD1032F0075AC35 /* Images.xcassets */,
 				3205E7501AAED9F9006F374D /* LaunchScreen.xib */,
 				3205E7451AAED9F9006F374D /* Supporting Files */,
 			);
@@ -620,12 +618,9 @@
 				3205E74D1AAED9F9006F374D /* Main.storyboard in Resources */,
 				326773BA1ACAEFB000899745 /* BooleanPickerCell.xib in Resources */,
 				3205E7521AAED9F9006F374D /* LaunchScreen.xib in Resources */,
-				3205E74F1AAED9F9006F374D /* Images.xcassets in Resources */,
 				AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */,
-				320920631AC9908500E8A456 /* GooglePlus.bundle in Resources */,
 				3222E6F71ACF8F8000E51BA1 /* ButtonCell.xib in Resources */,
 				3205E7521AAED9F9006F374D /* LaunchScreen.xib in Resources */,
-				3205E74F1AAED9F9006F374D /* Images.xcassets in Resources */,
 				329B29271ACFF5BC007ADC65 /* PhotoPickerCell.xib in Resources */,
 				326773BF1ACAEFB000899745 /* SingleLineTextCell.xib in Resources */,
 				326773BE1ACAEFB000899745 /* MultiLineTextCell.xib in Resources */,

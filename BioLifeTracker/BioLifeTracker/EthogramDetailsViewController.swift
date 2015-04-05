@@ -117,7 +117,7 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
     // Selectors for text fields
     func nameRowDidChange(sender: UITextField) {
         if sender.text != "" {
-            ethogram!.name = sender.text
+            ethogram!.updateName(sender.text)
         }
     }
     
