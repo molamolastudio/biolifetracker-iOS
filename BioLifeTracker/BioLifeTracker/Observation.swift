@@ -66,7 +66,7 @@ class Observation: BiolifeModel {
         self._session = session
     }
     
-    func updateBehaviourState(state: BehaviourState) {
+    func changeBehaviourState(state: BehaviourState) {
         self._state = state
         updateObservation()
     }

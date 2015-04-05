@@ -58,7 +58,7 @@ class Project: BiolifeModel, Storable {
     
     /******************Project*********************/
     func updateName(name: String) {
-        Project.deleteFromArchives(self._name)
+        // Project.deleteFromArchives(self._name)
         self._name = name
         updateProject()
     }
@@ -84,7 +84,7 @@ class Project: BiolifeModel, Storable {
         updateProject()
     }
     
-    /********************Memberss*******************/
+    /********************Members*******************/
     func addMembers(members: [User]) {
         self._members += members
         updateProject()

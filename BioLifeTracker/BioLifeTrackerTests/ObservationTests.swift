@@ -44,7 +44,7 @@ class ObservationTests: XCTestCase {
         var observation = Observation(session: session, individual: individual, state: state1, timestamp: NSDate(), information: "Eating vigourously")
         
         XCTAssert(observation.state.name == "Feeding", "Observation not initialised properly")
-        observation.updateBehaviourState(state2)
+        observation.changeBehaviourState(state2)
         XCTAssert(observation.state.name == "Fighting", "Observation not initialised properly")
         
         XCTAssert(observation.information == "Eating vigourously", "Observation not initialised properly")
