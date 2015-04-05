@@ -124,6 +124,8 @@
 		ACDE13AD1AD0C0540075AC35 /* EthogramManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDE13AC1AD0C0540075AC35 /* EthogramManager.swift */; };
 		ACDE13AE1AD0E4E40075AC35 /* ProjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDE13AA1AD0C03F0075AC35 /* ProjectManager.swift */; };
 		ACDE13AF1AD0E4E60075AC35 /* EthogramManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDE13AC1AD0C0540075AC35 /* EthogramManager.swift */; };
+		ACDE13B21AD0E6C80075AC35 /* ProjectMngTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDE13B11AD0E6C80075AC35 /* ProjectMngTests.swift */; };
+		ACDE13B41AD0E6D60075AC35 /* EthogramMngTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDE13B31AD0E6D60075AC35 /* EthogramMngTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -228,6 +230,8 @@
 		ACDCC0F01ACD05E1001590B8 /* UserAuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthService.swift; sourceTree = "<group>"; };
 		ACDE13AA1AD0C03F0075AC35 /* ProjectManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectManager.swift; sourceTree = "<group>"; };
 		ACDE13AC1AD0C0540075AC35 /* EthogramManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramManager.swift; sourceTree = "<group>"; };
+		ACDE13B11AD0E6C80075AC35 /* ProjectMngTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectMngTests.swift; sourceTree = "<group>"; };
+		ACDE13B31AD0E6D60075AC35 /* EthogramMngTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramMngTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,6 +301,7 @@
 		240D042E1AB6D43100D8BB9F /* Unit Testing */ = {
 			isa = PBXGroup;
 			children = (
+				ACDE13B01AD0E6B10075AC35 /* Managers */,
 				240D042F1AB6D43B00D8BB9F /* Model */,
 			);
 			name = "Unit Testing";
@@ -501,6 +506,15 @@
 			name = Managers;
 			sourceTree = "<group>";
 		};
+		ACDE13B01AD0E6B10075AC35 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				ACDE13B11AD0E6C80075AC35 /* ProjectMngTests.swift */,
+				ACDE13B31AD0E6D60075AC35 /* EthogramMngTests.swift */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -668,9 +682,11 @@
 				AC18815D1AD02F5D00CE450B /* ObservationTests.swift in Sources */,
 				AC702EE81AC55EB5003C50C8 /* Weather.swift in Sources */,
 				247F2FB51AC8EF220065A0D1 /* BiolifeModel.swift in Sources */,
+				ACDE13B41AD0E6D60075AC35 /* EthogramMngTests.swift in Sources */,
 				AC702EE71AC55EB2003C50C8 /* Location.swift in Sources */,
 				AC9EE3481ACEE0F100939476 /* BehaviourState.swift in Sources */,
 				AC1881611AD02F8600CE450B /* BehaviourStateTests.swift in Sources */,
+				ACDE13B21AD0E6C80075AC35 /* ProjectMngTests.swift in Sources */,
 				AC188C7D1AC2B11A00CB08C0 /* Storable.swift in Sources */,
 				AC1881551AD02F2400CE450B /* TagTests.swift in Sources */,
 				AC9EE33B1ACEC2E400939476 /* EthogramTests.swift in Sources */,

@@ -29,13 +29,25 @@ class EthogramManager: NSObject, Storable {
         self._ethograms = ethograms
     }
     
+    func addEthogram(ethogram: Ethogram) {
+        self._ethograms.append(ethogram)
+    }
+    
     func updateEthogram(index: Int, ethogram: Ethogram) {
         self._ethograms.removeAtIndex(index)
         self._ethograms.insert(ethogram, atIndex: index)
     }
     
-    func removeEthogramAtIndex(index: Int) {
-        self._ethograms.removeAtIndex(index)
+    func removeEthogramAtIndexes(indexes: [Int]) {
+        for index in indexes {
+            self._ethograms.removeAtIndex(index)
+        }
+    }
+    
+    // For testing.
+    func clearEthograms() {
+        self._ethograms = [Ethogram]()
+        saveToArchives()
     }
     
     /**************Saving to Archives****************/
@@ -72,7 +84,7 @@ class EthogramManager: NSObject, Storable {
         }
         
         let archiver = NSKeyedUnarchiver(forReadingWithData: data!)
-        let ethogramManager = archiver.decodeObjectForKey("ethogramManager") as EthogramManager
+        let ethogramManager = archiver.decodeObjectForKey("ethogramManager") as EthogramManager!
         
         return ethogramManager
     }

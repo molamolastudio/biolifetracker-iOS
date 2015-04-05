@@ -29,13 +29,25 @@ class ProjectManager: NSObject, Storable {
         self._projects = projects
     }
     
+    func addProject(project: Project) {
+        self._projects.append(project)
+    }
+    
     func updateProject(index: Int, project: Project) {
         self._projects.removeAtIndex(index)
         self._projects.insert(project, atIndex: index)
     }
     
-    func removeProjectAtIndex(index: Int) {
-        self._projects.removeAtIndex(index)
+    func removeProjectAtIndexes(indexes: [Int]) {
+        for index in indexes {
+            self._projects.removeAtIndex(index)
+        }
+    }
+    
+    // For testing.
+    func clearProjects() {
+        self._projects = [Project]()
+        saveToArchives()
     }
     
     /**************Saving to Archives****************/
@@ -44,11 +56,11 @@ class ProjectManager: NSObject, Storable {
         
         if ((dirs) != nil) {
             let dir = dirs![0]; //documents directory
-            let path = dir.stringByAppendingPathComponent("Existing project of" + UserAuthService.sharedInstance.user.toString())
+            let path = dir.stringByAppendingPathComponent("Existing projects of" + UserAuthService.sharedInstance.user.toString())
             
             let data = NSMutableData();
             let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
-            archiver.encodeObject(self, forKey: "projects")
+            archiver.encodeObject(self, forKey: "projectManager")
             archiver.finishEncoding()
             let success = data.writeToFile(path, atomically: true)
         }
@@ -72,7 +84,7 @@ class ProjectManager: NSObject, Storable {
         }
         
         let archiver = NSKeyedUnarchiver(forReadingWithData: data!)
-        let projectManager = archiver.decodeObjectForKey("projects") as ProjectManager
+        let projectManager = archiver.decodeObjectForKey("projectManager") as ProjectManager!
         
         return projectManager
     }
