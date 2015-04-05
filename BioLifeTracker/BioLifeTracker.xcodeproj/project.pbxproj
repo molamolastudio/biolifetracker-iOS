@@ -11,7 +11,6 @@
 		240D04331AB718EF00D8BB9F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D04321AB718EF00D8BB9F /* Location.swift */; };
 		240D04351AB7190800D8BB9F /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D04341AB7190800D8BB9F /* Weather.swift */; };
 		240D04381AB7206200D8BB9F /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7801AAEDB03006F374D /* StartViewController.swift */; };
-		242C6E031AC7DFBC0024ECEF /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242C6E011AC7DFBC0024ECEF /* GooglePlus.framework */; };
 		242C6E071AC80F050024ECEF /* BiolifeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242C6E061AC80F050024ECEF /* BiolifeModel.swift */; };
 		242C6E091AC86BFD0024ECEF /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242C6E081AC86BFD0024ECEF /* Tag.swift */; };
 		2439AABA1AC7DC7900389195 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2439AAB91AC7DC7900389195 /* FacebookSDK.framework */; };
@@ -147,7 +146,6 @@
 		240D04301AB718AE00D8BB9F /* Individual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Individual.swift; sourceTree = "<group>"; };
 		240D04321AB718EF00D8BB9F /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		240D04341AB7190800D8BB9F /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
-		242C6E011AC7DFBC0024ECEF /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlus.framework; path = BioLifeTracker/GooglePlus.framework; sourceTree = "<group>"; };
 		242C6E061AC80F050024ECEF /* BiolifeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiolifeModel.swift; sourceTree = "<group>"; };
 		242C6E081AC86BFD0024ECEF /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		2439AAB91AC7DC7900389195 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = BioLifeTracker/FacebookSDK.framework; sourceTree = "<group>"; };
@@ -242,7 +240,6 @@
 		ACDE13AC1AD0C0540075AC35 /* EthogramManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramManager.swift; sourceTree = "<group>"; };
 		ACDE13B11AD0E6C80075AC35 /* ProjectMngTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectMngTests.swift; sourceTree = "<group>"; };
 		ACDE13B31AD0E6D60075AC35 /* EthogramMngTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramMngTests.swift; sourceTree = "<group>"; };
-		ACDE13B51AD1032F0075AC35 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = file; name = Images.xcassets; path = ../../../Desktop/Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,7 +248,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				ACB073EE1AC17BA3004E0BFC /* UIKit.framework in Frameworks */,
-				242C6E031AC7DFBC0024ECEF /* GooglePlus.framework in Frameworks */,
 				24E32D4F1AB1E92A003C4E0A /* SystemConfiguration.framework in Frameworks */,
 				ACB073ED1AC17BA3004E0BFC /* Security.framework in Frameworks */,
 				ACB073EC1AC17BA3004E0BFC /* MediaPlayer.framework in Frameworks */,
@@ -427,7 +423,6 @@
 				32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */,
 				320920591AC98E8A00E8A456 /* SessionsViewController.swift */,
 				3205E74B1AAED9F9006F374D /* Main.storyboard */,
-				ACDE13B51AD1032F0075AC35 /* Images.xcassets */,
 				3205E7501AAED9F9006F374D /* LaunchScreen.xib */,
 				3205E7451AAED9F9006F374D /* Supporting Files */,
 			);

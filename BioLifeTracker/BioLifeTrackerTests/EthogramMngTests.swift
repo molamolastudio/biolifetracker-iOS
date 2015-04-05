@@ -25,7 +25,7 @@ class EthogramMngTests: XCTestCase {
         XCTAssert(EthogramManager.sharedInstance.ethograms[0].name == "Fiddler Crabs", "Ethogram not added")
         
         // Edit EthogramManager without saving
-        EthogramManager.sharedInstance.removeEthogramAtIndexes([0])
+        EthogramManager.sharedInstance.removeEthograms([0])
         XCTAssert(EthogramManager.sharedInstance.ethograms.count == 0, "Ethogram not removed")
         
         // EthogramManager retrieved the state last saved

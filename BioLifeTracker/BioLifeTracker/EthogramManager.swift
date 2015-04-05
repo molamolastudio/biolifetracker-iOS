@@ -38,7 +38,7 @@ class EthogramManager: NSObject, Storable {
         self._ethograms.insert(ethogram, atIndex: index)
     }
     
-    func removeEthogramAtIndexes(indexes: [Int]) {
+    func removeEthograms(indexes: [Int]) {
         for index in indexes {
             self._ethograms.removeAtIndex(index)
         }
