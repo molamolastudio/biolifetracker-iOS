@@ -38,7 +38,7 @@ class ProjectManager: NSObject, Storable {
         self._projects.insert(project, atIndex: index)
     }
     
-    func removeProjectAtIndexes(indexes: [Int]) {
+    func removeProjects(indexes: [Int]) {
         for index in indexes {
             self._projects.removeAtIndex(index)
         }

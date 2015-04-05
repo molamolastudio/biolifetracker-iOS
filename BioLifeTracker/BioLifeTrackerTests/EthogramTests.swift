@@ -97,7 +97,7 @@ class EthogramTests: XCTestCase {
         ethogram.updateBehaviourStateInformation(0, bsInformation: "Tiny inputs of sand to the mouth")
         XCTAssert(ethogram.behaviourStates[0].information == "Tiny inputs of sand to the mouth", "Ethogram not updated properly")
 
-        ethogram.deleteBehaviourState(0)
+        ethogram.removeBehaviourState(0)
         XCTAssert(ethogram.behaviourStates.count == 0, "Ethogram not updated properly")
         
         ethogram.addBehaviourState(state3)
@@ -109,7 +109,7 @@ class EthogramTests: XCTestCase {
         ethogram.addBSPhotoUrl(0, photoUrl: "www.photo2.com")
         XCTAssert(ethogram.behaviourStates[0].photoUrls[1] == "www.photo2.com", "Ethogram not updated properly")
         
-        ethogram.deleteBSPhotoUrl(0, photoIndex: 0)
+        ethogram.removeBSPhotoUrl(0, photoIndex: 0)
         XCTAssert(ethogram.behaviourStates[0].photoUrls[0] == "www.photo2.com", "Ethogram not updated properly")
     }
 }

@@ -76,7 +76,7 @@ class Ethogram: BiolifeModel, Storable {
         updateEthogram()
     }
     
-    func deleteBehaviourState(index: Int) {
+    func removeBehaviourState(index: Int) {
         self._behaviourStates.removeAtIndex(index)
         updateEthogram()
     }
@@ -87,7 +87,7 @@ class Ethogram: BiolifeModel, Storable {
         updateEthogram()
     }
     
-    func deleteBSPhotoUrl(bsIndex: Int, photoIndex: Int) {
+    func removeBSPhotoUrl(bsIndex: Int, photoIndex: Int) {
         self._behaviourStates[bsIndex].removePhotoUrlAtIndex(photoIndex)
         updateEthogram()
     }

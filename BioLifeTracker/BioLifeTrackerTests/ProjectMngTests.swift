@@ -26,7 +26,7 @@ class ProjectMngTests: XCTestCase {
         XCTAssert(ProjectManager.sharedInstance.projects[0].name == "A Day in a Fiddler Crab life", "Project not added")
 
         // Edit ProjectManager without saving
-        ProjectManager.sharedInstance.removeProjectAtIndexes([0])
+        ProjectManager.sharedInstance.removeProjects([0])
         XCTAssert(ProjectManager.sharedInstance.projects.count == 0, "Project not removed")
         
         // ProjectManager retrieved the state last saved

@@ -48,7 +48,7 @@ class SessionTests: XCTestCase {
         session.updateObservation(0, updatedObservation: observation2)
         XCTAssert(session.observations[0].information == "Picking up sand", "Session not updated properly")
         
-        session.deleteObservations([0])
+        session.removeObservations([0])
         XCTAssert(session.observations.count == 0, "Session not updated properly")
         
         
@@ -60,7 +60,7 @@ class SessionTests: XCTestCase {
         session.updateIndividual(0, updatedIndividual: individual2)
         XCTAssert(session.individuals[0].label == "M3", "Session not updated properly")
         
-        session.deleteIndividuals([0])
+        session.removeIndividuals([0])
         XCTAssert(session.individuals.count == 0, "Session not updated properly")
     }
 }
