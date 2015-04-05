@@ -19,6 +19,7 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     /************Important***************/
     @IBOutlet weak var btnLogin: FBLoginView!
     /************************************/
+    @IBOutlet weak var btnLoginGoogle: GPPSignInButton!
 
     /******************Important****************/
     // TODO: Make the google login button/view type of GPPSignInButton

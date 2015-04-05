@@ -11,6 +11,7 @@
                 <outlet property="btnCreateProject" destination="IZi-tF-61q" id="WP2-44-w8c"/>
                 <outlet property="btnCreateSession" destination="IVj-Lp-QOO" id="B0C-RR-Mp6"/>
                 <outlet property="btnLogin" destination="6h0-J9-TBw" id="q2c-gq-qXg"/>
+                <outlet property="btnLoginGoogle" destination="eq2-tV-nam" id="cGP-bO-Esk"/>
                 <outlet property="displayProject" destination="l8Y-Gf-Kq2" id="UZk-jp-43v"/>
                 <outlet property="displaySession" destination="V5j-CI-aqJ" id="utK-KE-Itf"/>
                 <outlet property="displaySessionTitle" destination="Nwb-qk-voH" id="6mF-mO-NU9"/>
@@ -67,8 +68,8 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6h0-J9-TBw" customClass="FBLoginView">
-                    <rect key="frame" x="159.5" y="482" width="280" height="51"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6h0-J9-TBw" customClass="FBLoginView">
+                    <rect key="frame" x="160" y="482" width="280" height="51"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="6h0-J9-TBw" secondAttribute="height" multiplier="2:1" id="2Be-pH-NeU"/>
@@ -81,14 +82,30 @@
                         </mask>
                     </variation>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eq2-tV-nam" customClass="GPPSignInButton">
+                    <rect key="frame" x="160" y="416" width="280" height="51"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="51" id="IAD-js-VZr"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="VVo-iv-8bH"/>
+                        <constraint firstAttribute="width" constant="280" id="g4A-Oj-2Mg"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="VVo-iv-8bH"/>
+                        </mask>
+                    </variation>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="IVj-Lp-QOO" firstAttribute="top" secondItem="V5j-CI-aqJ" secondAttribute="bottom" constant="10" id="1ye-FG-ez6"/>
                 <constraint firstAttribute="centerX" secondItem="IZi-tF-61q" secondAttribute="centerX" id="6ha-9f-66v"/>
                 <constraint firstItem="IZi-tF-61q" firstAttribute="top" secondItem="l8Y-Gf-Kq2" secondAttribute="bottom" constant="10" id="7nE-5L-fr6"/>
+                <constraint firstItem="6h0-J9-TBw" firstAttribute="top" secondItem="eq2-tV-nam" secondAttribute="bottom" constant="15" id="G5s-yS-YhD"/>
                 <constraint firstItem="l8Y-Gf-Kq2" firstAttribute="top" secondItem="mnS-jd-SBr" secondAttribute="bottom" constant="10" id="GGW-CL-TI0"/>
                 <constraint firstItem="mnS-jd-SBr" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="0.4" id="JZR-IW-b0J"/>
+                <constraint firstAttribute="centerX" secondItem="eq2-tV-nam" secondAttribute="centerX" id="RFl-KY-ewG"/>
                 <constraint firstAttribute="centerX" secondItem="V5j-CI-aqJ" secondAttribute="centerX" id="Vdx-SQ-fWq"/>
                 <constraint firstItem="V5j-CI-aqJ" firstAttribute="top" secondItem="Nwb-qk-voH" secondAttribute="bottom" constant="10" id="Xpm-n8-kPT"/>
                 <constraint firstAttribute="centerX" secondItem="IVj-Lp-QOO" secondAttribute="centerX" id="aep-ks-mbK"/>
