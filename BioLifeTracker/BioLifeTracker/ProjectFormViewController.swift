@@ -73,7 +73,7 @@ class ProjectFormViewController: UITableViewController, CustomPickerPopupDelegat
                 
                 // Get the ethogram created from the controller
                 if let ethogram = vc.ethogram {
-                    project?.ethogram = ethogram
+                    project?.updateEthogram(ethogram)
                     // Update display
                 } else {
                     // No ethogram was created

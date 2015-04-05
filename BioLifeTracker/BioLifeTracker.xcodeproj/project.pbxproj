@@ -11,7 +11,6 @@
 		240D04331AB718EF00D8BB9F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D04321AB718EF00D8BB9F /* Location.swift */; };
 		240D04351AB7190800D8BB9F /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D04341AB7190800D8BB9F /* Weather.swift */; };
 		240D04381AB7206200D8BB9F /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7801AAEDB03006F374D /* StartViewController.swift */; };
-		242C6E021AC7DFBC0024ECEF /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242C6E001AC7DFBC0024ECEF /* GoogleOpenSource.framework */; };
 		242C6E031AC7DFBC0024ECEF /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 242C6E011AC7DFBC0024ECEF /* GooglePlus.framework */; };
 		242C6E071AC80F050024ECEF /* BiolifeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242C6E061AC80F050024ECEF /* BiolifeModel.swift */; };
 		242C6E091AC86BFD0024ECEF /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242C6E081AC86BFD0024ECEF /* Tag.swift */; };
@@ -42,13 +41,10 @@
 		24E32D701AB1EC5A003C4E0A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D401AB1E88E003C4E0A /* Social.framework */; };
 		24E32D711AB1EC5A003C4E0A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D3E1AB1E86A003C4E0A /* AudioToolbox.framework */; };
 		24E32D721AB1EC5A003C4E0A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D311AB19647003C4E0A /* Bolts.framework */; };
-		24E32D7E1AB29DEF003C4E0A /* BehaviourState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E76E1AAEDA85006F374D /* BehaviourState.swift */; };
 		3205E7481AAED9F9006F374D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7471AAED9F9006F374D /* AppDelegate.swift */; };
 		3205E74D1AAED9F9006F374D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3205E74B1AAED9F9006F374D /* Main.storyboard */; };
-		3205E74F1AAED9F9006F374D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3205E74E1AAED9F9006F374D /* Images.xcassets */; };
 		3205E7521AAED9F9006F374D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3205E7501AAED9F9006F374D /* LaunchScreen.xib */; };
 		3205E75E1AAED9F9006F374D /* BioLifeTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E75D1AAED9F9006F374D /* BioLifeTrackerTests.swift */; };
-		3205E7761AAEDA85006F374D /* BehaviourState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E76E1AAEDA85006F374D /* BehaviourState.swift */; };
 		3205E7771AAEDA85006F374D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E76F1AAEDA85006F374D /* Constants.swift */; };
 		3205E7781AAEDA85006F374D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7701AAEDA85006F374D /* Data.swift */; };
 		3205E7791AAEDA85006F374D /* Ethogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7711AAEDA85006F374D /* Ethogram.swift */; };
@@ -57,7 +53,6 @@
 		3205E77C1AAEDA85006F374D /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7741AAEDA85006F374D /* Session.swift */; };
 		3205E77D1AAEDA85006F374D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7751AAEDA85006F374D /* User.swift */; };
 		3209205D1AC98E8A00E8A456 /* SessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320920591AC98E8A00E8A456 /* SessionsViewController.swift */; };
-		320920631AC9908500E8A456 /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 320920621AC9908400E8A456 /* GooglePlus.bundle */; };
 		320920691ACA7E4400E8A456 /* SuperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320920681ACA7E4400E8A456 /* SuperController.swift */; };
 		320920711ACA9A1600E8A456 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320920701ACA9A1600E8A456 /* MenuViewController.swift */; };
 		3222E6F51ACF8F5F00E51BA1 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3222E6F41ACF8F5F00E51BA1 /* ButtonCell.swift */; };
@@ -90,6 +85,19 @@
 		32850BE61AB9625500C49D33 /* EthogramDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */; };
 		329B29251ACFF516007ADC65 /* PhotoPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329B29241ACFF516007ADC65 /* PhotoPickerCell.swift */; };
 		329B29271ACFF5BC007ADC65 /* PhotoPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 329B29261ACFF5BC007ADC65 /* PhotoPickerCell.xib */; };
+		AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AC18814A1ACFC84600CE450B /* GooglePlus.bundle */; };
+		AC18814E1ACFC84600CE450B /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814B1ACFC84600CE450B /* GooglePlus.framework */; };
+		AC1881501ACFD05D00CE450B /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814F1ACFD05D00CE450B /* GoogleOpenSource.framework */; };
+		AC1881511ACFD0E400CE450B /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814F1ACFD05D00CE450B /* GoogleOpenSource.framework */; };
+		AC1881521ACFD0E400CE450B /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814B1ACFC84600CE450B /* GooglePlus.framework */; };
+		AC1881531ACFD0E400CE450B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2439AAB91AC7DC7900389195 /* FacebookSDK.framework */; };
+		AC1881551AD02F2400CE450B /* TagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1881541AD02F2400CE450B /* TagTests.swift */; };
+		AC1881571AD02F3100CE450B /* WeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1881561AD02F3100CE450B /* WeatherTests.swift */; };
+		AC1881591AD02F3E00CE450B /* LocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1881581AD02F3E00CE450B /* LocationTests.swift */; };
+		AC18815B1AD02F4E00CE450B /* IndividualTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18815A1AD02F4E00CE450B /* IndividualTests.swift */; };
+		AC18815D1AD02F5D00CE450B /* ObservationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18815C1AD02F5D00CE450B /* ObservationTests.swift */; };
+		AC18815F1AD02F6E00CE450B /* SessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC18815E1AD02F6E00CE450B /* SessionTests.swift */; };
+		AC1881611AD02F8600CE450B /* BehaviourStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1881601AD02F8600CE450B /* BehaviourStateTests.swift */; };
 		AC188C7C1AC2B11A00CB08C0 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC188C7B1AC2B11A00CB08C0 /* Storable.swift */; };
 		AC188C7D1AC2B11A00CB08C0 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC188C7B1AC2B11A00CB08C0 /* Storable.swift */; };
 		AC702EE21AC55EA3003C50C8 /* Ethogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7711AAEDA85006F374D /* Ethogram.swift */; };
@@ -104,6 +112,10 @@
 		AC702EEC1AC55FC6003C50C8 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7701AAEDA85006F374D /* Data.swift */; };
 		AC9162AC1ACA6A0400FED714 /* CloudStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */; };
 		AC9162AD1ACA6CC300FED714 /* CloudStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */; };
+		AC9EE3391ACEC2C500939476 /* ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9EE3381ACEC2C500939476 /* ProjectTests.swift */; };
+		AC9EE33B1ACEC2E400939476 /* EthogramTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9EE33A1ACEC2E400939476 /* EthogramTests.swift */; };
+		AC9EE3471ACEC57200939476 /* BehaviourState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9EE3461ACEC57200939476 /* BehaviourState.swift */; };
+		AC9EE3481ACEE0F100939476 /* BehaviourState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9EE3461ACEC57200939476 /* BehaviourState.swift */; };
 		ACB073E91AC17BA3004E0BFC /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073E31AC17BA3004E0BFC /* AddressBook.framework */; };
 		ACB073EA1AC17BA3004E0BFC /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073E41AC17BA3004E0BFC /* AssetsLibrary.framework */; };
 		ACB073EB1AC17BA3004E0BFC /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073E51AC17BA3004E0BFC /* CoreText.framework */; };
@@ -111,11 +123,14 @@
 		ACB073ED1AC17BA3004E0BFC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073E71AC17BA3004E0BFC /* Security.framework */; };
 		ACB073EE1AC17BA3004E0BFC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073E81AC17BA3004E0BFC /* UIKit.framework */; };
 		ACB073F41AC184F5004E0BFC /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073F31AC184F5004E0BFC /* CoreMotion.framework */; };
-		ACDC54401AC3FC6B00779FAE /* LocalStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDC543F1AC3FC6B00779FAE /* LocalStorageTests.swift */; };
 		ACDCC0F11ACD05E1001590B8 /* UserAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDCC0F01ACD05E1001590B8 /* UserAuthService.swift */; };
 		ACDCC0F21ACD05E1001590B8 /* UserAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDCC0F01ACD05E1001590B8 /* UserAuthService.swift */; };
-		ACDCFADF1AC9B68600CEA99C /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDCFADE1AC9B68600CEA99C /* GooglePlus.framework */; };
-		ACDCFAE01AC9B68600CEA99C /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACDCFADE1AC9B68600CEA99C /* GooglePlus.framework */; };
+		ACDE13AB1AD0C03F0075AC35 /* ProjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDE13AA1AD0C03F0075AC35 /* ProjectManager.swift */; };
+		ACDE13AD1AD0C0540075AC35 /* EthogramManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDE13AC1AD0C0540075AC35 /* EthogramManager.swift */; };
+		ACDE13AE1AD0E4E40075AC35 /* ProjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDE13AA1AD0C03F0075AC35 /* ProjectManager.swift */; };
+		ACDE13AF1AD0E4E60075AC35 /* EthogramManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDE13AC1AD0C0540075AC35 /* EthogramManager.swift */; };
+		ACDE13B21AD0E6C80075AC35 /* ProjectMngTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDE13B11AD0E6C80075AC35 /* ProjectMngTests.swift */; };
+		ACDE13B41AD0E6D60075AC35 /* EthogramMngTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDE13B31AD0E6D60075AC35 /* EthogramMngTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,7 +147,6 @@
 		240D04301AB718AE00D8BB9F /* Individual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Individual.swift; sourceTree = "<group>"; };
 		240D04321AB718EF00D8BB9F /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		240D04341AB7190800D8BB9F /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
-		242C6E001AC7DFBC0024ECEF /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleOpenSource.framework; path = BioLifeTracker/GoogleOpenSource.framework; sourceTree = "<group>"; };
 		242C6E011AC7DFBC0024ECEF /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlus.framework; path = BioLifeTracker/GooglePlus.framework; sourceTree = "<group>"; };
 		242C6E061AC80F050024ECEF /* BiolifeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiolifeModel.swift; sourceTree = "<group>"; };
 		242C6E081AC86BFD0024ECEF /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
@@ -156,12 +170,10 @@
 		3205E7461AAED9F9006F374D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3205E7471AAED9F9006F374D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3205E74C1AAED9F9006F374D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3205E74E1AAED9F9006F374D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3205E7511AAED9F9006F374D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		3205E7571AAED9F9006F374D /* BioLifeTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BioLifeTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3205E75C1AAED9F9006F374D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3205E75D1AAED9F9006F374D /* BioLifeTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioLifeTrackerTests.swift; sourceTree = "<group>"; };
-		3205E76E1AAEDA85006F374D /* BehaviourState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviourState.swift; sourceTree = "<group>"; };
 		3205E76F1AAEDA85006F374D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3205E7701AAEDA85006F374D /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		3205E7711AAEDA85006F374D /* Ethogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ethogram.swift; sourceTree = "<group>"; };
@@ -174,7 +186,6 @@
 		3205E7801AAEDB03006F374D /* StartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramFormViewController.swift; sourceTree = "<group>"; };
 		320920591AC98E8A00E8A456 /* SessionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionsViewController.swift; sourceTree = "<group>"; };
-		320920621AC9908400E8A456 /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GooglePlus.bundle; path = BioLifeTracker/GooglePlus.bundle; sourceTree = "<group>"; };
 		320920681ACA7E4400E8A456 /* SuperController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperController.swift; sourceTree = "<group>"; };
 		320920701ACA9A1600E8A456 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		3222E6F41ACF8F5F00E51BA1 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
@@ -204,8 +215,21 @@
 		326773CC1ACD86BB00899745 /* DefaultPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultPickerCell.xib; sourceTree = "<group>"; };
 		329B29241ACFF516007ADC65 /* PhotoPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPickerCell.swift; sourceTree = "<group>"; };
 		329B29261ACFF5BC007ADC65 /* PhotoPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoPickerCell.xib; sourceTree = "<group>"; };
+		AC18814A1ACFC84600CE450B /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
+		AC18814B1ACFC84600CE450B /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
+		AC18814F1ACFD05D00CE450B /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
+		AC1881541AD02F2400CE450B /* TagTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagTests.swift; sourceTree = "<group>"; };
+		AC1881561AD02F3100CE450B /* WeatherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherTests.swift; sourceTree = "<group>"; };
+		AC1881581AD02F3E00CE450B /* LocationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTests.swift; sourceTree = "<group>"; };
+		AC18815A1AD02F4E00CE450B /* IndividualTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndividualTests.swift; sourceTree = "<group>"; };
+		AC18815C1AD02F5D00CE450B /* ObservationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservationTests.swift; sourceTree = "<group>"; };
+		AC18815E1AD02F6E00CE450B /* SessionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTests.swift; sourceTree = "<group>"; };
+		AC1881601AD02F8600CE450B /* BehaviourStateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviourStateTests.swift; sourceTree = "<group>"; };
 		AC188C7B1AC2B11A00CB08C0 /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
 		AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorable.swift; sourceTree = "<group>"; };
+		AC9EE3381ACEC2C500939476 /* ProjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
+		AC9EE33A1ACEC2E400939476 /* EthogramTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramTests.swift; sourceTree = "<group>"; };
+		AC9EE3461ACEC57200939476 /* BehaviourState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviourState.swift; sourceTree = "<group>"; };
 		ACB073E31AC17BA3004E0BFC /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		ACB073E41AC17BA3004E0BFC /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		ACB073E51AC17BA3004E0BFC /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -213,9 +237,12 @@
 		ACB073E71AC17BA3004E0BFC /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		ACB073E81AC17BA3004E0BFC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ACB073F31AC184F5004E0BFC /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		ACDC543F1AC3FC6B00779FAE /* LocalStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStorageTests.swift; sourceTree = "<group>"; };
 		ACDCC0F01ACD05E1001590B8 /* UserAuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthService.swift; sourceTree = "<group>"; };
-		ACDCFADE1AC9B68600CEA99C /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GooglePlus.framework; path = "../../Downloads/google-plus-ios-sdk-1.7.1 2/GooglePlus.framework"; sourceTree = "<group>"; };
+		ACDE13AA1AD0C03F0075AC35 /* ProjectManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectManager.swift; sourceTree = "<group>"; };
+		ACDE13AC1AD0C0540075AC35 /* EthogramManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramManager.swift; sourceTree = "<group>"; };
+		ACDE13B11AD0E6C80075AC35 /* ProjectMngTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectMngTests.swift; sourceTree = "<group>"; };
+		ACDE13B31AD0E6D60075AC35 /* EthogramMngTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramMngTests.swift; sourceTree = "<group>"; };
+		ACDE13B51AD1032F0075AC35 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = file; name = Images.xcassets; path = ../../../Desktop/Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,8 +255,8 @@
 				24E32D4F1AB1E92A003C4E0A /* SystemConfiguration.framework in Frameworks */,
 				ACB073ED1AC17BA3004E0BFC /* Security.framework in Frameworks */,
 				ACB073EC1AC17BA3004E0BFC /* MediaPlayer.framework in Frameworks */,
+				AC1881501ACFD05D00CE450B /* GoogleOpenSource.framework in Frameworks */,
 				ACB073EB1AC17BA3004E0BFC /* CoreText.framework in Frameworks */,
-				242C6E021AC7DFBC0024ECEF /* GoogleOpenSource.framework in Frameworks */,
 				24E32D491AB1E8C3003C4E0A /* CoreGraphics.framework in Frameworks */,
 				ACB073F41AC184F5004E0BFC /* CoreMotion.framework in Frameworks */,
 				24E32D4B1AB1E8CA003C4E0A /* CoreLocation.framework in Frameworks */,
@@ -245,7 +272,7 @@
 				24E32D3F1AB1E86A003C4E0A /* AudioToolbox.framework in Frameworks */,
 				2439AABA1AC7DC7900389195 /* FacebookSDK.framework in Frameworks */,
 				24E32D361AB19647003C4E0A /* Bolts.framework in Frameworks */,
-				ACDCFADF1AC9B68600CEA99C /* GooglePlus.framework in Frameworks */,
+				AC18814E1ACFC84600CE450B /* GooglePlus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,10 +282,12 @@
 			files = (
 				24E32D681AB1EC52003C4E0A /* libsqlite3.dylib in Frameworks */,
 				24E32D671AB1EC4C003C4E0A /* MobileCoreServices.framework in Frameworks */,
+				AC1881511ACFD0E400CE450B /* GoogleOpenSource.framework in Frameworks */,
+				AC1881521ACFD0E400CE450B /* GooglePlus.framework in Frameworks */,
+				AC1881531ACFD0E400CE450B /* FacebookSDK.framework in Frameworks */,
 				24E32D691AB1EC5A003C4E0A /* SystemConfiguration.framework in Frameworks */,
 				24E32D6A1AB1EC5A003C4E0A /* Foundation.framework in Frameworks */,
 				24E32D6B1AB1EC5A003C4E0A /* CoreLocation.framework in Frameworks */,
-				ACDCFAE01AC9B68600CEA99C /* GooglePlus.framework in Frameworks */,
 				24E32D6C1AB1EC5A003C4E0A /* CoreGraphics.framework in Frameworks */,
 				24E32D6D1AB1EC5A003C4E0A /* CFNetwork.framework in Frameworks */,
 				24E32D6E1AB1EC5A003C4E0A /* Accounts.framework in Frameworks */,
@@ -283,6 +312,7 @@
 		240D042E1AB6D43100D8BB9F /* Unit Testing */ = {
 			isa = PBXGroup;
 			children = (
+				ACDE13B01AD0E6B10075AC35 /* Managers */,
 				240D042F1AB6D43B00D8BB9F /* Model */,
 			);
 			name = "Unit Testing";
@@ -291,7 +321,15 @@
 		240D042F1AB6D43B00D8BB9F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				ACDC543F1AC3FC6B00779FAE /* LocalStorageTests.swift */,
+				AC9EE3381ACEC2C500939476 /* ProjectTests.swift */,
+				AC9EE33A1ACEC2E400939476 /* EthogramTests.swift */,
+				AC18815E1AD02F6E00CE450B /* SessionTests.swift */,
+				AC1881601AD02F8600CE450B /* BehaviourStateTests.swift */,
+				AC18815C1AD02F5D00CE450B /* ObservationTests.swift */,
+				AC18815A1AD02F4E00CE450B /* IndividualTests.swift */,
+				AC1881581AD02F3E00CE450B /* LocationTests.swift */,
+				AC1881561AD02F3100CE450B /* WeatherTests.swift */,
+				AC1881541AD02F2400CE450B /* TagTests.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -299,9 +337,9 @@
 		24E32D3B1AB1991C003C4E0A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				ACDCFADE1AC9B68600CEA99C /* GooglePlus.framework */,
-				320920621AC9908400E8A456 /* GooglePlus.bundle */,
-				242C6E001AC7DFBC0024ECEF /* GoogleOpenSource.framework */,
+				AC18814F1ACFD05D00CE450B /* GoogleOpenSource.framework */,
+				AC18814A1ACFC84600CE450B /* GooglePlus.bundle */,
+				AC18814B1ACFC84600CE450B /* GooglePlus.framework */,
 				2439AAB91AC7DC7900389195 /* FacebookSDK.framework */,
 				24E32D441AB1E89D003C4E0A /* Accounts.framework */,
 				ACB073E31AC17BA3004E0BFC /* AddressBook.framework */,
@@ -331,8 +369,9 @@
 			children = (
 				242C6E061AC80F050024ECEF /* BiolifeModel.swift */,
 				3205E7731AAEDA85006F374D /* Project.swift */,
+				AC188C7B1AC2B11A00CB08C0 /* Storable.swift */,
+				AC9EE3461ACEC57200939476 /* BehaviourState.swift */,
 				3205E7711AAEDA85006F374D /* Ethogram.swift */,
-				3205E76E1AAEDA85006F374D /* BehaviourState.swift */,
 				3205E7741AAEDA85006F374D /* Session.swift */,
 				3205E7721AAEDA85006F374D /* Observation.swift */,
 				240D04301AB718AE00D8BB9F /* Individual.swift */,
@@ -367,6 +406,7 @@
 		3205E7441AAED9F9006F374D /* BioLifeTracker */ = {
 			isa = PBXGroup;
 			children = (
+				ACDE13A91AD0C0200075AC35 /* Managers */,
 				ACDCC0EF1ACD05C7001590B8 /* Services */,
 				24E32D771AB298D8003C4E0A /* BioLifeTracker-Bridging-Header.h */,
 				240D042B1AB6CA6800D8BB9F /* Authentication */,
@@ -379,7 +419,6 @@
 				326773C41ACD7C9A00899745 /* MenuViewDelegate.swift */,
 				3205E7471AAED9F9006F374D /* AppDelegate.swift */,
 				3205E7801AAEDB03006F374D /* StartViewController.swift */,
-				AC188C7B1AC2B11A00CB08C0 /* Storable.swift */,
 				3205E77E1AAEDB03006F374D /* ProjectFormViewController.swift */,
 				3205E77F1AAEDB03006F374D /* ProjectsViewController.swift */,
 				32517A1F1AB09A3D00578C42 /* ProjectHomeViewController.swift */,
@@ -388,7 +427,7 @@
 				32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */,
 				320920591AC98E8A00E8A456 /* SessionsViewController.swift */,
 				3205E74B1AAED9F9006F374D /* Main.storyboard */,
-				3205E74E1AAED9F9006F374D /* Images.xcassets */,
+				ACDE13B51AD1032F0075AC35 /* Images.xcassets */,
 				3205E7501AAED9F9006F374D /* LaunchScreen.xib */,
 				3205E7451AAED9F9006F374D /* Supporting Files */,
 			);
@@ -473,6 +512,24 @@
 				ACDCC0F01ACD05E1001590B8 /* UserAuthService.swift */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		ACDE13A91AD0C0200075AC35 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				ACDE13AA1AD0C03F0075AC35 /* ProjectManager.swift */,
+				ACDE13AC1AD0C0540075AC35 /* EthogramManager.swift */,
+			);
+			name = Managers;
+			sourceTree = "<group>";
+		};
+		ACDE13B01AD0E6B10075AC35 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				ACDE13B11AD0E6C80075AC35 /* ProjectMngTests.swift */,
+				ACDE13B31AD0E6D60075AC35 /* EthogramMngTests.swift */,
+			);
+			name = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -560,10 +617,10 @@
 				326773B81ACAEFB000899745 /* CustomPickerPopupCell.xib in Resources */,
 				3205E74D1AAED9F9006F374D /* Main.storyboard in Resources */,
 				326773BA1ACAEFB000899745 /* BooleanPickerCell.xib in Resources */,
-				320920631AC9908500E8A456 /* GooglePlus.bundle in Resources */,
+				3205E7521AAED9F9006F374D /* LaunchScreen.xib in Resources */,
+				AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */,
 				3222E6F71ACF8F8000E51BA1 /* ButtonCell.xib in Resources */,
 				3205E7521AAED9F9006F374D /* LaunchScreen.xib in Resources */,
-				3205E74F1AAED9F9006F374D /* Images.xcassets in Resources */,
 				329B29271ACFF5BC007ADC65 /* PhotoPickerCell.xib in Resources */,
 				326773BF1ACAEFB000899745 /* SingleLineTextCell.xib in Resources */,
 				326773BE1ACAEFB000899745 /* MultiLineTextCell.xib in Resources */,
@@ -591,18 +648,20 @@
 				32850BE21AB9625500C49D33 /* ProjectsViewController.swift in Sources */,
 				240D04381AB7206200D8BB9F /* StartViewController.swift in Sources */,
 				326773C21ACAEFB000899745 /* SingleLineTextCell.swift in Sources */,
+				ACDE13AD1AD0C0540075AC35 /* EthogramManager.swift in Sources */,
 				3205E7791AAEDA85006F374D /* Ethogram.swift in Sources */,
 				326773C51ACD7C9A00899745 /* MenuViewDelegate.swift in Sources */,
 				326773BC1ACAEFB000899745 /* FormField.swift in Sources */,
+				AC9EE3471ACEC57200939476 /* BehaviourState.swift in Sources */,
 				329B29251ACFF516007ADC65 /* PhotoPickerCell.swift in Sources */,
 				320920691ACA7E4400E8A456 /* SuperController.swift in Sources */,
 				326773B61ACAEFB000899745 /* BooleanPickerCell.swift in Sources */,
 				320920711ACA9A1600E8A456 /* MenuViewController.swift in Sources */,
+				ACDE13AB1AD0C03F0075AC35 /* ProjectManager.swift in Sources */,
 				240D04331AB718EF00D8BB9F /* Location.swift in Sources */,
 				ACDCC0F11ACD05E1001590B8 /* UserAuthService.swift in Sources */,
 				32850BE41AB9625500C49D33 /* EthogramFormViewController.swift in Sources */,
 				326773C01ACAEFB000899745 /* FormViewController.swift in Sources */,
-				3205E7761AAEDA85006F374D /* BehaviourState.swift in Sources */,
 				32850BE61AB9625500C49D33 /* EthogramDetailsViewController.swift in Sources */,
 				242C6E071AC80F050024ECEF /* BiolifeModel.swift in Sources */,
 				326773BB1ACAEFB000899745 /* FormCell.swift in Sources */,
@@ -641,18 +700,30 @@
 				AC702EE21AC55EA3003C50C8 /* Ethogram.swift in Sources */,
 				AC702EEA1AC55FAA003C50C8 /* User.swift in Sources */,
 				AC702EEC1AC55FC6003C50C8 /* Data.swift in Sources */,
+				AC1881591AD02F3E00CE450B /* LocationTests.swift in Sources */,
 				ACDCC0F21ACD05E1001590B8 /* UserAuthService.swift in Sources */,
-				24E32D7E1AB29DEF003C4E0A /* BehaviourState.swift in Sources */,
+				AC18815D1AD02F5D00CE450B /* ObservationTests.swift in Sources */,
 				AC702EE81AC55EB5003C50C8 /* Weather.swift in Sources */,
 				247F2FB51AC8EF220065A0D1 /* BiolifeModel.swift in Sources */,
+				ACDE13B41AD0E6D60075AC35 /* EthogramMngTests.swift in Sources */,
 				AC702EE71AC55EB2003C50C8 /* Location.swift in Sources */,
+				AC9EE3481ACEE0F100939476 /* BehaviourState.swift in Sources */,
+				AC1881611AD02F8600CE450B /* BehaviourStateTests.swift in Sources */,
+				ACDE13B21AD0E6C80075AC35 /* ProjectMngTests.swift in Sources */,
 				AC188C7D1AC2B11A00CB08C0 /* Storable.swift in Sources */,
-				ACDC54401AC3FC6B00779FAE /* LocalStorageTests.swift in Sources */,
+				AC1881551AD02F2400CE450B /* TagTests.swift in Sources */,
+				AC9EE33B1ACEC2E400939476 /* EthogramTests.swift in Sources */,
+				AC18815B1AD02F4E00CE450B /* IndividualTests.swift in Sources */,
+				ACDE13AE1AD0E4E40075AC35 /* ProjectManager.swift in Sources */,
+				AC1881571AD02F3100CE450B /* WeatherTests.swift in Sources */,
 				3205E75E1AAED9F9006F374D /* BioLifeTrackerTests.swift in Sources */,
+				ACDE13AF1AD0E4E60075AC35 /* EthogramManager.swift in Sources */,
+				AC9EE3391ACEC2C500939476 /* ProjectTests.swift in Sources */,
 				AC9162AD1ACA6CC300FED714 /* CloudStorable.swift in Sources */,
 				247F2FB41AC8EEF90065A0D1 /* Tag.swift in Sources */,
 				AC702EE51AC55EAC003C50C8 /* Observation.swift in Sources */,
 				AC702EE31AC55EA8003C50C8 /* Project.swift in Sources */,
+				AC18815F1AD02F6E00CE450B /* SessionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -778,8 +849,6 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/BioLifeTracker",
 					"$(PROJECT_DIR)",
-					"/Users/nekonekonik/Downloads/google-plus-ios-sdk-1.7.1",
-					2,
 				);
 				INFOPLIST_FILE = BioLifeTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -787,7 +856,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "BioLifeTracker/BioLifeTracker-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -800,15 +868,12 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/BioLifeTracker",
 					"$(PROJECT_DIR)",
-					"/Users/nekonekonik/Downloads/google-plus-ios-sdk-1.7.1",
-					2,
 				);
 				INFOPLIST_FILE = BioLifeTracker/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "BioLifeTracker/BioLifeTracker-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};
@@ -820,8 +885,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(PROJECT_DIR)/BioLifeTracker",
-					"/Users/nekonekonik/Downloads/google-plus-ios-sdk-1.7.1",
-					2,
+					"$(PROJECT_DIR)",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -843,8 +907,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(PROJECT_DIR)/BioLifeTracker",
-					"/Users/nekonekonik/Downloads/google-plus-ios-sdk-1.7.1",
-					2,
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = BioLifeTrackerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

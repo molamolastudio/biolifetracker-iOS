@@ -9,22 +9,33 @@
 import Foundation
 
 class Location: BiolifeModel {
-    var location: String // to change when we determine what maps to use
+    private var _location: String // to change when we determine what maps to use
+    var location: String {
+        get { return _location }
+    }
     
     override init() {
-        location = ""
+        _location = ""
         super.init()
     }
     
-    // static maker method
-    class func makeDefault() -> Location {
-        var location = Location()
-        // assign @NSManaged variables here
-        return location
+    convenience init(location: String) {
+        self.init()
+        self._location = location
+    }
+    
+    func updateLocation(location: String) {
+        self._location = location
+        updateLocation()
+    }
+    
+    private func updateLocation() {
+        updatedBy = UserAuthService.sharedInstance.user
+        updatedAt = NSDate()
     }
     
     required init(coder aDecoder: NSCoder) {
-        self.location = aDecoder.decodeObjectForKey("location") as String
+        self._location = aDecoder.decodeObjectForKey("location") as String
         super.init(coder: aDecoder)
     }
 }
@@ -32,6 +43,6 @@ class Location: BiolifeModel {
 extension Location: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)
-        aCoder.encodeObject(location, forKey: "location")
+        aCoder.encodeObject(_location, forKey: "location")
     }
 }

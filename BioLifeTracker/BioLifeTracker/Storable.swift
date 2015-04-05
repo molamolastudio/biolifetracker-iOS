@@ -12,5 +12,5 @@ protocol Storable: NSCoding {
     
     func saveToArchives()
     class func loadFromArchives(identifier: String) -> NSObject?
-    
+    class func deleteFromArchives(identifier: String) -> Bool
 }

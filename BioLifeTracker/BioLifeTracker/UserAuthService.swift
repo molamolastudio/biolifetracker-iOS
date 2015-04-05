@@ -26,8 +26,24 @@ class UserAuthService {
         return Singleton.instance
     }
     
+    func useDefaultUser() {
+        initialiseManagers()
+    }
+    
     func setUserAuth(user: User, accessToken: String) {
         self._user = user
         self._accessToken = accessToken
+        initialiseManagers()
+    }
+    
+    private func initialiseManagers() {
+        let loadedProjectMng = ProjectManager.loadFromArchives(UserAuthService.sharedInstance.user.toString()) as ProjectManager?
+        if loadedProjectMng != nil {
+            ProjectManager.sharedInstance.updateProjects(loadedProjectMng!.projects)
+        }
+        let loadedEthogramMng = EthogramManager.loadFromArchives(UserAuthService.sharedInstance.user.toString()) as EthogramManager?
+        if loadedEthogramMng != nil {
+            EthogramManager.sharedInstance.updateEthograms(loadedEthogramMng!.ethograms)
+        }
     }
 }

@@ -9,21 +9,33 @@
 import Foundation
 
 class Weather: BiolifeModel {
-    var weather: String
+    private var _weather: String
+    var weather: String {
+        get { return _weather }
+    }
     
     override init() {
-        weather = ""
+        _weather = ""
         super.init()
     }
     
-    // static maker method
-    class func makeDefault() -> Weather {
-        var weather = Weather()
-        return weather
+    convenience init(weather: String) {
+        self.init()
+        self._weather = weather
+    }
+    
+    func updateWeather(weather: String) {
+        self._weather = weather
+        updateWeather()
+    }
+    
+    private func updateWeather() {
+        updatedBy = UserAuthService.sharedInstance.user
+        updatedAt = NSDate()
     }
     
     required init(coder aDecoder: NSCoder) {
-        self.weather = aDecoder.decodeObjectForKey("weather") as String
+        self._weather = aDecoder.decodeObjectForKey("weather") as String
         super.init(coder: aDecoder)
     }
     
@@ -33,6 +45,6 @@ class Weather: BiolifeModel {
 extension Weather: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)
-        aCoder.encodeObject(weather, forKey: "weather")
+        aCoder.encodeObject(_weather, forKey: "weather")
     }
 }
