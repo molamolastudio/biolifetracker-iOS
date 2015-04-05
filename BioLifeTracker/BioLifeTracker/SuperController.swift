@@ -15,6 +15,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     let splitVC = UISplitViewController()
     let menu = MenuViewController(style: UITableViewStyle.Grouped)
+    
+    let startPage = FirstViewController(nibName: "FirstView", bundle: nil)
     let newProject = FormViewController(style: UITableViewStyle.Grouped)
     let newIndividual = FormViewController(style: UITableViewStyle.Grouped)
     
@@ -27,30 +29,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         setupMenu()
         setupNewProject()
         
-        let data = FormFieldData(sections: 3)
-        
-        data.setSectionTitle(0, title: "Text Cells")
-        data.setSectionTitle(1, title: "Boolean Cells")
-        data.setSectionTitle(2, title: "Picker Cells")
-        
-        data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
-        data.addTextCell(section: 0, label: "Notes", hasSingleLine: false, value: "I have no notes.")
-        
-        data.addBooleanCell(section: 1, label: "Human?")
-        data.addButtonCell(section: 1, label: "Button", buttonTitle: "Press", target: self, action: "showPicker", popup: popup)
-        data.addPickerCell(section: 1, label: "Custom pick", pickerValues: ethogramPickerValues, isCustomPicker: true)
-        data.addPhotoPickerCell(section: 1, label: "Photo")
-        
-        data.addDatePickerCell(section: 2, label: "Birthdate")
-        data.addPickerCell(section: 2, label: "Options", pickerValues: ["Good", "Neutral", "Evil"], isCustomPicker: false)
-        
-        let controller = FormViewController(style: UITableViewStyle.Grouped)
-        controller.setFormData(data)
-        controller.cellHorizontalPadding = 10
-        controller.roundedCells = true
-        
         let masterNav = UINavigationController(rootViewController: menu)
-        let detailNav = UINavigationController(rootViewController: controller)
+        let detailNav = UINavigationController(rootViewController: startPage)
         
         splitVC.viewControllers = [masterNav, detailNav]
         splitVC.delegate = self

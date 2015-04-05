@@ -9,21 +9,17 @@
 import UIKit
 
 class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
-    @IBOutlet weak var displaySessionTitle: UITextField!
     
-    @IBOutlet weak var displayProject: UITextField!
-    @IBOutlet weak var displaySession: UITextField!
+    @IBOutlet weak var displayProject: UILabel!
+    @IBOutlet weak var displaySession: UILabel!
+    @IBOutlet weak var displaySessionTitle: UILabel!
+    @IBOutlet weak var btnCreateProject: UIButton!
+    @IBOutlet weak var btnCreateSession: UIButton!
 
     /************Important***************/
     @IBOutlet weak var btnLogin: FBLoginView!
     /************************************/
-    
-    
-    @IBOutlet weak var btnAllProjects: UIButton!
-    @IBOutlet weak var btnCreateProject: UIButton!
-    
-    @IBOutlet weak var btnSession: UIButton!
-    
+
     /******************Important****************/
     // TODO: Make the google login button/view type of GPPSignInButton
     // More information on https://developers.google.com/+/mobile/ios/sign-in#add_the_sign-in_button
@@ -53,6 +49,7 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
             signIn!.signOut()
             println("signed out")
         }
+
     }
     
     /************Important***************/
@@ -70,10 +67,6 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     let messageNoProjects = "You don't have any projects."
     let messageNoSessions = "You don't have any sessions."
     
-    
-    let superVC = SuperController()
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -87,14 +80,6 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         /************************************/
         
         refreshView()
-
-        self.view.addSubview(superVC.view)
-        superVC.view.frame = self.view.frame
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
     }
 
     // Changes the visibility of UI elements based on state variables.
@@ -114,10 +99,10 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
             
             if let session = Data.selectedSession {
                 displaySession.text = session.getDisplayName()
-                btnSession.titleLabel!.text = labelStartTracking
+                btnCreateSession.titleLabel!.text = labelStartTracking
             } else {
                 displaySession.text = messageNoSessions
-                btnSession.titleLabel!.text = labelCreateSession
+                btnCreateSession.titleLabel!.text = labelCreateSession
             }
         } else {
             // Else, show the appropriate text.
@@ -129,13 +114,13 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     func showSessionSection() {
         displaySessionTitle.hidden = false
         displaySession.hidden = false
-        btnSession.hidden = false
+        btnCreateSession.hidden = false
     }
     
     func hideSessionSection() {
         displaySessionTitle.hidden = true
         displaySession.hidden = true
-        btnSession.hidden = true
+        btnCreateSession.hidden = true
     }
     
     
