@@ -14,6 +14,9 @@ import UIKit
 class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate, CustomPickerPopupDelegate, FirstViewControllerDelegate {
     
     let splitVC = UISplitViewController()
+    let masterNav = UINavigationController()
+    let detailNav = UINavigationController()
+    
     let menu = MenuViewController(style: UITableViewStyle.Grouped)
     
     let startPage = FirstViewController(nibName: "FirstView", bundle: nil)
@@ -29,9 +32,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         setupMenu()
         setupNewProject()
         
-        let masterNav = UINavigationController(rootViewController: menu)
-        let detailNav = UINavigationController(rootViewController: startPage)
-        
+        masterNav.setViewControllers([menu], animated: true)
+        detailNav.setViewControllers([startPage], animated: true)
+
         splitVC.viewControllers = [masterNav, detailNav]
         splitVC.delegate = self
         
@@ -88,6 +91,10 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         return data
     }
     
+    func showNewProjectPage() {
+        detailNav.pushViewController(newProject, animated: true)
+    }
+    
     // MenuViewDelegate methods
     func userDidSelectProjects() {
         println("projects")
@@ -134,6 +141,15 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func userDidSelectObservations(project: Project, session: Session) {
+        
+    }
+    
+    // FirstViewControllerDelegate methods
+    func userDidSelectCreateProjectButton() {
+        showNewProjectPage()
+    }
+    
+    func userDidSelectCreateSessionButton() {
         
     }
 }

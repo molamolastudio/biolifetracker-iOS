@@ -9,6 +9,7 @@
 import UIKit
 
 class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
+    var delegate: FirstViewControllerDelegate? = nil
     
     @IBOutlet weak var displayProject: UILabel!
     @IBOutlet weak var displaySession: UILabel!
@@ -20,7 +21,19 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     @IBOutlet weak var btnLogin: FBLoginView!
     /************************************/
     @IBOutlet weak var btnLoginGoogle: GPPSignInButton!
+    
+    
+    @IBAction func projectBtnPressed(sender: UIButton) {
+        if delegate != nil {
+            delegate!.userDidSelectCreateProjectButton()
+        }
+    }
 
+    @IBAction func sessionBtnPressed(sender: UIButton) {
+        if delegate != nil {
+            delegate!.userDidSelectCreateSessionButton()
+        }
+    }
     /******************Important****************/
     // TODO: Make the google login button/view type of GPPSignInButton
     // More information on https://developers.google.com/+/mobile/ios/sign-in#add_the_sign-in_button
