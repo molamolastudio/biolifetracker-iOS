@@ -33,7 +33,7 @@ class Observation: BiolifeModel {
     var photoUrls: [String] { get { return _photoUrls } }
     var notes: String { get { return _notes } }
     
-    init(session: Session, individual: Individual, state: BehaviourState, timestamp: NSDate, creator: User, information: String) {
+    init(session: Session, individual: Individual, state: BehaviourState, timestamp: NSDate, information: String) {
         self._session = session
         self._state = state
         self._timestamp = timestamp
@@ -46,7 +46,7 @@ class Observation: BiolifeModel {
         super.init()
     }
     
-    init(session: Session, individual: Individual, state: BehaviourState, timestamp: NSDate, creator: User, information: String, notes: String) {
+    init(session: Session, individual: Individual, state: BehaviourState, timestamp: NSDate, information: String, notes: String) {
         self._session = session
         self._state = state
         self._timestamp = timestamp

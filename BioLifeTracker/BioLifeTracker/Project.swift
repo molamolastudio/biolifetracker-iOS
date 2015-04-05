@@ -21,7 +21,7 @@ class Project: BiolifeModel, Storable {
     var admins: [User] { get { return _admins } }
     var members: [User] { get { return _members } }
     var sessions: [Session] { get { return _sessions } }
-    var individual: [Individual] { get { return _individuals } }
+    var individuals: [Individual] { get { return _individuals } }
     
     // Default initializer
     override init() {
@@ -40,7 +40,7 @@ class Project: BiolifeModel, Storable {
         self._ethogram = ethogram
         self._admins = [UserAuthService.sharedInstance.user]
         self._members = [UserAuthService.sharedInstance.user]
-        self.saveToArchives()
+  //      self.saveToArchives()
     }
     
     func getIndexOfSession(session: Session) -> Int? {
@@ -138,7 +138,7 @@ class Project: BiolifeModel, Storable {
     private func updateProject() {
         updatedBy = UserAuthService.sharedInstance.user
         updatedAt = NSDate()
-        self.saveToArchives()
+   //     self.saveToArchives()
     }
     
     /**************Saving to Archives****************/
@@ -215,10 +215,8 @@ class Project: BiolifeModel, Storable {
         while true {
             let admin = enumerator.nextObject() as User?
             if admin == nil {
-                println("/*************failadmin")
                 break
             } else {
-                println("/*************admin  \(admin!.toString())")
                 self._admins.append(admin!)
             }
         }
@@ -229,10 +227,8 @@ class Project: BiolifeModel, Storable {
         while true {
             let user = enumerator.nextObject() as User?
             if user == nil {
-                println("/*************failmember")
                 break
             } else {
-                println("/**************member \(user!.toString())")
                 self._members.append(user!)
             }
         }

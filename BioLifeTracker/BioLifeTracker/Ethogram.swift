@@ -35,7 +35,7 @@ class Ethogram: BiolifeModel, Storable {
         self._name = name
         self._behaviourStates = []
         self._information = ""
-        self.saveToArchives()
+    //    self.saveToArchives()
     }
     
     convenience init(name: String, information: String) {
@@ -43,7 +43,7 @@ class Ethogram: BiolifeModel, Storable {
         self._name = name
         self._behaviourStates = []
         self._information = information
-        self.saveToArchives()
+    //    self.saveToArchives()
     }
     
     /************Ethogram********************/
@@ -95,7 +95,7 @@ class Ethogram: BiolifeModel, Storable {
     private func updateEthogram() {
         updatedBy = UserAuthService.sharedInstance.user
         updatedAt = NSDate()
-        self.saveToArchives()
+   //     self.saveToArchives()
     }
     
     /**************Saving to Archives****************/
