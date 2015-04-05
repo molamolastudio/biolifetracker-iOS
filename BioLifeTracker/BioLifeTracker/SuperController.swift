@@ -11,7 +11,7 @@
 
 import UIKit
 
-class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate, CustomPickerPopupDelegate, FirstViewControllerDelegate {
+class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate, FirstViewControllerDelegate {
     
     let splitVC = UISplitViewController()
     let masterNav = UINavigationController()
@@ -28,9 +28,11 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     let popup = CustomPickerPopup()
     
     override func viewDidLoad() {
+        setupForDemo()
         
         setupMenu()
         setupNewProject()
+        setupStartPage()
         
         masterNav.setViewControllers([menu], animated: true)
         detailNav.setViewControllers([startPage], animated: true)
@@ -42,22 +44,20 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         splitVC.view.frame = self.view.frame
     }
     
-    func showPicker() {
-        popup.pickerDelegate = self
-        
-        popup.data = ethogramPickerValues
-        
-        self.view.addSubview(popup.view)
-        popup.view.frame = self.view.frame
-    }
-    
-    func pickerDidDismiss(selectedIndex: Int?) {
-        popup.view.removeFromSuperview()
+    func setupForDemo() {
+        // Insert some ethograms
+        EthogramManager.sharedInstance.addEthogram(Ethogram(name: ethogramPickerValues[0]))
+        EthogramManager.sharedInstance.addEthogram(Ethogram(name: ethogramPickerValues[1]))
     }
     
     func setupMenu() {
         menu.title = "BioLifeTracker"
         menu.delegate = self
+    }
+    
+    func setupStartPage() {
+        startPage.title = "Home"
+        startPage.delegate = self
     }
     
     func setupNewProject() {
@@ -77,7 +77,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func getFormDataForNewProject() -> FormFieldData {
         let data = FormFieldData(sections: 2)
         data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
-        data.addPickerCell(section: 0, label: "Ethogram", pickerValues: ethogramPickerValues, isCustomPicker: false)
+        data.addPickerCell(section: 0, label: "Ethogram", pickerValues: ethogramPickerValues, isCustomPicker: true)
         data.setSectionTitle(1, title: "Members")
         data.addTextCell(section: 1, label: "Enter Member Here", hasSingleLine: true) // To be decided
         return data
@@ -93,6 +93,22 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     func showNewProjectPage() {
         detailNav.pushViewController(newProject, animated: true)
+        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("createNewProject"))
+        newProject.navigationItem.rightBarButtonItem = createBtn
+    }
+    
+    func createNewProject() {
+        let values = newProject.getFormData()
+        
+        if let name = values[0] as? String {
+            if let index = values[1] as? Int {
+                let project = Project(name: name, ethogram: EthogramManager.sharedInstance.ethograms[index])
+                
+                ProjectManager.sharedInstance.addProject(project)
+                
+                detailNav.popViewControllerAnimated(true)
+            }
+        }
     }
     
     // MenuViewDelegate methods
