@@ -11,7 +11,7 @@
 
 import UIKit
 
-class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewDelegate, CustomPickerPopupDelegate {
+class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate, CustomPickerPopupDelegate, FirstViewControllerDelegate {
     
     let splitVC = UISplitViewController()
     let menu = MenuViewController(style: UITableViewStyle.Grouped)
@@ -88,6 +88,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         return data
     }
     
+    // MenuViewDelegate methods
     func userDidSelectProjects() {
         println("projects")
         let data = newProject.getFormData()
