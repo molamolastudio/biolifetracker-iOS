@@ -120,6 +120,10 @@
 		ACB073F41AC184F5004E0BFC /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073F31AC184F5004E0BFC /* CoreMotion.framework */; };
 		ACDCC0F11ACD05E1001590B8 /* UserAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDCC0F01ACD05E1001590B8 /* UserAuthService.swift */; };
 		ACDCC0F21ACD05E1001590B8 /* UserAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDCC0F01ACD05E1001590B8 /* UserAuthService.swift */; };
+		ACDE13AB1AD0C03F0075AC35 /* ProjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDE13AA1AD0C03F0075AC35 /* ProjectManager.swift */; };
+		ACDE13AD1AD0C0540075AC35 /* EthogramManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDE13AC1AD0C0540075AC35 /* EthogramManager.swift */; };
+		ACDE13AE1AD0E4E40075AC35 /* ProjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDE13AA1AD0C03F0075AC35 /* ProjectManager.swift */; };
+		ACDE13AF1AD0E4E60075AC35 /* EthogramManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDE13AC1AD0C0540075AC35 /* EthogramManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -222,6 +226,8 @@
 		ACB073E81AC17BA3004E0BFC /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ACB073F31AC184F5004E0BFC /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		ACDCC0F01ACD05E1001590B8 /* UserAuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAuthService.swift; sourceTree = "<group>"; };
+		ACDE13AA1AD0C03F0075AC35 /* ProjectManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectManager.swift; sourceTree = "<group>"; };
+		ACDE13AC1AD0C0540075AC35 /* EthogramManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -346,8 +352,8 @@
 			isa = PBXGroup;
 			children = (
 				242C6E061AC80F050024ECEF /* BiolifeModel.swift */,
-				AC188C7B1AC2B11A00CB08C0 /* Storable.swift */,
 				3205E7731AAEDA85006F374D /* Project.swift */,
+				AC188C7B1AC2B11A00CB08C0 /* Storable.swift */,
 				AC9EE3461ACEC57200939476 /* BehaviourState.swift */,
 				3205E7711AAEDA85006F374D /* Ethogram.swift */,
 				3205E7741AAEDA85006F374D /* Session.swift */,
@@ -384,6 +390,7 @@
 		3205E7441AAED9F9006F374D /* BioLifeTracker */ = {
 			isa = PBXGroup;
 			children = (
+				ACDE13A91AD0C0200075AC35 /* Managers */,
 				ACDCC0EF1ACD05C7001590B8 /* Services */,
 				24E32D771AB298D8003C4E0A /* BioLifeTracker-Bridging-Header.h */,
 				240D042B1AB6CA6800D8BB9F /* Authentication */,
@@ -483,6 +490,15 @@
 				ACDCC0F01ACD05E1001590B8 /* UserAuthService.swift */,
 			);
 			name = Services;
+			sourceTree = "<group>";
+		};
+		ACDE13A91AD0C0200075AC35 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				ACDE13AA1AD0C03F0075AC35 /* ProjectManager.swift */,
+				ACDE13AC1AD0C0540075AC35 /* EthogramManager.swift */,
+			);
+			name = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -599,6 +615,7 @@
 				32850BE21AB9625500C49D33 /* ProjectsViewController.swift in Sources */,
 				240D04381AB7206200D8BB9F /* StartViewController.swift in Sources */,
 				326773C21ACAEFB000899745 /* SingleLineTextCell.swift in Sources */,
+				ACDE13AD1AD0C0540075AC35 /* EthogramManager.swift in Sources */,
 				3205E7791AAEDA85006F374D /* Ethogram.swift in Sources */,
 				326773C51ACD7C9A00899745 /* MenuViewDelegate.swift in Sources */,
 				326773BC1ACAEFB000899745 /* FormField.swift in Sources */,
@@ -606,6 +623,7 @@
 				320920691ACA7E4400E8A456 /* SuperController.swift in Sources */,
 				326773B61ACAEFB000899745 /* BooleanPickerCell.swift in Sources */,
 				320920711ACA9A1600E8A456 /* MenuViewController.swift in Sources */,
+				ACDE13AB1AD0C03F0075AC35 /* ProjectManager.swift in Sources */,
 				240D04331AB718EF00D8BB9F /* Location.swift in Sources */,
 				ACDCC0F11ACD05E1001590B8 /* UserAuthService.swift in Sources */,
 				32850BE41AB9625500C49D33 /* EthogramFormViewController.swift in Sources */,
@@ -657,8 +675,10 @@
 				AC1881551AD02F2400CE450B /* TagTests.swift in Sources */,
 				AC9EE33B1ACEC2E400939476 /* EthogramTests.swift in Sources */,
 				AC18815B1AD02F4E00CE450B /* IndividualTests.swift in Sources */,
+				ACDE13AE1AD0E4E40075AC35 /* ProjectManager.swift in Sources */,
 				AC1881571AD02F3100CE450B /* WeatherTests.swift in Sources */,
 				3205E75E1AAED9F9006F374D /* BioLifeTrackerTests.swift in Sources */,
+				ACDE13AF1AD0E4E60075AC35 /* EthogramManager.swift in Sources */,
 				AC9EE3391ACEC2C500939476 /* ProjectTests.swift in Sources */,
 				AC9162AD1ACA6CC300FED714 /* CloudStorable.swift in Sources */,
 				247F2FB41AC8EEF90065A0D1 /* Tag.swift in Sources */,
