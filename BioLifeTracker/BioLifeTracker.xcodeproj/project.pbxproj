@@ -50,6 +50,8 @@
 		3205E77D1AAEDA85006F374D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7751AAEDA85006F374D /* User.swift */; };
 		3209205D1AC98E8A00E8A456 /* SessionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320920591AC98E8A00E8A456 /* SessionsViewController.swift */; };
 		320920711ACA9A1600E8A456 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320920701ACA9A1600E8A456 /* MenuViewController.swift */; };
+		32145C2B1AD26E4A00C20F07 /* SessionsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32145C2A1AD26E4A00C20F07 /* SessionsViewControllerDelegate.swift */; };
+		32145C2D1AD272B800C20F07 /* ObservationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32145C2C1AD272B800C20F07 /* ObservationsViewController.swift */; };
 		321D62591AD1757C00CF9BE9 /* FirstViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321D62581AD1757C00CF9BE9 /* FirstViewControllerDelegate.swift */; };
 		321D62C01AD2604400CF9BE9 /* SubtitleTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321D62BE1AD2604400CF9BE9 /* SubtitleTableCell.swift */; };
 		321D62C11AD2604400CF9BE9 /* SubtitleTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 321D62BF1AD2604400CF9BE9 /* SubtitleTableCell.xib */; };
@@ -190,6 +192,8 @@
 		3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramFormViewController.swift; sourceTree = "<group>"; };
 		320920591AC98E8A00E8A456 /* SessionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionsViewController.swift; sourceTree = "<group>"; };
 		320920701ACA9A1600E8A456 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		32145C2A1AD26E4A00C20F07 /* SessionsViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionsViewControllerDelegate.swift; sourceTree = "<group>"; };
+		32145C2C1AD272B800C20F07 /* ObservationsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObservationsViewController.swift; sourceTree = "<group>"; };
 		321D62581AD1757C00CF9BE9 /* FirstViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewControllerDelegate.swift; sourceTree = "<group>"; };
 		321D62BE1AD2604400CF9BE9 /* SubtitleTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubtitleTableCell.swift; sourceTree = "<group>"; };
 		321D62BF1AD2604400CF9BE9 /* SubtitleTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubtitleTableCell.xib; sourceTree = "<group>"; };
@@ -429,14 +433,16 @@
 				320920701ACA9A1600E8A456 /* MenuViewController.swift */,
 				326773C41ACD7C9A00899745 /* MenuViewControllerDelegate.swift */,
 				3205E77F1AAEDB03006F374D /* ProjectsViewController.swift */,
+				32145C2C1AD272B800C20F07 /* ObservationsViewController.swift */,
 				321D62C21AD2615B00CF9BE9 /* ProjectsViewControllerDelegate.swift */,
+				320920591AC98E8A00E8A456 /* SessionsViewController.swift */,
+				32145C2A1AD26E4A00C20F07 /* SessionsViewControllerDelegate.swift */,
 				32517A211AB1789100578C42 /* EthogramsViewController.swift */,
 				321D62C41AD2618800CF9BE9 /* EthogramsViewControllerDelegate.swift */,
 				3205E77E1AAEDB03006F374D /* ProjectFormViewController.swift */,
 				32517A1F1AB09A3D00578C42 /* ProjectHomeViewController.swift */,
 				3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */,
 				32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */,
-				320920591AC98E8A00E8A456 /* SessionsViewController.swift */,
 				321D62BE1AD2604400CF9BE9 /* SubtitleTableCell.swift */,
 				321D62BF1AD2604400CF9BE9 /* SubtitleTableCell.xib */,
 				329B293E1AD15E6F007ADC65 /* FirstView.xib */,
@@ -688,10 +694,12 @@
 				3205E7781AAEDA85006F374D /* Data.swift in Sources */,
 				3205E77A1AAEDA85006F374D /* Observation.swift in Sources */,
 				AC9162AC1ACA6A0400FED714 /* CloudStorable.swift in Sources */,
+				32145C2D1AD272B800C20F07 /* ObservationsViewController.swift in Sources */,
 				329B29391AD15BBF007ADC65 /* FormPopupDelegate.swift in Sources */,
 				326773B71ACAEFB000899745 /* CustomPickerPopup.swift in Sources */,
 				32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */,
 				3205E7481AAED9F9006F374D /* AppDelegate.swift in Sources */,
+				32145C2B1AD26E4A00C20F07 /* SessionsViewControllerDelegate.swift in Sources */,
 				3205E7771AAEDA85006F374D /* Constants.swift in Sources */,
 				3209205D1AC98E8A00E8A456 /* SessionsViewController.swift in Sources */,
 				321D62C51AD2618800CF9BE9 /* EthogramsViewControllerDelegate.swift in Sources */,

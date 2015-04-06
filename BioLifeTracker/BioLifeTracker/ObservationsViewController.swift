@@ -1,5 +1,5 @@
 //
-//  ProjectsViewController.swift
+//  ObservationssViewController.swift
 //  BioLifeTracker
 //
 //  Created by Michelle Tan on 10/3/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProjectsViewController: UITableViewController {
+class ObservationsViewController: UITableViewController {
     var delegate: ProjectsViewControllerDelegate? = nil
     
     let cellReuseIdentifier = "SubtitleTableCell"

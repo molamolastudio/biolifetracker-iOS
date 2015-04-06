@@ -11,7 +11,7 @@
 
 import UIKit
 
-class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate, FirstViewControllerDelegate, ProjectsViewControllerDelegate, EthogramsViewControllerDelegate {
+class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate, FirstViewControllerDelegate, ProjectsViewControllerDelegate, EthogramsViewControllerDelegate, SessionsViewControllerDelegate {
     
     let splitVC = UISplitViewController()
     let masterNav = UINavigationController()
@@ -27,6 +27,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     let popup = CustomPickerPopup()
     
+    var currentProject: Project? = nil
+    var currentSession: Session? = nil
+    
     override func viewDidLoad() {
         setupForDemo()
         
@@ -36,7 +39,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
         masterNav.setViewControllers([menu], animated: true)
         detailNav.setViewControllers([startPage], animated: true)
-
+        
         splitVC.viewControllers = [masterNav, detailNav]
         splitVC.delegate = self
         
@@ -91,6 +94,14 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         return data
     }
     
+    func getFormDataForNewSession() -> FormFieldData {
+        let data = FormFieldData(sections: 1)
+        data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
+        data.addPickerCell(section: 0, label: "Locations", pickerValues: ["Location 1", "Location 2"], isCustomPicker: true)
+        data.addPhotoPickerCell(section: 0, label: "Photos")
+        return data
+    }
+    
     func showNewProjectPage() {
         detailNav.pushViewController(newProject, animated: true)
         var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("createNewProject"))
@@ -106,18 +117,22 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
                 
                 ProjectManager.sharedInstance.addProject(project)
                 
-                detailNav.popViewControllerAnimated(true)
+                showProjectsPage()
             }
         }
     }
     
     func showProjectsPage() {
-        let projects = ProjectsViewController()
-        projects.delegate = self
-        projects.title = "Projects"
-        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("showNewProjectPage"))
-        projects.navigationItem.rightBarButtonItem = createBtn
-        detailNav.pushViewController(projects, animated: true)
+        if let vc = detailNav.viewControllers.last as? ProjectsViewController {
+            detailNav.popViewControllerAnimated(true)
+        } else {
+            let projects = ProjectsViewController()
+            projects.delegate = self
+            projects.title = "Projects"
+            var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("showNewProjectPage"))
+            projects.navigationItem.rightBarButtonItem = createBtn
+            detailNav.pushViewController(projects, animated: true)
+        }
     }
     
     func showEthogramsPage() {
@@ -131,6 +146,32 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     func showNewEthogramPage() {
         println("show new ethogram page")
+    }
+    
+    func showSessionsPage() {
+        let sessions = SessionsViewController()
+        sessions.title = "Sessions"
+        sessions.delegate = self
+        sessions.currentProject = currentProject
+        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("showObservationsPage"))
+        sessions.navigationItem.rightBarButtonItem = createBtn
+        detailNav.pushViewController(sessions, animated: true)
+    }
+    
+    func showNewSessionPage() {
+        let newSession = FormViewController()
+        newSession.title = "New Session"
+        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("showObservationsPage"))
+        newSession.navigationItem.rightBarButtonItem = createBtn
+        
+        newSession.setFormData(getFormDataForNewSession())
+        newSession.cellHorizontalPadding = 10
+        newSession.roundedCells = true
+        detailNav.pushViewController(newSession, animated: true)
+    }
+    
+    func showObservationsPage() {
+        
     }
     
     // MenuViewDelegate methods
@@ -190,10 +231,20 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     // ProjectsViewControllerDelegate methods
     func userDidSelectProject(selectedProject: Project) {
         println(selectedProject.name)
+        currentProject = selectedProject
+        showSessionsPage()
     }
     
     // EthogramsViewControllerDelegate methods
     func userDidSelectEthogram(selectedEthogram: Ethogram) {
         println(selectedEthogram.name)
     }
+    
+    // SessionsViewControllerDelegate methods
+    func userDidSelectSession(selectedProject: Project, selectedSession: Session) {
+        currentProject = selectedProject
+        currentSession = selectedSession
+        showObservationsPage()
+    }
+    
 }
