@@ -8,11 +8,9 @@
 
 import UIKit
 
-class EthogramsViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+class EthogramsViewController: UITableViewController {
     
-    let segueToEthogramDetails = "EthogramsToEthogramDetails"
-    
-    let cellReuseIdentifier = "EthogramTableCell"
+    let cellReuseIdentifier = "SubtitleTableCell"
     
     let messageCellSubtitle = "States: "
     
@@ -27,14 +25,12 @@ class EthogramsViewController: UITableViewController, UITableViewDataSource, UIT
     
     // UITableViewDataSource and UITableViewDelegate METHODS
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell
-        
-        let title = cell.viewWithTag(Constants.ViewTags.ethogramsCellTitle) as UILabel
-        let subtitle = cell.viewWithTag(Constants.ViewTags.ethogramsCellSubtitle) as UILabel
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as SubtitleTableCell
+
         let ethogram = Data.ethograms[indexPath.row]
         
-        title.text = ethogram.name
-        subtitle.text = messageCellSubtitle + String(ethogram.behaviourStates.count)
+        cell.title.text = ethogram.name
+        cell.subtitle.text = messageCellSubtitle + String(ethogram.behaviourStates.count)
         
         return cell
     }

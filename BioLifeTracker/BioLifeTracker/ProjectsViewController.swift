@@ -10,7 +10,7 @@ import UIKit
 
 class ProjectsViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
     
-    let cellReuseIdentifier = "ProjectTableCell"
+    let cellReuseIdentifier = "SubtitleTableCell"
     
     let numSections = 1
     
@@ -19,18 +19,17 @@ class ProjectsViewController: UITableViewController, UITableViewDataSource, UITa
         if Data.projects.count == 0 {
             Data.projects.append(Project()) // For testing
         }
+        self.tableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as SubtitleTableCell
         
-        let title = cell.viewWithTag(Constants.ViewTags.projectsCellTitle) as UILabel
-        let subtitle = cell.viewWithTag(Constants.ViewTags.projectsCellSubtitle) as UILabel
         let project = Data.projects[indexPath.row]
         
-        title.text = project.getDisplayName()
-        //subtitle.text = project.creator.name
+        cell.title.text = project.getDisplayName()
+        cell.subtitle.text = "Created by: " + project.admins.first!.name
         
         return cell
     }

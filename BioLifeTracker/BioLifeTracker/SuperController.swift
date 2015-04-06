@@ -111,17 +111,23 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         }
     }
     
+    func showProjectsPage() {
+        let projects = ProjectsViewController()
+        detailNav.pushViewController(projects, animated: true)
+    }
+    
+    func showEthogramsPage() {
+        let ethograms = EthogramsViewController()
+        detailNav.pushViewController(ethograms, animated: true)
+    }
+    
     // MenuViewDelegate methods
     func userDidSelectProjects() {
-        println("projects")
-        let data = newProject.getFormData()
-        let name = data[0] as String
-        let ethogram = Ethogram(name: data[1] as String)
-        let project = Project(name: name, ethogram: ethogram)
+        showProjectsPage()
     }
     
     func userDidSelectEthograms() {
-        
+        showEthogramsPage()
     }
     
     func userDidSelectGraphs() {

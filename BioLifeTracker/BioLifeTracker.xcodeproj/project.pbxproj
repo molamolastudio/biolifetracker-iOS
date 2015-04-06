@@ -52,6 +52,8 @@
 		320920691ACA7E4400E8A456 /* SuperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320920681ACA7E4400E8A456 /* SuperController.swift */; };
 		320920711ACA9A1600E8A456 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 320920701ACA9A1600E8A456 /* MenuViewController.swift */; };
 		321D62591AD1757C00CF9BE9 /* FirstViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321D62581AD1757C00CF9BE9 /* FirstViewControllerDelegate.swift */; };
+		321D62C01AD2604400CF9BE9 /* SubtitleTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321D62BE1AD2604400CF9BE9 /* SubtitleTableCell.swift */; };
+		321D62C11AD2604400CF9BE9 /* SubtitleTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 321D62BF1AD2604400CF9BE9 /* SubtitleTableCell.xib */; };
 		326773B61ACAEFB000899745 /* BooleanPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773A91ACAEFB000899745 /* BooleanPickerCell.swift */; };
 		326773B71ACAEFB000899745 /* CustomPickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */; };
 		326773B81ACAEFB000899745 /* CustomPickerPopupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 326773AB1ACAEFB000899745 /* CustomPickerPopupCell.xib */; };
@@ -188,6 +190,8 @@
 		320920681ACA7E4400E8A456 /* SuperController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperController.swift; sourceTree = "<group>"; };
 		320920701ACA9A1600E8A456 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		321D62581AD1757C00CF9BE9 /* FirstViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewControllerDelegate.swift; sourceTree = "<group>"; };
+		321D62BE1AD2604400CF9BE9 /* SubtitleTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubtitleTableCell.swift; sourceTree = "<group>"; };
+		321D62BF1AD2604400CF9BE9 /* SubtitleTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubtitleTableCell.xib; sourceTree = "<group>"; };
 		32517A1F1AB09A3D00578C42 /* ProjectHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectHomeViewController.swift; sourceTree = "<group>"; };
 		32517A211AB1789100578C42 /* EthogramsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramsViewController.swift; sourceTree = "<group>"; };
 		32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramDetailsViewController.swift; sourceTree = "<group>"; };
@@ -420,13 +424,15 @@
 				321D62581AD1757C00CF9BE9 /* FirstViewControllerDelegate.swift */,
 				320920701ACA9A1600E8A456 /* MenuViewController.swift */,
 				326773C41ACD7C9A00899745 /* MenuViewControllerDelegate.swift */,
-				3205E77E1AAEDB03006F374D /* ProjectFormViewController.swift */,
 				3205E77F1AAEDB03006F374D /* ProjectsViewController.swift */,
+				32517A211AB1789100578C42 /* EthogramsViewController.swift */,
+				3205E77E1AAEDB03006F374D /* ProjectFormViewController.swift */,
 				32517A1F1AB09A3D00578C42 /* ProjectHomeViewController.swift */,
 				3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */,
-				32517A211AB1789100578C42 /* EthogramsViewController.swift */,
 				32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */,
 				320920591AC98E8A00E8A456 /* SessionsViewController.swift */,
+				321D62BE1AD2604400CF9BE9 /* SubtitleTableCell.swift */,
+				321D62BF1AD2604400CF9BE9 /* SubtitleTableCell.xib */,
 				329B293E1AD15E6F007ADC65 /* FirstView.xib */,
 				3205E74B1AAED9F9006F374D /* Main.storyboard */,
 				3205E7501AAED9F9006F374D /* LaunchScreen.xib */,
@@ -614,6 +620,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				321D62C11AD2604400CF9BE9 /* SubtitleTableCell.xib in Resources */,
 				326773B81ACAEFB000899745 /* CustomPickerPopupCell.xib in Resources */,
 				329B292D1AD15BAF007ADC65 /* ButtonCell.xib in Resources */,
 				329B293F1AD15E6F007ADC65 /* FirstView.xib in Resources */,
@@ -648,6 +655,7 @@
 				326773C11ACAEFB000899745 /* MultiLineTextCell.swift in Sources */,
 				326773BD1ACAEFB000899745 /* FormFieldData.swift in Sources */,
 				242C6E091AC86BFD0024ECEF /* Tag.swift in Sources */,
+				321D62C01AD2604400CF9BE9 /* SubtitleTableCell.swift in Sources */,
 				32850BE21AB9625500C49D33 /* ProjectsViewController.swift in Sources */,
 				329B293A1AD15BBF007ADC65 /* PhotoPickerCell.swift in Sources */,
 				326773C21ACAEFB000899745 /* SingleLineTextCell.swift in Sources */,
