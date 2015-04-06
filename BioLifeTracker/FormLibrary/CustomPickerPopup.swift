@@ -18,9 +18,6 @@ class CustomPickerPopup: FormPopupController, UITableViewDataSource, UITableView
     let alphaQuarter: Float = 0.25
     let cornerRadius: CGFloat = 5
     
-    let tableFrame = CGRectMake(10, 150, 355, 200)
-    let shadowFrame = CGRectMake(0, 0, 355, 200)
-    
     let tableBorderWidth: CGFloat = 0.5
     let tableBorderColor = UIColor.lightGrayColor().CGColor
     
@@ -51,11 +48,11 @@ class CustomPickerPopup: FormPopupController, UITableViewDataSource, UITableView
     }
     
     func setupShadow() {
-        let shadowWidth = self.view.frame.width/2
-        let shadowHeight = self.view.frame.height/3
+        let shadowWidth = self.view.bounds.width/2
+        let shadowHeight = self.view.bounds.height/3
         let shadowPathFrame = CGRectMake(0, 0, shadowWidth, shadowHeight)
         
-        shadow.frame = CGRectMake(shadowWidth/2, shadowHeight, shadowWidth, shadowHeight)
+        shadow.frame = CGRectMake(self.view.frame.width/4, shadowHeight, shadowWidth, shadowHeight)
         shadow.backgroundColor = UIColor.clearColor()
         shadow.layer.masksToBounds = false
         shadow.layer.shadowColor = UIColor.blackColor().CGColor
@@ -70,7 +67,7 @@ class CustomPickerPopup: FormPopupController, UITableViewDataSource, UITableView
         let tableWidth = self.view.frame.width/2
         let tableHeight = self.view.frame.height/3
         
-        table.frame = CGRectMake(tableWidth/2, tableHeight, tableWidth, tableHeight)
+        table.frame = CGRectMake(self.view.frame.width/4, tableHeight, tableWidth, tableHeight)
         table.dataSource = self
         table.delegate = self
         
@@ -126,6 +123,5 @@ class CustomPickerPopup: FormPopupController, UITableViewDataSource, UITableView
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return numSections
-    }
-    
+    }    
 }
