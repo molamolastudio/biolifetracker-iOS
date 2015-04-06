@@ -9,10 +9,13 @@
 import UIKit
 
 class ObservationsViewController: UITableViewController {
-    var delegate: ProjectsViewControllerDelegate? = nil
+    //var delegate: ObservationsViewControllerDelegate? = nil
     
     let cellReuseIdentifier = "SubtitleTableCell"
     let cellHeight: CGFloat = 50
+    
+    var currentProject: Project? = nil
+    var currentSession: Session? = nil
     
     let numSections = 1
     
@@ -25,22 +28,23 @@ class ObservationsViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as SubtitleTableCell
         
-        let project = ProjectManager.sharedInstance.projects[indexPath.row]
+        let observation = currentSession!.observations[indexPath.row]
+        let formatter = NSDateFormatter()
         
-        cell.title.text = project.getDisplayName()
-        cell.subtitle.text = "Created by: " + project.admins.first!.name
+        cell.title.text = formatter.stringFromDate(observation.timestamp)
+        cell.subtitle.text = observation.state.name
         
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if delegate != nil {
-            delegate!.userDidSelectProject(ProjectManager.sharedInstance.projects[indexPath.row])
-        }
+        //if delegate != nil {
+        //    delegate!.userDidSelectProject(ProjectManager.sharedInstance.projects[indexPath.row])
+        //}
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ProjectManager.sharedInstance.projects.count
+        return currentSession!.observations.count
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

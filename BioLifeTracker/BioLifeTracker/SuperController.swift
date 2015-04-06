@@ -51,6 +51,10 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         // Insert some ethograms
         EthogramManager.sharedInstance.addEthogram(Ethogram(name: ethogramPickerValues[0]))
         EthogramManager.sharedInstance.addEthogram(Ethogram(name: ethogramPickerValues[1]))
+        
+        ProjectManager.sharedInstance.addProject(Project(name: "Activity Pattern with Cobra", ethogram: EthogramManager.sharedInstance.ethograms[0]))
+        ProjectManager.sharedInstance.addProject(Project(name: "Activity Pattern with Penguin", ethogram: EthogramManager.sharedInstance.ethograms[1
+            ]))
     }
     
     func setupMenu() {
@@ -153,7 +157,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         sessions.title = "Sessions"
         sessions.delegate = self
         sessions.currentProject = currentProject
-        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("showObservationsPage"))
+        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Bordered, target: self, action: Selector(""))
         sessions.navigationItem.rightBarButtonItem = createBtn
         detailNav.pushViewController(sessions, animated: true)
     }
@@ -171,7 +175,14 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showObservationsPage() {
+        let observations = ObservationsViewController()
+        observations.title = "Observations"
+        observations.currentProject = currentProject
+        observations.currentSession = currentSession
+        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Bordered, target: self, action: Selector(""))
+        observations.navigationItem.rightBarButtonItem = createBtn
         
+        detailNav.pushViewController(observations, animated: true)
     }
     
     // MenuViewDelegate methods
