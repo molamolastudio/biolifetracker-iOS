@@ -33,9 +33,10 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         }
     }
 
-    // CAN DELETE
+    // IMPORTANT CHANGE TO SIGN OUT NAME
     @IBAction func btnLoginGoogle(sender: UIButton) {
-
+        println("pressed")
+        signIn!.signOut()
     }
     
     var signIn: GPPSignIn?
@@ -64,11 +65,11 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         signIn?.scopes = ["profile", "email"]
         signIn?.delegate = self
 
-        println(UserAuthService.sharedInstance.user.name)
-        println(UserAuthService.sharedInstance.user.email)
-        println(UserAuthService.sharedInstance.accessToken)
+//        println(UserAuthService.sharedInstance.user.name)
+//        println(UserAuthService.sharedInstance.user.email)
+//        println(UserAuthService.sharedInstance.accessToken)
 
-        signIn?.trySilentAuthentication()
+ //       signIn?.trySilentAuthentication()
         
         refreshView()
     }
@@ -118,7 +119,7 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         println("User Logged In")
-        // TODO: Make google login button hidden
+        btnLoginGoogle.hidden = true
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
@@ -128,6 +129,10 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         let currentUser = User(name: user.name, email: userEmail)
         let userAuth = UserAuthService.sharedInstance
         userAuth.setUserAuth(currentUser, accessToken: FBSession.activeSession().accessTokenData.accessToken)
+        
+        println(UserAuthService.sharedInstance.user.name)
+        println(UserAuthService.sharedInstance.user.email)
+        println(UserAuthService.sharedInstance.accessToken)
     }
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
@@ -135,10 +140,6 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         
         isSignedIn = false
         println("User Logged Out")
-        println(UserAuthService.sharedInstance.user.name)
-        println(UserAuthService.sharedInstance.user.email)
-        println(UserAuthService.sharedInstance.accessToken)
-
     }
     
     func loginView(loginView : FBLoginView!, handleError:NSError) {
@@ -147,23 +148,22 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     
     // Google Plus Sign in
     func refreshInterfaceBasedOnSignIn() {
-        println(UserAuthService.sharedInstance.user.name)
-        println(UserAuthService.sharedInstance.user.email)
-        println(UserAuthService.sharedInstance.accessToken)
+
     }
     
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
+        
         if error == nil {
             signIn = GPPSignIn.sharedInstance()
+            let currentUser = User(name: signIn!.googlePlusUser.displayName, email: signIn!.userEmail)
+            UserAuthService.sharedInstance.setUserAuth(currentUser, accessToken: auth.accessToken)
             
             println(UserAuthService.sharedInstance.user.name)
             println(UserAuthService.sharedInstance.user.email)
             println(UserAuthService.sharedInstance.accessToken)
             
-            let currentUser = User(name: UserAuthService.sharedInstance.user.name, email: UserAuthService.sharedInstance.user.email)
-            let userAuth = UserAuthService.sharedInstance
-            userAuth.setUserAuth(currentUser, accessToken: UserAuthService.sharedInstance.accessToken)
-            
+            btnLogin.hidden = true
+            btnLoginGoogle.hidden = true
         } else {
             println("Error: \(error)")
         }
@@ -174,6 +174,7 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     }
     
     func signOut() {
+        println("User signed out")
         GPPSignIn.sharedInstance().signOut()
     }
 }
