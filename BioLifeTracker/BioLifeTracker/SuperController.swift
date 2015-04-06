@@ -11,7 +11,7 @@
 
 import UIKit
 
-class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate, FirstViewControllerDelegate {
+class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate, FirstViewControllerDelegate, ProjectsViewControllerDelegate, EthogramsViewControllerDelegate {
     
     let splitVC = UISplitViewController()
     let masterNav = UINavigationController()
@@ -113,12 +113,24 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     func showProjectsPage() {
         let projects = ProjectsViewController()
+        projects.delegate = self
+        projects.title = "Projects"
+        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("showNewProjectPage"))
+        projects.navigationItem.rightBarButtonItem = createBtn
         detailNav.pushViewController(projects, animated: true)
     }
     
     func showEthogramsPage() {
         let ethograms = EthogramsViewController()
+        ethograms.delegate = self
+        ethograms.title = "Ethograms"
+        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("showNewEthogramPage"))
+        ethograms.navigationItem.rightBarButtonItem = createBtn
         detailNav.pushViewController(ethograms, animated: true)
+    }
+    
+    func showNewEthogramPage() {
+        println("show new ethogram page")
     }
     
     // MenuViewDelegate methods
@@ -173,5 +185,15 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     func userDidSelectCreateSessionButton() {
         
+    }
+    
+    // ProjectsViewControllerDelegate methods
+    func userDidSelectProject(selectedProject: Project) {
+        println(selectedProject.name)
+    }
+    
+    // EthogramsViewControllerDelegate methods
+    func userDidSelectEthogram(selectedEthogram: Ethogram) {
+        println(selectedEthogram.name)
     }
 }

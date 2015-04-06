@@ -9,16 +9,15 @@
 import UIKit
 
 class ProjectsViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+    var delegate: ProjectsViewControllerDelegate? = nil
     
     let cellReuseIdentifier = "SubtitleTableCell"
+    let cellHeight: CGFloat = 50
     
     let numSections = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if Data.projects.count == 0 {
-            Data.projects.append(Project()) // For testing
-        }
         self.tableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
     }
     
@@ -26,7 +25,7 @@ class ProjectsViewController: UITableViewController, UITableViewDataSource, UITa
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as SubtitleTableCell
         
-        let project = Data.projects[indexPath.row]
+        let project = ProjectManager.sharedInstance.projects[indexPath.row]
         
         cell.title.text = project.getDisplayName()
         cell.subtitle.text = "Created by: " + project.admins.first!.name
@@ -35,14 +34,20 @@ class ProjectsViewController: UITableViewController, UITableViewDataSource, UITa
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        Data.selectedProject = Data.projects[indexPath.row]
+        if delegate != nil {
+            delegate!.userDidSelectProject(ProjectManager.sharedInstance.projects[indexPath.row])
+        }
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Data.projects.count
+        return ProjectManager.sharedInstance.projects.count
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return numSections
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return cellHeight
     }
 }
