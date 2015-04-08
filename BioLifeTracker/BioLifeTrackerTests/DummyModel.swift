@@ -31,19 +31,19 @@ class DummyModel: BiolifeModel {
 }
 
 extension DummyModel: CloudStorable {
-    var classUrl: String { return "dummy/" }
+    var classUrl: String { return "dummy" }
     
     func getDependencies() -> [CloudStorable] {
         return [] //this object does not depend on anything
     }
     
     func encodeWithDictionary(inout dictionary: NSMutableDictionary) {
-        dictionary.setObject(stringProperty, forKey: "stringProperty")
-        dictionary.setObject(intProperty, forKey: "intProperty")
+        dictionary.setValue(stringProperty, forKey: "stringProperty")
+        dictionary.setValue(intProperty, forKey: "intProperty")
         
         dictionary.setValue(optionalStringProperty, forKey: "optionalStringProperty")
         let dateFormatter = BiolifeDateFormatter()
-        dictionary.setObject(dateFormatter.formatDate(dateProperty), forKey: "dateProperty")
+        dictionary.setValue(dateFormatter.formatDate(dateProperty), forKey: "dateProperty")
         
     }
     

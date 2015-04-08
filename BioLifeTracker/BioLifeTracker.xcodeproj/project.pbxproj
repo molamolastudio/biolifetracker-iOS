@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2408193A1AD503DD00DFE8AA /* NSURL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240819391AD503DD00DFE8AA /* NSURL+Utils.swift */; };
+		2408193B1AD508AC00DFE8AA /* NSURL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240819391AD503DD00DFE8AA /* NSURL+Utils.swift */; };
 		240D04311AB718AE00D8BB9F /* Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D04301AB718AE00D8BB9F /* Individual.swift */; };
 		240D04331AB718EF00D8BB9F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D04321AB718EF00D8BB9F /* Location.swift */; };
 		240D04351AB7190800D8BB9F /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D04341AB7190800D8BB9F /* Weather.swift */; };
@@ -156,6 +158,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		240819391AD503DD00DFE8AA /* NSURL+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+Utils.swift"; sourceTree = "<group>"; };
 		240D04301AB718AE00D8BB9F /* Individual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Individual.swift; sourceTree = "<group>"; };
 		240D04321AB718EF00D8BB9F /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		240D04341AB7190800D8BB9F /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
@@ -527,13 +530,14 @@
 		AC9162AA1ACA69BF00FED714 /* Cloud Storage */ = {
 			isa = PBXGroup;
 			children = (
+				244BB57F1AD4656C004EC65F /* BiolifeDateFormatter.swift */,
 				AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */,
 				24A92E3B1AD27A4C00A2002F /* CloudStorageManager.swift */,
 				241208A61AD1233B00778360 /* CloudStorageTask.swift */,
 				241208A41AD1227700778360 /* CloudStorageWorker.swift */,
 				241208AA1AD124A500778360 /* DownloadTask.swift */,
 				241208A81AD123D700778360 /* UploadTask.swift */,
-				244BB57F1AD4656C004EC65F /* BiolifeDateFormatter.swift */,
+				240819391AD503DD00DFE8AA /* NSURL+Utils.swift */,
 			);
 			name = "Cloud Storage";
 			sourceTree = "<group>";
@@ -698,6 +702,7 @@
 				32850BE41AB9625500C49D33 /* EthogramFormViewController.swift in Sources */,
 				326773C01ACAEFB000899745 /* FormViewController.swift in Sources */,
 				32850BE61AB9625500C49D33 /* EthogramDetailsViewController.swift in Sources */,
+				2408193A1AD503DD00DFE8AA /* NSURL+Utils.swift in Sources */,
 				242C6E071AC80F050024ECEF /* BiolifeModel.swift in Sources */,
 				326773BB1ACAEFB000899745 /* FormCell.swift in Sources */,
 				3222E6F51ACF8F5F00E51BA1 /* ButtonCell.swift in Sources */,
@@ -736,6 +741,7 @@
 				241208AE1AD15C8A00778360 /* CloudStorageTests.swift in Sources */,
 				AC702EE61AC55EAF003C50C8 /* Individual.swift in Sources */,
 				AC702EEB1AC55FBC003C50C8 /* Constants.swift in Sources */,
+				2408193B1AD508AC00DFE8AA /* NSURL+Utils.swift in Sources */,
 				AC702EE41AC55EAA003C50C8 /* Session.swift in Sources */,
 				AC702EE21AC55EA3003C50C8 /* Ethogram.swift in Sources */,
 				AC702EEA1AC55FAA003C50C8 /* User.swift in Sources */,

@@ -23,6 +23,6 @@ class CloudStorageTests: XCTestCase {
         var dummyItem = DummyModel()
         var uploadTask = UploadTask(item: dummyItem)
         uploadTask.execute()
-        
+        XCTAssertNotNil(dummyItem.id, "Item ID must not be nil after uploading")
     }
 }

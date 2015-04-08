@@ -8,6 +8,9 @@
 
 import Foundation
 
+
+/// A subclass of CloudStorage task that is meant to prepare
+/// for uploading a specified item and all its dependencies
 class UploadTask: CloudStorageTask {
     var serverUrl = NSURL(string: Constants.WebServer.serverUrl)
     
@@ -18,19 +21,48 @@ class UploadTask: CloudStorageTask {
         self.item = item
     }
     
-    // upload item and its dependencies to the cloud
+    /// Upload item and its dependencies to the cloud
     func execute() {
+        assert(serverUrl != nil, "Error: server url is not specified")
         enqueueDependencies(item)
         while !queue.isEmpty {
             let currentItem = queue.removeLast()
-            if currentItem.isLocked { continue } // do not mess with locked item
-            currentItem.lock() // lock item to prevent duplicate uploading
+            
+            // Handle item locking to prevent duplicate uploading
+            if currentItem.isLocked { continue }
+            currentItem.lock()
+            
+            // Serialize item to NSDictionary
             var dictionary = NSMutableDictionary()
             currentItem.encodeWithDictionary(&dictionary)
-            if let destinationUrl = serverUrl?.URLByAppendingPathComponent(currentItem.classUrl) {
-                uploadDictionary(dictionary, toURL: destinationUrl)
+            
+            var destinationUrl = serverUrl!.URLByAppendingPathComponent(currentItem.classUrl).URLByAppendingSlash()
+            let responseDictionary = uploadDictionary(dictionary, toURL: destinationUrl)
+            
+            if responseDictionary == nil {
+                NSLog("Response dictionary is nil. Cannot set item id.")
+            } else {
+                checkForItemCongruency(dictionary, target: responseDictionary!)
+                let newId = responseDictionary!["id"] as Int?
+                assert(newId != nil, "The server does not return item ID for \(currentItem.classUrl)")
+                currentItem.setId(newId!)
             }
+            
+            // Unlock item
             currentItem.unlock()
+        }
+    }
+    
+    func checkForItemCongruency(source: NSDictionary, target: NSDictionary) {
+        for keyObject in source.allKeys{
+            let key = keyObject as String
+            assert(source[key] != nil)
+            assert(target[key] != nil, "The entry is mising from server reply")
+            let originalValue = source[key] as NSObject
+            let newValue = target[key] as NSObject
+            if originalValue != newValue {
+                NSLog("Returned value for key %@, (%@) does not match original (%@)", key, newValue, originalValue)
+            }
         }
     }
     
@@ -110,3 +142,4 @@ class UploadTask: CloudStorageTask {
         return dictionary
     }
 }
+
