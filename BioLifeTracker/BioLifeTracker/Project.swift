@@ -277,9 +277,16 @@ extension Project: NSCoding {
     }
 }
 
-//extension Project: CloudStorable {
-//    class var classUrl: String { return "project" }
-//    func upload() { }
-//    func getDependencies() -> [CloudStorable] { return [] }
-//}
+extension Project: CloudStorable {
+    class var classUrl: String { return "projects" }
+    
+    override func encodeWithDictionary(dictionary: NSMutableDictionary) {
+        super.encodeWithDictionary(dictionary)
+        
+    }
+    
+    func getDependencies() -> [CloudStorable] {
+        return []
+    }
+}
 

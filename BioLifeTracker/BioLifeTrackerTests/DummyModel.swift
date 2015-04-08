@@ -19,9 +19,11 @@ class DummyModel: BiolifeModel {
         super.init()
     }
 
-    required init(dictionary: NSDictionary) {
-        //do nothing
-        super.init()
+    override required init(dictionary: NSDictionary) {
+        // read values from dictionary here
+        
+        // call parent class' init
+        super.init(dictionary: dictionary)
     }
     
     required init(coder decoder: NSCoder) {
@@ -37,7 +39,8 @@ extension DummyModel: CloudStorable {
         return [] //this object does not depend on anything
     }
     
-    func encodeWithDictionary(inout dictionary: NSMutableDictionary) {
+    override func encodeWithDictionary(dictionary: NSMutableDictionary) {
+        super.encodeWithDictionary(dictionary)
         dictionary.setValue(stringProperty, forKey: "stringProperty")
         dictionary.setValue(intProperty, forKey: "intProperty")
         
@@ -46,9 +49,5 @@ extension DummyModel: CloudStorable {
         dictionary.setValue(dateFormatter.formatDate(dateProperty), forKey: "dateProperty")
         
     }
-    
-    func lock() { isLocked = true }
-    func unlock() { isLocked = false }
-    func setId(id: Int) { self.id = id }
     
 }

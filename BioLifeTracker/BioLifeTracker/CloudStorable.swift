@@ -20,7 +20,7 @@ protocol CloudStorable {
     func unlock()
     
     init(dictionary: NSDictionary)
-    func encodeWithDictionary(inout dictionary: NSMutableDictionary)
+    func encodeWithDictionary(dictionary: NSMutableDictionary)
     
     func getDependencies() -> [CloudStorable]
 }
