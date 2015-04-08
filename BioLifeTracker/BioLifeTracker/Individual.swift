@@ -109,8 +109,8 @@ extension Individual: NSCoding {
     }
 }
 
-extension Individual: CloudStorable {
-    class var classUrl: String { return "Individual" }
-    func upload() { }
-    func getDependencies() -> [CloudStorable] { return [] }
-}
+//extension Individual: CloudStorable {
+//    class var classUrl: String { return "Individual" }
+//    func upload() { }
+//    func getDependencies() -> [CloudStorable] { return [] }
+//}

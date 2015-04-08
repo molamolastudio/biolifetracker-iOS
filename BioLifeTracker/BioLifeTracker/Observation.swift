@@ -160,8 +160,8 @@ extension Observation: NSCoding {
     }
 }
 
-extension Observation: CloudStorable {
-    class var classUrl: String { return "observation" }
-    func upload() { }
-    func getDependencies() -> [CloudStorable] { return [] }
-}
+//extension Observation: CloudStorable {
+//    class var classUrl: String { return "observation" }
+//    func upload() { }
+//    func getDependencies() -> [CloudStorable] { return [] }
+//}

@@ -277,9 +277,9 @@ extension Project: NSCoding {
     }
 }
 
-extension Project: CloudStorable {
-    class var classUrl: String { return "project" }
-    func upload() { }
-    func getDependencies() -> [CloudStorable] { return [] }
-}
+//extension Project: CloudStorable {
+//    class var classUrl: String { return "project" }
+//    func upload() { }
+//    func getDependencies() -> [CloudStorable] { return [] }
+//}
 

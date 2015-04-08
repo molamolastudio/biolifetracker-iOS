@@ -192,9 +192,3 @@ extension Ethogram: NSCoding {
         aCoder.encodeObject(_behaviourStates, forKey: "behaviourStates")
     }
 }
-
-extension Ethogram: CloudStorable {
-    class var classUrl: String { return "ethogram" }
-    func upload() { }
-    func getDependencies() -> [CloudStorable] { return [] }
-}

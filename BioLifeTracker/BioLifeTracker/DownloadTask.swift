@@ -8,25 +8,34 @@
 
 import Foundation
 
-class DownloadTask: CloudStorageTask {
+class DownloadTask<T: CloudStorable>: CloudStorageTask {
     
-    var className: String
-    var id: Int?
+    var itemId: Int?
+    var completionHandler: ((items: [T]) -> Void)?
+    var results = [T]()
     
-    init(className: String) {
-        self.className = className
+    init() { }
+    
+    init(forItemWithId itemId: Int) {
+        self.itemId = itemId
     }
     
-    init(className: String, id: Int) {
-        self.className = className
-        self.id = id
+    func setCompletionHandler(completionHandler: ((items: [T]) -> Void)?) {
+        self.completionHandler = completionHandler
     }
     
+    // download the specified items and then call completionHandler
     func execute() {
-        // download
+        //download items
+        
+        // call completion handler
+        if let completionHandler = completionHandler {
+            completionHandler(items: results)
+        }
+        
     }
     
-    func getResults() -> [CloudStorable] {
-        return []
+    func getResults() -> [T] {
+        return results
     }
 }

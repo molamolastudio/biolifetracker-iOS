@@ -9,15 +9,42 @@
 import Foundation
 
 class CloudStorageWorker {
+    // MARK: Stored properties
+    var pendingTasks: [CloudStorageTask] = []
+    var locked: Bool = false
+    var numOfTasks: Int = 0
     
+    // MARK: Computed properties
+    var hasCompleted: Bool {
+        return pendingTasks.isEmpty
+    }
     
-    func addTask(task: CloudStorageTask) { }
+    // MARK: Functions
+    func addTask(task: CloudStorageTask) {
+        pendingTasks.append(task)
+    }
     
-    func removeTask(task: CloudStorageTask) { }
+    // REQUIRES: nothing
+    // EFFECT:  - locks the worker instance (cannot add tasks anymore 
+    //            after this function is called)
+    //          - asynchronously starts execution of the enqueued tasks
+    //          - progress can be monitored via getPercentageCompletion
+    func startExecution() {
+        self.locked = true
+        numOfTasks = pendingTasks.count
+        
+    }
     
-    func startExecution() { }
+    func getPercentageCompletion() -> Double {
+        let completedItems = numOfTasks - pendingTasks.count
+        let percentage = 100.0 * Double(completedItems) / Double(numOfTasks)
+        return percentage
+    }
     
-    func getPercentageCompletion() -> Double { return 0.0 }
+    func setOnProgressUpdate(
+        onProgressUpdate: (percentage: Double, message: String) -> ()) {
+        
+    }
     
     
 }

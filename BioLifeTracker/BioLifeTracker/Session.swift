@@ -136,8 +136,8 @@ extension Session: NSCoding {
     }
 }
 
-extension Session: CloudStorable {
-    class var classUrl: String { return "session" }
-    func upload() { }
-    func getDependencies() -> [CloudStorable] { return [] }
-}
+//extension Session: CloudStorable {
+//    class var classUrl: String { return "session" }
+//    func upload() { }
+//    func getDependencies() -> [CloudStorable] { return [] }
+//}
