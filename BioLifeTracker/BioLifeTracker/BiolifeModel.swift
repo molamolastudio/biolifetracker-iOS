@@ -10,34 +10,44 @@ import Foundation
 
 class BiolifeModel: NSObject, NSCoding {
     var id: String?
-    var createdAt: NSDate
-    var updatedAt: NSDate
-    var createdBy: User
-    var updatedBy: User
+    private var _createdAt: NSDate
+    private var _updatedAt: NSDate
+    private var _createdBy: User
+    private var _updatedBy: User
+    
+    var createdAt: NSDate { get { return _createdAt } }
+    var updatedAt: NSDate { get { return _updatedAt } }
+    var createdBy: User { get { return _createdBy } }
+    var updatedBy: User { get { return _updatedBy } }
     
     override init() {
-        createdBy = UserAuthService.sharedInstance.user
-        updatedBy = UserAuthService.sharedInstance.user
-        createdAt = NSDate()
-        updatedAt = NSDate()
+        _createdBy = UserAuthService.sharedInstance.user
+        _updatedBy = UserAuthService.sharedInstance.user
+        _createdAt = NSDate()
+        _updatedAt = NSDate()
         super.init()
     }
     
     required init(coder decoder: NSCoder) {
-        createdAt = decoder.decodeObjectForKey("createdAt") as NSDate
-        updatedAt = decoder.decodeObjectForKey("updatedAt") as NSDate
-        createdBy = decoder.decodeObjectForKey("createdBy") as User
-        updatedBy = decoder.decodeObjectForKey("updatedBy") as User
+        _createdAt = decoder.decodeObjectForKey("createdAt") as NSDate
+        _updatedAt = decoder.decodeObjectForKey("updatedAt") as NSDate
+        _createdBy = decoder.decodeObjectForKey("createdBy") as User
+        _updatedBy = decoder.decodeObjectForKey("updatedBy") as User
         super.init()
+    }
+    
+    func updateInfo(#updatedBy: User, updatedAt: NSDate) {
+        _updatedBy = updatedBy
+        _updatedAt = updatedAt
     }
 }
 
 
 extension BiolifeModel: NSCoding {    
     func encodeWithCoder(coder: NSCoder) {
-        coder.encodeObject(createdAt, forKey: "createdAt")
-        coder.encodeObject(updatedAt, forKey: "updatedAt")
-        coder.encodeObject(createdBy, forKey: "createdBy")
-        coder.encodeObject(updatedBy, forKey: "updatedBy")
+        coder.encodeObject(_createdAt, forKey: "createdAt")
+        coder.encodeObject(_updatedAt, forKey: "updatedAt")
+        coder.encodeObject(_createdBy, forKey: "createdBy")
+        coder.encodeObject(_updatedBy, forKey: "updatedBy")
     }
 }

@@ -63,8 +63,7 @@ class Individual: BiolifeModel {
     }
     
     private func updateIndividual() {
-        updatedBy = UserAuthService.sharedInstance.user
-        updatedAt = NSDate()
+        updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
     }
     
     required init(coder aDecoder: NSCoder) {

@@ -30,8 +30,7 @@ class Location: BiolifeModel {
     }
     
     private func updateLocation() {
-        updatedBy = UserAuthService.sharedInstance.user
-        updatedAt = NSDate()
+        updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
     }
     
     required init(coder aDecoder: NSCoder) {

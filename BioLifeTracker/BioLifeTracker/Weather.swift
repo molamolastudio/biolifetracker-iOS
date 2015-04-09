@@ -30,8 +30,7 @@ class Weather: BiolifeModel {
     }
     
     private func updateWeather() {
-        updatedBy = UserAuthService.sharedInstance.user
-        updatedAt = NSDate()
+        updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
     }
     
     required init(coder aDecoder: NSCoder) {

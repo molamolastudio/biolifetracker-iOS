@@ -30,8 +30,8 @@ class Tag: BiolifeModel {
     }
     
     private func updateTag() {
-        updatedBy = UserAuthService.sharedInstance.user
-        updatedAt = NSDate()
+        updateInfo(updatedBy: UserAuthService.sharedInstance.user,
+            updatedAt: NSDate())
     }
     
      required init(coder aDecoder: NSCoder) {

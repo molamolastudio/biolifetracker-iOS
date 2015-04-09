@@ -93,8 +93,7 @@ class Ethogram: BiolifeModel, Storable {
     }
     
     private func updateEthogram() {
-        updatedBy = UserAuthService.sharedInstance.user
-        updatedAt = NSDate()
+        updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
    //     self.saveToArchives()
     }
     

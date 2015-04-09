@@ -112,8 +112,7 @@ class Observation: BiolifeModel {
     }
     
     private func updateObservation() {
-        updatedBy = UserAuthService.sharedInstance.user
-        updatedAt = NSDate()
+        updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
     }
     
     
