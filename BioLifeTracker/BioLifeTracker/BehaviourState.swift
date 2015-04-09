@@ -83,6 +83,11 @@ class BehaviourState: BiolifeModel {
     }
 }
 
+func ==(lhs: BehaviourState, rhs: BehaviourState) -> Bool {
+    return lhs.name == rhs.name && lhs.information == rhs.information
+        && lhs.photo == rhs.photo && lhs.photoUrls == rhs.photoUrls
+}
+
 
 extension BehaviourState: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {

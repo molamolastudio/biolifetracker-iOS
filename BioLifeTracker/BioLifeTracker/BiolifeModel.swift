@@ -40,6 +40,11 @@ class BiolifeModel: NSObject, NSCoding {
         _updatedBy = updatedBy
         _updatedAt = updatedAt
     }
+    
+    // For testing only
+    func changeCreator(creator: User) {
+        _createdBy = creator
+    }
 }
 
 

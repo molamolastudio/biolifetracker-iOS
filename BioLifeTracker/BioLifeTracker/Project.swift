@@ -141,27 +141,27 @@ class Project: BiolifeModel, Storable {
     }
     
     /**************Methods for data analysis**************/
-    func getObservationsPerBS() -> [BehaviourState: Int] {
-        var countBS = [BehaviourState: Int]()
+    func getObservationsPerBS() -> [String: Int] {
+        var countBS = [String: Int]()
         let observations = getObservations(_sessions)
         
         // Initialise all behaviourStates
         for bs in _ethogram.behaviourStates {
-            countBS[bs] = 0
+            countBS[bs.name] = 0
         }
         
         // Count the occurrences of behaviourStates
         for obs in observations {
-            countBS[obs.state] = countBS[obs.state]! + 1
+            countBS[obs.state.name] = countBS[obs.state.name]! + 1
         }
         
         return countBS
     }
     
-    func getObservations(sessions: [Session], users: [User], behaviourStates: [BehaviourState]) -> [Observation] {
+    func getObservations(#sessions: [Session], users: [User], behaviourStates: [BehaviourState]) -> [Observation] {
         
         // Create dictionaries of queries for easier searching
-        var userDict: [String: Bool] = toDictionary(users) { ($0.email, true) }
+        var userDict: [String: Bool] = toDictionary(users) { ($0.name, true) }
         var bsDict: [String: Bool] = toDictionary(behaviourStates) { ($0.name, true) }
         
         let observations = getObservations(sessions)
@@ -178,9 +178,9 @@ class Project: BiolifeModel, Storable {
         return newObservations
     }
     
-    private func getObservations(sessions: [Session]) -> [Observation] {
+    private func getObservations(selectedSessions: [Session]) -> [Observation] {
         var observations = [Observation]()
-        for session in sessions {
+        for session in selectedSessions {
             observations += session.observations
         }
         
@@ -317,6 +317,12 @@ class Project: BiolifeModel, Storable {
             session.setProject(self)
         }
     }
+}
+
+func ==(lhs: Project, rhs: Project) -> Bool {
+    return lhs.name == rhs.name &&  lhs.ethogram == rhs.ethogram
+        && lhs.admins == rhs.admins && lhs.members == rhs.members
+        && lhs.sessions == rhs.sessions && lhs.individuals == rhs.individuals
 }
 
 extension Project: NSCoding {

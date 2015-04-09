@@ -39,6 +39,10 @@ class Location: BiolifeModel {
     }
 }
 
+func ==(lhs: Location, rhs: Location) -> Bool {
+    return lhs.location == rhs.location
+}
+
 extension Location: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)

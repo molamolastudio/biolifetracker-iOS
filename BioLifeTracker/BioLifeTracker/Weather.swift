@@ -40,6 +40,9 @@ class Weather: BiolifeModel {
     
 }
 
+func ==(lhs: Weather, rhs: Weather) -> Bool {
+    return lhs.weather == rhs.weather
+}
 
 extension Weather: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {

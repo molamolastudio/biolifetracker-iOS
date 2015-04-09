@@ -41,6 +41,10 @@ class Tag: BiolifeModel {
     
 }
 
+func ==(lhs: Tag, rhs: Tag) -> Bool {
+    return lhs.tag == rhs.tag
+}
+
 extension Tag: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)

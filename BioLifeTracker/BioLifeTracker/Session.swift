@@ -52,7 +52,7 @@ class Session: BiolifeModel {
         self._observations += observations
         updateSession()
     }
-    
+
     func updateObservation(index: Int, updatedObservation: Observation) {
         self._observations.removeAtIndex(index)
         self._observations.insert(updatedObservation, atIndex: index)
@@ -122,6 +122,11 @@ class Session: BiolifeModel {
             observation.setSession(self)
         }
     }
+}
+
+func ==(lhs: Session, rhs: Session) -> Bool {
+    return lhs.project == rhs.project &&  lhs.observations == rhs.observations
+            && lhs.individuals == rhs.individuals
 }
 
 

@@ -97,6 +97,11 @@ class Individual: BiolifeModel {
     }
 }
 
+func ==(lhs: Individual, rhs: Individual) -> Bool {
+    return lhs.label == rhs.label && lhs.tags == rhs.tags
+            && lhs.photo == rhs.photo && lhs.photoUrls == rhs.photoUrls
+}
+
 
 extension Individual: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
