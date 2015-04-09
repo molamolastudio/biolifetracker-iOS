@@ -12,7 +12,7 @@ import Foundation
 /// A subclass of CloudStorage task that is meant to prepare
 /// for uploading a specified item and all its dependencies
 class UploadTask: CloudStorageTask {
-    var serverUrl = NSURL(string: Constants.WebServer.serverUrl)
+    var serverUrl = NSURL(string: Constants.WebServer.serverUrl)!
     
     var item: CloudStorable
     var itemStack = [CloudStorable]()
@@ -23,21 +23,39 @@ class UploadTask: CloudStorageTask {
     
     /// Upload item and its dependencies to the cloud
     func execute() {
-        assert(serverUrl != nil, "Error: server url is not specified")
         stackDependencies(item)
         while !itemStack.isEmpty {
             let currentItem = itemStack.removeLast()
             
             // Handle item locking to prevent duplicate uploading
-            if currentItem.isLocked { continue }
+            if (currentItem.isLocked) { continue }
             currentItem.lock()
             
             // Serialize item to NSDictionary
             var dictionary = NSMutableDictionary()
             currentItem.encodeWithDictionary(dictionary)
             
-            var destinationUrl = serverUrl!.URLByAppendingPathComponent(currentItem.classUrl).URLByAppendingSlash()
-            let responseDictionary = uploadDictionary(dictionary, toURL: destinationUrl)
+            var payloadData = dictionaryToData(dictionary)
+            var responseData: NSData?
+            var destinationUrl: NSURL
+            if currentItem.id == nil { // item has not been uploaded before, therefore POST
+                destinationUrl = serverUrl
+                    .URLByAppendingPathComponent(currentItem.classUrl)
+                    .URLByAppendingSlash()
+                responseData = makeRequestToUrl(destinationUrl, withMethod: "POST", withPayload: payloadData)
+            } else { // item has been uploaded before, therefore PUT
+                destinationUrl = serverUrl
+                    .URLByAppendingPathComponent(currentItem.classUrl)
+                    .URLByAppendingPathComponent(String(currentItem.id!))
+                    .URLByAppendingSlash()
+                responseData = makeRequestToUrl(destinationUrl, withMethod: "PUT", withPayload: payloadData)
+            }
+            
+            if responseData == nil {
+                NSLog("There is no response from server", destinationUrl.description)
+            }
+            assert(responseData != nil)
+            let responseDictionary = (responseData == nil) ? nil : readFromJson(responseData!)
             
             if responseDictionary == nil {
                 NSLog("Response dictionary is nil. Cannot set item id.")
@@ -73,30 +91,16 @@ class UploadTask: CloudStorageTask {
         }
     }
     
-    func uploadDictionary(dictionary: NSDictionary, toURL url: NSURL) -> NSDictionary? {
+    func dictionaryToData(dictionary: NSDictionary) -> NSData {
         let data = serializeToJson(dictionary)
-        if data == nil {
-            NSLog("Cannot upload nil data. Cancelling upload to %@", url)
-            return nil // if data is nil, write a log and cancel upload
-        }
-        
-        // if there is a valid data, continue with upload process
-        assert(data != nil)
-        let responseData = makePostRequestToUrl(url, withPayload: data!)
-        if responseData == nil {
-            NSLog("There is no response from %@", url.description)
-            return nil
-        }
-        
-        assert(responseData != nil)
-        let updatedDictionary = readFromJson(responseData!)
-        return updatedDictionary
+        assert(data != nil, "Fail to convert dictionary to data")
+        return data!
     }
     
-    func makePostRequestToUrl(url: NSURL, withPayload payload: NSData) -> NSData? {
+    func makeRequestToUrl(url: NSURL, withMethod method: String, withPayload payload: NSData) -> NSData? {
         // sets up URL request
         let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "POST"
+        request.HTTPMethod = method
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("\(payload.length)", forHTTPHeaderField: "Content-Length")
