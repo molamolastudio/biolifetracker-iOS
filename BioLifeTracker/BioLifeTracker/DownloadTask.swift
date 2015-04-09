@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 class DownloadTask<T: CloudStorable>: CloudStorageTask {
     
     var itemId: Int?
@@ -27,6 +28,7 @@ class DownloadTask<T: CloudStorable>: CloudStorageTask {
     // download the specified items and then call completionHandler
     func execute() {
         //download items
+
         
         // call completion handler
         if let completionHandler = completionHandler {
