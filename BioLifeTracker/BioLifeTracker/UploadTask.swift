@@ -57,7 +57,7 @@ class UploadTask: CloudStorageTask {
             }
             assert(responseData != nil)
             
-            let responseDictionary = (responseData == nil) ? nil : CloudStorage.readFromJson(responseData!)
+            let responseDictionary = (responseData == nil) ? nil : CloudStorage.readFromJsonAsDictionary(responseData!)
             
             if responseDictionary == nil {
                 NSLog("Response dictionary is nil. Cannot set item id.")

@@ -9,35 +9,50 @@
 import Foundation
 
 
-class DownloadTask<T: CloudStorable>: CloudStorageTask {
+class DownloadTask: CloudStorageTask {
+    let serverUrl = NSURL(string: Constants.WebServer.serverUrl)!
     
+    var classUrl: String
     var itemId: Int?
-    var completionHandler: ((items: [T]) -> Void)?
-    var results = [T]()
+    var results = [NSDictionary]()
     
-    init() { }
+    init(className: String) {
+        self.classUrl = className
+    }
     
-    init(forItemWithId itemId: Int) {
+    init(className: String, itemId: Int) {
+        self.classUrl = className
         self.itemId = itemId
     }
     
-    func setCompletionHandler(completionHandler: ((items: [T]) -> Void)?) {
-        self.completionHandler = completionHandler
-    }
-    
-    // download the specified items and then call completionHandler
     func execute() {
-        //download items
-
-        
-        // call completion handler
-        if let completionHandler = completionHandler {
-            completionHandler(items: results)
+        var destinationUrl = serverUrl
+            .URLByAppendingPathComponent(classUrl)
+            .URLByAppendingSlash()
+        if (itemId != nil) {
+            destinationUrl = destinationUrl
+                .URLByAppendingPathComponent(String(itemId!))
+                .URLByAppendingSlash()
         }
         
+        let responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "GET", withPayload: nil)
+        assert(responseData != nil, "There is no response from server")
+        
+        if (itemId == nil) {
+            let responseArray = CloudStorage.readFromJsonAsArray(responseData!)
+            assert(responseArray != nil, "Fail to translate JSON to array")
+            for item in responseArray! {
+                results.append(item as NSDictionary)
+            }
+        } else {
+            let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)
+            assert(responseDictionary != nil, "Fail to translate JSON to dictionary")
+            results.append(responseDictionary!)
+        }
     }
     
-    func getResults() -> [T] {
+    func getResults() -> [NSDictionary] {
         return results
     }
+    
 }

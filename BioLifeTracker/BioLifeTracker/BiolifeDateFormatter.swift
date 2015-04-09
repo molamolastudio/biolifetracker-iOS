@@ -12,7 +12,7 @@ class BiolifeDateFormatter {
     var dateFormatter = NSDateFormatter()
 
     init() {
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'hh:mm:ss.SSSSSSZ"
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"
     }
     
     func formatDate(date: NSDate) -> String {
@@ -23,7 +23,7 @@ class BiolifeDateFormatter {
         if let date = dateFormatter.dateFromString(string) {
             return date
         } else {
-            NSLog("Error formatting date with string: %@. Returning default value...", string)
+            NSLog("Error retrieving date from string: %@. Returning default value...", string)
             return NSDate()
         }
     }

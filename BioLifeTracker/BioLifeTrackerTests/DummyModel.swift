@@ -21,14 +21,14 @@ class DummyModel: BiolifeModel {
     }
 
     override required init(dictionary: NSDictionary) {
-        // read values from dictionary here
         let dateFormatter = BiolifeDateFormatter()
+        
         dateProperty = dateFormatter.getDate(dictionary["dateProperty"] as String)
         intProperty = dictionary["intProperty"] as Int
-        optionalStringProperty = dictionary["optionalStringProperty"] as String?
+        optionalStringProperty = dictionary["optionalStringProperty"] as? String
         stringProperty = dictionary["stringProperty"] as String
         friends = DummyModel.retrieveFriends(dictionary["friends"] as [Int])
-        // call parent class' init
+        
         super.init(dictionary: dictionary)
     }
     

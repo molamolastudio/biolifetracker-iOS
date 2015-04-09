@@ -36,6 +36,7 @@ class BiolifeModel: NSObject, NSCoding {
     init(dictionary: NSDictionary) {
         let cloudStorage = CloudStorageManager.sharedInstance
         let dateFormatter = BiolifeDateFormatter()
+        self.id = dictionary["id"] as Int?
         self.createdAt = dateFormatter.getDate(dictionary["created_at"] as String)
         self.updatedAt = dateFormatter.getDate(dictionary["updated_at"] as String)
         self.createdBy = cloudStorage.getUserWithId(dictionary["created_by"] as Int)

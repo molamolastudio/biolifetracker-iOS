@@ -16,14 +16,16 @@ struct CloudStorage {
     
     /// Synchronously sends the specified payload to the specified URL, with the specified HTTP method.
     /// Returns the NSData received as reply from server, if there is response.
-    static func makeRequestToUrl(url: NSURL, withMethod method: String, withPayload payload: NSData) -> NSData? {
+    static func makeRequestToUrl(url: NSURL, withMethod method: String, withPayload payload: NSData?) -> NSData? {
         // sets up URL request
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = method
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("\(payload.length)", forHTTPHeaderField: "Content-Length")
-        request.HTTPBody = payload
+        if let payload = payload {
+            request.setValue("\(payload.length)", forHTTPHeaderField: "Content-Length")
+            request.HTTPBody = payload
+        }
         
         var uploadError: NSError?
         var response: NSURLResponse?
@@ -94,7 +96,7 @@ struct CloudStorage {
     /// Deserializes a JSON data into NSDictionary.
     /// Will return the corresponding NSDictionary if successful.
     /// Otherwise, returns nil.
-    static func readFromJson(data: NSData) -> NSDictionary? {
+    static func readFromJsonAsDictionary(data: NSData) -> NSDictionary? {
         let stringRepresentation = NSString(data: data, encoding: NSUTF8StringEncoding)
         NSLog("Received data: %@", stringRepresentation!)
         
@@ -107,5 +109,20 @@ struct CloudStorage {
         return dictionary
     }
     
+    /// Deserializes a JSON data into NSArray.
+    /// Will return the corresponding array of NSDictionary if successful.
+    /// Otherwise, returns nil.
+    static func readFromJsonAsArray(data: NSData) -> NSArray? {
+        let stringRepresentation = NSString(data: data, encoding: NSUTF8StringEncoding)
+        NSLog("Received data: %@", stringRepresentation!)
+        
+        var readingError: NSError?
+        var dictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(0), error: &readingError) as NSArray
+        if readingError != nil {
+            NSLog("JSON Reading Error: %@", readingError!.localizedDescription)
+            return nil
+        }
+        return dictionary
+    }
 
 }
