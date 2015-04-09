@@ -30,7 +30,7 @@ class UploadTaskTests: XCTestCase {
     /// Test for this scenario: A relies on B and C.
     /// B relies on D.
     /// C relies on E.
-    func DISABLED_testUploadItemWithSimpleDependencies() {
+    func testUploadItemWithSimpleDependencies() {
         var A = DummyModel()
         var B = DummyModel()
         var C = DummyModel()
