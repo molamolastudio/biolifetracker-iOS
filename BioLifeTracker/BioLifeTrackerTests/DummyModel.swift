@@ -14,6 +14,7 @@ class DummyModel: BiolifeModel {
     var intProperty: Int = 1234567890
     var optionalStringProperty: String?
     var dateProperty: NSDate = NSDate()
+    var friends = [DummyModel]()
     
     override init() {
         super.init()
@@ -26,6 +27,7 @@ class DummyModel: BiolifeModel {
         intProperty = dictionary["intProperty"] as Int
         optionalStringProperty = dictionary["optionalStringProperty"] as String?
         stringProperty = dictionary["stringProperty"] as String
+        friends = DummyModel.retrieveFriends(dictionary["friends"] as [Int])
         // call parent class' init
         super.init(dictionary: dictionary)
     }
@@ -40,18 +42,35 @@ extension DummyModel: CloudStorable {
     var classUrl: String { return "dummy" }
     
     func getDependencies() -> [CloudStorable] {
-        return [] //this object does not depend on anything
+        var dependencies = [CloudStorable]()
+        for friend in friends {
+            dependencies.append(friend)
+        }
+        return dependencies
     }
     
     override func encodeWithDictionary(dictionary: NSMutableDictionary) {
         super.encodeWithDictionary(dictionary)
         dictionary.setValue(stringProperty, forKey: "stringProperty")
         dictionary.setValue(intProperty, forKey: "intProperty")
-        
         dictionary.setValue(optionalStringProperty, forKey: "optionalStringProperty")
         let dateFormatter = BiolifeDateFormatter()
         dictionary.setValue(dateFormatter.formatDate(dateProperty), forKey: "dateProperty")
-        
+        dictionary.setValue(friendsIdList, forKey: "friends")
+    }
+    
+    var friendsIdList: [Int] {
+        var friendsId = [Int]()
+        for friend in friends {
+            assert(friend.id != nil, "Friend must have been uploaded beforehand")
+            friendsId.append(friend.id!)
+        }
+        return friendsId
+    }
+    
+    class func retrieveFriends(idList: [Int]) -> [DummyModel] {
+        // not implemented yet
+        return []
     }
     
 }

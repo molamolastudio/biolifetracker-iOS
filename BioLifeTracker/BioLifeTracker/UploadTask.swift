@@ -15,7 +15,7 @@ class UploadTask: CloudStorageTask {
     var serverUrl = NSURL(string: Constants.WebServer.serverUrl)
     
     var item: CloudStorable
-    var queue = [CloudStorable]()
+    var itemStack = [CloudStorable]()
     
     init(item: CloudStorable) {
         self.item = item
@@ -24,9 +24,9 @@ class UploadTask: CloudStorageTask {
     /// Upload item and its dependencies to the cloud
     func execute() {
         assert(serverUrl != nil, "Error: server url is not specified")
-        enqueueDependencies(item)
-        while !queue.isEmpty {
-            let currentItem = queue.removeLast()
+        stackDependencies(item)
+        while !itemStack.isEmpty {
+            let currentItem = itemStack.removeLast()
             
             // Handle item locking to prevent duplicate uploading
             if currentItem.isLocked { continue }
@@ -66,11 +66,11 @@ class UploadTask: CloudStorageTask {
         }
     }
     
-    func enqueueDependencies(item: CloudStorable) {
+    func stackDependencies(item: CloudStorable) {
+        itemStack.append(item)
         for dependedItem in item.getDependencies() {
-            enqueueDependencies(dependedItem)
+            stackDependencies(dependedItem)
         }
-        queue.append(item)
     }
     
     func uploadDictionary(dictionary: NSDictionary, toURL url: NSURL) -> NSDictionary? {

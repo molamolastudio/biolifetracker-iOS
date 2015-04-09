@@ -36,10 +36,10 @@ class BiolifeModel: NSObject, NSCoding {
     init(dictionary: NSDictionary) {
         let cloudStorage = CloudStorageManager.sharedInstance
         let dateFormatter = BiolifeDateFormatter()
-        self.createdAt = dateFormatter.getDate(dictionary["createdAt"] as String)
-        self.updatedAt = dateFormatter.getDate(dictionary["updatedAt"] as String)
-        self.createdBy = cloudStorage.getUserWithId(dictionary["createdBy"] as Int)
-        self.updatedBy = cloudStorage.getUserWithId(dictionary["updatedBy"] as Int)
+        self.createdAt = dateFormatter.getDate(dictionary["created_at"] as String)
+        self.updatedAt = dateFormatter.getDate(dictionary["updated_at"] as String)
+        self.createdBy = cloudStorage.getUserWithId(dictionary["created_by"] as Int)
+        self.updatedBy = cloudStorage.getUserWithId(dictionary["updated_by"] as Int)
         super.init()
     }
     func setId(id: Int) { self.id = id }
@@ -47,10 +47,10 @@ class BiolifeModel: NSObject, NSCoding {
     func unlock() { isLocked = false }
     func encodeWithDictionary(dictionary: NSMutableDictionary) {
         let dateFormatter = BiolifeDateFormatter()
-        dictionary.setValue(dateFormatter.formatDate(createdAt), forKey: "createdAt")
-        dictionary.setValue(dateFormatter.formatDate(updatedAt), forKey: "updatedAt")
-        dictionary.setValue(createdBy.id, forKey: "createdBy")
-        dictionary.setValue(updatedBy.id, forKey: "updatedBy")
+        dictionary.setValue(dateFormatter.formatDate(createdAt), forKey: "created_at")
+        dictionary.setValue(dateFormatter.formatDate(updatedAt), forKey: "updated_at")
+        dictionary.setValue(createdBy.id, forKey: "created_by")
+        dictionary.setValue(updatedBy.id, forKey: "updated_by")
     }
 
 }
