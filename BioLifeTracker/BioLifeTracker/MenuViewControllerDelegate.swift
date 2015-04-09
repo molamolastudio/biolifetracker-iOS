@@ -1,5 +1,5 @@
 //
-//  MenuViewDelegate.swift
+//  MenuViewControllerDelegate.swift
 //  BioLifeTracker
 //
 //  Created by Michelle Tan on 2/4/15.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol MenuViewDelegate {
+protocol MenuViewControllerDelegate {
     func userDidSelectProjects()
     func userDidSelectEthograms()
     func userDidSelectGraphs()

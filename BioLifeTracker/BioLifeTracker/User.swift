@@ -15,6 +15,7 @@ class User: NSObject, NSCoding {
     init(name: String, email: String) {
         self.name = name
         self.email = email
+        super.init()
     }
     
     required init(coder aDecoder: NSCoder) {

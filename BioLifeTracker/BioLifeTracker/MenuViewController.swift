@@ -10,7 +10,7 @@ import UIKit
 
 class MenuViewController: UITableViewController {
     
-    var delegate: MenuViewDelegate? = nil
+    var delegate: MenuViewControllerDelegate? = nil
     
     let cellIdentifier = "MenuCell"
     

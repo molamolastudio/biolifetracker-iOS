@@ -60,7 +60,7 @@ class ProjectManager: NSObject, Storable {
             
             let data = NSMutableData();
             let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
-            archiver.encodeObject(self, forKey: "projectManager")
+            archiver.encodeObject(self, forKey: "projects")
             archiver.finishEncoding()
             let success = data.writeToFile(path, atomically: true)
         }
@@ -84,7 +84,7 @@ class ProjectManager: NSObject, Storable {
         }
         
         let archiver = NSKeyedUnarchiver(forReadingWithData: data!)
-        let projectManager = archiver.decodeObjectForKey("projectManager") as ProjectManager!
+        var projectManager = archiver.decodeObjectForKey("projects") as ProjectManager?
         
         return projectManager
     }
@@ -108,6 +108,7 @@ class ProjectManager: NSObject, Storable {
                 self._projects.append(project!)
             }
         }
+        super.init()
     }
 }
 
