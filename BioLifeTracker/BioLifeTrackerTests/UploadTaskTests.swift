@@ -53,17 +53,5 @@ class UploadTaskTests: XCTestCase {
         XCTAssertNotNil(D.id)
         XCTAssertNotNil(E.id)
     }
-    
-    /// Test for this scenario: A relies on B and C.
-    /// B relies on C.
-    /// C relies on B.
-    func DISABLED_testUploadItemWithCircularDependencies() {
-        var A = DummyModel()
-        var B = DummyModel()
-        var C = DummyModel()
-        var D = DummyModel()
-        var E = DummyModel()
-        // unfinished test case
-    }
 
 }
