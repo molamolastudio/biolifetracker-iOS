@@ -35,8 +35,9 @@ class BiolifeModel: NSObject, NSCoding {
     // Set of functionalities for CloudStorable protocol
     init(dictionary: NSDictionary) {
         let cloudStorage = CloudStorageManager.sharedInstance
-        self.createdAt = dictionary["createdAt"] as NSDate
-        self.updatedAt = dictionary["updatedAt"] as NSDate
+        let dateFormatter = BiolifeDateFormatter()
+        self.createdAt = dateFormatter.getDate(dictionary["createdAt"] as String)
+        self.updatedAt = dateFormatter.getDate(dictionary["updatedAt"] as String)
         self.createdBy = cloudStorage.getUserWithId(dictionary["createdBy"] as Int)
         self.updatedBy = cloudStorage.getUserWithId(dictionary["updatedBy"] as Int)
         super.init()
@@ -45,10 +46,11 @@ class BiolifeModel: NSObject, NSCoding {
     func lock() { isLocked = true }
     func unlock() { isLocked = false }
     func encodeWithDictionary(dictionary: NSMutableDictionary) {
-        dictionary.setObject(createdAt, forKey: "createdAt")
-        dictionary.setObject(updatedAt, forKey: "updatedAt")
-        dictionary.setObject(createdBy, forKey: "createdBy")
-        dictionary.setObject(updatedBy, forKey: "updatedBy")
+        let dateFormatter = BiolifeDateFormatter()
+        dictionary.setValue(dateFormatter.formatDate(createdAt), forKey: "createdAt")
+        dictionary.setValue(dateFormatter.formatDate(updatedAt), forKey: "updatedAt")
+        dictionary.setValue(createdBy.id, forKey: "createdBy")
+        dictionary.setValue(updatedBy.id, forKey: "updatedBy")
     }
 
 }

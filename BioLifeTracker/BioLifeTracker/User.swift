@@ -9,6 +9,7 @@
 import Foundation
 
 class User: NSObject, NSCoding {
+    var id: Int = 1 // TESTING, Andhieka
     var email: String
     var name: String
     

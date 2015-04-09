@@ -18,4 +18,13 @@ class BiolifeDateFormatter {
     func formatDate(date: NSDate) -> String {
         return dateFormatter.stringFromDate(date)
     }
+    
+    func getDate(string: String) -> NSDate {
+        if let date = dateFormatter.dateFromString(string) {
+            return date
+        } else {
+            NSLog("Error formatting date with string: %@. Returning default value...", string)
+            return NSDate()
+        }
+    }
 }

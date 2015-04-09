@@ -57,7 +57,7 @@ class UploadTask: CloudStorageTask {
         for keyObject in source.allKeys{
             let key = keyObject as String
             assert(source[key] != nil)
-            assert(target[key] != nil, "The entry is mising from server reply")
+            assert(target[key] != nil, "The entry for \(key) is mising from server reply")
             let originalValue = source[key] as NSObject
             let newValue = target[key] as NSObject
             if originalValue != newValue {
@@ -84,7 +84,7 @@ class UploadTask: CloudStorageTask {
         assert(data != nil)
         let responseData = makePostRequestToUrl(url, withPayload: data!)
         if responseData == nil {
-            NSLog("Dictionary has been uploaded to %@ but there is no response", url.description)
+            NSLog("There is no response from %@", url.description)
             return nil
         }
         
@@ -112,11 +112,15 @@ class UploadTask: CloudStorageTask {
         return responseData
     }
     
+    /// Serializes a dictionary to JSON.
+    /// Requires: All keys must be an instance of NSString.
+    /// All values must be an instance of NSString, NSNumber, NSArray, NSDictionary, or NSNull
     func serializeToJson(dictionary: NSDictionary) -> NSData? {
         var serializationError: NSError?
         let data = NSJSONSerialization.dataWithJSONObject(dictionary,
             options: NSJSONWritingOptions.PrettyPrinted,
             error: &serializationError)
+        assert(data != nil, "Error serializing to JSON. JSON only allows NSString, NSNumber, NSArray, NSDictionary, or NSNull")
         
         let requestJson = NSString(data: data!, encoding: NSUTF8StringEncoding)
         NSLog("Request JSON is %@", requestJson!)
