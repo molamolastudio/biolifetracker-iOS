@@ -59,7 +59,7 @@ class Session: BiolifeModel {
         updateSession()
     }
     
-    func deleteObservations(observationIndexes: [Int]) {
+    func removeObservations(observationIndexes: [Int]) {
         for index in observationIndexes {
             self._observations.removeAtIndex(index)
         }
@@ -78,7 +78,7 @@ class Session: BiolifeModel {
         updateSession()
     }
     
-    func deleteIndividuals(individualIndexes: [Int]) {
+    func removeIndividuals(individualIndexes: [Int]) {
         for index in individualIndexes {
             self._individuals.removeAtIndex(index)
         }

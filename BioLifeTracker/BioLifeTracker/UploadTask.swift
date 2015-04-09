@@ -34,7 +34,7 @@ class UploadTask: CloudStorageTask {
             
             // Serialize item to NSDictionary
             var dictionary = NSMutableDictionary()
-            currentItem.encodeWithDictionary(&dictionary)
+            currentItem.encodeWithDictionary(dictionary)
             
             var destinationUrl = serverUrl!.URLByAppendingPathComponent(currentItem.classUrl).URLByAppendingSlash()
             let responseDictionary = uploadDictionary(dictionary, toURL: destinationUrl)

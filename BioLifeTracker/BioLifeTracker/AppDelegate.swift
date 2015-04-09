@@ -12,11 +12,16 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var initialViewController: SuperController?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         FBLoginView.self
+        
+        initialViewController = SuperController()
+        
+        window!.rootViewController = initialViewController
+        window!.makeKeyAndVisible()
 
         return true
     }

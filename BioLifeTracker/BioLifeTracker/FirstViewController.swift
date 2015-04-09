@@ -1,5 +1,5 @@
 //
-//  StartViewController.swift
+//  FirstViewController.swift
 //  BioLifeTracker
 //
 //  Created by Michelle Tan on 2/3/15.
@@ -9,60 +9,39 @@
 import UIKit
 
 class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
-    @IBOutlet weak var displaySessionTitle: UITextField!
+    var delegate: FirstViewControllerDelegate? = nil
     
-    @IBOutlet weak var displayProject: UITextField!
-    @IBOutlet weak var displaySession: UITextField!
-
-    /************Important***************/
-    @IBOutlet weak var btnLogin: FBLoginView!
-    /************************************/
-    
-    
-    @IBOutlet weak var btnAllProjects: UIButton!
+    @IBOutlet weak var displayProject: UILabel!
+    @IBOutlet weak var displaySession: UILabel!
+    @IBOutlet weak var displaySessionTitle: UILabel!
     @IBOutlet weak var btnCreateProject: UIButton!
+    @IBOutlet weak var btnCreateSession: UIButton!
+
+    @IBOutlet weak var btnLogin: FBLoginView!
+    @IBOutlet weak var btnLoginGoogle: GPPSignInButton!
     
-    @IBOutlet weak var btnSession: UIButton!
     
-    /******************Important****************/
-    // TODO: Make the google login button/view type of GPPSignInButton
-    // More information on https://developers.google.com/+/mobile/ios/sign-in#add_the_sign-in_button
-    @IBAction func btnLoginGoogle(sender: UIButton) {
-        // Configure Google login
-        if !isSignedIn {
-            isSignedIn = true
-            btnLogin.hidden = true
-            
-            /************Important***************/
-            signIn = GPPSignIn.sharedInstance()
-            signIn?.shouldFetchGooglePlusUser = true
-            signIn?.shouldFetchGoogleUserID = true
-            signIn?.shouldFetchGoogleUserEmail = true
-            signIn?.clientID = "47253329705-c8p8oqi7j036p5lakqia2jl3v3j1np2g.apps.googleusercontent.com"
-            signIn?.scopes = ["profile", "email"]
-            signIn?.delegate = self
-            signIn?.authenticate()
-            /************************************/
-            
-        } else if isSignedIn {
-            isSignedIn = false
-            btnLogin.hidden = false
-            println(UserAuthService.sharedInstance.user.name)
-            println(UserAuthService.sharedInstance.user.email)
-            println(UserAuthService.sharedInstance.accessToken)
-            signIn!.signOut()
-            println("signed out")
+    @IBAction func projectBtnPressed(sender: UIButton) {
+        if delegate != nil {
+            delegate!.userDidSelectCreateProjectButton()
         }
     }
+
+    @IBAction func sessionBtnPressed(sender: UIButton) {
+        if delegate != nil {
+            delegate!.userDidSelectCreateSessionButton()
+        }
+    }
+
+    // IMPORTANT CHANGE TO SIGN OUT NAME
+    @IBAction func btnLoginGoogle(sender: UIButton) {
+        println("pressed")
+        signIn!.signOut()
+    }
     
-    /************Important***************/
     var signIn: GPPSignIn?
-    /************************************/
-    
-    /************Important***************/
-    // TODO: Can try implementing google login button and see whether it will change to logout button after login. if so, remove the variable below
+
     var isSignedIn = false
-    /************************************/
     
     let labelCreateSession = "Create A Session"
     let labelStartTracking = "Start Tracking"
@@ -70,31 +49,29 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     let messageNoProjects = "You don't have any projects."
     let messageNoSessions = "You don't have any sessions."
     
-    
-    let superVC = SuperController()
-
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /************Important***************/
         // Facebook login
         self.btnLogin.delegate = self
         self.btnLogin.readPermissions = ["public_profile", "email", "user_friends"]
         
         // Google plus
-        signIn?.trySilentAuthentication()
-        /************************************/
+        signIn = GPPSignIn.sharedInstance()
+        signIn?.shouldFetchGooglePlusUser = true
+        signIn?.shouldFetchGoogleUserID = true
+        signIn?.shouldFetchGoogleUserEmail = true
+        signIn?.clientID = "47253329705-c8p8oqi7j036p5lakqia2jl3v3j1np2g.apps.googleusercontent.com"
+        signIn?.scopes = ["profile", "email"]
+        signIn?.delegate = self
+
+//        println(UserAuthService.sharedInstance.user.name)
+//        println(UserAuthService.sharedInstance.user.email)
+//        println(UserAuthService.sharedInstance.accessToken)
+
+ //       signIn?.trySilentAuthentication()
         
         refreshView()
-
-        self.view.addSubview(superVC.view)
-        superVC.view.frame = self.view.frame
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        
     }
 
     // Changes the visibility of UI elements based on state variables.
@@ -114,10 +91,10 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
             
             if let session = Data.selectedSession {
                 displaySession.text = session.getDisplayName()
-                btnSession.titleLabel!.text = labelStartTracking
+                btnCreateSession.titleLabel!.text = labelStartTracking
             } else {
                 displaySession.text = messageNoSessions
-                btnSession.titleLabel!.text = labelCreateSession
+                btnCreateSession.titleLabel!.text = labelCreateSession
             }
         } else {
             // Else, show the appropriate text.
@@ -129,22 +106,20 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     func showSessionSection() {
         displaySessionTitle.hidden = false
         displaySession.hidden = false
-        btnSession.hidden = false
+        btnCreateSession.hidden = false
     }
     
     func hideSessionSection() {
         displaySessionTitle.hidden = true
         displaySession.hidden = true
-        btnSession.hidden = true
+        btnCreateSession.hidden = true
     }
     
-    
-    /******************************Important******************************/
     // Facebook Delegate Methods
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         println("User Logged In")
-        // TODO: Make google login button hidden
+        btnLoginGoogle.hidden = true
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
@@ -154,6 +129,10 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         let currentUser = User(name: user.name, email: userEmail)
         let userAuth = UserAuthService.sharedInstance
         userAuth.setUserAuth(currentUser, accessToken: FBSession.activeSession().accessTokenData.accessToken)
+        
+        println(UserAuthService.sharedInstance.user.name)
+        println(UserAuthService.sharedInstance.user.email)
+        println(UserAuthService.sharedInstance.accessToken)
     }
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
@@ -161,10 +140,6 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         
         isSignedIn = false
         println("User Logged Out")
-        println(UserAuthService.sharedInstance.user.name)
-        println(UserAuthService.sharedInstance.user.email)
-        println(UserAuthService.sharedInstance.accessToken)
-
     }
     
     func loginView(loginView : FBLoginView!, handleError:NSError) {
@@ -172,12 +147,23 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     }
     
     // Google Plus Sign in
+    func refreshInterfaceBasedOnSignIn() {
+
+    }
+    
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
+        
         if error == nil {
-            
+            signIn = GPPSignIn.sharedInstance()
             let currentUser = User(name: signIn!.googlePlusUser.displayName, email: signIn!.userEmail)
-            let userAuth = UserAuthService.sharedInstance
-            userAuth.setUserAuth(currentUser, accessToken: auth.accessToken)
+            UserAuthService.sharedInstance.setUserAuth(currentUser, accessToken: auth.accessToken)
+            
+            println(UserAuthService.sharedInstance.user.name)
+            println(UserAuthService.sharedInstance.user.email)
+            println(UserAuthService.sharedInstance.accessToken)
+            
+            btnLogin.hidden = true
+            btnLoginGoogle.hidden = true
         } else {
             println("Error: \(error)")
         }
@@ -186,6 +172,10 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     func didDisconnectWithError(error: NSError!) {
         println(error)
     }
-    /****************************************************************************/
+    
+    func signOut() {
+        println("User signed out")
+        GPPSignIn.sharedInstance().signOut()
+    }
 }
 
