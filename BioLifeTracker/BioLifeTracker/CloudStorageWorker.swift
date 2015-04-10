@@ -32,14 +32,20 @@ class CloudStorageWorker {
     func startExecution() {
         self.locked = true
         totalNumOfTasks = pendingTasks.count
-        while !pendingTasks.isEmpty {
-            let task = pendingTasks.removeAtIndex(0)
-            let message = "Executing \(task.description)"
-            onProgressUpdate?(getPercentageCompletion(), message)
-            task.execute()
-        }
         
-        onProgressUpdate?(getPercentageCompletion(), "Finished all tasks")
+        var networkThread: dispatch_queue_t = dispatch_queue_create(
+            "com.cs3217.biolifetracker.network",
+            DISPATCH_QUEUE_SERIAL)
+        
+        dispatch_async(networkThread, {
+            while !self.pendingTasks.isEmpty {
+                let task = self.pendingTasks.removeAtIndex(0)
+                let message = "Executing \(task.description)"
+                self.onProgressUpdate?(self.getPercentageCompletion(), message)
+                task.execute()
+            }
+            self.onProgressUpdate?(self.getPercentageCompletion(), "Finished all tasks")
+        })
     }
     
     /// Sets a closure that will be called every time one task is about to be executed.
