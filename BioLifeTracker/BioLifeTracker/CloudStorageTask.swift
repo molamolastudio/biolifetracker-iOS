@@ -17,7 +17,10 @@ import Foundation
 /// asynchronous execution.
 protocol CloudStorageTask {
     
+    /// Synchronously executes the CloudStorageTask.
     func execute()
+    
+    /// Short description of the CloudStorageTask.
     var description: String { get }
     
 }

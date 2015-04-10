@@ -31,11 +31,11 @@ class DeleteTaskTests: XCTestCase {
         deleteTask.execute()
         XCTAssertNil(dummy.id, "Item id should be erased after deletion from server")
         
-        let downloadTask = DownloadTask(className: dummy.classUrl, itemId: itemId)
+        let downloadTask = DownloadTask(classUrl: dummy.classUrl, itemId: itemId)
         downloadTask.execute()
         let responseDictionary = downloadTask.getResults()[0]
         XCTAssertNotNil(responseDictionary["detail"], "Check web server response for DELETE")
-        XCTAssertEqual(responseDictionary["detail"]! as String, "Not found.", "Item should not exist on server anymore")
+        XCTAssertEqual(responseDictionary["detail"]! as String, "Not found.", "Item should not exist on server.")
         
     }
 }

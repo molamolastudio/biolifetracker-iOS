@@ -20,12 +20,12 @@ class DownloadTask: CloudStorageTask {
         return "DownloadTask for \(classUrl) : \(itemId)"
     }
     
-    init(className: String) {
-        self.classUrl = className
+    init(classUrl: String) {
+        self.classUrl = classUrl
     }
     
-    init(className: String, itemId: Int) {
-        self.classUrl = className
+    init(classUrl: String, itemId: Int) {
+        self.classUrl = classUrl
         self.itemId = itemId
     }
     

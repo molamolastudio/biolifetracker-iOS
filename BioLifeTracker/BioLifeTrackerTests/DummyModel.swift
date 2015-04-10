@@ -9,7 +9,8 @@
 import Foundation
 
 class DummyModel: BiolifeModel {
-    
+    class var ClassUrl: String { return "dummy" }
+
     var stringProperty: String = "Test string"
     var intProperty: Int = 1234567890
     var optionalStringProperty: String?
@@ -39,8 +40,7 @@ class DummyModel: BiolifeModel {
 }
 
 extension DummyModel: CloudStorable {
-    var classUrl: String { return DummyModel.classUrl }
-    class var classUrl: String { return "dummy" }
+    var classUrl: String { return DummyModel.ClassUrl }
     
     func getDependencies() -> [CloudStorable] {
         var dependencies = [CloudStorable]()
@@ -73,7 +73,7 @@ extension DummyModel: CloudStorable {
         let manager = CloudStorageManager.sharedInstance
         var friends = [DummyModel]()
         for friendId in idList {
-            let friendData = manager.getItemForClass(DummyModel.classUrl, itemId: friendId)
+            let friendData = manager.getItemForClass(DummyModel.ClassUrl, itemId: friendId)
             let friend = DummyModel(dictionary: friendData)
             friends.append(friend)
         }

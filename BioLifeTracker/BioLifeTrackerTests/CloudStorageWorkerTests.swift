@@ -20,7 +20,7 @@ class CloudStorageWorkerTests: XCTestCase {
     }
     
     func testOneItemExecution() {
-        var task = DownloadTask(className: "dummy")
+        var task = DownloadTask(classUrl: "dummy")
         var worker = CloudStorageWorker()
         worker.enqueueTask(task)
         
@@ -38,7 +38,7 @@ class CloudStorageWorkerTests: XCTestCase {
     
     func testMultipleItemExecution() {
         var worker = CloudStorageWorker()
-        var downloadTask = DownloadTask(className: "dummy", itemId: 1)
+        var downloadTask = DownloadTask(classUrl: "dummy", itemId: 1)
         var dummyItem = DummyModel()
         var uploadTask = UploadTask(item: dummyItem)
         worker.enqueueTask(downloadTask)
@@ -71,7 +71,7 @@ class CloudStorageWorkerTests: XCTestCase {
         var workerACompleted = self.expectationWithDescription("Worker A has completed")
         var workerBCompleted = self.expectationWithDescription("Worker B has completed")
         
-        var downloadTask = DownloadTask(className: "dummy") // download all tasks, takes quite a long time
+        var downloadTask = DownloadTask(classUrl: "dummy") // download all tasks, takes quite a long time
         workerA.enqueueTask(downloadTask)
         workerA.enqueueTask(downloadTask) // queue again to make worker A take longer time
         workerA.enqueueTask(downloadTask) // queue the third time!

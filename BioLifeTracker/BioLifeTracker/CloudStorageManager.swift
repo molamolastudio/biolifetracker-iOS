@@ -10,9 +10,11 @@ import Foundation
 
 class CloudStorageManager {
     
-    var globalCache = [String: [Int: NSDictionary]]()
+    var globalCache: [String: [Int: NSDictionary]]
     
-    private init() { }
+    private init() {
+        globalCache = [String: [Int: NSDictionary]]()
+    }
     
     class var sharedInstance: CloudStorageManager {
         struct Singleton {
@@ -30,15 +32,15 @@ class CloudStorageManager {
     /// last time clearCache() is called. Otherwise, will synchronously download
     /// the item from server, puts it inside cache, and return the item.
     /// Will trigger an assertion error if the item does not exist on server.
-    func getItemForClass(className: String, itemId: Int) -> NSDictionary {
-        if globalCache[className] == nil {
-            globalCache[className] = [Int: NSDictionary]()
+    func getItemForClass(classUrl: String, itemId: Int) -> NSDictionary {
+        if globalCache[classUrl] == nil {
+            globalCache[classUrl] = [Int: NSDictionary]()
         }
-        var classCache = globalCache["className"]! // classCache is guaranteed to exist
+        var classCache = globalCache[classUrl]! // classCache is guaranteed to exist
         if let item = classCache[itemId] {
             return item // item is cached. simply return
         } else {
-            let downloadTask = DownloadTask(className: className, itemId: itemId)
+            let downloadTask = DownloadTask(classUrl: classUrl, itemId: itemId)
             downloadTask.execute() // download item synchronously
             assert(downloadTask.getResults().count == 1) // must always have one item
             let retrievedItem = downloadTask.getResults()[0]
@@ -46,6 +48,5 @@ class CloudStorageManager {
             classCache[itemId] = retrievedItem
             return retrievedItem
         }
-    }
-    
+    }    
 }

@@ -88,8 +88,8 @@ struct CloudStorage {
             error: &serializationError)
         assert(data != nil, "Error serializing to JSON. JSON only allows NSString, NSNumber, NSArray, NSDictionary, or NSNull")
         
-        let requestJson = NSString(data: data!, encoding: NSUTF8StringEncoding)
-        NSLog("Request JSON is %@", requestJson!)
+        //let requestJson = NSString(data: data!, encoding: NSUTF8StringEncoding)
+        //NSLog("Request JSON is %@", requestJson!)
         
         // error handling
         if serializationError != nil {
@@ -104,7 +104,7 @@ struct CloudStorage {
     /// Otherwise, returns nil.
     static func readFromJsonAsDictionary(data: NSData) -> NSDictionary? {
         let stringRepresentation = NSString(data: data, encoding: NSUTF8StringEncoding)
-        NSLog("Received data: %@", stringRepresentation!)
+        //NSLog("Received data: %@", stringRepresentation!)
         
         var readingError: NSError?
         var dictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(0), error: &readingError) as NSDictionary
@@ -120,7 +120,7 @@ struct CloudStorage {
     /// Otherwise, returns nil.
     static func readFromJsonAsArray(data: NSData) -> NSArray? {
         let stringRepresentation = NSString(data: data, encoding: NSUTF8StringEncoding)
-        NSLog("Received data: %@", stringRepresentation!)
+        //NSLog("Received data: %@", stringRepresentation!)
         
         var readingError: NSError?
         var dictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(0), error: &readingError) as NSArray
