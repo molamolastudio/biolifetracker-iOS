@@ -39,7 +39,8 @@ class DummyModel: BiolifeModel {
 }
 
 extension DummyModel: CloudStorable {
-    var classUrl: String { return "dummy" }
+    var classUrl: String { return DummyModel.classUrl }
+    class var classUrl: String { return "dummy" }
     
     func getDependencies() -> [CloudStorable] {
         var dependencies = [CloudStorable]()
@@ -51,10 +52,10 @@ extension DummyModel: CloudStorable {
     
     override func encodeWithDictionary(dictionary: NSMutableDictionary) {
         super.encodeWithDictionary(dictionary)
+        let dateFormatter = BiolifeDateFormatter()
         dictionary.setValue(stringProperty, forKey: "stringProperty")
         dictionary.setValue(intProperty, forKey: "intProperty")
         dictionary.setValue(optionalStringProperty, forKey: "optionalStringProperty")
-        let dateFormatter = BiolifeDateFormatter()
         dictionary.setValue(dateFormatter.formatDate(dateProperty), forKey: "dateProperty")
         dictionary.setValue(friendsIdList, forKey: "friends")
     }
@@ -69,8 +70,14 @@ extension DummyModel: CloudStorable {
     }
     
     class func retrieveFriends(idList: [Int]) -> [DummyModel] {
-        
-        return []
+        let manager = CloudStorageManager.sharedInstance
+        var friends = [DummyModel]()
+        for friendId in idList {
+            let friendData = manager.getItemForClass(DummyModel.classUrl, itemId: friendId)
+            let friend = DummyModel(dictionary: friendData)
+            friends.append(friend)
+        }
+        return friends
     }
     
 }
