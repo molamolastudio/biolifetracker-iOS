@@ -30,6 +30,8 @@ class DownloadTask: CloudStorageTask {
     }
     
     func execute() {
+        results.removeAll(keepCapacity: false) // clear results first
+        
         var destinationUrl = serverUrl
             .URLByAppendingPathComponent(classUrl)
             .URLByAppendingSlash()
@@ -38,7 +40,6 @@ class DownloadTask: CloudStorageTask {
                 .URLByAppendingPathComponent(String(itemId!))
                 .URLByAppendingSlash()
         }
-        
         let responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "GET", withPayload: nil)
         assert(responseData != nil, "There is no response from server")
         

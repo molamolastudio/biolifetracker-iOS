@@ -11,8 +11,11 @@ import Foundation
 class CloudStorageWorker {
     var pendingTasks: [CloudStorageTask] = [CloudStorageTask]()
     var locked: Bool = false
+    var executing: Bool = false
+    var finished: Bool = false
     var totalNumOfTasks: Int = 0
     var onProgressUpdate: ((Double, String) -> ())?
+    var onFinished: (()-> ())?
     var hasCompleted: Bool {
         return pendingTasks.isEmpty
     }
@@ -30,21 +33,30 @@ class CloudStorageWorker {
     /// If you wish to monitor the execution progress, please call
     /// setOnProgressUpdate(onProgressUpdate:) before calling this function.
     func startExecution() {
+        if self.locked || self.finished {
+            NSLog("Do not call startExecution() on a processing or completed CloudStorageWorker instance.")
+            return
+        }
         self.locked = true
         totalNumOfTasks = pendingTasks.count
         
-        var networkThread: dispatch_queue_t = dispatch_queue_create(
-            "com.cs3217.biolifetracker.network",
-            DISPATCH_QUEUE_SERIAL)
-        
-        dispatch_async(networkThread, {
+        dispatch_async(CloudStorage.networkThread, {
+            self.executing = true
+            CloudStorageManager.sharedInstance.clearCache()
             while !self.pendingTasks.isEmpty {
+                let percentage = self.getPercentageCompletion()
                 let task = self.pendingTasks.removeAtIndex(0)
                 let message = "Executing \(task.description)"
-                self.onProgressUpdate?(self.getPercentageCompletion(), message)
+                self.onProgressUpdate?(percentage, message)
                 task.execute()
             }
             self.onProgressUpdate?(self.getPercentageCompletion(), "Finished all tasks")
+            self.executing = false
+            self.finished = true
+            self.onFinished?()
+        })
+        dispatch_async(CloudStorage.networkThread, {
+            self.locked = false
         })
     }
     
@@ -56,6 +68,12 @@ class CloudStorageWorker {
         onProgressUpdate: (percentage: Double, message: String) -> ()) {
         self.onProgressUpdate = onProgressUpdate
     }
+    
+    func setOnFinished(onFinished: () -> ()) {
+        self.onFinished = onFinished
+    }
+    
+    
     
     /// Returns the percentage completion of task execution.
     /// Will simply calculate the number of task done divided by total number of tasks,

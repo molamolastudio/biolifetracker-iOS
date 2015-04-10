@@ -11,6 +11,12 @@ import Foundation
 /// Contains Cloud Storage static properties, and utility functions
 /// for use across cloud storage classes.
 struct CloudStorage {
+    
+    static var networkThread: dispatch_queue_t = dispatch_queue_create(
+        "com.cs3217.biolifetracker.network",
+        DISPATCH_QUEUE_SERIAL)
+    
+    
     // MARK: Network Operations
     
     
