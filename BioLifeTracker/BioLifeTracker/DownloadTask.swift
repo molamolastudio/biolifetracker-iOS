@@ -10,11 +10,11 @@ import Foundation
 
 
 class DownloadTask: CloudStorageTask {
-    let serverUrl = NSURL(string: Constants.WebServer.serverUrl)!
+    private let serverUrl = NSURL(string: Constants.WebServer.serverUrl)!
     
-    var classUrl: String
-    var itemId: Int?
-    var results = [NSDictionary]()
+    private var classUrl: String
+    private var itemId: Int?
+    private var results = [NSDictionary]()
     
     init(className: String) {
         self.classUrl = className

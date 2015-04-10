@@ -43,7 +43,7 @@ class BiolifeModel: NSObject, NSCoding {
         self.updatedBy = cloudStorage.getUserWithId(dictionary["updated_by"] as Int)
         super.init()
     }
-    func setId(id: Int) { self.id = id }
+    func setId(id: Int?) { self.id = id }
     func lock() { isLocked = true }
     func unlock() { isLocked = false }
     func encodeWithDictionary(dictionary: NSMutableDictionary) {

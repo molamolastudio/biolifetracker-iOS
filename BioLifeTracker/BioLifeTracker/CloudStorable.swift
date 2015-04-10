@@ -13,7 +13,7 @@ protocol CloudStorable {
     var classUrl: String { get }
     
     var id: Int? { get }
-    func setId(id: Int)
+    func setId(id: Int?)
     
     var isLocked: Bool { get }
     func lock()
