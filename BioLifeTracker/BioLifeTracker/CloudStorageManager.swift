@@ -46,6 +46,7 @@ class CloudStorageManager {
             let retrievedItem = downloadTask.getResults()[0]
             assert(retrievedItem["id"] as Int == itemId) // assert that item has correct id
             classCache[itemId] = retrievedItem
+            globalCache[classUrl] = classCache
             return retrievedItem
         }
     }    
