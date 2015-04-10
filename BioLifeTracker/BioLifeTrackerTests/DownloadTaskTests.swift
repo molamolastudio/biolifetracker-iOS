@@ -71,18 +71,7 @@ class DownloadTaskTests: XCTestCase {
         var downloadTask = DownloadTask(classUrl: DummyModel.ClassUrl, itemId: A.id!)
         downloadTask.execute()
         
-        XCTAssertNil(manager.globalCache[DummyModel.ClassUrl]?[B.id!], "Lazy downloading")
-        XCTAssertNil(manager.globalCache[DummyModel.ClassUrl]?[C.id!], "Lazy downloading")
-        XCTAssertNil(manager.globalCache[DummyModel.ClassUrl]?[D.id!], "Lazy downloading")
-        XCTAssertNil(manager.globalCache[DummyModel.ClassUrl]?[E.id!], "Lazy downloading")
-        
         var resA = DummyModel(dictionary: downloadTask.getResults()[0])
-        XCTAssertNotNil(manager.globalCache[DummyModel.ClassUrl]?[B.id!], "Result must be cached")
-        XCTAssertNotNil(manager.globalCache[DummyModel.ClassUrl]?[C.id!], "Result must be cached")
-        XCTAssertNotNil(manager.globalCache[DummyModel.ClassUrl]?[D.id!], "Result must be cached")
-        XCTAssertNotNil(manager.globalCache[DummyModel.ClassUrl]?[E.id!], "Result must be cached")
-        
-        // Check for friends
         let friendIds = resA.friends.map { $0.id! }
         XCTAssert(contains(friendIds, B.id!))
         XCTAssert(contains(friendIds, C.id!))

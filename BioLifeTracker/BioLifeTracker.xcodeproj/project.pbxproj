@@ -61,6 +61,7 @@
 		24F0F6C81AD7728A00C6CC23 /* DeleteTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6C61AD7717200C6CC23 /* DeleteTask.swift */; };
 		24F0F6CA1AD7740300C6CC23 /* DeleteTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6C91AD7740300C6CC23 /* DeleteTaskTests.swift */; };
 		24F0F6CC1AD7D55400C6CC23 /* CloudStorageWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6CB1AD7D55400C6CC23 /* CloudStorageWorkerTests.swift */; };
+		24F5DF481AD8352200F76B6B /* CloudStorageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F5DF471AD8352200F76B6B /* CloudStorageManagerTests.swift */; };
 		3205E7481AAED9F9006F374D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7471AAED9F9006F374D /* AppDelegate.swift */; };
 		3205E74D1AAED9F9006F374D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3205E74B1AAED9F9006F374D /* Main.storyboard */; };
 		3205E7521AAED9F9006F374D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3205E7501AAED9F9006F374D /* LaunchScreen.xib */; };
@@ -209,6 +210,7 @@
 		24F0F6C61AD7717200C6CC23 /* DeleteTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteTask.swift; sourceTree = "<group>"; };
 		24F0F6C91AD7740300C6CC23 /* DeleteTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteTaskTests.swift; sourceTree = "<group>"; };
 		24F0F6CB1AD7D55400C6CC23 /* CloudStorageWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorageWorkerTests.swift; sourceTree = "<group>"; };
+		24F5DF471AD8352200F76B6B /* CloudStorageManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorageManagerTests.swift; sourceTree = "<group>"; };
 		3205E7421AAED9F9006F374D /* BioLifeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BioLifeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3205E7461AAED9F9006F374D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3205E7471AAED9F9006F374D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -391,6 +393,7 @@
 				2486AB3E1AD64C3A00573618 /* DownloadTaskTests.swift */,
 				2486AB401AD64C7D00573618 /* UploadTaskTests.swift */,
 				24F0F6CB1AD7D55400C6CC23 /* CloudStorageWorkerTests.swift */,
+				24F5DF471AD8352200F76B6B /* CloudStorageManagerTests.swift */,
 			);
 			name = "Cloud Storage";
 			sourceTree = "<group>";
@@ -819,6 +822,7 @@
 				AC7B6DBF1AD2543B002D3EE6 /* LocationTests.swift in Sources */,
 				AC7B6DE11AD254A6002D3EE6 /* UserAuthService.swift in Sources */,
 				AC7B6DE01AD254A1002D3EE6 /* User.swift in Sources */,
+				24F5DF481AD8352200F76B6B /* CloudStorageManagerTests.swift in Sources */,
 				AC7B6DBE1AD25438002D3EE6 /* WeatherTests.swift in Sources */,
 				AC7B6DD71AD25485002D3EE6 /* Location.swift in Sources */,
 				AC7B6DD91AD2548C002D3EE6 /* Observation.swift in Sources */,
