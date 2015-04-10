@@ -11,9 +11,10 @@ import Foundation
 class CloudStorageManager {
     
     var userCache = [Int: User]()
+    var projectCache = [Int: Project]()
+    var ethogramCache = [Int: Ethogram]()
     
     private init() {
-        // read from local storage
     }
     
     class var sharedInstance: CloudStorageManager {
@@ -33,8 +34,18 @@ class CloudStorageManager {
         }
     }
     
-    func synchronize() {
-        // upload all data
-        // download all data
+    func getProjectWithId(id: Int) {
+        
     }
+    
+    func getEthogramWithId(id: Int) {
+        
+    }
+    
+    func clearCache() {
+        userCache.removeAll(keepCapacity: false)
+        projectCache.removeAll(keepCapacity: false)
+        ethogramCache.removeAll(keepCapacity: false)
+    }
+    
 }

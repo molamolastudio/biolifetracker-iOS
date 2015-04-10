@@ -69,7 +69,7 @@ extension DummyModel: CloudStorable {
     }
     
     class func retrieveFriends(idList: [Int]) -> [DummyModel] {
-        // not implemented yet
+        
         return []
     }
     

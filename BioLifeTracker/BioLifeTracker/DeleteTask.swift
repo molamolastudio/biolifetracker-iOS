@@ -8,10 +8,17 @@
 
 import Foundation
 
+/// Prepares a task to DELETE an item from the server.
+/// After an item is successfully deleted, its id will be erased and becomes
+/// nil. However, the item will not be erased from memory and can still be used,
+/// or even reuploaded after deletion (although it may mean getting a new id)
 class DeleteTask: CloudStorageTask {
     
     let item: CloudStorable
     let serverUrl = NSURL(string: Constants.WebServer.serverUrl)!
+    var description: String {
+        return "DeleteTask for \(item.classUrl) : \(item.id)"
+    }
     
     init(item: CloudStorable) {
         self.item = item

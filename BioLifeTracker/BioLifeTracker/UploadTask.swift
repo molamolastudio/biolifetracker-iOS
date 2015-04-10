@@ -10,18 +10,24 @@ import Foundation
 
 
 /// A subclass of CloudStorage task that is meant to prepare
-/// for uploading a specified item and all its dependencies
+/// for uploading a specified item and all its dependencies.
+/// On successful execution, the item and all its recursive dependencies
+/// will be assigned an id.
+/// If an item already has an id, this task will send a PUT request instead
+/// of POST request.
 class UploadTask: CloudStorageTask {
     
     var serverUrl = NSURL(string: Constants.WebServer.serverUrl)!
-    
     var item: CloudStorable
     var itemStack = [CloudStorable]()
+    var description: String {
+        return "UploadTask for \(item.classUrl) : \(item.id)"
+    }
     
     init(item: CloudStorable) {
         self.item = item
     }
-    
+
     /// Upload item and its dependencies to the cloud
     func execute() {
         stackDependencies(item)
