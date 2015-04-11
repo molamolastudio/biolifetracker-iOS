@@ -35,7 +35,7 @@ class Location: BiolifeModel {
     }
     
     required init(coder aDecoder: NSCoder) {
-        self._location = aDecoder.decodeObjectForKey("location") as String
+        self._location = aDecoder.decodeObjectForKey("location") as! String
         super.init(coder: aDecoder)
     }
 }

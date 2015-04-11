@@ -19,8 +19,8 @@ class User: NSObject, NSCoding {
     }
     
     required init(coder aDecoder: NSCoder) {
-        self.email = aDecoder.decodeObjectForKey("email") as String
-        self.name = aDecoder.decodeObjectForKey("name") as String
+        self.email = aDecoder.decodeObjectForKey("email") as! String
+        self.name = aDecoder.decodeObjectForKey("name") as! String
         super.init()
     }
     

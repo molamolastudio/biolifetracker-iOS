@@ -24,10 +24,10 @@ class BiolifeModel: NSObject, NSCoding {
     }
     
     required init(coder decoder: NSCoder) {
-        createdAt = decoder.decodeObjectForKey("createdAt") as NSDate
-        updatedAt = decoder.decodeObjectForKey("updatedAt") as NSDate
-        createdBy = decoder.decodeObjectForKey("createdBy") as User
-        updatedBy = decoder.decodeObjectForKey("updatedBy") as User
+        createdAt = decoder.decodeObjectForKey("createdAt") as! NSDate
+        updatedAt = decoder.decodeObjectForKey("updatedAt") as! NSDate
+        createdBy = decoder.decodeObjectForKey("createdBy") as! User
+        updatedBy = decoder.decodeObjectForKey("updatedBy") as! User
         super.init()
     }
 }

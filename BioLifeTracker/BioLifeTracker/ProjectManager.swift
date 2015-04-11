@@ -77,14 +77,14 @@ class ProjectManager: NSObject, Storable {
         // documents directory
         let dir = dirs![0]
         let path = dir.stringByAppendingPathComponent("Existing projects of" + identifier)
-        let data = NSMutableData(contentsOfFile: path)?
+        let data = NSMutableData(contentsOfFile: path)
         
         if data == nil {
             return nil
         }
         
         let archiver = NSKeyedUnarchiver(forReadingWithData: data!)
-        var projectManager = archiver.decodeObjectForKey("projects") as ProjectManager?
+        var projectManager = archiver.decodeObjectForKey("projects") as! ProjectManager?
         
         return projectManager
     }
@@ -101,7 +101,7 @@ class ProjectManager: NSObject, Storable {
         enumerator = objectProjects.objectEnumerator()
         self._projects = Array<Project>()
         while true {
-            let project = enumerator.nextObject() as Project?
+            let project = enumerator.nextObject() as! Project?
             if project == nil {
                 break
             } else {

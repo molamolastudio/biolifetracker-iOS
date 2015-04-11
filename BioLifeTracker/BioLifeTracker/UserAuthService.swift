@@ -37,12 +37,12 @@ class UserAuthService {
     }
     
     private func initialiseManagers() {
-        let loadedProjectMng = ProjectManager.loadFromArchives(UserAuthService.sharedInstance.user.toString()) as ProjectManager?
+        let loadedProjectMng = ProjectManager.loadFromArchives(UserAuthService.sharedInstance.user.toString()) as! ProjectManager?
         if loadedProjectMng != nil {
             ProjectManager.sharedInstance.updateProjects(loadedProjectMng!.projects)
         }
         
-        let loadedEthogramMng = EthogramManager.loadFromArchives(UserAuthService.sharedInstance.user.toString()) as EthogramManager?
+        let loadedEthogramMng = EthogramManager.loadFromArchives(UserAuthService.sharedInstance.user.toString()) as! EthogramManager?
         if loadedEthogramMng != nil {
             EthogramManager.sharedInstance.updateEthograms(loadedEthogramMng!.ethograms)
         }

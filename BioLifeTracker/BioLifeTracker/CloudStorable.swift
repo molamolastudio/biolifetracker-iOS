@@ -9,7 +9,7 @@
 import Foundation
 
 protocol CloudStorable {
-    class var classUrl: String { get }
+    static var classUrl: String { get }
     var id: String? { get set }
     func upload()
     func getDependencies() -> [CloudStorable]

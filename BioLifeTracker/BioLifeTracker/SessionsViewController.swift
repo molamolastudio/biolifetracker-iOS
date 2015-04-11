@@ -25,7 +25,7 @@ class SessionsViewController: UITableViewController {
     
     // UITableViewDataSource and UITableViewDelegate METHODS
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as SubtitleTableCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SubtitleTableCell
         
         let session = currentProject!.sessions[indexPath.row]
         

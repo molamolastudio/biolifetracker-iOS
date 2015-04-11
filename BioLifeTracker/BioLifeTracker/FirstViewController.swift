@@ -125,7 +125,7 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
         isSignedIn = true
         
-        let userEmail = user.objectForKey("email") as String
+        let userEmail = user.objectForKey("email") as! String
         let currentUser = User(name: user.name, email: userEmail)
         let userAuth = UserAuthService.sharedInstance
         userAuth.setUserAuth(currentUser, accessToken: FBSession.activeSession().accessTokenData.accessToken)

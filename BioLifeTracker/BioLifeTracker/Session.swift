@@ -93,13 +93,13 @@ class Session: BiolifeModel {
     required init(coder aDecoder: NSCoder) {
         var enumerator: NSEnumerator
         
-        self._typeValue = aDecoder.decodeObjectForKey("typeValue") as String
+        self._typeValue = aDecoder.decodeObjectForKey("typeValue") as! String
     
         let objectObservations: AnyObject = aDecoder.decodeObjectForKey("observations")!
         enumerator = objectObservations.objectEnumerator()
         self._observations = Array<Observation>()
         while true {
-            var observation = enumerator.nextObject() as Observation?
+            var observation = enumerator.nextObject() as! Observation?
             if observation == nil {
                 break
             }
@@ -111,7 +111,7 @@ class Session: BiolifeModel {
         self._individuals = Array<Individual>()
         
         while true {
-            let individual = enumerator.nextObject() as Individual?
+            let individual = enumerator.nextObject() as! Individual?
             if individual == nil {
                 break
             }
