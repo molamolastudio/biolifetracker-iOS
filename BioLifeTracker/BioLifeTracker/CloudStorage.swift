@@ -28,6 +28,10 @@ struct CloudStorage {
         request.HTTPMethod = method
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        if let accessToken = UserAuthService.sharedInstance.accessToken {
+            request.setValue("Token \(accessToken)", forHTTPHeaderField: "Authorization")
+        }
+        
         if let payload = payload {
             request.setValue("\(payload.length)", forHTTPHeaderField: "Content-Length")
             request.HTTPBody = payload

@@ -9,14 +9,20 @@
 import Foundation
 
 class UserAuthService {
+    enum OAuthProvider {
+        case Facebook, Google
+    }
     private var _user: User = User(name: "Default", email: "Default")
-    private var _accessToken: String = ""
-    
+    private var _accessToken: String?
+    private var _authProvider: OAuthProvider?
     var user: User {
         get { return _user }
     }
-    var accessToken: String {
+    var accessToken: String? {
         get { return _accessToken }
+    }
+    var authProvider: OAuthProvider? {
+        get { return _authProvider }
     }
     
     class var sharedInstance: UserAuthService {
@@ -48,37 +54,42 @@ class UserAuthService {
         }
     }
     
-    /// Login to server using Facebook token.
+    /// Login to server using Facebook token asynchronously.
     /// Will set user and accessToken upon successful login.
     func loginToServerUsingFacebookToken(facebookToken: String) {
         loginToServerWithSocialLogin("facebook", withToken: facebookToken)
+        _authProvider = .Facebook
     }
     
-    /// Login to server using Google token.
+    /// Login to server using Google token asynchronously.
     /// Will set user and accessToken upon successful login.
     func loginToServerUsingGoogleToken(googleToken: String) {
         loginToServerWithSocialLogin("google", withToken: googleToken)
+        _authProvider = .Google
     }
     
     /// Login to server using the specified OAuth social login provider,
     /// and the corresponding OAuth token from the specified provider.
     /// Will set _user and _accessToken upon successful login.
+    /// This function runs asynchronously on network queue and will immediately return.
     private func loginToServerWithSocialLogin(provider: String, withToken token: String) {
-        let destinationUrl = NSURL(string: Constants.WebServer.serverUrl)!
-            .URLByAppendingPathComponent("auth")
-            .URLByAppendingPathComponent(provider)
-            .URLByAppendingSlash()
-        let postDictionary = NSDictionary()
-        postDictionary.setValue(token, forKey: "access_token")
-        let postData = CloudStorage.dictionaryToData(postDictionary)
-        let responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "POST", withPayload: postData)
-        assert(responseData != nil, "The server rejects the \(provider) token. This shouldn't happen.")
-        let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)!
-        let serverToken = responseDictionary["key"] as String
-        _accessToken = serverToken
-        let user = getCurrentUserFromServer()
-        assert(user != nil, "Token is not accepted by server")
-        _user = user!
+        dispatch_async(CloudStorage.networkThread, {
+            let destinationUrl = NSURL(string: Constants.WebServer.serverUrl)!
+                .URLByAppendingPathComponent("auth")
+                .URLByAppendingPathComponent(provider)
+                .URLByAppendingSlash()
+            var postDictionary = NSMutableDictionary()
+            postDictionary.setValue(token, forKey: "access_token")
+            let postData = CloudStorage.dictionaryToData(postDictionary)
+            let responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "POST", withPayload: postData)
+            assert(responseData != nil, "The server rejects the \(provider) token. This shouldn't happen.")
+            let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)!
+            let serverToken = responseDictionary["key"] as String
+            self._accessToken = serverToken
+            let user = self.getCurrentUserFromServer()
+            assert(user != nil, "Token is not accepted by server")
+            self._user = user!
+        })
     }
     
     /// Gets the currently logged in user information from server. The server
