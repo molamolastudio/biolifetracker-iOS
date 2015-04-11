@@ -108,7 +108,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     func showNewProjectPage() {
         detailNav.pushViewController(newProject, animated: true)
-        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("createNewProject"))
+        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("createNewProject"))
         newProject.navigationItem.rightBarButtonItem = createBtn
     }
     
@@ -133,7 +133,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
             let projects = ProjectsViewController()
             projects.delegate = self
             projects.title = "Projects"
-            var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("showNewProjectPage"))
+            var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showNewProjectPage"))
             projects.navigationItem.rightBarButtonItem = createBtn
             detailNav.pushViewController(projects, animated: true)
         }
@@ -143,7 +143,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         let ethograms = EthogramsViewController()
         ethograms.delegate = self
         ethograms.title = "Ethograms"
-        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("showNewEthogramPage"))
+        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showNewEthogramPage"))
         ethograms.navigationItem.rightBarButtonItem = createBtn
         detailNav.pushViewController(ethograms, animated: true)
     }
@@ -157,7 +157,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         sessions.title = "Sessions"
         sessions.delegate = self
         sessions.currentProject = currentProject
-        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Bordered, target: self, action: Selector(""))
+        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector(""))
         sessions.navigationItem.rightBarButtonItem = createBtn
         detailNav.pushViewController(sessions, animated: true)
     }
@@ -165,7 +165,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func showNewSessionPage() {
         let newSession = FormViewController()
         newSession.title = "New Session"
-        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Bordered, target: self, action: Selector("showObservationsPage"))
+        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showObservationsPage"))
         newSession.navigationItem.rightBarButtonItem = createBtn
         
         newSession.setFormData(getFormDataForNewSession())
@@ -179,7 +179,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         observations.title = "Observations"
         observations.currentProject = currentProject
         observations.currentSession = currentSession
-        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Bordered, target: self, action: Selector(""))
+        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector(""))
         observations.navigationItem.rightBarButtonItem = createBtn
         
         detailNav.pushViewController(observations, animated: true)
