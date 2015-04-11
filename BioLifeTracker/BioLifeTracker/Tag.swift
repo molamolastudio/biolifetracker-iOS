@@ -30,8 +30,8 @@ class Tag: BiolifeModel {
     }
     
     private func updateTag() {
-        updatedBy = UserAuthService.sharedInstance.user
-        updatedAt = NSDate()
+        updateInfo(updatedBy: UserAuthService.sharedInstance.user,
+            updatedAt: NSDate())
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -39,6 +39,10 @@ class Tag: BiolifeModel {
         super.init(coder: aDecoder)
     }
     
+}
+
+func ==(lhs: Tag, rhs: Tag) -> Bool {
+    return lhs.tag == rhs.tag
 }
 
 extension Tag: NSCoding {

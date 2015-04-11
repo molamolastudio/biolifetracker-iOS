@@ -20,4 +20,11 @@ class WeatherTests: XCTestCase {
         weather.updateWeather("Cloudy")
         XCTAssert(weather.weather == "Cloudy", "Weather not updated properly")
     }
+    
+    func testEquality() {
+        var weather1 = Weather(weather: "Cloudy")
+        
+        XCTAssert(weather == weather, "Not equal")
+        XCTAssert(weather != weather1, "Error in equality")
+    }
 }

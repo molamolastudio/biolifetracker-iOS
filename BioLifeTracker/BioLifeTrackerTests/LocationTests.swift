@@ -20,4 +20,11 @@ class LocationTests: XCTestCase {
         location.updateLocation("Kent Ridge")
         XCTAssert(location.location == "Kent Ridge", "Location not updated properly")
     }
+    
+    func testEquality() {
+        var location1 = Location(location: "Tampines")
+        
+        XCTAssert(location == location, "Not equal")
+        XCTAssert(location != location1, "Error in equality")
+    }
 }

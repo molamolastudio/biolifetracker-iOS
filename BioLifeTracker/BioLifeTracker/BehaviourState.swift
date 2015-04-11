@@ -60,8 +60,7 @@ class BehaviourState: BiolifeModel {
     }
     
     private func updateBehaviourState() {
-        updatedBy = UserAuthService.sharedInstance.user
-        updatedAt = NSDate()
+        updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -82,6 +81,11 @@ class BehaviourState: BiolifeModel {
         
         super.init(coder: aDecoder)
     }
+}
+
+func ==(lhs: BehaviourState, rhs: BehaviourState) -> Bool {
+    return lhs.name == rhs.name && lhs.information == rhs.information
+        && lhs.photo == rhs.photo && lhs.photoUrls == rhs.photoUrls
 }
 
 

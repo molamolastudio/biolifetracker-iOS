@@ -13,15 +13,9 @@ class Ethogram: BiolifeModel, Storable {
     private var _behaviourStates: [BehaviourState]
     var creator: User { return createdBy }
     
-    var name: String {
-        get { return _name }
-    }
-    var information: String {
-        get { return _information }
-    }
-    var behaviourStates: [BehaviourState] {
-        get { return _behaviourStates }
-    }
+    var name: String { get { return _name } }
+    var information: String { get { return _information } }
+    var behaviourStates: [BehaviourState] { get { return _behaviourStates } }
     
     override init() {
         _name = ""
@@ -93,8 +87,7 @@ class Ethogram: BiolifeModel, Storable {
     }
     
     private func updateEthogram() {
-        updatedBy = UserAuthService.sharedInstance.user
-        updatedAt = NSDate()
+        updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
    //     self.saveToArchives()
     }
     
@@ -183,6 +176,12 @@ class Ethogram: BiolifeModel, Storable {
         return success;
     }
 }
+
+func ==(lhs: Ethogram, rhs: Ethogram) -> Bool {
+    return lhs.name == rhs.name &&  lhs.information == rhs.information
+        && lhs.behaviourStates == rhs.behaviourStates
+}
+
 
 extension Ethogram: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {

@@ -112,10 +112,8 @@ class Observation: BiolifeModel {
     }
     
     private func updateObservation() {
-        updatedBy = UserAuthService.sharedInstance.user
-        updatedAt = NSDate()
+        updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
     }
-    
     
     required init(coder aDecoder: NSCoder) {
         var enumerator: NSEnumerator
@@ -143,6 +141,17 @@ class Observation: BiolifeModel {
         super.init(coder: aDecoder)
     }
 }
+
+
+func ==(lhs: Observation, rhs: Observation) -> Bool {
+    return lhs.session == rhs.session && lhs.state == rhs.state
+            && lhs.information == rhs.information && lhs.timestamp == rhs.timestamp
+            && lhs.photo == rhs.photo && lhs.individual == rhs.individual
+            && lhs.location == rhs.location && lhs.weather == rhs.weather
+            && lhs.photoUrls == rhs.photoUrls && lhs.notes == rhs.notes
+}
+
+
 
 
 extension Observation: NSCoding {

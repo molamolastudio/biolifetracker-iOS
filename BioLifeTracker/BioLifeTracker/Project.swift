@@ -136,10 +136,64 @@ class Project: BiolifeModel, Storable {
     }
     
     private func updateProject() {
-        updatedBy = UserAuthService.sharedInstance.user
-        updatedAt = NSDate()
+        updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
    //     self.saveToArchives()
     }
+    
+    /**************Methods for data analysis**************/
+    func getObservationsPerBS() -> [String: Int] {
+        var countBS = [String: Int]()
+        let observations = getObservations(_sessions)
+        
+        // Initialise all behaviourStates
+        for bs in _ethogram.behaviourStates {
+            countBS[bs.name] = 0
+        }
+        
+        // Count the occurrences of behaviourStates
+        for obs in observations {
+            countBS[obs.state.name] = countBS[obs.state.name]! + 1
+        }
+        
+        return countBS
+    }
+    
+    func getObservations(#sessions: [Session], users: [User], behaviourStates: [BehaviourState]) -> [Observation] {
+        
+        // Create dictionaries of queries for easier searching
+        var userDict: [String: Bool] = toDictionary(users) { ($0.name, true) }
+        var bsDict: [String: Bool] = toDictionary(behaviourStates) { ($0.name, true) }
+        
+        let observations = getObservations(sessions)
+        var newObservations = [Observation]()
+        for obs in observations {
+            let userIsInside = userDict[obs.createdBy.name]
+            let bsIsInside = bsDict[obs.state.name]
+            if userIsInside != nil && bsIsInside != nil && userIsInside! &&
+                bsIsInside! {
+                    newObservations.append(obs)
+            }
+        }
+        
+        return newObservations
+    }
+    
+    private func getObservations(selectedSessions: [Session]) -> [Observation] {
+        var observations = [Observation]()
+        for session in selectedSessions {
+            observations += session.observations
+        }
+        
+        return observations
+    }
+    
+//    private func convertArrayToDict(array: [AnyObject]) -> [AnyObject:Boolean] {
+//        var dictionary = [AnyObject:Boolean]()
+//        for element in array {
+//            dictionary[element] = true
+//        }
+//        return dictionary
+//    }
     
     /**************Saving to Archives****************/
     func saveToArchives() {
@@ -265,6 +319,12 @@ class Project: BiolifeModel, Storable {
     }
 }
 
+func ==(lhs: Project, rhs: Project) -> Bool {
+    return lhs.name == rhs.name &&  lhs.ethogram == rhs.ethogram
+        && lhs.admins == rhs.admins && lhs.members == rhs.members
+        && lhs.sessions == rhs.sessions && lhs.individuals == rhs.individuals
+}
+
 extension Project: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)
@@ -290,3 +350,19 @@ extension Project: NSCoding {
 //    }
 //}
 
+
+// Creates a dictionary from an array with an optional entry
+func toDictionary<E, K, V>(
+    array:       [E],
+    transformer: (element: E) -> (key: K, value: V)?)
+    -> Dictionary<K, V>
+{
+    return array.reduce([:]) {
+        (var dict, e) in
+        if let (key, value) = transformer(element: e)
+        {
+            dict[key] = value
+        }
+        return dict
+    }
+}
