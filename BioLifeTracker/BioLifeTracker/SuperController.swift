@@ -185,37 +185,44 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         detailNav.pushViewController(observations, animated: true)
     }
     
+    func clearNavigationStack() {
+        detailNav.popToRootViewControllerAnimated(false)
+        detailNav.popViewControllerAnimated(false)
+    }
+    
     // MenuViewDelegate methods
     func userDidSelectProjects() {
+        clearNavigationStack()
         showProjectsPage()
     }
     
     func userDidSelectEthograms() {
+        clearNavigationStack()
         showEthogramsPage()
     }
     
     func userDidSelectGraphs() {
-        
+        clearNavigationStack()
     }
     
     func userDidSelectData() {
-        
+        clearNavigationStack()
     }
     
     func userDidSelectSettings() {
-        
+        clearNavigationStack()
     }
     
     func userDidSelectFacebookLogin() {
-        
+
     }
     
     func userDidSelectGoogleLogin() {
-        
+
     }
     
     func userDidSelectLogout() {
-        
+
     }
     
     func userDidSelectSessions(project: Project) {
