@@ -9,6 +9,9 @@
 import Foundation
 
 class User: NSObject, NSCoding {
+    class var ClassUrl: String { return "users" }
+    
+    var id: Int = 1 // TESTING, Andhieka
     var email: String
     var name: String
     
@@ -19,8 +22,8 @@ class User: NSObject, NSCoding {
     }
     
     required init(coder aDecoder: NSCoder) {
-        self.email = aDecoder.decodeObjectForKey("email") as String
-        self.name = aDecoder.decodeObjectForKey("name") as String
+        self.email = aDecoder.decodeObjectForKey("email") as! String
+        self.name = aDecoder.decodeObjectForKey("name") as! String
         super.init()
     }
     
@@ -31,5 +34,12 @@ class User: NSObject, NSCoding {
     
     func toString() -> String {
         return name
+    }
+    
+    init(dictionary: NSDictionary) {
+        id = dictionary["id"] as! Int
+        email = dictionary["email"] as! String
+        name = dictionary["username"] as! String
+        super.init()
     }
 }

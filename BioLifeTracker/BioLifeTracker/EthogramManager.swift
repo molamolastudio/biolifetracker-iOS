@@ -77,14 +77,14 @@ class EthogramManager: NSObject, Storable {
         // documents directory
         let dir = dirs![0]
         let path = dir.stringByAppendingPathComponent("Existing ethograms of" + identifier)
-        let data = NSMutableData(contentsOfFile: path)?
+        let data = NSMutableData(contentsOfFile: path)
         
         if data == nil {
             return nil
         }
         
         let archiver = NSKeyedUnarchiver(forReadingWithData: data!)
-        var ethogramManager = archiver.decodeObjectForKey("ethograms") as EthogramManager?
+        var ethogramManager = archiver.decodeObjectForKey("ethograms") as! EthogramManager?
 
         return ethogramManager
     }
@@ -101,7 +101,7 @@ class EthogramManager: NSObject, Storable {
         enumerator = objectEthograms.objectEnumerator()
         self._ethograms = Array<Ethogram>()
         while true {
-            let ethogram = enumerator.nextObject() as Ethogram?
+            let ethogram = enumerator.nextObject() as! Ethogram?
             if ethogram == nil {
                 break
             } else {

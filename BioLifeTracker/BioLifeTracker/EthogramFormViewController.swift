@@ -62,7 +62,7 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
     }
     
     func createAddButton() -> UIButton {
-        let button = UIButton.buttonWithType(UIButtonType.System) as UIButton
+        let button = UIButton.buttonWithType(UIButtonType.System) as! UIButton
         button.setTitle("Add", forState: UIControlState.Normal)
         button.addTarget(self, action: Selector("addButtonPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
         return button
@@ -71,8 +71,8 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
     // Gets the name for the new behaviour state from the cell and adds it to the ethogram,
     // then refreshes the view.
     func addButtonPressed(sender: UIButton) {
-        let cell = sender.superview! as UITableViewCell
-        let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormCellFullTextField) as UITextField
+        let cell = sender.superview! as! UITableViewCell
+        let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormCellFullTextField) as! UITextField
         
         let state = BehaviourState(name: textField.text!, information: "Must add information")
 
@@ -105,13 +105,13 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
     // Sets up listeners for text fields in first section
     func getCellForFirstSection(indexPath: NSIndexPath) -> UITableViewCell {
         if isFirstRow(indexPath.row) {
-            let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseNameCell) as UITableViewCell
-            let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormNameField) as UITextField
+            let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseNameCell) as! UITableViewCell
+            let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormNameField) as! UITextField
             textField.addTarget(self, action: Selector("nameRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
             return cell
         } else {
-            let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseCodeCell) as UITableViewCell
-            let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormCodeField) as UITextField
+            let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseCodeCell)as! UITableViewCell
+            let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormCodeField) as! UITextField
             
             //textField.text = ethogram?.id
             
@@ -122,8 +122,8 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
     
     // Populates behaviour states in second section and sets up listeners for adding new state.
     func getCellForSecondSection(indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseTextField) as UITableViewCell
-        let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormCellFullTextField) as UITextField
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseTextField)as! UITableViewCell
+        let textField = cell.viewWithTag(Constants.ViewTags.ethogramFormCellFullTextField) as! UITextField
         
         if ethogram!.behaviourStates.count > indexPath.row {
             textField.text = ethogram!.behaviourStates[indexPath.row].name
@@ -152,7 +152,7 @@ class EthogramFormViewController: UITableViewController, UITableViewDataSource, 
     
     func extraRowDidChange(sender: UITextField) {
         if sender.text != "" {
-            let cell = sender.superview!.superview! as UITableViewCell
+            let cell = sender.superview!.superview!as! UITableViewCell
             cell.addSubview(btnAdd!)
             btnAdd!.frame = btnAddFrame
         } else {

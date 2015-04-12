@@ -68,13 +68,13 @@ class Individual: BiolifeModel {
     
     required init(coder aDecoder: NSCoder) {
         var enumerator: NSEnumerator
-        self._label = aDecoder.decodeObjectForKey("label") as String
-        self._photo = aDecoder.decodeObjectForKey("photo") as UIImage?
+        self._label = aDecoder.decodeObjectForKey("label") as! String
+        self._photo = aDecoder.decodeObjectForKey("photo") as! UIImage?
         let objectPhotoUrls: AnyObject = aDecoder.decodeObjectForKey("photoUrls")!
         enumerator = objectPhotoUrls.objectEnumerator()
         self._photoUrls = Array<String>()
         while true {
-            let url = enumerator.nextObject() as String?
+            let url = enumerator.nextObject() as! String?
             if url == nil {
                 break
             }
@@ -86,7 +86,7 @@ class Individual: BiolifeModel {
         enumerator = objectTags.objectEnumerator()
         self._tags = []
         while true {
-            let tag = enumerator.nextObject() as Tag?
+            let tag = enumerator.nextObject() as! Tag?
             if tag == nil {
                 break
             }
@@ -113,8 +113,8 @@ extension Individual: NSCoding {
     }
 }
 
-extension Individual: CloudStorable {
-    class var classUrl: String { return "Individual" }
-    func upload() { }
-    func getDependencies() -> [CloudStorable] { return [] }
-}
+//extension Individual: CloudStorable {
+//    class var classUrl: String { return "Individual" }
+//    func upload() { }
+//    func getDependencies() -> [CloudStorable] { return [] }
+//}

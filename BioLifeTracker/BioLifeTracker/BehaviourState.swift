@@ -65,12 +65,15 @@ class BehaviourState: BiolifeModel {
     
     required init(coder aDecoder: NSCoder) {
 
-        self._name = aDecoder.decodeObjectForKey("name") as String
-        self._information = aDecoder.decodeObjectForKey("information") as String
+        self._name = aDecoder.decodeObjectForKey("name") as! String
+        self._information = aDecoder.decodeObjectForKey("information") as! String
         
         let objectPhotoUrls: AnyObject = aDecoder.decodeObjectForKey("photoUrls")!
-        let enumerator = objectPhotoUrls.objectEnumerator()
+        // Error: Ambiguous use of objectEnumerator
+        
+        //let enumerator = objectPhotoUrls.objectEnumerator()
         self._photoUrls = Array<String>()
+        /*
         while true {
             let url = enumerator.nextObject() as String?
             if url == nil {
@@ -78,7 +81,7 @@ class BehaviourState: BiolifeModel {
             }
             self._photoUrls.append(url!)
         }
-        
+        */
         super.init(coder: aDecoder)
     }
 }
@@ -98,8 +101,3 @@ extension BehaviourState: NSCoding {
     }
 }
 
-extension BehaviourState: CloudStorable {
-    class var classUrl: String { return "behaviourState" }
-    func upload() { }
-    func getDependencies() -> [CloudStorable] { return [] }
-}

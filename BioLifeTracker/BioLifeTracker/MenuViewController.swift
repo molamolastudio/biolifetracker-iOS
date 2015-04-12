@@ -31,7 +31,7 @@ class MenuViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as SingleLineTextCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier) as! SingleLineTextCell
         
         cell.rounded = false
         cell.textField.text = ""

@@ -97,9 +97,9 @@ class CustomPickerPopup: FormPopupController, UITableViewDataSource, UITableView
     
     // Changes the accessory type of selected row to a checkmark.
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! UITableViewCell
         
-        let label = cell.viewWithTag(Constants.ViewTags.pickerCellLabel) as UILabel
+        let label = cell.viewWithTag(Constants.ViewTags.pickerCellLabel) as! UILabel
         label.text = data[indexPath.row]
         
         if selectedIndex != nil {

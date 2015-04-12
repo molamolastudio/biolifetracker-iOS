@@ -34,7 +34,7 @@ class Weather: BiolifeModel {
     }
     
     required init(coder aDecoder: NSCoder) {
-        self._weather = aDecoder.decodeObjectForKey("weather") as String
+        self._weather = aDecoder.decodeObjectForKey("weather") as! String
         super.init(coder: aDecoder)
     }
     

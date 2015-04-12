@@ -34,8 +34,8 @@ class Tag: BiolifeModel {
             updatedAt: NSDate())
     }
     
-     required init(coder aDecoder: NSCoder) {
-        self._tag = aDecoder.decodeObjectForKey("tag") as String
+    required init(coder aDecoder: NSCoder) {
+        self._tag = aDecoder.decodeObjectForKey("tag") as! String
         super.init(coder: aDecoder)
     }
     
