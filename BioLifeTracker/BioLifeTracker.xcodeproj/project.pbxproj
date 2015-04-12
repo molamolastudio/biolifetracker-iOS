@@ -34,6 +34,7 @@
 		248464841ADA481F0001C5E3 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248464831ADA481F0001C5E3 /* Photo.swift */; };
 		2486AB3F1AD64C3A00573618 /* DownloadTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2486AB3E1AD64C3A00573618 /* DownloadTaskTests.swift */; };
 		2486AB411AD64C7D00573618 /* UploadTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2486AB401AD64C7D00573618 /* UploadTaskTests.swift */; };
+		24D28D141ADA5A6800E70759 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24D28D131ADA5A6800E70759 /* Images.xcassets */; };
 		24E32D361AB19647003C4E0A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D311AB19647003C4E0A /* Bolts.framework */; };
 		24E32D3F1AB1E86A003C4E0A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D3E1AB1E86A003C4E0A /* AudioToolbox.framework */; };
 		24E32D411AB1E88E003C4E0A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D401AB1E88E003C4E0A /* Social.framework */; };
@@ -196,6 +197,7 @@
 		2486AB3E1AD64C3A00573618 /* DownloadTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTaskTests.swift; sourceTree = "<group>"; };
 		2486AB401AD64C7D00573618 /* UploadTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadTaskTests.swift; sourceTree = "<group>"; };
 		24A92E3B1AD27A4C00A2002F /* CloudStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorageManager.swift; sourceTree = "<group>"; };
+		24D28D131ADA5A6800E70759 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		24E32D311AB19647003C4E0A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = BioLifeTracker/Bolts.framework; sourceTree = "<group>"; };
 		24E32D3E1AB1E86A003C4E0A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		24E32D401AB1E88E003C4E0A /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -535,6 +537,7 @@
 		3205E7671AAEDA38006F374D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				24D28D131ADA5A6800E70759 /* Images.xcassets */,
 			);
 			name = Images;
 			path = BioLifeTracker;
@@ -703,6 +706,7 @@
 				326773BA1ACAEFB000899745 /* BooleanPickerCell.xib in Resources */,
 				32FB650A1AD94B6800391194 /* LaunchScreen.xib in Resources */,
 				AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */,
+				24D28D141ADA5A6800E70759 /* Images.xcassets in Resources */,
 				329B29371AD15BBF007ADC65 /* DefaultPickerCell.xib in Resources */,
 				329B293B1AD15BBF007ADC65 /* PhotoPickerCell.xib in Resources */,
 				326773BF1ACAEFB000899745 /* SingleLineTextCell.xib in Resources */,
