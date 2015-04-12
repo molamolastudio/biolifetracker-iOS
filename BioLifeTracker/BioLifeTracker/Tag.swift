@@ -11,28 +11,28 @@ import Foundation
 class Tag: BiolifeModel {
     static let ClassUrl = "tags"
     
-    private var _tag: String
-    var tag: String {
-        get { return _tag }
+    private var _name: String
+    var name: String {
+        get { return _name }
     }
     
     override init() {
-        _tag = ""
+        _name = ""
         super.init()
     }
     
-    init(tag: String) {
-        self._tag = tag
+    init(name: String) {
+        self._name = name
         super.init()
     }
     
     required override init(dictionary: NSDictionary) {
-        _tag = dictionary["tag"] as! String
+        _name = dictionary["name"] as! String
         super.init(dictionary: dictionary)
     }
     
-    func updateTag(tag: String) {
-        self._tag = tag
+    func updateName(name: String) {
+        self._name = name
         updateTag()
     }
     
@@ -42,7 +42,7 @@ class Tag: BiolifeModel {
     }
     
     required init(coder aDecoder: NSCoder) {
-        self._tag = aDecoder.decodeObjectForKey("tag") as! String
+        self._name = aDecoder.decodeObjectForKey("name") as! String
         super.init(coder: aDecoder)
     }
     
@@ -56,13 +56,13 @@ class Tag: BiolifeModel {
 }
 
 func ==(lhs: Tag, rhs: Tag) -> Bool {
-    return lhs.tag == rhs.tag
+    return lhs.name == rhs.name
 }
 
 extension Tag: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)
-        aCoder.encodeObject(_tag, forKey: "tag")
+        aCoder.encodeObject(_name, forKey: "name")
     }
 }
 
@@ -70,13 +70,11 @@ extension Tag: CloudStorable {
     var classUrl: String { return Tag.ClassUrl }
     
     func getDependencies() -> [CloudStorable] {
-        var dependencies = [CloudStorable]()
-        // append dependencies here
-        return dependencies
+        return []
     }
     
     override func encodeWithDictionary(dictionary: NSMutableDictionary) {
-        dictionary.setValue(tag, forKey: "name")
+        dictionary.setValue(name, forKey: "name")
         super.encodeWithDictionary(dictionary)
     }
 }
