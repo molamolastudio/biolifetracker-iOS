@@ -40,5 +40,15 @@ class BehaviourStateTests: XCTestCase {
         state.removePhotoUrlAtIndex(0)
         XCTAssert(state.photoUrls[0] == "www.photo2.com", "BehaviourState not updated properly")
     }
+    
+    func testEquality() {
+        let state1 = BehaviourState(name: "Feeding", information: "Small claws bringing food to mouth")
+        let state2 = BehaviourState(name: "Fighting", information: "Engagement of large clawa with another crab")
+        let state3 = BehaviourState(name: "Feeding", information: "Small claws bringing food to mouth")
+        
+        XCTAssert(state1 == state3, "Not equal")
+        XCTAssert(state1 != state2, "Error in equality")
+        
+    }
 
 }

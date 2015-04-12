@@ -41,4 +41,13 @@ class IndividualTests: XCTestCase {
         individual.removePhotoUrlAtIndex(0)
         XCTAssert(individual.photoUrls[0] == "www.photo2.com", "Individual not initialised properly")
     }
+    
+    func testEquality() {
+        let individual1 = Individual(label: "M1")
+        let individual2 = Individual(label: "F1")
+        let individual3 = Individual(label: "M1")
+        
+        XCTAssert(individual1 == individual3, "Not equal")
+        XCTAssert(individual1 != individual2, "Error in equality")
+    }
 }

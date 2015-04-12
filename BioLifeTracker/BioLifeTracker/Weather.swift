@@ -30,8 +30,7 @@ class Weather: BiolifeModel {
     }
     
     private func updateWeather() {
-        updatedBy = UserAuthService.sharedInstance.user
-        updatedAt = NSDate()
+        updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -41,6 +40,9 @@ class Weather: BiolifeModel {
     
 }
 
+func ==(lhs: Weather, rhs: Weather) -> Bool {
+    return lhs.weather == rhs.weather
+}
 
 extension Weather: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {

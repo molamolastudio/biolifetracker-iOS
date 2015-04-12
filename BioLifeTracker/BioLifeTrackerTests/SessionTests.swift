@@ -11,6 +11,10 @@ import XCTest
 
 class SessionTests: XCTestCase {
     
+    let user1 = User(name: "Captain America", email: "iamcaptamerica@default.com")
+    let user2 = User(name: "The Hulk", email: "iamgreen@default.com")
+    let user3 = User(name: "Black Power Ranger", email: "black.ranger@default.com")
+    
     func testInitialization() {
         let state1 = BehaviourState(name: "Feeding", information: "Small claws bringing food to mouth")
         let state2 = BehaviourState(name: "Fighting", information: "Engagement of large clawa with another crab")
@@ -62,5 +66,42 @@ class SessionTests: XCTestCase {
         
         session.removeIndividuals([0])
         XCTAssert(session.individuals.count == 0, "Session not updated properly")
+    }
+    
+    func testEquality() {
+        let state1 = BehaviourState(name: "Feeding", information: "Small claws bringing food to mouth")
+        let state2 = BehaviourState(name: "Fighting", information: "Engagement of large clawa with another crab")
+        let state3 = BehaviourState(name: "Hiding", information: "Withdrawal of fiddler crab into its burrow")
+        
+        var ethogram = Ethogram(name: "Fiddler Crabs")
+        ethogram.addBehaviourState(state1)
+        ethogram.addBehaviourState(state2)
+        
+        let project = Project(name: "A Day in a Fiddler Crab life", ethogram: ethogram)
+        
+        let individual1 = Individual(label: "M1")
+        let individual2 = Individual(label: "M2")
+        let individual3 = Individual(label: "F1")
+        
+        var session2 = Session(project: project, type: SessionType.Scan)
+        var session3 = Session(project: project, type: SessionType.Scan)
+        
+        var observation16 = Observation(session: session3, individual: individual1, state: state2, timestamp: NSDate(), information: "")
+        observation16.changeCreator(user1)
+        var observation17 = Observation(session: session3, individual: individual1, state: state3, timestamp: NSDate(), information: "")
+        observation17.changeCreator(user1)
+        var observation18 = Observation(session: session3, individual: individual2, state: state2, timestamp: NSDate(), information: "")
+        observation18.changeCreator(user2)
+        var observation19 = Observation(session: session3, individual: individual2, state: state3, timestamp: NSDate(), information: "")
+        observation19.changeCreator(user2)
+        var observation20 = Observation(session: session3, individual: individual3, state: state2, timestamp: NSDate(), information: "")
+        observation20.changeCreator(user3)
+        var observation21 = Observation(session: session3, individual: individual3, state: state3, timestamp: NSDate(), information: "")
+        observation21.changeCreator(user3)
+        
+        session3.addObservation([observation16, observation17, observation18, observation19, observation20, observation21])
+        
+        XCTAssert(session3 == session3, "Not equal")
+        XCTAssert(session3 != session2, "Error with equality")
     }
 }

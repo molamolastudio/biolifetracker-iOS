@@ -60,8 +60,7 @@ class BehaviourState: BiolifeModel {
     }
     
     private func updateBehaviourState() {
-        updatedBy = UserAuthService.sharedInstance.user
-        updatedAt = NSDate()
+        updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -87,6 +86,11 @@ class BehaviourState: BiolifeModel {
     }
 }
 
+func ==(lhs: BehaviourState, rhs: BehaviourState) -> Bool {
+    return lhs.name == rhs.name && lhs.information == rhs.information
+        && lhs.photo == rhs.photo && lhs.photoUrls == rhs.photoUrls
+}
+
 
 extension BehaviourState: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
@@ -97,8 +101,3 @@ extension BehaviourState: NSCoding {
     }
 }
 
-extension BehaviourState: CloudStorable {
-    class var classUrl: String { return "behaviourState" }
-    func upload() { }
-    func getDependencies() -> [CloudStorable] { return [] }
-}

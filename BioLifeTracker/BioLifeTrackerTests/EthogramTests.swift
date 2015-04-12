@@ -112,4 +112,15 @@ class EthogramTests: XCTestCase {
         ethogram.removeBSPhotoUrl(0, photoIndex: 0)
         XCTAssert(ethogram.behaviourStates[0].photoUrls[0] == "www.photo2.com", "Ethogram not updated properly")
     }
+    
+    func testEquality() {
+        ethogram.addBehaviourState(state1)
+        ethogram.addBehaviourState(state2)
+        ethogram.addBehaviourState(state3)
+        
+        var ethogram2 = Ethogram(name: "Blue Crabs")
+        
+        XCTAssert(ethogram == ethogram, "Not equal")
+        XCTAssert(ethogram != ethogram2, "Error with equality")
+    }
 }

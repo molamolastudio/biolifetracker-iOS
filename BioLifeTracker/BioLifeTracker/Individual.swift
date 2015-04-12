@@ -63,8 +63,7 @@ class Individual: BiolifeModel {
     }
     
     private func updateIndividual() {
-        updatedBy = UserAuthService.sharedInstance.user
-        updatedAt = NSDate()
+        updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -98,6 +97,11 @@ class Individual: BiolifeModel {
     }
 }
 
+func ==(lhs: Individual, rhs: Individual) -> Bool {
+    return lhs.label == rhs.label && lhs.tags == rhs.tags
+            && lhs.photo == rhs.photo && lhs.photoUrls == rhs.photoUrls
+}
+
 
 extension Individual: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
@@ -109,8 +113,8 @@ extension Individual: NSCoding {
     }
 }
 
-extension Individual: CloudStorable {
-    class var classUrl: String { return "Individual" }
-    func upload() { }
-    func getDependencies() -> [CloudStorable] { return [] }
-}
+//extension Individual: CloudStorable {
+//    class var classUrl: String { return "Individual" }
+//    func upload() { }
+//    func getDependencies() -> [CloudStorable] { return [] }
+//}

@@ -112,10 +112,8 @@ class Observation: BiolifeModel {
     }
     
     private func updateObservation() {
-        updatedBy = UserAuthService.sharedInstance.user
-        updatedAt = NSDate()
+        updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
     }
-    
     
     required init(coder aDecoder: NSCoder) {
         var enumerator: NSEnumerator
@@ -145,6 +143,17 @@ class Observation: BiolifeModel {
 }
 
 
+func ==(lhs: Observation, rhs: Observation) -> Bool {
+    return lhs.session == rhs.session && lhs.state == rhs.state
+            && lhs.information == rhs.information && lhs.timestamp == rhs.timestamp
+            && lhs.photo == rhs.photo && lhs.individual == rhs.individual
+            && lhs.location == rhs.location && lhs.weather == rhs.weather
+            && lhs.photoUrls == rhs.photoUrls && lhs.notes == rhs.notes
+}
+
+
+
+
 extension Observation: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)
@@ -160,8 +169,8 @@ extension Observation: NSCoding {
     }
 }
 
-extension Observation: CloudStorable {
-    class var classUrl: String { return "observation" }
-    func upload() { }
-    func getDependencies() -> [CloudStorable] { return [] }
-}
+//extension Observation: CloudStorable {
+//    class var classUrl: String { return "observation" }
+//    func upload() { }
+//    func getDependencies() -> [CloudStorable] { return [] }
+//}
