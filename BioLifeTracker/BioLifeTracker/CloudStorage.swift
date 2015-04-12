@@ -58,11 +58,11 @@ struct CloudStorage {
     /// Will not check for key that is in target but not in source dictionary.
     static func checkForItemCongruency(source: NSDictionary, target: NSDictionary) {
         for keyObject in source.allKeys{
-            let key = keyObject as String
+            let key = keyObject as! String
             assert(source[key] != nil)
             assert(target[key] != nil, "The entry for \(key) is mising from server reply")
-            let originalValue = source[key] as NSObject
-            let newValue = target[key] as NSObject
+            let originalValue = source[key] as! NSObject
+            let newValue = target[key] as! NSObject
             if originalValue != newValue {
                 NSLog("Returned value for key %@, (%@) does not match original (%@)", key, newValue, originalValue)
             }
@@ -111,7 +111,7 @@ struct CloudStorage {
         //NSLog("Received data: %@", stringRepresentation!)
         
         var readingError: NSError?
-        var dictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(0), error: &readingError) as NSDictionary
+        var dictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(0), error: &readingError) as? NSDictionary
         if readingError != nil {
             NSLog("JSON Reading Error: %@", readingError!.localizedDescription)
             return nil
@@ -127,7 +127,7 @@ struct CloudStorage {
         //NSLog("Received data: %@", stringRepresentation!)
         
         var readingError: NSError?
-        var dictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(0), error: &readingError) as NSArray
+        var dictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(0), error: &readingError) as? NSArray
         if readingError != nil {
             NSLog("JSON Reading Error: %@", readingError!.localizedDescription)
             return nil

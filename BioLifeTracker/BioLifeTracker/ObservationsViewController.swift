@@ -26,7 +26,7 @@ class ObservationsViewController: UITableViewController {
     
     // UITableViewDataSource and UITableViewDelegate METHODS
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as SubtitleTableCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SubtitleTableCell
         
         let observation = currentSession!.observations[indexPath.row]
         let formatter = NSDateFormatter()

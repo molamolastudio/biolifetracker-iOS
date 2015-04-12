@@ -47,7 +47,7 @@ class CloudStorageWorkerTests: XCTestCase {
         let uploadExpectation = self.expectationWithDescription("Check that item has been uploaded")
         worker.setOnFinished({
             XCTAssertNotEqual(0, downloadTask.getResults().count, "Check download task has result")
-            XCTAssertEqual(1, downloadTask.getResults()[0]["id"] as Int, "Check for correct downloaded id")
+            XCTAssertEqual(1, downloadTask.getResults()[0]["id"] as! Int, "Check for correct downloaded id")
             downloadExpectation.fulfill()
             
             XCTAssertNotNil(dummyItem.id, "Test that item has been uploaded")

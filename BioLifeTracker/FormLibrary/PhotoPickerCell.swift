@@ -19,7 +19,7 @@ class PhotoPickerCell: FormCell {
         button.addTarget(target, action: action, forControlEvents: .TouchUpInside)
     }
     
-    func setSelectedImage(image: UIImage) {
+    func setSelectedImageView(image: UIImage) {
         imageDisplay.contentMode = UIViewContentMode.ScaleAspectFit
         selectedValue = image
         imageDisplay.image = image

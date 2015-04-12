@@ -69,7 +69,7 @@ class UploadTask: CloudStorageTask {
                 NSLog("Response dictionary is nil. Cannot set item id.")
             } else {
                 CloudStorage.checkForItemCongruency(dictionary, target: responseDictionary!)
-                let newId = responseDictionary!["id"] as Int?
+                let newId = responseDictionary!["id"] as! Int?
                 assert(newId != nil, "The server does not return item ID for \(currentItem.classUrl)")
                 currentItem.setId(newId!)
             }

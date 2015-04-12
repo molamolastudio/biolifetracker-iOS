@@ -44,7 +44,7 @@ class CloudStorageManager {
             downloadTask.execute() // download item synchronously
             assert(downloadTask.getResults().count == 1) // must always have one item
             let retrievedItem = downloadTask.getResults()[0]
-            assert(retrievedItem["id"] as Int == itemId) // assert that item has correct id
+            assert(retrievedItem["id"] as! Int == itemId) // assert that item has correct id
             classCache[itemId] = retrievedItem
             globalCache[classUrl] = classCache
             return retrievedItem

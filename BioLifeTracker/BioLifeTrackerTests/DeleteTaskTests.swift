@@ -35,7 +35,7 @@ class DeleteTaskTests: XCTestCase {
         downloadTask.execute()
         let responseDictionary = downloadTask.getResults()[0]
         XCTAssertNotNil(responseDictionary["detail"], "Check web server response for DELETE")
-        XCTAssertEqual(responseDictionary["detail"]! as String, "Not found.", "Item should not exist on server.")
+        XCTAssertEqual(responseDictionary["detail"]! as! String, "Not found.", "Item should not exist on server.")
         
     }
 }

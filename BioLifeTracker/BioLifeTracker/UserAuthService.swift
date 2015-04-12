@@ -43,12 +43,12 @@ class UserAuthService {
     }
     
     private func initialiseManagers() {
-        let loadedProjectMng = ProjectManager.loadFromArchives(UserAuthService.sharedInstance.user.toString()) as ProjectManager?
+        let loadedProjectMng = ProjectManager.loadFromArchives(UserAuthService.sharedInstance.user.toString()) as! ProjectManager?
         if loadedProjectMng != nil {
             ProjectManager.sharedInstance.updateProjects(loadedProjectMng!.projects)
         }
         
-        let loadedEthogramMng = EthogramManager.loadFromArchives(UserAuthService.sharedInstance.user.toString()) as EthogramManager?
+        let loadedEthogramMng = EthogramManager.loadFromArchives(UserAuthService.sharedInstance.user.toString()) as! EthogramManager?
         if loadedEthogramMng != nil {
             EthogramManager.sharedInstance.updateEthograms(loadedEthogramMng!.ethograms)
         }
@@ -84,7 +84,7 @@ class UserAuthService {
             let responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "POST", withPayload: postData)
             assert(responseData != nil, "The server rejects the \(provider) token. This shouldn't happen.")
             let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)!
-            let serverToken = responseDictionary["key"] as String
+            let serverToken = responseDictionary["key"] as! String
             self._accessToken = serverToken
             let user = self.getCurrentUserFromServer()
             assert(user != nil, "Token is not accepted by server")

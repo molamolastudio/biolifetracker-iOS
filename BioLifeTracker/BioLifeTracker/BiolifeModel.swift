@@ -30,10 +30,10 @@ class BiolifeModel: NSObject, NSCoding {
     }
     
     required init(coder decoder: NSCoder) {
-        _createdAt = decoder.decodeObjectForKey("createdAt") as NSDate
-        _updatedAt = decoder.decodeObjectForKey("updatedAt") as NSDate
-        _createdBy = decoder.decodeObjectForKey("createdBy") as User
-        _updatedBy = decoder.decodeObjectForKey("updatedBy") as User
+        _createdAt = decoder.decodeObjectForKey("createdAt") as! NSDate
+        _updatedAt = decoder.decodeObjectForKey("updatedAt") as! NSDate
+        _createdBy = decoder.decodeObjectForKey("createdBy") as! User
+        _updatedBy = decoder.decodeObjectForKey("updatedBy") as! User
         super.init()
     }
     
@@ -41,14 +41,14 @@ class BiolifeModel: NSObject, NSCoding {
     init(dictionary: NSDictionary) {
         let manager = CloudStorageManager.sharedInstance
         let dateFormatter = BiolifeDateFormatter()
-        self.id = dictionary["id"] as Int?
-        self._createdAt = dateFormatter.getDate(dictionary["created_at"] as String)
-        self._updatedAt = dateFormatter.getDate(dictionary["updated_at"] as String)
+        self.id = dictionary["id"] as! Int?
+        self._createdAt = dateFormatter.getDate(dictionary["created_at"] as! String)
+        self._updatedAt = dateFormatter.getDate(dictionary["updated_at"] as! String)
         // retrieve dictionary of createdBy and updatedBy
         let createdByDictionary = manager.getItemForClass(User.ClassUrl,
-            itemId: dictionary["created_by"] as Int)
+            itemId: dictionary["created_by"] as! Int)
         let updatedByDictionary = manager.getItemForClass(User.ClassUrl,
-            itemId: dictionary["updated_by"] as Int)
+            itemId: dictionary["updated_by"] as! Int)
         // instantiate createdBy and updatedBy user object
         self._createdBy = User(dictionary: createdByDictionary)
         self._updatedBy = User(dictionary: updatedByDictionary)

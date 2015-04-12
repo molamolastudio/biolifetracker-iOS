@@ -222,14 +222,14 @@ class Project: BiolifeModel, Storable {
         // documents directory
         let dir = dirs![0]
         let path = dir.stringByAppendingPathComponent("Project" + identifier)
-        let data = NSMutableData(contentsOfFile: path)?
+        let data = NSMutableData(contentsOfFile: path)
         
         if data == nil {
             return nil
         }
         
         let archiver = NSKeyedUnarchiver(forReadingWithData: data!)
-        let project = archiver.decodeObjectForKey(identifier) as Project?
+        let project = archiver.decodeObjectForKey(identifier) as! Project?
     
         return project
     }
@@ -260,14 +260,14 @@ class Project: BiolifeModel, Storable {
     required init(coder aDecoder: NSCoder) {
         var enumerator: NSEnumerator
 
-        self._name = aDecoder.decodeObjectForKey("name") as String
-        self._ethogram = aDecoder.decodeObjectForKey("ethogram") as Ethogram
+        self._name = aDecoder.decodeObjectForKey("name") as! String
+        self._ethogram = aDecoder.decodeObjectForKey("ethogram") as! Ethogram
         
         let objectAdmins: AnyObject = aDecoder.decodeObjectForKey("admins")!
         enumerator = objectAdmins.objectEnumerator()
         self._admins = Array<User>()
         while true {
-            let admin = enumerator.nextObject() as User?
+            let admin = enumerator.nextObject() as! User?
             if admin == nil {
                 break
             } else {
@@ -279,7 +279,7 @@ class Project: BiolifeModel, Storable {
         enumerator = objectMembers.objectEnumerator()
         self._members = Array<User>()
         while true {
-            let user = enumerator.nextObject() as User?
+            let user = enumerator.nextObject() as! User?
             if user == nil {
                 break
             } else {
@@ -292,7 +292,7 @@ class Project: BiolifeModel, Storable {
         self._sessions = Array<Session>()
         var session: Session?
         while true {
-            session = enumerator.nextObject() as Session?
+            session = enumerator.nextObject() as! Session?
             if session == nil {
                 break
             }
@@ -304,7 +304,7 @@ class Project: BiolifeModel, Storable {
         self._individuals = Array<Individual>()
         var individual: Individual?
         while true {
-            individual = enumerator.nextObject() as Individual?
+            individual = enumerator.nextObject() as! Individual?
             if session == nil {
                 break
             }

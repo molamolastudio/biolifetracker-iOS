@@ -118,8 +118,8 @@ class Observation: BiolifeModel {
     required init(coder aDecoder: NSCoder) {
         var enumerator: NSEnumerator
         
-        self._state = aDecoder.decodeObjectForKey("state") as BehaviourState
-        self._timestamp = aDecoder.decodeObjectForKey("timestamp") as NSDate
+        self._state = aDecoder.decodeObjectForKey("state") as! BehaviourState
+        self._timestamp = aDecoder.decodeObjectForKey("timestamp") as! NSDate
         self._location = aDecoder.decodeObjectForKey("location") as? Location
         self._weather = aDecoder.decodeObjectForKey("weather") as? Weather
         
@@ -127,7 +127,7 @@ class Observation: BiolifeModel {
         enumerator = objectPhotoUrls.objectEnumerator()
         self._photoUrls = Array<String>()
         while true {
-            let url = enumerator.nextObject() as String?
+            let url = enumerator.nextObject() as! String?
             if url == nil {
                 break
             }
@@ -135,9 +135,9 @@ class Observation: BiolifeModel {
             self._photoUrls.append(url!)
         }
         
-        self._notes = aDecoder.decodeObjectForKey("notes") as String
-        self._individual = aDecoder.decodeObjectForKey("individual") as Individual
-        self._information = aDecoder.decodeObjectForKey("information") as String
+        self._notes = aDecoder.decodeObjectForKey("notes") as! String
+        self._individual = aDecoder.decodeObjectForKey("individual") as! Individual
+        self._information = aDecoder.decodeObjectForKey("information") as! String
         super.init(coder: aDecoder)
     }
 }

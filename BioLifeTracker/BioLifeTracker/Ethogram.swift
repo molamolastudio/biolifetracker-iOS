@@ -120,26 +120,27 @@ class Ethogram: BiolifeModel, Storable {
         
         let dir = dirs![0]
         let path = dir.stringByAppendingPathComponent("Ethogram" + identifier)
-        let data = NSMutableData(contentsOfFile: path)?
+        let data = NSMutableData(contentsOfFile: path)
     
         if data == nil {
             return nil
         }
         
         let archiver = NSKeyedUnarchiver(forReadingWithData: data!)
-        let ethogram = archiver.decodeObjectForKey(identifier) as Ethogram?
+        let ethogram = archiver.decodeObjectForKey(identifier) as! Ethogram?
         
         return ethogram
     }
     
     required init(coder aDecoder: NSCoder) {
-        self._name = aDecoder.decodeObjectForKey("name") as String
+        self._name = aDecoder.decodeObjectForKey("name") as! String
         
         let objectBehavStates: AnyObject = aDecoder.decodeObjectForKey("behaviourStates")!
-        let enumerator = objectBehavStates.objectEnumerator()
+        // Error: Ambiguous use of objectEnumerator
+        //let enumerator = objectBehavStates.objectEnumerator()
         
         self._behaviourStates = Array<BehaviourState>()  // Check whether BehaviourState can be stored
-        
+        /*
         while true {
             
             let behaviourState = enumerator.nextObject() as BehaviourState?
@@ -149,7 +150,8 @@ class Ethogram: BiolifeModel, Storable {
         
             self._behaviourStates.append(behaviourState!)
         }
-        self._information = aDecoder.decodeObjectForKey("information") as String
+        */
+        self._information = aDecoder.decodeObjectForKey("information") as! String
         super.init(coder: aDecoder)
     }
     
