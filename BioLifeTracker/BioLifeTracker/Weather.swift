@@ -9,7 +9,7 @@
 import Foundation
 
 class Weather: BiolifeModel {
-    
+    static let ClassUrl = "weathers"
     
     private var _weather: String
     var weather: String {
@@ -40,6 +40,11 @@ class Weather: BiolifeModel {
         super.init(coder: aDecoder)
     }
     
+    override required init(dictionary: NSDictionary) {
+        _weather = dictionary["weather"] as! String
+        super.init(dictionary: dictionary)
+    }
+    
 }
 
 func ==(lhs: Weather, rhs: Weather) -> Bool {
@@ -51,4 +56,18 @@ extension Weather: NSCoding {
         super.encodeWithCoder(aCoder)
         aCoder.encodeObject(_weather, forKey: "weather")
     }
+}
+
+extension Weather: CloudStorable {
+    var classUrl: String { return Weather.ClassUrl }
+    
+    func getDependencies() -> [CloudStorable] {
+        return []
+    }
+    
+    override func encodeWithDictionary(dictionary: NSMutableDictionary) {
+        dictionary.setValue(weather, forKey: "weather")
+        super.encodeWithDictionary(dictionary)
+    }
+
 }
