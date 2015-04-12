@@ -15,6 +15,7 @@ enum SessionType: String {
 
 class Session: BiolifeModel {
     // Stored properties
+    private var _name: String
     private var _project: Project!
     private var _typeValue: String
     private var _observations: [Observation]
@@ -26,7 +27,8 @@ class Session: BiolifeModel {
     var observations: [Observation] { get { return _observations } }
     var individuals: [Individual] { get { return _individuals } }
     
-    init(project: Project, type: SessionType) {
+    init(project: Project, name: String, type: SessionType) {
+        self._name = name
         self._project = project
         self._typeValue = type.rawValue
         self._observations = []
@@ -35,10 +37,7 @@ class Session: BiolifeModel {
     }
     
     func getDisplayName() -> String {
-        if let index = _project.getIndexOfSession(self) {
-            return type.rawValue + " " + String()
-        }
-        return ""
+        return self._name
     }
     
     /******************Observation*******************/
@@ -46,6 +45,10 @@ class Session: BiolifeModel {
     // To be called by Project instance during decoding
     func setProject(project: Project) {
         self._project = project
+    }
+    
+    func updateName(name: String) {
+        self._name = name
     }
     
     func addObservation(observations: [Observation]) {
@@ -93,7 +96,8 @@ class Session: BiolifeModel {
         var enumerator: NSEnumerator
         
         self._typeValue = aDecoder.decodeObjectForKey("typeValue") as! String
-    
+        self._name = aDecoder.decodeObjectForKey("name") as! String
+        
         let objectObservations: AnyObject = aDecoder.decodeObjectForKey("observations")!
         enumerator = objectObservations.objectEnumerator()
         self._observations = Array<Observation>()
@@ -135,6 +139,7 @@ extension Session: NSCoding {
         super.encodeWithCoder(aCoder)
         // project attribute is allocated when project is initialized
         aCoder.encodeObject(_typeValue, forKey: "typeValue")
+        aCoder.encodeObject(_name, forKey: "name")
         aCoder.encodeObject(_observations, forKey: "observations")
         aCoder.encodeObject(_individuals, forKey: "individuals")
     }

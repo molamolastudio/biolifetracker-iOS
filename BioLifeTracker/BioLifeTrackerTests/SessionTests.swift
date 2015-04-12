@@ -24,7 +24,10 @@ class SessionTests: XCTestCase {
         
         let project = Project(name: "A Day in a Fiddler Crab life", ethogram: ethogram)
         
-        var session = Session(project: project, type: SessionType.Scan)
+        var session = Session(project: project, name: "Session1", type: SessionType.Scan)
+        
+        let name = session.getDisplayName()
+        XCTAssert(name == "Session1", "Session not initialised properly")
         
         XCTAssert(session.project.name == "A Day in a Fiddler Crab life", "Session not initialised properly")
         XCTAssert(session.type == SessionType.Scan, "Session not initialised properly")
@@ -40,7 +43,7 @@ class SessionTests: XCTestCase {
         ethogram.addBehaviourState(state2)
         
         let project = Project(name: "A Day in a Fiddler Crab life", ethogram: ethogram)
-        var session = Session(project: project, type: SessionType.Scan)
+        var session = Session(project: project, name: "Session1", type: SessionType.Scan)
         
         let individual = Individual(label: "M1")
         let observation1 = Observation(session: session, individual: individual, state: state1, timestamp: NSDate(), information: "Eating vigourously")
@@ -83,8 +86,8 @@ class SessionTests: XCTestCase {
         let individual2 = Individual(label: "M2")
         let individual3 = Individual(label: "F1")
         
-        var session2 = Session(project: project, type: SessionType.Scan)
-        var session3 = Session(project: project, type: SessionType.Scan)
+        var session2 = Session(project: project, name: "Session2", type: SessionType.Scan)
+        var session3 = Session(project: project, name: "Session3", type: SessionType.Scan)
         
         var observation16 = Observation(session: session3, individual: individual1, state: state2, timestamp: NSDate(), information: "")
         observation16.changeCreator(user1)
