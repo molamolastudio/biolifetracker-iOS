@@ -9,6 +9,8 @@
 import Foundation
 
 class Weather: BiolifeModel {
+    
+    
     private var _weather: String
     var weather: String {
         get { return _weather }

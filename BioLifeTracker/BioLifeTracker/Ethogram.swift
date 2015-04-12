@@ -8,6 +8,8 @@
 import Foundation
 
 class Ethogram: BiolifeModel, Storable {
+    static let ClassUrl = "ethograms"
+    
     private var _name: String
     private var _information: String
     private var _behaviourStates: [BehaviourState]
@@ -38,6 +40,11 @@ class Ethogram: BiolifeModel, Storable {
         self._behaviourStates = []
         self._information = information
     //    self.saveToArchives()
+    }
+    
+    required override init(dictionary: NSDictionary) {
+        //read data from dictionary
+        super.init(dictionary: dictionary)
     }
     
     /************Ethogram********************/
@@ -177,6 +184,12 @@ class Ethogram: BiolifeModel, Storable {
         
         return success;
     }
+    
+    class func ethogramWithId(id: Int) -> Ethogram {
+        let manager = CloudStorageManager.sharedInstance
+        let dictionary = manager.getItemForClass(Ethogram.ClassUrl, itemId: id)
+        return Ethogram(dictionary: dictionary)
+    }
 }
 
 func ==(lhs: Ethogram, rhs: Ethogram) -> Bool {
@@ -191,5 +204,21 @@ extension Ethogram: NSCoding {
         aCoder.encodeObject(_name, forKey: "name")
         aCoder.encodeObject(_information, forKey: "information")
         aCoder.encodeObject(_behaviourStates, forKey: "behaviourStates")
+    }
+}
+
+
+extension Ethogram: CloudStorable {
+    var classUrl: String { return Ethogram.ClassUrl }
+    
+    func getDependencies() -> [CloudStorable] {
+        var dependencies = [CloudStorable]()
+        // append dependencies here
+        return dependencies
+    }
+    
+    override func encodeWithDictionary(dictionary: NSMutableDictionary) {
+        super.encodeWithDictionary(dictionary)
+        // write data here
     }
 }

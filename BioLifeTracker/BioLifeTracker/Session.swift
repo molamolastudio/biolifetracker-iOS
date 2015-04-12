@@ -14,6 +14,8 @@ enum SessionType: String {
 }
 
 class Session: BiolifeModel {
+    static let ClassUrl = "sessions"
+    
     // Stored properties
     private var _project: Project!
     private var _typeValue: String
@@ -32,6 +34,11 @@ class Session: BiolifeModel {
         self._observations = []
         self._individuals = []
         super.init()
+    }
+    
+    required override init(dictionary: NSDictionary) {
+        //read data from dictionary
+        super.init(dictionary: dictionary)
     }
     
     func getDisplayName() -> String {
@@ -140,8 +147,18 @@ extension Session: NSCoding {
     }
 }
 
-//extension Session: CloudStorable {
-//    class var classUrl: String { return "session" }
-//    func upload() { }
-//    func getDependencies() -> [CloudStorable] { return [] }
-//}
+
+extension Session: CloudStorable {
+    var classUrl: String { return Session.ClassUrl }
+    
+    func getDependencies() -> [CloudStorable] {
+        var dependencies = [CloudStorable]()
+        // append dependencies here
+        return dependencies
+    }
+    
+    override func encodeWithDictionary(dictionary: NSMutableDictionary) {
+        super.encodeWithDictionary(dictionary)
+        // write data here
+    }
+}

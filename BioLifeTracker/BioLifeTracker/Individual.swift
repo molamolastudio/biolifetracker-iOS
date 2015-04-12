@@ -9,6 +9,8 @@
 import Foundation
 
 class Individual: BiolifeModel {
+    static let ClassUrl = "individuals"
+    
     private var _label: String
     private var _tags: [Tag]
     private var _photo: UIImage?
@@ -29,6 +31,14 @@ class Individual: BiolifeModel {
     convenience init(label: String) {
         self.init()
         self._label = label
+    }
+    
+    required override init(dictionary: NSDictionary) {
+        //read data from dictionary
+        _label = dictionary["label"] as! String
+        _tags = Tag.tagsWithIds(dictionary["tags"] as! [Int])
+        _photoUrls = [] // TODO: Andhieka
+        super.init(dictionary: dictionary)
     }
     
     /*****************Individual*******************/
@@ -113,8 +123,23 @@ extension Individual: NSCoding {
     }
 }
 
-//extension Individual: CloudStorable {
-//    class var classUrl: String { return "Individual" }
-//    func upload() { }
-//    func getDependencies() -> [CloudStorable] { return [] }
-//}
+
+extension Individual: CloudStorable {
+    var classUrl: String { return Individual.ClassUrl }
+    
+    func getDependencies() -> [CloudStorable] {
+        var dependencies = [CloudStorable]()
+        // append dependencies here
+        for tag in tags {
+            dependencies.append(tag)
+        }
+        return dependencies
+    }
+    
+    override func encodeWithDictionary(dictionary: NSMutableDictionary) {
+        super.encodeWithDictionary(dictionary)
+        // write data here
+        dictionary.setValue(label, forKey: "label")
+        dictionary.setValue(tags.map { $0.id! }, forKey: "tags")
+    }
+}

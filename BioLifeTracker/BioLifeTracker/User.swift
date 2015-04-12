@@ -42,4 +42,12 @@ class User: NSObject, NSCoding {
         name = dictionary["username"] as! String
         super.init()
     }
+    
+    class func usersWithIds(idList: [Int]) -> [User] {
+        let manager = CloudStorageManager.sharedInstance
+        return idList.map {
+            let memberDictionary = manager.getItemForClass(User.ClassUrl, itemId: $0)
+            return User(dictionary: memberDictionary)
+        }
+    }
 }

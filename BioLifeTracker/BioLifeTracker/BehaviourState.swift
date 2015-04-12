@@ -10,6 +10,8 @@
 import Foundation
 
 class BehaviourState: BiolifeModel {
+    static let ClassUrl = "behaviours"
+    
     private var _name: String
     private var _information: String
     private var _photo: UIImage?
@@ -32,6 +34,11 @@ class BehaviourState: BiolifeModel {
         self._name = name
         self._information = information
         self._photoUrls = []
+    }
+    
+    required override init(dictionary: NSDictionary) {
+        //read data from dictionary
+        super.init(dictionary: dictionary)
     }
     
     func updateName(name: String) {
@@ -101,3 +108,18 @@ extension BehaviourState: NSCoding {
     }
 }
 
+
+extension BehaviourState: CloudStorable {
+    var classUrl: String { return BehaviourState.ClassUrl }
+    
+    func getDependencies() -> [CloudStorable] {
+        var dependencies = [CloudStorable]()
+        // append dependencies here
+        return dependencies
+    }
+    
+    override func encodeWithDictionary(dictionary: NSMutableDictionary) {
+        super.encodeWithDictionary(dictionary)
+        // write data here
+    }
+}

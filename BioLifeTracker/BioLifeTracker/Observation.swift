@@ -9,6 +9,8 @@
 import Foundation
 
 class Observation: BiolifeModel {
+    static let ClassUrl = "observations"
+    
     private var _session: Session!
     private var _state: BehaviourState
     private var _information: String
@@ -57,6 +59,20 @@ class Observation: BiolifeModel {
         self._information = information
         self._individual = individual
         super.init()
+    }
+    
+    required override init(dictionary: NSDictionary) {
+        //read data from dictionary
+        let dateFormatter = BiolifeDateFormatter()
+        _session =
+        _state =
+        _timestamp = dateFormatter.getDate(dictionary["timestamp"] as! String)
+        _notes = "Not implemented in server"
+        //_location =
+        //_weather =
+        _photoUrls =
+        _information = dictionary["information"] as! String
+        super.init(dictionary: dictionary)
     }
     
     /************Observation***************/
@@ -169,8 +185,18 @@ extension Observation: NSCoding {
     }
 }
 
-//extension Observation: CloudStorable {
-//    class var classUrl: String { return "observation" }
-//    func upload() { }
-//    func getDependencies() -> [CloudStorable] { return [] }
-//}
+
+extension Observation: CloudStorable {
+    var classUrl: String { return Observation.ClassUrl }
+    
+    func getDependencies() -> [CloudStorable] {
+        var dependencies = [CloudStorable]()
+        // append dependencies here
+        return dependencies
+    }
+    
+    override func encodeWithDictionary(dictionary: NSMutableDictionary) {
+        super.encodeWithDictionary(dictionary)
+        // write data here
+    }
+}
