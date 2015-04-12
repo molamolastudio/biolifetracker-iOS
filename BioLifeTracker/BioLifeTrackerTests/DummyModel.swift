@@ -15,7 +15,7 @@ class DummyModel: BiolifeModel {
     var intProperty: Int = 1234567890
     var optionalStringProperty: String?
     var dateProperty: NSDate = NSDate()
-    var imageProperty: UIImage? = UIImage(named: )
+    var imageProperty: UIImage? = UIImage(named: "dummy_image")
     var friends = [DummyModel]()
     
     override init() {

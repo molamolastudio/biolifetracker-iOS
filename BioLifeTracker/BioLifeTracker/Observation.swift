@@ -64,7 +64,7 @@ class Observation: BiolifeModel {
     required override init(dictionary: NSDictionary) {
         //read data from dictionary
         let dateFormatter = BiolifeDateFormatter()
-        _session =
+        _session = 
         _state =
         _timestamp = dateFormatter.getDate(dictionary["timestamp"] as! String)
         _notes = "Not implemented in server"
