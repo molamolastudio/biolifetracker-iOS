@@ -13,18 +13,15 @@ class Individual: BiolifeModel {
     
     private var _label: String
     private var _tags: [Tag]
-    private var _photo: UIImage?
-    private var _photoUrls:[String]
+    private var _photo: Photo?
     
     var label: String { get { return _label } }
     var tags: [Tag] { get { return _tags } }
-    var photo: UIImage? { get { return _photo } }
-    var photoUrls: [String] { get { return _photoUrls } }
+    var photo: Photo? { get { return _photo } }
 
     override init() {
         self._label = ""
         self._tags = []
-        self._photoUrls = [String]()
         super.init()
     }
     
@@ -34,10 +31,11 @@ class Individual: BiolifeModel {
     }
     
     required override init(dictionary: NSDictionary) {
-        //read data from dictionary
         _label = dictionary["label"] as! String
         _tags = Tag.tagsWithIds(dictionary["tags"] as! [Int])
-        _photoUrls = [] // TODO: Andhieka
+        if let photoId = dictionary["photo"] as! Int? {
+            _photo = Photo.photoWithId(photoId)
+        }
         super.init(dictionary: dictionary)
     }
     
@@ -47,7 +45,7 @@ class Individual: BiolifeModel {
         updateIndividual()
     }
     
-    func updatePhoto(photo: UIImage) {
+    func updatePhoto(photo: Photo?) {
         self._photo = photo
         updateIndividual()
     }
@@ -62,16 +60,6 @@ class Individual: BiolifeModel {
         updateIndividual()
     }
     
-    func addPhotoUrl(url: String) {
-        self._photoUrls.append(url)
-        updateIndividual()
-    }
-    
-    func removePhotoUrlAtIndex(index: Int) {
-        self._photoUrls.removeAtIndex(index)
-        updateIndividual()
-    }
-    
     private func updateIndividual() {
         updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
     }
@@ -79,18 +67,7 @@ class Individual: BiolifeModel {
     required init(coder aDecoder: NSCoder) {
         var enumerator: NSEnumerator
         self._label = aDecoder.decodeObjectForKey("label") as! String
-        self._photo = aDecoder.decodeObjectForKey("photo") as! UIImage?
-        let objectPhotoUrls: AnyObject = aDecoder.decodeObjectForKey("photoUrls")!
-        enumerator = objectPhotoUrls.objectEnumerator()
-        self._photoUrls = Array<String>()
-        while true {
-            let url = enumerator.nextObject() as! String?
-            if url == nil {
-                break
-            }
-            
-            self._photoUrls.append(url!)
-        }
+        self._photo = aDecoder.decodeObjectForKey("photo") as! Photo?
         
         let objectTags: AnyObject = aDecoder.decodeObjectForKey("tags")!
         enumerator = objectTags.objectEnumerator()
@@ -105,11 +82,13 @@ class Individual: BiolifeModel {
 
         super.init(coder: aDecoder)
     }
+    
 }
 
 func ==(lhs: Individual, rhs: Individual) -> Bool {
-    return lhs.label == rhs.label && lhs.tags == rhs.tags
-            && lhs.photo == rhs.photo && lhs.photoUrls == rhs.photoUrls
+    return lhs.label == rhs.label &&
+        lhs.tags == rhs.tags &&
+        lhs.photo == rhs.photo
 }
 
 
@@ -118,7 +97,6 @@ extension Individual: NSCoding {
         super.encodeWithCoder(aCoder)
         aCoder.encodeObject(_label, forKey: "label")
         aCoder.encodeObject(_photo, forKey: "photo")
-        aCoder.encodeObject(_photoUrls, forKey: "photoUrls")
         aCoder.encodeObject(_tags, forKey: "tags")
     }
 }
@@ -129,17 +107,15 @@ extension Individual: CloudStorable {
     
     func getDependencies() -> [CloudStorable] {
         var dependencies = [CloudStorable]()
-        // append dependencies here
-        for tag in tags {
-            dependencies.append(tag)
-        }
+        tags.map { dependencies.append($0) }
+        if photo != nil { dependencies.append(photo!) }
         return dependencies
     }
     
     override func encodeWithDictionary(dictionary: NSMutableDictionary) {
         super.encodeWithDictionary(dictionary)
-        // write data here
         dictionary.setValue(label, forKey: "label")
+        dictionary.setValue(photo?.id, forKey: "photo")
         dictionary.setValue(tags.map { $0.id! }, forKey: "tags")
     }
 }

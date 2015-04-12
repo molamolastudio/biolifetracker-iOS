@@ -31,6 +31,12 @@ class Photo: BiolifeModel {
     required init(coder decoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    class func photoWithId(id: Int) -> Photo {
+        let manager = CloudStorageManager.sharedInstance
+        let photoDictionary = manager.getItemForClass(ClassUrl, itemId: id)
+        return Photo(dictionary: photoDictionary)
+    }
 }
 
 extension Photo: CloudStorable {
