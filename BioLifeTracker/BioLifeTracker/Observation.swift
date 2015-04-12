@@ -21,7 +21,6 @@ class Observation: BiolifeModel {
     private var _weather: Weather?
 
     private var _photoUrls = [String]()
-    private var _notes: String
     var _creator: User { return createdBy }
     
     var session: Session! { get { return _session } }
@@ -33,26 +32,11 @@ class Observation: BiolifeModel {
     var location: Location? { get { return _location } }
     var weather: Weather? { get { return _weather } }
     var photoUrls: [String] { get { return _photoUrls } }
-    var notes: String { get { return _notes } }
     
     init(session: Session, individual: Individual, state: BehaviourState, timestamp: NSDate, information: String) {
         self._session = session
         self._state = state
         self._timestamp = timestamp
-        self._location = Location()
-        self._weather = Weather()
-        self._photoUrls = []
-        self._notes = ""
-        self._information = information
-        self._individual = individual
-        super.init()
-    }
-    
-    init(session: Session, individual: Individual, state: BehaviourState, timestamp: NSDate, information: String, notes: String) {
-        self._session = session
-        self._state = state
-        self._timestamp = timestamp
-        self._notes = notes
         self._location = Location()
         self._weather = Weather()
         self._photoUrls = []
@@ -122,11 +106,6 @@ class Observation: BiolifeModel {
         updateObservation()
     }
     
-    func updateNotes(notes: String) {
-        self._notes = notes
-        updateObservation()
-    }
-    
     private func updateObservation() {
         updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
     }
@@ -151,7 +130,6 @@ class Observation: BiolifeModel {
             self._photoUrls.append(url!)
         }
         
-        self._notes = aDecoder.decodeObjectForKey("notes") as! String
         self._individual = aDecoder.decodeObjectForKey("individual") as! Individual
         self._information = aDecoder.decodeObjectForKey("information") as! String
         super.init(coder: aDecoder)
@@ -164,7 +142,7 @@ func ==(lhs: Observation, rhs: Observation) -> Bool {
             && lhs.information == rhs.information && lhs.timestamp == rhs.timestamp
             && lhs.photo == rhs.photo && lhs.individual == rhs.individual
             && lhs.location == rhs.location && lhs.weather == rhs.weather
-            && lhs.photoUrls == rhs.photoUrls && lhs.notes == rhs.notes
+            && lhs.photoUrls == rhs.photoUrls
 }
 
 
@@ -179,7 +157,6 @@ extension Observation: NSCoding {
         aCoder.encodeObject(_location, forKey: "location")
         aCoder.encodeObject(_weather, forKey: "weather")
         aCoder.encodeObject(_photoUrls, forKey: "photoUrls")
-        aCoder.encodeObject(_notes, forKey: "notes")
         aCoder.encodeObject(_individual, forKey: "individual")
         aCoder.encodeObject(_information, forKey: "information")
     }

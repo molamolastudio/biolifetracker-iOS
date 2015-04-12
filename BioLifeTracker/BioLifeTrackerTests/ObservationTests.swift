@@ -20,7 +20,7 @@ class ObservationTests: XCTestCase {
         
         let project = Project(name: "A Day in a Fiddler Crab life", ethogram: ethogram)
         
-        let session = Session(project: project, type: SessionType.Scan)
+        let session = Session(project: project, name: "Session1", type: SessionType.Scan)
         let individual = Individual(label: "M1")
         var observation = Observation(session: session, individual: individual, state: state1, timestamp: NSDate(), information: "Eating vigourously")
         
@@ -39,7 +39,7 @@ class ObservationTests: XCTestCase {
         
         let project = Project(name: "A Day in a Fiddler Crab life", ethogram: ethogram)
         
-        let session = Session(project: project, type: SessionType.Scan)
+        let session = Session(project: project, name: "Session1", type: SessionType.Scan)
         let individual = Individual(label: "M1")
         var observation = Observation(session: session, individual: individual, state: state1, timestamp: NSDate(), information: "Eating vigourously")
         
@@ -69,10 +69,6 @@ class ObservationTests: XCTestCase {
         
         observation.removePhotoUrlAtIndex(0)
         XCTAssert(observation.photoUrls[0] == "www.photo2.com", "Individual not initialised properly")
-        
-        XCTAssert(observation.notes == "", "Observation not initialised properly")
-        observation.updateNotes("Fought with a bigger crab")
-        XCTAssert(observation.notes == "Fought with a bigger crab", "Observation not initialised properly")
     }
     
     func testEquality() {
@@ -84,7 +80,7 @@ class ObservationTests: XCTestCase {
         
         let project = Project(name: "A Day in a Fiddler Crab life", ethogram: ethogram)
         
-        let session = Session(project: project, type: SessionType.Scan)
+        let session = Session(project: project, name: "Session1", type: SessionType.Scan)
         let individual = Individual(label: "M1")
         
         let observation1 = Observation(session: session, individual: individual, state: state1, timestamp: NSDate(), information: "Eating vigourously")
