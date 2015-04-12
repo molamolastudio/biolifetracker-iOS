@@ -8,42 +8,46 @@
 
 import UIKit
 
-class ProjectsViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+class ProjectsViewController: UITableViewController {
+    var delegate: ProjectsViewControllerDelegate? = nil
     
-    let cellReuseIdentifier = "ProjectTableCell"
+    let cellReuseIdentifier = "SubtitleTableCell"
+    let cellHeight: CGFloat = 50
     
     let numSections = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if Data.projects.count == 0 {
-            Data.projects.append(Project()) // For testing
-        }
+        self.tableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SubtitleTableCell
         
-        let title = cell.viewWithTag(Constants.ViewTags.projectsCellTitle) as UILabel
-        let subtitle = cell.viewWithTag(Constants.ViewTags.projectsCellSubtitle) as UILabel
-        let project = Data.projects[indexPath.row]
+        let project = ProjectManager.sharedInstance.projects[indexPath.row]
         
-        title.text = project.getDisplayName()
-        //subtitle.text = project.creator.name
+        cell.title.text = project.getDisplayName()
+        cell.subtitle.text = "Created by: " + project.admins.first!.name
         
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        Data.selectedProject = Data.projects[indexPath.row]
+        if delegate != nil {
+            delegate!.userDidSelectProject(ProjectManager.sharedInstance.projects[indexPath.row])
+        }
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Data.projects.count
+        return ProjectManager.sharedInstance.projects.count
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return numSections
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return cellHeight
     }
 }

@@ -8,37 +8,96 @@
 import Foundation
 
 class Ethogram: BiolifeModel, Storable {
-    var name: String
-    var information: String
-    var behaviourStates: [BehaviourState]
-    
-    @availability(iOS, deprecated=0.1, message="Use createdBy instead")
+    private var _name: String
+    private var _information: String
+    private var _behaviourStates: [BehaviourState]
     var creator: User { return createdBy }
     
+    var name: String { get { return _name } }
+    var information: String { get { return _information } }
+    var behaviourStates: [BehaviourState] { get { return _behaviourStates } }
+    
     override init() {
-        name = ""
-        behaviourStates = []
-        information = ""
+        _name = ""
+        _behaviourStates = []
+        _information = ""
         super.init()
     }
     
     convenience init(name: String) {
         self.init()
-        self.name = name
-        self.behaviourStates = []
-        information = ""
+        self._name = name
+        self._behaviourStates = []
+        self._information = ""
+    //    self.saveToArchives()
     }
+    
+    convenience init(name: String, information: String) {
+        self.init()
+        self._name = name
+        self._behaviourStates = []
+        self._information = information
+    //    self.saveToArchives()
+    }
+    
+    /************Ethogram********************/
+    
+    func updateName(name: String) {
+        Ethogram.deleteFromArchives(self.name)
+        self._name = name
+        updateEthogram()
+    }
+    
+    func updateInformation(information: String) {
+        self._information = information
+        updateEthogram()
+    }
+    
+    /*********Behaviour State****************/
     
     func addBehaviourState(state: BehaviourState) {
-        behaviourStates.append(state)
+        self._behaviourStates.append(state)
+        updateEthogram()
     }
     
+    func updateBehaviourStateName(index: Int, bsName: String) {
+        self._behaviourStates[index].updateName(bsName)
+        updateEthogram()
+    }
+    
+    func updateBehaviourStateInformation(index: Int, bsInformation: String) {
+        self._behaviourStates[index].updateInformation(bsInformation)
+        updateEthogram()
+    }
+    
+    func removeBehaviourState(index: Int) {
+        self._behaviourStates.removeAtIndex(index)
+        updateEthogram()
+    }
+    
+    /*************Photo Url in BS***************/
+    func addBSPhotoUrl(bsIndex: Int, photoUrl: String) {
+        self._behaviourStates[bsIndex].addPhotoUrl(photoUrl)
+        updateEthogram()
+    }
+    
+    func removeBSPhotoUrl(bsIndex: Int, photoIndex: Int) {
+        self._behaviourStates[bsIndex].removePhotoUrlAtIndex(photoIndex)
+        updateEthogram()
+    }
+    
+    private func updateEthogram() {
+        updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
+   //     self.saveToArchives()
+    }
+    
+    /**************Saving to Archives****************/
     func saveToArchives() {
         let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
     
         if ((dirs) != nil) {
             let dir = dirs![0]; //documents directory
-            let path = dir.stringByAppendingPathComponent("Ethogram");
+            let path = dir.stringByAppendingPathComponent("Ethogram" + self._name);
         
             let data = NSMutableData();
             let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
@@ -60,27 +119,28 @@ class Ethogram: BiolifeModel, Storable {
         // documents directory
         
         let dir = dirs![0]
-        let path = dir.stringByAppendingPathComponent("Ethogram")
-        let data = NSMutableData(contentsOfFile: path)?
+        let path = dir.stringByAppendingPathComponent("Ethogram" + identifier)
+        let data = NSMutableData(contentsOfFile: path)
     
         if data == nil {
             return nil
         }
         
         let archiver = NSKeyedUnarchiver(forReadingWithData: data!)
-        let ethogram = archiver.decodeObjectForKey(identifier) as Ethogram
+        let ethogram = archiver.decodeObjectForKey(identifier) as! Ethogram?
         
         return ethogram
     }
     
     required init(coder aDecoder: NSCoder) {
-        self.name = aDecoder.decodeObjectForKey("name") as String
+        self._name = aDecoder.decodeObjectForKey("name") as! String
         
         let objectBehavStates: AnyObject = aDecoder.decodeObjectForKey("behaviourStates")!
-        let enumerator = objectBehavStates.objectEnumerator()
+        // Error: Ambiguous use of objectEnumerator
+        //let enumerator = objectBehavStates.objectEnumerator()
         
-        self.behaviourStates = Array<BehaviourState>()  // Check whether BehaviourState can be stored
-        
+        self._behaviourStates = Array<BehaviourState>()  // Check whether BehaviourState can be stored
+        /*
         while true {
             
             let behaviourState = enumerator.nextObject() as BehaviourState?
@@ -88,24 +148,48 @@ class Ethogram: BiolifeModel, Storable {
                 break
             }
         
-            self.behaviourStates.append(behaviourState!)
+            self._behaviourStates.append(behaviourState!)
         }
-        self.information = ""
+        */
+        self._information = aDecoder.decodeObjectForKey("information") as! String
         super.init(coder: aDecoder)
     }
+    
+    class func deleteFromArchives(identifier: String) -> Bool {
+        
+        let dirs: [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        
+        if (dirs == nil) {
+            return false
+        }
+        
+        // documents directory
+        let dir = dirs![0]
+        let path = dir.stringByAppendingPathComponent("Ethogram" + identifier)
+        
+        // Delete the file and see if it was successful
+        var error: NSError?
+        let success :Bool = NSFileManager.defaultManager().removeItemAtPath(path, error: &error)
+        
+        if error != nil {
+            println(error)
+        }
+        
+        return success;
+    }
 }
+
+func ==(lhs: Ethogram, rhs: Ethogram) -> Bool {
+    return lhs.name == rhs.name &&  lhs.information == rhs.information
+        && lhs.behaviourStates == rhs.behaviourStates
+}
+
 
 extension Ethogram: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)
-        aCoder.encodeObject(name, forKey: "name")
-        aCoder.encodeObject(creator, forKey: "creator")
-        aCoder.encodeObject(behaviourStates, forKey: "behaviourStates")
+        aCoder.encodeObject(_name, forKey: "name")
+        aCoder.encodeObject(_information, forKey: "information")
+        aCoder.encodeObject(_behaviourStates, forKey: "behaviourStates")
     }
-}
-
-extension Ethogram: CloudStorable {
-    class var classUrl: String { return "ethogram" }
-    func upload() { }
-    func getDependencies() -> [CloudStorable] { return [] }
 }

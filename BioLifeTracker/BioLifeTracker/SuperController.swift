@@ -11,10 +11,15 @@
 
 import UIKit
 
-class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewDelegate, CustomPickerPopupDelegate {
+class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate, FirstViewControllerDelegate, ProjectsViewControllerDelegate, EthogramsViewControllerDelegate, SessionsViewControllerDelegate {
     
     let splitVC = UISplitViewController()
+    let masterNav = UINavigationController()
+    let detailNav = UINavigationController()
+    
     let menu = MenuViewController(style: UITableViewStyle.Grouped)
+    
+    let startPage = FirstViewController(nibName: "FirstView", bundle: nil)
     let newProject = FormViewController(style: UITableViewStyle.Grouped)
     let newIndividual = FormViewController(style: UITableViewStyle.Grouped)
     
@@ -22,35 +27,18 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     let popup = CustomPickerPopup()
     
+    var currentProject: Project? = nil
+    var currentSession: Session? = nil
+    
     override func viewDidLoad() {
+        setupForDemo()
         
         setupMenu()
         setupNewProject()
+        setupStartPage()
         
-        let data = FormFieldData(sections: 3)
-        
-        data.setSectionTitle(0, title: "Text Cells")
-        data.setSectionTitle(1, title: "Boolean Cells")
-        data.setSectionTitle(2, title: "Picker Cells")
-        
-        data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
-        data.addTextCell(section: 0, label: "Notes", hasSingleLine: false, value: "I have no notes.")
-        
-        data.addBooleanCell(section: 1, label: "Human?")
-        data.addButtonCell(section: 1, label: "Button", buttonTitle: "Press", target: self, action: "showPicker", popup: popup)
-        data.addPickerCell(section: 1, label: "Custom pick", pickerValues: ethogramPickerValues, isCustomPicker: true)
-        data.addPhotoPickerCell(section: 1, label: "Photo")
-        
-        data.addDatePickerCell(section: 2, label: "Birthdate")
-        data.addPickerCell(section: 2, label: "Options", pickerValues: ["Good", "Neutral", "Evil"], isCustomPicker: false)
-        
-        let controller = FormViewController(style: UITableViewStyle.Grouped)
-        controller.setFormData(data)
-        controller.cellHorizontalPadding = 10
-        controller.roundedCells = true
-        
-        let masterNav = UINavigationController(rootViewController: menu)
-        let detailNav = UINavigationController(rootViewController: controller)
+        masterNav.setViewControllers([menu], animated: true)
+        detailNav.setViewControllers([startPage], animated: true)
         
         splitVC.viewControllers = [masterNav, detailNav]
         splitVC.delegate = self
@@ -59,22 +47,24 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         splitVC.view.frame = self.view.frame
     }
     
-    func showPicker() {
-        popup.pickerDelegate = self
+    func setupForDemo() {
+        // Insert some ethograms
+        EthogramManager.sharedInstance.addEthogram(Ethogram(name: ethogramPickerValues[0]))
+        EthogramManager.sharedInstance.addEthogram(Ethogram(name: ethogramPickerValues[1]))
         
-        popup.data = ethogramPickerValues
-        
-        self.view.addSubview(popup.view)
-        popup.view.frame = self.view.frame
-    }
-    
-    func pickerDidDismiss(selectedIndex: Int?) {
-        popup.view.removeFromSuperview()
+        ProjectManager.sharedInstance.addProject(Project(name: "Activity Pattern with Cobra", ethogram: EthogramManager.sharedInstance.ethograms[0]))
+        ProjectManager.sharedInstance.addProject(Project(name: "Activity Pattern with Penguin", ethogram: EthogramManager.sharedInstance.ethograms[1
+            ]))
     }
     
     func setupMenu() {
         menu.title = "BioLifeTracker"
         menu.delegate = self
+    }
+    
+    func setupStartPage() {
+        startPage.title = "Home"
+        startPage.delegate = self
     }
     
     func setupNewProject() {
@@ -94,7 +84,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func getFormDataForNewProject() -> FormFieldData {
         let data = FormFieldData(sections: 2)
         data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
-        data.addPickerCell(section: 0, label: "Ethogram", pickerValues: ethogramPickerValues, isCustomPicker: false)
+        data.addPickerCell(section: 0, label: "Ethogram", pickerValues: ethogramPickerValues, isCustomPicker: true)
         data.setSectionTitle(1, title: "Members")
         data.addTextCell(section: 1, label: "Enter Member Here", hasSingleLine: true) // To be decided
         return data
@@ -108,40 +98,131 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         return data
     }
     
+    func getFormDataForNewSession() -> FormFieldData {
+        let data = FormFieldData(sections: 1)
+        data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
+        data.addPickerCell(section: 0, label: "Locations", pickerValues: ["Location 1", "Location 2"], isCustomPicker: true)
+        data.addPhotoPickerCell(section: 0, label: "Photos")
+        return data
+    }
+    
+    func showNewProjectPage() {
+        detailNav.pushViewController(newProject, animated: true)
+        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("createNewProject"))
+        newProject.navigationItem.rightBarButtonItem = createBtn
+    }
+    
+    func createNewProject() {
+        let values = newProject.getFormData()
+        
+        if let name = values[0] as? String {
+            if let index = values[1] as? Int {
+                let project = Project(name: name, ethogram: EthogramManager.sharedInstance.ethograms[index])
+                
+                ProjectManager.sharedInstance.addProject(project)
+                
+                showProjectsPage()
+            }
+        }
+    }
+    
+    func showProjectsPage() {
+        if let vc = detailNav.viewControllers.last as? ProjectsViewController {
+            detailNav.popViewControllerAnimated(true)
+        } else {
+            let projects = ProjectsViewController()
+            projects.delegate = self
+            projects.title = "Projects"
+            var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showNewProjectPage"))
+            projects.navigationItem.rightBarButtonItem = createBtn
+            detailNav.pushViewController(projects, animated: true)
+        }
+    }
+    
+    func showEthogramsPage() {
+        let ethograms = EthogramsViewController()
+        ethograms.delegate = self
+        ethograms.title = "Ethograms"
+        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showNewEthogramPage"))
+        ethograms.navigationItem.rightBarButtonItem = createBtn
+        detailNav.pushViewController(ethograms, animated: true)
+    }
+    
+    func showNewEthogramPage() {
+        println("show new ethogram page")
+    }
+    
+    func showSessionsPage() {
+        let sessions = SessionsViewController()
+        sessions.title = "Sessions"
+        sessions.delegate = self
+        sessions.currentProject = currentProject
+        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector(""))
+        sessions.navigationItem.rightBarButtonItem = createBtn
+        detailNav.pushViewController(sessions, animated: true)
+    }
+    
+    func showNewSessionPage() {
+        let newSession = FormViewController()
+        newSession.title = "New Session"
+        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showObservationsPage"))
+        newSession.navigationItem.rightBarButtonItem = createBtn
+        
+        newSession.setFormData(getFormDataForNewSession())
+        newSession.cellHorizontalPadding = 10
+        newSession.roundedCells = true
+        detailNav.pushViewController(newSession, animated: true)
+    }
+    
+    func showObservationsPage() {
+        let observations = ObservationsViewController()
+        observations.title = "Observations"
+        observations.currentProject = currentProject
+        observations.currentSession = currentSession
+        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector(""))
+        observations.navigationItem.rightBarButtonItem = createBtn
+        
+        detailNav.pushViewController(observations, animated: true)
+    }
+    
+    func clearNavigationStack() {
+        detailNav.popToRootViewControllerAnimated(false)
+        detailNav.popViewControllerAnimated(false)
+    }
+    
+    // MenuViewDelegate methods
     func userDidSelectProjects() {
-        println("projects")
-        let data = newProject.getFormData()
-        let name = data[0] as String
-        let ethogram = Ethogram(name: data[1] as String)
-        let project = Project(name: name, ethogram: ethogram)
+        clearNavigationStack()
+        showProjectsPage()
     }
     
     func userDidSelectEthograms() {
-        
+        clearNavigationStack()
+        showEthogramsPage()
     }
     
     func userDidSelectGraphs() {
-        
+        clearNavigationStack()
     }
     
     func userDidSelectData() {
-        
+        clearNavigationStack()
     }
     
     func userDidSelectSettings() {
-        
+        clearNavigationStack()
     }
     
     func userDidSelectFacebookLogin() {
-        
+
     }
     
     func userDidSelectGoogleLogin() {
-        
+
     }
     
     func userDidSelectLogout() {
-        
+
     }
     
     func userDidSelectSessions(project: Project) {
@@ -155,4 +236,33 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func userDidSelectObservations(project: Project, session: Session) {
         
     }
+    
+    // FirstViewControllerDelegate methods
+    func userDidSelectCreateProjectButton() {
+        showNewProjectPage()
+    }
+    
+    func userDidSelectCreateSessionButton() {
+        
+    }
+    
+    // ProjectsViewControllerDelegate methods
+    func userDidSelectProject(selectedProject: Project) {
+        println(selectedProject.name)
+        currentProject = selectedProject
+        showSessionsPage()
+    }
+    
+    // EthogramsViewControllerDelegate methods
+    func userDidSelectEthogram(selectedEthogram: Ethogram) {
+        println(selectedEthogram.name)
+    }
+    
+    // SessionsViewControllerDelegate methods
+    func userDidSelectSession(selectedProject: Project, selectedSession: Session) {
+        currentProject = selectedProject
+        currentSession = selectedSession
+        showObservationsPage()
+    }
+    
 }

@@ -73,7 +73,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
         var result: [AnyObject?] = []
         for var i = 0; i < fields!.getNumberOfSections(); i++ {
             for var j = 0; j < fields!.getNumberOfRowsForSection(i); j++ {
-                let cell = self.tableView!.cellForRowAtIndexPath(NSIndexPath(forRow: j, inSection: i)) as FormCell
+                let cell = self.tableView!.cellForRowAtIndexPath(NSIndexPath(forRow: j, inSection: i)) as! FormCell
                 result.append(cell.getValueFromCell())
             }
         }
@@ -120,7 +120,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
         
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
             if alertCaller != nil {
-                alertCaller!.setSelectedImage(image)
+                alertCaller!.setSelectedImageView(image)
             }
         }
         
@@ -192,7 +192,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
     // Creates a SingleLineTextCell with values as specified in the FormField.
     func getSingleLineTextCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
-            nibNames[FormField.FieldType.TextSingleLine.rawValue]) as SingleLineTextCell
+            nibNames[FormField.FieldType.TextSingleLine.rawValue]) as! SingleLineTextCell
         
         cell.label.text = field.label
         if let text = field.value as? String {
@@ -207,7 +207,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
     // Creates a MultiLineTextCell with values as specified in the FormField.
     func getMultiLineTextCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
-            nibNames[FormField.FieldType.TextMultiLine.rawValue]) as MultiLineTextCell
+            nibNames[FormField.FieldType.TextMultiLine.rawValue]) as! MultiLineTextCell
         
         cell.label.text = field.label
         if let text = field.value as? String {
@@ -222,7 +222,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
     // Creates a BooleanPickerCell with values as specified in the FormField.
     func getBooleanPickerCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
-            nibNames[FormField.FieldType.PickerBoolean.rawValue]) as BooleanPickerCell
+            nibNames[FormField.FieldType.PickerBoolean.rawValue]) as! BooleanPickerCell
         
         cell.label.text = field.label
         if let value = field.value as? Bool {
@@ -237,7 +237,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
     // Creates a DatePickerCell with values as specified in the FormField.
     func getDatePickerCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
-            nibNames[FormField.FieldType.PickerDate.rawValue]) as DatePickerCell
+            nibNames[FormField.FieldType.PickerDate.rawValue]) as! DatePickerCell
         
         cell.label.text = field.label
         if let value = field.value as? NSDate {
@@ -252,7 +252,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
     // Creates a DefaultPickerCell with values as specified in the FormField.
     func getDefaultPickerCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
-            nibNames[FormField.FieldType.PickerDefault.rawValue]) as DefaultPickerCell
+            nibNames[FormField.FieldType.PickerDefault.rawValue]) as! DefaultPickerCell
         
         cell.label.text = field.label
         cell.values = field.pickerValues
@@ -273,7 +273,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
     // Sets the new cell as the given target's delegate.
     func getCustomPickerCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
-            nibNames[FormField.FieldType.Button.rawValue]) as ButtonCell
+            nibNames[FormField.FieldType.Button.rawValue]) as! ButtonCell
         
         cell.label.text = field.label
         cell.button.setTitle("Select", forState: .Normal)
@@ -294,7 +294,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
     
     func getPhotoPickerCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
-            nibNames[FormField.FieldType.PickerPhoto.rawValue]) as PhotoPickerCell
+            nibNames[FormField.FieldType.PickerPhoto.rawValue]) as! PhotoPickerCell
         
         cell.label.text = field.label
         cell.button.setTitle("Pick Image", forState: .Normal)
@@ -302,7 +302,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
         cell.setSelectorForButton(self, action: Selector("showPhotoPicker:"))
         
         if let image = field.value as? UIImage {
-            cell.setSelectedImage(image)
+            cell.setSelectedImageView(image)
         }
         
         cell.button.enabled = editable
@@ -314,7 +314,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
     // Sets the new cell as the given target's delegate.
     func getButtonCell(field: FormField, indexPath: NSIndexPath) -> FormCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(
-            nibNames[FormField.FieldType.Button.rawValue]) as ButtonCell
+            nibNames[FormField.FieldType.Button.rawValue]) as! ButtonCell
         cell.label.text = field.label
         
         if let buttonTitle = field.buttonValues[0] as? String {
@@ -332,8 +332,10 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
         
         // Set the currently selected values
         let selectedValue: AnyObject? = field.buttonValues[4]
-        let selectedValueAsString = field.buttonValues[5] as String
-        cell.userDidSelectValue(selectedValue, valueAsString: selectedValueAsString)
+
+ // To Michelle: There were some errors over here so I commented them out -Nicholette
+ //       let selectedValueAsString = field.buttonValues[5] as String
+ //       cell.userDidSelectValue(selectedValue, valueAsString: selectedValueAsString)
         
         cell.button.enabled = editable
         

@@ -1,63 +1,54 @@
 //
-//  BehaviorStateTests.swift
+//  BehaviourStateTests.swift
 //  BioLifeTracker
 //
-//  Created by Andhieka Putra on 12/3/15.
+//  Created by Li Jia'En, Nicholette on 4/4/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import XCTest
 
 class BehaviourStateTests: XCTestCase {
-//    var bs1: BehaviourState!
-//    var bs2: BehaviourState!
-//    
-//    override func setUp() {
-//        super.setUp()
-//        bs1 = BehaviourState(id: 1, name: "Feeding", information: "The animal is eating")
-//        bs2 = BehaviourState(id: 2, name: "Sleeping", information: "In deep slumber")
-//    }
-//
-//    override func tearDown() {
-//        // Put teardown code here. This method is called after the invocation of each test method in the class.
-//        super.tearDown()
-//        bs1.delete()
-//        bs2.delete()
-//    }
-//
-//    func testInit() {
-//        XCTAssert(bs1 != nil, "Behavior state 1 is not initialized")
-//        XCTAssert(bs2 != nil, "Behavior state 2 is not initialized")
-//    }
-//    
-//    func testDefaultMaker() {
-//        var behaviourState = BehaviourState.makeDefault()
-//        XCTAssertNotNil(behaviourState.id)
-//        XCTAssertNotNil(behaviourState.name)
-//        XCTAssertNotNil(behaviourState.information)
-//        XCTAssertNotNil(behaviourState.photoUrls)
-//    }
-//    
-//    func testSaveToParse() {
-//        // synchronously save to Parse
-//        var success1 = bs1.save()
-//        var success2 = bs2.save()
-//        XCTAssertEqual(success1, true, "BehaviourState not saved properly")
-//        XCTAssertEqual(success2, true, "BehaviourState not saved properly")
-//        
-//        // test saved data integrity
-//        var query = BehaviourState.query()
-//        query.whereKey("name", equalTo: "Sleeping")
-//        var result = query.findObjects()
-//        XCTAssertFalse(result.isEmpty, "Query result must not be empty")
-//    }
-//
-//    func testPerformanceSaveToParse() {
-//        self.measureBlock {
-//            self.bs1.save()
-//            self.bs2.save()
-//        }
-//    }
+    var state = BehaviourState(name: "Feeding", information: "Small claws bringing food to mouth")
+    
+    func testInitialization() {
+        XCTAssert(state.name == "Feeding", "BehaviourState not initialised properly")
+        XCTAssert(state.information == "Small claws bringing food to mouth", "BehaviourState not initialised properly")
+        XCTAssert(state.photoUrls.count == 0, "BehaviourState not initialised properly")
+    }
+    
+    func testUpdates() {
+        XCTAssert(state.name == "Feeding", "BehaviourState not updated properly")
+        state.updateName("Fighting")
+        XCTAssert(state.name == "Fighting", "BehaviourState not updated properly")
+        
+        XCTAssert(state.information == "Small claws bringing food to mouth", "BehaviourState not updated properly")
+        state.updateInformation("Engagement of large clawa with another crab")
+        XCTAssert(state.information == "Engagement of large clawa with another crab", "BehaviourState not updated properly")
+        
+        // Test update photo
+        
+        XCTAssert(state.photoUrls.count == 0, "BehaviourState not updated properly")
+        
+        state.addPhotoUrl("www.photo1.com")
+        XCTAssert(state.photoUrls[0] == "www.photo1.com", "BehaviourState not updated properly")
+        
+        state.addPhotoUrl("www.photo2.com")
+        XCTAssert(state.photoUrls[1] == "www.photo2.com", "BehaviourState not updated properly")
+        
+        state.removePhotoUrlAtIndex(0)
+        XCTAssert(state.photoUrls[0] == "www.photo2.com", "BehaviourState not updated properly")
+    }
+    
+    func testEquality() {
+        let state1 = BehaviourState(name: "Feeding", information: "Small claws bringing food to mouth")
+        let state2 = BehaviourState(name: "Fighting", information: "Engagement of large clawa with another crab")
+        let state3 = BehaviourState(name: "Feeding", information: "Small claws bringing food to mouth")
+        
+        XCTAssert(state1 == state3, "Not equal")
+        XCTAssert(state1 != state2, "Error in equality")
+        
+    }
 
 }

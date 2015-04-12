@@ -9,28 +9,45 @@
 import Foundation
 
 class Tag: BiolifeModel {
-    var name: String
+    private var _tag: String
+    var tag: String {
+        get { return _tag }
+    }
     
     override init() {
-        name = ""
+        _tag = ""
         super.init()
     }
     
-    init(name: String) {
-        self.name = name
+    init(tag: String) {
+        self._tag = tag
         super.init()
     }
     
-     required init(coder aDecoder: NSCoder) {
-        self.name = aDecoder.decodeObjectForKey("name") as String
+    func updateTag(tag: String) {
+        self._tag = tag
+        updateTag()
+    }
+    
+    private func updateTag() {
+        updateInfo(updatedBy: UserAuthService.sharedInstance.user,
+            updatedAt: NSDate())
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        self._tag = aDecoder.decodeObjectForKey("tag") as! String
         super.init(coder: aDecoder)
     }
     
 }
 
+func ==(lhs: Tag, rhs: Tag) -> Bool {
+    return lhs.tag == rhs.tag
+}
+
 extension Tag: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)
-        aCoder.encodeObject(name, forKey: "name")
+        aCoder.encodeObject(_tag, forKey: "tag")
     }
 }

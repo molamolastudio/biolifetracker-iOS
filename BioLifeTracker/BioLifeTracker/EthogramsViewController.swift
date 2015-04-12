@@ -8,48 +8,48 @@
 
 import UIKit
 
-class EthogramsViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+class EthogramsViewController: UITableViewController {
+    var delegate: EthogramsViewControllerDelegate? = nil
     
-    let segueToEthogramDetails = "EthogramsToEthogramDetails"
-    
-    let cellReuseIdentifier = "EthogramTableCell"
-    
+    let cellReuseIdentifier = "SubtitleTableCell"
+    let cellHeight: CGFloat = 50
     let messageCellSubtitle = "States: "
     
     let numSections = 1
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if Data.ethograms.count == 0 {
-            Data.ethograms.append(Ethogram()) // For testing
-        }
+        self.tableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SubtitleTableCell
+
+        let ethogram = EthogramManager.sharedInstance.ethograms[indexPath.row]
         
-        let title = cell.viewWithTag(Constants.ViewTags.ethogramsCellTitle) as UILabel
-        let subtitle = cell.viewWithTag(Constants.ViewTags.ethogramsCellSubtitle) as UILabel
-        let ethogram = Data.ethograms[indexPath.row]
-        
-        title.text = ethogram.name
-        subtitle.text = messageCellSubtitle + String(ethogram.behaviourStates.count)
+        cell.title.text = ethogram.name
+        cell.subtitle.text = messageCellSubtitle + String(ethogram.behaviourStates.count)
         
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        Data.selectedEthogram = Data.ethograms[indexPath.row]
-        self.performSegueWithIdentifier(segueToEthogramDetails, sender: self)
+        if delegate != nil {
+            delegate!.userDidSelectEthogram(EthogramManager.sharedInstance.ethograms[indexPath.row])
+        }
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Data.ethograms.count
+        return EthogramManager.sharedInstance.ethograms.count
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return numSections
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return cellHeight
     }
 }
 

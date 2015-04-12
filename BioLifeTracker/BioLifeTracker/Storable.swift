@@ -11,6 +11,6 @@ import Foundation
 protocol Storable: NSCoding {
     
     func saveToArchives()
-    class func loadFromArchives(identifier: String) -> NSObject?
-    
+    static func loadFromArchives(identifier: String) -> NSObject?
+    static func deleteFromArchives(identifier: String) -> Bool
 }

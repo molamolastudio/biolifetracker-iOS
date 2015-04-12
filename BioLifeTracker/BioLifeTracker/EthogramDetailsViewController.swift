@@ -52,7 +52,7 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
     }
     
     func createAddButton() -> UIButton {
-        let button = UIButton.buttonWithType(UIButtonType.System) as UIButton
+        let button = UIButton.buttonWithType(UIButtonType.System) as! UIButton
         button.setTitle("Add", forState: UIControlState.Normal)
         button.addTarget(self, action: Selector("addButtonPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
         return button
@@ -61,10 +61,10 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
     // Gets the name for the new behaviour state from the cell and adds it to the ethogram,
     // then refreshes the view.
     func addButtonPressed(sender: UIButton) {
-        let cell = sender.superview! as UITableViewCell
-        let textField = cell.viewWithTag(Constants.ViewTags.ethogramDetailState) as UITextField
+        let cell = sender.superview! as! UITableViewCell
+        let textField = cell.viewWithTag(Constants.ViewTags.ethogramDetailState) as! UITextField
         
-        let state = BehaviourState(name: textField.text!, id: ethogram!.behaviourStates.count)
+        let state = BehaviourState(name: textField.text!, information: "must add information")
         ethogram!.addBehaviourState(state)
         
         sender.removeFromSuperview()
@@ -83,9 +83,9 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
     
     // Sets up data in the cells
     func getCellForFirstSection(indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseBasicCell) as UITableViewCell
-        let title = cell.viewWithTag(Constants.ViewTags.ethogramDetailTitle) as UILabel
-        let info = cell.viewWithTag(Constants.ViewTags.ethogramDetailLabel) as UILabel
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseBasicCell) as! UITableViewCell
+        let title = cell.viewWithTag(Constants.ViewTags.ethogramDetailTitle) as! UILabel
+        let info = cell.viewWithTag(Constants.ViewTags.ethogramDetailLabel) as! UILabel
         
         if isFirstRow(indexPath.row) {
             title.text = "Name"
@@ -99,8 +99,8 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
     
     // Populates behaviour states in second section and sets up listeners for adding new state.
     func getCellForSecondSection(indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseState) as UITableViewCell
-        let textField = cell.viewWithTag(Constants.ViewTags.ethogramDetailState) as UITextField
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseState) as! UITableViewCell
+        let textField = cell.viewWithTag(Constants.ViewTags.ethogramDetailState) as! UITextField
         
         if ethogram!.behaviourStates.count > indexPath.row {
             textField.text = ethogram!.behaviourStates[indexPath.row].name
@@ -117,7 +117,7 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
     // Selectors for text fields
     func nameRowDidChange(sender: UITextField) {
         if sender.text != "" {
-            ethogram!.name = sender.text
+            ethogram!.updateName(sender.text)
         }
     }
     
@@ -129,7 +129,7 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
     
     func extraRowDidChange(sender: UITextField) {
         if sender.text != "" {
-            let cell = sender.superview!.superview! as UITableViewCell
+            let cell = sender.superview!.superview! as! UITableViewCell
             cell.addSubview(btnAdd!)
             btnAdd!.frame = btnAddFrame
         } else {
