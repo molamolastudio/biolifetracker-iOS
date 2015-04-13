@@ -13,7 +13,6 @@ class Ethogram: BiolifeModel, Storable {
     private var _name: String
     private var _information: String
     private var _behaviourStates: [BehaviourState]
-    var creator: User { return createdBy }
     
     var name: String { get { return _name } }
     var information: String { get { return _information } }
@@ -43,7 +42,10 @@ class Ethogram: BiolifeModel, Storable {
     }
     
     required override init(dictionary: NSDictionary) {
-        //read data from dictionary
+        _name = dictionary["name"] as! String
+        _information = dictionary["information"] as! String
+        let behaviourIds = dictionary["behaviours"] as! [Int]
+        _behaviourStates = behaviourIds.map { BehaviourState.behaviourStateWithId($0) }
         super.init(dictionary: dictionary)
     }
     
@@ -82,17 +84,7 @@ class Ethogram: BiolifeModel, Storable {
         updateEthogram()
     }
     
-    /*************Photo Url in BS***************/
-    func addBSPhotoUrl(bsIndex: Int, photoUrl: String) {
-        self._behaviourStates[bsIndex].addPhotoUrl(photoUrl)
-        updateEthogram()
-    }
-    
-    func removeBSPhotoUrl(bsIndex: Int, photoIndex: Int) {
-        self._behaviourStates[bsIndex].removePhotoUrlAtIndex(photoIndex)
-        updateEthogram()
-    }
-    
+    /*************Photo Url in BS***************/    
     private func updateEthogram() {
         updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
    //     self.saveToArchives()
@@ -213,12 +205,14 @@ extension Ethogram: CloudStorable {
     
     func getDependencies() -> [CloudStorable] {
         var dependencies = [CloudStorable]()
-        // append dependencies here
+        behaviourStates.map { dependencies.append($0) }
         return dependencies
     }
     
     override func encodeWithDictionary(dictionary: NSMutableDictionary) {
+        dictionary.setValue(name, forKey: "name")
+        dictionary.setValue(information, forKey: "information")
+        dictionary.setValue(behaviourStates.map { $0.id! }, forKey: "behaviours")
         super.encodeWithDictionary(dictionary)
-        // write data here
     }
 }
