@@ -213,11 +213,11 @@ class ProjectTests: XCTestCase {
         XCTAssert(containsMember == false, "Project not updated properly")
         
         
-        var session1 = Session(project: project, type: SessionType.Scan)
+        var session1 = Session(project: project, name: "Session1", type: SessionType.Scan)
         project.addSessions([session1])
         XCTAssert(project.sessions[0].type == SessionType.Scan, "Project not updated properly")
         
-        var session2 = Session(project: project, type: SessionType.Focal)
+        var session2 = Session(project: project, name: "Session2", type: SessionType.Focal)
         project.updateSession(0, updatedSession: session2)
         XCTAssert(project.sessions[0].type == SessionType.Focal, "Project not updated properly")
         
@@ -244,7 +244,7 @@ class ProjectTests: XCTestCase {
     
         var project = Project(name: "A Day in a Fiddler Crab life", ethogram: ethogram)
     
-        var session = Session(project: project, type: SessionType.Scan)
+        var session = Session(project: project, name: "Session1", type: SessionType.Scan)
     
         let individual1 = Individual(label: "M1")
         let individual2 = Individual(label: "M2")
@@ -271,9 +271,9 @@ class ProjectTests: XCTestCase {
         
         var project = Project(name: "A Day in a Fiddler Crab life", ethogram: ethogram)
         
-        var session1 = Session(project: project, type: SessionType.Scan)
-        var session2 = Session(project: project, type: SessionType.Scan)
-        var session3 = Session(project: project, type: SessionType.Scan)
+        var session1 = Session(project: project, name: "Session1", type: SessionType.Scan)
+        var session2 = Session(project: project, name: "Session2", type: SessionType.Scan)
+        var session3 = Session(project: project, name: "Session3", type: SessionType.Scan)
 
         
         let individual1 = Individual(label: "M1")
@@ -361,7 +361,7 @@ class ProjectTests: XCTestCase {
         let individual2 = Individual(label: "M2")
         let individual3 = Individual(label: "F1")
         
-        var session3 = Session(project: project, type: SessionType.Scan)
+        var session3 = Session(project: project, name: "Session3", type: SessionType.Scan)
         
         var observation16 = Observation(session: session3, individual: individual1, state: state2, timestamp: NSDate(), information: "")
         observation16.changeCreator(user1)
