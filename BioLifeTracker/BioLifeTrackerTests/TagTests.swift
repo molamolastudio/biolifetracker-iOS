@@ -20,4 +20,11 @@ class TagTests: XCTestCase {
         tag.updateTag("Male")
         XCTAssert(tag.tag == "Male", "Tag not updated properly")
     }
+    
+    func testEquality() {
+    var tag1 = Tag(tag: "Dominant")
+        
+        XCTAssert(tag == tag, "Not equal")
+        XCTAssert(tag != tag1, "Error in equality")
+    }
 }

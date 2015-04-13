@@ -74,5 +74,24 @@ class ObservationTests: XCTestCase {
         observation.updateNotes("Fought with a bigger crab")
         XCTAssert(observation.notes == "Fought with a bigger crab", "Observation not initialised properly")
     }
+    
+    func testEquality() {
+        let state1 = BehaviourState(name: "Feeding", information: "Small claws bringing food to mouth")
+        let state2 = BehaviourState(name: "Fighting", information: "Engagement of large clawa with another crab")
+        var ethogram = Ethogram(name: "Fiddler Crabs")
+        ethogram.addBehaviourState(state1)
+        ethogram.addBehaviourState(state2)
+        
+        let project = Project(name: "A Day in a Fiddler Crab life", ethogram: ethogram)
+        
+        let session = Session(project: project, type: SessionType.Scan)
+        let individual = Individual(label: "M1")
+        
+        let observation1 = Observation(session: session, individual: individual, state: state1, timestamp: NSDate(), information: "Eating vigourously")
+        let observation2 = Observation(session: session, individual: individual, state: state2, timestamp: NSDate(), information: "Eating vigourously")
+        
+        XCTAssert(observation1 == observation1, "Not equal")
+        XCTAssert(observation1 != observation2, "Error in equality")
+    }
 
 }

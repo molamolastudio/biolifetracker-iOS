@@ -30,14 +30,17 @@ class Location: BiolifeModel {
     }
     
     private func updateLocation() {
-        updatedBy = UserAuthService.sharedInstance.user
-        updatedAt = NSDate()
+        updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
     }
     
     required init(coder aDecoder: NSCoder) {
         self._location = aDecoder.decodeObjectForKey("location") as! String
         super.init(coder: aDecoder)
     }
+}
+
+func ==(lhs: Location, rhs: Location) -> Bool {
+    return lhs.location == rhs.location
 }
 
 extension Location: NSCoding {

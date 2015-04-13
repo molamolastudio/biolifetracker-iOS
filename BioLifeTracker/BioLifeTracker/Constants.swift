@@ -57,4 +57,8 @@ struct Constants {
         static let ethogramDetailLabel = 403
         static let ethogramDetailState = 404
     }
+    
+    struct WebServer {
+        static let serverUrl: String = "http://localhost:8000"
+    }
 }

@@ -52,7 +52,7 @@ class Session: BiolifeModel {
         self._observations += observations
         updateSession()
     }
-    
+
     func updateObservation(index: Int, updatedObservation: Observation) {
         self._observations.removeAtIndex(index)
         self._observations.insert(updatedObservation, atIndex: index)
@@ -86,8 +86,7 @@ class Session: BiolifeModel {
     }
     
     private func updateSession() {
-        updatedBy = UserAuthService.sharedInstance.user
-        updatedAt = NSDate()
+        updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -125,6 +124,11 @@ class Session: BiolifeModel {
     }
 }
 
+func ==(lhs: Session, rhs: Session) -> Bool {
+    return lhs.project == rhs.project &&  lhs.observations == rhs.observations
+            && lhs.individuals == rhs.individuals
+}
+
 
 extension Session: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
@@ -136,8 +140,8 @@ extension Session: NSCoding {
     }
 }
 
-extension Session: CloudStorable {
-    class var classUrl: String { return "session" }
-    func upload() { }
-    func getDependencies() -> [CloudStorable] { return [] }
-}
+//extension Session: CloudStorable {
+//    class var classUrl: String { return "session" }
+//    func upload() { }
+//    func getDependencies() -> [CloudStorable] { return [] }
+//}

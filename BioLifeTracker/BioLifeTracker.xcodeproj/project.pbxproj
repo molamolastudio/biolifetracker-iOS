@@ -7,12 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2408193A1AD503DD00DFE8AA /* NSURL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240819391AD503DD00DFE8AA /* NSURL+Utils.swift */; };
 		240D04311AB718AE00D8BB9F /* Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D04301AB718AE00D8BB9F /* Individual.swift */; };
 		240D04331AB718EF00D8BB9F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D04321AB718EF00D8BB9F /* Location.swift */; };
 		240D04351AB7190800D8BB9F /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D04341AB7190800D8BB9F /* Weather.swift */; };
+		240FEF041AD60ACE000FD9F3 /* BiolifeDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244BB57F1AD4656C004EC65F /* BiolifeDateFormatter.swift */; };
+		240FEF051AD60ACF000FD9F3 /* BiolifeDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244BB57F1AD4656C004EC65F /* BiolifeDateFormatter.swift */; };
+		240FEF061AD60AE1000FD9F3 /* CloudStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A92E3B1AD27A4C00A2002F /* CloudStorageManager.swift */; };
+		240FEF071AD60AE1000FD9F3 /* CloudStorageTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241208A61AD1233B00778360 /* CloudStorageTask.swift */; };
+		240FEF081AD60AE1000FD9F3 /* CloudStorageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241208A41AD1227700778360 /* CloudStorageWorker.swift */; };
+		240FEF091AD60AE1000FD9F3 /* DownloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241208AA1AD124A500778360 /* DownloadTask.swift */; };
+		240FEF0A1AD60AE1000FD9F3 /* UploadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241208A81AD123D700778360 /* UploadTask.swift */; };
+		240FEF0B1AD60AF6000FD9F3 /* CloudStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A92E3B1AD27A4C00A2002F /* CloudStorageManager.swift */; };
+		240FEF0C1AD60AF6000FD9F3 /* CloudStorageTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241208A61AD1233B00778360 /* CloudStorageTask.swift */; };
+		240FEF0D1AD60AF6000FD9F3 /* CloudStorageWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241208A41AD1227700778360 /* CloudStorageWorker.swift */; };
+		240FEF0E1AD60AF6000FD9F3 /* DownloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241208AA1AD124A500778360 /* DownloadTask.swift */; };
+		240FEF0F1AD60AF6000FD9F3 /* UploadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241208A81AD123D700778360 /* UploadTask.swift */; };
+		240FEF101AD60AF6000FD9F3 /* NSURL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240819391AD503DD00DFE8AA /* NSURL+Utils.swift */; };
+		240FEF111AD60AF6000FD9F3 /* CloudStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241208AD1AD15C8A00778360 /* CloudStorageTests.swift */; };
+		240FEF121AD60AF6000FD9F3 /* DummyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241208AF1AD15E7A00778360 /* DummyModel.swift */; };
+		242465291AD67EB20035BD2C /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242465281AD67EB20035BD2C /* CloudStorage.swift */; };
+		2424652A1AD685C60035BD2C /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242465281AD67EB20035BD2C /* CloudStorage.swift */; };
 		242C6E071AC80F050024ECEF /* BiolifeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242C6E061AC80F050024ECEF /* BiolifeModel.swift */; };
 		242C6E091AC86BFD0024ECEF /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242C6E081AC86BFD0024ECEF /* Tag.swift */; };
 		2439AABA1AC7DC7900389195 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2439AAB91AC7DC7900389195 /* FacebookSDK.framework */; };
+		2486AB3F1AD64C3A00573618 /* DownloadTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2486AB3E1AD64C3A00573618 /* DownloadTaskTests.swift */; };
+		2486AB411AD64C7D00573618 /* UploadTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2486AB401AD64C7D00573618 /* UploadTaskTests.swift */; };
 		24E32D361AB19647003C4E0A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D311AB19647003C4E0A /* Bolts.framework */; };
 		24E32D3F1AB1E86A003C4E0A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D3E1AB1E86A003C4E0A /* AudioToolbox.framework */; };
 		24E32D411AB1E88E003C4E0A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D401AB1E88E003C4E0A /* Social.framework */; };
@@ -37,6 +57,11 @@
 		24E32D701AB1EC5A003C4E0A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D401AB1E88E003C4E0A /* Social.framework */; };
 		24E32D711AB1EC5A003C4E0A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D3E1AB1E86A003C4E0A /* AudioToolbox.framework */; };
 		24E32D721AB1EC5A003C4E0A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D311AB19647003C4E0A /* Bolts.framework */; };
+		24F0F6C71AD7717200C6CC23 /* DeleteTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6C61AD7717200C6CC23 /* DeleteTask.swift */; };
+		24F0F6C81AD7728A00C6CC23 /* DeleteTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6C61AD7717200C6CC23 /* DeleteTask.swift */; };
+		24F0F6CA1AD7740300C6CC23 /* DeleteTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6C91AD7740300C6CC23 /* DeleteTaskTests.swift */; };
+		24F0F6CC1AD7D55400C6CC23 /* CloudStorageWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6CB1AD7D55400C6CC23 /* CloudStorageWorkerTests.swift */; };
+		24F5DF481AD8352200F76B6B /* CloudStorageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F5DF471AD8352200F76B6B /* CloudStorageManagerTests.swift */; };
 		3205E7481AAED9F9006F374D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7471AAED9F9006F374D /* AppDelegate.swift */; };
 		3205E74D1AAED9F9006F374D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3205E74B1AAED9F9006F374D /* Main.storyboard */; };
 		3205E75E1AAED9F9006F374D /* BioLifeTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E75D1AAED9F9006F374D /* BioLifeTrackerTests.swift */; };
@@ -152,14 +177,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		240819391AD503DD00DFE8AA /* NSURL+Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSURL+Utils.swift"; sourceTree = "<group>"; };
 		240D04301AB718AE00D8BB9F /* Individual.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Individual.swift; sourceTree = "<group>"; };
 		240D04321AB718EF00D8BB9F /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		240D04341AB7190800D8BB9F /* Weather.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
+		241208A41AD1227700778360 /* CloudStorageWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorageWorker.swift; sourceTree = "<group>"; };
+		241208A61AD1233B00778360 /* CloudStorageTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorageTask.swift; sourceTree = "<group>"; };
+		241208A81AD123D700778360 /* UploadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadTask.swift; sourceTree = "<group>"; };
+		241208AA1AD124A500778360 /* DownloadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTask.swift; sourceTree = "<group>"; };
+		241208AD1AD15C8A00778360 /* CloudStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorageTests.swift; sourceTree = "<group>"; };
+		241208AF1AD15E7A00778360 /* DummyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyModel.swift; sourceTree = "<group>"; };
+		242465281AD67EB20035BD2C /* CloudStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
 		242C6E061AC80F050024ECEF /* BiolifeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiolifeModel.swift; sourceTree = "<group>"; };
 		242C6E081AC86BFD0024ECEF /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		2439AAB91AC7DC7900389195 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = BioLifeTracker/FacebookSDK.framework; sourceTree = "<group>"; };
 		2439AABC1AC7DD7800389195 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		2439AABE1AC7DD8900389195 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		244BB57F1AD4656C004EC65F /* BiolifeDateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiolifeDateFormatter.swift; sourceTree = "<group>"; };
+		2486AB3E1AD64C3A00573618 /* DownloadTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTaskTests.swift; sourceTree = "<group>"; };
+		2486AB401AD64C7D00573618 /* UploadTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadTaskTests.swift; sourceTree = "<group>"; };
+		24A92E3B1AD27A4C00A2002F /* CloudStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorageManager.swift; sourceTree = "<group>"; };
 		24E32D311AB19647003C4E0A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = BioLifeTracker/Bolts.framework; sourceTree = "<group>"; };
 		24E32D3E1AB1E86A003C4E0A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		24E32D401AB1E88E003C4E0A /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -173,6 +210,10 @@
 		24E32D501AB1E9B9003C4E0A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		24E32D521AB1E9F2003C4E0A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		24E32D771AB298D8003C4E0A /* BioLifeTracker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BioLifeTracker-Bridging-Header.h"; sourceTree = "<group>"; };
+		24F0F6C61AD7717200C6CC23 /* DeleteTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteTask.swift; sourceTree = "<group>"; };
+		24F0F6C91AD7740300C6CC23 /* DeleteTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteTaskTests.swift; sourceTree = "<group>"; };
+		24F0F6CB1AD7D55400C6CC23 /* CloudStorageWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorageWorkerTests.swift; sourceTree = "<group>"; };
+		24F5DF471AD8352200F76B6B /* CloudStorageManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorageManagerTests.swift; sourceTree = "<group>"; };
 		3205E7421AAED9F9006F374D /* BioLifeTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BioLifeTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3205E7461AAED9F9006F374D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3205E7471AAED9F9006F374D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -326,6 +367,7 @@
 		240D042E1AB6D43100D8BB9F /* Unit Testing */ = {
 			isa = PBXGroup;
 			children = (
+				241208AC1AD15C7900778360 /* Cloud Storage */,
 				ACDE13B01AD0E6B10075AC35 /* Managers */,
 				240D042F1AB6D43B00D8BB9F /* Model */,
 			);
@@ -346,6 +388,20 @@
 				AC1881541AD02F2400CE450B /* TagTests.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		241208AC1AD15C7900778360 /* Cloud Storage */ = {
+			isa = PBXGroup;
+			children = (
+				241208AD1AD15C8A00778360 /* CloudStorageTests.swift */,
+				241208AF1AD15E7A00778360 /* DummyModel.swift */,
+				24F0F6C91AD7740300C6CC23 /* DeleteTaskTests.swift */,
+				2486AB3E1AD64C3A00573618 /* DownloadTaskTests.swift */,
+				2486AB401AD64C7D00573618 /* UploadTaskTests.swift */,
+				24F0F6CB1AD7D55400C6CC23 /* CloudStorageWorkerTests.swift */,
+				24F5DF471AD8352200F76B6B /* CloudStorageManagerTests.swift */,
+			);
+			name = "Cloud Storage";
 			sourceTree = "<group>";
 		};
 		24E32D3B1AB1991C003C4E0A /* Frameworks */ = {
@@ -523,7 +579,16 @@
 		AC9162AA1ACA69BF00FED714 /* Cloud Storage */ = {
 			isa = PBXGroup;
 			children = (
+				244BB57F1AD4656C004EC65F /* BiolifeDateFormatter.swift */,
 				AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */,
+				242465281AD67EB20035BD2C /* CloudStorage.swift */,
+				24A92E3B1AD27A4C00A2002F /* CloudStorageManager.swift */,
+				241208A61AD1233B00778360 /* CloudStorageTask.swift */,
+				241208A41AD1227700778360 /* CloudStorageWorker.swift */,
+				24F0F6C61AD7717200C6CC23 /* DeleteTask.swift */,
+				241208AA1AD124A500778360 /* DownloadTask.swift */,
+				241208A81AD123D700778360 /* UploadTask.swift */,
+				240819391AD503DD00DFE8AA /* NSURL+Utils.swift */,
 			);
 			name = "Cloud Storage";
 			sourceTree = "<group>";
@@ -666,6 +731,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				240FEF061AD60AE1000FD9F3 /* CloudStorageManager.swift in Sources */,
+				240FEF071AD60AE1000FD9F3 /* CloudStorageTask.swift in Sources */,
+				240FEF081AD60AE1000FD9F3 /* CloudStorageWorker.swift in Sources */,
+				240FEF091AD60AE1000FD9F3 /* DownloadTask.swift in Sources */,
+				240FEF0A1AD60AE1000FD9F3 /* UploadTask.swift in Sources */,
 				329B29411AD16058007ADC65 /* FirstViewController.swift in Sources */,
 				326773C11ACAEFB000899745 /* MultiLineTextCell.swift in Sources */,
 				326773BD1ACAEFB000899745 /* FormFieldData.swift in Sources */,
@@ -693,6 +763,8 @@
 				329B292E1AD15BAF007ADC65 /* DatePickerCell.swift in Sources */,
 				326773C01ACAEFB000899745 /* FormViewController.swift in Sources */,
 				32850BE61AB9625500C49D33 /* EthogramDetailsViewController.swift in Sources */,
+				2408193A1AD503DD00DFE8AA /* NSURL+Utils.swift in Sources */,
+				242465291AD67EB20035BD2C /* CloudStorage.swift in Sources */,
 				242C6E071AC80F050024ECEF /* BiolifeModel.swift in Sources */,
 				326773BB1ACAEFB000899745 /* FormCell.swift in Sources */,
 				3205E7781AAEDA85006F374D /* Data.swift in Sources */,
@@ -702,6 +774,7 @@
 				329B29391AD15BBF007ADC65 /* FormPopupDelegate.swift in Sources */,
 				326773B71ACAEFB000899745 /* CustomPickerPopup.swift in Sources */,
 				32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */,
+				240FEF051AD60ACF000FD9F3 /* BiolifeDateFormatter.swift in Sources */,
 				3205E7481AAED9F9006F374D /* AppDelegate.swift in Sources */,
 				32145C2B1AD26E4A00C20F07 /* SessionsViewControllerDelegate.swift in Sources */,
 				3205E7771AAEDA85006F374D /* Constants.swift in Sources */,
@@ -710,6 +783,7 @@
 				3205E77B1AAEDA85006F374D /* Project.swift in Sources */,
 				329B29361AD15BBF007ADC65 /* DefaultPickerCell.swift in Sources */,
 				326773B91ACAEFB000899745 /* CustomPickerPopupDelegate.swift in Sources */,
+				24F0F6C71AD7717200C6CC23 /* DeleteTask.swift in Sources */,
 				3205E77D1AAEDA85006F374D /* User.swift in Sources */,
 				3205E77C1AAEDA85006F374D /* Session.swift in Sources */,
 				240D04351AB7190800D8BB9F /* Weather.swift in Sources */,
@@ -724,6 +798,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				240FEF0B1AD60AF6000FD9F3 /* CloudStorageManager.swift in Sources */,
+				240FEF0C1AD60AF6000FD9F3 /* CloudStorageTask.swift in Sources */,
+				240FEF0D1AD60AF6000FD9F3 /* CloudStorageWorker.swift in Sources */,
+				240FEF0E1AD60AF6000FD9F3 /* DownloadTask.swift in Sources */,
+				240FEF0F1AD60AF6000FD9F3 /* UploadTask.swift in Sources */,
+				24F0F6CA1AD7740300C6CC23 /* DeleteTaskTests.swift in Sources */,
+				2424652A1AD685C60035BD2C /* CloudStorage.swift in Sources */,
+				240FEF101AD60AF6000FD9F3 /* NSURL+Utils.swift in Sources */,
+				240FEF111AD60AF6000FD9F3 /* CloudStorageTests.swift in Sources */,
+				24F0F6C81AD7728A00C6CC23 /* DeleteTask.swift in Sources */,
+				240FEF121AD60AF6000FD9F3 /* DummyModel.swift in Sources */,
+				2486AB3F1AD64C3A00573618 /* DownloadTaskTests.swift in Sources */,
 				AC7B6DC11AD25440002D3EE6 /* ObservationTests.swift in Sources */,
 				AC7B6DBD1AD25433002D3EE6 /* TagTests.swift in Sources */,
 				AC7B6DC61AD2544E002D3EE6 /* EthogramMngTests.swift in Sources */,
@@ -737,14 +823,17 @@
 				AC7B6DC31AD25445002D3EE6 /* SessionTests.swift in Sources */,
 				AC7B6DC21AD25443002D3EE6 /* BehaviourStateTests.swift in Sources */,
 				3205E75E1AAED9F9006F374D /* BioLifeTrackerTests.swift in Sources */,
+				2486AB411AD64C7D00573618 /* UploadTaskTests.swift in Sources */,
 				AC7B6DE31AD254B2002D3EE6 /* ProjectManager.swift in Sources */,
 				AC7B6DC71AD25451002D3EE6 /* ProjectMngTests.swift in Sources */,
 				AC7B6DDC1AD25495002D3EE6 /* BehaviourState.swift in Sources */,
 				AC9162AD1ACA6CC300FED714 /* CloudStorable.swift in Sources */,
+				240FEF041AD60ACE000FD9F3 /* BiolifeDateFormatter.swift in Sources */,
 				AC7B6DDB1AD25492002D3EE6 /* Ethogram.swift in Sources */,
 				AC7B6DBF1AD2543B002D3EE6 /* LocationTests.swift in Sources */,
 				AC7B6DE11AD254A6002D3EE6 /* UserAuthService.swift in Sources */,
 				AC7B6DE01AD254A1002D3EE6 /* User.swift in Sources */,
+				24F5DF481AD8352200F76B6B /* CloudStorageManagerTests.swift in Sources */,
 				AC7B6DBE1AD25438002D3EE6 /* WeatherTests.swift in Sources */,
 				AC7B6DD71AD25485002D3EE6 /* Location.swift in Sources */,
 				AC7B6DD91AD2548C002D3EE6 /* Observation.swift in Sources */,
@@ -753,6 +842,7 @@
 				AC7B6DC51AD2544B002D3EE6 /* ProjectTests.swift in Sources */,
 				AC7B6DDA1AD2548F002D3EE6 /* Session.swift in Sources */,
 				AC7B6DD81AD25488002D3EE6 /* Individual.swift in Sources */,
+				24F0F6CC1AD7D55400C6CC23 /* CloudStorageWorkerTests.swift in Sources */,
 				AC7B6DD41AD2547A002D3EE6 /* Data.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

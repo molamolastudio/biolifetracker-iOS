@@ -124,15 +124,8 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
         isSignedIn = true
-        
-        let userEmail = user.objectForKey("email") as! String
-        let currentUser = User(name: user.name, email: userEmail)
         let userAuth = UserAuthService.sharedInstance
-        userAuth.setUserAuth(currentUser, accessToken: FBSession.activeSession().accessTokenData.accessToken)
-        
-        println(UserAuthService.sharedInstance.user.name)
-        println(UserAuthService.sharedInstance.user.email)
-        println(UserAuthService.sharedInstance.accessToken)
+        userAuth.loginToServerUsingFacebookToken(FBSession.activeSession().accessTokenData.accessToken)
     }
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
@@ -152,16 +145,8 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     }
     
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
-        
         if error == nil {
-            signIn = GPPSignIn.sharedInstance()
-            let currentUser = User(name: signIn!.googlePlusUser.displayName, email: signIn!.userEmail)
-            UserAuthService.sharedInstance.setUserAuth(currentUser, accessToken: auth.accessToken)
-            
-            println(UserAuthService.sharedInstance.user.name)
-            println(UserAuthService.sharedInstance.user.email)
-            println(UserAuthService.sharedInstance.accessToken)
-            
+            UserAuthService.sharedInstance.loginToServerUsingGoogleToken(auth.accessToken)
             btnLogin.hidden = true
             btnLoginGoogle.hidden = true
         } else {
