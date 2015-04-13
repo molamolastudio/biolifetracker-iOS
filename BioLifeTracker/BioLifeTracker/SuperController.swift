@@ -206,8 +206,10 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     // Selectors for creation
     func newEthogramCreated() {
         if let vc = detailNav.visibleViewController as? EthogramFormViewController {
-            EthogramManager.sharedInstance.addEthogram(vc.ethogram!)
-            detailNav.popViewControllerAnimated(true)
+            if let ethogram = vc.getEthogram() {
+                EthogramManager.sharedInstance.addEthogram(vc.ethogram)
+                detailNav.popViewControllerAnimated(true)
+            }
         }
     }
     

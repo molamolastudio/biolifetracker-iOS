@@ -12,11 +12,10 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     var delegate: ProjectHomeViewControllerDelegate? = nil
     
     @IBOutlet weak var leftTableView: UITableView!
-    @IBOutlet weak var rightTableView: UITableView!
     @IBOutlet weak var bottomTableView: UITableView!
     
+    @IBOutlet weak var rightView: UIView!
     let leftTag = 1
-    let rightTag = 2
     let bottomTag = 3
     
     let cellReuseIdentifier = "SingleLineTextCell"
@@ -31,9 +30,6 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         leftTableView.dataSource = self
         leftTableView.delegate = self
         
-        rightTableView.dataSource = self
-        rightTableView.delegate = self
-        
         bottomTableView.dataSource = self
         bottomTableView.delegate = self
         
@@ -41,8 +37,11 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         formatter.timeStyle = .MediumStyle
         
         leftTableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
-        rightTableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
         bottomTableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
+        
+        self.edgesForExtendedLayout = UIRectEdge.None
+        self.extendedLayoutIncludesOpaqueBars = false
+        self.automaticallyAdjustsScrollViewInsets = false
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS
@@ -58,9 +57,6 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
             } else {
                 cell.label.text = currentProject!.members[indexPath.row - currentProject!.admins.count].name
             }
-        } else if tableView.tag == rightTag {
-            // Displays all behaviour states of this project's ethogram
-            cell.label.text = currentProject!.ethogram.behaviourStates[indexPath.row].name
         } else if tableView.tag == bottomTag {
             // Displays all sessions of this project
             let dateString = formatter.stringFromDate(currentProject!.sessions[indexPath.row].createdAt)
@@ -78,8 +74,6 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
                     delegate!.userDidSelectMember(currentProject!, member: currentProject!.members[indexPath.row - currentProject!.admins.count])
                 }
                 
-            } else if tableView.tag == rightTag {
-                delegate!.userDidChangeEthogram(currentProject!, ethogram: currentProject!.ethogram)
             } else if tableView.tag == bottomTag {
                 delegate!.userDidSelectSession(0, project: currentProject!, session: currentProject!.sessions[indexPath.row])
             }
@@ -89,8 +83,6 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView.tag == leftTag {
             return currentProject!.admins.count + currentProject!.members.count
-        } else if tableView.tag == rightTag {
-            return currentProject!.ethogram.behaviourStates.count
         } else if tableView.tag == bottomTag {
             return currentProject!.sessions.count
         } else {
@@ -100,18 +92,6 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
-    }
-    
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if tableView.tag == leftTag {
-            return "Members"
-        } else if tableView.tag == rightTag {
-            return "Selected Ethogram: " + currentProject!.ethogram.name
-        } else if tableView.tag == bottomTag {
-            return "Sessions"
-        } else {
-            return ""
-        }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
