@@ -185,6 +185,12 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         detailNav.pushViewController(observations, animated: true)
     }
     
+    func showGraphsPage() {
+        let graphs = GraphsViewController(nibName: "GraphsView", bundle: nil)
+
+        detailNav.pushViewController(graphs, animated: true)
+    }
+    
     func clearNavigationStack() {
         detailNav.popToRootViewControllerAnimated(false)
         detailNav.popViewControllerAnimated(false)
@@ -203,6 +209,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     func userDidSelectGraphs() {
         clearNavigationStack()
+        showGraphsPage()
     }
     
     func userDidSelectData() {
