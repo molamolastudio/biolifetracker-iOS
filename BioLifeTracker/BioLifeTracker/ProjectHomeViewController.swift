@@ -90,7 +90,7 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
                 }
                 
             } else if tableView.tag == sessionTag {
-                delegate!.userDidSelectSession(0, project: currentProject!, session: currentProject!.sessions[indexPath.row])
+                delegate!.userDidSelectSession(currentProject!, session: currentProject!.sessions[indexPath.row])
             }
         }
     }

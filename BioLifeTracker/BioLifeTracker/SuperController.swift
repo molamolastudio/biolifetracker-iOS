@@ -11,7 +11,7 @@
 
 import UIKit
 
-class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate, FirstViewControllerDelegate, ProjectsViewControllerDelegate, EthogramsViewControllerDelegate, SessionsViewControllerDelegate, ProjectHomeViewControllerDelegate {
+class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate, FirstViewControllerDelegate, ProjectsViewControllerDelegate, EthogramsViewControllerDelegate, ProjectHomeViewControllerDelegate {
     
     let splitVC = UISplitViewController()
     let masterNav = UINavigationController()
@@ -57,6 +57,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
             ]))
     }
     
+    // Setup methods
     func setupMenu() {
         menu.title = "BioLifeTracker"
         menu.delegate = self
@@ -81,6 +82,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         newIndividual.roundedCells = true
     }
     
+    // Methods for creating form data
     func getFormDataForNewProject() -> FormFieldData {
         let data = FormFieldData(sections: 2)
         data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
@@ -106,24 +108,11 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         return data
     }
     
+    // Methods to show pages
     func showNewProjectPage() {
         detailNav.pushViewController(newProject, animated: true)
         var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("createNewProject"))
         newProject.navigationItem.rightBarButtonItem = createBtn
-    }
-    
-    func createNewProject() {
-        let values = newProject.getFormData()
-        
-        if let name = values[0] as? String {
-            if let index = values[1] as? Int {
-                let project = Project(name: name, ethogram: EthogramManager.sharedInstance.ethograms[index])
-                
-                ProjectManager.sharedInstance.addProject(project)
-                
-                showProjectsPage()
-            }
-        }
     }
     
     func showProjectsPage() {
@@ -166,16 +155,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         detailNav.pushViewController(details, animated: true)
     }
     
-    func showSessionsPage() {
-        let sessions = SessionsViewController()
-        sessions.title = "Sessions"
-        sessions.delegate = self
-        sessions.currentProject = currentProject
-        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector(""))
-        sessions.navigationItem.rightBarButtonItem = createBtn
-        detailNav.pushViewController(sessions, animated: true)
-    }
-    
     func showNewSessionPage() {
         let newSession = FormViewController()
         newSession.title = "New Session"
@@ -203,8 +182,22 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         detailNav.popToRootViewControllerAnimated(false)
     }
     
-    // Selectors for creation
-    func newEthogramCreated() {
+    // Selectors for creating Model objects
+    func createNewProject() {
+        let values = newProject.getFormData()
+        
+        if let name = values[0] as? String {
+            if let index = values[1] as? Int {
+                let project = Project(name: name, ethogram: EthogramManager.sharedInstance.ethograms[index])
+                
+                ProjectManager.sharedInstance.addProject(project)
+                
+                showProjectsPage()
+            }
+        }
+    }
+    
+    func createNewEthogram() {
         if let vc = detailNav.visibleViewController as? EthogramFormViewController {
             if let ethogram = vc.getEthogram() {
                 EthogramManager.sharedInstance.addEthogram(vc.ethogram)
@@ -282,15 +275,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         showEthogramDetailsPage()
     }
     
-    // SessionsViewControllerDelegate methods
-    func userDidSelectSession(selectedProject: Project, selectedSession: Session) {
-        currentProject = selectedProject
-        currentSession = selectedSession
-        showObservationsPage()
-    }
-    
     // ProjectHomeViewControllerDelegate methods
-    func userDidSelectSession(tag: Int, project: Project, session: Session) {
+    func userDidSelectSession(project: Project, session: Session) {
         
     }
     
