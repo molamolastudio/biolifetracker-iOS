@@ -12,7 +12,8 @@ import UIKit
 class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotDataSource, CPTBarPlotDelegate, CPTPlotDelegate {
     var delegate: GraphsViewControllerDelegate!
     
-    @IBOutlet weak var `switch`: UISegmentedControl!
+
+    @IBOutlet weak var graphSwitch: UISegmentedControl!
     
     @IBOutlet weak var hostingView: CPTGraphHostingView!
 
