@@ -9,23 +9,30 @@
 import Foundation
 
 class Tag: BiolifeModel {
-    private var _tag: String
-    var tag: String {
-        get { return _tag }
+    static let ClassUrl = "tags"
+    
+    private var _name: String
+    var name: String {
+        get { return _name }
     }
     
     override init() {
-        _tag = ""
+        _name = ""
         super.init()
     }
     
-    init(tag: String) {
-        self._tag = tag
+    init(name: String) {
+        self._name = name
         super.init()
     }
     
-    func updateTag(tag: String) {
-        self._tag = tag
+    required override init(dictionary: NSDictionary) {
+        _name = dictionary["name"] as! String
+        super.init(dictionary: dictionary)
+    }
+    
+    func updateName(name: String) {
+        self._name = name
         updateTag()
     }
     
@@ -35,19 +42,39 @@ class Tag: BiolifeModel {
     }
     
     required init(coder aDecoder: NSCoder) {
-        self._tag = aDecoder.decodeObjectForKey("tag") as! String
+        self._name = aDecoder.decodeObjectForKey("name") as! String
         super.init(coder: aDecoder)
+    }
+    
+    class func tagsWithIds(idList: [Int]) -> [Tag] {
+        let manager = CloudStorageManager.sharedInstance
+        return idList.map {
+            Tag(dictionary: manager.getItemForClass(Tag.ClassUrl, itemId: $0))
+        }
     }
     
 }
 
 func ==(lhs: Tag, rhs: Tag) -> Bool {
-    return lhs.tag == rhs.tag
+    return lhs.name == rhs.name
 }
 
 extension Tag: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)
-        aCoder.encodeObject(_tag, forKey: "tag")
+        aCoder.encodeObject(_name, forKey: "name")
+    }
+}
+
+extension Tag: CloudStorable {
+    var classUrl: String { return Tag.ClassUrl }
+    
+    func getDependencies() -> [CloudStorable] {
+        return []
+    }
+    
+    override func encodeWithDictionary(dictionary: NSMutableDictionary) {
+        dictionary.setValue(name, forKey: "name")
+        super.encodeWithDictionary(dictionary)
     }
 }

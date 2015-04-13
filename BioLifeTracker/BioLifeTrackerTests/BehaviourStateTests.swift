@@ -15,7 +15,6 @@ class BehaviourStateTests: XCTestCase {
     func testInitialization() {
         XCTAssert(state.name == "Feeding", "BehaviourState not initialised properly")
         XCTAssert(state.information == "Small claws bringing food to mouth", "BehaviourState not initialised properly")
-        XCTAssert(state.photoUrls.count == 0, "BehaviourState not initialised properly")
     }
     
     func testUpdates() {
@@ -28,17 +27,6 @@ class BehaviourStateTests: XCTestCase {
         XCTAssert(state.information == "Engagement of large clawa with another crab", "BehaviourState not updated properly")
         
         // Test update photo
-        
-        XCTAssert(state.photoUrls.count == 0, "BehaviourState not updated properly")
-        
-        state.addPhotoUrl("www.photo1.com")
-        XCTAssert(state.photoUrls[0] == "www.photo1.com", "BehaviourState not updated properly")
-        
-        state.addPhotoUrl("www.photo2.com")
-        XCTAssert(state.photoUrls[1] == "www.photo2.com", "BehaviourState not updated properly")
-        
-        state.removePhotoUrlAtIndex(0)
-        XCTAssert(state.photoUrls[0] == "www.photo2.com", "BehaviourState not updated properly")
     }
     
     func testEquality() {

@@ -9,6 +9,8 @@
 import Foundation
 
 class Project: BiolifeModel, Storable {
+    static let ClassUrl = "projects"
+    
     private var _name: String
     private var _ethogram: Ethogram
     private var _admins: [User]
@@ -41,6 +43,20 @@ class Project: BiolifeModel, Storable {
         self._admins = [UserAuthService.sharedInstance.user]
         self._members = [UserAuthService.sharedInstance.user]
   //      self.saveToArchives()
+    }
+    
+    required override init(dictionary: NSDictionary) {
+        
+        let manager = CloudStorageManager.sharedInstance
+        _name = dictionary["name"] as! String
+        _members = User.usersWithIds(dictionary["members"] as! [Int])
+        _admins = User.usersWithIds(dictionary["admins"] as! [Int])
+        _ethogram = Ethogram.ethogramWithId(dictionary["ethogram"] as! Int)
+        let sessionIds = dictionary["session_set"] as! [Int]
+        _sessions = sessionIds.map { Session.sessionWithId($0) }
+        let individualIds = dictionary["individuals"] as! [Int]
+        _individuals = individualIds.map { Individual.individualWithId($0) }
+        super.init(dictionary: dictionary)
     }
     
     func getIndexOfSession(session: Session) -> Int? {
@@ -337,21 +353,9 @@ extension Project: NSCoding {
     }
 }
 
-//extension Project: CloudStorable {
-//    class var classUrl: String { return "projects" }
-//    
-//    override func encodeWithDictionary(dictionary: NSMutableDictionary) {
-//        super.encodeWithDictionary(dictionary)
-//        
-//    }
-//    
-//    func getDependencies() -> [CloudStorable] {
-//        return []
-//    }
-//}
-
-
-// Creates a dictionary from an array with an optional entry
+// Taken from ijohnsmith's GitHub Gist
+// https://gist.github.com/ijoshsmith/0c966b1752b9a5722e23
+/// Creates a dictionary from an array with an optional entry
 func toDictionary<E, K, V>(
     array:       [E],
     transformer: (element: E) -> (key: K, value: V)?)
@@ -365,4 +369,27 @@ func toDictionary<E, K, V>(
         }
         return dict
     }
+}
+
+extension Project: CloudStorable {
+    var classUrl: String { return Project.ClassUrl }
+    
+    func getDependencies() -> [CloudStorable] {
+        var dependencies = [CloudStorable]()
+        dependencies.append(ethogram)
+        sessions.map { dependencies.append($0) }
+        individuals.map { dependencies.append($0) }
+        return dependencies
+    }
+    
+    override func encodeWithDictionary(dictionary: NSMutableDictionary) {
+        super.encodeWithDictionary(dictionary)
+        dictionary.setValue(name, forKey: "name")
+        dictionary.setValue(ethogram.id!, forKey: "ethogram")
+        dictionary.setValue(members.map { $0.id }, forKey: "members")
+        dictionary.setValue(admins.map { $0.id }, forKey: "admins")
+        dictionary.setValue(sessions.map { $0.id! }, forKey: "sessions")
+        dictionary.setValue(individuals.map { $0.id! }, forKey: "individuals")
+    }
+    
 }

@@ -8,10 +8,11 @@
 import Foundation
 
 class Ethogram: BiolifeModel, Storable {
+    static let ClassUrl = "ethograms"
+    
     private var _name: String
     private var _information: String
     private var _behaviourStates: [BehaviourState]
-    var creator: User { return createdBy }
     
     var name: String { get { return _name } }
     var information: String { get { return _information } }
@@ -38,6 +39,14 @@ class Ethogram: BiolifeModel, Storable {
         self._behaviourStates = []
         self._information = information
       //  self.saveToArchives()
+    }
+    
+    required override init(dictionary: NSDictionary) {
+        _name = dictionary["name"] as! String
+        _information = dictionary["information"] as! String
+        let behaviourIds = dictionary["behaviours"] as! [Int]
+        _behaviourStates = behaviourIds.map { BehaviourState.behaviourStateWithId($0) }
+        super.init(dictionary: dictionary)
     }
     
     /************Ethogram********************/
@@ -75,17 +84,7 @@ class Ethogram: BiolifeModel, Storable {
         updateEthogram()
     }
     
-    /*************Photo Url in BS***************/
-    func addBSPhotoUrl(bsIndex: Int, photoUrl: String) {
-        self._behaviourStates[bsIndex].addPhotoUrl(photoUrl)
-        updateEthogram()
-    }
-    
-    func removeBSPhotoUrl(bsIndex: Int, photoIndex: Int) {
-        self._behaviourStates[bsIndex].removePhotoUrlAtIndex(photoIndex)
-        updateEthogram()
-    }
-    
+    /*************Photo Url in BS***************/    
     private func updateEthogram() {
         updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
       //  self.saveToArchives()
@@ -178,6 +177,12 @@ class Ethogram: BiolifeModel, Storable {
         
         return success;
     }
+    
+    class func ethogramWithId(id: Int) -> Ethogram {
+        let manager = CloudStorageManager.sharedInstance
+        let dictionary = manager.getItemForClass(Ethogram.ClassUrl, itemId: id)
+        return Ethogram(dictionary: dictionary)
+    }
 }
 
 func ==(lhs: Ethogram, rhs: Ethogram) -> Bool {
@@ -192,5 +197,23 @@ extension Ethogram: NSCoding {
         aCoder.encodeObject(_name, forKey: "name")
         aCoder.encodeObject(_information, forKey: "information")
         aCoder.encodeObject(_behaviourStates, forKey: "behaviourStates")
+    }
+}
+
+
+extension Ethogram: CloudStorable {
+    var classUrl: String { return Ethogram.ClassUrl }
+    
+    func getDependencies() -> [CloudStorable] {
+        var dependencies = [CloudStorable]()
+        behaviourStates.map { dependencies.append($0) }
+        return dependencies
+    }
+    
+    override func encodeWithDictionary(dictionary: NSMutableDictionary) {
+        dictionary.setValue(name, forKey: "name")
+        dictionary.setValue(information, forKey: "information")
+        dictionary.setValue(behaviourStates.map { $0.id! }, forKey: "behaviours")
+        super.encodeWithDictionary(dictionary)
     }
 }

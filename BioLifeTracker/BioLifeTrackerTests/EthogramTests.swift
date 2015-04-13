@@ -102,16 +102,6 @@ class EthogramTests: XCTestCase {
         XCTAssert(ethogram.behaviourStates.count == 0, "Ethogram not updated properly")
         
         ethogram.addBehaviourState(state3)
-        
-        
-        ethogram.addBSPhotoUrl(0, photoUrl: "www.photo1.com")
-        XCTAssert(ethogram.behaviourStates[0].photoUrls[0] == "www.photo1.com", "Ethogram not updated properly")
-        
-        ethogram.addBSPhotoUrl(0, photoUrl: "www.photo2.com")
-        XCTAssert(ethogram.behaviourStates[0].photoUrls[1] == "www.photo2.com", "Ethogram not updated properly")
-        
-        ethogram.removeBSPhotoUrl(0, photoIndex: 0)
-        XCTAssert(ethogram.behaviourStates[0].photoUrls[0] == "www.photo2.com", "Ethogram not updated properly")
     }
     
     func testEquality() {

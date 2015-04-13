@@ -31,8 +31,10 @@
 		242C6E071AC80F050024ECEF /* BiolifeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242C6E061AC80F050024ECEF /* BiolifeModel.swift */; };
 		242C6E091AC86BFD0024ECEF /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242C6E081AC86BFD0024ECEF /* Tag.swift */; };
 		2439AABA1AC7DC7900389195 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2439AAB91AC7DC7900389195 /* FacebookSDK.framework */; };
+		248464841ADA481F0001C5E3 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248464831ADA481F0001C5E3 /* Photo.swift */; };
 		2486AB3F1AD64C3A00573618 /* DownloadTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2486AB3E1AD64C3A00573618 /* DownloadTaskTests.swift */; };
 		2486AB411AD64C7D00573618 /* UploadTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2486AB401AD64C7D00573618 /* UploadTaskTests.swift */; };
+		24D28D141ADA5A6800E70759 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24D28D131ADA5A6800E70759 /* Images.xcassets */; };
 		24E32D361AB19647003C4E0A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D311AB19647003C4E0A /* Bolts.framework */; };
 		24E32D3F1AB1E86A003C4E0A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D3E1AB1E86A003C4E0A /* AudioToolbox.framework */; };
 		24E32D411AB1E88E003C4E0A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D401AB1E88E003C4E0A /* Social.framework */; };
@@ -57,6 +59,7 @@
 		24E32D701AB1EC5A003C4E0A /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D401AB1E88E003C4E0A /* Social.framework */; };
 		24E32D711AB1EC5A003C4E0A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D3E1AB1E86A003C4E0A /* AudioToolbox.framework */; };
 		24E32D721AB1EC5A003C4E0A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D311AB19647003C4E0A /* Bolts.framework */; };
+		24E45C411ADB797F000E0DD1 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248464831ADA481F0001C5E3 /* Photo.swift */; };
 		24F0F6C71AD7717200C6CC23 /* DeleteTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6C61AD7717200C6CC23 /* DeleteTask.swift */; };
 		24F0F6C81AD7728A00C6CC23 /* DeleteTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6C61AD7717200C6CC23 /* DeleteTask.swift */; };
 		24F0F6CA1AD7740300C6CC23 /* DeleteTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6C91AD7740300C6CC23 /* DeleteTaskTests.swift */; };
@@ -194,9 +197,11 @@
 		2439AABC1AC7DD7800389195 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		2439AABE1AC7DD8900389195 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		244BB57F1AD4656C004EC65F /* BiolifeDateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiolifeDateFormatter.swift; sourceTree = "<group>"; };
+		248464831ADA481F0001C5E3 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		2486AB3E1AD64C3A00573618 /* DownloadTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTaskTests.swift; sourceTree = "<group>"; };
 		2486AB401AD64C7D00573618 /* UploadTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadTaskTests.swift; sourceTree = "<group>"; };
 		24A92E3B1AD27A4C00A2002F /* CloudStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorageManager.swift; sourceTree = "<group>"; };
+		24D28D131ADA5A6800E70759 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		24E32D311AB19647003C4E0A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = BioLifeTracker/Bolts.framework; sourceTree = "<group>"; };
 		24E32D3E1AB1E86A003C4E0A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		24E32D401AB1E88E003C4E0A /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
@@ -448,6 +453,7 @@
 				240D04321AB718EF00D8BB9F /* Location.swift */,
 				240D04341AB7190800D8BB9F /* Weather.swift */,
 				242C6E081AC86BFD0024ECEF /* Tag.swift */,
+				248464831ADA481F0001C5E3 /* Photo.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -541,6 +547,7 @@
 		3205E7671AAEDA38006F374D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				24D28D131ADA5A6800E70759 /* Images.xcassets */,
 			);
 			name = Images;
 			path = BioLifeTracker;
@@ -710,6 +717,7 @@
 				326773BA1ACAEFB000899745 /* BooleanPickerCell.xib in Resources */,
 				32FB650A1AD94B6800391194 /* LaunchScreen.xib in Resources */,
 				AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */,
+				24D28D141ADA5A6800E70759 /* Images.xcassets in Resources */,
 				329B29371AD15BBF007ADC65 /* DefaultPickerCell.xib in Resources */,
 				329B293B1AD15BBF007ADC65 /* PhotoPickerCell.xib in Resources */,
 				326773BF1ACAEFB000899745 /* SingleLineTextCell.xib in Resources */,
@@ -772,6 +780,7 @@
 				AC9162AC1ACA6A0400FED714 /* CloudStorable.swift in Sources */,
 				32145C2D1AD272B800C20F07 /* ObservationsViewController.swift in Sources */,
 				329B29391AD15BBF007ADC65 /* FormPopupDelegate.swift in Sources */,
+				248464841ADA481F0001C5E3 /* Photo.swift in Sources */,
 				326773B71ACAEFB000899745 /* CustomPickerPopup.swift in Sources */,
 				32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */,
 				240FEF051AD60ACF000FD9F3 /* BiolifeDateFormatter.swift in Sources */,
@@ -827,6 +836,7 @@
 				AC7B6DE31AD254B2002D3EE6 /* ProjectManager.swift in Sources */,
 				AC7B6DC71AD25451002D3EE6 /* ProjectMngTests.swift in Sources */,
 				AC7B6DDC1AD25495002D3EE6 /* BehaviourState.swift in Sources */,
+				24E45C411ADB797F000E0DD1 /* Photo.swift in Sources */,
 				AC9162AD1ACA6CC300FED714 /* CloudStorable.swift in Sources */,
 				240FEF041AD60ACE000FD9F3 /* BiolifeDateFormatter.swift in Sources */,
 				AC7B6DDB1AD25492002D3EE6 /* Ethogram.swift in Sources */,
