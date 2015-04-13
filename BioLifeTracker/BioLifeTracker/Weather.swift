@@ -45,6 +45,11 @@ class Weather: BiolifeModel {
         super.init(dictionary: dictionary)
     }
     
+    class func weatherWithId(id: Int) -> Weather {
+        let manager = CloudStorageManager.sharedInstance
+        let weatherDictionary = manager.getItemForClass(ClassUrl, itemId: id)
+        return Weather(dictionary: weatherDictionary)
+    }
 }
 
 func ==(lhs: Weather, rhs: Weather) -> Bool {

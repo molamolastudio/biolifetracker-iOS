@@ -133,6 +133,12 @@ class Session: BiolifeModel {
             observation.setSession(self)
         }
     }
+    
+    class func sessionWithId(id: Int) -> Session {
+        let manager = CloudStorageManager.sharedInstance
+        let sessionDictionary = manager.getItemForClass(ClassUrl, itemId: id)
+        return Session(dictionary: sessionDictionary)
+    }
 }
 
 func ==(lhs: Session, rhs: Session) -> Bool {
