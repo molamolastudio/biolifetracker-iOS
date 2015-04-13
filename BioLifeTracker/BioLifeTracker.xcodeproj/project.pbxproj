@@ -82,6 +82,9 @@
 		321D62C31AD2615B00CF9BE9 /* ProjectsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321D62C21AD2615B00CF9BE9 /* ProjectsViewControllerDelegate.swift */; };
 		321D62C51AD2618800CF9BE9 /* EthogramsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321D62C41AD2618800CF9BE9 /* EthogramsViewControllerDelegate.swift */; };
 		321D62C71AD261D300CF9BE9 /* SuperController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 321D62C61AD261D300CF9BE9 /* SuperController.swift */; };
+		323CBD8E1ADB8FF000A7C970 /* ProjectHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323CBD8D1ADB8FF000A7C970 /* ProjectHomeViewController.swift */; };
+		323CBD901ADB901200A7C970 /* ProjectHomeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 323CBD8F1ADB901200A7C970 /* ProjectHomeView.xib */; };
+		323CBD921ADB96F600A7C970 /* ProjectHomeViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323CBD911ADB96F600A7C970 /* ProjectHomeViewControllerDelegate.swift */; };
 		326773B61ACAEFB000899745 /* BooleanPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773A91ACAEFB000899745 /* BooleanPickerCell.swift */; };
 		326773B71ACAEFB000899745 /* CustomPickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */; };
 		326773B81ACAEFB000899745 /* CustomPickerPopupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 326773AB1ACAEFB000899745 /* CustomPickerPopupCell.xib */; };
@@ -238,6 +241,9 @@
 		321D62C21AD2615B00CF9BE9 /* ProjectsViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectsViewControllerDelegate.swift; sourceTree = "<group>"; };
 		321D62C41AD2618800CF9BE9 /* EthogramsViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramsViewControllerDelegate.swift; sourceTree = "<group>"; };
 		321D62C61AD261D300CF9BE9 /* SuperController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperController.swift; sourceTree = "<group>"; };
+		323CBD8D1ADB8FF000A7C970 /* ProjectHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectHomeViewController.swift; sourceTree = "<group>"; };
+		323CBD8F1ADB901200A7C970 /* ProjectHomeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectHomeView.xib; sourceTree = "<group>"; };
+		323CBD911ADB96F600A7C970 /* ProjectHomeViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectHomeViewControllerDelegate.swift; sourceTree = "<group>"; };
 		32517A211AB1789100578C42 /* EthogramsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramsViewController.swift; sourceTree = "<group>"; };
 		32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramDetailsViewController.swift; sourceTree = "<group>"; };
 		326773A91ACAEFB000899745 /* BooleanPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BooleanPickerCell.swift; path = FormLibrary/BooleanPickerCell.swift; sourceTree = "<group>"; };
@@ -486,13 +492,16 @@
 				326773C41ACD7C9A00899745 /* MenuViewControllerDelegate.swift */,
 				3205E77F1AAEDB03006F374D /* ProjectsViewController.swift */,
 				321D62C21AD2615B00CF9BE9 /* ProjectsViewControllerDelegate.swift */,
+				323CBD8D1ADB8FF000A7C970 /* ProjectHomeViewController.swift */,
+				323CBD911ADB96F600A7C970 /* ProjectHomeViewControllerDelegate.swift */,
+				323CBD8F1ADB901200A7C970 /* ProjectHomeView.xib */,
 				320920591AC98E8A00E8A456 /* SessionsViewController.swift */,
 				32145C2A1AD26E4A00C20F07 /* SessionsViewControllerDelegate.swift */,
-				32145C2C1AD272B800C20F07 /* ObservationsViewController.swift */,
 				32517A211AB1789100578C42 /* EthogramsViewController.swift */,
 				321D62C41AD2618800CF9BE9 /* EthogramsViewControllerDelegate.swift */,
 				3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */,
 				32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */,
+				32145C2C1AD272B800C20F07 /* ObservationsViewController.swift */,
 				321D62BE1AD2604400CF9BE9 /* SubtitleTableCell.swift */,
 				321D62BF1AD2604400CF9BE9 /* SubtitleTableCell.xib */,
 				329B293E1AD15E6F007ADC65 /* FirstView.xib */,
@@ -694,6 +703,7 @@
 				321D62C11AD2604400CF9BE9 /* SubtitleTableCell.xib in Resources */,
 				326773B81ACAEFB000899745 /* CustomPickerPopupCell.xib in Resources */,
 				329B292D1AD15BAF007ADC65 /* ButtonCell.xib in Resources */,
+				323CBD901ADB901200A7C970 /* ProjectHomeView.xib in Resources */,
 				329B293F1AD15E6F007ADC65 /* FirstView.xib in Resources */,
 				329B292F1AD15BAF007ADC65 /* DatePickerCell.xib in Resources */,
 				3205E74D1AAED9F9006F374D /* Main.storyboard in Resources */,
@@ -733,6 +743,7 @@
 				242C6E091AC86BFD0024ECEF /* Tag.swift in Sources */,
 				321D62C01AD2604400CF9BE9 /* SubtitleTableCell.swift in Sources */,
 				32850BE21AB9625500C49D33 /* ProjectsViewController.swift in Sources */,
+				323CBD921ADB96F600A7C970 /* ProjectHomeViewControllerDelegate.swift in Sources */,
 				329B293A1AD15BBF007ADC65 /* PhotoPickerCell.swift in Sources */,
 				326773C21ACAEFB000899745 /* SingleLineTextCell.swift in Sources */,
 				ACDE13AD1AD0C0540075AC35 /* EthogramManager.swift in Sources */,
@@ -777,6 +788,7 @@
 				3205E77C1AAEDA85006F374D /* Session.swift in Sources */,
 				240D04351AB7190800D8BB9F /* Weather.swift in Sources */,
 				240D04311AB718AE00D8BB9F /* Individual.swift in Sources */,
+				323CBD8E1ADB8FF000A7C970 /* ProjectHomeViewController.swift in Sources */,
 				AC188C7C1AC2B11A00CB08C0 /* Storable.swift in Sources */,
 				321D62591AD1757C00CF9BE9 /* FirstViewControllerDelegate.swift in Sources */,
 			);

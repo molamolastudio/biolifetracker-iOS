@@ -20,7 +20,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
     
     var fields: FormFieldData? = nil
     var editable: Bool = true // Determines if the cells can be edited.
-    var roundedCells: Bool = true // Determines if the cells have rounded corners.
+    var roundedCells: Bool = false // Determines if the cells have rounded corners.
     
     // Variables for the amount of cell padding.
     var cellHorizontalPadding: CGFloat = 0
@@ -170,6 +170,7 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
         
         cell.horizontalPadding = cellHorizontalPadding
         cell.verticalPadding = cellVerticalPadding
+        cell.rounded = roundedCells
         
         return cell
     }
