@@ -10,7 +10,8 @@ import Foundation
 
 
 class ProjectStub: Project {
-
+    
+    
     
     override init() {
         super.init()
@@ -27,10 +28,5 @@ class ProjectStub: Project {
         var BSDict = [ "Eating" : 32, "Sleeping": 15 , "Bathing": 9, "Mating": 24, "Yawning": 45, "Playing": 23, "Stalking": 37]
         return BSDict
     }
-    
-    override func getObservations(#sessions: [Session], users: [User], behaviourStates: [BehaviourState]) -> [Observation] {
-        
-    }
-    
     
 }

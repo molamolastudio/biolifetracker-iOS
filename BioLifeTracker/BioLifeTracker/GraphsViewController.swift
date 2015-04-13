@@ -92,7 +92,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         
     }
     
-    
+    /********************* SET INITIAL DATA **********************/
     //Gets the data that conform to what the user provided and 
     //sets them as conditions for the the graph
     func initConditions() {
@@ -115,6 +115,23 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         
     }
     
+    func getAllUsers() {
+        allUsers = projectInstance.members
+        chosenUsers = allUsers
+    }
+    
+    func getAllSessions() {
+        allSessions = projectInstance.sessions
+        chosenSessions = allSessions
+    }
+    
+    func getAllBehaviourStates() {
+        allBehaviourStates = projectInstance.ethogram.behaviourStates
+        chosenBehaviourStates = allBehaviourStates
+    }
+    
+    
+    /*********************** UPDATE FOR GRAPH ********************/
     func prepareNumberOfBehaviourStates() {
         var numPerBS = projectInstance.getObservationsPerBS()
         
@@ -141,7 +158,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         var occurences = projectInstance.getObservations(sessions: chosenSessions, users: chosenUsers, behaviourStates: chosenBehaviourStates)
         
         if plotByDay {
-            
+            // 7 for number of days
             numberOfOccurences = [Int](count: 7, repeatedValue:0)
             
             for occurence in occurences {
@@ -160,6 +177,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
             }
             
         } else {
+            //13 for number of hours
             numberOfOccurences = [Int](count: 13, repeatedValue:0)
             
             for occurence in occurences {
@@ -177,7 +195,8 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
             }
         }
     }
-    
+
+    /********************* HELPER METHODS ********************/
     func getDayOfWeek(date: NSDate) -> Int {
         
         var calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
@@ -246,21 +265,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
 
     }
     
-    func getAllUsers() {
-        allUsers = projectInstance.members
-        chosenUsers = allUsers
-    }
-    
-    func getAllSessions() {
-        allSessions = projectInstance.sessions
-        chosenSessions = allSessions
-    }
-    
-    func getAllBehaviourStates() {
-        allBehaviourStates = projectInstance.ethogram.behaviourStates
-        chosenBehaviourStates = allBehaviourStates
-    }
-    
+    /********************** CONFIGURE GRAPHS ****************/
     func configureGraph() {
 
         self.hostingView.allowPinchScaling = false
@@ -269,16 +274,6 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         graph.applyTheme(CPTTheme(named: kCPTPlainWhiteTheme))
         self.hostingView.hostedGraph = graph
         
-//        graph.title = "Observations over time"
-//        
-//        var titleStyle = CPTMutableTextStyle.textStyle() as CPTMutableTextStyle
-//        titleStyle.color = CPTColor.whiteColor()
-//        titleStyle.fontName = "Helvetica-Bold"
-//        titleStyle.fontSize = 16.0
-//        graph.titleTextStyle = titleStyle
-        
-//        graph.titleDisplacement = CGPointMake(0, 0)
-        
         graph.plotAreaFrame.paddingLeft = 40
         graph.plotAreaFrame.paddingRight = 40
         graph.plotAreaFrame.paddingBottom = 40
@@ -286,7 +281,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         
         
         var plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
-        plotSpace.allowsUserInteraction = true
+        plotSpace.allowsUserInteraction = false
         
     }
     
@@ -298,15 +293,6 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         var occurenceColor = CPTColor.darkGrayColor()
         
         graph.addPlot(occurencePlot, toPlotSpace: plotSpace)
-        
-//        var example2Plot = CPTScatterPlot(frame: graph.frame)
-//        example2Plot.dataSource = self
-//        example2Plot.identifier = "example2"
-//        var example2Color = CPTColor.blueColor()
-//        
-//        graph.addPlot(example2Plot, toPlotSpace: plotSpace)
-//        
-//        plotSpace.scaleToFitPlots([examplePlot, example2Plot])
         
         var xRange = plotSpace.xRange.mutableCopy() as! CPTMutablePlotRange
         var yRange = plotSpace.yRange.mutableCopy() as! CPTMutablePlotRange
@@ -332,18 +318,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         occurenceSymbol.lineStyle = occurenceSymbolLineStyle
         
         occurencePlot.plotSymbol = occurenceSymbol
-        
-//        var example2LineStyle = example2Plot.dataLineStyle.mutableCopy() as! CPTMutableLineStyle
-//        example2LineStyle.lineWidth = 2.5
-//        example2LineStyle.lineColor = example2Color
-//        example2Plot.dataLineStyle = example2LineStyle
-//        var example2SymbolLineStyle = CPTMutableLineStyle()
-//        example2SymbolLineStyle.lineColor = example2Color
-//        var example2Symbol = CPTPlotSymbol.ellipsePlotSymbol()
-//        example2Symbol.fill = CPTFill(color: example2Color)
-//        example2Symbol.lineStyle = example2SymbolLineStyle
-//        
-//        example2Plot.plotSymbol = example2Symbol
+
 
     }
     
@@ -353,10 +328,9 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         
         statesPlot.dataSource = self
         statesPlot.identifier = "states"
-        //var statesColor = CPTColor.blueColor()
+
         statesPlot.barWidth = 0.5
         statesPlot.barOffset = 0.5
-        //statesPlot.barOffset =
         
         graph.addPlot(statesPlot, toPlotSpace: plotSpace)
         
@@ -365,7 +339,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
   
         //xRange.length = chosenBehaviourStates.count
         
-        //yRange.length = numberOfOccurences.count
+        //yRange.length = numberOfBehaviourStates.count
         
         xRange.length = 5
         yRange.length = 10
@@ -548,6 +522,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         y.minorTickLocations = yMinorLocations as Set<NSObject>;
     }
     
+    /******************** DATASOURCE AND DELEGATE METHODS ******************/
     func numberOfRecordsForPlot(plot: CPTPlot!) -> UInt {
         if chartByState {
             //return UInt(numberOfBehaviourStates.count)
@@ -592,10 +567,6 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         return CPTFill(color: CPTColor.blueColor())
     }
     
-    func configureChart() {
-        // for the number of each behaviour states
-    }
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -603,3 +574,6 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     }
     
 }
+
+
+

@@ -120,6 +120,13 @@
 		7854206C1ADA5A5E00526EAA /* GraphsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7854206B1ADA5A5E00526EAA /* GraphsView.xib */; };
 		7854206E1ADAA06500526EAA /* GraphsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7854206D1ADAA06500526EAA /* GraphsViewControllerDelegate.swift */; };
 		785420701ADB437C00526EAA /* ProjectStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7854206F1ADB437C00526EAA /* ProjectStub.swift */; };
+		7876BC2B1ADB9FA500471528 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 785420631ADA272600526EAA /* Accelerate.framework */; };
+		7876BC2C1ADB9FB500471528 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 785420671ADA275E00526EAA /* QuartzCore.framework */; };
+		7876BC2D1ADB9FCB00471528 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 785420651ADA275300526EAA /* libCorePlot-CocoaTouch.a */; };
+		7876BC2E1ADB9FE900471528 /* GraphsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785420691ADA28A500526EAA /* GraphsViewController.swift */; };
+		7876BC2F1ADB9FED00471528 /* GraphsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7854206D1ADAA06500526EAA /* GraphsViewControllerDelegate.swift */; };
+		7876BC301ADB9FF700471528 /* GraphsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7854206B1ADA5A5E00526EAA /* GraphsView.xib */; };
+		7876BC311ADBA00600471528 /* ProjectStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7854206F1ADB437C00526EAA /* ProjectStub.swift */; };
 		AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AC18814A1ACFC84600CE450B /* GooglePlus.bundle */; };
 		AC18814E1ACFC84600CE450B /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814B1ACFC84600CE450B /* GooglePlus.framework */; };
 		AC1881501ACFD05D00CE450B /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814F1ACFD05D00CE450B /* GoogleOpenSource.framework */; };
@@ -346,6 +353,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7876BC2D1ADB9FCB00471528 /* libCorePlot-CocoaTouch.a in Frameworks */,
+				7876BC2C1ADB9FB500471528 /* QuartzCore.framework in Frameworks */,
+				7876BC2B1ADB9FA500471528 /* Accelerate.framework in Frameworks */,
 				24E32D681AB1EC52003C4E0A /* libsqlite3.dylib in Frameworks */,
 				24E32D671AB1EC4C003C4E0A /* MobileCoreServices.framework in Frameworks */,
 				AC1881511ACFD0E400CE450B /* GoogleOpenSource.framework in Frameworks */,
@@ -744,6 +754,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7876BC301ADB9FF700471528 /* GraphsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -841,6 +852,7 @@
 				AC7B6DE21AD254AF002D3EE6 /* EthogramManager.swift in Sources */,
 				AC7B6DD61AD25482002D3EE6 /* Weather.swift in Sources */,
 				AC7B6DDD1AD25498002D3EE6 /* Storable.swift in Sources */,
+				7876BC2E1ADB9FE900471528 /* GraphsViewController.swift in Sources */,
 				AC7B6DC01AD2543D002D3EE6 /* IndividualTests.swift in Sources */,
 				AC7B6DDE1AD2549B002D3EE6 /* Project.swift in Sources */,
 				AC7B6DDF1AD2549E002D3EE6 /* BiolifeModel.swift in Sources */,
@@ -863,8 +875,10 @@
 				AC7B6DD91AD2548C002D3EE6 /* Observation.swift in Sources */,
 				AC7B6DC41AD25448002D3EE6 /* EthogramTests.swift in Sources */,
 				AC7B6DD51AD2547E002D3EE6 /* Tag.swift in Sources */,
+				7876BC311ADBA00600471528 /* ProjectStub.swift in Sources */,
 				AC7B6DC51AD2544B002D3EE6 /* ProjectTests.swift in Sources */,
 				AC7B6DDA1AD2548F002D3EE6 /* Session.swift in Sources */,
+				7876BC2F1ADB9FED00471528 /* GraphsViewControllerDelegate.swift in Sources */,
 				AC7B6DD81AD25488002D3EE6 /* Individual.swift in Sources */,
 				24F0F6CC1AD7D55400C6CC23 /* CloudStorageWorkerTests.swift in Sources */,
 				AC7B6DD41AD2547A002D3EE6 /* Data.swift in Sources */,
@@ -1047,6 +1061,10 @@
 				);
 				INFOPLIST_FILE = BioLifeTrackerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BioLifeTracker",
+				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BioLifeTracker.app/BioLifeTracker";
@@ -1065,6 +1083,10 @@
 				);
 				INFOPLIST_FILE = BioLifeTrackerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/BioLifeTracker",
+				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BioLifeTracker.app/BioLifeTracker";
