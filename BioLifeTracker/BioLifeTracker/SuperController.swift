@@ -11,7 +11,7 @@
 
 import UIKit
 
-class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate, FirstViewControllerDelegate, ProjectsViewControllerDelegate, EthogramsViewControllerDelegate, SessionsViewControllerDelegate {
+class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate, FirstViewControllerDelegate, ProjectsViewControllerDelegate, EthogramsViewControllerDelegate, SessionsViewControllerDelegate, ProjectHomeViewControllerDelegate {
     
     let splitVC = UISplitViewController()
     let masterNav = UINavigationController()
@@ -127,16 +127,20 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showProjectsPage() {
-        if let vc = detailNav.viewControllers.last as? ProjectsViewController {
-            detailNav.popViewControllerAnimated(true)
-        } else {
-            let projects = ProjectsViewController()
-            projects.delegate = self
-            projects.title = "Projects"
-            var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showNewProjectPage"))
-            projects.navigationItem.rightBarButtonItem = createBtn
-            detailNav.pushViewController(projects, animated: true)
-        }
+        let projects = ProjectsViewController()
+        projects.delegate = self
+        projects.title = "Projects"
+        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showNewProjectPage"))
+        projects.navigationItem.rightBarButtonItem = createBtn
+        detailNav.setViewControllers([projects], animated: false)
+    }
+    
+    func showProjectHomePage() {
+        let home = ProjectHomeViewController(nibName: "ProjectHomeView", bundle: nil)
+        home.delegate = self
+        home.title = currentProject!.name
+        home.currentProject = currentProject!
+        detailNav.pushViewController(home, animated: true)
     }
     
     func showEthogramsPage() {
@@ -145,11 +149,21 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         ethograms.title = "Ethograms"
         var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showNewEthogramPage"))
         ethograms.navigationItem.rightBarButtonItem = createBtn
-        detailNav.pushViewController(ethograms, animated: true)
+        detailNav.setViewControllers([ethograms], animated: false)
     }
     
     func showNewEthogramPage() {
         println("show new ethogram page")
+        let newEthogram = EthogramFormViewController()
+        newEthogram.title = "Create New Ethogram"
+        var createBtn = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("newEthogramCreated"))
+        newEthogram.navigationItem.rightBarButtonItem = createBtn
+        detailNav.pushViewController(newEthogram, animated: true)
+    }
+    
+    func showEthogramDetailsPage() {
+        let details = EthogramDetailsViewController()
+        detailNav.pushViewController(details, animated: true)
     }
     
     func showSessionsPage() {
@@ -187,7 +201,14 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     func clearNavigationStack() {
         detailNav.popToRootViewControllerAnimated(false)
-        detailNav.popViewControllerAnimated(false)
+    }
+    
+    // Selectors for creation
+    func newEthogramCreated() {
+        if let vc = detailNav.visibleViewController as? EthogramFormViewController {
+            EthogramManager.sharedInstance.addEthogram(vc.ethogram!)
+            detailNav.popViewControllerAnimated(true)
+        }
     }
     
     // MenuViewDelegate methods
@@ -214,15 +235,15 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func userDidSelectFacebookLogin() {
-
+        
     }
     
     func userDidSelectGoogleLogin() {
-
+        
     }
     
     func userDidSelectLogout() {
-
+        
     }
     
     func userDidSelectSessions(project: Project) {
@@ -250,12 +271,13 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func userDidSelectProject(selectedProject: Project) {
         println(selectedProject.name)
         currentProject = selectedProject
-        showSessionsPage()
+        showProjectHomePage()
     }
     
     // EthogramsViewControllerDelegate methods
     func userDidSelectEthogram(selectedEthogram: Ethogram) {
-        println(selectedEthogram.name)
+        Data.selectedEthogram = selectedEthogram
+        showEthogramDetailsPage()
     }
     
     // SessionsViewControllerDelegate methods
@@ -263,6 +285,19 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         currentProject = selectedProject
         currentSession = selectedSession
         showObservationsPage()
+    }
+    
+    // ProjectHomeViewControllerDelegate methods
+    func userDidSelectSession(tag: Int, project: Project, session: Session) {
+        
+    }
+    
+    func userDidSelectMember(project: Project, member: User) {
+        
+    }
+    
+    func userDidChangeEthogram(project: Project, ethogram: Ethogram) {
+        
     }
     
 }

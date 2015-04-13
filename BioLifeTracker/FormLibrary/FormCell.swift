@@ -12,7 +12,7 @@ class FormCell: UITableViewCell {
     let radius: CGFloat = 10
     
     var sizeSet: Bool = false // Make sure padding is only applied once.
-    var rounded: Bool = true
+    var rounded: Bool = false
     
     var horizontalPadding: CGFloat = 0
     var verticalPadding: CGFloat = 0
