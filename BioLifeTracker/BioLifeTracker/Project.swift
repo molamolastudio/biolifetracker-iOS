@@ -194,7 +194,7 @@ class Project: BiolifeModel, Storable {
         return newObservations
     }
     
-    private func getObservations(selectedSessions: [Session]) -> [Observation] {
+    func getObservations(selectedSessions: [Session]) -> [Observation] {
         var observations = [Observation]()
         for session in selectedSessions {
             observations += session.observations
