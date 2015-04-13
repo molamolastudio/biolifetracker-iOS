@@ -567,6 +567,21 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         return CPTFill(color: CPTColor.blueColor())
     }
     
+    @IBAction func graphIndexChanged(sender: AnyObject) {
+        switch graphSwitch.selectedSegmentIndex {
+        case 0:
+            println("hour")
+        case 1:
+            println("day")
+        case 2:
+            println("states")
+            // only view behaviourstate tables
+        default:
+            break
+        }
+    }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
