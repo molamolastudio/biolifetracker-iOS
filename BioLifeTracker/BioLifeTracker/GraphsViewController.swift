@@ -17,7 +17,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     
     @IBOutlet weak var hostingView: CPTGraphHostingView!
 
-    var projectInstance: ProjectStub!
+    var projectInstance: Project!
     
     var graph: CPTXYGraph!
     var graphLineWidth: CGFloat = 2.5
@@ -268,7 +268,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     /********************** CONFIGURE GRAPHS ****************/
     func configureGraph() {
 
-        self.hostingView.allowPinchScaling = false
+        self.hostingView.allowPinchScaling = true
         
         self.graph = CPTXYGraph(frame: CGRectZero)
         graph.applyTheme(CPTTheme(named: kCPTPlainWhiteTheme))
@@ -281,7 +281,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         
         
         var plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
-        plotSpace.allowsUserInteraction = false
+        plotSpace.allowsUserInteraction = true
         
     }
     
