@@ -60,15 +60,6 @@ class ObservationTests: XCTestCase {
         
         // Test changeLocation
         // Test changeWeather
-        
-        observation.addPhotoUrl("www.photo1.com")
-        XCTAssert(observation.photoUrls[0] == "www.photo1.com", "Individual not initialised properly")
-        
-        observation.addPhotoUrl("www.photo2.com")
-        XCTAssert(observation.photoUrls[1] == "www.photo2.com", "Individual not initialised properly")
-        
-        observation.removePhotoUrlAtIndex(0)
-        XCTAssert(observation.photoUrls[0] == "www.photo2.com", "Individual not initialised properly")
     }
     
     func testEquality() {
