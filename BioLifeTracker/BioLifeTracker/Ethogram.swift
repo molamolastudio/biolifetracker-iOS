@@ -29,7 +29,7 @@ class Ethogram: BiolifeModel, Storable {
         self._name = name
         self._behaviourStates = []
         self._information = ""
-    //    self.saveToArchives()
+      //  self.saveToArchives()
     }
     
     convenience init(name: String, information: String) {
@@ -37,7 +37,7 @@ class Ethogram: BiolifeModel, Storable {
         self._name = name
         self._behaviourStates = []
         self._information = information
-    //    self.saveToArchives()
+      //  self.saveToArchives()
     }
     
     /************Ethogram********************/
@@ -88,7 +88,7 @@ class Ethogram: BiolifeModel, Storable {
     
     private func updateEthogram() {
         updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
-   //     self.saveToArchives()
+      //  self.saveToArchives()
     }
     
     /**************Saving to Archives****************/
@@ -133,24 +133,25 @@ class Ethogram: BiolifeModel, Storable {
     }
     
     required init(coder aDecoder: NSCoder) {
+        var enumerator: NSEnumerator
         self._name = aDecoder.decodeObjectForKey("name") as! String
         
         let objectBehavStates: AnyObject = aDecoder.decodeObjectForKey("behaviourStates")!
-        // Error: Ambiguous use of objectEnumerator
-        //let enumerator = objectBehavStates.objectEnumerator()
+
+        enumerator = objectBehavStates.objectEnumerator()
         
         self._behaviourStates = Array<BehaviourState>()  // Check whether BehaviourState can be stored
-        /*
+        
         while true {
             
-            let behaviourState = enumerator.nextObject() as BehaviourState?
+            let behaviourState = enumerator.nextObject() as! BehaviourState?
             if behaviourState == nil {
                 break
             }
         
             self._behaviourStates.append(behaviourState!)
         }
-        */
+
         self._information = aDecoder.decodeObjectForKey("information") as! String
         super.init(coder: aDecoder)
     }
