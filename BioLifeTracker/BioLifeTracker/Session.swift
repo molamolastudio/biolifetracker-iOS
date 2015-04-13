@@ -24,7 +24,7 @@ class Session: BiolifeModel {
     private var _individuals: [Individual]
     
     var type: SessionType { return SessionType(rawValue: _typeValue)! }
-    
+    var name: String { get { return _name } }
     var project: Project { get { return _project } }
     var observations: [Observation] { get { return _observations } }
     var individuals: [Individual] { get { return _individuals } }
@@ -39,8 +39,22 @@ class Session: BiolifeModel {
     }
     
     required override init(dictionary: NSDictionary) {
-        //read data from dictionary
+        let manager = CloudStorageManager.sharedInstance
+        _name = dictionary["name"] as! String
+        
+        let sessionType = dictionary["session_type"] as! String
+        assert(sessionType == "SCN" || sessionType == "FCL")
+        _typeValue = sessionType
+        
+        let observationIds = dictionary["observation_set"] as! [Int]
+        _observations = observationIds.map { Observation.observationWithId($0) }
+        
+        let individualIds = dictionary["individuals"] as! [Int]
+        _individuals = individualIds.map { manager.getIndividualWithId($0) }
+        
         super.init(dictionary: dictionary)
+        
+        _observations.map { $0.setSession(self) }
     }
     
     func getDisplayName() -> String {
@@ -164,12 +178,16 @@ extension Session: CloudStorable {
     
     func getDependencies() -> [CloudStorable] {
         var dependencies = [CloudStorable]()
-        // append dependencies here
+        observations.map { dependencies.append($0) }
+        individuals.map { dependencies.append($0) }
         return dependencies
     }
     
     override func encodeWithDictionary(dictionary: NSMutableDictionary) {
+        dictionary.setValue(project.id, forKey: "project")
+        dictionary.setValue(_typeValue, forKey: "session_type")
+        dictionary.setValue(individuals.map { $0.id! }, forKey: "individuals")
+        dictionary.setValue(name, forKey: "name")
         super.encodeWithDictionary(dictionary)
-        // write data here
     }
 }

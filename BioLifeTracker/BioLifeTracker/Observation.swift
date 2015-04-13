@@ -108,6 +108,12 @@ class Observation: BiolifeModel {
         self._information = aDecoder.decodeObjectForKey("information") as! String
         super.init(coder: aDecoder)
     }
+    
+    class func observationWithId(id: Int) -> Observation {
+        let manager = CloudStorageManager.sharedInstance
+        let observationDictionary = manager.getItemForClass(ClassUrl, itemId: id)
+        return Observation(dictionary: observationDictionary)
+    }
 }
 
 

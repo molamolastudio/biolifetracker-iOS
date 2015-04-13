@@ -11,9 +11,11 @@ import Foundation
 class CloudStorageManager {
     
     var globalCache: [String: [Int: NSDictionary]]
+    var individualCache: [Int: Individual]
     
     private init() {
         globalCache = [String: [Int: NSDictionary]]()
+        individualCache = [Int: Individual]()
     }
     
     class var sharedInstance: CloudStorageManager {
@@ -25,6 +27,7 @@ class CloudStorageManager {
     
     func clearCache() {
         globalCache.removeAll(keepCapacity: false)
+        individualCache.removeAll(keepCapacity: false)
     }
     
     /// Returns an NSDictionary representation of the specified item.
@@ -49,5 +52,19 @@ class CloudStorageManager {
             globalCache[classUrl] = classCache
             return retrievedItem
         }
-    }    
+    }
+    
+    /// Returns a cached "Individual" object. This is to prevent initializing
+    /// the same "Individual" object many times, resulting in each object taking
+    /// its own space in memory.
+    func getIndividualWithId(id: Int) -> Individual {
+        if let individual = individualCache[id] {
+            return individual
+        } else {
+            let individualDictionary = getItemForClass(Individual.ClassUrl, itemId: id)
+            let individual = Individual(dictionary: individualDictionary)
+            individualCache[id] = individual
+            return individual
+        }
+    }
 }
