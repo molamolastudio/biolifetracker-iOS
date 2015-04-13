@@ -150,7 +150,6 @@ extension Observation: CloudStorable {
     
     func getDependencies() -> [CloudStorable] {
         var dependencies = [CloudStorable]()
-        dependencies.append(session)
         dependencies.append(state)
         if photo != nil { dependencies.append(photo!) }
         dependencies.append(individual)

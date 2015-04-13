@@ -57,6 +57,8 @@ class Project: BiolifeModel, Storable {
         let individualIds = dictionary["individuals"] as! [Int]
         _individuals = individualIds.map { Individual.individualWithId($0) }
         super.init(dictionary: dictionary)
+        
+        sessions.map { $0.setProject(self) }
     }
     
     func getIndexOfSession(session: Session) -> Int? {
@@ -388,7 +390,6 @@ extension Project: CloudStorable {
         dictionary.setValue(ethogram.id!, forKey: "ethogram")
         dictionary.setValue(members.map { $0.id }, forKey: "members")
         dictionary.setValue(admins.map { $0.id }, forKey: "admins")
-        dictionary.setValue(sessions.map { $0.id! }, forKey: "sessions")
         dictionary.setValue(individuals.map { $0.id! }, forKey: "individuals")
     }
     
