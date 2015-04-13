@@ -33,7 +33,11 @@ class BehaviourState: BiolifeModel {
     }
     
     required override init(dictionary: NSDictionary) {
-        //read data from dictionary
+        _name = dictionary["name"] as! String
+        _information = dictionary["information"] as! String
+        if let photoId = dictionary["photo"] as! Int? {
+            _photo = Photo.photoWithId(photoId)
+        }
         super.init(dictionary: dictionary)
     }
     
@@ -93,12 +97,14 @@ extension BehaviourState: CloudStorable {
     
     func getDependencies() -> [CloudStorable] {
         var dependencies = [CloudStorable]()
-        // append dependencies here
+        if photo != nil { dependencies.append(photo!) }
         return dependencies
     }
     
     override func encodeWithDictionary(dictionary: NSMutableDictionary) {
+        dictionary.setValue(name, forKey: "name")
+        dictionary.setValue(information, forKey: "information")
+        dictionary.setValue(photo?.id, forKey: "photo")
         super.encodeWithDictionary(dictionary)
-        // write data here
     }
 }

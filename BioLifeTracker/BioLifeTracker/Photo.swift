@@ -39,6 +39,11 @@ class Photo: BiolifeModel {
     }
 }
 
+func ==(lhs: Photo, rhs: Photo) -> Bool {
+    if lhs.id == rhs.id { return true }
+    return lhs.image == rhs.image
+}
+
 extension Photo: CloudStorable {
     var classUrl: String { return Photo.ClassUrl }
     
