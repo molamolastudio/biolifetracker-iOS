@@ -12,6 +12,7 @@ class BiolifeModel: NSObject, NSCoding {
 
     var id: Int?
     var isLocked: Bool = false
+    var requiresMultipart: Bool { return false }
     private var _createdAt: NSDate
     private var _updatedAt: NSDate
     private var _createdBy: User

@@ -16,18 +16,33 @@ struct CloudStorage {
         "com.cs3217.biolifetracker.network",
         DISPATCH_QUEUE_SERIAL)
     
+    static let boundary = "$$BOUNDARY$$"
     
     // MARK: Network Operations
     
     
+    static func makeMultipartRequestToUrl(url: NSURL, withMethod method: String, withPayload payload: NSData?) -> NSData? {
+        var headers = [String: String]()
+        headers["Content-Type"] = "multipart/form-data; boundary=\(boundary)"
+        return makeRequestToUrl(url, withMethod: method, withPayload: payload, withHeaders: headers)
+    }
+    
     /// Synchronously sends the specified payload to the specified URL, with the specified HTTP method.
     /// Returns the NSData received as reply from server, if there is response.
     static func makeRequestToUrl(url: NSURL, withMethod method: String, withPayload payload: NSData?) -> NSData? {
+        var headers = [String: String]()
+        headers["Accept"] = "application/json"
+        headers["Content-Type"] = "application/json"
+        return makeRequestToUrl(url, withMethod: method, withPayload: payload, withHeaders: headers)
+    }
+    
+    static func makeRequestToUrl(url: NSURL, withMethod method: String, withPayload payload: NSData?, withHeaders headers: [String: String]) -> NSData? {
         // sets up URL request
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = method
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        for (key, value) in headers {
+            request.setValue(value, forHTTPHeaderField: key)
+        }
         if let accessToken = UserAuthService.sharedInstance.accessToken {
             request.setValue("Token \(accessToken)", forHTTPHeaderField: "Authorization")
         }
@@ -46,7 +61,7 @@ struct CloudStorage {
         }
         return responseData
     }
-    
+
     
     // MARK: NSDictionary Operations
     
@@ -60,7 +75,7 @@ struct CloudStorage {
         for keyObject in source.allKeys{
             let key = keyObject as! String
             assert(source[key] != nil)
-            assert(target[key] != nil, "The entry for \(key) is mising from server reply")
+            assert(target[key] != nil, "The entry for \(key) is missing from server reply")
             let originalValue = source[key] as! NSObject
             let newValue = target[key] as! NSObject
             if originalValue != newValue {
@@ -73,10 +88,44 @@ struct CloudStorage {
     // MARK: Interaction between NSDictionary and NSData
     
     
+    static func dictionaryToMultipartData(dictionary: NSDictionary) -> NSData {
+        var mutableData = NSMutableData()
+        for entry in dictionary {
+            appendObjectToMutableData(entry.key as! String,
+                value: entry.value as! NSObject,
+                body: mutableData)
+        }
+        return mutableData
+    }
+    
+    static func encode(s: NSString) -> NSData {
+        return s.dataUsingEncoding(NSUTF8StringEncoding)!
+    }
+    
+    static func appendObjectToMutableData(key: String, value: NSObject, body: NSMutableData) {
+        body.appendData(encode("\r\n--\(boundary)\r\n"))
+        if let image = value as? UIImage {
+            body.appendData(encode("Content-Disposition: form-data; name=\"\(key)\"; filename=\"image.jpg\"\r\n"))
+            body.appendData(encode("Content-Type: application/octet-stream\r\n\r\n"))
+            body.appendData(UIImageJPEGRepresentation(image, 1.0))
+        } else if let number = value as? NSNumber {
+            body.appendData(encode("Content-Disposition: form-data; name=\"\(key)\"\r\n"))
+            body.appendData(encode("Content-Type: text/plain\r\n\r\n"))
+            body.appendData(encode(number.stringValue))
+        } else if let text = value as? String {
+            body.appendData(encode("Content-Disposition: form-data; name=\"\(key)\"\r\n"))
+            body.appendData(encode("Content-Type: text/plain\r\n\r\n"))
+            body.appendData(encode(text))
+        } else {
+            NSLog("%@ Not Sent. Only NSString, NSNumber and UIImage are supported.", key)
+        }
+        let string = NSString(data: body, encoding: NSUTF8StringEncoding)
+    }
+    
     /// Serializes a dictionary into JSON and then convert it to NSData.
     /// Returns representation of dictionary in NSData. This function will fail
     /// if dictionary cannot be converted to JSON.
-    static func dictionaryToData(dictionary: NSDictionary) -> NSData {
+    static func dictionaryToJsonData(dictionary: NSDictionary) -> NSData {
         let data = serializeToJson(dictionary)
         assert(data != nil, "Fail to convert dictionary to data")
         return data!

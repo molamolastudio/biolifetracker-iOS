@@ -42,24 +42,16 @@ class UploadTask: CloudStorageTask {
             var dictionary = NSMutableDictionary()
             currentItem.encodeWithDictionary(dictionary)
             
-            var payloadData = CloudStorage.dictionaryToData(dictionary)
-            var responseData: NSData?
-            var destinationUrl: NSURL
-            if currentItem.id == nil { // item has not been uploaded before, therefore POST
-                destinationUrl = serverUrl
-                    .URLByAppendingPathComponent(currentItem.classUrl)
-                    .URLByAppendingSlash()
-                responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "POST", withPayload: payloadData)
-            } else { // item has been uploaded before, therefore PUT
-                destinationUrl = serverUrl
-                    .URLByAppendingPathComponent(currentItem.classUrl)
-                    .URLByAppendingPathComponent(String(currentItem.id!))
-                    .URLByAppendingSlash()
-                responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "PUT", withPayload: payloadData)
+            // Create NSData using either JSON serialization or multipart serialization
+            let responseData: NSData?
+            if item.requiresMultipart {
+                responseData = processMultipart(currentItem, dictionary: dictionary)
+            } else {
+                responseData = processJson(currentItem, dictionary: dictionary)
             }
             
             if responseData == nil {
-                NSLog("There is no response from server", destinationUrl.description)
+                NSLog("There is no response from server")
             }
             assert(responseData != nil)
             
@@ -77,6 +69,44 @@ class UploadTask: CloudStorageTask {
             // Unlock item
             currentItem.unlock()
         }
+    }
+    
+    func processMultipart(item: CloudStorable, dictionary: NSDictionary) -> NSData? {
+        let payloadData = CloudStorage.dictionaryToMultipartData(dictionary)
+        var responseData: NSData?
+        var destinationUrl: NSURL
+        if item.id == nil { // item has not been uploaded before, therefore POST
+            destinationUrl = serverUrl
+                .URLByAppendingPathComponent(item.classUrl)
+                .URLByAppendingSlash()
+            responseData = CloudStorage.makeMultipartRequestToUrl(destinationUrl, withMethod: "POST", withPayload: payloadData)
+        } else { // item has been uploaded before, therefore PUT
+            destinationUrl = serverUrl
+                .URLByAppendingPathComponent(item.classUrl)
+                .URLByAppendingPathComponent(String(item.id!))
+                .URLByAppendingSlash()
+            responseData = CloudStorage.makeMultipartRequestToUrl(destinationUrl, withMethod: "PUT", withPayload: payloadData)
+        }
+        return responseData
+    }
+    
+    func processJson(item: CloudStorable, dictionary: NSDictionary) -> NSData? {
+        let payloadData = CloudStorage.dictionaryToJsonData(dictionary)
+        var responseData: NSData?
+        var destinationUrl: NSURL
+        if item.id == nil { // item has not been uploaded before, therefore POST
+            destinationUrl = serverUrl
+                .URLByAppendingPathComponent(item.classUrl)
+                .URLByAppendingSlash()
+            responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "POST", withPayload: payloadData)
+        } else { // item has been uploaded before, therefore PUT
+            destinationUrl = serverUrl
+                .URLByAppendingPathComponent(item.classUrl)
+                .URLByAppendingPathComponent(String(item.id!))
+                .URLByAppendingSlash()
+            responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "PUT", withPayload: payloadData)
+        }
+        return responseData
     }
     
     func stackDependencies(item: CloudStorable) {

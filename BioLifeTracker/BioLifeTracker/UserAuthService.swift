@@ -80,7 +80,7 @@ class UserAuthService {
                 .URLByAppendingSlash()
             var postDictionary = NSMutableDictionary()
             postDictionary.setValue(token, forKey: "access_token")
-            let postData = CloudStorage.dictionaryToData(postDictionary)
+            let postData = CloudStorage.dictionaryToJsonData(postDictionary)
             let responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "POST", withPayload: postData)
             assert(responseData != nil, "The server rejects the \(provider) token. This shouldn't happen.")
             let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)!
