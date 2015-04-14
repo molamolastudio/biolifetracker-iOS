@@ -23,8 +23,8 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     var graphLineWidth: CGFloat = 2.5
     
     var plotByDay = false
-    var plotByHour = true // default setting
-    var chartByState = false
+    var plotByHour = false // default setting
+    var chartByState = true
     
     var yMaxHours = 0
     var yMaxDays = 0
@@ -160,13 +160,13 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
             
         } else if plotByHour {
             //13 for number of hours
-            numberOfOccurences = [Int](count: 13, repeatedValue:0)
+            numberOfOccurences = [Int](count: 17, repeatedValue:0)
             println("getting occurences")
             
             for occurence in occurences {
                 var hour = getHourOfDay(occurence.timestamp)
                 numberOfOccurences[hour] += 1
-                println(str)
+                println(String(hour))
                 
                 // check and update max value of y axis
                 var count = numberOfOccurences[hour]
@@ -312,10 +312,10 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         var yRange = plotSpace.yRange.mutableCopy() as! CPTMutablePlotRange
         if plotByHour {
             xRange.length = hours.count
-            yRange.length = numberOfOccurences.count
+            yRange.length = yMaxHours
         } else {
             xRange.length = days.count
-            yRange.length = numberOfOccurences.count
+            yRange.length = yMaxDays
         }
         
         plotSpace.xRange = xRange
@@ -352,7 +352,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         var yRange = plotSpace.yRange.mutableCopy() as! CPTMutablePlotRange
   
         xRange.length = chosenBehaviourStates.count
-        yRange.length = numberOfOccurences.count
+        yRange.length = yMaxStates
         
         plotSpace.xRange = xRange
         plotSpace.yRange = yRange

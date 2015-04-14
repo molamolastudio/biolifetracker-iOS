@@ -44,48 +44,48 @@ class ProjectStub {
     // morning times
     var calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
 
-    let date1 = NSDate()
-    let date2 = NSDate()
-    let date3 = NSDate()
-    let date4 = NSDate()
-    let date5 = NSDate()
-    let date6 = NSDate()
-    let date7 = NSDate()
-    let date8 = NSDate()
-    let date9 = NSDate()
-    let date10 = NSDate()
-    let date11 = NSDate()
-    let date12 = NSDate()
-    let date13 = NSDate()
-    let date14 = NSDate()
-    let date15 = NSDate()
-    let date16 = NSDate()
-    let date17 = NSDate()
-    let date18 = NSDate()
-    let date19 = NSDate()
-    let date20 = NSDate()
-    let date21 = NSDate()
-    let date22 = NSDate()
-    let date23 = NSDate()
-    let date24 = NSDate()
-    let date25 = NSDate()
-    let date26 = NSDate()
-    let date27 = NSDate()
-    let date28 = NSDate()
-    let date29 = NSDate()
-    let date30 = NSDate()
-    let date31 = NSDate()
-    let date32 = NSDate()
-    let date33 = NSDate()
-    let date34 = NSDate()
-    let date35 = NSDate()
-    let date36 = NSDate()
-    let date37 = NSDate()
-    let date38 = NSDate()
-    let date39 = NSDate()
-    let date40 = NSDate()
-    let date41 = NSDate()
-    let date42 = NSDate()
+    var date1 = NSDate()
+    var date2 = NSDate()
+    var date3 = NSDate()
+    var date4 = NSDate()
+    var date5 = NSDate()
+    var date6 = NSDate()
+    var date7 = NSDate()
+    var date8 = NSDate()
+    var date9 = NSDate()
+    var date10 = NSDate()
+    var date11 = NSDate()
+    var date12 = NSDate()
+    var date13 = NSDate()
+    var date14 = NSDate()
+    var date15 = NSDate()
+    var date16 = NSDate()
+    var date17 = NSDate()
+    var date18 = NSDate()
+    var date19 = NSDate()
+    var date20 = NSDate()
+    var date21 = NSDate()
+    var date22 = NSDate()
+    var date23 = NSDate()
+    var date24 = NSDate()
+    var date25 = NSDate()
+    var date26 = NSDate()
+    var date27 = NSDate()
+    var date28 = NSDate()
+    var date29 = NSDate()
+    var date30 = NSDate()
+    var date31 = NSDate()
+    var date32 = NSDate()
+    var date33 = NSDate()
+    var date34 = NSDate()
+    var date35 = NSDate()
+    var date36 = NSDate()
+    var date37 = NSDate()
+    var date38 = NSDate()
+    var date39 = NSDate()
+    var date40 = NSDate()
+    var date41 = NSDate()
+    var date42 = NSDate()
     
     init() {
         
@@ -95,7 +95,10 @@ class ProjectStub {
         setDates()
         createObservations()
         
-        project.getObservations(sessions: [Session1], users: [User1], behaviourStates: <#[BehaviourState]#>)
+        project.addMembers([user1, user2, user3, user4])
+        project.addSessions([session1, session2, session3, session4, session5])
+        
+        
     }
     
     func initialiseEthogram() {
@@ -130,177 +133,261 @@ class ProjectStub {
         var calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
         
         //mon 7am
-        var components1 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date1)
-        components1?.setValue(2, forComponent: .CalendarUnitWeekday)
-        components1?.setValue(7, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 2, ofDate: date1, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 7, ofDate: day, options: nil) {
+                date1 = hour
+            }
+        }
         //mon 8am
-        var components2 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date2)
-        components2?.setValue(2, forComponent: .CalendarUnitWeekday)
-        components2?.setValue(8, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 2, ofDate: date2, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 8, ofDate: day, options: nil) {
+                date2 = hour
+            }
+        }
         //tue 9am
-        var components3 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date3)
-        components3?.setValue(3, forComponent: .CalendarUnitWeekday)
-        components3?.setValue(9, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 3, ofDate: date3, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 9, ofDate: day, options: nil) {
+                date3 = hour
+            }
+        }
         //tue 6am
-        var components4 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date4)
-        components4?.setValue(3, forComponent: .CalendarUnitWeekday)
-        components4?.setValue(6, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 3, ofDate: date4, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 6, ofDate: day, options: nil) {
+                date4 = hour
+            }
+        }
         //wed 12pm
-        var components5 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date5)
-        components5?.setValue(4, forComponent: .CalendarUnitWeekday)
-        components5?.setValue(12, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 4, ofDate: date5, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 12, ofDate: day, options: nil) {
+                date5 = hour
+            }
+        }
         //wed 11am
-        var components6 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date6)
-        components6?.setValue(4, forComponent: .CalendarUnitWeekday)
-        components6?.setValue(11, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 4, ofDate: date6, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 11, ofDate: day, options: nil) {
+                date6 = hour
+            }
+        }
         //thurs 10am
-        var components7 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date7)
-        components7?.setValue(5, forComponent: .CalendarUnitWeekday)
-        components7?.setValue(10, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 5, ofDate: date7, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 10, ofDate: day, options: nil) {
+                date7 = hour
+            }
+        }
         //thurs 11am
-        var components8 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date8)
-        components8?.setValue(5, forComponent: .CalendarUnitWeekday)
-        components8?.setValue(11, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 5, ofDate: date8, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 11, ofDate: day, options: nil) {
+                date8 = hour
+            }
+        }
         //fri 11am
-        var components9 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date9)
-        components9?.setValue(6, forComponent: .CalendarUnitWeekday)
-        components9?.setValue(11, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 6, ofDate: date9, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 11, ofDate: day, options: nil) {
+                date9 = hour
+            }
+        }
         //fri 6am
-        var components10 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date10)
-        components10?.setValue(6, forComponent: .CalendarUnitWeekday)
-        components10?.setValue(6, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 6, ofDate: date10, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 6, ofDate: day, options: nil) {
+                date10 = hour
+            }
+        }
         //sat 5am
-        var components11 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date11)
-        components11?.setValue(7, forComponent: .CalendarUnitWeekday)
-        components11?.setValue(5, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 7, ofDate: date11, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 5, ofDate: day, options: nil) {
+                date11 = hour
+            }
+        }
         //sat 12pm
-        var components12 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date12)
-        components12?.setValue(7, forComponent: .CalendarUnitWeekday)
-        components12?.setValue(12, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 7, ofDate: date12, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 12, ofDate: day, options: nil) {
+                date12 = hour
+            }
+        }
         //sun 9am
-        var components13 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date13)
-        components13?.setValue(1, forComponent: .CalendarUnitWeekday)
-        components13?.setValue(9, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 1, ofDate: date13, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 9, ofDate: day, options: nil) {
+                date13 = hour
+            }
+        }
         //sun 8am
-        var components14 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date14)
-        components14?.setValue(1, forComponent: .CalendarUnitWeekday)
-        components14?.setValue(8, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 1, ofDate: date14, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 8, ofDate: day, options: nil) {
+                date14 = hour
+            }
+        }
         
         // afternoon times
         //mon 1pm
-        var components15 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date15)
-        components15?.setValue(2, forComponent: .CalendarUnitWeekday)
-        components15?.setValue(13, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 2, ofDate: date15, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 13, ofDate: day, options: nil) {
+                date15 = hour
+            }
+        }
         //mon 2pm
-        var components16 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date16)
-        components16?.setValue(2, forComponent: .CalendarUnitWeekday)
-        components16?.setValue(14, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 2, ofDate: date16, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 14, ofDate: day, options: nil) {
+                date16 = hour
+            }
+        }
         //tue 1pm
-        var components17 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date17)
-        components17?.setValue(3, forComponent: .CalendarUnitWeekday)
-        components17?.setValue(13, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 3, ofDate: date17, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 13, ofDate: day, options: nil) {
+                date17 = hour
+            }
+        }
         //tue 3pm
-        var components18 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date18)
-        components18?.setValue(3, forComponent: .CalendarUnitWeekday)
-        components18?.setValue(15, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 3, ofDate: date18, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 15, ofDate: day, options: nil) {
+                date18 = hour
+            }
+        }
         //wed 3pm
-        var components19 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date19)
-        components19?.setValue(4, forComponent: .CalendarUnitWeekday)
-        components19?.setValue(15, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 4, ofDate: date19, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 15, ofDate: day, options: nil) {
+                date19 = hour
+            }
+        }
         //wed 2pm
-        var components20 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date20)
-        components20?.setValue(4, forComponent: .CalendarUnitWeekday)
-        components20?.setValue(14, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 4, ofDate: date20, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 14, ofDate: day, options: nil) {
+                date20 = hour
+            }
+        }
         //thurs 1pm
-        var components21 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date21)
-        components21?.setValue(5, forComponent: .CalendarUnitWeekday)
-        components21?.setValue(13, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 5, ofDate: date21, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 13, ofDate: day, options: nil) {
+                date21 = hour
+            }
+        }
         //thurs 3pm
-        var components22 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date22)
-        components22?.setValue(5, forComponent: .CalendarUnitWeekday)
-        components22?.setValue(15, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 5, ofDate: date22, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 15, ofDate: day, options: nil) {
+                date22 = hour
+            }
+        }
         //fri 1pm
-        var components23 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date23)
-        components23?.setValue(6, forComponent: .CalendarUnitWeekday)
-        components23?.setValue(13, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 6, ofDate: date23, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 13, ofDate: day, options: nil) {
+                date23 = hour
+            }
+        }
         //fri 3pm
-        var components24 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date24)
-        components24?.setValue(6, forComponent: .CalendarUnitWeekday)
-        components24?.setValue(15, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 6, ofDate: date24, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 15, ofDate: day, options: nil) {
+                date24 = hour
+            }
+        }
         //sat 1pm
-        var components25 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date25)
-        components25?.setValue(7, forComponent: .CalendarUnitWeekday)
-        components25?.setValue(13, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 7, ofDate: date25, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 13, ofDate: day, options: nil) {
+                date25 = hour
+            }
+        }
         //sat 2pm
-        var components26 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date26)
-        components26?.setValue(7, forComponent: .CalendarUnitWeekday)
-        components26?.setValue(14, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 7, ofDate: date26, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 14, ofDate: day, options: nil) {
+                date26 = hour
+            }
+        }
         //sun 3pm
-        var components27 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date27)
-        components27?.setValue(1, forComponent: .CalendarUnitWeekday)
-        components27?.setValue(15, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 1, ofDate: date27, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 15, ofDate: day, options: nil) {
+                date27 = hour
+            }
+        }
         //sun 1pm
-        var components28 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date28)
-        components28?.setValue(1, forComponent: .CalendarUnitWeekday)
-        components28?.setValue(13, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 1, ofDate: date28, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 13, ofDate: day, options: nil) {
+                date28 = hour
+            }
+        }
         
         // evening times
         //mon 4pm
-        var components29 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date29)
-        components29?.setValue(2, forComponent: .CalendarUnitWeekday)
-        components29?.setValue(16, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 2, ofDate: date29, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 16, ofDate: day, options: nil) {
+                date29 = hour
+            }
+        }
         //mon 5pm
-        var components30 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date30)
-        components30?.setValue(2, forComponent: .CalendarUnitWeekday)
-        components30?.setValue(17, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 2, ofDate: date30, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 17, ofDate: day, options: nil) {
+                date30 = hour
+            }
+        }
         //tue 6pm
-        var components31 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date31)
-        components31?.setValue(3, forComponent: .CalendarUnitWeekday)
-        components31?.setValue(18, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 3, ofDate: date31, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 18, ofDate: day, options: nil) {
+                date31 = hour
+            }
+        }
         //tue 7pm
-        var components32 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date32)
-        components32?.setValue(3, forComponent: .CalendarUnitWeekday)
-        components32?.setValue(19, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 3, ofDate: date32, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 19, ofDate: day, options: nil) {
+                date32 = hour
+            }
+        }
         //wed 8pm
-        var components33 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date33)
-        components33?.setValue(4, forComponent: .CalendarUnitWeekday)
-        components33?.setValue(20, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 4, ofDate: date33, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 20, ofDate: day, options: nil) {
+                date33 = hour
+            }
+        }
         //wed 5pm
-        var components34 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date34)
-        components34?.setValue(4, forComponent: .CalendarUnitWeekday)
-        components34?.setValue(17, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 4, ofDate: date34, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 17, ofDate: day, options: nil) {
+                date34 = hour
+            }
+        }
         //thurs 10pm
-        var components35 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date35)
-        components35?.setValue(5, forComponent: .CalendarUnitWeekday)
-        components35?.setValue(22, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 5, ofDate: date35, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 22, ofDate: day, options: nil) {
+                date35 = hour
+            }
+        }
         //thurs 11pm
-        var components36 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date36)
-        components36?.setValue(5, forComponent: .CalendarUnitWeekday)
-        components36?.setValue(23, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 5, ofDate: date36, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 23, ofDate: day, options: nil) {
+                date36 = hour
+            }
+        }
         //fri 12am
-        var components37 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date37)
-        components37?.setValue(6, forComponent: .CalendarUnitWeekday)
-        components37?.setValue(0, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 6, ofDate: date37, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 0, ofDate: day, options: nil) {
+                date37 = hour
+            }
+        }
         //fri 6pm
-        var components38 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date38)
-        components38?.setValue(6, forComponent: .CalendarUnitWeekday)
-        components38?.setValue(18, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 6, ofDate: date38, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 18, ofDate: day, options: nil) {
+                date38 = hour
+            }
+        }
         //sat 5pm
-        var components39 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date39)
-        components39?.setValue(7, forComponent: .CalendarUnitWeekday)
-        components39?.setValue(17, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 7, ofDate: date39, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 17, ofDate: day, options: nil) {
+                date39 = hour
+            }
+        }
         //sat 4pm
-        var components40 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date40)
-        components40?.setValue(7, forComponent: .CalendarUnitWeekday)
-        components40?.setValue(16, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 7, ofDate: date40, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 16, ofDate: day, options: nil) {
+                date40 = hour
+            }
+        }
         //sun 9pm
-        var components41 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date41)
-        components41?.setValue(1, forComponent: .CalendarUnitWeekday)
-        components41?.setValue(21, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 1, ofDate: date41, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 21, ofDate: day, options: nil) {
+                date41 = hour
+            }
+        }
         //sun 8pm
-        var components42 = calendar?.components(.CalendarUnitWeekday | .CalendarUnitHour , fromDate: date42)
-        components42?.setValue(1, forComponent: .CalendarUnitWeekday)
-        components42?.setValue(20, forComponent: .CalendarUnitHour)
+        if let day = calendar?.dateBySettingUnit(.CalendarUnitWeekday, value: 1, ofDate: date42, options: nil) {
+            if let hour = calendar?.dateBySettingUnit(.CalendarUnitHour, value: 20, ofDate: day, options: nil) {
+                date42 = hour
+            }
+        }
 
     }
 
@@ -319,6 +406,19 @@ class ProjectStub {
         let observation10 = Observation(session: session1, individual: individual1, state: state2, timestamp: date10, information: "Eating vigourously")
         let observation131 = Observation(session: session1, individual: individual1, state: state3, timestamp: date11, information: "Eating vigourously")
         let observation132 = Observation(session: session1, individual: individual1, state: state4, timestamp: date12, information: "Eating vigourously")
+        
+        observation1.changeCreator(user1)
+        observation2.changeCreator(user2)
+        observation3.changeCreator(user3)
+        observation4.changeCreator(user4)
+        observation5.changeCreator(user1)
+        observation6.changeCreator(user2)
+        observation7.changeCreator(user3)
+        observation8.changeCreator(user4)
+        observation9.changeCreator(user1)
+        observation10.changeCreator(user2)
+        observation131.changeCreator(user3)
+        observation132.changeCreator(user4)
         
         session1.addObservation([observation1, observation2, observation3, observation4, observation5, observation6, observation7, observation8, observation9, observation10, observation131, observation132])
         
@@ -344,6 +444,27 @@ class ProjectStub {
         let observation28 = Observation(session: session2, individual: individual1, state: state3, timestamp: date27, information: "Eating vigourously")
         let observation29 = Observation(session: session2, individual: individual1, state: state4, timestamp: date15, information: "Eating vigourously")
         let observation30 = Observation(session: session2, individual: individual1, state: state5, timestamp: date19, information: "Eating vigourously")
+        
+        observation11.changeCreator(user1)
+        observation12.changeCreator(user2)
+        observation13.changeCreator(user3)
+        observation14.changeCreator(user4)
+        observation15.changeCreator(user1)
+        observation16.changeCreator(user2)
+        observation17.changeCreator(user3)
+        observation18.changeCreator(user4)
+        observation19.changeCreator(user1)
+        observation20.changeCreator(user2)
+        observation21.changeCreator(user3)
+        observation22.changeCreator(user4)
+        observation23.changeCreator(user1)
+        observation24.changeCreator(user2)
+        observation25.changeCreator(user3)
+        observation26.changeCreator(user4)
+        observation27.changeCreator(user1)
+        observation28.changeCreator(user2)
+        observation29.changeCreator(user3)
+        observation30.changeCreator(user4)
         
         session2.addObservation([observation11,
             observation12,
@@ -410,6 +531,47 @@ class ProjectStub {
         let observation69 = Observation(session: session2, individual: individual1, state: state4, timestamp: date39, information: "Eating vigourously")
         let observation70 = Observation(session: session2, individual: individual1, state: state5, timestamp: date40, information: "Eating vigourously")
         
+        observation31.changeCreator(user1)
+        observation32.changeCreator(user2)
+        observation33.changeCreator(user3)
+        observation34.changeCreator(user4)
+        observation35.changeCreator(user1)
+        observation36.changeCreator(user2)
+        observation37.changeCreator(user3)
+        observation38.changeCreator(user4)
+        observation39.changeCreator(user1)
+        observation40.changeCreator(user2)
+        observation41.changeCreator(user3)
+        observation42.changeCreator(user4)
+        observation43.changeCreator(user1)
+        observation44.changeCreator(user2)
+        observation45.changeCreator(user3)
+        observation46.changeCreator(user4)
+        observation47.changeCreator(user1)
+        observation48.changeCreator(user2)
+        observation49.changeCreator(user3)
+        observation50.changeCreator(user4)
+        observation51.changeCreator(user1)
+        observation52.changeCreator(user2)
+        observation53.changeCreator(user3)
+        observation54.changeCreator(user4)
+        observation55.changeCreator(user1)
+        observation56.changeCreator(user2)
+        observation57.changeCreator(user3)
+        observation58.changeCreator(user4)
+        observation59.changeCreator(user1)
+        observation60.changeCreator(user2)
+        observation61.changeCreator(user3)
+        observation62.changeCreator(user4)
+        observation63.changeCreator(user1)
+        observation64.changeCreator(user2)
+        observation65.changeCreator(user3)
+        observation66.changeCreator(user4)
+        observation67.changeCreator(user1)
+        observation68.changeCreator(user2)
+        observation69.changeCreator(user3)
+        observation70.changeCreator(user4)
+        
         session3.addObservation([observation31,
             observation32,
             observation33,
@@ -450,6 +612,8 @@ class ProjectStub {
             observation68,
             observation69,
             observation70])
+        
+        
         
         
         // session 4 -- evening
@@ -493,6 +657,47 @@ class ProjectStub {
         let observation108 = Observation(session: session2, individual: individual1, state: state3, timestamp: date35, information: "Eating vigourously")
         let observation109 = Observation(session: session2, individual: individual1, state: state4, timestamp: date34, information: "Eating vigourously")
         let observation110 = Observation(session: session2, individual: individual1, state: state5, timestamp: date33, information: "Eating vigourously")
+        
+        observation71.changeCreator(user1)
+        observation72.changeCreator(user2)
+        observation73.changeCreator(user3)
+        observation74.changeCreator(user4)
+        observation75.changeCreator(user1)
+        observation76.changeCreator(user2)
+        observation77.changeCreator(user3)
+        observation78.changeCreator(user4)
+        observation79.changeCreator(user1)
+        observation80.changeCreator(user2)
+        observation81.changeCreator(user3)
+        observation82.changeCreator(user4)
+        observation83.changeCreator(user1)
+        observation84.changeCreator(user2)
+        observation85.changeCreator(user3)
+        observation86.changeCreator(user4)
+        observation87.changeCreator(user1)
+        observation88.changeCreator(user2)
+        observation89.changeCreator(user3)
+        observation90.changeCreator(user4)
+        observation91.changeCreator(user1)
+        observation92.changeCreator(user2)
+        observation93.changeCreator(user3)
+        observation94.changeCreator(user4)
+        observation95.changeCreator(user1)
+        observation96.changeCreator(user2)
+        observation97.changeCreator(user3)
+        observation98.changeCreator(user4)
+        observation99.changeCreator(user1)
+        observation100.changeCreator(user2)
+        observation101.changeCreator(user3)
+        observation102.changeCreator(user4)
+        observation103.changeCreator(user1)
+        observation104.changeCreator(user2)
+        observation105.changeCreator(user3)
+        observation106.changeCreator(user4)
+        observation107.changeCreator(user1)
+        observation108.changeCreator(user2)
+        observation109.changeCreator(user3)
+        observation110.changeCreator(user4)
         
         session4.addObservation([observation71,
             observation72,
@@ -556,6 +761,29 @@ class ProjectStub {
         let observation128 = Observation(session: session2, individual: individual1, state: state3, timestamp: date19, information: "Eating vigourously")
         let observation129 = Observation(session: session2, individual: individual1, state: state4, timestamp: date23, information: "Eating vigourously")
         let observation130 = Observation(session: session2, individual: individual1, state: state5, timestamp: date22, information: "Eating vigourously")
+        
+        observation110.changeCreator(user2)
+        observation111.changeCreator(user3)
+        observation112.changeCreator(user4)
+        observation113.changeCreator(user1)
+        observation114.changeCreator(user2)
+        observation115.changeCreator(user3)
+        observation116.changeCreator(user4)
+        observation117.changeCreator(user1)
+        observation118.changeCreator(user2)
+        observation119.changeCreator(user3)
+        observation120.changeCreator(user4)
+        observation120.changeCreator(user2)
+        observation121.changeCreator(user3)
+        observation122.changeCreator(user4)
+        observation123.changeCreator(user1)
+        observation124.changeCreator(user2)
+        observation125.changeCreator(user3)
+        observation126.changeCreator(user4)
+        observation127.changeCreator(user1)
+        observation128.changeCreator(user2)
+        observation129.changeCreator(user3)
+        observation130.changeCreator(user4)
         
         session4.addObservation([observation111,
             observation112,
