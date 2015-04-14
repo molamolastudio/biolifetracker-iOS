@@ -47,10 +47,10 @@ class Observation: BiolifeModel {
         _information = dictionary["information"] as! String
         _timestamp = dateFormatter.getDate(dictionary["timestamp"] as! String)
         _individual = Individual.individualWithId(dictionary["individual"] as! Int)
-        if let locationId = dictionary["location"] as! Int? {
+        if let locationId = dictionary["location"] as? Int {
             _location = Location.locationWithId(locationId)
         }
-        if let weatherId = dictionary["weather"] as! Int? {
+        if let weatherId = dictionary["weather"] as? Int {
             _weather = Weather.weatherWithId(weatherId)
         }
         super.init(dictionary: dictionary)
@@ -160,7 +160,6 @@ extension Observation: CloudStorable {
     
     override func encodeWithDictionary(dictionary: NSMutableDictionary) {
         let dateFormatter = BiolifeDateFormatter()
-        dictionary.setValue(session.id, forKey: "session")
         dictionary.setValue(state.id, forKey: "recorded_behaviour")
         dictionary.setValue(information, forKey: "information")
         dictionary.setValue(photo?.id, forKey: "photo")

@@ -35,7 +35,7 @@ class BehaviourState: BiolifeModel {
     required override init(dictionary: NSDictionary) {
         _name = dictionary["name"] as! String
         _information = dictionary["information"] as! String
-        if let photoId = dictionary["photo"] as! Int? {
+        if let photoId = dictionary["photo"] as? Int {
             _photo = Photo.photoWithId(photoId)
         }
         super.init(dictionary: dictionary)

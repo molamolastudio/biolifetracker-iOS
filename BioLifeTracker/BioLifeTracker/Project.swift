@@ -387,6 +387,7 @@ extension Project: CloudStorable {
     override func encodeWithDictionary(dictionary: NSMutableDictionary) {
         super.encodeWithDictionary(dictionary)
         dictionary.setValue(name, forKey: "name")
+        dictionary.setValue(sessions.map { $0.id! }, forKey: "session_set")
         dictionary.setValue(ethogram.id!, forKey: "ethogram")
         dictionary.setValue(members.map { $0.id }, forKey: "members")
         dictionary.setValue(admins.map { $0.id }, forKey: "admins")

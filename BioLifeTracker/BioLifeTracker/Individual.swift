@@ -33,7 +33,7 @@ class Individual: BiolifeModel {
     required override init(dictionary: NSDictionary) {
         _label = dictionary["label"] as! String
         _tags = Tag.tagsWithIds(dictionary["tags"] as! [Int])
-        if let photoId = dictionary["photo"] as! Int? {
+        if let photoId = dictionary["photo"] as? Int {
             _photo = Photo.photoWithId(photoId)
         }
         super.init(dictionary: dictionary)

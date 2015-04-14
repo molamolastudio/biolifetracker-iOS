@@ -185,6 +185,7 @@ extension Session: CloudStorable {
     
     override func encodeWithDictionary(dictionary: NSMutableDictionary) {
         dictionary.setValue(project.id, forKey: "project")
+        dictionary.setValue(observations.map { $0.id! }, forKey: "observation_set")
         dictionary.setValue(_typeValue, forKey: "session_type")
         dictionary.setValue(individuals.map { $0.id! }, forKey: "individuals")
         dictionary.setValue(name, forKey: "name")
