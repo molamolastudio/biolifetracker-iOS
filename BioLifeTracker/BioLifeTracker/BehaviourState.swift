@@ -76,9 +76,10 @@ class BehaviourState: BiolifeModel {
 }
 
 func ==(lhs: BehaviourState, rhs: BehaviourState) -> Bool {
-    return lhs.name == rhs.name &&
-        lhs.information == rhs.information &&
-        lhs.photo == rhs.photo
+    if lhs.name != rhs.name { return false }
+    if lhs.information != rhs.information { return false }
+    if lhs.photo != rhs.photo { return false }
+    return true
 }
 
 

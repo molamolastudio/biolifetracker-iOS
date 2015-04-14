@@ -156,8 +156,10 @@ class Session: BiolifeModel {
 }
 
 func ==(lhs: Session, rhs: Session) -> Bool {
-    return lhs.project == rhs.project &&  lhs.observations == rhs.observations
-            && lhs.individuals == rhs.individuals
+    if lhs.project != rhs.project { return false }
+    if lhs.observations != rhs.observations { return false }
+    if lhs.individuals != rhs.individuals { return false }
+    return true
 }
 
 

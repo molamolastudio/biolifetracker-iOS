@@ -605,9 +605,12 @@ class ProjectTests: XCTestCase {
         downloadTask.execute()
         let downloadedProject = Project(dictionary: downloadTask.getResults()[0])
         
-        XCTAssertTrue(downloadedProject == project)
-//        XCTAssertEqual(downloadedProject.id!, projectId)
-//        XCTAssertEqual(downloadedProject.sessions.count, project.sessions.count)
+        
+        XCTAssertEqual(downloadedProject.id!, projectId)
+        XCTAssertEqual(downloadedProject.sessions.count, project.sessions.count)
+        XCTAssertEqual(downloadedProject.admins.count, project.admins.count)
+        XCTAssertEqual(downloadedProject.members.count, project.members.count)
+        XCTAssertEqual(downloadedProject.individuals.count, project.individuals.count)
     }
     
 }

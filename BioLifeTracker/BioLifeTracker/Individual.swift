@@ -91,9 +91,10 @@ class Individual: BiolifeModel {
 }
 
 func ==(lhs: Individual, rhs: Individual) -> Bool {
-    return lhs.label == rhs.label &&
-        lhs.tags == rhs.tags &&
-        lhs.photo == rhs.photo
+    if lhs.label != rhs.label { return false }
+    if lhs.tags != rhs.tags { return false }
+    if lhs.photo != rhs.photo { return false }
+    return true
 }
 
 

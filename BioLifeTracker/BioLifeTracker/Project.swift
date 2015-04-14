@@ -338,9 +338,13 @@ class Project: BiolifeModel, Storable {
 }
 
 func ==(lhs: Project, rhs: Project) -> Bool {
-    return lhs.name == rhs.name &&  lhs.ethogram == rhs.ethogram
-        && lhs.admins == rhs.admins && lhs.members == rhs.members
-        && lhs.sessions == rhs.sessions && lhs.individuals == rhs.individuals
+    if lhs.name != rhs.name { return false }
+    if lhs.ethogram != rhs.ethogram { return false }
+    if lhs.admins != rhs.admins { return false }
+    if lhs.members != rhs.members { return false }
+    if lhs.sessions != rhs.sessions { return false }
+    if lhs.individuals != rhs.individuals { return false }
+    return true
 }
 
 extension Project: NSCoding {
