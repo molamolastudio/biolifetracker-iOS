@@ -186,8 +186,10 @@ class Ethogram: BiolifeModel, Storable {
 }
 
 func ==(lhs: Ethogram, rhs: Ethogram) -> Bool {
-    return lhs.name == rhs.name &&  lhs.information == rhs.information
-        && lhs.behaviourStates == rhs.behaviourStates
+    if lhs.name != rhs.name { return false }
+    if lhs.information != rhs.information { return false }
+    if lhs.behaviourStates != rhs.behaviourStates { return false }
+    return true
 }
 
 

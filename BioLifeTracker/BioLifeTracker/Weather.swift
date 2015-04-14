@@ -53,7 +53,8 @@ class Weather: BiolifeModel {
 }
 
 func ==(lhs: Weather, rhs: Weather) -> Bool {
-    return lhs.weather == rhs.weather
+    if lhs.weather != rhs.weather { return false }
+    return true
 }
 
 extension Weather: NSCoding {

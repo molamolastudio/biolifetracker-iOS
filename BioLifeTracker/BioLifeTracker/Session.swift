@@ -156,8 +156,10 @@ class Session: BiolifeModel {
 }
 
 func ==(lhs: Session, rhs: Session) -> Bool {
-    return lhs.project == rhs.project &&  lhs.observations == rhs.observations
-            && lhs.individuals == rhs.individuals
+    if lhs.project != rhs.project { return false }
+    if lhs.observations != rhs.observations { return false }
+    if lhs.individuals != rhs.individuals { return false }
+    return true
 }
 
 
@@ -185,6 +187,7 @@ extension Session: CloudStorable {
     
     override func encodeWithDictionary(dictionary: NSMutableDictionary) {
         dictionary.setValue(project.id, forKey: "project")
+        dictionary.setValue(observations.map { $0.id! }, forKey: "observation_set")
         dictionary.setValue(_typeValue, forKey: "session_type")
         dictionary.setValue(individuals.map { $0.id! }, forKey: "individuals")
         dictionary.setValue(name, forKey: "name")

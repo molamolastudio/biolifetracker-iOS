@@ -61,6 +61,7 @@
 		24E32D711AB1EC5A003C4E0A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D3E1AB1E86A003C4E0A /* AudioToolbox.framework */; };
 		24E32D721AB1EC5A003C4E0A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D311AB19647003C4E0A /* Bolts.framework */; };
 		24E45C411ADB797F000E0DD1 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248464831ADA481F0001C5E3 /* Photo.swift */; };
+		24E45C431ADBE45A000E0DD1 /* PhotoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E45C421ADBE45A000E0DD1 /* PhotoTests.swift */; };
 		24F0F6C71AD7717200C6CC23 /* DeleteTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6C61AD7717200C6CC23 /* DeleteTask.swift */; };
 		24F0F6C81AD7728A00C6CC23 /* DeleteTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6C61AD7717200C6CC23 /* DeleteTask.swift */; };
 		24F0F6CA1AD7740300C6CC23 /* DeleteTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6C91AD7740300C6CC23 /* DeleteTaskTests.swift */; };
@@ -228,6 +229,7 @@
 		24E32D501AB1E9B9003C4E0A /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		24E32D521AB1E9F2003C4E0A /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		24E32D771AB298D8003C4E0A /* BioLifeTracker-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BioLifeTracker-Bridging-Header.h"; sourceTree = "<group>"; };
+		24E45C421ADBE45A000E0DD1 /* PhotoTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTests.swift; sourceTree = "<group>"; };
 		24F0F6C61AD7717200C6CC23 /* DeleteTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteTask.swift; sourceTree = "<group>"; };
 		24F0F6C91AD7740300C6CC23 /* DeleteTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteTaskTests.swift; sourceTree = "<group>"; };
 		24F0F6CB1AD7D55400C6CC23 /* CloudStorageWorkerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorageWorkerTests.swift; sourceTree = "<group>"; };
@@ -415,6 +417,7 @@
 				AC1881581AD02F3E00CE450B /* LocationTests.swift */,
 				AC1881561AD02F3100CE450B /* WeatherTests.swift */,
 				AC1881541AD02F2400CE450B /* TagTests.swift */,
+				24E45C421ADBE45A000E0DD1 /* PhotoTests.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -887,6 +890,7 @@
 				AC7B6DDF1AD2549E002D3EE6 /* BiolifeModel.swift in Sources */,
 				AC7B6DC31AD25445002D3EE6 /* SessionTests.swift in Sources */,
 				AC7B6DC21AD25443002D3EE6 /* BehaviourStateTests.swift in Sources */,
+				24E45C431ADBE45A000E0DD1 /* PhotoTests.swift in Sources */,
 				3205E75E1AAED9F9006F374D /* BioLifeTrackerTests.swift in Sources */,
 				2486AB411AD64C7D00573618 /* UploadTaskTests.swift in Sources */,
 				AC7B6DE31AD254B2002D3EE6 /* ProjectManager.swift in Sources */,
