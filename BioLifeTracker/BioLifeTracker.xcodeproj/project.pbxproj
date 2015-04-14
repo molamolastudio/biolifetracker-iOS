@@ -35,6 +35,8 @@
 		248464841ADA481F0001C5E3 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248464831ADA481F0001C5E3 /* Photo.swift */; };
 		2486AB3F1AD64C3A00573618 /* DownloadTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2486AB3E1AD64C3A00573618 /* DownloadTaskTests.swift */; };
 		2486AB411AD64C7D00573618 /* UploadTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2486AB401AD64C7D00573618 /* UploadTaskTests.swift */; };
+		24CE59411ADD3E94000571A3 /* NSDate+Encoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CE59401ADD3E94000571A3 /* NSDate+Encoding.swift */; };
+		24CE59421ADD42AB000571A3 /* NSDate+Encoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CE59401ADD3E94000571A3 /* NSDate+Encoding.swift */; };
 		24D28D141ADA5A6800E70759 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24D28D131ADA5A6800E70759 /* Images.xcassets */; };
 		24E32D361AB19647003C4E0A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D311AB19647003C4E0A /* Bolts.framework */; };
 		24E32D3F1AB1E86A003C4E0A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E32D3E1AB1E86A003C4E0A /* AudioToolbox.framework */; };
@@ -69,7 +71,6 @@
 		24F5DF481AD8352200F76B6B /* CloudStorageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F5DF471AD8352200F76B6B /* CloudStorageManagerTests.swift */; };
 		3205E7481AAED9F9006F374D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7471AAED9F9006F374D /* AppDelegate.swift */; };
 		3205E74D1AAED9F9006F374D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3205E74B1AAED9F9006F374D /* Main.storyboard */; };
-		3205E75E1AAED9F9006F374D /* BioLifeTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E75D1AAED9F9006F374D /* BioLifeTrackerTests.swift */; };
 		3205E7771AAEDA85006F374D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E76F1AAEDA85006F374D /* Constants.swift */; };
 		3205E7781AAEDA85006F374D /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7701AAEDA85006F374D /* Data.swift */; };
 		3205E7791AAEDA85006F374D /* Ethogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7711AAEDA85006F374D /* Ethogram.swift */; };
@@ -215,6 +216,7 @@
 		2486AB3E1AD64C3A00573618 /* DownloadTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTaskTests.swift; sourceTree = "<group>"; };
 		2486AB401AD64C7D00573618 /* UploadTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadTaskTests.swift; sourceTree = "<group>"; };
 		24A92E3B1AD27A4C00A2002F /* CloudStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorageManager.swift; sourceTree = "<group>"; };
+		24CE59401ADD3E94000571A3 /* NSDate+Encoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Encoding.swift"; sourceTree = "<group>"; };
 		24D28D131ADA5A6800E70759 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		24E32D311AB19647003C4E0A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = BioLifeTracker/Bolts.framework; sourceTree = "<group>"; };
 		24E32D3E1AB1E86A003C4E0A /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -241,7 +243,6 @@
 		3205E7511AAED9F9006F374D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		3205E7571AAED9F9006F374D /* BioLifeTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BioLifeTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3205E75C1AAED9F9006F374D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3205E75D1AAED9F9006F374D /* BioLifeTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BioLifeTrackerTests.swift; sourceTree = "<group>"; };
 		3205E76F1AAEDA85006F374D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3205E7701AAEDA85006F374D /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		3205E7711AAEDA85006F374D /* Ethogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ethogram.swift; sourceTree = "<group>"; };
@@ -557,7 +558,6 @@
 		3205E75A1AAED9F9006F374D /* BioLifeTrackerTests */ = {
 			isa = PBXGroup;
 			children = (
-				3205E75D1AAED9F9006F374D /* BioLifeTrackerTests.swift */,
 				240D042E1AB6D43100D8BB9F /* Unit Testing */,
 				3205E75B1AAED9F9006F374D /* Supporting Files */,
 			);
@@ -641,6 +641,7 @@
 				241208AA1AD124A500778360 /* DownloadTask.swift */,
 				241208A81AD123D700778360 /* UploadTask.swift */,
 				240819391AD503DD00DFE8AA /* NSURL+Utils.swift */,
+				24CE59401ADD3E94000571A3 /* NSDate+Encoding.swift */,
 			);
 			name = "Cloud Storage";
 			sourceTree = "<group>";
@@ -807,6 +808,7 @@
 				326773C21ACAEFB000899745 /* SingleLineTextCell.swift in Sources */,
 				ACDE13AD1AD0C0540075AC35 /* EthogramManager.swift in Sources */,
 				329B29381AD15BBF007ADC65 /* FormPopupController.swift in Sources */,
+				24CE59411ADD3E94000571A3 /* NSDate+Encoding.swift in Sources */,
 				3205E7791AAEDA85006F374D /* Ethogram.swift in Sources */,
 				AC6A24AC1ADD1B8100CF33D6 /* BLTPhotoProtocol.swift in Sources */,
 				326773C51ACD7C9A00899745 /* MenuViewControllerDelegate.swift in Sources */,
@@ -891,7 +893,6 @@
 				AC7B6DC31AD25445002D3EE6 /* SessionTests.swift in Sources */,
 				AC7B6DC21AD25443002D3EE6 /* BehaviourStateTests.swift in Sources */,
 				24E45C431ADBE45A000E0DD1 /* PhotoTests.swift in Sources */,
-				3205E75E1AAED9F9006F374D /* BioLifeTrackerTests.swift in Sources */,
 				2486AB411AD64C7D00573618 /* UploadTaskTests.swift in Sources */,
 				AC7B6DE31AD254B2002D3EE6 /* ProjectManager.swift in Sources */,
 				AC7B6DC71AD25451002D3EE6 /* ProjectMngTests.swift in Sources */,
@@ -900,6 +901,7 @@
 				AC9162AD1ACA6CC300FED714 /* CloudStorable.swift in Sources */,
 				240FEF041AD60ACE000FD9F3 /* BiolifeDateFormatter.swift in Sources */,
 				AC7B6DDB1AD25492002D3EE6 /* Ethogram.swift in Sources */,
+				24CE59421ADD42AB000571A3 /* NSDate+Encoding.swift in Sources */,
 				AC7B6DBF1AD2543B002D3EE6 /* LocationTests.swift in Sources */,
 				AC7B6DE11AD254A6002D3EE6 /* UserAuthService.swift in Sources */,
 				AC7B6DE01AD254A1002D3EE6 /* User.swift in Sources */,

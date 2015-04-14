@@ -56,7 +56,7 @@ class Tag: BiolifeModel {
 }
 
 func ==(lhs: Tag, rhs: Tag) -> Bool {
-    if lhs.name == rhs.name { return false }
+    if lhs.name != rhs.name { return false }
     return true
 }
 
@@ -81,7 +81,7 @@ extension Tag: CloudStorable {
 }
 
 extension Tag {
-    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+    override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
         encodeWithDictionary(dictionary)
     }
 }

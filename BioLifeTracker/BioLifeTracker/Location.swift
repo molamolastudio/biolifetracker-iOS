@@ -78,7 +78,7 @@ extension Location: CloudStorable {
 }
 
 extension Location {
-    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+    override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
         encodeWithDictionary(dictionary)
     }
 }

@@ -400,9 +400,47 @@ extension Project: CloudStorable {
 }
 
 extension Project {
-    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
-        let dateFormatter = BiolifeDateFormatter()
+    override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        // simple properties 
+        dictionary.setValue(name, forKey: "name")
         
-        super.encodeWithDictionary(dictionary)
+        // complex properties
+        var membersArray = [NSDictionary]()
+        for member in members {
+            var memberDictionary = NSMutableDictionary()
+            member.encodeRecursivelyWithDictionary(memberDictionary)
+            membersArray.append(memberDictionary)
+        }
+        dictionary.setValue(membersArray, forKey: "members")
+        
+        var adminsArray = [NSDictionary]()
+        for admin in admins {
+            var adminDictionary = NSMutableDictionary()
+            admin.encodeRecursivelyWithDictionary(adminDictionary)
+            adminsArray.append(adminDictionary)
+        }
+        dictionary.setValue(adminsArray, forKey: "admins")
+        
+        var sessionsArray = [NSDictionary]()
+        for session in sessions {
+            var sessionDictionary = NSMutableDictionary()
+            session.encodeRecursivelyWithDictionary(sessionDictionary)
+            sessionsArray.append(sessionDictionary)
+        }
+        dictionary.setValue(sessionsArray, forKey: "sessions")
+
+        var ethogramDictionary = NSMutableDictionary()
+        ethogram.encodeRecursivelyWithDictionary(ethogramDictionary)
+        dictionary.setValue(ethogramDictionary, forKey: "ethogram")
+
+        var individualsArray = [NSDictionary]()
+        for individual in individuals {
+            var individualDictionary = NSMutableDictionary()
+            individual.encodeRecursivelyWithDictionary(individualDictionary)
+            individualsArray.append(individualDictionary)
+        }
+        dictionary.setValue(individualsArray, forKey: "individuals")
+        
+        super.encodeRecursivelyWithDictionary(dictionary)
     }
 }

@@ -196,9 +196,28 @@ extension Session: CloudStorable {
 }
 
 extension Session {
-    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
-        let dateFormatter = BiolifeDateFormatter()
+    override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        // simple properties
+        dictionary.setValue(_typeValue, forKey: "session_type")
+        dictionary.setValue(name, forKey: "name")
         
-        super.encodeWithDictionary(dictionary)
+        // complex properties
+        var observationsArray = [NSDictionary]()
+        for observation in observations {
+            var observationDictionary = NSMutableDictionary()
+            observation.encodeRecursivelyWithDictionary(observationDictionary)
+            observationsArray.append(observationDictionary)
+        }
+        dictionary.setValue(observationsArray, forKey: "observations")
+
+        var individualsArray = [NSDictionary]()
+        for individual in individuals {
+            var individualDictionary = NSMutableDictionary()
+            individual.encodeRecursivelyWithDictionary(individualDictionary)
+            individualsArray.append(individualDictionary)
+        }
+        dictionary.setValue(individualsArray, forKey: "individuals")
+        
+        super.encodeRecursivelyWithDictionary(dictionary)
     }
 }

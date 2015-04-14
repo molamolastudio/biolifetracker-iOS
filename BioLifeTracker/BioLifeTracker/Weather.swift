@@ -78,7 +78,7 @@ extension Weather: CloudStorable {
 }
 
 extension Weather {
-    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+    override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
         encodeWithDictionary(dictionary)
     }
 }

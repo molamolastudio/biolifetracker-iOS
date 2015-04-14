@@ -127,7 +127,7 @@ extension Individual: CloudStorable {
 }
 
 extension Individual {
-    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+    override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
         dictionary.setValue(label, forKey: "label")
 
         var photoDictionary = NSMutableDictionary()

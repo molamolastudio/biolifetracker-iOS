@@ -86,3 +86,9 @@ extension BiolifeModel: NSCoding {
         coder.encodeObject(_updatedBy, forKey: "updatedBy")
     }
 }
+
+extension BiolifeModel {
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        encodeWithDictionary(dictionary)
+    }
+}

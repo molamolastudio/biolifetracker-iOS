@@ -22,7 +22,7 @@ class TagTests: XCTestCase {
     }
     
     func testEquality() {
-    var tag1 = Tag(name: "Dominant")
+        var tag1 = Tag(name: "Dominant")
         
         XCTAssert(tag == tag, "Not equal")
         XCTAssert(tag != tag1, "Error in equality")

@@ -111,9 +111,18 @@ extension BehaviourState: CloudStorable {
 }
 
 extension BehaviourState {
-    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
-        let dateFormatter = BiolifeDateFormatter()
+    override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        // simple properties
+        dictionary.setValue(name, forKey: "name")
+        dictionary.setValue(information, forKey: "information")
         
-        super.encodeWithDictionary(dictionary)
+        // complex properties
+        var photoDictionary = NSMutableDictionary()
+        if let photo = photo {
+            photo.encodeRecursivelyWithDictionary(photoDictionary)
+        }
+        dictionary.setValue(photoDictionary, forKey: "photo")
+        
+        super.encodeRecursivelyWithDictionary(dictionary)
     }
 }

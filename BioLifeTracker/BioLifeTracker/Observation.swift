@@ -159,11 +159,10 @@ extension Observation: CloudStorable {
     }
     
     override func encodeWithDictionary(dictionary: NSMutableDictionary) {
-        let dateFormatter = BiolifeDateFormatter()
         dictionary.setValue(state.id, forKey: "recorded_behaviour")
         dictionary.setValue(information, forKey: "information")
         dictionary.setValue(photo?.id, forKey: "photo")
-        dictionary.setValue(dateFormatter.formatDate(timestamp), forKey: "timestamp")
+        dictionary.setValue(timestamp.toBiolifeDateFormat(), forKey: "timestamp")
         dictionary.setValue(individual.id, forKey: "individual")
         dictionary.setValue(location?.id, forKey: "location")
         dictionary.setValue(weather?.id, forKey: "weather")
@@ -172,11 +171,32 @@ extension Observation: CloudStorable {
 }
 
 extension Observation {
-    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
-        let dateFormatter = BiolifeDateFormatter()
-        let sessionDictionary = NSMutableDictionary()
-        session.encodeRecursivelyWithDictionary(sessionDictionary)
+    override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        // simple properties
+        dictionary.setValue(information, forKey: "information")
+        dictionary.setValue(timestamp.toBiolifeDateFormat(), forKey: "timestamp")
+        timestamp.toBiolifeDateFormat()
+        // complex properties
+        var stateDictionary = NSMutableDictionary()
+        state.encodeRecursivelyWithDictionary(stateDictionary)
+        dictionary.setValue(stateDictionary, forKey: "recorded_behaviour")
+        
+        var photoDictionary = NSMutableDictionary()
+        photo?.encodeRecursivelyWithDictionary(dictionary)
+        dictionary.setValue(photoDictionary, forKey: "photo")
+        
+        var individualDictionary = NSMutableDictionary()
+        individual.encodeRecursivelyWithDictionary(individualDictionary)
+        dictionary.setValue(individualDictionary, forKey: "individual")
+        
+        var locationDictionary = NSMutableDictionary()
+        location?.encodeRecursivelyWithDictionary(locationDictionary)
+        dictionary.setValue(locationDictionary, forKey: "location")
 
-        super.encodeWithDictionary(dictionary)
+        var weatherDictionary = NSMutableDictionary()
+        weather?.encodeRecursivelyWithDictionary(weatherDictionary)
+        dictionary.setValue(weatherDictionary, forKey: "weather")
+        
+        super.encodeRecursivelyWithDictionary(dictionary)
     }
 }

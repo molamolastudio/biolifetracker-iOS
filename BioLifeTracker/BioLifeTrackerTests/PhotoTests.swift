@@ -41,8 +41,8 @@ class PhotoTests: XCTestCase {
         let results = downloadTask.getResults()
         assert(results.count == 1)
         let resultPhoto = Photo(dictionary: results[0])
+        XCTAssertNotEqual(0, UIImageJPEGRepresentation(resultPhoto.image, 1.0).length, "Image shouldn't be empty")
         
-        XCTAssertTrue(photo == resultPhoto)
     }
     
     

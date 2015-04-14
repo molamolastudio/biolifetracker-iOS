@@ -40,13 +40,6 @@ class Photo: BiolifeModel {
     }
 }
 
-func ==(lhs: Photo, rhs: Photo) -> Bool {
-    if lhs.id == rhs.id { return true }
-    let lhsImageRep = UIImagePNGRepresentation(lhs.image)
-    let rhsImageRep = UIImagePNGRepresentation(rhs.image)
-    return lhsImageRep.isEqualToData(rhsImageRep)
-}
-
 extension Photo: CloudStorable {
     var classUrl: String { return Photo.ClassUrl }
     
@@ -61,7 +54,9 @@ extension Photo: CloudStorable {
 }
 
 extension Photo {
-    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
-        encodeWithDictionary(dictionary)
+    override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        let imageString = UIImageJPEGRepresentation(image, 1.0)
+            .base64EncodedStringWithOptions(nil)
+        dictionary.setValue(imageString, forKey: "image")
     }
 }

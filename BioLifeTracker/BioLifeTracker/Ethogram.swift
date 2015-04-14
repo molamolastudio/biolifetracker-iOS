@@ -221,9 +221,20 @@ extension Ethogram: CloudStorable {
 }
 
 extension Ethogram {
-    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
-        let dateFormatter = BiolifeDateFormatter()
+    override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        // simple properties
+        dictionary.setValue(name, forKey: "name")
+        dictionary.setValue(information, forKey: "information")
         
-        super.encodeWithDictionary(dictionary)
+        // complex properties
+        var behavioursArray = [NSDictionary]()
+        for behaviour in behaviourStates {
+            var behaviourDictionary = NSMutableDictionary()
+            behaviour.encodeRecursivelyWithDictionary(behaviourDictionary)
+            behavioursArray.append(behaviourDictionary)
+        }
+        dictionary.setValue(behavioursArray, forKey: "behaviours")
+        
+        super.encodeRecursivelyWithDictionary(dictionary)
     }
 }

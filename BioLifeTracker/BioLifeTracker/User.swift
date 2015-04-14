@@ -50,4 +50,10 @@ class User: NSObject, NSCoding {
             return User(dictionary: memberDictionary)
         }
     }
+    
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        dictionary.setValue(id, forKey: "id")
+        dictionary.setValue(email, forKey: "email")
+        dictionary.setValue(name, forKey: "name")
+    }
 }
