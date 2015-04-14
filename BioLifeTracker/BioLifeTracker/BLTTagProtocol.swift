@@ -8,8 +8,8 @@
 
 import Foundation
 
-protocol BLTTagProtocol{
+protocol BLTTagProtocol {
     var name: String { get }
     
-    func encodeWithDictionary(dictionary: NSMutableDictionary)
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary)
 }

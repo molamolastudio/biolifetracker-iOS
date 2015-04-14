@@ -8,8 +8,8 @@
 
 import Foundation
 
-protocol BLTWeatherProtocol{
+protocol BLTWeatherProtocol {
     var weather: String { get }
     
-    func encodeWithDictionary(dictionary: NSMutableDictionary)
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary)
 }

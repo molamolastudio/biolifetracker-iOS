@@ -8,13 +8,11 @@
 
 import Foundation
 
-class Weather: BiolifeModel {
+class Weather: BiolifeModel, BLTWeatherProtocol {
     static let ClassUrl = "weathers"
     
     private var _weather: String
-    var weather: String {
-        get { return _weather }
-    }
+    var weather: String { get { return _weather } }
     
     override init() {
         _weather = ""
@@ -77,7 +75,7 @@ extension Weather: CloudStorable {
     }
 }
 
-extension Weather {
+extension Weather: BLTWeatherProtocol {
     override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
         encodeWithDictionary(dictionary)
     }

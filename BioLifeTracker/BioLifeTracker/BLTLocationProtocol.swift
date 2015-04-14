@@ -8,8 +8,8 @@
 
 import Foundation
 
-protocol BLTLocationProtocol{
+protocol BLTLocationProtocol {
     var location: String { get }
     
-    func encodeWithDictionary(dictionary: NSMutableDictionary)
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary)
 }

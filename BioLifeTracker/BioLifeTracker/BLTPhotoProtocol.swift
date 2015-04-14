@@ -8,8 +8,8 @@
 
 import Foundation
 
-protocol BLTPhotoProtocol{
+protocol BLTPhotoProtocol {
     var image: UIImage { get }
     
-    func encodeWithDictionary(dictionary: NSMutableDictionary)
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary)
 }

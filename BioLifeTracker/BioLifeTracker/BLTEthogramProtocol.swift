@@ -8,10 +8,10 @@
 
 import Foundation
 
-protocol BLTEthogramProtocol{
+protocol BLTEthogramProtocol {
     var name: String { get }
     var information: String { get }
     var behaviourStates: [BehaviourState] { get }
     
-    func encodeWithDictionary(dictionary: NSMutableDictionary)
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary)
 }

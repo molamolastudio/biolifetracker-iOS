@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Project: BiolifeModel, Storable {
+class Project: BiolifeModel, Storable, BLTProjectProtocol {
     static let ClassUrl = "projects"
     
     private var _name: String
@@ -399,7 +399,7 @@ extension Project: CloudStorable {
     }
 }
 
-extension Project {
+extension Project: BLTProjectProtocol {
     override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
         // simple properties 
         dictionary.setValue(name, forKey: "name")

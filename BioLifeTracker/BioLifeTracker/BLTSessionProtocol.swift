@@ -8,12 +8,12 @@
 
 import Foundation
 
-protocol BLTSessionProtocol{
+protocol BLTSessionProtocol {
     var type: SessionType { get }
     var name: String { get }
     var project: Project { get }
     var observations: [Observation] { get }
     var individuals: [Individual] { get }
     
-    func encodeWithDictionary(dictionary: NSMutableDictionary)
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary)
 }

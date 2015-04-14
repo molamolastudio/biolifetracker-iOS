@@ -8,10 +8,10 @@
 
 import Foundation
 
-protocol BLTBehaviourStateProtocol{
+protocol BLTBehaviourStateProtocol {
     var name: String { get }
     var information: String { get }
     var photo: Photo? { get }
     
-    func encodeWithDictionary(dictionary: NSMutableDictionary)
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary)
 }

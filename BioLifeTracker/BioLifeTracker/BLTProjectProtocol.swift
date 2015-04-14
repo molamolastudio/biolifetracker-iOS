@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol BLTProjectProtocol{
+protocol BLTProjectProtocol {
     var name: String { get }
     var ethogram: Ethogram { get }
     var admins: [User] { get }
@@ -16,5 +16,5 @@ protocol BLTProjectProtocol{
     var sessions: [Session] { get }
     var individuals: [Individual] { get }
     
-    func encodeWithDictionary(dictionary: NSMutableDictionary)
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary)
 }

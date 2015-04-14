@@ -52,6 +52,8 @@ class Photo: BiolifeModel, BLTPhotoProtocol {
     }
 }
 
+<<<<<<< HEAD
+=======
 extension Photo: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)
@@ -59,6 +61,14 @@ extension Photo: NSCoding {
     }
 }
 
+func ==(lhs: Photo, rhs: Photo) -> Bool {
+    if lhs.id == rhs.id { return true }
+    let lhsImageRep = UIImagePNGRepresentation(lhs.image)
+    let rhsImageRep = UIImagePNGRepresentation(rhs.image)
+    return lhsImageRep.isEqualToData(rhsImageRep)
+}
+
+>>>>>>> eea413646d23a0d87f32994e92a18606efc591cf
 extension Photo: CloudStorable {
     var classUrl: String { return Photo.ClassUrl }
     
@@ -72,7 +82,7 @@ extension Photo: CloudStorable {
     }
 }
 
-extension Photo: BLTPhotoProtocol {
+extension Photo {
     override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
         let imageString = UIImageJPEGRepresentation(image, 1.0)
             .base64EncodedStringWithOptions(nil)

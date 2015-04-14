@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol BLTObservationProtocol{
+protocol BLTObservationProtocol {
     var session: Session! { get }
     var state: BehaviourState { get }
     var information: String { get }
@@ -18,5 +18,5 @@ protocol BLTObservationProtocol{
     var location: Location? { get }
     var weather: Weather? { get }
     
-    func encodeWithDictionary(dictionary: NSMutableDictionary)
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary)
 }
