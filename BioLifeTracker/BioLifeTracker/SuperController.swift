@@ -11,7 +11,7 @@
 
 import UIKit
 
-class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate, FirstViewControllerDelegate, ProjectsViewControllerDelegate, EthogramsViewControllerDelegate, ProjectHomeViewControllerDelegate {
+class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate, FirstViewControllerDelegate, ProjectsViewControllerDelegate, EthogramsViewControllerDelegate, ProjectHomeViewControllerDelegate, ScanSessionViewControllerDelegate {
     
     let splitVC = UISplitViewController()
     let masterNav = UINavigationController()
@@ -38,6 +38,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
         self.view.addSubview(splitVC.view)
         splitVC.view.frame = self.view.frame
+        
+        showStartPage()
     }
     
     func setupForDemo() {
@@ -194,6 +196,22 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         detailNav.pushViewController(vc, animated: true)
     }
     
+    func showSession(session: Session) {
+        if session.type == SessionType.Focal {
+            showFocalSessionPage(session)
+        } else {
+            showScanSessionPage(session)
+        }
+    }
+    
+    func showFocalSessionPage(session: Session) {
+        
+    }
+    
+    func showScanSessionPage(session: Session) {
+        
+    }
+    
     func clearNavigationStack() {
         detailNav.popToRootViewControllerAnimated(false)
     }
@@ -295,11 +313,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     // ProjectHomeViewControllerDelegate methods
     func userDidSelectSession(project: Project, session: Session) {
-        if session.type == SessionType.Focal {
-            
-        } else {
-            
-        }
+        showSession(session)
     }
     
     func userDidSelectMember(project: Project, member: User) {
@@ -311,10 +325,16 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func userDidSelectCreateSession() {
-        
+        // Popup options: name, type
+        // After popup -> create then show the type of session
     }
     
     func userDidSelectEditMembers() {
+        
+    }
+    
+    // ScanSessionViewControllerDelegate methods
+    func userDidSelectScan(session: Session, index: Int) {
         
     }
     

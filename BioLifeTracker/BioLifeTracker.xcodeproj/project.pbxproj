@@ -88,6 +88,8 @@
 		323CBD921ADB96F600A7C970 /* ProjectHomeViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323CBD911ADB96F600A7C970 /* ProjectHomeViewControllerDelegate.swift */; };
 		323CBD941ADD526600A7C970 /* ScanView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 323CBD931ADD526600A7C970 /* ScanView.xib */; };
 		323CBD961ADD58EA00A7C970 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323CBD951ADD58EA00A7C970 /* ScanViewController.swift */; };
+		323CBD981ADD624D00A7C970 /* ScanSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323CBD971ADD624D00A7C970 /* ScanSessionViewController.swift */; };
+		323CBD9A1ADD634400A7C970 /* ScanSessionViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323CBD991ADD634400A7C970 /* ScanSessionViewControllerDelegate.swift */; };
 		326773B61ACAEFB000899745 /* BooleanPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773A91ACAEFB000899745 /* BooleanPickerCell.swift */; };
 		326773B71ACAEFB000899745 /* CustomPickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */; };
 		326773B81ACAEFB000899745 /* CustomPickerPopupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 326773AB1ACAEFB000899745 /* CustomPickerPopupCell.xib */; };
@@ -248,6 +250,8 @@
 		323CBD911ADB96F600A7C970 /* ProjectHomeViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectHomeViewControllerDelegate.swift; sourceTree = "<group>"; };
 		323CBD931ADD526600A7C970 /* ScanView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ScanView.xib; path = ../ScanView.xib; sourceTree = "<group>"; };
 		323CBD951ADD58EA00A7C970 /* ScanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
+		323CBD971ADD624D00A7C970 /* ScanSessionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanSessionViewController.swift; sourceTree = "<group>"; };
+		323CBD991ADD634400A7C970 /* ScanSessionViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanSessionViewControllerDelegate.swift; sourceTree = "<group>"; };
 		32517A211AB1789100578C42 /* EthogramsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramsViewController.swift; sourceTree = "<group>"; };
 		32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramDetailsViewController.swift; sourceTree = "<group>"; };
 		326773A91ACAEFB000899745 /* BooleanPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BooleanPickerCell.swift; path = FormLibrary/BooleanPickerCell.swift; sourceTree = "<group>"; };
@@ -502,6 +506,8 @@
 				323CBD911ADB96F600A7C970 /* ProjectHomeViewControllerDelegate.swift */,
 				323CBD8F1ADB901200A7C970 /* ProjectHomeView.xib */,
 				32517A211AB1789100578C42 /* EthogramsViewController.swift */,
+				323CBD971ADD624D00A7C970 /* ScanSessionViewController.swift */,
+				323CBD991ADD634400A7C970 /* ScanSessionViewControllerDelegate.swift */,
 				321D62C41AD2618800CF9BE9 /* EthogramsViewControllerDelegate.swift */,
 				3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */,
 				32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */,
@@ -764,6 +770,7 @@
 				320920711ACA9A1600E8A456 /* MenuViewController.swift in Sources */,
 				329B292C1AD15BAF007ADC65 /* ButtonCell.swift in Sources */,
 				ACDE13AB1AD0C03F0075AC35 /* ProjectManager.swift in Sources */,
+				323CBD9A1ADD634400A7C970 /* ScanSessionViewControllerDelegate.swift in Sources */,
 				240D04331AB718EF00D8BB9F /* Location.swift in Sources */,
 				ACDCC0F11ACD05E1001590B8 /* UserAuthService.swift in Sources */,
 				32850BE41AB9625500C49D33 /* EthogramFormViewController.swift in Sources */,
@@ -796,6 +803,7 @@
 				240D04351AB7190800D8BB9F /* Weather.swift in Sources */,
 				240D04311AB718AE00D8BB9F /* Individual.swift in Sources */,
 				323CBD8E1ADB8FF000A7C970 /* ProjectHomeViewController.swift in Sources */,
+				323CBD981ADD624D00A7C970 /* ScanSessionViewController.swift in Sources */,
 				AC188C7C1AC2B11A00CB08C0 /* Storable.swift in Sources */,
 				321D62591AD1757C00CF9BE9 /* FirstViewControllerDelegate.swift in Sources */,
 			);
