@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Observation: BiolifeModel, BLTObservationProtocol {
+class Observation: BiolifeModel {
     static let ClassUrl = "observations"
     
     private var _session: Session!
@@ -170,7 +170,7 @@ extension Observation: CloudStorable {
     }
 }
 
-extension Observation: BLTObservationProtocol {
+extension Observation {
     override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
         // simple properties
         dictionary.setValue(information, forKey: "information")

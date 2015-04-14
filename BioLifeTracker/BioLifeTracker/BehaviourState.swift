@@ -9,7 +9,7 @@
 
 import Foundation
 
-class BehaviourState: BiolifeModel, BLTBehaviourStateProtocol {
+class BehaviourState: BiolifeModel {
     static let ClassUrl = "behaviours"
     
     private var _name: String
@@ -110,7 +110,7 @@ extension BehaviourState: CloudStorable {
     }
 }
 
-extension BehaviourState: BLTBehaviourStateProtocol {
+extension BehaviourState {
     override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
         // simple properties
         dictionary.setValue(name, forKey: "name")

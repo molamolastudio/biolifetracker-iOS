@@ -24,8 +24,6 @@
 		240FEF0E1AD60AF6000FD9F3 /* DownloadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241208AA1AD124A500778360 /* DownloadTask.swift */; };
 		240FEF0F1AD60AF6000FD9F3 /* UploadTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241208A81AD123D700778360 /* UploadTask.swift */; };
 		240FEF101AD60AF6000FD9F3 /* NSURL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240819391AD503DD00DFE8AA /* NSURL+Utils.swift */; };
-		240FEF111AD60AF6000FD9F3 /* CloudStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241208AD1AD15C8A00778360 /* CloudStorageTests.swift */; };
-		240FEF121AD60AF6000FD9F3 /* DummyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241208AF1AD15E7A00778360 /* DummyModel.swift */; };
 		242465291AD67EB20035BD2C /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242465281AD67EB20035BD2C /* CloudStorage.swift */; };
 		2424652A1AD685C60035BD2C /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242465281AD67EB20035BD2C /* CloudStorage.swift */; };
 		242C6E071AC80F050024ECEF /* BiolifeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242C6E061AC80F050024ECEF /* BiolifeModel.swift */; };
@@ -33,8 +31,8 @@
 		2439AABA1AC7DC7900389195 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2439AAB91AC7DC7900389195 /* FacebookSDK.framework */; };
 		2458E86A1ADCF3AE0001D75E /* CSVWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2458E8691ADCF3AE0001D75E /* CSVWriter.swift */; };
 		248464841ADA481F0001C5E3 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248464831ADA481F0001C5E3 /* Photo.swift */; };
-		2486AB3F1AD64C3A00573618 /* DownloadTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2486AB3E1AD64C3A00573618 /* DownloadTaskTests.swift */; };
-		2486AB411AD64C7D00573618 /* UploadTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2486AB401AD64C7D00573618 /* UploadTaskTests.swift */; };
+		248DBBE31ADD5348001CA04F /* BLTProjectDeserializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248DBBE11ADD5348001CA04F /* BLTProjectDeserializer.swift */; };
+		248DBBE41ADD5348001CA04F /* BLTProjectSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248DBBE21ADD5348001CA04F /* BLTProjectSerializer.swift */; };
 		24CE59411ADD3E94000571A3 /* NSDate+Encoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CE59401ADD3E94000571A3 /* NSDate+Encoding.swift */; };
 		24CE59421ADD42AB000571A3 /* NSDate+Encoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24CE59401ADD3E94000571A3 /* NSDate+Encoding.swift */; };
 		24D28D141ADA5A6800E70759 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24D28D131ADA5A6800E70759 /* Images.xcassets */; };
@@ -66,9 +64,6 @@
 		24E45C431ADBE45A000E0DD1 /* PhotoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24E45C421ADBE45A000E0DD1 /* PhotoTests.swift */; };
 		24F0F6C71AD7717200C6CC23 /* DeleteTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6C61AD7717200C6CC23 /* DeleteTask.swift */; };
 		24F0F6C81AD7728A00C6CC23 /* DeleteTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6C61AD7717200C6CC23 /* DeleteTask.swift */; };
-		24F0F6CA1AD7740300C6CC23 /* DeleteTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6C91AD7740300C6CC23 /* DeleteTaskTests.swift */; };
-		24F0F6CC1AD7D55400C6CC23 /* CloudStorageWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6CB1AD7D55400C6CC23 /* CloudStorageWorkerTests.swift */; };
-		24F5DF481AD8352200F76B6B /* CloudStorageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F5DF471AD8352200F76B6B /* CloudStorageManagerTests.swift */; };
 		3205E7481AAED9F9006F374D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7471AAED9F9006F374D /* AppDelegate.swift */; };
 		3205E74D1AAED9F9006F374D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3205E74B1AAED9F9006F374D /* Main.storyboard */; };
 		3205E7771AAEDA85006F374D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E76F1AAEDA85006F374D /* Constants.swift */; };
@@ -154,7 +149,6 @@
 		AC6A24B91ADD26B600CF33D6 /* DeleteTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6C91AD7740300C6CC23 /* DeleteTaskTests.swift */; };
 		AC6A24BA1ADD26BA00CF33D6 /* DownloadTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2486AB3E1AD64C3A00573618 /* DownloadTaskTests.swift */; };
 		AC6A24BB1ADD26BC00CF33D6 /* UploadTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2486AB401AD64C7D00573618 /* UploadTaskTests.swift */; };
-		AC6A24BC1ADD26BF00CF33D6 /* CloudStorageWorkerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6CB1AD7D55400C6CC23 /* CloudStorageWorkerTests.swift */; };
 		AC6A24BD1ADD26C100CF33D6 /* CloudStorageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F5DF471AD8352200F76B6B /* CloudStorageManagerTests.swift */; };
 		AC702EEB1AC55FBC003C50C8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E76F1AAEDA85006F374D /* Constants.swift */; };
 		AC7B6DBD1AD25433002D3EE6 /* TagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1881541AD02F2400CE450B /* TagTests.swift */; };
@@ -232,6 +226,8 @@
 		248464831ADA481F0001C5E3 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		2486AB3E1AD64C3A00573618 /* DownloadTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTaskTests.swift; sourceTree = "<group>"; };
 		2486AB401AD64C7D00573618 /* UploadTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadTaskTests.swift; sourceTree = "<group>"; };
+		248DBBE11ADD5348001CA04F /* BLTProjectDeserializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTProjectDeserializer.swift; sourceTree = "<group>"; };
+		248DBBE21ADD5348001CA04F /* BLTProjectSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTProjectSerializer.swift; sourceTree = "<group>"; };
 		24A92E3B1AD27A4C00A2002F /* CloudStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorageManager.swift; sourceTree = "<group>"; };
 		24CE59401ADD3E94000571A3 /* NSDate+Encoding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Encoding.swift"; sourceTree = "<group>"; };
 		24D28D131ADA5A6800E70759 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -454,6 +450,15 @@
 			name = "Cloud Storage";
 			sourceTree = "<group>";
 		};
+		248DBBE01ADD5331001CA04F /* Serialization */ = {
+			isa = PBXGroup;
+			children = (
+				248DBBE11ADD5348001CA04F /* BLTProjectDeserializer.swift */,
+				248DBBE21ADD5348001CA04F /* BLTProjectSerializer.swift */,
+			);
+			name = Serialization;
+			sourceTree = "<group>";
+		};
 		24E32D3B1AB1991C003C4E0A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -487,6 +492,7 @@
 		24E32D3C1AB19954003C4E0A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				248DBBE01ADD5331001CA04F /* Serialization */,
 				AC6A24981ADD1A8100CF33D6 /* BLTProtocols */,
 				242C6E061AC80F050024ECEF /* BiolifeModel.swift */,
 				3205E7731AAEDA85006F374D /* Project.swift */,
@@ -832,6 +838,7 @@
 				AC6A24AA1ADD1B5F00CF33D6 /* BLTTagProtocol.swift in Sources */,
 				326773BC1ACAEFB000899745 /* FormField.swift in Sources */,
 				AC6A24A21ADD1AF700CF33D6 /* BLTObservationProtocol.swift in Sources */,
+				248DBBE41ADD5348001CA04F /* BLTProjectSerializer.swift in Sources */,
 				AC9EE3471ACEC57200939476 /* BehaviourState.swift in Sources */,
 				326773B61ACAEFB000899745 /* BooleanPickerCell.swift in Sources */,
 				321D62C71AD261D300CF9BE9 /* SuperController.swift in Sources */,
@@ -859,6 +866,7 @@
 				AC6A24A41ADD1B1500CF33D6 /* BLTIndividualProtocol.swift in Sources */,
 				32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */,
 				240FEF051AD60ACF000FD9F3 /* BiolifeDateFormatter.swift in Sources */,
+				248DBBE31ADD5348001CA04F /* BLTProjectDeserializer.swift in Sources */,
 				3205E7481AAED9F9006F374D /* AppDelegate.swift in Sources */,
 				32145C2B1AD26E4A00C20F07 /* SessionsViewControllerDelegate.swift in Sources */,
 				3205E7771AAEDA85006F374D /* Constants.swift in Sources */,
@@ -915,7 +923,6 @@
 				AC7B6DC31AD25445002D3EE6 /* SessionTests.swift in Sources */,
 				AC7B6DC21AD25443002D3EE6 /* BehaviourStateTests.swift in Sources */,
 				24E45C431ADBE45A000E0DD1 /* PhotoTests.swift in Sources */,
-				3205E75E1AAED9F9006F374D /* BioLifeTrackerTests.swift in Sources */,
 				AC6A24B81ADD26B400CF33D6 /* DummyModel.swift in Sources */,
 				AC7B6DE31AD254B2002D3EE6 /* ProjectManager.swift in Sources */,
 				AC6A24B41ADD234800CF33D6 /* BLTLocationProtocol.swift in Sources */,

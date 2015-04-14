@@ -13,7 +13,7 @@ enum SessionType: String {
     case Scan = "SCN"
 }
 
-class Session: BiolifeModel, BLTSessionProtocol {
+class Session: BiolifeModel {
     static let ClassUrl = "sessions"
     
     // Stored properties
@@ -195,7 +195,7 @@ extension Session: CloudStorable {
     }
 }
 
-extension Session: BLTSessionProtocol {
+extension Session {
     override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
         // simple properties
         dictionary.setValue(_typeValue, forKey: "session_type")

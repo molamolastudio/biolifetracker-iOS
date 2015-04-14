@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Individual: BiolifeModel, BLTIndividualProtocol {
+class Individual: BiolifeModel {
     static let ClassUrl = "individuals"
     
     private var _label: String
@@ -126,7 +126,7 @@ extension Individual: CloudStorable {
     }
 }
 
-extension Individual: BLTIndividualProtocol {
+extension Individual {
     override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
         dictionary.setValue(label, forKey: "label")
 

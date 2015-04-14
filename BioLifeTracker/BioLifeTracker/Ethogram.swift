@@ -7,7 +7,7 @@
 //
 import Foundation
 
-class Ethogram: BiolifeModel, Storable, BLTEthogramProtocol {
+class Ethogram: BiolifeModel, Storable {
     static let ClassUrl = "ethograms"
     
     private var _name: String
@@ -220,7 +220,7 @@ extension Ethogram: CloudStorable {
     }
 }
 
-extension Ethogram: BLTEthogramProtocol {
+extension Ethogram {
     override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
         // simple properties
         dictionary.setValue(name, forKey: "name")

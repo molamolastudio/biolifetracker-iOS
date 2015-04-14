@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Photo: BiolifeModel, BLTPhotoProtocol {
+class Photo: BiolifeModel {
     static var ClassUrl: String { return "photos" }
     override var requiresMultipart: Bool { return true }
     
@@ -72,7 +72,7 @@ extension Photo: CloudStorable {
     }
 }
 
-extension Photo: BLTPhotoProtocol {
+extension Photo {
     override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
         let imageString = UIImageJPEGRepresentation(image, 1.0)
             .base64EncodedStringWithOptions(nil)

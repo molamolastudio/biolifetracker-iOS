@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Location: BiolifeModel, BLTLocationProtocol {
+class Location: BiolifeModel {
     static let ClassUrl = "locations"
     
     private var _location: String // to change when we determine what maps to use
@@ -75,7 +75,7 @@ extension Location: CloudStorable {
     }
 }
 
-extension Location: BLTLocationProtocol {
+extension Location {
     override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
         encodeWithDictionary(dictionary)
     }

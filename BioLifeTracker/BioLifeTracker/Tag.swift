@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Tag: BiolifeModel, BLTTagProtocol {
+class Tag: BiolifeModel {
     static let ClassUrl = "tags"
     
     private var _name: String
@@ -78,7 +78,7 @@ extension Tag: CloudStorable {
     }
 }
 
-extension Tag: BLTTagProtocol {
+extension Tag {
     override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
         encodeWithDictionary(dictionary)
     }
