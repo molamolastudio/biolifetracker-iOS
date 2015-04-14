@@ -10,19 +10,19 @@ import Foundation
 import XCTest
 
 class TagTests: XCTestCase {
-    var tag = Tag(tag: "Female")
+    var tag = Tag(name: "Female")
     
     func testReadTag() {
-        XCTAssert(tag.tag == "Female", "Tag not initialised properly")
+        XCTAssert(tag.name == "Female", "Tag not initialised properly")
     }
     
     func testUpdateTag() {
-        tag.updateTag("Male")
-        XCTAssert(tag.tag == "Male", "Tag not updated properly")
+        tag.updateName("Male")
+        XCTAssert(tag.name == "Male", "Tag not updated properly")
     }
     
     func testEquality() {
-    var tag1 = Tag(tag: "Dominant")
+    var tag1 = Tag(name: "Dominant")
         
         XCTAssert(tag == tag, "Not equal")
         XCTAssert(tag != tag1, "Error in equality")

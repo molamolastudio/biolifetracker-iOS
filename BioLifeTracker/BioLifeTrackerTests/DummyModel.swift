@@ -10,7 +10,8 @@ import Foundation
 
 class DummyModel: BiolifeModel {
     class var ClassUrl: String { return "dummy" }
-
+    override var requiresMultipart: Bool { return false }
+    
     var stringProperty: String = "Test string"
     var intProperty: Int = 1234567890
     var optionalStringProperty: String?

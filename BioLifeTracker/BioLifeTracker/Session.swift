@@ -14,6 +14,8 @@ enum SessionType: String {
 }
 
 class Session: BiolifeModel {
+    static let ClassUrl = "sessions"
+    
     // Stored properties
     private var _name: String
     private var _project: Project!
@@ -22,7 +24,7 @@ class Session: BiolifeModel {
     private var _individuals: [Individual]
     
     var type: SessionType { return SessionType(rawValue: _typeValue)! }
-    
+    var name: String { get { return _name } }
     var project: Project { get { return _project } }
     var observations: [Observation] { get { return _observations } }
     var individuals: [Individual] { get { return _individuals } }
@@ -34,6 +36,25 @@ class Session: BiolifeModel {
         self._observations = []
         self._individuals = []
         super.init()
+    }
+    
+    required override init(dictionary: NSDictionary) {
+        let manager = CloudStorageManager.sharedInstance
+        _name = dictionary["name"] as! String
+        
+        let sessionType = dictionary["session_type"] as! String
+        assert(sessionType == "SCN" || sessionType == "FCL")
+        _typeValue = sessionType
+        
+        let observationIds = dictionary["observation_set"] as! [Int]
+        _observations = observationIds.map { Observation.observationWithId($0) }
+        
+        let individualIds = dictionary["individuals"] as! [Int]
+        _individuals = individualIds.map { manager.getIndividualWithId($0) }
+        
+        super.init(dictionary: dictionary)
+        
+        _observations.map { $0.setSession(self) }
     }
     
     func getDisplayName() -> String {
@@ -126,11 +147,19 @@ class Session: BiolifeModel {
             observation.setSession(self)
         }
     }
+    
+    class func sessionWithId(id: Int) -> Session {
+        let manager = CloudStorageManager.sharedInstance
+        let sessionDictionary = manager.getItemForClass(ClassUrl, itemId: id)
+        return Session(dictionary: sessionDictionary)
+    }
 }
 
 func ==(lhs: Session, rhs: Session) -> Bool {
-    return lhs.project == rhs.project &&  lhs.observations == rhs.observations
-            && lhs.individuals == rhs.individuals
+    if lhs.project != rhs.project { return false }
+    if lhs.observations != rhs.observations { return false }
+    if lhs.individuals != rhs.individuals { return false }
+    return true
 }
 
 
@@ -145,8 +174,23 @@ extension Session: NSCoding {
     }
 }
 
-//extension Session: CloudStorable {
-//    class var classUrl: String { return "session" }
-//    func upload() { }
-//    func getDependencies() -> [CloudStorable] { return [] }
-//}
+
+extension Session: CloudStorable {
+    var classUrl: String { return Session.ClassUrl }
+    
+    func getDependencies() -> [CloudStorable] {
+        var dependencies = [CloudStorable]()
+        observations.map { dependencies.append($0) }
+        individuals.map { dependencies.append($0) }
+        return dependencies
+    }
+    
+    override func encodeWithDictionary(dictionary: NSMutableDictionary) {
+        dictionary.setValue(project.id, forKey: "project")
+        dictionary.setValue(observations.map { $0.id! }, forKey: "observation_set")
+        dictionary.setValue(_typeValue, forKey: "session_type")
+        dictionary.setValue(individuals.map { $0.id! }, forKey: "individuals")
+        dictionary.setValue(name, forKey: "name")
+        super.encodeWithDictionary(dictionary)
+    }
+}

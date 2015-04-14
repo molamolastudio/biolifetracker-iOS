@@ -9,27 +9,25 @@
 import Foundation
 
 class Observation: BiolifeModel {
+    static let ClassUrl = "observations"
+    
     private var _session: Session!
     private var _state: BehaviourState
     private var _information: String
     private var _timestamp: NSDate
-    private var _photo: UIImage?
+    private var _photo: Photo?
     private var _individual: Individual
     private var _location: Location?
     private var _weather: Weather?
-
-    private var _photoUrls = [String]()
-    var _creator: User { return createdBy }
     
     var session: Session! { get { return _session } }
     var state: BehaviourState { get { return _state } }
     var information: String { get { return _information } }
     var timestamp: NSDate { get { return _timestamp } }
-    var photo: UIImage? { get { return _photo } }
+    var photo: Photo? { get { return _photo } }
     var individual: Individual { get { return _individual } }
     var location: Location? { get { return _location } }
     var weather: Weather? { get { return _weather } }
-    var photoUrls: [String] { get { return _photoUrls } }
     
     init(session: Session, individual: Individual, state: BehaviourState, timestamp: NSDate, information: String) {
         self._session = session
@@ -37,10 +35,25 @@ class Observation: BiolifeModel {
         self._timestamp = timestamp
         self._location = Location()
         self._weather = Weather()
-        self._photoUrls = []
         self._information = information
         self._individual = individual
         super.init()
+    }
+    
+    required override init(dictionary: NSDictionary) {
+        //read data from dictionary
+        let dateFormatter = BiolifeDateFormatter()
+        _state = BehaviourState.behaviourStateWithId(dictionary["recorded_behaviour"] as! Int)
+        _information = dictionary["information"] as! String
+        _timestamp = dateFormatter.getDate(dictionary["timestamp"] as! String)
+        _individual = Individual.individualWithId(dictionary["individual"] as! Int)
+        if let locationId = dictionary["location"] as? Int {
+            _location = Location.locationWithId(locationId)
+        }
+        if let weatherId = dictionary["weather"] as? Int {
+            _weather = Weather.weatherWithId(weatherId)
+        }
+        super.init(dictionary: dictionary)
     }
     
     /************Observation***************/
@@ -60,7 +73,7 @@ class Observation: BiolifeModel {
         updateObservation()
     }
     
-    func updatePhoto(photo: UIImage) {
+    func updatePhoto(photo: Photo?) {
         self._photo = photo
         updateObservation()
     }
@@ -80,16 +93,6 @@ class Observation: BiolifeModel {
         updateObservation()
     }
     
-    func addPhotoUrl(url: String) {
-        self._photoUrls.append(url)
-        updateObservation()
-    }
-    
-    func removePhotoUrlAtIndex(index: Int) {
-        self._photoUrls.removeAtIndex(index)
-        updateObservation()
-    }
-    
     private func updateObservation() {
         updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
     }
@@ -101,32 +104,28 @@ class Observation: BiolifeModel {
         self._timestamp = aDecoder.decodeObjectForKey("timestamp") as! NSDate
         self._location = aDecoder.decodeObjectForKey("location") as? Location
         self._weather = aDecoder.decodeObjectForKey("weather") as? Weather
-        
-        let objectPhotoUrls: AnyObject = aDecoder.decodeObjectForKey("photoUrls")!
-        enumerator = objectPhotoUrls.objectEnumerator()
-        self._photoUrls = Array<String>()
-        while true {
-            let url = enumerator.nextObject() as! String?
-            if url == nil {
-                break
-            }
-            
-            self._photoUrls.append(url!)
-        }
-        
         self._individual = aDecoder.decodeObjectForKey("individual") as! Individual
         self._information = aDecoder.decodeObjectForKey("information") as! String
         super.init(coder: aDecoder)
+    }
+    
+    class func observationWithId(id: Int) -> Observation {
+        let manager = CloudStorageManager.sharedInstance
+        let observationDictionary = manager.getItemForClass(ClassUrl, itemId: id)
+        return Observation(dictionary: observationDictionary)
     }
 }
 
 
 func ==(lhs: Observation, rhs: Observation) -> Bool {
-    return lhs.session == rhs.session && lhs.state == rhs.state
-            && lhs.information == rhs.information && lhs.timestamp == rhs.timestamp
-            && lhs.photo == rhs.photo && lhs.individual == rhs.individual
-            && lhs.location == rhs.location && lhs.weather == rhs.weather
-            && lhs.photoUrls == rhs.photoUrls
+    return lhs.session == rhs.session &&
+        lhs.state == rhs.state &&
+        lhs.information == rhs.information &&
+        lhs.timestamp == rhs.timestamp &&
+        lhs.photo == rhs.photo &&
+        lhs.individual == rhs.individual &&
+        lhs.location == rhs.location &&
+        lhs.weather == rhs.weather
 }
 
 
@@ -140,14 +139,34 @@ extension Observation: NSCoding {
         aCoder.encodeObject(_timestamp, forKey: "timestamp")
         aCoder.encodeObject(_location, forKey: "location")
         aCoder.encodeObject(_weather, forKey: "weather")
-        aCoder.encodeObject(_photoUrls, forKey: "photoUrls")
         aCoder.encodeObject(_individual, forKey: "individual")
         aCoder.encodeObject(_information, forKey: "information")
     }
 }
 
-//extension Observation: CloudStorable {
-//    class var classUrl: String { return "observation" }
-//    func upload() { }
-//    func getDependencies() -> [CloudStorable] { return [] }
-//}
+
+extension Observation: CloudStorable {
+    var classUrl: String { return Observation.ClassUrl }
+    
+    func getDependencies() -> [CloudStorable] {
+        var dependencies = [CloudStorable]()
+        dependencies.append(state)
+        if photo != nil { dependencies.append(photo!) }
+        dependencies.append(individual)
+        if location != nil { dependencies.append(location!) }
+        if weather != nil { dependencies.append(weather!) }
+        return dependencies
+    }
+    
+    override func encodeWithDictionary(dictionary: NSMutableDictionary) {
+        let dateFormatter = BiolifeDateFormatter()
+        dictionary.setValue(state.id, forKey: "recorded_behaviour")
+        dictionary.setValue(information, forKey: "information")
+        dictionary.setValue(photo?.id, forKey: "photo")
+        dictionary.setValue(dateFormatter.formatDate(timestamp), forKey: "timestamp")
+        dictionary.setValue(individual.id, forKey: "individual")
+        dictionary.setValue(location?.id, forKey: "location")
+        dictionary.setValue(weather?.id, forKey: "weather")
+        super.encodeWithDictionary(dictionary)
+    }
+}

@@ -12,6 +12,7 @@ class BiolifeModel: NSObject, NSCoding {
 
     var id: Int?
     var isLocked: Bool = false
+    var requiresMultipart: Bool { return false }
     private var _createdAt: NSDate
     private var _updatedAt: NSDate
     private var _createdBy: User
@@ -41,7 +42,7 @@ class BiolifeModel: NSObject, NSCoding {
     init(dictionary: NSDictionary) {
         let manager = CloudStorageManager.sharedInstance
         let dateFormatter = BiolifeDateFormatter()
-        self.id = dictionary["id"] as! Int?
+        self.id = dictionary["id"] as? Int
         self._createdAt = dateFormatter.getDate(dictionary["created_at"] as! String)
         self._updatedAt = dateFormatter.getDate(dictionary["updated_at"] as! String)
         // retrieve dictionary of createdBy and updatedBy

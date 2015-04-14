@@ -9,6 +9,8 @@
 import Foundation
 
 class Location: BiolifeModel {
+    static let ClassUrl = "locations"
+    
     private var _location: String // to change when we determine what maps to use
     var location: String {
         get { return _location }
@@ -37,10 +39,22 @@ class Location: BiolifeModel {
         self._location = aDecoder.decodeObjectForKey("location") as! String
         super.init(coder: aDecoder)
     }
+    
+    override required init(dictionary: NSDictionary) {
+        _location = dictionary["location"] as! String
+        super.init(dictionary: dictionary)
+    }
+    
+    class func locationWithId(id: Int) -> Location {
+        let manager = CloudStorageManager.sharedInstance
+        let locationDictionary = manager.getItemForClass(ClassUrl, itemId: id)
+        return Location(dictionary: locationDictionary)
+    }
 }
 
 func ==(lhs: Location, rhs: Location) -> Bool {
-    return lhs.location == rhs.location
+    if lhs.location != rhs.location { return false }
+    return true
 }
 
 extension Location: NSCoding {
@@ -48,4 +62,18 @@ extension Location: NSCoding {
         super.encodeWithCoder(aCoder)
         aCoder.encodeObject(_location, forKey: "location")
     }
+}
+
+extension Location: CloudStorable {
+    var classUrl: String { return Location.ClassUrl }
+    
+    func getDependencies() -> [CloudStorable] {
+        return []
+    }
+    
+    override func encodeWithDictionary(dictionary: NSMutableDictionary) {
+        dictionary.setValue(location, forKey: "location")
+        super.encodeWithDictionary(dictionary)
+    }
+
 }

@@ -10,20 +10,19 @@
 import Foundation
 
 class BehaviourState: BiolifeModel {
+    static let ClassUrl = "behaviours"
+    
     private var _name: String
     private var _information: String
-    private var _photo: UIImage?
-    private var _photoUrls: [String]
+    private var _photo: Photo?
     
     var name: String { get { return _name } }
     var information: String { get { return _information } }
-    var photo: UIImage? { get { return _photo } }
-    var photoUrls: [String] { get { return _photoUrls } }
+    var photo: Photo? { get { return _photo } }
     
     override init() {
         self._name = ""
         self._information = ""
-        self._photoUrls = []
         super.init()
     }
     
@@ -31,7 +30,15 @@ class BehaviourState: BiolifeModel {
         self.init()
         self._name = name
         self._information = information
-        self._photoUrls = []
+    }
+    
+    required override init(dictionary: NSDictionary) {
+        _name = dictionary["name"] as! String
+        _information = dictionary["information"] as! String
+        if let photoId = dictionary["photo"] as? Int {
+            _photo = Photo.photoWithId(photoId)
+        }
+        super.init(dictionary: dictionary)
     }
     
     func updateName(name: String) {
@@ -44,51 +51,35 @@ class BehaviourState: BiolifeModel {
         updateBehaviourState()
     }
     
-    func updatePhoto(photo: UIImage) {
+    func updatePhoto(photo: Photo?) {
         self._photo = photo
         updateBehaviourState()
     }
     
-    func addPhotoUrl(url: String) {
-        self._photoUrls.append(url)
-        updateBehaviourState()
-    }
-    
-    func removePhotoUrlAtIndex(index: Int) {
-        self._photoUrls.removeAtIndex(index)
-        updateBehaviourState()
-    }
     
     private func updateBehaviourState() {
         updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
     }
     
     required init(coder aDecoder: NSCoder) {
-
         self._name = aDecoder.decodeObjectForKey("name") as! String
         self._information = aDecoder.decodeObjectForKey("information") as! String
-        
-        let objectPhotoUrls: AnyObject = aDecoder.decodeObjectForKey("photoUrls")!
-        // Error: Ambiguous use of objectEnumerator
-        
-        //let enumerator = objectPhotoUrls.objectEnumerator()
-        self._photoUrls = Array<String>()
-        /*
-        while true {
-            let url = enumerator.nextObject() as String?
-            if url == nil {
-                break
-            }
-            self._photoUrls.append(url!)
-        }
-        */
+        self._photo = aDecoder.decodeObjectForKey("photo") as! Photo?
         super.init(coder: aDecoder)
+    }
+    
+    class func behaviourStateWithId(id: Int) -> BehaviourState {
+        let manager = CloudStorageManager.sharedInstance
+        let behaviourDictionary = manager.getItemForClass(ClassUrl, itemId: id)
+        return BehaviourState(dictionary: behaviourDictionary)
     }
 }
 
 func ==(lhs: BehaviourState, rhs: BehaviourState) -> Bool {
-    return lhs.name == rhs.name && lhs.information == rhs.information
-        && lhs.photo == rhs.photo && lhs.photoUrls == rhs.photoUrls
+    if lhs.name != rhs.name { return false }
+    if lhs.information != rhs.information { return false }
+    if lhs.photo != rhs.photo { return false }
+    return true
 }
 
 
@@ -97,7 +88,24 @@ extension BehaviourState: NSCoding {
         super.encodeWithCoder(aCoder)
         aCoder.encodeObject(_name, forKey: "name")
         aCoder.encodeObject(_information, forKey: "information")
-        aCoder.encodeObject(_photoUrls, forKey: "photoUrls")
+        aCoder.encodeObject(_photo, forKey: "photo")
     }
 }
 
+
+extension BehaviourState: CloudStorable {
+    var classUrl: String { return BehaviourState.ClassUrl }
+    
+    func getDependencies() -> [CloudStorable] {
+        var dependencies = [CloudStorable]()
+        if photo != nil { dependencies.append(photo!) }
+        return dependencies
+    }
+    
+    override func encodeWithDictionary(dictionary: NSMutableDictionary) {
+        dictionary.setValue(name, forKey: "name")
+        dictionary.setValue(information, forKey: "information")
+        dictionary.setValue(photo?.id, forKey: "photo")
+        super.encodeWithDictionary(dictionary)
+    }
+}
