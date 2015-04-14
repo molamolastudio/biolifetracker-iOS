@@ -94,6 +94,8 @@ class ProjectStub {
         createSessions()
         setDates()
         createObservations()
+        
+        project.getObservations(sessions: [Session1], users: [User1], behaviourStates: <#[BehaviourState]#>)
     }
     
     func initialiseEthogram() {
@@ -121,6 +123,7 @@ class ProjectStub {
         session3.addIndividuals([individual1])
         session4.addIndividuals([individual1])
         session5.addIndividuals([individual1])
+        
     }
     
     func setDates() {

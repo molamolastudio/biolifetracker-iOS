@@ -80,15 +80,15 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         var stub = ProjectStub()
         projectInstance = stub.project
         initConditions()
-        if plotByDay {
+        
+        prepareNumberOfOccurances()
+        if chartByState {
             configureGraph()
-        } else if plotByHour {
-            configureGraph()
-            configurePlots()
+            configureBarPlots()
             configureAxes()
         } else {
             configureGraph()
-            configureBarPlots()
+            configurePlots()
             configureAxes()
         }
         
@@ -138,6 +138,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     func prepareNumberOfOccurances() {
         var occurences = projectInstance.getObservations(sessions: chosenSessions, users: chosenUsers, behaviourStates: chosenBehaviourStates)
         
+        
         if plotByDay {
             // 7 for number of days
             numberOfOccurences = [Int](count: 7, repeatedValue:0)
@@ -160,10 +161,12 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         } else if plotByHour {
             //13 for number of hours
             numberOfOccurences = [Int](count: 13, repeatedValue:0)
+            println("getting occurences")
             
             for occurence in occurences {
                 var hour = getHourOfDay(occurence.timestamp)
                 numberOfOccurences[hour] += 1
+                println(str)
                 
                 // check and update max value of y axis
                 var count = numberOfOccurences[hour]
@@ -176,7 +179,8 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
             }
         } else {
             var numPerBS = projectInstance.getObservationsPerBS()
-            
+            //initialize to 0 elements
+            numberOfOccurences = [Int]()
             for BS in chosenBehaviourStates {
                 
                 if let count = numPerBS[BS.name] {
@@ -308,10 +312,10 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         var yRange = plotSpace.yRange.mutableCopy() as! CPTMutablePlotRange
         if plotByHour {
             xRange.length = hours.count
-            yRange.length = yMaxHours
+            yRange.length = numberOfOccurences.count
         } else {
             xRange.length = days.count
-            yRange.length = yMaxDays
+            yRange.length = numberOfOccurences.count
         }
         
         plotSpace.xRange = xRange
@@ -348,7 +352,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         var yRange = plotSpace.yRange.mutableCopy() as! CPTMutablePlotRange
   
         xRange.length = chosenBehaviourStates.count
-        yRange.length = yMaxStates
+        yRange.length = numberOfOccurences.count
         
         plotSpace.xRange = xRange
         plotSpace.yRange = yRange
