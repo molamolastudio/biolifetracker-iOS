@@ -17,6 +17,7 @@ class CSVWriter {
             rowStr += "\",\""
             rowStr += row[i]
         }
+        rowStr += "\""
         rows.append(rowStr)
     }
     

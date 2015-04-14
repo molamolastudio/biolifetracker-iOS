@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate, UIDocumentInteractionControllerDelegate {
+class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
     var delegate: FirstViewControllerDelegate? = nil
     
     @IBOutlet weak var displayProject: UILabel!
@@ -22,25 +22,9 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     
     
     @IBAction func projectBtnPressed(sender: UIButton) {
-//        if delegate != nil {
-//            delegate!.userDidSelectCreateProjectButton()
-//        }
-        
-        
-        var ethogram = Ethogram(name: "Fiddler Crabs")
-        let state1 = BehaviourState(name: "Feeding", information: "Small claws bringing food to mouth")
-        let state2 = BehaviourState(name: "Fighting", information: "Engagement of large clawa with another crab")
-        let state3 = BehaviourState(name: "Hiding", information: "Withdrawal of fiddler crab into its burrow")
-        ethogram.addBehaviourState(state1)
-        ethogram.addBehaviourState(state2)
-        ethogram.addBehaviourState(state3)
-        
-        var project = Project(name: "A Day in a Fiddler Crab life", ethogram: ethogram)
-        
-        var example = ExportObservationsServices(project: project)
-        example.createObservationsCSV()
-        example.openInOtherApps(self)
-        
+        if delegate != nil {
+            delegate!.userDidSelectCreateProjectButton()
+        }
     }
 
     @IBAction func sessionBtnPressed(sender: UIButton) {
