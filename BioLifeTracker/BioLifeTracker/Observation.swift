@@ -172,3 +172,13 @@ extension Observation: CloudStorable {
         super.encodeWithDictionary(dictionary)
     }
 }
+
+extension Observation {
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        let dateFormatter = BiolifeDateFormatter()
+        let sessionDictionary = NSMutableDictionary()
+        session.encodeRecursivelyWithDictionary(sessionDictionary)
+
+        super.encodeWithDictionary(dictionary)
+    }
+}

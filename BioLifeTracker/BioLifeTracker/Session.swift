@@ -191,3 +191,11 @@ extension Session: CloudStorable {
         super.encodeWithDictionary(dictionary)
     }
 }
+
+extension Session {
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        let dateFormatter = BiolifeDateFormatter()
+        
+        super.encodeWithDictionary(dictionary)
+    }
+}

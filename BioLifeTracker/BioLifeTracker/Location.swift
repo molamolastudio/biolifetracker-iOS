@@ -74,5 +74,10 @@ extension Location: CloudStorable {
         dictionary.setValue(location, forKey: "location")
         super.encodeWithDictionary(dictionary)
     }
+}
 
+extension Location {
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        encodeWithDictionary(dictionary)
+    }
 }

@@ -74,5 +74,10 @@ extension Weather: CloudStorable {
         dictionary.setValue(weather, forKey: "weather")
         super.encodeWithDictionary(dictionary)
     }
+}
 
+extension Weather {
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        encodeWithDictionary(dictionary)
+    }
 }

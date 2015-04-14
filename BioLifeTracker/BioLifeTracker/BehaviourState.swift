@@ -108,3 +108,11 @@ extension BehaviourState: CloudStorable {
         super.encodeWithDictionary(dictionary)
     }
 }
+
+extension BehaviourState {
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        let dateFormatter = BiolifeDateFormatter()
+        
+        super.encodeWithDictionary(dictionary)
+    }
+}

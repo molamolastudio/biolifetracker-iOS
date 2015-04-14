@@ -78,3 +78,9 @@ extension Tag: CloudStorable {
         super.encodeWithDictionary(dictionary)
     }
 }
+
+extension Tag {
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        encodeWithDictionary(dictionary)
+    }
+}

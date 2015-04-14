@@ -391,5 +391,12 @@ extension Project: CloudStorable {
         dictionary.setValue(sessions.map { $0.id! }, forKey: "sessions")
         dictionary.setValue(individuals.map { $0.id! }, forKey: "individuals")
     }
-    
+}
+
+extension Project {
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        let dateFormatter = BiolifeDateFormatter()
+        
+        super.encodeWithDictionary(dictionary)
+    }
 }

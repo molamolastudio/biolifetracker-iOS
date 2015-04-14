@@ -124,3 +124,25 @@ extension Individual: CloudStorable {
         dictionary.setValue(tags.map { $0.id! }, forKey: "tags")
     }
 }
+
+extension Individual {
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        dictionary.setValue(label, forKey: "label")
+
+        var photoDictionary = NSMutableDictionary()
+        if let photo = photo {
+            photo.encodeRecursivelyWithDictionary(photoDictionary)
+        }
+        dictionary.setValue(photoDictionary, forKey: "photo")
+        
+        var tagInfos = [NSDictionary]()
+        for tag in tags {
+            var tagDictionary = NSMutableDictionary()
+            tag.encodeRecursivelyWithDictionary(tagDictionary)
+            tagInfos.append(tagDictionary)
+        }
+        dictionary.setValue(tagInfos, forKey: "tags")
+        
+        super.encodeWithDictionary(dictionary)
+    }
+}

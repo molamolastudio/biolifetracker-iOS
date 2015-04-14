@@ -56,3 +56,9 @@ extension Photo: CloudStorable {
         super.encodeWithDictionary(dictionary)
     }
 }
+
+extension Photo {
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        encodeWithDictionary(dictionary)
+    }
+}

@@ -217,3 +217,11 @@ extension Ethogram: CloudStorable {
         super.encodeWithDictionary(dictionary)
     }
 }
+
+extension Ethogram {
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        let dateFormatter = BiolifeDateFormatter()
+        
+        super.encodeWithDictionary(dictionary)
+    }
+}
