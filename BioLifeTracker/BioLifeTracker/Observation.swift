@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Observation: BiolifeModel {
+class Observation: BiolifeModel, BLTObservationProtocol {
     static let ClassUrl = "observations"
     
     private var _session: Session!

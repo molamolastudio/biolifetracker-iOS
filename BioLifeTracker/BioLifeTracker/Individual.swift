@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Individual: BiolifeModel {
+class Individual: BiolifeModel, BLTIndividualProtocol {
     static let ClassUrl = "individuals"
     
     private var _label: String

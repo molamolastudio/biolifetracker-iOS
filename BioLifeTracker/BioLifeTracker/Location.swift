@@ -8,13 +8,11 @@
 
 import Foundation
 
-class Location: BiolifeModel {
+class Location: BiolifeModel, BLTLocationProtocol {
     static let ClassUrl = "locations"
     
     private var _location: String // to change when we determine what maps to use
-    var location: String {
-        get { return _location }
-    }
+    var location: String { get { return _location } }
     
     override init() {
         _location = ""

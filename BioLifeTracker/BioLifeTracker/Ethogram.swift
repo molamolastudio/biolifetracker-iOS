@@ -7,7 +7,7 @@
 //
 import Foundation
 
-class Ethogram: BiolifeModel, Storable {
+class Ethogram: BiolifeModel, Storable, BLTEthogramProtocol {
     static let ClassUrl = "ethograms"
     
     private var _name: String

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Project: BiolifeModel, Storable {
+class Project: BiolifeModel, Storable, BLTProjectProtocol {
     static let ClassUrl = "projects"
     
     private var _name: String

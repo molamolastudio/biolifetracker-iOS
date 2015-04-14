@@ -9,12 +9,9 @@
 import Foundation
 
 protocol BLTIndividualProtocol{
-    var name: String { get }
-    var ethogram: Ethogram { get }
-    var admins: [User] { get }
-    var members: [User] { get }
-    var sessions: [Session] { get }
-    var individuals: [Individual] { get }
-    
+    var label: String { get }
+    var tags: [Tag] { get }
+    var photo: Photo? { get }
+
     func encodeWithDictionary(dictionary: NSMutableDictionary)
 }

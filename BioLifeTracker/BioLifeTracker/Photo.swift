@@ -8,14 +8,15 @@
 
 import Foundation
 
-class Photo: BiolifeModel {
+class Photo: BiolifeModel, BLTPhotoProtocol {
     static var ClassUrl: String { return "photos" }
     override var requiresMultipart: Bool { return true }
     
-    var image: UIImage
+    private var _image: UIImage
+    var image: UIImage { get { return _image } }
     
     init(image: UIImage) {
-        self.image = image
+        self._image = image
         super.init()
     }
     
@@ -25,18 +26,36 @@ class Photo: BiolifeModel {
         assert(imageData != nil, "Cannot get image binary from server")
         let image = UIImage(data: imageData!)
         assert(image != nil, "Cannot convert binary data into UIImage")
-        self.image = image!
+        self._image = image!
         super.init(dictionary: dictionary)
     }
+    
+    func updateImage(image: UIImage) {
+        self._image = image
+        updateImage()
+    }
+    
+    private func updateImage() {
+        updateInfo(updatedBy: UserAuthService.sharedInstance.user,
+            updatedAt: NSDate())
+    }
 
-    required init(coder decoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    required init(coder aDecoder: NSCoder) {
+        self._image = aDecoder.decodeObjectForKey("image") as! UIImage
+        super.init(coder: aDecoder)
     }
     
     class func photoWithId(id: Int) -> Photo {
         let manager = CloudStorageManager.sharedInstance
         let photoDictionary = manager.getItemForClass(ClassUrl, itemId: id)
         return Photo(dictionary: photoDictionary)
+    }
+}
+
+extension Photo: NSCoding {
+    override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
+        aCoder.encodeObject(_image, forKey: "image")
     }
 }
 

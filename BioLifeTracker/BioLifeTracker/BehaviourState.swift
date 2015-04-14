@@ -9,7 +9,7 @@
 
 import Foundation
 
-class BehaviourState: BiolifeModel {
+class BehaviourState: BiolifeModel, BLTBehaviourStateProtocol {
     static let ClassUrl = "behaviours"
     
     private var _name: String

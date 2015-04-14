@@ -13,7 +13,7 @@ enum SessionType: String {
     case Scan = "SCN"
 }
 
-class Session: BiolifeModel {
+class Session: BiolifeModel, BLTSessionProtocol {
     static let ClassUrl = "sessions"
     
     // Stored properties
