@@ -295,7 +295,11 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     // ProjectHomeViewControllerDelegate methods
     func userDidSelectSession(project: Project, session: Session) {
-        
+        if session.type == SessionType.Focal {
+            
+        } else {
+            
+        }
     }
     
     func userDidSelectMember(project: Project, member: User) {
@@ -303,6 +307,14 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func userDidSelectGraph() {
+        
+    }
+    
+    func userDidSelectCreateSession() {
+        
+    }
+    
+    func userDidSelectEditMembers() {
         
     }
     

@@ -59,6 +59,18 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         sessionView.layer.masksToBounds = true;
     }
     
+    @IBAction func editMembersBtnPressed() {
+        if delegate != nil {
+            delegate!.userDidSelectEditMembers()
+        }
+    }
+    
+    @IBAction func createSessionBtnPressed() {
+        if delegate != nil {
+            delegate!.userDidSelectCreateSession()
+        }
+    }
+    
     // UITableViewDataSource and UITableViewDelegate METHODS
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SingleLineTextCell
