@@ -10,76 +10,68 @@ import Foundation
 
 class ExportObservationsServices {
     var project: Project
-    var plistpath: String
+    var plistPath: String
     
     init(project: Project) {
         self.project = project
-        self.plistpath = ""
+        self.plistPath = ""
     }
     
     func createObservationsCSV() {
-        var csvString = NSMutableString()
+        let csvWriter = CSVWriter()
+        let dateFormatter = BiolifeDateFormatter()
         
-        let string = "\"Session name\",\"Information\",\"Timestamp\",\"Individual\",\"Location\",\"Weather\""
+        // Write CSV Header
+        let header = ["Session Name", "Information", "Timestamp", "Individual", "Location", "Weather"]
+        csvWriter.addRow(header)
         
-        csvString.appendString(string)
-        
+        // Write CSV Body
         let observations = project.getObservations(project.sessions)
-        
-        var sessionName: String
-        var information: String
-        var timestamp: NSDate
-        var individual: String
-        var location = ""
-        var weather = ""
-        
         for observation in observations {
-            sessionName = observation.session.getDisplayName()
-            information = observation.information
-            timestamp = observation.timestamp
-            individual = observation.individual.label
+            let sessionName = observation.session.getDisplayName()
+            let information = observation.information
+            let timestamp = dateFormatter.formatDate(observation.timestamp)
+            let individual = observation.individual.label
+            let location: String
             if let tempLocation = observation.location {
                 location = tempLocation.location
+            } else {
+                location = ""
             }
+            let weather: String
             if let tempWeather = observation.weather {
-                location = tempWeather.weather
+                weather = tempWeather.weather
+            } else {
+                weather = ""
             }
-            
-            csvString.appendString("\n\"\(sessionName)\".\"\(information)\",\"\(timestamp)\",\"\(individual)\",\"\(location)\",\"\(weather)\"")
+            csvWriter.addRow([sessionName, information, information, timestamp, individual, location, weather])
         }
-
+        
+        // Write CSV File to disk
+        let csvString = csvWriter.getResult()
         let fileManager = (NSFileManager.defaultManager())
-        let directorys : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory,NSSearchPathDomainMask.AllDomainsMask, true) as? [String]
+        let directories  = NSSearchPathForDirectoriesInDomains(
+            NSSearchPathDirectory.DocumentDirectory,
+            NSSearchPathDomainMask.AllDomainsMask,
+            true) as? [String]
     
-        if ((directorys) != nil) {
-    
-            let directories:[String] = directorys!;
-            let dictionary = directories[0];
-            let plistfile = "\(project.name).csv"
-            plistpath = dictionary.stringByAppendingPathComponent(plistfile);
-            plistpath = plistpath.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
-            
-            println("\(plistpath)")
-    
-            csvString.writeToFile(plistpath, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+        if let directories = directories {
+            let targetDirectory = directories[0]
+            let plistFileName = "\(project.name).csv"
+            plistPath = targetDirectory
+                .stringByAppendingPathComponent(plistFileName)
+                .stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+            plistPath = plistPath.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
+            csvString.writeToFile(plistPath, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
         }
     }
     
     func openInOtherApps(vc: UIViewController) {
-        if let fileURL = NSURL.fileURLWithPath(plistpath) {
+        if let fileURL = NSURL.fileURLWithPath(plistPath) {
             let docuVC = UIDocumentInteractionController(URL: fileURL)
             docuVC.UTI = "public.comma-separated-values-text"
             docuVC.presentOptionsMenuFromRect(CGRectZero, inView: vc.view, animated: true)
-            
-//            let objectsToShare = [fileURL]
-//            let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-//            let popup = UIPopoverController(contentViewController: activityVC)
-//            popup.presentPopoverFromRect(CGRectMake(100, 100, 100, 100), inView: vc.view, permittedArrowDirections: .Any, animated: true)
-            
-//            //New Excluded Activities Code
-//            activityVC.excludedActivityTypes = [UIActivityTypeAirDrop, UIActivityTypeAddToReadingList]
-        
         }
     }
-    
+
 }
