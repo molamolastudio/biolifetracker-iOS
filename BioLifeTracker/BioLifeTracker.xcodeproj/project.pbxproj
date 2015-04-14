@@ -154,6 +154,7 @@
 		AC7B6DE11AD254A6002D3EE6 /* UserAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDCC0F01ACD05E1001590B8 /* UserAuthService.swift */; };
 		AC7B6DE21AD254AF002D3EE6 /* EthogramManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDE13AC1AD0C0540075AC35 /* EthogramManager.swift */; };
 		AC7B6DE31AD254B2002D3EE6 /* ProjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDE13AA1AD0C03F0075AC35 /* ProjectManager.swift */; };
+		AC803E101ADCC1D8003E2A98 /* ExportObservationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC803E0F1ADCC1D8003E2A98 /* ExportObservationsService.swift */; };
 		AC9162AC1ACA6A0400FED714 /* CloudStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */; };
 		AC9162AD1ACA6CC300FED714 /* CloudStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */; };
 		AC9EE3471ACEC57200939476 /* BehaviourState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9EE3461ACEC57200939476 /* BehaviourState.swift */; };
@@ -288,6 +289,7 @@
 		AC18815E1AD02F6E00CE450B /* SessionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTests.swift; sourceTree = "<group>"; };
 		AC1881601AD02F8600CE450B /* BehaviourStateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviourStateTests.swift; sourceTree = "<group>"; };
 		AC188C7B1AC2B11A00CB08C0 /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
+		AC803E0F1ADCC1D8003E2A98 /* ExportObservationsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportObservationsService.swift; sourceTree = "<group>"; };
 		AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorable.swift; sourceTree = "<group>"; };
 		AC9EE3381ACEC2C500939476 /* ProjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
 		AC9EE33A1ACEC2E400939476 /* EthogramTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramTests.swift; sourceTree = "<group>"; };
@@ -604,6 +606,7 @@
 			isa = PBXGroup;
 			children = (
 				ACDCC0F01ACD05E1001590B8 /* UserAuthService.swift */,
+				AC803E0F1ADCC1D8003E2A98 /* ExportObservationsService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -741,6 +744,7 @@
 			files = (
 				240FEF061AD60AE1000FD9F3 /* CloudStorageManager.swift in Sources */,
 				240FEF071AD60AE1000FD9F3 /* CloudStorageTask.swift in Sources */,
+				AC803E101ADCC1D8003E2A98 /* ExportObservationsService.swift in Sources */,
 				240FEF081AD60AE1000FD9F3 /* CloudStorageWorker.swift in Sources */,
 				240FEF091AD60AE1000FD9F3 /* DownloadTask.swift in Sources */,
 				240FEF0A1AD60AE1000FD9F3 /* UploadTask.swift in Sources */,

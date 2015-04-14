@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
+class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate, UIDocumentInteractionControllerDelegate {
     var delegate: FirstViewControllerDelegate? = nil
     
     @IBOutlet weak var displayProject: UILabel!
@@ -25,6 +25,8 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
 //        if delegate != nil {
 //            delegate!.userDidSelectCreateProjectButton()
 //        }
+        
+        
         var ethogram = Ethogram(name: "Fiddler Crabs")
         let state1 = BehaviourState(name: "Feeding", information: "Small claws bringing food to mouth")
         let state2 = BehaviourState(name: "Fighting", information: "Engagement of large clawa with another crab")
@@ -38,6 +40,7 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         var example = ExportObservationsServices(project: project)
         example.createObservationsCSV()
         example.openInOtherApps(self)
+        
     }
 
     @IBAction func sessionBtnPressed(sender: UIButton) {
@@ -175,5 +178,6 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         println("User signed out")
         GPPSignIn.sharedInstance().signOut()
     }
+    
 }
 
