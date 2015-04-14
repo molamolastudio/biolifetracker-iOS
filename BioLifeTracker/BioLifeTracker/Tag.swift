@@ -56,7 +56,8 @@ class Tag: BiolifeModel {
 }
 
 func ==(lhs: Tag, rhs: Tag) -> Bool {
-    return lhs.name == rhs.name
+    if lhs.name == rhs.name { return false }
+    return true
 }
 
 extension Tag: NSCoding {

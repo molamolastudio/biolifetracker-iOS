@@ -383,4 +383,234 @@ class ProjectTests: XCTestCase {
         XCTAssert(project == project, "Not equal")
         XCTAssert(project != project1, "Not equal")
     }
+    
+    func testUploadProjectToCloud() {
+        // 1 session, 3 users, 3 bs each
+        ethogram.addBehaviourState(state1)
+        ethogram.addBehaviourState(state2)
+        ethogram.addBehaviourState(state3)
+        
+        var project = Project(name: "A Day in a Fiddler Crab life", ethogram: ethogram)
+        
+        var session1 = Session(project: project, name: "Session1", type: SessionType.Scan)
+        var session2 = Session(project: project, name: "Session2", type: SessionType.Scan)
+        var session3 = Session(project: project, name: "Session3", type: SessionType.Scan)
+        
+        
+        let individual1 = Individual(label: "M1")
+        let individual2 = Individual(label: "M2")
+        let individual3 = Individual(label: "F1")
+        
+        
+        // Observations for session 1
+        var observation1 = Observation(session: session1, individual: individual1, state: state1, timestamp: NSDate(), information: "Eating vigourously")
+        observation1.changeCreator(user1)
+        var observation2 = Observation(session: session1, individual: individual1, state: state2, timestamp: NSDate(), information: "")
+        observation2.changeCreator(user1)
+        var observation3 = Observation(session: session1, individual: individual1, state: state3, timestamp: NSDate(), information: "")
+        observation3.changeCreator(user1)
+        var observation4 = Observation(session: session1, individual: individual2, state: state1, timestamp: NSDate(), information: "Eating vigourously")
+        observation4.changeCreator(user2)
+        var observation5 = Observation(session: session1, individual: individual2, state: state2, timestamp: NSDate(), information: "")
+        observation5.changeCreator(user2)
+        var observation6 = Observation(session: session1, individual: individual2, state: state3, timestamp: NSDate(), information: "")
+        observation6.changeCreator(user2)
+        var observation7 = Observation(session: session1, individual: individual3, state: state1, timestamp: NSDate(), information: "Eating vigourously")
+        observation7.changeCreator(user3)
+        var observation8 = Observation(session: session1, individual: individual3, state: state2, timestamp: NSDate(), information: "")
+        observation8.changeCreator(user3)
+        var observation9 = Observation(session: session1, individual: individual3, state: state3, timestamp: NSDate(), information: "")
+        observation9.changeCreator(user3)
+        
+        // Observations for session 2
+        var observation10 = Observation(session: session2, individual: individual1, state: state1, timestamp: NSDate(), information: "Eating vigourously")
+        observation10.changeCreator(user1)
+        var observation11 = Observation(session: session2, individual: individual1, state: state2, timestamp: NSDate(), information: "")
+        observation11.changeCreator(user1)
+        var observation12 = Observation(session: session2, individual: individual2, state: state1, timestamp: NSDate(), information: "Eating vigourously")
+        observation12.changeCreator(user2)
+        var observation13 = Observation(session: session2, individual: individual2, state: state2, timestamp: NSDate(), information: "")
+        observation13.changeCreator(user2)
+        var observation14 = Observation(session: session2, individual: individual3, state: state1, timestamp: NSDate(), information: "Eating vigourously")
+        observation14.changeCreator(user3)
+        var observation15 = Observation(session: session2, individual: individual3, state: state2, timestamp: NSDate(), information: "")
+        observation15.changeCreator(user3)
+        
+        
+        // Observations for session 3
+        var observation16 = Observation(session: session3, individual: individual1, state: state2, timestamp: NSDate(), information: "")
+        observation16.changeCreator(user1)
+        var observation17 = Observation(session: session3, individual: individual1, state: state3, timestamp: NSDate(), information: "")
+        observation17.changeCreator(user1)
+        var observation18 = Observation(session: session3, individual: individual2, state: state2, timestamp: NSDate(), information: "")
+        observation18.changeCreator(user2)
+        var observation19 = Observation(session: session3, individual: individual2, state: state3, timestamp: NSDate(), information: "")
+        observation19.changeCreator(user2)
+        var observation20 = Observation(session: session3, individual: individual3, state: state2, timestamp: NSDate(), information: "")
+        observation20.changeCreator(user3)
+        var observation21 = Observation(session: session3, individual: individual3, state: state3, timestamp: NSDate(), information: "")
+        observation21.changeCreator(user3)
+        
+        session1.addObservation([observation1, observation2, observation3, observation4,
+            observation5, observation6, observation7, observation8, observation9])
+        session2.addObservation([observation10, observation11, observation12,
+            observation13, observation14, observation15])
+        session3.addObservation([observation16, observation17, observation18, observation19, observation20, observation21])
+        
+        project.addSessions([session1, session2, session3])
+        
+        let uploadTask = UploadTask(item: project)
+        uploadTask.execute()
+        XCTAssertNotNil(project.id)
+        XCTAssertNotNil(session1.id)
+        XCTAssertNotNil(session2.id)
+        XCTAssertNotNil(session3.id)
+        XCTAssertNotNil(individual1.id)
+        XCTAssertNotNil(individual2.id)
+        XCTAssertNotNil(individual3.id)
+        XCTAssertNotNil(observation1.id)
+        XCTAssertNotNil(observation2.id)
+        XCTAssertNotNil(observation3.id)
+        XCTAssertNotNil(observation4.id)
+        XCTAssertNotNil(observation5.id)
+        XCTAssertNotNil(observation6.id)
+        XCTAssertNotNil(observation7.id)
+        XCTAssertNotNil(observation8.id)
+        XCTAssertNotNil(observation9.id)
+        XCTAssertNotNil(observation10.id)
+        XCTAssertNotNil(observation11.id)
+        XCTAssertNotNil(observation12.id)
+        XCTAssertNotNil(observation13.id)
+        XCTAssertNotNil(observation14.id)
+        XCTAssertNotNil(observation15.id)
+        XCTAssertNotNil(observation16.id)
+        XCTAssertNotNil(observation17.id)
+        XCTAssertNotNil(observation18.id)
+        XCTAssertNotNil(observation19.id)
+        XCTAssertNotNil(observation20.id)
+        XCTAssertNotNil(observation21.id)
+    }
+    
+    func testDownloadProjectToCloud() {
+        // 1 session, 3 users, 3 bs each
+        ethogram.addBehaviourState(state1)
+        ethogram.addBehaviourState(state2)
+        ethogram.addBehaviourState(state3)
+        
+        var project = Project(name: "A Day in a Fiddler Crab life", ethogram: ethogram)
+        
+        var session1 = Session(project: project, name: "Session1", type: SessionType.Scan)
+        var session2 = Session(project: project, name: "Session2", type: SessionType.Scan)
+        var session3 = Session(project: project, name: "Session3", type: SessionType.Scan)
+        
+        
+        let individual1 = Individual(label: "M1")
+        let individual2 = Individual(label: "M2")
+        let individual3 = Individual(label: "F1")
+        
+        
+        // Observations for session 1
+        var observation1 = Observation(session: session1, individual: individual1, state: state1, timestamp: NSDate(), information: "Eating vigourously")
+        observation1.changeCreator(user1)
+        var observation2 = Observation(session: session1, individual: individual1, state: state2, timestamp: NSDate(), information: "")
+        observation2.changeCreator(user1)
+        var observation3 = Observation(session: session1, individual: individual1, state: state3, timestamp: NSDate(), information: "")
+        observation3.changeCreator(user1)
+        var observation4 = Observation(session: session1, individual: individual2, state: state1, timestamp: NSDate(), information: "Eating vigourously")
+        observation4.changeCreator(user2)
+        var observation5 = Observation(session: session1, individual: individual2, state: state2, timestamp: NSDate(), information: "")
+        observation5.changeCreator(user2)
+        var observation6 = Observation(session: session1, individual: individual2, state: state3, timestamp: NSDate(), information: "")
+        observation6.changeCreator(user2)
+        var observation7 = Observation(session: session1, individual: individual3, state: state1, timestamp: NSDate(), information: "Eating vigourously")
+        observation7.changeCreator(user3)
+        var observation8 = Observation(session: session1, individual: individual3, state: state2, timestamp: NSDate(), information: "")
+        observation8.changeCreator(user3)
+        var observation9 = Observation(session: session1, individual: individual3, state: state3, timestamp: NSDate(), information: "")
+        observation9.changeCreator(user3)
+        
+        // Observations for session 2
+        var observation10 = Observation(session: session2, individual: individual1, state: state1, timestamp: NSDate(), information: "Eating vigourously")
+        observation10.changeCreator(user1)
+        var observation11 = Observation(session: session2, individual: individual1, state: state2, timestamp: NSDate(), information: "")
+        observation11.changeCreator(user1)
+        var observation12 = Observation(session: session2, individual: individual2, state: state1, timestamp: NSDate(), information: "Eating vigourously")
+        observation12.changeCreator(user2)
+        var observation13 = Observation(session: session2, individual: individual2, state: state2, timestamp: NSDate(), information: "")
+        observation13.changeCreator(user2)
+        var observation14 = Observation(session: session2, individual: individual3, state: state1, timestamp: NSDate(), information: "Eating vigourously")
+        observation14.changeCreator(user3)
+        var observation15 = Observation(session: session2, individual: individual3, state: state2, timestamp: NSDate(), information: "")
+        observation15.changeCreator(user3)
+        
+        
+        // Observations for session 3
+        var observation16 = Observation(session: session3, individual: individual1, state: state2, timestamp: NSDate(), information: "")
+        observation16.changeCreator(user1)
+        var observation17 = Observation(session: session3, individual: individual1, state: state3, timestamp: NSDate(), information: "")
+        observation17.changeCreator(user1)
+        var observation18 = Observation(session: session3, individual: individual2, state: state2, timestamp: NSDate(), information: "")
+        observation18.changeCreator(user2)
+        var observation19 = Observation(session: session3, individual: individual2, state: state3, timestamp: NSDate(), information: "")
+        observation19.changeCreator(user2)
+        var observation20 = Observation(session: session3, individual: individual3, state: state2, timestamp: NSDate(), information: "")
+        observation20.changeCreator(user3)
+        var observation21 = Observation(session: session3, individual: individual3, state: state3, timestamp: NSDate(), information: "")
+        observation21.changeCreator(user3)
+        
+        session1.addObservation([observation1, observation2, observation3, observation4,
+            observation5, observation6, observation7, observation8, observation9])
+        session2.addObservation([observation10, observation11, observation12,
+            observation13, observation14, observation15])
+        session3.addObservation([observation16, observation17, observation18, observation19, observation20, observation21])
+        
+        project.addSessions([session1, session2, session3])
+        
+        let uploadTask = UploadTask(item: project)
+        uploadTask.execute()
+        
+        assert(project.id != nil)
+        assert(session1.id != nil)
+        assert(session2.id != nil)
+        assert(session3.id != nil)
+        assert(individual1.id != nil)
+        assert(individual2.id != nil)
+        assert(individual3.id != nil)
+        assert(observation1.id != nil)
+        assert(observation2.id != nil)
+        assert(observation3.id != nil)
+        assert(observation4.id != nil)
+        assert(observation5.id != nil)
+        assert(observation6.id != nil)
+        assert(observation7.id != nil)
+        assert(observation8.id != nil)
+        assert(observation9.id != nil)
+        assert(observation10.id != nil)
+        assert(observation11.id != nil)
+        assert(observation12.id != nil)
+        assert(observation13.id != nil)
+        assert(observation14.id != nil)
+        assert(observation15.id != nil)
+        assert(observation16.id != nil)
+        assert(observation17.id != nil)
+        assert(observation18.id != nil)
+        assert(observation19.id != nil)
+        assert(observation20.id != nil)
+        assert(observation21.id != nil)
+        
+        let projectId = project.id!
+        
+        // TEST DOWNLOADING
+        let downloadTask = DownloadTask(classUrl: Project.ClassUrl, itemId: projectId)
+        downloadTask.execute()
+        let downloadedProject = Project(dictionary: downloadTask.getResults()[0])
+        
+        
+        XCTAssertEqual(downloadedProject.id!, projectId)
+        XCTAssertEqual(downloadedProject.sessions.count, project.sessions.count)
+        XCTAssertEqual(downloadedProject.admins.count, project.admins.count)
+        XCTAssertEqual(downloadedProject.members.count, project.members.count)
+        XCTAssertEqual(downloadedProject.individuals.count, project.individuals.count)
+    }
+    
 }

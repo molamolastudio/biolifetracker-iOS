@@ -53,7 +53,8 @@ class Location: BiolifeModel {
 }
 
 func ==(lhs: Location, rhs: Location) -> Bool {
-    return lhs.location == rhs.location
+    if lhs.location != rhs.location { return false }
+    return true
 }
 
 extension Location: NSCoding {

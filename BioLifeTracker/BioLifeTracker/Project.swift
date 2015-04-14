@@ -57,6 +57,8 @@ class Project: BiolifeModel, Storable {
         let individualIds = dictionary["individuals"] as! [Int]
         _individuals = individualIds.map { Individual.individualWithId($0) }
         super.init(dictionary: dictionary)
+        
+        sessions.map { $0.setProject(self) }
     }
     
     func getIndexOfSession(session: Session) -> Int? {
@@ -336,9 +338,13 @@ class Project: BiolifeModel, Storable {
 }
 
 func ==(lhs: Project, rhs: Project) -> Bool {
-    return lhs.name == rhs.name &&  lhs.ethogram == rhs.ethogram
-        && lhs.admins == rhs.admins && lhs.members == rhs.members
-        && lhs.sessions == rhs.sessions && lhs.individuals == rhs.individuals
+    if lhs.name != rhs.name { return false }
+    if lhs.ethogram != rhs.ethogram { return false }
+    if lhs.admins != rhs.admins { return false }
+    if lhs.members != rhs.members { return false }
+    if lhs.sessions != rhs.sessions { return false }
+    if lhs.individuals != rhs.individuals { return false }
+    return true
 }
 
 extension Project: NSCoding {
@@ -385,10 +391,10 @@ extension Project: CloudStorable {
     override func encodeWithDictionary(dictionary: NSMutableDictionary) {
         super.encodeWithDictionary(dictionary)
         dictionary.setValue(name, forKey: "name")
+        dictionary.setValue(sessions.map { $0.id! }, forKey: "session_set")
         dictionary.setValue(ethogram.id!, forKey: "ethogram")
         dictionary.setValue(members.map { $0.id }, forKey: "members")
         dictionary.setValue(admins.map { $0.id }, forKey: "admins")
-        dictionary.setValue(sessions.map { $0.id! }, forKey: "sessions")
         dictionary.setValue(individuals.map { $0.id! }, forKey: "individuals")
     }
 }

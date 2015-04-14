@@ -11,6 +11,7 @@ import Foundation
 
 protocol CloudStorable {
     var classUrl: String { get }
+    var requiresMultipart: Bool { get }
     
     var id: Int? { get }
     func setId(id: Int?)

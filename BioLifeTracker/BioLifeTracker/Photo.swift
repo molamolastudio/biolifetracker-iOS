@@ -10,6 +10,7 @@ import Foundation
 
 class Photo: BiolifeModel {
     static var ClassUrl: String { return "photos" }
+    override var requiresMultipart: Bool { return true }
     
     var image: UIImage
     
@@ -41,7 +42,9 @@ class Photo: BiolifeModel {
 
 func ==(lhs: Photo, rhs: Photo) -> Bool {
     if lhs.id == rhs.id { return true }
-    return lhs.image == rhs.image
+    let lhsImageRep = UIImagePNGRepresentation(lhs.image)
+    let rhsImageRep = UIImagePNGRepresentation(rhs.image)
+    return lhsImageRep.isEqualToData(rhsImageRep)
 }
 
 extension Photo: CloudStorable {
@@ -52,7 +55,7 @@ extension Photo: CloudStorable {
     }
     
     override func encodeWithDictionary(dictionary: NSMutableDictionary) {
-        fatalError("Photo::encodeWithDictionary has not been implemented")
+        dictionary.setValue(image, forKey: "image")
         super.encodeWithDictionary(dictionary)
     }
 }
