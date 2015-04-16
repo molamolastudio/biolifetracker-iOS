@@ -688,8 +688,12 @@ class ProjectTests: XCTestCase {
         
         project.addSessions([session1, session2, session3])
         
-        var targetDictionary = NSMutableDictionary()
-        project.encodeRecursivelyWithDictionary(targetDictionary)
+        var encodedProjectDictionary = NSMutableDictionary()
+        project.encodeRecursivelyWithDictionary(encodedProjectDictionary)
+        
+        var decodedProject = Project(dictionary: encodedProjectDictionary, recursive: true)
+        
+        XCTAssertTrue(decodedProject == project)
     }
     
 }

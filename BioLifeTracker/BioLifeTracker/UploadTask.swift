@@ -44,7 +44,7 @@ class UploadTask: CloudStorageTask {
             
             // Create NSData using either JSON serialization or multipart serialization
             let responseData: NSData?
-            if item.requiresMultipart {
+            if currentItem.requiresMultipart {
                 responseData = processMultipart(currentItem, dictionary: dictionary)
             } else {
                 responseData = processJson(currentItem, dictionary: dictionary)

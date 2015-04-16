@@ -40,8 +40,9 @@ class BehaviourState: BiolifeModel {
         _name = dictionary["name"] as! String
         _information = dictionary["information"] as! String
         if recursive {
-            let photoInfo = dictionary["photo"] as! NSDictionary
-            _photo = Photo(dictionary: photoInfo)
+            if let photoInfo = dictionary["photo"] as? NSDictionary {
+                _photo = Photo(dictionary: photoInfo, recursive: true)
+            }
         } else {
             if let photoId = dictionary["photo"] as? Int {
                 _photo = Photo.photoWithId(photoId)
@@ -91,6 +92,9 @@ func ==(lhs: BehaviourState, rhs: BehaviourState) -> Bool {
     return true
 }
 
+func !=(lhs: BehaviourState, rhs: BehaviourState) -> Bool {
+    return !(lhs == rhs)
+}
 
 extension BehaviourState: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
@@ -129,8 +133,8 @@ extension BehaviourState {
         var photoDictionary = NSMutableDictionary()
         if let photo = photo {
             photo.encodeRecursivelyWithDictionary(photoDictionary)
+            dictionary.setValue(photoDictionary, forKey: "photo")
         }
-        dictionary.setValue(photoDictionary, forKey: "photo")
         
         super.encodeRecursivelyWithDictionary(dictionary)
     }

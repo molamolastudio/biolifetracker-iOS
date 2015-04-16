@@ -62,6 +62,10 @@ func ==(lhs: Tag, rhs: Tag) -> Bool {
     return true
 }
 
+func !=(lhs: Tag, rhs: Tag) -> Bool {
+    return !(lhs == rhs)
+}
+
 extension Tag: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)
@@ -84,6 +88,7 @@ extension Tag: CloudStorable {
 
 extension Tag {
     override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
-        encodeWithDictionary(dictionary)
+        dictionary.setValue(name, forKey: "name")
+        super.encodeRecursivelyWithDictionary(dictionary)
     }
 }

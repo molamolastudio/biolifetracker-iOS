@@ -50,9 +50,7 @@ class Ethogram: BiolifeModel, Storable {
         _information = dictionary["information"] as! String
         if recursive {
             let behaviourInfos = dictionary["behaviours"] as! [NSDictionary]
-            self._behaviourStates = behaviourInfos.map {
-                BehaviourState(dictionary: $0, recursive: true)
-            }
+            self._behaviourStates = behaviourInfos.map { BehaviourState(dictionary: $0, recursive: true) }
         } else {
             let behaviourIds = dictionary["behaviours"] as! [Int]
             self._behaviourStates = behaviourIds.map { BehaviourState.behaviourStateWithId($0) }
@@ -199,10 +197,13 @@ class Ethogram: BiolifeModel, Storable {
 func ==(lhs: Ethogram, rhs: Ethogram) -> Bool {
     if lhs.name != rhs.name { return false }
     if lhs.information != rhs.information { return false }
-    if lhs.behaviourStates != rhs.behaviourStates { return false }
+    if lhs.behaviourStates.count != rhs.behaviourStates.count { return false }
     return true
 }
 
+func !=(lhs: Ethogram, rhs: Ethogram) -> Bool {
+    return !(lhs == rhs)
+}
 
 extension Ethogram: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {

@@ -59,6 +59,10 @@ func ==(lhs: Weather, rhs: Weather) -> Bool {
     return true
 }
 
+func !=(lhs: Weather, rhs: Weather) -> Bool {
+    return !(lhs == rhs)
+}
+
 extension Weather: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)
@@ -81,6 +85,7 @@ extension Weather: CloudStorable {
 
 extension Weather {
     override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
-        encodeWithDictionary(dictionary)
+        dictionary.setValue(weather, forKey: "weather")
+        super.encodeRecursivelyWithDictionary(dictionary)
     }
 }

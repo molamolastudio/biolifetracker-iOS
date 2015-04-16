@@ -43,10 +43,11 @@ class Observation: BiolifeModel {
     override init(dictionary: NSDictionary, recursive: Bool) {
         //read data from dictionary
         let dateFormatter = BiolifeDateFormatter()
-        _state = BehaviourState.behaviourStateWithId(dictionary["recorded_behaviour"] as! Int)
         _information = dictionary["information"] as! String
         _timestamp = dateFormatter.getDate(dictionary["timestamp"] as! String)
         if recursive {
+            let stateInfo = dictionary["recorded_behaviour"] as! NSDictionary
+            _state = BehaviourState(dictionary: stateInfo, recursive: true)
             let individualInfo = dictionary["individual"] as! NSDictionary
             _individual = Individual(dictionary: individualInfo, recursive: true)
             let locationInfo = dictionary["location"] as! NSDictionary
@@ -54,6 +55,7 @@ class Observation: BiolifeModel {
             let weatherInfo = dictionary["weather"] as! NSDictionary
             _weather = Weather(dictionary: weatherInfo, recursive: true)
         } else {
+            _state = BehaviourState.behaviourStateWithId(dictionary["recorded_behaviour"] as! Int)
             _individual = Individual.individualWithId(dictionary["individual"] as! Int)
             if let locationId = dictionary["location"] as? Int {
                 _location = Location.locationWithId(locationId)
@@ -62,7 +64,7 @@ class Observation: BiolifeModel {
                 _weather = Weather.weatherWithId(weatherId)
             }
         }
-        super.init(dictionary: dictionary, recursive: false)
+        super.init(dictionary: dictionary, recursive: recursive)
     }
     
     required convenience init(dictionary: NSDictionary) {
@@ -141,7 +143,9 @@ func ==(lhs: Observation, rhs: Observation) -> Bool {
         lhs.weather == rhs.weather
 }
 
-
+func !=(lhs: Observation, rhs: Observation) -> Bool {
+    return !(lhs == rhs)
+}
 
 
 extension Observation: NSCoding {

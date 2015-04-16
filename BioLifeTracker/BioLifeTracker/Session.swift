@@ -202,11 +202,14 @@ class Session: BiolifeModel {
 
 func ==(lhs: Session, rhs: Session) -> Bool {
     if lhs.project != rhs.project { return false }
-    if lhs.observations != rhs.observations { return false }
-    if lhs.individuals != rhs.individuals { return false }
+    if lhs.observations.count != rhs.observations.count { return false }
+    if lhs.individuals.count != rhs.individuals.count { return false }
     return true
 }
 
+func !=(lhs: Session, rhs: Session) -> Bool {
+    return !(lhs == rhs)
+}
 
 extension Session: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
@@ -253,7 +256,7 @@ extension Session {
             observation.encodeRecursivelyWithDictionary(observationDictionary)
             observationsArray.append(observationDictionary)
         }
-        dictionary.setValue(observationsArray, forKey: "observations")
+        dictionary.setValue(observationsArray, forKey: "observation_set")
 
         var individualsArray = [NSDictionary]()
         for individual in individuals {

@@ -59,6 +59,10 @@ func ==(lhs: Location, rhs: Location) -> Bool {
     return true
 }
 
+func !=(lhs: Location, rhs: Location) -> Bool {
+    return !(lhs == rhs)
+}
+
 extension Location: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)
@@ -81,6 +85,7 @@ extension Location: CloudStorable {
 
 extension Location {
     override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
-        encodeWithDictionary(dictionary)
+        dictionary.setValue(location, forKey: "location")
+        super.encodeRecursivelyWithDictionary(dictionary)
     }
 }

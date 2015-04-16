@@ -61,6 +61,14 @@ class Photo: BiolifeModel {
     }
 }
 
+func ==(lhs: Photo, rhs: Photo) -> Bool {
+    return lhs.image.size == rhs.image.size
+}
+
+func !=(lhs: Photo, rhs: Photo) -> Bool {
+    return !(lhs == rhs)
+}
+
 extension Photo: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)
