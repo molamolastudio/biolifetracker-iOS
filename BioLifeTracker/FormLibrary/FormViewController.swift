@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class FormViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     let defaultCellHeight: CGFloat = 44
     
@@ -87,8 +87,9 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
     // Displays the CustomPickerPopup view and sets up the values for the picker.
     func showPicker(sender: UIButton) {
         if let cell = sender.superview as? ButtonCell {
-            popup.pickerDelegate = self
-            
+            popup.modalPresentationStyle = .Popover
+            popup.preferredContentSize = CGSizeMake(400, 400)
+
             popup.data = cell.pickerValues
             
             // Sets the currently selected index if it exists.
@@ -96,14 +97,14 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
                 popup.selectedIndex = index
             }
             
-            self.view.addSubview(popup.view)
-            popup.view.frame = self.view.frame
+            let popoverController = popup.popoverPresentationController!
+            popoverController.permittedArrowDirections = .Any
+            popoverController.delegate = self
+            popoverController.sourceView = cell
+            popoverController.sourceRect = cell.frame
+
+            presentViewController(popup, animated: true, completion: nil)
         }
-    }
-    
-    // Removes the CustomPickerPopup view from this controller's view.
-    func pickerDidDismiss(selectedIndex: Int?) {
-        popup.view.removeFromSuperview()
     }
     
     // Displays the PhotoPickerViewController and sets up the values for the picker.
@@ -365,5 +366,10 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
         } else {
             return 0
         }
+    }
+    
+    // UIPopoverPresentationControllerDelegate method
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle{
+        return .None
     }
 }

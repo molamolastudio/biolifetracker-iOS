@@ -8,9 +8,10 @@
 
 import UIKit
 
-class EthogramDetailsViewController: UITableViewController, UITableViewDataSource, UITableViewDelegate {
+class EthogramDetailsViewController: UITableViewController {
     
-    let cellReuseIdentifier = "SingleLineTextCell"
+    let nameCellIdentifier = "SingleLineTextCell"
+    let stateCellIdentifier = "BehaviourStateCell"
     
     let messageNewState = "+ Add new state"
     
@@ -21,16 +22,15 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
     let secondSection = 1
     let sectionTitles = ["Details", "Behaviour States"]
     
-    let firstSectionNumRows = 2
+    let firstSectionNumRows = 1
     let firstRow = 0
-    let secondRow = 1
     
     var secondSectionNumRows = 1
     var secondSectionRowTitles = []
     let extraRow = 1
     
     // Collected data
-    var ethogram: Ethogram?
+    var ethogram = Ethogram()
     
     // UI elements to add later
     var btnAdd: UIButton? // For the behaviour state section
@@ -38,11 +38,15 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.tableView.rowHeight = rowHeight
         ethogram = Data.selectedEthogram!
         btnAdd = createAddButton()
-        self.tableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
-        self.navigationItem.title = ethogram!.name
+        
+        self.tableView.registerNib(UINib(nibName: nameCellIdentifier, bundle: nil), forCellReuseIdentifier: nameCellIdentifier)
+        self.tableView.registerNib(UINib(nibName: stateCellIdentifier, bundle: nil), forCellReuseIdentifier: stateCellIdentifier)
+        
+        self.navigationItem.title = ethogram.name
     }
     
     func refreshView() {
@@ -59,13 +63,12 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
     // Gets the name for the new behaviour state from the cell and adds it to the ethogram,
     // then refreshes the view.
     func addButtonPressed(sender: UIButton) {
-        let cell = sender.superview! as! UITableViewCell
-        let textField = cell.viewWithTag(Constants.ViewTags.ethogramDetailState) as! UITextField
+        let cell = sender.superview! as! BehaviourStateCell
         
-        let state = BehaviourState(name: textField.text!, information: "must add information")
-        ethogram!.addBehaviourState(state)
+        let state = BehaviourState(name: cell.textField.text!, information: "must add information")
+        ethogram.addBehaviourState(state)
         
-        sender.removeFromSuperview()
+        cell.button.hidden = true
         
         refreshView()
     }
@@ -81,58 +84,60 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
     
     // Sets up data in the cells
     func getCellForFirstSection(indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SingleLineTextCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(nameCellIdentifier) as! SingleLineTextCell
         
         cell.textField.userInteractionEnabled = false
         
-        if isFirstRow(indexPath.row) {
-            cell.label.text = "Name"
-            cell.textField.text = ethogram!.name
-        } else {
-            cell.label.text = "Code"
-            //info.text = ethogram!.code
-        }
+        cell.label.text = "Name"
+        cell.textField.text = ethogram.name
         return cell
     }
     
     // Populates behaviour states in second section and sets up listeners for adding new state.
     func getCellForSecondSection(indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SingleLineTextCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(stateCellIdentifier) as! BehaviourStateCell
         let textField = cell.textField
         
-        if ethogram!.behaviourStates.count > indexPath.row {
-            textField.text = ethogram!.behaviourStates[indexPath.row].name
-            textField.userInteractionEnabled = false
-            textField.removeTarget(self, action: Selector("extraRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
-        } else if ethogram!.behaviourStates.count == indexPath.row {
+        if ethogram.behaviourStates.count > indexPath.row {
+            textField.text = ethogram.behaviourStates[indexPath.row].name
+            textField.addTarget(self, action: Selector("textFieldTouched:"), forControlEvents: UIControlEvents.EditingChanged)
+        } else if ethogram.behaviourStates.count == indexPath.row {
             textField.placeholder = messageNewState
-            textField.userInteractionEnabled = true
             textField.addTarget(self, action: Selector("extraRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
         }
+        textField.userInteractionEnabled = true
+        cell.button.hidden = true
         return cell
     }
     
     // Selectors for text fields
     func nameRowDidChange(sender: UITextField) {
         if sender.text != "" {
-            ethogram!.updateName(sender.text)
+            ethogram.updateName(sender.text)
         }
     }
     
-    func codeRowDidChange(sender: UITextField) {
+    func textFieldTouched(sender: UITextField) {
+        let cell = sender.superview! as! BehaviourStateCell
         if sender.text != "" {
-            //ethogram!.code = sender.text
+            cell.button.setTitle("Edit", forState: .Normal)
+            cell.button.hidden = false
+            cell.button.addTarget(self, action: Selector("addButtonPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
+        } else {
+            sender.placeholder = messageNewState
+            cell.button.hidden = true
         }
     }
     
     func extraRowDidChange(sender: UITextField) {
+        let cell = sender.superview! as! BehaviourStateCell
         if sender.text != "" {
-            let cell = sender.superview! as! SingleLineTextCell
-            cell.addSubview(btnAdd!)
-            btnAdd!.frame = btnAddFrame
+            cell.button.setTitle("Add", forState: .Normal)
+            cell.button.hidden = false
+            cell.button.addTarget(self, action: Selector("addButtonPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
         } else {
             sender.placeholder = messageNewState
-            btnAdd!.removeFromSuperview()
+            cell.button.hidden = true
         }
     }
     
@@ -144,7 +149,7 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
         if isFirstSection(section) {
             return firstSectionNumRows
         } else {
-            return ethogram!.behaviourStates.count + extraRow
+            return ethogram.behaviourStates.count + extraRow
         }
     }
     
@@ -166,8 +171,9 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
         if editingStyle == UITableViewCellEditingStyle.Delete {
             if let cell = tableView.cellForRowAtIndexPath(indexPath) {
                 // Unable to delete cell, array out of bounds or hang
-                //let index = indexPath.row
-                //ethogram!.behaviourStates.removeAtIndex(index)
+                if !isExtraRow(indexPath.row) {
+                    ethogram.removeBehaviourState(indexPath.row)
+                }
             }
         }
     }
@@ -181,16 +187,8 @@ class EthogramDetailsViewController: UITableViewController, UITableViewDataSourc
         return index == secondSection
     }
     
-    func isFirstRow(index: Int) -> Bool {
-        return index == firstRow
-    }
-    
-    func isSecondRow(index: Int) -> Bool {
-        return index == secondRow
-    }
-    
     func isExtraRow(index: Int) -> Bool {
-        return index == ethogram!.behaviourStates.count
+        return index == ethogram.behaviourStates.count
     }
     
 }

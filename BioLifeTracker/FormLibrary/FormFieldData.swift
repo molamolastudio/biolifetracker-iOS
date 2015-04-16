@@ -156,7 +156,7 @@ class FormFieldData {
         }
     }
     
-    func addButtonCell(section: Int = 0, label: String, buttonTitle: String, target: AnyObject? = nil, action: String? = nil,  popup: FormPopupController? = nil, selectedValue: AnyObject? = nil, selectedValueAsString: String? = nil) {
+    func addButtonCell(section: Int = 0, label: String, buttonTitle: String, target: AnyObject? = nil, action: String? = nil,  popup: UIViewController? = nil, selectedValue: AnyObject? = nil, selectedValueAsString: String? = nil) {
         if let var array = fields[section] {
             var field = FormField()
             
