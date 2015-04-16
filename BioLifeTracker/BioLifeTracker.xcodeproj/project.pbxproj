@@ -97,6 +97,7 @@
 		32423B8B1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32423B8A1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib */; };
 		32423B8D1AE0023400AFA2F8 /* FocalSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423B8C1AE0023400AFA2F8 /* FocalSessionViewController.swift */; };
 		32423B8F1AE0025900AFA2F8 /* FocalSessionViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423B8E1AE0025900AFA2F8 /* FocalSessionViewControllerDelegate.swift */; };
+		32423B911AE0093B00AFA2F8 /* FocalSessionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32423B901AE0093B00AFA2F8 /* FocalSessionView.xib */; };
 		326773B61ACAEFB000899745 /* BooleanPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773A91ACAEFB000899745 /* BooleanPickerCell.swift */; };
 		326773B71ACAEFB000899745 /* CustomPickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */; };
 		326773BA1ACAEFB000899745 /* BooleanPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 326773AD1ACAEFB000899745 /* BooleanPickerCell.xib */; };
@@ -262,6 +263,7 @@
 		32423B8A1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomPickerPopupCell.xib; sourceTree = "<group>"; };
 		32423B8C1AE0023400AFA2F8 /* FocalSessionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocalSessionViewController.swift; sourceTree = "<group>"; };
 		32423B8E1AE0025900AFA2F8 /* FocalSessionViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocalSessionViewControllerDelegate.swift; sourceTree = "<group>"; };
+		32423B901AE0093B00AFA2F8 /* FocalSessionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FocalSessionView.xib; sourceTree = "<group>"; };
 		32517A211AB1789100578C42 /* EthogramsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramsViewController.swift; sourceTree = "<group>"; };
 		326773A91ACAEFB000899745 /* BooleanPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BooleanPickerCell.swift; path = FormLibrary/BooleanPickerCell.swift; sourceTree = "<group>"; };
 		326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomPickerPopup.swift; path = FormLibrary/CustomPickerPopup.swift; sourceTree = "<group>"; };
@@ -514,6 +516,7 @@
 				323CBD8F1ADB901200A7C970 /* ProjectHomeView.xib */,
 				32423B8C1AE0023400AFA2F8 /* FocalSessionViewController.swift */,
 				32423B8E1AE0025900AFA2F8 /* FocalSessionViewControllerDelegate.swift */,
+				32423B901AE0093B00AFA2F8 /* FocalSessionView.xib */,
 				323CBD971ADD624D00A7C970 /* ScanSessionViewController.swift */,
 				323CBD991ADD634400A7C970 /* ScanSessionViewControllerDelegate.swift */,
 				32517A211AB1789100578C42 /* EthogramsViewController.swift */,
@@ -734,6 +737,7 @@
 				24D28D141ADA5A6800E70759 /* Images.xcassets in Resources */,
 				329B29371AD15BBF007ADC65 /* DefaultPickerCell.xib in Resources */,
 				329B293B1AD15BBF007ADC65 /* PhotoPickerCell.xib in Resources */,
+				32423B911AE0093B00AFA2F8 /* FocalSessionView.xib in Resources */,
 				32423B811ADF766200AFA2F8 /* BehaviourStateCell.xib in Resources */,
 				326773BF1ACAEFB000899745 /* SingleLineTextCell.xib in Resources */,
 				326773BE1ACAEFB000899745 /* MultiLineTextCell.xib in Resources */,

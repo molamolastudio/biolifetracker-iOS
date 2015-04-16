@@ -9,5 +9,5 @@
 import Foundation
 
 protocol FocalSessionViewControllerDelegate {
-    func userDidSelectObservation(session: Session, index: Int)
+    func userDidSelectObservation(session: Session, observation: Observation)
 }
