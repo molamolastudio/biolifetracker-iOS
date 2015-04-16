@@ -186,7 +186,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showGraphsPage() {
-        let graphs = GraphsViewController(nibName: "GraphsView", bundle: nil)
+        let graphs = GraphAnalysisViewController(nibName: "GraphAnalysisView", bundle: nil)
 
         detailNav.pushViewController(graphs, animated: true)
     }

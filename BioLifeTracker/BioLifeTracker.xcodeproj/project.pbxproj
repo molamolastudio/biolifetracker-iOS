@@ -127,6 +127,8 @@
 		7876BC2F1ADB9FED00471528 /* GraphsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7854206D1ADAA06500526EAA /* GraphsViewControllerDelegate.swift */; };
 		7876BC301ADB9FF700471528 /* GraphsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7854206B1ADA5A5E00526EAA /* GraphsView.xib */; };
 		7876BC311ADBA00600471528 /* ProjectStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7854206F1ADB437C00526EAA /* ProjectStub.swift */; };
+		789980C61ADFD6B000A50E94 /* GraphAnalysisView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 789980C51ADFD6B000A50E94 /* GraphAnalysisView.xib */; };
+		789980C81ADFD70700A50E94 /* GraphAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789980C71ADFD70700A50E94 /* GraphAnalysisViewController.swift */; };
 		AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AC18814A1ACFC84600CE450B /* GooglePlus.bundle */; };
 		AC18814E1ACFC84600CE450B /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814B1ACFC84600CE450B /* GooglePlus.framework */; };
 		AC1881501ACFD05D00CE450B /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814F1ACFD05D00CE450B /* GoogleOpenSource.framework */; };
@@ -287,6 +289,8 @@
 		7854206B1ADA5A5E00526EAA /* GraphsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GraphsView.xib; sourceTree = "<group>"; };
 		7854206D1ADAA06500526EAA /* GraphsViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphsViewControllerDelegate.swift; sourceTree = "<group>"; };
 		7854206F1ADB437C00526EAA /* ProjectStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectStub.swift; sourceTree = "<group>"; };
+		789980C51ADFD6B000A50E94 /* GraphAnalysisView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GraphAnalysisView.xib; sourceTree = "<group>"; };
+		789980C71ADFD70700A50E94 /* GraphAnalysisViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphAnalysisViewController.swift; sourceTree = "<group>"; };
 		AC18814A1ACFC84600CE450B /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
 		AC18814B1ACFC84600CE450B /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
 		AC18814F1ACFD05D00CE450B /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
@@ -605,6 +609,8 @@
 				7854206D1ADAA06500526EAA /* GraphsViewControllerDelegate.swift */,
 				7854206B1ADA5A5E00526EAA /* GraphsView.xib */,
 				7854206F1ADB437C00526EAA /* ProjectStub.swift */,
+				789980C51ADFD6B000A50E94 /* GraphAnalysisView.xib */,
+				789980C71ADFD70700A50E94 /* GraphAnalysisViewController.swift */,
 			);
 			name = Graph;
 			sourceTree = "<group>";
@@ -742,6 +748,7 @@
 				3205E74D1AAED9F9006F374D /* Main.storyboard in Resources */,
 				326773BA1ACAEFB000899745 /* BooleanPickerCell.xib in Resources */,
 				32FB650A1AD94B6800391194 /* LaunchScreen.xib in Resources */,
+				789980C61ADFD6B000A50E94 /* GraphAnalysisView.xib in Resources */,
 				AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */,
 				329B29371AD15BBF007ADC65 /* DefaultPickerCell.xib in Resources */,
 				329B293B1AD15BBF007ADC65 /* PhotoPickerCell.xib in Resources */,
@@ -778,6 +785,7 @@
 				321D62C01AD2604400CF9BE9 /* SubtitleTableCell.swift in Sources */,
 				32850BE21AB9625500C49D33 /* ProjectsViewController.swift in Sources */,
 				329B293A1AD15BBF007ADC65 /* PhotoPickerCell.swift in Sources */,
+				789980C81ADFD70700A50E94 /* GraphAnalysisViewController.swift in Sources */,
 				326773C21ACAEFB000899745 /* SingleLineTextCell.swift in Sources */,
 				ACDE13AD1AD0C0540075AC35 /* EthogramManager.swift in Sources */,
 				329B29381AD15BBF007ADC65 /* FormPopupController.swift in Sources */,

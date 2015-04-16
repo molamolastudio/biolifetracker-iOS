@@ -12,9 +12,6 @@ import UIKit
 class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotDataSource, CPTBarPlotDelegate, CPTPlotDelegate {
     var delegate: GraphsViewControllerDelegate!
     
-
-    @IBOutlet weak var graphSwitch: UISegmentedControl!
-    
     @IBOutlet weak var hostingView: CPTGraphHostingView!
 
     var projectInstance: Project!
@@ -57,10 +54,6 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     var fourpm = 10
     var fivepm = 11
     var sixpm = 12
-    var sevenpm = 13
-    var eightpm = 14
-    var ninepm = 15
-    var tenpm = 16
     
     var allBehaviourStates: [BehaviourState]!
     var chosenBehaviourStates: [BehaviourState]!
@@ -160,7 +153,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
             
         } else if plotByHour {
             //13 for number of hours
-            numberOfOccurences = [Int](count: 17, repeatedValue:0)
+            numberOfOccurences = [Int](count: 13, repeatedValue:0)
             println("getting occurences")
             
             for occurence in occurences {
@@ -261,19 +254,11 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
             return fivepm
         case 18:
             return sixpm
-        case 19:
-            return sevenpm
-        case 20:
-            return eightpm
-        case 21:
-            return ninepm
-        case 22:
-            return tenpm
         default:
             if hour < 6 {
                 return sixam
             } else {
-                return tenpm
+                return sixpm
             }
         }
 
@@ -566,22 +551,6 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     func barFillForBarPlot(barPlot: CPTBarPlot!, recordIndex idx: UInt) -> CPTFill! {
         return CPTFill(color: CPTColor.blueColor())
     }
-    
-    @IBAction func graphIndexChanged(sender: AnyObject) {
-        switch graphSwitch.selectedSegmentIndex {
-        case 0:
-            println("hour")
-        case 1:
-            println("day")
-        case 2:
-            println("states")
-            // only view behaviourstate tables
-        default:
-            break
-        }
-    }
-    
-    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
