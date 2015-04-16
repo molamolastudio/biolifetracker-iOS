@@ -90,6 +90,43 @@ class Session: BiolifeModel {
         updateSession()
     }
     
+    func getTimestamps() -> [NSDate] {
+        var timestamps: [NSDate] = []
+        var duplicate: Bool
+        
+        for observation in observations {
+            duplicate = false
+            for timestamp in timestamps {
+                if observation.timestamp == timestamp {
+                    duplicate = true
+                    break
+                }
+            }
+            if !duplicate {
+                timestamps.append(observation.timestamp)
+            }
+        }
+        
+        var sortedTimestamps = sorted(timestamps, { (left: NSDate, right: NSDate) -> Bool in left.compare(right) == NSComparisonResult.OrderedAscending })
+        
+        return sortedTimestamps
+    }
+    
+    func getObservationsByTimestamp(timestamp: NSDate) -> [Observation] {
+        var selectedObs = [Observation]()
+        
+        for observation in observations {
+            if observation.timestamp == timestamp {
+                selectedObs.append(observation)
+            }
+        }
+        return selectedObs
+    }
+    
+    private func sortDates(date1: String, date2: String) -> Bool {
+        return date1 > date2
+    }
+    
     /******************Individual*******************/
     func addIndividuals(individuals: [Individual]) {
         self._individuals += individuals

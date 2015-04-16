@@ -9,7 +9,9 @@
 import Foundation
 
 protocol ProjectHomeViewControllerDelegate {
-    func userDidSelectSession(tag: Int, project: Project, session: Session)
+    func userDidSelectSession(project: Project, session: Session)
     func userDidSelectMember(project: Project, member: User)
-    func userDidChangeEthogram(project: Project, ethogram: Ethogram)
+    func userDidSelectGraph()
+    func userDidSelectCreateSession()
+    func userDidSelectEditMembers()
 }

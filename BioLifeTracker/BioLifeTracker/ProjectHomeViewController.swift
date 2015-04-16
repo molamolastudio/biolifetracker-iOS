@@ -11,13 +11,12 @@ import UIKit
 class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var delegate: ProjectHomeViewControllerDelegate? = nil
     
-    @IBOutlet weak var leftTableView: UITableView!
-    @IBOutlet weak var rightTableView: UITableView!
-    @IBOutlet weak var bottomTableView: UITableView!
+    @IBOutlet weak var graphView: UIView!
+    @IBOutlet weak var memberView: UITableView!
+    @IBOutlet weak var sessionView: UITableView!
     
-    let leftTag = 1
-    let rightTag = 2
-    let bottomTag = 3
+    let memberTag = 2
+    let sessionTag = 3
     
     let cellReuseIdentifier = "SingleLineTextCell"
     let cellHeight: CGFloat = 44
@@ -28,21 +27,48 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        leftTableView.dataSource = self
-        leftTableView.delegate = self
         
-        rightTableView.dataSource = self
-        rightTableView.delegate = self
+        setupTableViews()
         
-        bottomTableView.dataSource = self
-        bottomTableView.delegate = self
-        
+        // Sets up the date formatter for converting dates to strings
         formatter.dateStyle = NSDateFormatterStyle.LongStyle
         formatter.timeStyle = .MediumStyle
+    }
+    
+    func setupTableViews() {
+        // Sets the data source and delegates of table views to self
+        memberView.dataSource = self
+        memberView.delegate = self
         
-        leftTableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
-        rightTableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
-        bottomTableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
+        sessionView.dataSource = self
+        sessionView.delegate = self
+        
+        // Registers the nibs used for the table cells
+        memberView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
+        sessionView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
+        
+        // Sets the table views to display under the navigation bar
+        self.edgesForExtendedLayout = UIRectEdge.None
+        self.extendedLayoutIncludesOpaqueBars = false
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+        // Sets the rounded corners for the table views
+        memberView.layer.cornerRadius = 8;
+        memberView.layer.masksToBounds = true;
+        sessionView.layer.cornerRadius = 8;
+        sessionView.layer.masksToBounds = true;
+    }
+    
+    @IBAction func editMembersBtnPressed() {
+        if delegate != nil {
+            delegate!.userDidSelectEditMembers()
+        }
+    }
+    
+    @IBAction func createSessionBtnPressed() {
+        if delegate != nil {
+            delegate!.userDidSelectCreateSession()
+        }
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS
@@ -51,17 +77,14 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         
         cell.textField.userInteractionEnabled = false
         
-        if tableView.tag == leftTag {
+        if tableView.tag == memberTag {
             // Displays all admins and members
             if indexPath.row < currentProject!.admins.count {
                 cell.label.text = currentProject!.admins[indexPath.row].name
             } else {
                 cell.label.text = currentProject!.members[indexPath.row - currentProject!.admins.count].name
             }
-        } else if tableView.tag == rightTag {
-            // Displays all behaviour states of this project's ethogram
-            cell.label.text = currentProject!.ethogram.behaviourStates[indexPath.row].name
-        } else if tableView.tag == bottomTag {
+        } else if tableView.tag == sessionTag {
             // Displays all sessions of this project
             let dateString = formatter.stringFromDate(currentProject!.sessions[indexPath.row].createdAt)
             cell.label.text = dateString
@@ -71,27 +94,23 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if delegate != nil {
-            if tableView.tag == leftTag {
+            if tableView.tag == memberTag {
                 if indexPath.row < currentProject!.admins.count {
                     delegate!.userDidSelectMember(currentProject!, member: currentProject!.admins[indexPath.row])
                 } else {
                     delegate!.userDidSelectMember(currentProject!, member: currentProject!.members[indexPath.row - currentProject!.admins.count])
                 }
                 
-            } else if tableView.tag == rightTag {
-                delegate!.userDidChangeEthogram(currentProject!, ethogram: currentProject!.ethogram)
-            } else if tableView.tag == bottomTag {
-                delegate!.userDidSelectSession(0, project: currentProject!, session: currentProject!.sessions[indexPath.row])
+            } else if tableView.tag == sessionTag {
+                delegate!.userDidSelectSession(currentProject!, session: currentProject!.sessions[indexPath.row])
             }
         }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView.tag == leftTag {
+        if tableView.tag == memberTag {
             return currentProject!.admins.count + currentProject!.members.count
-        } else if tableView.tag == rightTag {
-            return currentProject!.ethogram.behaviourStates.count
-        } else if tableView.tag == bottomTag {
+        } else if tableView.tag == sessionTag {
             return currentProject!.sessions.count
         } else {
             return 0
@@ -100,18 +119,6 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
-    }
-    
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if tableView.tag == leftTag {
-            return "Members"
-        } else if tableView.tag == rightTag {
-            return "Selected Ethogram: " + currentProject!.ethogram.name
-        } else if tableView.tag == bottomTag {
-            return "Sessions"
-        } else {
-            return ""
-        }
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

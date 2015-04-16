@@ -20,7 +20,7 @@ class EthogramFormViewController: UITableViewController {
     let secondSection = 1
     let sectionTitles = ["Details", "Behaviour States"]
     
-    let firstSectionNumRows = 2
+    let firstSectionNumRows = 1
     let firstRow = 0
     let secondRow = 1
     
@@ -33,7 +33,7 @@ class EthogramFormViewController: UITableViewController {
     let alertMessage = "All fields must be filled."
     
     // Collected data
-    var ethogram: Ethogram?
+    var ethogram = Ethogram()
     
     // UI elements to add later
     var btnAdd: UIButton? // For the behaviour state section
@@ -44,7 +44,6 @@ class EthogramFormViewController: UITableViewController {
         self.tableView.rowHeight = rowHeight
         btnAdd = createAddButton()
         self.tableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
-        ethogram = Ethogram()
         setupAlertController()
     }
     
@@ -70,7 +69,7 @@ class EthogramFormViewController: UITableViewController {
         //            println("Saving behaviour state success: \(success)\nError: \(error.debugDescription)")
         //        }
         
-        ethogram!.addBehaviourState(state)
+        ethogram.addBehaviourState(state)
         
         sender.removeFromSuperview()
         
@@ -81,6 +80,15 @@ class EthogramFormViewController: UITableViewController {
         alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
         let actionOk = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
         alert.addAction(actionOk)
+    }
+    
+    func getEthogram() -> Ethogram? {
+        if ethogram.name != "" {
+            return ethogram
+        } else {
+            self.presentViewController(alert, animated: true, completion: nil)
+            return nil
+        }
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS
@@ -95,14 +103,9 @@ class EthogramFormViewController: UITableViewController {
     // Sets up listeners for text fields in first section
     func getCellForFirstSection(indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SingleLineTextCell
-        
-        if isFirstRow(indexPath.row) {
+
             cell.label.text = "Name"
             cell.textField.addTarget(self, action: Selector("nameRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
-        } else {
-            cell.label.text = "Code"
-            cell.textField.addTarget(self, action: Selector("codeRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
-        }
         return cell
     }
     
@@ -111,11 +114,11 @@ class EthogramFormViewController: UITableViewController {
         let cell = self.tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier)as! SingleLineTextCell
         let textField = cell.textField
         
-        if ethogram!.behaviourStates.count > indexPath.row {
-            textField.text = ethogram!.behaviourStates[indexPath.row].name
+        if ethogram.behaviourStates.count > indexPath.row {
+            textField.text = ethogram.behaviourStates[indexPath.row].name
             textField.userInteractionEnabled = false
             textField.removeTarget(self, action: Selector("extraRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
-        } else if ethogram!.behaviourStates.count == indexPath.row {
+        } else if ethogram.behaviourStates.count == indexPath.row {
             textField.placeholder = messageNewState
             textField.userInteractionEnabled = true
             textField.addTarget(self, action: Selector("extraRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
@@ -126,13 +129,7 @@ class EthogramFormViewController: UITableViewController {
     // Selectors for text fields
     func nameRowDidChange(sender: UITextField) {
         if sender.text != "" {
-            ethogram!.updateName(sender.text)
-        }
-    }
-    
-    func codeRowDidChange(sender: UITextField) {
-        if sender.text != "" {
-            //ethogram!.code = sender.text
+            ethogram.updateName(sender.text)
         }
     }
     
@@ -155,7 +152,7 @@ class EthogramFormViewController: UITableViewController {
         if isFirstSection(section) {
             return firstSectionNumRows
         } else {
-            return ethogram!.behaviourStates.count + extraRow
+            return ethogram.behaviourStates.count + extraRow
         }
     }
     
@@ -201,7 +198,7 @@ class EthogramFormViewController: UITableViewController {
     }
     
     func isExtraRow(index: Int) -> Bool {
-        return index == ethogram!.behaviourStates.count
+        return index == ethogram.behaviourStates.count
     }
     
 }

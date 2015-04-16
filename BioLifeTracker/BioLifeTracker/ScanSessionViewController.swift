@@ -1,48 +1,54 @@
 //
-//  SessionsViewController.swift
+//  ScanSessionViewController.swift
 //  BioLifeTracker
 //
-//  Created by Michelle Tan on 10/3/15.
+//  Created by Michelle Tan on 14/4/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
 
 import UIKit
 
-class SessionsViewController: UITableViewController {
-    var delegate: SessionsViewControllerDelegate? = nil
+class ScanSessionViewController: UITableViewController {
+    var delegate: ScanSessionViewControllerDelegate? = nil
     
     let cellReuseIdentifier = "SubtitleTableCell"
     let cellHeight: CGFloat = 50
+    let messageCellSubtitle = "Observations: "
     
     let numSections = 1
     
-    var currentProject: Project? = nil
+    var currentSession: Session? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tableView.reloadData()
+    }
+    
     // UITableViewDataSource and UITableViewDelegate METHODS
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SubtitleTableCell
         
-        let session = currentProject!.sessions[indexPath.row]
+        let ethogram = EthogramManager.sharedInstance.ethograms[indexPath.row]
         
-        cell.title.text = "Observations: " + String(session.observations.count)
-        cell.subtitle.text = ""
+        cell.title.text = ethogram.name
+        cell.subtitle.text = messageCellSubtitle + String(ethogram.behaviourStates.count)
         
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if delegate != nil {
-            delegate!.userDidSelectSession(currentProject!, selectedSession: currentProject!.sessions[indexPath.row])
+            delegate!.userDidSelectScan(currentSession!, index: indexPath.row)
         }
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currentProject!.sessions.count
+        return EthogramManager.sharedInstance.ethograms.count
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -53,3 +59,4 @@ class SessionsViewController: UITableViewController {
         return cellHeight
     }
 }
+
