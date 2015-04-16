@@ -95,6 +95,8 @@
 		32423B871ADFDA3900AFA2F8 /* FormPopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423B861ADFDA3900AFA2F8 /* FormPopupController.swift */; };
 		32423B891ADFDC8600AFA2F8 /* CustomPickerPopupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423B881ADFDC8600AFA2F8 /* CustomPickerPopupCell.swift */; };
 		32423B8B1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32423B8A1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib */; };
+		32423B8D1AE0023400AFA2F8 /* FocalSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423B8C1AE0023400AFA2F8 /* FocalSessionViewController.swift */; };
+		32423B8F1AE0025900AFA2F8 /* FocalSessionViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423B8E1AE0025900AFA2F8 /* FocalSessionViewControllerDelegate.swift */; };
 		326773B61ACAEFB000899745 /* BooleanPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773A91ACAEFB000899745 /* BooleanPickerCell.swift */; };
 		326773B71ACAEFB000899745 /* CustomPickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */; };
 		326773BA1ACAEFB000899745 /* BooleanPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 326773AD1ACAEFB000899745 /* BooleanPickerCell.xib */; };
@@ -258,6 +260,8 @@
 		32423B861ADFDA3900AFA2F8 /* FormPopupController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormPopupController.swift; path = FormLibrary/FormPopupController.swift; sourceTree = "<group>"; };
 		32423B881ADFDC8600AFA2F8 /* CustomPickerPopupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPickerPopupCell.swift; sourceTree = "<group>"; };
 		32423B8A1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomPickerPopupCell.xib; sourceTree = "<group>"; };
+		32423B8C1AE0023400AFA2F8 /* FocalSessionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocalSessionViewController.swift; sourceTree = "<group>"; };
+		32423B8E1AE0025900AFA2F8 /* FocalSessionViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocalSessionViewControllerDelegate.swift; sourceTree = "<group>"; };
 		32517A211AB1789100578C42 /* EthogramsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramsViewController.swift; sourceTree = "<group>"; };
 		326773A91ACAEFB000899745 /* BooleanPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BooleanPickerCell.swift; path = FormLibrary/BooleanPickerCell.swift; sourceTree = "<group>"; };
 		326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomPickerPopup.swift; path = FormLibrary/CustomPickerPopup.swift; sourceTree = "<group>"; };
@@ -508,6 +512,8 @@
 				323CBD8D1ADB8FF000A7C970 /* ProjectHomeViewController.swift */,
 				323CBD911ADB96F600A7C970 /* ProjectHomeViewControllerDelegate.swift */,
 				323CBD8F1ADB901200A7C970 /* ProjectHomeView.xib */,
+				32423B8C1AE0023400AFA2F8 /* FocalSessionViewController.swift */,
+				32423B8E1AE0025900AFA2F8 /* FocalSessionViewControllerDelegate.swift */,
 				323CBD971ADD624D00A7C970 /* ScanSessionViewController.swift */,
 				323CBD991ADD634400A7C970 /* ScanSessionViewControllerDelegate.swift */,
 				32517A211AB1789100578C42 /* EthogramsViewController.swift */,
@@ -786,6 +792,7 @@
 				32423B871ADFDA3900AFA2F8 /* FormPopupController.swift in Sources */,
 				326773BB1ACAEFB000899745 /* FormCell.swift in Sources */,
 				3205E7781AAEDA85006F374D /* Data.swift in Sources */,
+				32423B8F1AE0025900AFA2F8 /* FocalSessionViewControllerDelegate.swift in Sources */,
 				3205E77A1AAEDA85006F374D /* Observation.swift in Sources */,
 				AC9162AC1ACA6A0400FED714 /* CloudStorable.swift in Sources */,
 				32145C2D1AD272B800C20F07 /* ObservationsViewController.swift in Sources */,
@@ -798,6 +805,7 @@
 				3205E7481AAED9F9006F374D /* AppDelegate.swift in Sources */,
 				3205E7771AAEDA85006F374D /* Constants.swift in Sources */,
 				323CBD961ADD58EA00A7C970 /* ScanViewController.swift in Sources */,
+				32423B8D1AE0023400AFA2F8 /* FocalSessionViewController.swift in Sources */,
 				321D62C51AD2618800CF9BE9 /* EthogramsViewControllerDelegate.swift in Sources */,
 				3205E77B1AAEDA85006F374D /* Project.swift in Sources */,
 				329B29361AD15BBF007ADC65 /* DefaultPickerCell.swift in Sources */,

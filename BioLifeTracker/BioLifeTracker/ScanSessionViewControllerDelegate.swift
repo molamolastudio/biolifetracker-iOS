@@ -9,5 +9,5 @@
 import Foundation
 
 protocol ScanSessionViewControllerDelegate {
-    func userDidSelectScan(session: Session, index: Int)
+    func userDidSelectScan(session: Session, timestamp: NSDate)
 }
