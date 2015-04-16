@@ -61,6 +61,32 @@ class Project: BiolifeModel, Storable {
         sessions.map { $0.setProject(self) }
     }
     
+    convenience init(dictionary: NSDictionary, recursive: Bool) {
+        if !recursive {
+            self.init(dictionary: dictionary)
+        } else {
+            let ethogram = Ethogram(dictionary: dictionary["ethogram"] as! NSDictionary, recursive: true)
+            let name = dictionary["name"] as! String
+            self.init(name: name, ethogram: ethogram)
+            let memberInfos =  dictionary["members"] as! [NSDictionary]
+            for memberInfo in memberInfos {
+                _members.append(User(dictionary: memberInfo, recursive: true))
+            }
+            let adminInfos = dictionary["admins"] as! [NSDictionary]
+            for adminInfo in adminInfos {
+                _admins.append(User(dictionary: adminInfo, recursive: true))
+            }
+            let sessionInfos = dictionary["sessions"] as! [NSDictionary]
+            for sessionInfo in sessionInfos {
+                _sessions.append(Session(dictionary: sessionInfo, recursive: true))
+            }
+            let individualInfos = dictionary["individuals"] as! [NSDictionary]
+            for individualInfo in individualInfos {
+                _individuals.append(Individual(dictionary: individualInfo, recursive: true)
+            }
+        }
+    }
+    
     func getIndexOfSession(session: Session) -> Int? {
         for var i = 0; i < _sessions.count; i++ {
             if _sessions[i] == session {

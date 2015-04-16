@@ -61,7 +61,12 @@ class BiolifeModel: NSObject, NSCoding {
             self.init(dictionary: dictionary)
         } else {
             self.init()
-            _created
+            _createdBy = User(dictionary: dictionary["created_by"] as! NSDictionary, recursive: true)
+            _updatedBy = User(dictionary: dictionary["updated_by"] as! NSDictionary, recursive: true)
+            let dateFormatter = BiolifeDateFormatter()
+            _createdAt = dateFormatter.getDate(dictionary["created_at"] as! String)
+            _updatedAt = dateFormatter.getDate(dictionary["updated_at"] as! String)
+            
         }
     }
     

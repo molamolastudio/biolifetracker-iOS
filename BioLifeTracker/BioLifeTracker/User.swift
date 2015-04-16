@@ -43,6 +43,10 @@ class User: NSObject, NSCoding {
         super.init()
     }
     
+    convenience init(dictionary: NSDictionary, recursive: Bool) {
+        self.init(dictionary: dictionary)
+    }
+    
     class func usersWithIds(idList: [Int]) -> [User] {
         let manager = CloudStorageManager.sharedInstance
         return idList.map {
