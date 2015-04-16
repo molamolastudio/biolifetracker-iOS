@@ -33,6 +33,10 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         leftTableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
         rightTableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
         
+        // Sets up the date formatter for converting dates to strings
+        formatter.dateStyle = NSDateFormatterStyle.LongStyle
+        formatter.timeStyle = .MediumStyle
+        
         // Setup the individuals array
         individuals.append("All")
         individualObservations["All"] = currentSession!.observations

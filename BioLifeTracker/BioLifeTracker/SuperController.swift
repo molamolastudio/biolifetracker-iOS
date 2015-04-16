@@ -11,7 +11,7 @@
 
 import UIKit
 
-class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate, FirstViewControllerDelegate, ProjectsViewControllerDelegate, EthogramsViewControllerDelegate, ProjectHomeViewControllerDelegate, ScanSessionViewControllerDelegate {
+class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate, FirstViewControllerDelegate, ProjectsViewControllerDelegate, EthogramsViewControllerDelegate, ProjectHomeViewControllerDelegate, ScanSessionViewControllerDelegate, FocalSessionViewControllerDelegate {
     
     let splitVC = UISplitViewController()
     let masterNav = UINavigationController()
@@ -331,8 +331,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
     }
     
-    func userDidSelectGraph() {
-        
+    func userDidSelectGraph(project: Project) {
+        // Show analysis with the particular project
     }
     
     func userDidSelectCreateSession() {
@@ -345,8 +345,13 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     // ScanSessionViewControllerDelegate methods
-    func userDidSelectScan(session: Session, index: Int) {
-        
+    func userDidSelectScan(session: Session, timestamp: NSDate) {
+        // Open the ScanView
+    }
+    
+    // FocalSessionViewControllerDelegate methods
+    func userDidSelectObservation(session: Session, observation: Observation) {
+        // Open the Observation View
     }
     
 }

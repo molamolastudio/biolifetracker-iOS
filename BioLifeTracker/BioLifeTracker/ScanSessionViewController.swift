@@ -26,6 +26,11 @@ class ScanSessionViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
+        
+        // Sets up the date formatter for converting dates to strings
+        formatter.dateStyle = NSDateFormatterStyle.LongStyle
+        formatter.timeStyle = .MediumStyle
+        
         timestamps = currentSession!.getTimestamps()
     }
     
