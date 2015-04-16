@@ -55,6 +55,16 @@ class BiolifeModel: NSObject, NSCoding {
         self._updatedBy = User(dictionary: updatedByDictionary)
         super.init()
     }
+    
+    convenience init(dictionary: NSDictionary, recursive: Bool) {
+        if (!recursive) {
+            self.init(dictionary: dictionary)
+        } else {
+            self.init()
+            _created
+        }
+    }
+    
     func setId(id: Int?) { self.id = id }
     func lock() { isLocked = true }
     func unlock() { isLocked = false }
@@ -89,6 +99,16 @@ extension BiolifeModel: NSCoding {
 
 extension BiolifeModel {
     func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
-        encodeWithDictionary(dictionary)
+        let dateFormatter = BiolifeDateFormatter()
+        dictionary.setValue(dateFormatter.formatDate(createdAt), forKey: "created_at")
+        dictionary.setValue(dateFormatter.formatDate(updatedAt), forKey: "updated_at")
+        
+        let createdByDictionary = NSMutableDictionary()
+        createdBy.encodeRecursivelyWithDictionary(createdByDictionary)
+        dictionary.setValue(createdByDictionary, forKey: "created_by")
+        
+        let updatedByDictionary = NSMutableDictionary()
+        updatedBy.encodeRecursivelyWithDictionary(updatedByDictionary)
+        dictionary.setValue(updatedByDictionary, forKey: "updated_by")
     }
 }
