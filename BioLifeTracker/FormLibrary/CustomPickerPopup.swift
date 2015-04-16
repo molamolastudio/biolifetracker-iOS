@@ -9,7 +9,6 @@
 import UIKit
 
 class CustomPickerPopup: FormPopupController, UITableViewDataSource, UITableViewDelegate {
-    
     let table = UITableView()
     
     let tableBorderWidth: CGFloat = 0.5
@@ -25,8 +24,6 @@ class CustomPickerPopup: FormPopupController, UITableViewDataSource, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.clipsToBounds = true
-        table.clipsToBounds = true
         table.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
         setupTableView()
     }

@@ -15,7 +15,7 @@ class EthogramFormViewController: UITableViewController {
     
     let messageNewState = "+ Add new state"
     
-    let rowHeight = Constants.Table.rowHeight
+    let rowHeight: CGFloat = 44
     
     let numSections = 2
     let firstSection = 0
@@ -26,8 +26,6 @@ class EthogramFormViewController: UITableViewController {
     let firstRow = 0
     
     var secondSectionNumRows = 1
-    var secondSectionRowTitles = []
-    let extraRow = 1
     
     var alert = UIAlertController()
     let alertTitle = "Incomplete Ethogram"
@@ -44,9 +42,11 @@ class EthogramFormViewController: UITableViewController {
         self.tableView.registerNib(UINib(nibName: nameCellIdentifier, bundle: nil), forCellReuseIdentifier: nameCellIdentifier)
         self.tableView.registerNib(UINib(nibName: stateCellIdentifier, bundle: nil), forCellReuseIdentifier: stateCellIdentifier)
         
-        if ethogram.name != "" { // Is empty Ethogram
+        if ethogram.name != "" { // Is not empty Ethogram
             self.navigationItem.title = ethogram.name
         }
+        
+        setupAlertController()
     }
     
     func setupAlertController() {
@@ -81,10 +81,11 @@ class EthogramFormViewController: UITableViewController {
     func getCellForFirstSection(indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier(nameCellIdentifier) as! SingleLineTextCell
         
-        cell.textField.userInteractionEnabled = false
+        cell.textField.userInteractionEnabled = true
         
         cell.label.text = "Name"
         cell.textField.text = ethogram.name
+        cell.textField.addTarget(self, action: Selector("nameRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
         return cell
     }
     
@@ -95,10 +96,12 @@ class EthogramFormViewController: UITableViewController {
         
         if ethogram.behaviourStates.count > indexPath.row {
             textField.text = ethogram.behaviourStates[indexPath.row].name
-            textField.addTarget(self, action: Selector("textFieldTouched:"), forControlEvents: UIControlEvents.EditingChanged)
+            textField.removeTarget(self, action: Selector("extraRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
+            textField.addTarget(self, action: Selector("textFieldDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
             cell.button.tag = indexPath.row
         } else if ethogram.behaviourStates.count == indexPath.row {
             textField.placeholder = messageNewState
+            textField.removeTarget(self, action: Selector("textFieldDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
             textField.addTarget(self, action: Selector("extraRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
         }
         textField.userInteractionEnabled = true
@@ -113,11 +116,12 @@ class EthogramFormViewController: UITableViewController {
         }
     }
     
-    func textFieldTouched(sender: UITextField) {
+    func textFieldDidChange(sender: UITextField) {
         let cell = sender.superview! as! BehaviourStateCell
         if sender.text != "" {
             cell.button.setTitle("Edit", forState: .Normal)
             cell.button.hidden = false
+            cell.button.removeTarget(self, action: Selector("addButtonPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
             cell.button.addTarget(self, action: Selector("editButtonPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
         } else {
             sender.placeholder = messageNewState
@@ -130,6 +134,7 @@ class EthogramFormViewController: UITableViewController {
         if sender.text != "" {
             cell.button.setTitle("Add", forState: .Normal)
             cell.button.hidden = false
+            cell.button.removeTarget(self, action: Selector("editButtonPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
             cell.button.addTarget(self, action: Selector("addButtonPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
         } else {
             sender.placeholder = messageNewState
@@ -137,17 +142,11 @@ class EthogramFormViewController: UITableViewController {
         }
     }
     
-    // Gets the name for the new behaviour state from the cell and adds it to the ethogram,
-    // then refreshes the view.
+    // Gets the name for the new behaviour state from the cell and updates the behaviour state
+    // of the ethogram, then refreshes the view.
     func editButtonPressed(sender: UIButton) {
         let cell = sender.superview! as! BehaviourStateCell
-        
-        let state = BehaviourState(name: cell.textField.text!, information: "must add information")
-        ethogram.addBehaviourState(state)
-        
-        //        state.saveInBackgroundWithBlock { (success, error) in
-        //            println("Saving behaviour state success: \(success)\nError: \(error.debugDescription)")
-        //        }
+        ethogram.updateBehaviourStateName(cell.button.tag, bsName: cell.textField.text!)
         
         cell.button.hidden = true
         
@@ -179,7 +178,7 @@ class EthogramFormViewController: UITableViewController {
         if isFirstSection(section) {
             return firstSectionNumRows
         } else {
-            return ethogram.behaviourStates.count + extraRow
+            return ethogram.behaviourStates.count + 1
         }
     }
     

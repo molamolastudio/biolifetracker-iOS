@@ -145,14 +145,18 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
         vc.title = "Create New Ethogram"
         
-        var createBtn = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("newEthogramCreated"))
+        var createBtn = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("createNewEthogram"))
         vc.navigationItem.rightBarButtonItem = createBtn
         
         detailNav.pushViewController(vc, animated: true)
     }
     
     func showEthogramDetailsPage() {
-        let vc = EthogramDetailsViewController()
+        let vc = EthogramFormViewController()
+        vc.ethogram = Data.selectedEthogram!
+        
+        var createBtn = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showEthogramsPage"))
+        vc.navigationItem.rightBarButtonItem = createBtn
         
         detailNav.pushViewController(vc, animated: true)
     }
