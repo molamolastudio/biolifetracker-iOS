@@ -39,35 +39,30 @@ class BiolifeModel: NSObject, NSCoding {
     }
     
     // Set of functionalities for CloudStorable protocol
-    init(dictionary: NSDictionary) {
-        let manager = CloudStorageManager.sharedInstance
+    init(dictionary: NSDictionary, recursive: Bool) {
         let dateFormatter = BiolifeDateFormatter()
         self.id = dictionary["id"] as? Int
         self._createdAt = dateFormatter.getDate(dictionary["created_at"] as! String)
         self._updatedAt = dateFormatter.getDate(dictionary["updated_at"] as! String)
-        // retrieve dictionary of createdBy and updatedBy
-        let createdByDictionary = manager.getItemForClass(User.ClassUrl,
-            itemId: dictionary["created_by"] as! Int)
-        let updatedByDictionary = manager.getItemForClass(User.ClassUrl,
-            itemId: dictionary["updated_by"] as! Int)
-        // instantiate createdBy and updatedBy user object
-        self._createdBy = User(dictionary: createdByDictionary)
-        self._updatedBy = User(dictionary: updatedByDictionary)
+        if recursive {
+            _createdBy = User(dictionary: dictionary["created_by"] as! NSDictionary, recursive: true)
+            _updatedBy = User(dictionary: dictionary["updated_by"] as! NSDictionary, recursive: true)
+        } else {
+            let manager = CloudStorageManager.sharedInstance
+            // retrieve dictionary of createdBy and updatedBy
+            let createdByDictionary = manager.getItemForClass(User.ClassUrl,
+                itemId: dictionary["created_by"] as! Int)
+            let updatedByDictionary = manager.getItemForClass(User.ClassUrl,
+                itemId: dictionary["updated_by"] as! Int)
+            // instantiate createdBy and updatedBy user object
+            self._createdBy = User(dictionary: createdByDictionary)
+            self._updatedBy = User(dictionary: updatedByDictionary)
+        }
         super.init()
     }
     
-    convenience init(dictionary: NSDictionary, recursive: Bool) {
-        if (!recursive) {
-            self.init(dictionary: dictionary)
-        } else {
-            self.init()
-            _createdBy = User(dictionary: dictionary["created_by"] as! NSDictionary, recursive: true)
-            _updatedBy = User(dictionary: dictionary["updated_by"] as! NSDictionary, recursive: true)
-            let dateFormatter = BiolifeDateFormatter()
-            _createdAt = dateFormatter.getDate(dictionary["created_at"] as! String)
-            _updatedAt = dateFormatter.getDate(dictionary["updated_at"] as! String)
-            
-        }
+    required convenience init(dictionary: NSDictionary) {
+        self.init(dictionary: dictionary, recursive: false)
     }
     
     func setId(id: Int?) { self.id = id }

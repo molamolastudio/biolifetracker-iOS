@@ -24,9 +24,13 @@ class Tag: BiolifeModel {
         super.init()
     }
     
-    required override init(dictionary: NSDictionary) {
+    override init(dictionary: NSDictionary, recursive: Bool) {
         _name = dictionary["name"] as! String
-        super.init(dictionary: dictionary)
+        super.init(dictionary: dictionary, recursive: recursive)
+    }
+    
+    required convenience init(dictionary: NSDictionary) {
+        self.init(dictionary: dictionary, recursive: false)
     }
     
     func updateName(name: String) {

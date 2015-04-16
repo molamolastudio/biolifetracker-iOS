@@ -45,46 +45,35 @@ class Project: BiolifeModel, Storable {
   //      self.saveToArchives()
     }
     
-    required override init(dictionary: NSDictionary) {
-        
-        let manager = CloudStorageManager.sharedInstance
+    override init(dictionary: NSDictionary, recursive: Bool) {
         _name = dictionary["name"] as! String
-        _members = User.usersWithIds(dictionary["members"] as! [Int])
-        _admins = User.usersWithIds(dictionary["admins"] as! [Int])
-        _ethogram = Ethogram.ethogramWithId(dictionary["ethogram"] as! Int)
-        let sessionIds = dictionary["session_set"] as! [Int]
-        _sessions = sessionIds.map { Session.sessionWithId($0) }
-        let individualIds = dictionary["individuals"] as! [Int]
-        _individuals = individualIds.map { Individual.individualWithId($0) }
-        super.init(dictionary: dictionary)
-        
+        if recursive {
+            _ethogram = Ethogram(dictionary: dictionary["ethogram"] as! NSDictionary, recursive: true)
+            _name = dictionary["name"] as! String
+            let memberInfos =  dictionary["members"] as! [NSDictionary]
+            _members = memberInfos.map { return User(dictionary: $0, recursive: true) }
+            let adminInfos = dictionary["admins"] as! [NSDictionary]
+            _admins = adminInfos.map { return User(dictionary: $0, recursive: true) }
+            let sessionInfos = dictionary["sessions"] as! [NSDictionary]
+            _sessions = sessionInfos.map { return Session(dictionary: $0, recursive: true) }
+            let individualInfos = dictionary["individuals"] as! [NSDictionary]
+            _individuals = individualInfos.map { return Individual(dictionary: $0, recursive: true) }
+        } else {
+            let manager = CloudStorageManager.sharedInstance
+            _members = User.usersWithIds(dictionary["members"] as! [Int])
+            _admins = User.usersWithIds(dictionary["admins"] as! [Int])
+            _ethogram = Ethogram.ethogramWithId(dictionary["ethogram"] as! Int)
+            let sessionIds = dictionary["session_set"] as! [Int]
+            _sessions = sessionIds.map { Session.sessionWithId($0) }
+            let individualIds = dictionary["individuals"] as! [Int]
+            _individuals = individualIds.map { Individual.individualWithId($0) }
+        }
+        super.init(dictionary: dictionary, recursive: recursive)
         sessions.map { $0.setProject(self) }
     }
     
-    convenience init(dictionary: NSDictionary, recursive: Bool) {
-        if !recursive {
-            self.init(dictionary: dictionary)
-        } else {
-            let ethogram = Ethogram(dictionary: dictionary["ethogram"] as! NSDictionary, recursive: true)
-            let name = dictionary["name"] as! String
-            self.init(name: name, ethogram: ethogram)
-            let memberInfos =  dictionary["members"] as! [NSDictionary]
-            for memberInfo in memberInfos {
-                _members.append(User(dictionary: memberInfo, recursive: true))
-            }
-            let adminInfos = dictionary["admins"] as! [NSDictionary]
-            for adminInfo in adminInfos {
-                _admins.append(User(dictionary: adminInfo, recursive: true))
-            }
-            let sessionInfos = dictionary["sessions"] as! [NSDictionary]
-            for sessionInfo in sessionInfos {
-                _sessions.append(Session(dictionary: sessionInfo, recursive: true))
-            }
-            let individualInfos = dictionary["individuals"] as! [NSDictionary]
-            for individualInfo in individualInfos {
-                _individuals.append(Individual(dictionary: individualInfo, recursive: true)
-            }
-        }
+    required convenience init(dictionary: NSDictionary) {
+        self.init(dictionary: dictionary, recursive: false)
     }
     
     func getIndexOfSession(session: Session) -> Int? {

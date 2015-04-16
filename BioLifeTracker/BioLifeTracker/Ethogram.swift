@@ -41,12 +41,23 @@ class Ethogram: BiolifeModel, Storable {
       //  self.saveToArchives()
     }
     
-    required override init(dictionary: NSDictionary) {
+    required convenience init(dictionary: NSDictionary) {
+        self.init(dictionary: dictionary, recursive: false)
+    }
+    
+    override init(dictionary: NSDictionary, recursive: Bool) {
         _name = dictionary["name"] as! String
         _information = dictionary["information"] as! String
-        let behaviourIds = dictionary["behaviours"] as! [Int]
-        _behaviourStates = behaviourIds.map { BehaviourState.behaviourStateWithId($0) }
-        super.init(dictionary: dictionary)
+        if recursive {
+            let behaviourInfos = dictionary["behaviours"] as! [NSDictionary]
+            self._behaviourStates = behaviourInfos.map {
+                BehaviourState(dictionary: $0, recursive: true)
+            }
+        } else {
+            let behaviourIds = dictionary["behaviours"] as! [Int]
+            self._behaviourStates = behaviourIds.map { BehaviourState.behaviourStateWithId($0) }
+        }
+        super.init(dictionary: dictionary, recursive: recursive)
     }
     
     /************Ethogram********************/

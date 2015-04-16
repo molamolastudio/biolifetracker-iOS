@@ -38,22 +38,30 @@ class Session: BiolifeModel {
         super.init()
     }
     
-    required override init(dictionary: NSDictionary) {
-        let manager = CloudStorageManager.sharedInstance
+    required convenience init(dictionary: NSDictionary) {
+        self.init(dictionary: dictionary, recursive: false)
+    }
+    
+    override init(dictionary: NSDictionary, recursive: Bool) {
         _name = dictionary["name"] as! String
         
         let sessionType = dictionary["session_type"] as! String
         assert(sessionType == "SCN" || sessionType == "FCL")
         _typeValue = sessionType
         
-        let observationIds = dictionary["observation_set"] as! [Int]
-        _observations = observationIds.map { Observation.observationWithId($0) }
-        
-        let individualIds = dictionary["individuals"] as! [Int]
-        _individuals = individualIds.map { manager.getIndividualWithId($0) }
-        
-        super.init(dictionary: dictionary)
-        
+        if recursive {
+            let observationInfos = dictionary["observation_set"] as! [NSDictionary]
+            _observations = observationInfos.map { Observation(dictionary: $0, recursive: true) }
+            let individualInfos = dictionary["individuals"] as! [NSDictionary]
+            _individuals = individualInfos.map { Individual(dictionary: $0, recursive: true) }
+        } else {
+            let manager = CloudStorageManager.sharedInstance
+            let observationIds = dictionary["observation_set"] as! [Int]
+            _observations = observationIds.map { Observation.observationWithId($0) }
+            let individualIds = dictionary["individuals"] as! [Int]
+            _individuals = individualIds.map { manager.getIndividualWithId($0) }
+        }
+        super.init(dictionary: dictionary, recursive: recursive)
         _observations.map { $0.setSession(self) }
     }
     

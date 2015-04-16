@@ -38,9 +38,13 @@ class Weather: BiolifeModel {
         super.init(coder: aDecoder)
     }
     
-    override required init(dictionary: NSDictionary) {
+    override init(dictionary: NSDictionary, recursive: Bool) {
         _weather = dictionary["weather"] as! String
-        super.init(dictionary: dictionary)
+        super.init(dictionary: dictionary, recursive: recursive)
+    }
+    
+    required convenience init(dictionary: NSDictionary) {
+        self.init(dictionary: dictionary, recursive: false)
     }
     
     class func weatherWithId(id: Int) -> Weather {

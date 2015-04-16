@@ -32,13 +32,22 @@ class BehaviourState: BiolifeModel {
         self._information = information
     }
     
-    required override init(dictionary: NSDictionary) {
+    required convenience init(dictionary: NSDictionary) {
+        self.init(dictionary: dictionary, recursive: false)
+    }
+    
+    override init(dictionary: NSDictionary, recursive: Bool) {
         _name = dictionary["name"] as! String
         _information = dictionary["information"] as! String
-        if let photoId = dictionary["photo"] as? Int {
-            _photo = Photo.photoWithId(photoId)
+        if recursive {
+            let photoInfo = dictionary["photo"] as! NSDictionary
+            _photo = Photo(dictionary: photoInfo)
+        } else {
+            if let photoId = dictionary["photo"] as? Int {
+                _photo = Photo.photoWithId(photoId)
+            }
         }
-        super.init(dictionary: dictionary)
+        super.init(dictionary: dictionary, recursive: recursive)
     }
     
     func updateName(name: String) {

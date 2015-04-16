@@ -38,9 +38,13 @@ class Location: BiolifeModel {
         super.init(coder: aDecoder)
     }
     
-    override required init(dictionary: NSDictionary) {
+    override init(dictionary: NSDictionary, recursive: Bool) {
         _location = dictionary["location"] as! String
-        super.init(dictionary: dictionary)
+        super.init(dictionary: dictionary, recursive: recursive)
+    }
+    
+    convenience required init(dictionary: NSDictionary) {
+        self.init(dictionary: dictionary, recursive: false)
     }
     
     class func locationWithId(id: Int) -> Location {

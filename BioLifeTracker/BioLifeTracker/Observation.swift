@@ -40,20 +40,33 @@ class Observation: BiolifeModel {
         super.init()
     }
     
-    required override init(dictionary: NSDictionary) {
+    override init(dictionary: NSDictionary, recursive: Bool) {
         //read data from dictionary
         let dateFormatter = BiolifeDateFormatter()
         _state = BehaviourState.behaviourStateWithId(dictionary["recorded_behaviour"] as! Int)
         _information = dictionary["information"] as! String
         _timestamp = dateFormatter.getDate(dictionary["timestamp"] as! String)
-        _individual = Individual.individualWithId(dictionary["individual"] as! Int)
-        if let locationId = dictionary["location"] as? Int {
-            _location = Location.locationWithId(locationId)
+        if recursive {
+            let individualInfo = dictionary["individual"] as! NSDictionary
+            _individual = Individual(dictionary: individualInfo, recursive: true)
+            let locationInfo = dictionary["location"] as! NSDictionary
+            _location = Location(dictionary: locationInfo, recursive: true)
+            let weatherInfo = dictionary["weather"] as! NSDictionary
+            _weather = Weather(dictionary: weatherInfo, recursive: true)
+        } else {
+            _individual = Individual.individualWithId(dictionary["individual"] as! Int)
+            if let locationId = dictionary["location"] as? Int {
+                _location = Location.locationWithId(locationId)
+            }
+            if let weatherId = dictionary["weather"] as? Int {
+                _weather = Weather.weatherWithId(weatherId)
+            }
         }
-        if let weatherId = dictionary["weather"] as? Int {
-            _weather = Weather.weatherWithId(weatherId)
-        }
-        super.init(dictionary: dictionary)
+        super.init(dictionary: dictionary, recursive: false)
+    }
+    
+    required convenience init(dictionary: NSDictionary) {
+        self.init(dictionary: dictionary, recursive: false)
     }
     
     /************Observation***************/

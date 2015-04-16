@@ -20,14 +20,23 @@ class Photo: BiolifeModel {
         super.init()
     }
     
-    required override init(dictionary: NSDictionary) {
-        let imageUrl = NSURL(string: dictionary["image"] as! String)!
-        let imageData = CloudStorage.makeRequestToUrl(imageUrl, withMethod: "GET", withPayload: nil)
-        assert(imageData != nil, "Cannot get image binary from server")
-        let image = UIImage(data: imageData!)
-        assert(image != nil, "Cannot convert binary data into UIImage")
-        self._image = image!
-        super.init(dictionary: dictionary)
+    override init(dictionary: NSDictionary, recursive: Bool) {
+        if recursive {
+            let imageData = NSData(base64EncodedString: dictionary["image"] as! String, options: nil)
+            _image = UIImage(data: imageData!)!
+        } else {
+            let imageUrl = NSURL(string: dictionary["image"] as! String)!
+            let imageData = CloudStorage.makeRequestToUrl(imageUrl, withMethod: "GET", withPayload: nil)
+            assert(imageData != nil, "Cannot get image binary from server")
+            let image = UIImage(data: imageData!)
+            assert(image != nil, "Cannot convert binary data into UIImage")
+            self._image = image!
+        }
+        super.init(dictionary: dictionary, recursive: recursive)
+    }
+    
+    required convenience init(dictionary: NSDictionary) {
+        self.init(dictionary: dictionary, recursive: false)
     }
     
     func updateImage(image: UIImage) {

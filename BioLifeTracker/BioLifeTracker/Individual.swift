@@ -30,14 +30,25 @@ class Individual: BiolifeModel {
         self._label = label
     }
     
-    required override init(dictionary: NSDictionary) {
+    override init(dictionary: NSDictionary, recursive: Bool) {
         _label = dictionary["label"] as! String
         _tags = Tag.tagsWithIds(dictionary["tags"] as! [Int])
-        if let photoId = dictionary["photo"] as? Int {
-            _photo = Photo.photoWithId(photoId)
+        if recursive {
+            if let photoInfo = dictionary["photo"] as? NSDictionary {
+                _photo = Photo(dictionary: photoInfo, recursive: true)
+            }
+        } else {
+            if let photoId = dictionary["photo"] as? Int {
+                _photo = Photo.photoWithId(photoId)
+            }
         }
-        super.init(dictionary: dictionary)
+        super.init(dictionary: dictionary, recursive: recursive)
     }
+    
+    required convenience init(dictionary: NSDictionary) {
+        self.init(dictionary: dictionary, recursive: false)
+    }
+
     
     /*****************Individual*******************/
     func updateLabel(label: String) {
