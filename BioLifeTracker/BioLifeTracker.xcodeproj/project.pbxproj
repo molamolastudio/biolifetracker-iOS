@@ -110,7 +110,6 @@
 		32850BE21AB9625500C49D33 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E77F1AAEDB03006F374D /* ProjectsViewController.swift */; };
 		32850BE41AB9625500C49D33 /* EthogramFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */; };
 		32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A211AB1789100578C42 /* EthogramsViewController.swift */; };
-		32850BE61AB9625500C49D33 /* EthogramDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */; };
 		329B292C1AD15BAF007ADC65 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329B29281AD15BAF007ADC65 /* ButtonCell.swift */; };
 		329B292D1AD15BAF007ADC65 /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 329B29291AD15BAF007ADC65 /* ButtonCell.xib */; };
 		329B292E1AD15BAF007ADC65 /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329B292A1AD15BAF007ADC65 /* DatePickerCell.swift */; };
@@ -260,7 +259,6 @@
 		32423B881ADFDC8600AFA2F8 /* CustomPickerPopupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPickerPopupCell.swift; sourceTree = "<group>"; };
 		32423B8A1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomPickerPopupCell.xib; sourceTree = "<group>"; };
 		32517A211AB1789100578C42 /* EthogramsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramsViewController.swift; sourceTree = "<group>"; };
-		32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramDetailsViewController.swift; sourceTree = "<group>"; };
 		326773A91ACAEFB000899745 /* BooleanPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BooleanPickerCell.swift; path = FormLibrary/BooleanPickerCell.swift; sourceTree = "<group>"; };
 		326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomPickerPopup.swift; path = FormLibrary/CustomPickerPopup.swift; sourceTree = "<group>"; };
 		326773AD1ACAEFB000899745 /* BooleanPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = BooleanPickerCell.xib; path = FormLibrary/BooleanPickerCell.xib; sourceTree = "<group>"; };
@@ -502,6 +500,7 @@
 				321D62C61AD261D300CF9BE9 /* SuperController.swift */,
 				329B29401AD16058007ADC65 /* FirstViewController.swift */,
 				321D62581AD1757C00CF9BE9 /* FirstViewControllerDelegate.swift */,
+				329B293E1AD15E6F007ADC65 /* FirstView.xib */,
 				320920701ACA9A1600E8A456 /* MenuViewController.swift */,
 				326773C41ACD7C9A00899745 /* MenuViewControllerDelegate.swift */,
 				3205E77F1AAEDB03006F374D /* ProjectsViewController.swift */,
@@ -514,15 +513,13 @@
 				32517A211AB1789100578C42 /* EthogramsViewController.swift */,
 				321D62C41AD2618800CF9BE9 /* EthogramsViewControllerDelegate.swift */,
 				3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */,
-				32517A231AB17BC900578C42 /* EthogramDetailsViewController.swift */,
-				32423B821ADF768600AFA2F8 /* BehaviourStateCell.swift */,
-				32423B801ADF766200AFA2F8 /* BehaviourStateCell.xib */,
 				32145C2C1AD272B800C20F07 /* ObservationsViewController.swift */,
 				323CBD951ADD58EA00A7C970 /* ScanViewController.swift */,
 				323CBD931ADD526600A7C970 /* ScanView.xib */,
+				32423B821ADF768600AFA2F8 /* BehaviourStateCell.swift */,
+				32423B801ADF766200AFA2F8 /* BehaviourStateCell.xib */,
 				321D62BE1AD2604400CF9BE9 /* SubtitleTableCell.swift */,
 				321D62BF1AD2604400CF9BE9 /* SubtitleTableCell.xib */,
-				329B293E1AD15E6F007ADC65 /* FirstView.xib */,
 				3205E7501AAED9F9006F374D /* LaunchScreen.xib */,
 				3205E7451AAED9F9006F374D /* Supporting Files */,
 			);
@@ -782,7 +779,6 @@
 				32850BE41AB9625500C49D33 /* EthogramFormViewController.swift in Sources */,
 				329B292E1AD15BAF007ADC65 /* DatePickerCell.swift in Sources */,
 				326773C01ACAEFB000899745 /* FormViewController.swift in Sources */,
-				32850BE61AB9625500C49D33 /* EthogramDetailsViewController.swift in Sources */,
 				2408193A1AD503DD00DFE8AA /* NSURL+Utils.swift in Sources */,
 				242465291AD67EB20035BD2C /* CloudStorage.swift in Sources */,
 				242C6E071AC80F050024ECEF /* BiolifeModel.swift in Sources */,

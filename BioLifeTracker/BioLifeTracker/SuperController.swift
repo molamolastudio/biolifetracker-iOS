@@ -129,6 +129,13 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showEthogramsPage() {
+        for n in EthogramManager.sharedInstance.ethograms {
+            println(n.name)
+        }
+        if Data.selectedEthogram != nil {
+            println(Data.selectedEthogram!)
+        }
+        
         let vc = EthogramsViewController()
         
         vc.delegate = self
