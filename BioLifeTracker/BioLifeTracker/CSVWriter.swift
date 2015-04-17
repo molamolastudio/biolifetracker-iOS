@@ -12,7 +12,8 @@ class CSVWriter {
     var rows = [String]()
     
     func addRow(row: [String]) {
-        var rowStr = "\"" + row[0]
+        var rowStr = "\""
+        if row.count > 0 { rowStr += row[0] }
         for(var i = 1; i < row.count; i++) {
             rowStr += "\",\""
             rowStr += row[i]

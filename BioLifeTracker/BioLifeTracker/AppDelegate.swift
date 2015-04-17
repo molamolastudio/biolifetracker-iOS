@@ -13,7 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var initialViewController: SuperController?
-
+    var incomingFileUrl: NSURL?
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         FBLoginView.self
@@ -28,7 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-        return FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication) || GPPURLHandler.handleURL(url, sourceApplication: sourceApplication, annotation: annotation)
+        return  FBAppCall.handleOpenURL(url, sourceApplication: sourceApplication) ||
+                GPPURLHandler.handleURL(url, sourceApplication: sourceApplication, annotation: annotation) ||
+                tryOpenProjectFileInUrl(url)
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -55,6 +58,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
 
-
+    func tryOpenProjectFileInUrl(url: NSURL) -> Bool {
+        if url.absoluteString!.hasSuffix(".bltproject") {
+            incomingFileUrl = url
+            var deserializer = BLTProjectDeserializer()
+            let decodedProject = deserializer.process(url)
+            ProjectManager.sharedInstance.addProject(decodedProject)
+            initialViewController?.showProjectsPage()
+            return true
+        }
+        return false
+    }
 }
 

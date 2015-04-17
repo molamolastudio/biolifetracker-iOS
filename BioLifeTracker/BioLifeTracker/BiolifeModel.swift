@@ -45,8 +45,16 @@ class BiolifeModel: NSObject, NSCoding {
         self._createdAt = dateFormatter.getDate(dictionary["created_at"] as! String)
         self._updatedAt = dateFormatter.getDate(dictionary["updated_at"] as! String)
         if recursive {
-            _createdBy = User(dictionary: dictionary["created_by"] as! NSDictionary, recursive: true)
-            _updatedBy = User(dictionary: dictionary["updated_by"] as! NSDictionary, recursive: true)
+            if let createdByInfo = dictionary["created_by"] as? NSDictionary {
+                _createdBy = User(dictionary: createdByInfo, recursive: true)
+            } else {
+                _createdBy = UserAuthService.sharedInstance.user
+            }
+            if let updatedByInfo = dictionary["updated_by"] as? NSDictionary {
+                _updatedBy = User(dictionary: updatedByInfo, recursive: true)
+            } else {
+                _updatedBy = UserAuthService.sharedInstance.user
+            }
         } else {
             let manager = CloudStorageManager.sharedInstance
             // retrieve dictionary of createdBy and updatedBy
