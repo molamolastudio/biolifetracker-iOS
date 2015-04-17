@@ -99,6 +99,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.title = currentProject!.name
         vc.currentProject = currentProject!
         
+        var createBtn = UIBarButtonItem(title: "Sync", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("syncProject"))
+        vc.navigationItem.rightBarButtonItem = createBtn
+        
         detailNav.pushViewController(vc, animated: true)
     }
     
@@ -235,7 +238,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         return data
     }
     
-    // Selectors for creating Model objects
+    // Selectors for navigation bar items
     func createNewProject() {
         if let vc = detailNav.visibleViewController as? FormViewController {
             let values = vc.getFormData()
@@ -259,6 +262,11 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
                 detailNav.popViewControllerAnimated(true)
             }
         }
+    }
+    
+    func syncProject() {
+        let project = currentProject!
+        // Sync
     }
     
     // MenuViewDelegate methods
