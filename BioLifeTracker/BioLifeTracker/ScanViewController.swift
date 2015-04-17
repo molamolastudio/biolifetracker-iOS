@@ -12,6 +12,8 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBOutlet weak var animalsView: UICollectionView!
     @IBOutlet weak var statesView: UICollectionView!
     @IBOutlet weak var notesView: UITextView!
+    @IBOutlet weak var leftArrow: UIButton!
+    @IBOutlet weak var rightArrow: UIButton!
     
     let animalsTag = 11
     let statesTag = 12
@@ -71,4 +73,13 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
             
         }
     }
+
+    @IBAction func leftArrowPressed(sender: UIButton) {
+        
+    }
+    
+    @IBAction func rightArrowPressed(sender: UIButton) {
+        
+    }
+    
 }

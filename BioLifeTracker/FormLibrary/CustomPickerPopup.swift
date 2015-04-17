@@ -9,19 +9,11 @@
 import UIKit
 
 class CustomPickerPopup: FormPopupController, UITableViewDataSource, UITableViewDelegate {
-    var pickerDelegate: CustomPickerPopupDelegate? = nil
-    
     let table = UITableView()
-    let overlay = UIView()
-    let shadow = UIView()
-    
-    let alphaQuarter: Float = 0.25
-    let cornerRadius: CGFloat = 5
     
     let tableBorderWidth: CGFloat = 0.5
     let tableBorderColor = UIColor.lightGrayColor().CGColor
     
-    let fileName = "CustomPickerPopupCell"
     let cellReuseIdentifier = "CustomPickerPopupCell"
     
     let numSections = 1
@@ -31,50 +23,29 @@ class CustomPickerPopup: FormPopupController, UITableViewDataSource, UITableView
     var data: [String] = []
     
     override func viewDidLoad() {
-        table.registerNib(UINib(nibName: fileName, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
-        setupOverlay()
-        setupShadow()
+        super.viewDidLoad()
+        table.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
         setupTableView()
     }
     
-    func setupOverlay() {
-        overlay.frame = self.view.frame
-        overlay.backgroundColor = UIColor.blackColor()
-        overlay.alpha = CGFloat(alphaQuarter)
-        self.view.addSubview(overlay)
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: Selector("tapDetected:"))
-        overlay.addGestureRecognizer(tapGesture)
-    }
-    
-    func setupShadow() {
-        let shadowWidth = self.view.bounds.width/2
-        let shadowHeight = self.view.bounds.height/3
-        let shadowPathFrame = CGRectMake(0, 0, shadowWidth, shadowHeight)
-        
-        shadow.frame = CGRectMake(self.view.frame.width/4, shadowHeight, shadowWidth, shadowHeight)
-        shadow.backgroundColor = UIColor.clearColor()
-        shadow.layer.masksToBounds = false
-        shadow.layer.shadowColor = UIColor.blackColor().CGColor
-        shadow.layer.shadowPath = UIBezierPath(roundedRect: shadowPathFrame, cornerRadius: cornerRadius).CGPath
-        shadow.layer.shadowOffset = CGSizeZero
-        shadow.layer.shadowOpacity = alphaQuarter
-        shadow.layer.shadowRadius = cornerRadius
-        self.view.addSubview(shadow)
+    override func viewDidDisappear(animated: Bool) {
+        if delegate != nil {
+            var message: String? = nil
+            if selectedIndex != nil {
+                message = data[selectedIndex!]
+            }
+            delegate!.userDidSelectValue(selectedIndex, valueAsString: message)
+        }
     }
     
     func setupTableView() {
-        let tableWidth = self.view.frame.width/2
-        let tableHeight = self.view.frame.height/3
-        
-        table.frame = CGRectMake(self.view.frame.width/4, tableHeight, tableWidth, tableHeight)
+        table.frame = self.view.frame
         table.dataSource = self
         table.delegate = self
         
-        table.layer.cornerRadius = cornerRadius
         table.layer.borderWidth = tableBorderWidth
         table.layer.borderColor = tableBorderColor
-        
+
         self.view.addSubview(table)
     }
     
@@ -83,30 +54,17 @@ class CustomPickerPopup: FormPopupController, UITableViewDataSource, UITableView
         table.reloadData()
     }
     
-    func tapDetected(sender: UITapGestureRecognizer) {
-        let point = sender.locationInView(sender.view)
-        if !CGRectContainsPoint(table.frame, point) {
-            var message: String? = nil
-            if selectedIndex != nil {
-                message = data[selectedIndex!]
-            }
-            delegate!.userDidSelectValue(selectedIndex, valueAsString: message)
-            pickerDelegate!.pickerDidDismiss(selectedIndex)
-        }
-    }
-    
     // Changes the accessory type of selected row to a checkmark.
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! CustomPickerPopupCell
         
-        let label = cell.viewWithTag(Constants.ViewTags.pickerCellLabel) as! UILabel
-        label.text = data[indexPath.row]
+        cell.label.text = data[indexPath.row]
         
         if selectedIndex != nil {
             if indexPath.row == selectedIndex {
-                cell.accessoryType = UITableViewCellAccessoryType.Checkmark
+                cell.backgroundColor = UIColor.groupTableViewBackgroundColor()
             } else {
-                cell.accessoryType = UITableViewCellAccessoryType.None
+                cell.backgroundColor = UIColor.whiteColor()
             }
         }
         return cell

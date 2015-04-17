@@ -17,11 +17,21 @@ class ScanSessionViewController: UITableViewController {
     
     let numSections = 1
     
+    let formatter = NSDateFormatter()
+    
     var currentSession: Session? = nil
+    
+    var timestamps: [NSDate] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
+        
+        // Sets up the date formatter for converting dates to strings
+        formatter.dateStyle = NSDateFormatterStyle.LongStyle
+        formatter.timeStyle = .MediumStyle
+        
+        timestamps = currentSession!.getTimestamps()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -33,22 +43,20 @@ class ScanSessionViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SubtitleTableCell
         
-        let ethogram = EthogramManager.sharedInstance.ethograms[indexPath.row]
-        
-        cell.title.text = ethogram.name
-        cell.subtitle.text = messageCellSubtitle + String(ethogram.behaviourStates.count)
+        cell.title.text = formatter.stringFromDate(timestamps[indexPath.row])
+        cell.subtitle.text = messageCellSubtitle + "\(currentSession!.getObservationsByTimestamp(timestamps[indexPath.row]).count)"
         
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if delegate != nil {
-            delegate!.userDidSelectScan(currentSession!, index: indexPath.row)
+            delegate!.userDidSelectScan(currentSession!, timestamp: timestamps[indexPath.row])
         }
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return EthogramManager.sharedInstance.ethograms.count
+        return timestamps.count
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

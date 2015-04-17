@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class FormViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     let defaultCellHeight: CGFloat = 44
     
@@ -87,7 +87,8 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
     // Displays the CustomPickerPopup view and sets up the values for the picker.
     func showPicker(sender: UIButton) {
         if let cell = sender.superview as? ButtonCell {
-            popup.pickerDelegate = self
+            popup.modalPresentationStyle = .Popover
+            popup.preferredContentSize = CGSizeMake(400, 400)
             
             popup.data = cell.pickerValues
             
@@ -96,14 +97,14 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
                 popup.selectedIndex = index
             }
             
-            self.view.addSubview(popup.view)
-            popup.view.frame = self.view.frame
+            let popoverController = popup.popoverPresentationController!
+            popoverController.permittedArrowDirections = .Any
+            popoverController.delegate = self
+            popoverController.sourceView = cell
+            popoverController.sourceRect = cell.frame
+            
+            presentViewController(popup, animated: true, completion: nil)
         }
-    }
-    
-    // Removes the CustomPickerPopup view from this controller's view.
-    func pickerDidDismiss(selectedIndex: Int?) {
-        popup.view.removeFromSuperview()
     }
     
     // Displays the PhotoPickerViewController and sets up the values for the picker.
@@ -333,10 +334,10 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
         
         // Set the currently selected values
         let selectedValue: AnyObject? = field.buttonValues[4]
-
- // To Michelle: There were some errors over here so I commented them out -Nicholette
- //       let selectedValueAsString = field.buttonValues[5] as String
- //       cell.userDidSelectValue(selectedValue, valueAsString: selectedValueAsString)
+        
+        // To Michelle: There were some errors over here so I commented them out -Nicholette
+        //       let selectedValueAsString = field.buttonValues[5] as String
+        //       cell.userDidSelectValue(selectedValue, valueAsString: selectedValueAsString)
         
         cell.button.enabled = editable
         
@@ -365,5 +366,25 @@ class FormViewController: UITableViewController, CustomPickerPopupDelegate, UIIm
         } else {
             return 0
         }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        switch fields!.getFieldTypeForIndex(indexPath)! {
+        case .TextSingleLine:
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! SingleLineTextCell
+            cell.textField.becomeFirstResponder()
+            break
+        case .TextMultiLine:
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! MultiLineTextCell
+            cell.textView.becomeFirstResponder()
+            break
+        default:
+            break
+        }
+    }
+    
+    // UIPopoverPresentationControllerDelegate method
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle{
+        return .None
     }
 }

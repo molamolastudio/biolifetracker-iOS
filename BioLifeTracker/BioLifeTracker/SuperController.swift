@@ -11,7 +11,7 @@
 
 import UIKit
 
-class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate, FirstViewControllerDelegate, ProjectsViewControllerDelegate, EthogramsViewControllerDelegate, ProjectHomeViewControllerDelegate, ScanSessionViewControllerDelegate {
+class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate, FirstViewControllerDelegate, ProjectsViewControllerDelegate, EthogramsViewControllerDelegate, ProjectHomeViewControllerDelegate, ScanSessionViewControllerDelegate, FocalSessionViewControllerDelegate {
     
     let splitVC = UISplitViewController()
     let masterNav = UINavigationController()
@@ -58,32 +58,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         menu.delegate = self
     }
     
-    // Methods for creating form data
-    func getFormDataForNewProject() -> FormFieldData {
-        let data = FormFieldData(sections: 2)
-        data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
-        data.addPickerCell(section: 0, label: "Ethogram", pickerValues: ethogramPickerValues, isCustomPicker: true)
-        data.setSectionTitle(1, title: "Members")
-        data.addTextCell(section: 1, label: "Enter Member Here", hasSingleLine: true) // To be decided
-        return data
-    }
-    
-    func getFormDataForNewIndividual() -> FormFieldData {
-        let data = FormFieldData(sections: 1)
-        data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
-        data.addTextCell(section: 0, label: "Tags", hasSingleLine: false)
-        data.addTextCell(section: 1, label: "Photos", hasSingleLine: true) // Photo picker cell
-        return data
-    }
-    
-    func getFormDataForNewSession() -> FormFieldData {
-        let data = FormFieldData(sections: 1)
-        data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
-        data.addPickerCell(section: 0, label: "Locations", pickerValues: ["Location 1", "Location 2"], isCustomPicker: true)
-        data.addPhotoPickerCell(section: 0, label: "Photos")
-        return data
-    }
-    
     // Methods to show pages
     func showStartPage() {
         let vc = FirstViewController(nibName: "FirstView", bundle: nil)
@@ -125,10 +99,20 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.title = currentProject!.name
         vc.currentProject = currentProject!
         
+        var createBtn = UIBarButtonItem(title: "Sync", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("syncProject"))
+        vc.navigationItem.rightBarButtonItem = createBtn
+        
         detailNav.pushViewController(vc, animated: true)
     }
     
     func showEthogramsPage() {
+        for n in EthogramManager.sharedInstance.ethograms {
+            println(n.name)
+        }
+        if Data.selectedEthogram != nil {
+            println(Data.selectedEthogram!)
+        }
+        
         let vc = EthogramsViewController()
         
         vc.delegate = self
@@ -145,44 +129,28 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
         vc.title = "Create New Ethogram"
         
-        var createBtn = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("newEthogramCreated"))
+        var createBtn = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("createNewEthogram"))
         vc.navigationItem.rightBarButtonItem = createBtn
         
         detailNav.pushViewController(vc, animated: true)
     }
     
     func showEthogramDetailsPage() {
-        let vc = EthogramDetailsViewController()
+        let vc = EthogramFormViewController()
+        
+        vc.ethogram = Data.selectedEthogram!
+        
+        var createBtn = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showEthogramsPage"))
+        vc.navigationItem.rightBarButtonItem = createBtn
         
         detailNav.pushViewController(vc, animated: true)
     }
     
     func showNewSessionPage() {
-        let vc = FormViewController()
-        
-        vc.title = "New Session"
-        
-        vc.setFormData(getFormDataForNewSession())
-        vc.cellHorizontalPadding = 10
-        vc.roundedCells = true
-        
-        var createBtn = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showObservationsPage"))
-        vc.navigationItem.rightBarButtonItem = createBtn
-        
-        detailNav.pushViewController(vc, animated: true)
-    }
-    
-    func showObservationsPage() {
-        let vc = ObservationsViewController()
-        
-        vc.title = "Observations"
-        vc.currentProject = currentProject
-        vc.currentSession = currentSession
-        
-        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector(""))
-        vc.navigationItem.rightBarButtonItem = createBtn
-        
-        detailNav.pushViewController(vc, animated: true)
+        // Popup instead
+        // selector to create new session
+        // set currentSession here
+        // then showSession
     }
     
     func showNewIndividualPage() {
@@ -196,27 +164,81 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         detailNav.pushViewController(vc, animated: true)
     }
     
-    func showSession(session: Session) {
-        if session.type == SessionType.Focal {
-            showFocalSessionPage(session)
-        } else {
-            showScanSessionPage(session)
+    func showSession() {
+        if currentSession != nil {
+            if currentSession!.type == SessionType.Focal {
+                showFocalSessionPage(currentSession!)
+            } else {
+                showScanSessionPage(currentSession!)
+            }
         }
     }
     
     func showFocalSessionPage(session: Session) {
+        let vc = FocalSessionViewController()
         
+        vc.delegate = self
+        vc.title = session.name
+        vc.currentSession = session
+        
+        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showCreateObservationPage"))
+        vc.navigationItem.rightBarButtonItem = createBtn
+        
+        detailNav.pushViewController(vc, animated: true)
     }
     
     func showScanSessionPage(session: Session) {
+        let vc = ScanSessionViewController()
         
+        vc.delegate = self
+        vc.title = session.name
+        vc.currentSession = session
+        
+        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showCreateScanPage"))
+        vc.navigationItem.rightBarButtonItem = createBtn
+        
+        detailNav.pushViewController(vc, animated: true)
+    }
+    
+    func showCreateObservationPage() {
+        // Observation Form VC
+    }
+    
+    func showCreateScanPage() {
+        // Scan View
     }
     
     func clearNavigationStack() {
         detailNav.popToRootViewControllerAnimated(false)
     }
     
-    // Selectors for creating Model objects
+    // Methods for creating form data
+    func getFormDataForNewProject() -> FormFieldData {
+        let data = FormFieldData(sections: 2)
+        data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
+        data.addPickerCell(section: 0, label: "Ethogram", pickerValues: ethogramPickerValues, isCustomPicker: true)
+        data.setSectionTitle(1, title: "Members")
+        data.addTextCell(section: 1, label: "Enter Member Here", hasSingleLine: true) // To be decided
+        return data
+    }
+    
+    func getFormDataForNewIndividual() -> FormFieldData {
+        let data = FormFieldData(sections: 1)
+        data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
+        data.addTextCell(section: 0, label: "Tags", hasSingleLine: false)
+        data.addTextCell(section: 1, label: "Photos", hasSingleLine: true) // Photo picker cell
+        return data
+    }
+    
+    func getFormDataForNewSession() -> FormFieldData {
+        let data = FormFieldData(sections: 1)
+        data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
+        data.addPickerCell(section: 0, label: "Locations", pickerValues: ["Location 1", "Location 2"], isCustomPicker: true)
+        data.addPhotoPickerCell(section: 0, label: "Photos")
+        return data
+    }
+    
+    // Selectors for navigation bar items
     func createNewProject() {
         if let vc = detailNav.visibleViewController as? FormViewController {
             let values = vc.getFormData()
@@ -242,39 +264,42 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         }
     }
     
+    func syncProject() {
+        let project = currentProject!
+        // Sync
+    }
+    
     // MenuViewDelegate methods
     func userDidSelectProjects() {
-        clearNavigationStack()
         showProjectsPage()
     }
     
     func userDidSelectEthograms() {
-        clearNavigationStack()
         showEthogramsPage()
     }
     
     func userDidSelectGraphs() {
-        clearNavigationStack()
+        
     }
     
     func userDidSelectData() {
-        clearNavigationStack()
+        
     }
     
     func userDidSelectSettings() {
-        clearNavigationStack()
+        
     }
     
     func userDidSelectFacebookLogin() {
-        
+        // user logs in through facebook
     }
     
     func userDidSelectGoogleLogin() {
-        
+        // user logs in through google
     }
     
     func userDidSelectLogout() {
-        
+        // logout
     }
     
     func userDidSelectSessions(project: Project) {
@@ -313,15 +338,16 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     // ProjectHomeViewControllerDelegate methods
     func userDidSelectSession(project: Project, session: Session) {
-        showSession(session)
+        currentSession = session
+        showSession()
     }
     
     func userDidSelectMember(project: Project, member: User) {
         
     }
     
-    func userDidSelectGraph() {
-        
+    func userDidSelectGraph(project: Project) {
+        // Show analysis with the particular project
     }
     
     func userDidSelectCreateSession() {
@@ -334,8 +360,15 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     // ScanSessionViewControllerDelegate methods
-    func userDidSelectScan(session: Session, index: Int) {
-        
+    func userDidSelectScan(session: Session, timestamp: NSDate) {
+        // Open the ScanView
     }
+    
+    // FocalSessionViewControllerDelegate methods
+    func userDidSelectObservation(session: Session, observation: Observation) {
+        // Open the Observation View
+    }
+    
+    // Methods for managing login
     
 }
