@@ -6,8 +6,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GraphsViewController" customModule="BioLifeTracker" customModuleProvider="target">
             <connections>
-                <outlet property="hostingView" destination="hN9-Ot-IrU" id="alT-CV-dU5"/>
+                <outlet property="dayPlotHostingView" destination="Usk-x2-7KD" id="UWv-hW-fTF"/>
+                <outlet property="hourPlotHostingView" destination="c0W-vt-sqE" id="ayN-pn-ItF"/>
+                <outlet property="stateChartHostingView" destination="hN9-Ot-IrU" id="JOT-G7-LZk"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Mgn-wZ-Si1"/>
+                <outletCollection property="hostingViews" destination="Usk-x2-7KD" id="LvS-QW-7J8"/>
+                <outletCollection property="hostingViews" destination="hN9-Ot-IrU" id="sbe-Wg-LLy"/>
+                <outletCollection property="hostingViews" destination="c0W-vt-sqE" id="P3n-B3-Fuv"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -15,7 +20,15 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hN9-Ot-IrU" customClass="CPTGraphHostingView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Usk-x2-7KD" userLabel="Day Plot Hosting View" customClass="CPTGraphHostingView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hN9-Ot-IrU" userLabel="State Chart Hosting View" customClass="CPTGraphHostingView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c0W-vt-sqE" userLabel="Hour Plot Hosting View" customClass="CPTGraphHostingView">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
@@ -23,8 +36,16 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="hN9-Ot-IrU" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4KB-qE-Aop"/>
+                <constraint firstItem="Usk-x2-7KD" firstAttribute="bottom" secondItem="c0W-vt-sqE" secondAttribute="bottom" id="5yj-vb-eBZ"/>
+                <constraint firstItem="Usk-x2-7KD" firstAttribute="trailing" secondItem="c0W-vt-sqE" secondAttribute="trailing" id="LK6-SL-yNr"/>
+                <constraint firstItem="Usk-x2-7KD" firstAttribute="top" secondItem="hN9-Ot-IrU" secondAttribute="top" id="QAX-iv-TIu"/>
                 <constraint firstItem="hN9-Ot-IrU" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="S1H-BP-n1x"/>
+                <constraint firstItem="Usk-x2-7KD" firstAttribute="leading" secondItem="hN9-Ot-IrU" secondAttribute="leading" id="f4A-Jn-Jgl"/>
                 <constraint firstAttribute="bottom" secondItem="hN9-Ot-IrU" secondAttribute="bottom" id="gNM-uE-fw5"/>
+                <constraint firstItem="Usk-x2-7KD" firstAttribute="top" secondItem="c0W-vt-sqE" secondAttribute="top" id="iR2-Dz-REC"/>
+                <constraint firstItem="Usk-x2-7KD" firstAttribute="leading" secondItem="c0W-vt-sqE" secondAttribute="leading" id="kbl-C7-gdi"/>
+                <constraint firstItem="Usk-x2-7KD" firstAttribute="bottom" secondItem="hN9-Ot-IrU" secondAttribute="bottom" id="lnP-Bn-Q1E"/>
+                <constraint firstItem="Usk-x2-7KD" firstAttribute="trailing" secondItem="hN9-Ot-IrU" secondAttribute="trailing" id="oOZ-Sd-63C"/>
                 <constraint firstAttribute="trailing" secondItem="hN9-Ot-IrU" secondAttribute="trailing" id="oRT-PN-ndm"/>
             </constraints>
             <point key="canvasLocation" x="221" y="245"/>

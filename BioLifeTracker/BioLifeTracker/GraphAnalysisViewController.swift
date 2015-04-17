@@ -11,102 +11,47 @@ import UIKit
 
 class GraphAnalysisViewController:  UIViewController {
     
-    //var graphsview
-    
     @IBOutlet weak var graphsView: UIView!
     @IBOutlet weak var graphSwitch: UISegmentedControl!
     
-    //@IBOutlet weak var hostingView: CPTGraphHostingView!
-    
-    var projectInstance: Project!
-    
-    var graph: CPTXYGraph!
-    var graphLineWidth: CGFloat = 2.5
-    
-    var plotByDay = false
-    var plotByHour = false // default setting
-    var chartByState = true
-    
-    var yMaxHours = 0
-    var yMaxDays = 0
-    var yMaxStates = 0
-    
-    var allBehaviourStates: [BehaviourState]!
-    var chosenBehaviourStates: [BehaviourState]!
-    
-    var chosenUsers: [User]!
-    var allUsers: [User]!
-    
-    var chosenSessions: [Session]!
-    var allSessions: [Session]!
+    var graphsVC: GraphsViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         showGraphsView();
-        var stub = ProjectStub()
-        projectInstance = stub.project
-        initConditions()
+        
         
 
     }
     
     func showGraphsView() {
-        let graphs = GraphsViewController(nibName: "GraphsView", bundle: nil)
-        self.addChildViewController(graphs)
-        graphs.view.frame = self.graphsView.frame
-        graphsView.addSubview(graphs.view)
+        graphsVC = GraphsViewController(nibName: "GraphsView", bundle: nil)
+        self.addChildViewController(graphsVC)
+        var stub = ProjectStub()
+        graphsVC.projectInstance = stub.project
+        graphsVC.view.frame = self.graphsView.frame
+        graphsView.addSubview(graphsVC.view)
     }
-    
-    /********************* SET INITIAL DATA **********************/
-    //Gets the data that conform to what the user provided and
-    //sets them as conditions for the the graph
-    func initConditions() {
-        getAllUsers()
-        getAllSessions()
-        getAllBehaviourStates()
-        
-    }
-    
-    func updateUsers(chosen: [User]) {
-        chosenUsers = chosen
-    }
-    
-    func updateSessions(chosen: [Session]) {
-        chosenSessions = chosen
-    }
-    
-    func updateBehaviourStates(chosen: [BehaviourState]) {
-        chosenBehaviourStates = chosen
-        
-    }
-    
-    func getAllUsers() {
-        allUsers = projectInstance.members
-        chosenUsers = allUsers
-    }
-    
-    func getAllSessions() {
-        allSessions = projectInstance.sessions
-        chosenSessions = allSessions
-    }
-    
-    func getAllBehaviourStates() {
-        allBehaviourStates = projectInstance.ethogram.behaviourStates
-        chosenBehaviourStates = allBehaviourStates
-    }
-    
     
     @IBAction func graphIndexChanged(sender: AnyObject) {
         switch graphSwitch.selectedSegmentIndex {
         case 0:
             println("hour")
+            graphsVC.toggleGraph(.HourPlot)
+            graphsVC.prepareNumberOfOccurances()
+            graphsVC.drawGraph()
         case 1:
             println("day")
+            graphsVC.toggleGraph(.DayPlot)
+            graphsVC.prepareNumberOfOccurances()
+            graphsVC.drawGraph2()
         case 2:
             println("states")
-            // only view behaviourstate tables
+            graphsVC.toggleGraph(.StateChart)
+            graphsVC.prepareNumberOfOccurances()
+            graphsVC.drawGraph()
         default:
             break
         }

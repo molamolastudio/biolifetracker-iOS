@@ -12,54 +12,70 @@ import UIKit
 class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotDataSource, CPTBarPlotDelegate, CPTPlotDelegate {
     var delegate: GraphsViewControllerDelegate!
     
-    @IBOutlet weak var hostingView: CPTGraphHostingView!
+    
+    enum GraphType {
+        case DayPlot, HourPlot, StateChart
+    }
+    
+    enum WeekDays : Int{
+        case Sunday = 6
+        case Monday = 0
+        case Tuesday = 1
+        case Wednesday = 2
+        case Thursday = 3
+        case Friday = 4
+        case Saturday = 5
+    }
+    
+    enum Hours : Int {
+        case sixam = 0
+        case sevenam = 1
+        case eightam = 2
+        case nineam = 3
+        case tenam = 4
+        case elevenam = 5
+        case twelvepm = 6
+        case onepm = 7
+        case twopm = 8
+        case threepm = 9
+        case fourpm = 10
+        case fivepm = 11
+        case sixpm = 12
+    }
 
+
+    @IBOutlet var hostingViews: [CPTGraphHostingView]!
+    
+    
+    @IBOutlet weak var hourPlotHostingView: CPTGraphHostingView!
+    @IBOutlet weak var stateChartHostingView: CPTGraphHostingView!
+    @IBOutlet weak var dayPlotHostingView: CPTGraphHostingView!
+    
     var projectInstance: Project!
     
-    var graph: CPTXYGraph!
+    var dayGraph: CPTXYGraph = CPTXYGraph(frame: CGRectZero)
+    var hourGraph: CPTXYGraph = CPTXYGraph(frame: CGRectZero)
+    var statesGraph: CPTXYGraph = CPTXYGraph(frame: CGRectZero)
     var graphLineWidth: CGFloat = 2.5
     
-    var plotByDay = false
-    var plotByHour = false // default setting
-    var chartByState = true
+    // default setting
+    var current: GraphType = .HourPlot
     
     var yMaxHours = 0
     var yMaxDays = 0
     var yMaxStates = 0
-    
-    var barOfBehaviourStates = false
 
     //x axis possiblities
     var days = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"]
-    var hours = ["6am", "7am", "8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm", "7pm", "8pm", "9pm", "10pm"]
-    
-    //constants
-    var Sunday = 6
-    var Monday = 0
-    var Tuesday = 1
-    var Wednesday = 2
-    var Thursday = 3
-    var Friday = 4
-    var Saturday = 5
-    var sixam = 0
-    var sevenam = 1
-    var eightam = 2
-    var nineam = 3
-    var tenam = 4
-    var elevenam = 5
-    var twelvepm = 6
-    var onepm = 7
-    var twopm = 8
-    var threepm = 9
-    var fourpm = 10
-    var fivepm = 11
-    var sixpm = 12
+    var hours = ["6am", "7am", "8am", "9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm", "6pm"]
     
     var allBehaviourStates: [BehaviourState]!
     var chosenBehaviourStates: [BehaviourState]!
     
     //y axis -- number of occurences
-    var numberOfOccurences: [Int]!
+    var numberOfDayOccurences: [Int]!
+    var numberOfHourOccurences: [Int]!
+    var numberOfStatesOccurences: [Int]!
     
     var chosenUsers: [User]!
     var allUsers: [User]!
@@ -70,20 +86,10 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var stub = ProjectStub()
-        projectInstance = stub.project
         initConditions()
-        
         prepareNumberOfOccurances()
-        if chartByState {
-            configureGraph()
-            configureBarPlots()
-            configureAxes()
-        } else {
-            configureGraph()
-            configurePlots()
-            configureAxes()
-        }
+        drawGraph()
+        
         
     }
     
@@ -127,72 +133,110 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     
     
     /*********************** UPDATE FOR GRAPH ********************/
+    func drawGraph() {
+
+        configureGraph(&hourPlotHostingView, graph: &hourGraph)
+
+        configurePlots(&hourGraph, type: GraphType.HourPlot)
+        configureAxes(&hourPlotHostingView, type: GraphType.HourPlot)
+        
+        hourPlotHostingView.hostedGraph.reloadData()
+//        if chartByState {
+//            configureGraph()
+//            configureBarPlots()
+//            configureAxes()
+//        } else {
+//            configureGraph()
+//            configurePlots()
+//            configureAxes()
+//            
+//        }
+//        hostingView.hostedGraph.reloadData()
+    }
+    func drawGraph2() {
+        
+        configureGraph(&hourPlotHostingView, graph: &statesGraph)
+        
+        configureBarPlots(&statesGraph)
+        configureAxes(&hourPlotHostingView, type: GraphType.StateChart)
+        
+        hourPlotHostingView.hostedGraph.reloadData()
+        //        if chartByState {
+        //            configureGraph()
+        //            configureBarPlots()
+        //            configureAxes()
+        //        } else {
+        //            configureGraph()
+        //            configurePlots()
+        //            configureAxes()
+        //            
+        //        }
+        //        hostingView.hostedGraph.reloadData()
+    }
+    
+    
+    func toggleGraph(type: GraphType) {
+        
+    }
     
     func prepareNumberOfOccurances() {
         var occurences = projectInstance.getObservations(sessions: chosenSessions, users: chosenUsers, behaviourStates: chosenBehaviourStates)
         
+        //for number of days
+        numberOfDayOccurences = [Int](count: days.count, repeatedValue:0)
         
-        if plotByDay {
-            // 7 for number of days
-            numberOfOccurences = [Int](count: 7, repeatedValue:0)
+        //for number of hours
+        numberOfHourOccurences = [Int](count: hours.count, repeatedValue:0)
+    
+        for occurence in occurences {
+            var day = getDayOfWeek(occurence.timestamp)
+            numberOfDayOccurences[day] += 1
             
-            for occurence in occurences {
-                var day = getDayOfWeek(occurence.timestamp)
-                numberOfOccurences[day] += 1
-                
-                //check and update max value of y axis
-                var count = numberOfOccurences[day]
-                if count > yMaxDays {
-                    var max = count/10
-                    max = max+1
-                    max = max*10
-                    yMaxDays = max
-                }
-                
+            //check and update max value of y axis
+            var dcount = numberOfDayOccurences[day]
+            if dcount > yMaxDays {
+                var max = dcount/10
+                max = max+1
+                max = max*10
+                yMaxDays = max
             }
             
-        } else if plotByHour {
-            //13 for number of hours
-            numberOfOccurences = [Int](count: 13, repeatedValue:0)
-            println("getting occurences")
+            var hour = getHourOfDay(occurence.timestamp)
+            numberOfHourOccurences[hour] += 1
             
-            for occurence in occurences {
-                var hour = getHourOfDay(occurence.timestamp)
-                numberOfOccurences[hour] += 1
-                println(String(hour))
+            // check and update max value of y axis
+            var hcount = numberOfHourOccurences[hour]
+            if hcount > yMaxHours {
+                var max = hcount/10
+                max = max+1
+                max = max*10
+                yMaxHours = max
+            }
+            
+        }
+        
+        var numPerBS = projectInstance.getObservationsPerBS()
+        //initialize to 0 elements
+        numberOfStatesOccurences = [Int]()
+        
+        for BS in chosenBehaviourStates {
+                
+            if let count = numPerBS[BS.name] {
+                numberOfStatesOccurences.append(count)
                 
                 // check and update max value of y axis
-                var count = numberOfOccurences[hour]
-                if count > yMaxHours {
+                if count > yMaxStates {
                     var max = count/10
                     max = max+1
                     max = max*10
-                    yMaxHours = max
+                    yMaxStates = max
                 }
-            }
-        } else {
-            var numPerBS = projectInstance.getObservationsPerBS()
-            //initialize to 0 elements
-            numberOfOccurences = [Int]()
-            for BS in chosenBehaviourStates {
                 
-                if let count = numPerBS[BS.name] {
-                    numberOfOccurences.append(count)
-                    
-                    // check and update max value of y axis
-                    if count > yMaxStates {
-                        var max = count/10
-                        max = max+1
-                        max = max*10
-                        yMaxStates = max
-                    }
-                    
-                } else {
-                    numberOfOccurences.append(0)
-                }
+            } else {
+                numberOfStatesOccurences.append(0)
             }
-
         }
+
     }
 
     /********************* HELPER METHODS ********************/
@@ -204,21 +248,21 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         
         switch weekday! {
         case 1:
-            return Sunday
+            return WeekDays.Sunday.rawValue
         case 2:
-            return Monday
+            return WeekDays.Monday.rawValue
         case 3:
-            return Tuesday
+            return WeekDays.Tuesday.rawValue
         case 4:
-            return Wednesday
+            return WeekDays.Wednesday.rawValue
         case 5:
-            return Thursday
+            return WeekDays.Thursday.rawValue
         case 6:
-            return Friday
+            return WeekDays.Friday.rawValue
         case 7:
-            return Saturday
+            return WeekDays.Saturday.rawValue
         default:
-            return 7
+            return WeekDays.Saturday.rawValue
         }
     }
     
@@ -229,73 +273,70 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         
         switch hour! {
         case 6:
-            return sixam
+            return Hours.sixam.rawValue
         case 7:
-            return sevenam
+            return Hours.sevenam.rawValue
         case 8:
-            return eightam
+            return Hours.eightam.rawValue
         case 9:
-            return nineam
+            return Hours.nineam.rawValue
         case 10:
-            return tenam
+            return Hours.tenam.rawValue
         case 11:
-            return elevenam
+            return Hours.elevenam.rawValue
         case 12:
-            return twelvepm
+            return Hours.twelvepm.rawValue
         case 13:
-            return onepm
+            return Hours.onepm.rawValue
         case 14:
-            return twopm
+            return Hours.twopm.rawValue
         case 15:
-            return threepm
+            return Hours.threepm.rawValue
         case 16:
-            return fourpm
+            return Hours.fourpm.rawValue
         case 17:
-            return fivepm
+            return Hours.fivepm.rawValue
         case 18:
-            return sixpm
+            return Hours.sixpm.rawValue
         default:
             if hour < 6 {
-                return sixam
+                return Hours.sixam.rawValue
             } else {
-                return sixpm
+                return Hours.sixpm.rawValue
             }
         }
 
     }
     
     /********************** CONFIGURE GRAPHS ****************/
-    func configureGraph() {
-
-        self.hostingView.allowPinchScaling = true
+    func configureGraph(inout hostingView: CPTGraphHostingView!, inout graph: CPTXYGraph) {
+    
+            hostingView.allowPinchScaling = true
+            graph.applyTheme(CPTTheme(named: kCPTPlainWhiteTheme))
+            hostingView.hostedGraph = graph
         
-        self.graph = CPTXYGraph(frame: CGRectZero)
-        graph.applyTheme(CPTTheme(named: kCPTPlainWhiteTheme))
-        self.hostingView.hostedGraph = graph
-        
-        graph.plotAreaFrame.paddingLeft = 40
-        graph.plotAreaFrame.paddingRight = 40
-        graph.plotAreaFrame.paddingBottom = 40
-        graph.plotAreaFrame.paddingTop = 40
-        
-        
-        var plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
-        plotSpace.allowsUserInteraction = true
+            graph.plotAreaFrame.paddingLeft = 40
+            graph.plotAreaFrame.paddingRight = 40
+            graph.plotAreaFrame.paddingBottom = 40
+            graph.plotAreaFrame.paddingTop = 40
+            
+            
+            var plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
+            plotSpace.allowsUserInteraction = true
         
     }
     
-    func configurePlots() {
+    func configurePlots(inout graph: CPTXYGraph, type: GraphType) {
         var plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
         var occurencePlot = CPTScatterPlot(frame: graph.frame)
         occurencePlot.dataSource = self
-        occurencePlot.identifier = "occurence"
         var occurenceColor = CPTColor.darkGrayColor()
         
         graph.addPlot(occurencePlot, toPlotSpace: plotSpace)
         
         var xRange = plotSpace.xRange.mutableCopy() as! CPTMutablePlotRange
         var yRange = plotSpace.yRange.mutableCopy() as! CPTMutablePlotRange
-        if plotByHour {
+        if type == .DayPlot {
             xRange.length = hours.count
             yRange.length = yMaxHours
         } else {
@@ -317,16 +358,14 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         occurenceSymbol.lineStyle = occurenceSymbolLineStyle
         
         occurencePlot.plotSymbol = occurenceSymbol
-
-
     }
     
-    func configureBarPlots() {
+    func configureBarPlots(inout graph: CPTXYGraph) {
         var plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
         var statesPlot = CPTBarPlot(frame: graph.frame)
         
         statesPlot.dataSource = self
-        statesPlot.identifier = "states"
+        //statesPlot.identifier = "states"
 
         statesPlot.barWidth = 0.5
         statesPlot.barOffset = 0.5
@@ -349,7 +388,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     }
 
     
-    func configureAxes() {
+    func configureAxes(inout hostingView: CPTGraphHostingView!, type: GraphType) {
         
         var axisTitleStyle = CPTMutableTextStyle()
         axisTitleStyle.color = CPTColor.blackColor()
@@ -374,17 +413,18 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         gridLineStyle.lineWidth = 1.0
         
         // 2 - Get axis set
-        var axisSet = self.hostingView.hostedGraph.axisSet as! CPTXYAxisSet
+        var axisSet = hostingView.hostedGraph.axisSet as! CPTXYAxisSet
         
         // 3 - Configure x-axis
         
         var x = axisSet.xAxis
         
-        if plotByHour {
+        switch type {
+        case .HourPlot:
             x.title = "Hour of the Day"
-        } else if plotByDay {
+        case .DayPlot:
             x.title = "Day of the Week"
-        } else {
+        case .StateChart:
             x.title = "Behaviour States"
         }
         
@@ -400,7 +440,8 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         var xLabels: NSMutableSet
         var xLocations: NSMutableSet
         
-        if plotByHour {
+        switch type {
+        case .DayPlot:
             xLabels = NSMutableSet(capacity: hours.count)
             xLocations = NSMutableSet(capacity: hours.count)
             var i = 0 as CGFloat
@@ -414,9 +455,8 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
                 xLabels.addObject(label)
                 
                 xLocations.addObject(location)
-                
             }
-        } else if plotByDay {
+        case .HourPlot:
             xLabels = NSMutableSet(capacity: days.count)
             xLocations = NSMutableSet(capacity: days.count)
             var i = 0 as CGFloat
@@ -432,8 +472,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
                 xLocations.addObject(location)
                 
             }
-        } else {
-            
+        case .StateChart:
             xLabels = NSMutableSet(capacity: chosenBehaviourStates.count)
             xLocations = NSMutableSet(capacity: chosenBehaviourStates.count)
             var i = 0.5 as CGFloat
@@ -457,11 +496,13 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         
         // 4 - Configure y-axis
         var y = axisSet.yAxis
-        if chartByState {
+        
+        if type == GraphType.StateChart {
             y.title = "No. of Behaviour States"
         } else {
             y.title = "No. of Observations"
         }
+        
         y.titleTextStyle = axisTitleStyle
         y.titleOffset = -40.0
         y.axisLineStyle = axisLineStyle
@@ -478,11 +519,13 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         var minorIncrement = 0.5 as CGFloat
         
         var yMax: CGFloat
-        if plotByHour {
+        
+        switch type {
+        case .HourPlot:
             yMax = CGFloat(yMaxHours)
-        } else if plotByDay {
+        case .DayPlot:
             yMax = CGFloat(yMaxDays)
-        } else {
+        case .StateChart:
             yMax = CGFloat(yMaxStates)
         }
         
@@ -514,13 +557,27 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     
     /******************** DATASOURCE AND DELEGATE METHODS ******************/
     func numberOfRecordsForPlot(plot: CPTPlot!) -> UInt {
-        
-        return UInt(numberOfOccurences.count)
+        switch current {
+        case .DayPlot:
+            return UInt(numberOfDayOccurences.count)
+        case .HourPlot:
+            return UInt(numberOfHourOccurences.count)
+        case .StateChart:
+            return UInt(numberOfStatesOccurences.count)
+        }
         
     }
     
     func numberForPlot(plot: CPTPlot!, field fieldEnum: UInt, recordIndex idx: UInt) -> AnyObject! {
-        var valueCount = UInt(numberOfOccurences.count)
+        var valueCount: UInt
+        switch current {
+        case .DayPlot:
+             valueCount = UInt(numberOfDayOccurences.count)
+        case .HourPlot:
+            valueCount =  UInt(numberOfHourOccurences.count)
+        case .StateChart:
+            valueCount =  UInt(numberOfStatesOccurences.count)
+        }
         switch fieldEnum {
         case UInt(CPTScatterPlotField.X.rawValue):
                 if idx < valueCount {
@@ -530,7 +587,16 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         case UInt(CPTScatterPlotField.Y.rawValue):
             if plot.identifier != nil {
                 //if plot.identifier.isEqual("occurence") {
-                return numberOfOccurences[Int(idx)]
+                
+                switch current {
+                case .DayPlot:
+                    return numberOfDayOccurences[Int(idx)]
+                case .HourPlot:
+                    return numberOfHourOccurences[Int(idx)]
+                case .StateChart:
+                    return numberOfStatesOccurences[Int(idx)]
+                }
+                
                 //}else if plot.identifier.isEqual("states") {
                  //   return arr[Int(idx)]
                 //}
