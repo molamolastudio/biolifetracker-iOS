@@ -20,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         initialViewController = SuperController()
         
+        // load user here
+        
         window!.rootViewController = initialViewController
         window!.makeKeyAndVisible()
 

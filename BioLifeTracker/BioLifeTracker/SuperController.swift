@@ -27,7 +27,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     var currentSession: Session? = nil
     
     override func viewDidLoad() {
-        setupForDemo()
+        UserAuthService.sharedInstance.useDefaultUser()
+        //setupForDemo()
         
         setupMenu()
         
@@ -43,13 +44,95 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func setupForDemo() {
-        // Insert some ethograms
-        EthogramManager.sharedInstance.addEthogram(Ethogram(name: ethogramPickerValues[0]))
-        EthogramManager.sharedInstance.addEthogram(Ethogram(name: ethogramPickerValues[1]))
+        let state1 = BehaviourState(name: "Feeding", information: "Small claws bringing food to mouth")
+        let state2 = BehaviourState(name: "Fighting", information: "Engagement of large clawa with another crab")
+        let state3 = BehaviourState(name: "Hiding", information: "Withdrawal of fiddler crab into its burrow")
+        var ethogram = Ethogram(name: "Fiddler Crabs")
         
-        ProjectManager.sharedInstance.addProject(Project(name: "Activity Pattern with Cobra", ethogram: EthogramManager.sharedInstance.ethograms[0]))
-        ProjectManager.sharedInstance.addProject(Project(name: "Activity Pattern with Penguin", ethogram: EthogramManager.sharedInstance.ethograms[1
-            ]))
+        
+        let user1 = User(name: "Captain America", email: "iamcaptamerica@default.com")
+        let user2 = User(name: "The Hulk", email: "iamgreen@default.com")
+        let user3 = User(name: "Black Power Ranger", email: "black.ranger@default.com")
+        
+        ethogram.addBehaviourState(state1)
+        ethogram.addBehaviourState(state2)
+        ethogram.addBehaviourState(state3)
+        
+        var project = Project(name: "A Day in a Fiddler Crab life", ethogram: ethogram)
+        
+        var session1 = Session(project: project, name: "Session1", type: SessionType.Scan)
+        var session2 = Session(project: project, name: "Session2", type: SessionType.Scan)
+        var session3 = Session(project: project, name: "Session3", type: SessionType.Scan)
+        
+        var session4 = Session(project: project, name: "Session4", type: SessionType.Focal)
+        
+        let individual1 = Individual(label: "M1")
+        let individual2 = Individual(label: "M2")
+        let individual3 = Individual(label: "F1")
+        
+        project.addIndividuals([individual1, individual2, individual3])
+        
+        // Observations for session 1
+        var observation1 = Observation(session: session1, individual: individual1, state: state1, timestamp: NSDate(), information: "Eating vigourously")
+        observation1.changeCreator(user1)
+        var observation2 = Observation(session: session1, individual: individual1, state: state2, timestamp: NSDate(), information: "")
+        observation2.changeCreator(user1)
+        var observation3 = Observation(session: session1, individual: individual1, state: state3, timestamp: NSDate(), information: "")
+        observation3.changeCreator(user1)
+        var observation4 = Observation(session: session1, individual: individual2, state: state1, timestamp: NSDate(), information: "Eating vigourously")
+        observation4.changeCreator(user2)
+        var observation5 = Observation(session: session1, individual: individual2, state: state2, timestamp: NSDate(), information: "")
+        observation5.changeCreator(user2)
+        var observation6 = Observation(session: session1, individual: individual2, state: state3, timestamp: NSDate(), information: "")
+        observation6.changeCreator(user2)
+        var observation7 = Observation(session: session1, individual: individual3, state: state1, timestamp: NSDate(), information: "Eating vigourously")
+        observation7.changeCreator(user3)
+        var observation8 = Observation(session: session1, individual: individual3, state: state2, timestamp: NSDate(), information: "")
+        observation8.changeCreator(user3)
+        var observation9 = Observation(session: session1, individual: individual3, state: state3, timestamp: NSDate(), information: "")
+        observation9.changeCreator(user3)
+        
+        // Observations for session 2
+        var observation10 = Observation(session: session2, individual: individual1, state: state1, timestamp: NSDate(), information: "Eating vigourously")
+        observation10.changeCreator(user1)
+        var observation11 = Observation(session: session2, individual: individual1, state: state2, timestamp: NSDate(), information: "")
+        observation11.changeCreator(user1)
+        var observation12 = Observation(session: session2, individual: individual2, state: state1, timestamp: NSDate(), information: "Eating vigourously")
+        observation12.changeCreator(user2)
+        var observation13 = Observation(session: session2, individual: individual2, state: state2, timestamp: NSDate(), information: "")
+        observation13.changeCreator(user2)
+        var observation14 = Observation(session: session2, individual: individual3, state: state1, timestamp: NSDate(), information: "Eating vigourously")
+        observation14.changeCreator(user3)
+        var observation15 = Observation(session: session2, individual: individual3, state: state2, timestamp: NSDate(), information: "")
+        observation15.changeCreator(user3)
+        
+        
+        // Observations for session 3
+        var observation16 = Observation(session: session3, individual: individual1, state: state2, timestamp: NSDate(), information: "")
+        observation16.changeCreator(user1)
+        var observation17 = Observation(session: session3, individual: individual1, state: state3, timestamp: NSDate(), information: "")
+        observation17.changeCreator(user1)
+        var observation18 = Observation(session: session3, individual: individual2, state: state2, timestamp: NSDate(), information: "")
+        observation18.changeCreator(user2)
+        var observation19 = Observation(session: session3, individual: individual2, state: state3, timestamp: NSDate(), information: "")
+        observation19.changeCreator(user2)
+        
+        var observation20 = Observation(session: session4, individual: individual2, state: state2, timestamp: NSDate(), information: "")
+        observation20.changeCreator(user3)
+        var observation21 = Observation(session: session4, individual: individual3, state: state3, timestamp: NSDate(), information: "")
+        observation21.changeCreator(user3)
+        
+        session1.addObservation([observation1, observation2, observation3, observation4,
+            observation5, observation6, observation7, observation8, observation9])
+        session2.addObservation([observation10, observation11, observation12,
+            observation13, observation14, observation15])
+        session3.addObservation([observation16, observation17, observation18, observation19, observation20, observation21])
+        session4.addObservation([observation20, observation21])
+        
+        project.addSessions([session1, session2, session3, session4])
+        ProjectManager.sharedInstance.addProject(project)
+        
+        ProjectManager.sharedInstance.saveToArchives()
     }
     
     // Setup methods
@@ -266,7 +349,31 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     func syncProject() {
         let project = currentProject!
-        // Sync
+        
+        // Set up alert controller
+        let alertTitle = "Sync In Progress"
+        let alertMessage = "Starting sync..."
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        // Set up cloud storage worker
+        let worker = CloudStorageWorker()
+        let uploadTask = UploadTask(item: project)
+        worker.enqueueTask(uploadTask)
+        worker.setOnProgressUpdate { percentage, message in
+            // Update popup here
+            alert.message = "\(message) [\(percentage)%]"
+        }
+        
+        // worker.setOnFailure { dismiss alert and open new alert with ok button
+        //}
+        
+        worker.setOnFinished {
+            // Dismiss popup here
+            alert.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
+        //presentViewController(alert, animated: true, completion: nil)
+        //worker.startExecution()
     }
     
     // MenuViewDelegate methods

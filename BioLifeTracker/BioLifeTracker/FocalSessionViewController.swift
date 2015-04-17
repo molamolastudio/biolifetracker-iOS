@@ -42,7 +42,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         individualObservations["All"] = currentSession!.observations
         for i in currentSession!.project.individuals {
             individuals.append(i.label)
-            individualObservations[i.label] = []//currentSession!.getObservationsByIndividual(i)
+            individualObservations[i.label] = currentSession!.getAllObservationsForIndividual(i)
         }
     }
     
