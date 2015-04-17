@@ -127,6 +127,17 @@ class Session: BiolifeModel {
         return date1 > date2
     }
     
+    func getAllObservationsForIndividual(individual: Individual) -> [Observation] {
+        var selectedObs = [Observation]()
+        
+        for observation in observations {
+            if observation.individual == individual {
+                selectedObs.append(observation)
+            }
+        }
+        return selectedObs
+    }
+    
     /******************Individual*******************/
     func addIndividuals(individuals: [Individual]) {
         self._individuals += individuals
@@ -149,6 +160,7 @@ class Session: BiolifeModel {
     private func updateSession() {
         updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
     }
+
 
     required init(coder aDecoder: NSCoder) {
         var enumerator: NSEnumerator

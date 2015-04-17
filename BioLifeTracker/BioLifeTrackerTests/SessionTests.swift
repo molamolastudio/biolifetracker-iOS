@@ -176,6 +176,37 @@ class SessionTests: XCTestCase {
         XCTAssert(containObservation(session3.observations, observation: observation18), "Cannot retrieve by timestamp")
     }
     
+    func testGetObservationsByIndividual() {
+        let state1 = BehaviourState(name: "Feeding", information: "Small claws bringing food to mouth")
+        let state2 = BehaviourState(name: "Fighting", information: "Engagement of large clawa with another crab")
+        let state3 = BehaviourState(name: "Hiding", information: "Withdrawal of fiddler crab into its burrow")
+        
+        var ethogram = Ethogram(name: "Fiddler Crabs")
+        ethogram.addBehaviourState(state1)
+        ethogram.addBehaviourState(state2)
+        
+        let project = Project(name: "A Day in a Fiddler Crab life", ethogram: ethogram)
+        
+        let individual1 = Individual(label: "M1")
+        let individual2 = Individual(label: "M2")
+        let individual3 = Individual(label: "F1")
+
+        var session3 = Session(project: project, name: "Session3", type: SessionType.Scan)
+        
+        let timestamp = NSDate()
+        
+        var observation16 = Observation(session: session3, individual: individual1, state: state2, timestamp: timestamp, information: "")
+        var observation17 = Observation(session: session3, individual: individual1, state: state3, timestamp: NSDate(), information: "")
+        var observation18 = Observation(session: session3, individual: individual2, state: state2, timestamp: NSDate(), information: "")
+        
+        session3.addObservation([observation16, observation17, observation18])
+        let observations = session3.getObservationsByTimestamp(timestamp)
+        
+        XCTAssert(containObservation(session3.observations, observation: observation16), "Cannot retrieve by individual")
+        XCTAssert(!containObservation(session3.observations, observation: observation17), "Cannot retrieve by individual")
+        XCTAssert(!containObservation(session3.observations, observation: observation18), "Cannot retrieve by individual")
+    }
+    
     // Helper function to test testGetObservationsByTimestamp()
     func containObservation(observations: [Observation], observation: Observation) -> Bool {
         for existingOb in observations {
