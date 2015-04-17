@@ -89,7 +89,7 @@ class FormViewController: UITableViewController, UIImagePickerControllerDelegate
         if let cell = sender.superview as? ButtonCell {
             popup.modalPresentationStyle = .Popover
             popup.preferredContentSize = CGSizeMake(400, 400)
-
+            
             popup.data = cell.pickerValues
             
             // Sets the currently selected index if it exists.
@@ -102,7 +102,7 @@ class FormViewController: UITableViewController, UIImagePickerControllerDelegate
             popoverController.delegate = self
             popoverController.sourceView = cell
             popoverController.sourceRect = cell.frame
-
+            
             presentViewController(popup, animated: true, completion: nil)
         }
     }
@@ -334,10 +334,10 @@ class FormViewController: UITableViewController, UIImagePickerControllerDelegate
         
         // Set the currently selected values
         let selectedValue: AnyObject? = field.buttonValues[4]
-
- // To Michelle: There were some errors over here so I commented them out -Nicholette
- //       let selectedValueAsString = field.buttonValues[5] as String
- //       cell.userDidSelectValue(selectedValue, valueAsString: selectedValueAsString)
+        
+        // To Michelle: There were some errors over here so I commented them out -Nicholette
+        //       let selectedValueAsString = field.buttonValues[5] as String
+        //       cell.userDidSelectValue(selectedValue, valueAsString: selectedValueAsString)
         
         cell.button.enabled = editable
         
@@ -365,6 +365,21 @@ class FormViewController: UITableViewController, UIImagePickerControllerDelegate
             return fields!.getNumberOfRowsForSection(section)
         } else {
             return 0
+        }
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        switch fields!.getFieldTypeForIndex(indexPath)! {
+        case .TextSingleLine:
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! SingleLineTextCell
+            cell.textField.becomeFirstResponder()
+            break
+        case .TextMultiLine:
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! MultiLineTextCell
+            cell.textView.becomeFirstResponder()
+            break
+        default:
+            break
         }
     }
     
