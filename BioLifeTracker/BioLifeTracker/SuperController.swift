@@ -291,15 +291,15 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func userDidSelectFacebookLogin() {
-        
+        // user logs in through facebook
     }
     
     func userDidSelectGoogleLogin() {
-        
+        // user logs in through google
     }
     
     func userDidSelectLogout() {
-        
+        // logout
     }
     
     func userDidSelectSessions(project: Project) {
@@ -368,5 +368,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func userDidSelectObservation(session: Session, observation: Observation) {
         // Open the Observation View
     }
+    
+    // Methods for managing login
     
 }
