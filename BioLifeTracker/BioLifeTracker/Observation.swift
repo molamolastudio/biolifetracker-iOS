@@ -16,7 +16,7 @@ class Observation: BiolifeModel {
     private var _information: String
     private var _timestamp: NSDate
     private var _photo: Photo?
-    private var _individual: Individual
+    private var _individual: Individual?
     private var _location: Location?
     private var _weather: Weather?
     
@@ -25,7 +25,7 @@ class Observation: BiolifeModel {
     var information: String { get { return _information } }
     var timestamp: NSDate { get { return _timestamp } }
     var photo: Photo? { get { return _photo } }
-    var individual: Individual { get { return _individual } }
+    var individual: Individual? { get { return _individual } }
     var location: Location? { get { return _location } }
     var weather: Weather? { get { return _weather } }
     
@@ -40,6 +40,16 @@ class Observation: BiolifeModel {
         super.init()
     }
     
+    init(session: Session, state: BehaviourState, timestamp: NSDate, information: String) {
+        self._session = session
+        self._state = state
+        self._timestamp = timestamp
+        self._location = Location()
+        self._weather = Weather()
+        self._information = information
+        super.init()
+    }
+
     override init(dictionary: NSDictionary, recursive: Bool) {
         //read data from dictionary
         let dateFormatter = BiolifeDateFormatter()
@@ -48,15 +58,18 @@ class Observation: BiolifeModel {
         if recursive {
             let stateInfo = dictionary["recorded_behaviour"] as! NSDictionary
             _state = BehaviourState(dictionary: stateInfo, recursive: true)
-            let individualInfo = dictionary["individual"] as! NSDictionary
-            _individual = Individual(dictionary: individualInfo, recursive: true)
+            if let individualInfo = dictionary["individual"] as? NSDictionary {
+                _individual = Individual(dictionary: individualInfo, recursive: true)
+            }
             let locationInfo = dictionary["location"] as! NSDictionary
             _location = Location(dictionary: locationInfo, recursive: true)
             let weatherInfo = dictionary["weather"] as! NSDictionary
             _weather = Weather(dictionary: weatherInfo, recursive: true)
         } else {
             _state = BehaviourState.behaviourStateWithId(dictionary["recorded_behaviour"] as! Int)
-            _individual = Individual.individualWithId(dictionary["individual"] as! Int)
+            if let individualId = dictionary["individual"] as? Int {
+                _individual = Individual.individualWithId(individualId)
+            }
             if let locationId = dictionary["location"] as? Int {
                 _location = Location.locationWithId(locationId)
             }
@@ -119,7 +132,7 @@ class Observation: BiolifeModel {
         self._timestamp = aDecoder.decodeObjectForKey("timestamp") as! NSDate
         self._location = aDecoder.decodeObjectForKey("location") as? Location
         self._weather = aDecoder.decodeObjectForKey("weather") as? Weather
-        self._individual = aDecoder.decodeObjectForKey("individual") as! Individual
+        self._individual = aDecoder.decodeObjectForKey("individual") as? Individual
         self._information = aDecoder.decodeObjectForKey("information") as! String
         super.init(coder: aDecoder)
     }
@@ -169,7 +182,7 @@ extension Observation: CloudStorable {
         var dependencies = [CloudStorable]()
         dependencies.append(state)
         if photo != nil { dependencies.append(photo!) }
-        dependencies.append(individual)
+        if individual != nil { dependencies.append(individual!) }
         if location != nil { dependencies.append(location!) }
         if weather != nil { dependencies.append(weather!) }
         return dependencies
@@ -180,7 +193,7 @@ extension Observation: CloudStorable {
         dictionary.setValue(information, forKey: "information")
         dictionary.setValue(photo?.id, forKey: "photo")
         dictionary.setValue(timestamp.toBiolifeDateFormat(), forKey: "timestamp")
-        dictionary.setValue(individual.id, forKey: "individual")
+        dictionary.setValue(individual?.id, forKey: "individual")
         dictionary.setValue(location?.id, forKey: "location")
         dictionary.setValue(weather?.id, forKey: "weather")
         super.encodeWithDictionary(dictionary)
@@ -203,7 +216,7 @@ extension Observation {
         dictionary.setValue(photoDictionary, forKey: "photo")
         
         var individualDictionary = NSMutableDictionary()
-        individual.encodeRecursivelyWithDictionary(individualDictionary)
+        individual?.encodeRecursivelyWithDictionary(individualDictionary)
         dictionary.setValue(individualDictionary, forKey: "individual")
         
         var locationDictionary = NSMutableDictionary()

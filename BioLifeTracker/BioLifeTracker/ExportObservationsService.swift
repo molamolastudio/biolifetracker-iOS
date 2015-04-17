@@ -33,7 +33,7 @@ class ExportObservationsService {
             let state = observation.state.name
             let information = observation.information
             let timestamp = dateFormatter.formatDate(observation.timestamp)
-            let individual = observation.individual.label
+            let individual = (observation.individual == nil) ? "" : observation.individual!.label
             let location: String
             if let tempLocation = observation.location {
                 location = tempLocation.location

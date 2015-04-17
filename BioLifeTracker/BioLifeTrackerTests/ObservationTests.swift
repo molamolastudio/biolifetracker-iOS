@@ -27,7 +27,7 @@ class ObservationTests: XCTestCase {
         XCTAssert(observation.session.project.name == "A Day in a Fiddler Crab life", "Observation not initialised properly")
         XCTAssert(observation.state.name == "Feeding", "Observation not initialised properly")
         XCTAssert(observation.information == "Eating vigourously", "Observation not initialised properly")
-        XCTAssert(observation.individual.label == "M1", "Observation not initialised properly")
+        XCTAssert(observation.individual!.label == "M1", "Observation not initialised properly")
     }
     
     func testUpdates() {
@@ -53,10 +53,10 @@ class ObservationTests: XCTestCase {
         
         // Test updatePhoto
         
-        XCTAssert(observation.individual.label == "M1", "Observation not initialised properly")
+        XCTAssert(observation.individual!.label == "M1", "Observation not initialised properly")
         let newIndividual = Individual(label: "M3")
         observation.changeIndividual(newIndividual)
-        XCTAssert(observation.individual.label == "M3", "Observation not initialised properly")
+        XCTAssert(observation.individual!.label == "M3", "Observation not initialised properly")
         
         // Test changeLocation
         // Test changeWeather
