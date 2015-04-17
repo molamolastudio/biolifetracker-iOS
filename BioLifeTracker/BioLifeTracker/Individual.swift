@@ -32,12 +32,14 @@ class Individual: BiolifeModel {
     
     override init(dictionary: NSDictionary, recursive: Bool) {
         _label = dictionary["label"] as! String
-        _tags = Tag.tagsWithIds(dictionary["tags"] as! [Int])
         if recursive {
+            let tagInfos = dictionary["tags"] as! [NSDictionary]
+            _tags = tagInfos.map { Tag(dictionary: $0, recursive: true) }
             if let photoInfo = dictionary["photo"] as? NSDictionary {
                 _photo = Photo(dictionary: photoInfo, recursive: true)
             }
         } else {
+            _tags = Tag.tagsWithIds(dictionary["tags"] as! [Int])
             if let photoId = dictionary["photo"] as? Int {
                 _photo = Photo.photoWithId(photoId)
             }

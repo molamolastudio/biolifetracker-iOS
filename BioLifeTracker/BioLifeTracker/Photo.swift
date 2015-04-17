@@ -94,5 +94,6 @@ extension Photo {
         let imageString = UIImageJPEGRepresentation(image, 1.0)
             .base64EncodedStringWithOptions(nil)
         dictionary.setValue(imageString, forKey: "image")
+        super.encodeRecursivelyWithDictionary(dictionary)
     }
 }

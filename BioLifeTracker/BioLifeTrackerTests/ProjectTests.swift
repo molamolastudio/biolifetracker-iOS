@@ -564,6 +564,14 @@ class ProjectTests: XCTestCase {
             observation13, observation14, observation15])
         session3.addObservation([observation16, observation17, observation18, observation19, observation20, observation21])
         
+        // additional test data
+        state1.updatePhoto(Photo(image: UIImage(named:"dummy_image")!))
+        individual1.updatePhoto(Photo(image: UIImage(named: "dummy_image")!))
+        individual2.addTag(Tag(name: "Test tag"))
+        observation1.changeWeather(Weather(weather: "rainy"))
+        observation2.changeLocation(Location(location: "Singapore"))
+        session1.addIndividuals([individual1, individual2, individual3])
+        project.addIndividuals(session1.individuals)
         project.addSessions([session1, session2, session3])
         
         let uploadTask = UploadTask(item: project)
@@ -611,6 +619,7 @@ class ProjectTests: XCTestCase {
         XCTAssertEqual(downloadedProject.admins.count, project.admins.count)
         XCTAssertEqual(downloadedProject.members.count, project.members.count)
         XCTAssertEqual(downloadedProject.individuals.count, project.individuals.count)
+        XCTAssertTrue(downloadedProject == project)
     }
     
     func testRecursiveEncodingWithDictionary() {
@@ -625,11 +634,9 @@ class ProjectTests: XCTestCase {
         var session2 = Session(project: project, name: "Session2", type: SessionType.Scan)
         var session3 = Session(project: project, name: "Session3", type: SessionType.Scan)
         
-        
         let individual1 = Individual(label: "M1")
         let individual2 = Individual(label: "M2")
         let individual3 = Individual(label: "F1")
-        
         
         // Observations for session 1
         var observation1 = Observation(session: session1, individual: individual1, state: state1, timestamp: NSDate(), information: "Eating vigourously")
@@ -686,7 +693,18 @@ class ProjectTests: XCTestCase {
             observation13, observation14, observation15])
         session3.addObservation([observation16, observation17, observation18, observation19, observation20, observation21])
         
+        // additional test data
+        project.addAdmins([UserAuthService.sharedInstance.user, User(name: "dummy user", email: "d@ummy.com")])
+        project.addMembers([UserAuthService.sharedInstance.user, User(name: "dummy user", email: "d@ummy.com")])
+        state1.updatePhoto(Photo(image: UIImage(named:"dummy_image")!))
+        individual1.updatePhoto(Photo(image: UIImage(named: "dummy_image")!))
+        individual2.addTag(Tag(name: "Test tag"))
+        observation1.changeWeather(Weather(weather: "rainy"))
+        observation2.changeLocation(Location(location: "Singapore"))
+        session1.addIndividuals([individual1, individual2, individual3])
+        project.addIndividuals(session1.individuals)
         project.addSessions([session1, session2, session3])
+        
         
         var encodedProjectDictionary = NSMutableDictionary()
         project.encodeRecursivelyWithDictionary(encodedProjectDictionary)
