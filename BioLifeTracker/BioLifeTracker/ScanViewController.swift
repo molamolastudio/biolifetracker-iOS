@@ -15,7 +15,8 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBOutlet weak var leftArrow: UIButton!
     @IBOutlet weak var rightArrow: UIButton!
     
-    let cellReuseIdentifier = "CircleCell"
+    let circleCellIdentifier = "CircleCell"
+    let circleLabelCellIdentifier = "CircleWithLabelCell"
     
     let animalsDefaultColor = UIColor.lightGrayColor()
     let animalsSelectedColor = UIColor.greenColor()
@@ -49,8 +50,8 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         statesView.dataSource = self
         statesView.delegate = self
         
-        animalsView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellWithReuseIdentifier: cellReuseIdentifier)
-        statesView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellWithReuseIdentifier: cellReuseIdentifier)
+        animalsView.registerNib(UINib(nibName: circleCellIdentifier, bundle: nil), forCellWithReuseIdentifier: circleCellIdentifier)
+        statesView.registerNib(UINib(nibName: circleLabelCellIdentifier, bundle: nil), forCellWithReuseIdentifier: circleLabelCellIdentifier)
         
         // Sets the subviews to display under the navigation bar
         self.edgesForExtendedLayout = UIRectEdge.None
@@ -75,17 +76,26 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     // UICollectionViewDataSource methods
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as! CircleCell
+        
         
         if collectionView == animalsView {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(circleCellIdentifier, forIndexPath: indexPath) as! CircleCell
+            
             cell.label.text = "A\(indexPath.row)"
             cell.backgroundColor = animalsDefaultColor
+            
+            return cell
         } else if collectionView == statesView {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(circleLabelCellIdentifier, forIndexPath: indexPath) as! CircleWithLabelCell
+            
             let name = states[indexPath.row].name
-            cell.label.text = name.substringToIndex(name.startIndex.successor())
-            cell.backgroundColor = statesDefaultColor
+            cell.circleViewLabel.text = name.substringToIndex(name.startIndex.successor())
+            cell.label.text = name
+            cell.circleView.backgroundColor = statesDefaultColor
+            
+            return cell
         }
-        return cell
+        return UICollectionViewCell()
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {

@@ -1,5 +1,5 @@
 //
-//  CircleCell.swift
+//  CircleWithLabelCell.swift
 //  BioLifeTracker
 //
 //  Created by Michelle Tan on 18/4/15.
@@ -8,15 +8,17 @@
 
 import UIKit
 
-class CircleCell: UICollectionViewCell {
+class CircleWithLabelCell: UICollectionViewCell {
+    @IBOutlet weak var circleView: UIView!
+    @IBOutlet weak var circleViewLabel: UILabel!
     @IBOutlet weak var label: UILabel!
     
-    // Makes the cell circular.
+    // Makes the circleView circular.
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let frame = self.frame
-        let radius = self.frame.width/2
+        let frame = circleView.frame
+        let radius = circleView.frame.width/2
         let top = frame.origin.y
         let bottom = top + frame.size.height
         var corners = UIRectCorner.AllCorners
@@ -27,7 +29,8 @@ class CircleCell: UICollectionViewCell {
             byRoundingCorners: corners,
             cornerRadii: CGSizeMake(radius, radius)).CGPath
         
-        self.layer.mask = mask
-        self.layer.masksToBounds = true
+        circleView.layer.mask = mask
+        circleView.layer.masksToBounds = true
     }
+
 }

@@ -99,6 +99,8 @@
 		32423B911AE0093B00AFA2F8 /* FocalSessionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32423B901AE0093B00AFA2F8 /* FocalSessionView.xib */; };
 		32423B951AE23E0D00AFA2F8 /* CircleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423B941AE23E0D00AFA2F8 /* CircleCell.swift */; };
 		32423B971AE23E2400AFA2F8 /* CircleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32423B961AE23E2400AFA2F8 /* CircleCell.xib */; };
+		32423B9B1AE2B1E600AFA2F8 /* CircleWithLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423B9A1AE2B1E600AFA2F8 /* CircleWithLabelCell.swift */; };
+		32423B9D1AE2B1F300AFA2F8 /* CircleWithLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32423B9C1AE2B1F300AFA2F8 /* CircleWithLabelCell.xib */; };
 		326773B61ACAEFB000899745 /* BooleanPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773A91ACAEFB000899745 /* BooleanPickerCell.swift */; };
 		326773B71ACAEFB000899745 /* CustomPickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */; };
 		326773BA1ACAEFB000899745 /* BooleanPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 326773AD1ACAEFB000899745 /* BooleanPickerCell.xib */; };
@@ -266,6 +268,8 @@
 		32423B901AE0093B00AFA2F8 /* FocalSessionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FocalSessionView.xib; sourceTree = "<group>"; };
 		32423B941AE23E0D00AFA2F8 /* CircleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleCell.swift; sourceTree = "<group>"; };
 		32423B961AE23E2400AFA2F8 /* CircleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CircleCell.xib; sourceTree = "<group>"; };
+		32423B9A1AE2B1E600AFA2F8 /* CircleWithLabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleWithLabelCell.swift; sourceTree = "<group>"; };
+		32423B9C1AE2B1F300AFA2F8 /* CircleWithLabelCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CircleWithLabelCell.xib; sourceTree = "<group>"; };
 		32517A211AB1789100578C42 /* EthogramsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramsViewController.swift; sourceTree = "<group>"; };
 		326773A91ACAEFB000899745 /* BooleanPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BooleanPickerCell.swift; path = FormLibrary/BooleanPickerCell.swift; sourceTree = "<group>"; };
 		326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomPickerPopup.swift; path = FormLibrary/CustomPickerPopup.swift; sourceTree = "<group>"; };
@@ -522,6 +526,8 @@
 				323CBD991ADD634400A7C970 /* ScanSessionViewControllerDelegate.swift */,
 				323CBD951ADD58EA00A7C970 /* ScanViewController.swift */,
 				323CBD931ADD526600A7C970 /* ScanView.xib */,
+				32423B9A1AE2B1E600AFA2F8 /* CircleWithLabelCell.swift */,
+				32423B9C1AE2B1F300AFA2F8 /* CircleWithLabelCell.xib */,
 				32423B941AE23E0D00AFA2F8 /* CircleCell.swift */,
 				32423B961AE23E2400AFA2F8 /* CircleCell.xib */,
 				32517A211AB1789100578C42 /* EthogramsViewController.swift */,
@@ -728,6 +734,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				321D62C11AD2604400CF9BE9 /* SubtitleTableCell.xib in Resources */,
+				32423B9D1AE2B1F300AFA2F8 /* CircleWithLabelCell.xib in Resources */,
 				329B292D1AD15BAF007ADC65 /* ButtonCell.xib in Resources */,
 				323CBD901ADB901200A7C970 /* ProjectHomeView.xib in Resources */,
 				323CBD941ADD526600A7C970 /* ScanView.xib in Resources */,
@@ -807,6 +814,7 @@
 				248464841ADA481F0001C5E3 /* Photo.swift in Sources */,
 				326773B71ACAEFB000899745 /* CustomPickerPopup.swift in Sources */,
 				24842FAE1AE1E9520071D395 /* NotificationService.swift in Sources */,
+				32423B9B1AE2B1E600AFA2F8 /* CircleWithLabelCell.swift in Sources */,
 				32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */,
 				240FEF051AD60ACF000FD9F3 /* BiolifeDateFormatter.swift in Sources */,
 				32423B831ADF768600AFA2F8 /* BehaviourStateCell.swift in Sources */,
