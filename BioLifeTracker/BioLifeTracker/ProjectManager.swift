@@ -131,7 +131,7 @@ class ProjectManager: NSObject, Storable {
     
     func handleLogOut() {
         // Please do anything to manage user data here
-        ProjectManager.deleteFromArchives(UserAuthService.sharedInstance.user.toString())
+        ProjectManager.deleteFromArchives(String(UserAuthService.sharedInstance.user.id))
     }
 }
 
