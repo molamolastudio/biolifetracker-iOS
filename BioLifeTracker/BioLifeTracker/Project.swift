@@ -45,20 +45,35 @@ class Project: BiolifeModel, Storable {
   //      self.saveToArchives()
     }
     
-    required override init(dictionary: NSDictionary) {
-        
-        let manager = CloudStorageManager.sharedInstance
+    override init(dictionary: NSDictionary, recursive: Bool) {
         _name = dictionary["name"] as! String
-        _members = User.usersWithIds(dictionary["members"] as! [Int])
-        _admins = User.usersWithIds(dictionary["admins"] as! [Int])
-        _ethogram = Ethogram.ethogramWithId(dictionary["ethogram"] as! Int)
-        let sessionIds = dictionary["session_set"] as! [Int]
-        _sessions = sessionIds.map { Session.sessionWithId($0) }
-        let individualIds = dictionary["individuals"] as! [Int]
-        _individuals = individualIds.map { Individual.individualWithId($0) }
-        super.init(dictionary: dictionary)
-        
+        if recursive {
+            _ethogram = Ethogram(dictionary: dictionary["ethogram"] as! NSDictionary, recursive: true)
+            _name = dictionary["name"] as! String
+            let memberInfos =  dictionary["members"] as! [NSDictionary]
+            _members = memberInfos.map { return User(dictionary: $0, recursive: true) }
+            let adminInfos = dictionary["admins"] as! [NSDictionary]
+            _admins = adminInfos.map { return User(dictionary: $0, recursive: true) }
+            let sessionInfos = dictionary["sessions"] as! [NSDictionary]
+            _sessions = sessionInfos.map { return Session(dictionary: $0, recursive: true) }
+            let individualInfos = dictionary["individuals"] as! [NSDictionary]
+            _individuals = individualInfos.map { return Individual(dictionary: $0, recursive: true) }
+        } else {
+            let manager = CloudStorageManager.sharedInstance
+            _members = User.usersWithIds(dictionary["members"] as! [Int])
+            _admins = User.usersWithIds(dictionary["admins"] as! [Int])
+            _ethogram = Ethogram.ethogramWithId(dictionary["ethogram"] as! Int)
+            let sessionIds = dictionary["session_set"] as! [Int]
+            _sessions = sessionIds.map { Session.sessionWithId($0) }
+            let individualIds = dictionary["individuals"] as! [Int]
+            _individuals = individualIds.map { Individual.individualWithId($0) }
+        }
+        super.init(dictionary: dictionary, recursive: recursive)
         sessions.map { $0.setProject(self) }
+    }
+    
+    required convenience init(dictionary: NSDictionary) {
+        self.init(dictionary: dictionary, recursive: false)
     }
     
     func getIndexOfSession(session: Session) -> Int? {
@@ -196,7 +211,7 @@ class Project: BiolifeModel, Storable {
         return newObservations
     }
     
-    private func getObservations(selectedSessions: [Session]) -> [Observation] {
+    func getObservations(selectedSessions: [Session]) -> [Observation] {
         var observations = [Observation]()
         for session in selectedSessions {
             observations += session.observations
@@ -342,11 +357,14 @@ class Project: BiolifeModel, Storable {
 func ==(lhs: Project, rhs: Project) -> Bool {
     if lhs.name != rhs.name { return false }
     if lhs.ethogram != rhs.ethogram { return false }
-    if lhs.admins != rhs.admins { return false }
-    if lhs.members != rhs.members { return false }
-    if lhs.sessions != rhs.sessions { return false }
-    if lhs.individuals != rhs.individuals { return false }
+    if lhs.admins.count != rhs.admins.count { return false }
+    if lhs.members.count != rhs.members.count { return false }
+    if lhs.sessions.count != rhs.sessions.count { return false }
+    if lhs.individuals.count != rhs.individuals.count { return false }
     return true
+}
+func !=(lhs: Project, rhs: Project) -> Bool {
+    return !(lhs == rhs)
 }
 
 extension Project: NSCoding {
@@ -399,5 +417,50 @@ extension Project: CloudStorable {
         dictionary.setValue(admins.map { $0.id }, forKey: "admins")
         dictionary.setValue(individuals.map { $0.id! }, forKey: "individuals")
     }
-    
+}
+
+extension Project {
+    override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        // simple properties 
+        dictionary.setValue(name, forKey: "name")
+        
+        // complex properties
+        var membersArray = [NSDictionary]()
+        for member in members {
+            var memberDictionary = NSMutableDictionary()
+            member.encodeRecursivelyWithDictionary(memberDictionary)
+            membersArray.append(memberDictionary)
+        }
+        dictionary.setValue(membersArray, forKey: "members")
+        
+        var adminsArray = [NSDictionary]()
+        for admin in admins {
+            var adminDictionary = NSMutableDictionary()
+            admin.encodeRecursivelyWithDictionary(adminDictionary)
+            adminsArray.append(adminDictionary)
+        }
+        dictionary.setValue(adminsArray, forKey: "admins")
+        
+        var sessionsArray = [NSDictionary]()
+        for session in sessions {
+            var sessionDictionary = NSMutableDictionary()
+            session.encodeRecursivelyWithDictionary(sessionDictionary)
+            sessionsArray.append(sessionDictionary)
+        }
+        dictionary.setValue(sessionsArray, forKey: "sessions")
+
+        var ethogramDictionary = NSMutableDictionary()
+        ethogram.encodeRecursivelyWithDictionary(ethogramDictionary)
+        dictionary.setValue(ethogramDictionary, forKey: "ethogram")
+
+        var individualsArray = [NSDictionary]()
+        for individual in individuals {
+            var individualDictionary = NSMutableDictionary()
+            individual.encodeRecursivelyWithDictionary(individualDictionary)
+            individualsArray.append(individualDictionary)
+        }
+        dictionary.setValue(individualsArray, forKey: "individuals")
+        
+        super.encodeRecursivelyWithDictionary(dictionary)
+    }
 }

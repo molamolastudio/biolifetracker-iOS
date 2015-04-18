@@ -30,14 +30,27 @@ class Individual: BiolifeModel {
         self._label = label
     }
     
-    required override init(dictionary: NSDictionary) {
+    override init(dictionary: NSDictionary, recursive: Bool) {
         _label = dictionary["label"] as! String
-        _tags = Tag.tagsWithIds(dictionary["tags"] as! [Int])
-        if let photoId = dictionary["photo"] as? Int {
-            _photo = Photo.photoWithId(photoId)
+        if recursive {
+            let tagInfos = dictionary["tags"] as! [NSDictionary]
+            _tags = tagInfos.map { Tag(dictionary: $0, recursive: true) }
+            if let photoInfo = dictionary["photo"] as? NSDictionary {
+                _photo = Photo(dictionary: photoInfo, recursive: true)
+            }
+        } else {
+            _tags = Tag.tagsWithIds(dictionary["tags"] as! [Int])
+            if let photoId = dictionary["photo"] as? Int {
+                _photo = Photo.photoWithId(photoId)
+            }
         }
-        super.init(dictionary: dictionary)
+        super.init(dictionary: dictionary, recursive: recursive)
     }
+    
+    required convenience init(dictionary: NSDictionary) {
+        self.init(dictionary: dictionary, recursive: false)
+    }
+
     
     /*****************Individual*******************/
     func updateLabel(label: String) {
@@ -97,6 +110,9 @@ func ==(lhs: Individual, rhs: Individual) -> Bool {
     return true
 }
 
+func !=(lhs: Individual, rhs: Individual) -> Bool {
+    return !(lhs == rhs)
+}
 
 extension Individual: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
@@ -123,5 +139,27 @@ extension Individual: CloudStorable {
         dictionary.setValue(label, forKey: "label")
         dictionary.setValue(photo?.id, forKey: "photo")
         dictionary.setValue(tags.map { $0.id! }, forKey: "tags")
+    }
+}
+
+extension Individual {
+    override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        dictionary.setValue(label, forKey: "label")
+
+        var photoDictionary = NSMutableDictionary()
+        if let photo = photo {
+            photo.encodeRecursivelyWithDictionary(photoDictionary)
+            dictionary.setValue(photoDictionary, forKey: "photo")
+        }
+        
+        var tagInfos = [NSDictionary]()
+        for tag in tags {
+            var tagDictionary = NSMutableDictionary()
+            tag.encodeRecursivelyWithDictionary(tagDictionary)
+            tagInfos.append(tagDictionary)
+        }
+        dictionary.setValue(tagInfos, forKey: "tags")
+        
+        super.encodeRecursivelyWithDictionary(dictionary)
     }
 }

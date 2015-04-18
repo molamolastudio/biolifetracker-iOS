@@ -12,25 +12,46 @@ class Photo: BiolifeModel {
     static var ClassUrl: String { return "photos" }
     override var requiresMultipart: Bool { return true }
     
-    var image: UIImage
+    private var _image: UIImage
+    var image: UIImage { get { return _image } }
     
     init(image: UIImage) {
-        self.image = image
+        self._image = image
         super.init()
     }
     
-    required override init(dictionary: NSDictionary) {
-        let imageUrl = NSURL(string: dictionary["image"] as! String)!
-        let imageData = CloudStorage.makeRequestToUrl(imageUrl, withMethod: "GET", withPayload: nil)
-        assert(imageData != nil, "Cannot get image binary from server")
-        let image = UIImage(data: imageData!)
-        assert(image != nil, "Cannot convert binary data into UIImage")
-        self.image = image!
-        super.init(dictionary: dictionary)
+    override init(dictionary: NSDictionary, recursive: Bool) {
+        if recursive {
+            let imageData = NSData(base64EncodedString: dictionary["image"] as! String, options: nil)
+            _image = UIImage(data: imageData!)!
+        } else {
+            let imageUrl = NSURL(string: dictionary["image"] as! String)!
+            let imageData = CloudStorage.makeRequestToUrl(imageUrl, withMethod: "GET", withPayload: nil)
+            assert(imageData != nil, "Cannot get image binary from server")
+            let image = UIImage(data: imageData!)
+            assert(image != nil, "Cannot convert binary data into UIImage")
+            self._image = image!
+        }
+        super.init(dictionary: dictionary, recursive: recursive)
+    }
+    
+    required convenience init(dictionary: NSDictionary) {
+        self.init(dictionary: dictionary, recursive: false)
+    }
+    
+    func updateImage(image: UIImage) {
+        self._image = image
+        updateImage()
+    }
+    
+    private func updateImage() {
+        updateInfo(updatedBy: UserAuthService.sharedInstance.user,
+            updatedAt: NSDate())
     }
 
-    required init(coder decoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    required init(coder aDecoder: NSCoder) {
+        self._image = aDecoder.decodeObjectForKey("image") as! UIImage
+        super.init(coder: aDecoder)
     }
     
     class func photoWithId(id: Int) -> Photo {
@@ -41,10 +62,18 @@ class Photo: BiolifeModel {
 }
 
 func ==(lhs: Photo, rhs: Photo) -> Bool {
-    if lhs.id == rhs.id { return true }
-    let lhsImageRep = UIImagePNGRepresentation(lhs.image)
-    let rhsImageRep = UIImagePNGRepresentation(rhs.image)
-    return lhsImageRep.isEqualToData(rhsImageRep)
+    return lhs.image.size == rhs.image.size
+}
+
+func !=(lhs: Photo, rhs: Photo) -> Bool {
+    return !(lhs == rhs)
+}
+
+extension Photo: NSCoding {
+    override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
+        aCoder.encodeObject(_image, forKey: "image")
+    }
 }
 
 extension Photo: CloudStorable {
@@ -57,5 +86,14 @@ extension Photo: CloudStorable {
     override func encodeWithDictionary(dictionary: NSMutableDictionary) {
         dictionary.setValue(image, forKey: "image")
         super.encodeWithDictionary(dictionary)
+    }
+}
+
+extension Photo {
+    override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        let imageString = UIImageJPEGRepresentation(image, 1.0)
+            .base64EncodedStringWithOptions(nil)
+        dictionary.setValue(imageString, forKey: "image")
+        super.encodeRecursivelyWithDictionary(dictionary)
     }
 }

@@ -40,22 +40,30 @@ class Session: BiolifeModel {
         super.init()
     }
     
-    required override init(dictionary: NSDictionary) {
-        let manager = CloudStorageManager.sharedInstance
+    required convenience init(dictionary: NSDictionary) {
+        self.init(dictionary: dictionary, recursive: false)
+    }
+    
+    override init(dictionary: NSDictionary, recursive: Bool) {
         _name = dictionary["name"] as! String
         
         let sessionType = dictionary["session_type"] as! String
         assert(sessionType == "SCN" || sessionType == "FCL")
         _typeValue = sessionType
         
-        let observationIds = dictionary["observation_set"] as! [Int]
-        _observations = observationIds.map { Observation.observationWithId($0) }
-        
-        let individualIds = dictionary["individuals"] as! [Int]
-        _individuals = individualIds.map { manager.getIndividualWithId($0) }
-        
-        super.init(dictionary: dictionary)
-        
+        if recursive {
+            let observationInfos = dictionary["observation_set"] as! [NSDictionary]
+            _observations = observationInfos.map { Observation(dictionary: $0, recursive: true) }
+            let individualInfos = dictionary["individuals"] as! [NSDictionary]
+            _individuals = individualInfos.map { Individual(dictionary: $0, recursive: true) }
+        } else {
+            let manager = CloudStorageManager.sharedInstance
+            let observationIds = dictionary["observation_set"] as! [Int]
+            _observations = observationIds.map { Observation.observationWithId($0) }
+            let individualIds = dictionary["individuals"] as! [Int]
+            _individuals = individualIds.map { manager.getIndividualWithId($0) }
+        }
+        super.init(dictionary: dictionary, recursive: recursive)
         _observations.map { $0.setSession(self) }
     }
     
@@ -213,11 +221,14 @@ class Session: BiolifeModel {
 
 func ==(lhs: Session, rhs: Session) -> Bool {
     if lhs.project != rhs.project { return false }
-    if lhs.observations != rhs.observations { return false }
-    if lhs.individuals != rhs.individuals { return false }
+    if lhs.observations.count != rhs.observations.count { return false }
+    if lhs.individuals.count != rhs.individuals.count { return false }
     return true
 }
 
+func !=(lhs: Session, rhs: Session) -> Bool {
+    return !(lhs == rhs)
+}
 
 extension Session: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
@@ -248,5 +259,32 @@ extension Session: CloudStorable {
         dictionary.setValue(individuals.map { $0.id! }, forKey: "individuals")
         dictionary.setValue(name, forKey: "name")
         super.encodeWithDictionary(dictionary)
+    }
+}
+
+extension Session {
+    override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        // simple properties
+        dictionary.setValue(_typeValue, forKey: "session_type")
+        dictionary.setValue(name, forKey: "name")
+        
+        // complex properties
+        var observationsArray = [NSDictionary]()
+        for observation in observations {
+            var observationDictionary = NSMutableDictionary()
+            observation.encodeRecursivelyWithDictionary(observationDictionary)
+            observationsArray.append(observationDictionary)
+        }
+        dictionary.setValue(observationsArray, forKey: "observation_set")
+
+        var individualsArray = [NSDictionary]()
+        for individual in individuals {
+            var individualDictionary = NSMutableDictionary()
+            individual.encodeRecursivelyWithDictionary(individualDictionary)
+            individualsArray.append(individualDictionary)
+        }
+        dictionary.setValue(individualsArray, forKey: "individuals")
+        
+        super.encodeRecursivelyWithDictionary(dictionary)
     }
 }

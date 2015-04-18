@@ -12,9 +12,7 @@ class Tag: BiolifeModel {
     static let ClassUrl = "tags"
     
     private var _name: String
-    var name: String {
-        get { return _name }
-    }
+    var name: String { get { return _name } }
     
     override init() {
         _name = ""
@@ -26,9 +24,13 @@ class Tag: BiolifeModel {
         super.init()
     }
     
-    required override init(dictionary: NSDictionary) {
+    override init(dictionary: NSDictionary, recursive: Bool) {
         _name = dictionary["name"] as! String
-        super.init(dictionary: dictionary)
+        super.init(dictionary: dictionary, recursive: recursive)
+    }
+    
+    required convenience init(dictionary: NSDictionary) {
+        self.init(dictionary: dictionary, recursive: false)
     }
     
     func updateName(name: String) {
@@ -56,8 +58,12 @@ class Tag: BiolifeModel {
 }
 
 func ==(lhs: Tag, rhs: Tag) -> Bool {
-    if lhs.name == rhs.name { return false }
+    if lhs.name != rhs.name { return false }
     return true
+}
+
+func !=(lhs: Tag, rhs: Tag) -> Bool {
+    return !(lhs == rhs)
 }
 
 extension Tag: NSCoding {
@@ -77,5 +83,12 @@ extension Tag: CloudStorable {
     override func encodeWithDictionary(dictionary: NSMutableDictionary) {
         dictionary.setValue(name, forKey: "name")
         super.encodeWithDictionary(dictionary)
+    }
+}
+
+extension Tag {
+    override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        dictionary.setValue(name, forKey: "name")
+        super.encodeRecursivelyWithDictionary(dictionary)
     }
 }

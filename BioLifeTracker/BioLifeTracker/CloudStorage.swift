@@ -156,7 +156,7 @@ struct CloudStorage {
     /// Will return the corresponding NSDictionary if successful.
     /// Otherwise, returns nil.
     static func readFromJsonAsDictionary(data: NSData) -> NSDictionary? {
-        let stringRepresentation = NSString(data: data, encoding: NSUTF8StringEncoding)
+        //let stringRepresentation = NSString(data: data, encoding: NSUTF8StringEncoding)
         //NSLog("Received data: %@", stringRepresentation!)
         
         var readingError: NSError?

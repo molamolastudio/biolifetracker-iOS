@@ -32,13 +32,23 @@ class BehaviourState: BiolifeModel {
         self._information = information
     }
     
-    required override init(dictionary: NSDictionary) {
+    required convenience init(dictionary: NSDictionary) {
+        self.init(dictionary: dictionary, recursive: false)
+    }
+    
+    override init(dictionary: NSDictionary, recursive: Bool) {
         _name = dictionary["name"] as! String
         _information = dictionary["information"] as! String
-        if let photoId = dictionary["photo"] as? Int {
-            _photo = Photo.photoWithId(photoId)
+        if recursive {
+            if let photoInfo = dictionary["photo"] as? NSDictionary {
+                _photo = Photo(dictionary: photoInfo, recursive: true)
+            }
+        } else {
+            if let photoId = dictionary["photo"] as? Int {
+                _photo = Photo.photoWithId(photoId)
+            }
         }
-        super.init(dictionary: dictionary)
+        super.init(dictionary: dictionary, recursive: recursive)
     }
     
     func updateName(name: String) {
@@ -82,6 +92,9 @@ func ==(lhs: BehaviourState, rhs: BehaviourState) -> Bool {
     return true
 }
 
+func !=(lhs: BehaviourState, rhs: BehaviourState) -> Bool {
+    return !(lhs == rhs)
+}
 
 extension BehaviourState: NSCoding {
     override func encodeWithCoder(aCoder: NSCoder) {
@@ -107,5 +120,22 @@ extension BehaviourState: CloudStorable {
         dictionary.setValue(information, forKey: "information")
         dictionary.setValue(photo?.id, forKey: "photo")
         super.encodeWithDictionary(dictionary)
+    }
+}
+
+extension BehaviourState {
+    override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        // simple properties
+        dictionary.setValue(name, forKey: "name")
+        dictionary.setValue(information, forKey: "information")
+        
+        // complex properties
+        var photoDictionary = NSMutableDictionary()
+        if let photo = photo {
+            photo.encodeRecursivelyWithDictionary(photoDictionary)
+            dictionary.setValue(photoDictionary, forKey: "photo")
+        }
+        
+        super.encodeRecursivelyWithDictionary(dictionary)
     }
 }
