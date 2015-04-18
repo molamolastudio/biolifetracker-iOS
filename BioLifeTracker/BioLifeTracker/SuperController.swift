@@ -143,10 +143,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     // Methods to show pages
     func showStartPage() {
-        let vc = FirstViewController(nibName: "FirstView", bundle: nil)
-        vc.title = "Home"
-        vc.delegate = self
-        detailNav.setViewControllers([vc], animated: true)
+        showProjectsPage()
     }
     
     func showNewProjectPage() {

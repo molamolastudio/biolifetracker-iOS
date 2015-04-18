@@ -12,13 +12,13 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var initialViewController: SuperController?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         FBLoginView.self
         
-        initialViewController = SuperController()
+        let initialViewController = FirstViewController(nibName: "FirstView", bundle: nil)
+        initialViewController.title = "Home"
         
         // load user here
         
