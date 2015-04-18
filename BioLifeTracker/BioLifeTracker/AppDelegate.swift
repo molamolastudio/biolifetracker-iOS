@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         UserAuthService.sharedInstance.getCurrentUserFromServer()
         
-        return !(UserAuthService.sharedInstance.user == User(name: "Default", email: "Default"))
+        return UserAuthService.sharedInstance.user.email != "Default"
     }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {

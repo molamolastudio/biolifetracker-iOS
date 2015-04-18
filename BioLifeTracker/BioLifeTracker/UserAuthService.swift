@@ -144,7 +144,7 @@ class UserAuthService {
         if let dir = dirs?[0] {
             let path = dir.stringByAppendingPathComponent("servertoken")
             let fileManager = NSFileManager.defaultManager()
-            fileManager.removeItemAtPath(path, error: nil)
+            let success = fileManager.removeItemAtPath(path, error: nil)
         }
     }
     
