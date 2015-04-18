@@ -162,6 +162,17 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         menu.delegate = self
     }
     
+    func showCorruptFileAlert() {
+        let alertTitle = "Save File Corrupt"
+        let alertMessage = "Unable to load save file."
+        
+        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
+        let actionOk = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
+        alert.addAction(actionOk)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
     // Methods to show pages
     func showStartPage() {
         showProjectsPage()
