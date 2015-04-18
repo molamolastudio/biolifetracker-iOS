@@ -39,22 +39,40 @@ class BiolifeModel: NSObject, NSCoding {
     }
     
     // Set of functionalities for CloudStorable protocol
-    init(dictionary: NSDictionary) {
-        let manager = CloudStorageManager.sharedInstance
+    init(dictionary: NSDictionary, recursive: Bool) {
         let dateFormatter = BiolifeDateFormatter()
         self.id = dictionary["id"] as? Int
         self._createdAt = dateFormatter.getDate(dictionary["created_at"] as! String)
         self._updatedAt = dateFormatter.getDate(dictionary["updated_at"] as! String)
-        // retrieve dictionary of createdBy and updatedBy
-        let createdByDictionary = manager.getItemForClass(User.ClassUrl,
-            itemId: dictionary["created_by"] as! Int)
-        let updatedByDictionary = manager.getItemForClass(User.ClassUrl,
-            itemId: dictionary["updated_by"] as! Int)
-        // instantiate createdBy and updatedBy user object
-        self._createdBy = User(dictionary: createdByDictionary)
-        self._updatedBy = User(dictionary: updatedByDictionary)
+        if recursive {
+            if let createdByInfo = dictionary["created_by"] as? NSDictionary {
+                _createdBy = User(dictionary: createdByInfo, recursive: true)
+            } else {
+                _createdBy = UserAuthService.sharedInstance.user
+            }
+            if let updatedByInfo = dictionary["updated_by"] as? NSDictionary {
+                _updatedBy = User(dictionary: updatedByInfo, recursive: true)
+            } else {
+                _updatedBy = UserAuthService.sharedInstance.user
+            }
+        } else {
+            let manager = CloudStorageManager.sharedInstance
+            // retrieve dictionary of createdBy and updatedBy
+            let createdByDictionary = manager.getItemForClass(User.ClassUrl,
+                itemId: dictionary["created_by"] as! Int)
+            let updatedByDictionary = manager.getItemForClass(User.ClassUrl,
+                itemId: dictionary["updated_by"] as! Int)
+            // instantiate createdBy and updatedBy user object
+            self._createdBy = User(dictionary: createdByDictionary)
+            self._updatedBy = User(dictionary: updatedByDictionary)
+        }
         super.init()
     }
+    
+    required convenience init(dictionary: NSDictionary) {
+        self.init(dictionary: dictionary, recursive: false)
+    }
+    
     func setId(id: Int?) { self.id = id }
     func lock() { isLocked = true }
     func unlock() { isLocked = false }
@@ -84,5 +102,21 @@ extension BiolifeModel: NSCoding {
         coder.encodeObject(_updatedAt, forKey: "updatedAt")
         coder.encodeObject(_createdBy, forKey: "createdBy")
         coder.encodeObject(_updatedBy, forKey: "updatedBy")
+    }
+}
+
+extension BiolifeModel {
+    func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        let dateFormatter = BiolifeDateFormatter()
+        dictionary.setValue(dateFormatter.formatDate(createdAt), forKey: "created_at")
+        dictionary.setValue(dateFormatter.formatDate(updatedAt), forKey: "updated_at")
+        
+        let createdByDictionary = NSMutableDictionary()
+        createdBy.encodeRecursivelyWithDictionary(createdByDictionary)
+        dictionary.setValue(createdByDictionary, forKey: "created_by")
+        
+        let updatedByDictionary = NSMutableDictionary()
+        updatedBy.encodeRecursivelyWithDictionary(updatedByDictionary)
+        dictionary.setValue(updatedByDictionary, forKey: "updated_by")
     }
 }

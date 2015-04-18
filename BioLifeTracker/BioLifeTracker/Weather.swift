@@ -12,9 +12,7 @@ class Weather: BiolifeModel {
     static let ClassUrl = "weathers"
     
     private var _weather: String
-    var weather: String {
-        get { return _weather }
-    }
+    var weather: String { get { return _weather } }
     
     override init() {
         _weather = ""
@@ -40,9 +38,13 @@ class Weather: BiolifeModel {
         super.init(coder: aDecoder)
     }
     
-    override required init(dictionary: NSDictionary) {
+    override init(dictionary: NSDictionary, recursive: Bool) {
         _weather = dictionary["weather"] as! String
-        super.init(dictionary: dictionary)
+        super.init(dictionary: dictionary, recursive: recursive)
+    }
+    
+    required convenience init(dictionary: NSDictionary) {
+        self.init(dictionary: dictionary, recursive: false)
     }
     
     class func weatherWithId(id: Int) -> Weather {
@@ -55,6 +57,10 @@ class Weather: BiolifeModel {
 func ==(lhs: Weather, rhs: Weather) -> Bool {
     if lhs.weather != rhs.weather { return false }
     return true
+}
+
+func !=(lhs: Weather, rhs: Weather) -> Bool {
+    return !(lhs == rhs)
 }
 
 extension Weather: NSCoding {
@@ -75,5 +81,11 @@ extension Weather: CloudStorable {
         dictionary.setValue(weather, forKey: "weather")
         super.encodeWithDictionary(dictionary)
     }
+}
 
+extension Weather {
+    override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
+        dictionary.setValue(weather, forKey: "weather")
+        super.encodeRecursivelyWithDictionary(dictionary)
+    }
 }
