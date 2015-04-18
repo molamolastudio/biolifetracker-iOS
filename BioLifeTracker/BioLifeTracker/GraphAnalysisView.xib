@@ -16,10 +16,32 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fwg-BZ-hzn">
+                    <rect key="frame" x="20" y="40" width="540" height="360"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVy-Qc-had">
+                    <rect key="frame" x="49" y="496" width="40" height="30"/>
+                    <state key="normal" title="Users">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xkz-gR-Wre">
+                    <rect key="frame" x="152" y="496" width="62" height="30"/>
+                    <state key="normal" title="Sessions">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ag-Zi-E8o">
+                    <rect key="frame" x="277" y="496" width="117" height="30"/>
+                    <state key="normal" title="Behaviour States">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="HmU-Ci-fRo">
-                    <rect key="frame" x="363" y="491" width="197" height="29"/>
+                    <rect key="frame" x="363" y="445" width="197" height="29"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="197" id="j7F-7D-9Uc"/>
+                        <constraint firstAttribute="width" constant="197" id="5FR-d5-HVY"/>
                     </constraints>
                     <segments>
                         <segment title="Hour"/>
@@ -30,19 +52,21 @@
                         <action selector="graphIndexChanged:" destination="-1" eventType="valueChanged" id="DZ1-TO-QfP"/>
                     </connections>
                 </segmentedControl>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fwg-BZ-hzn">
-                    <rect key="frame" x="20" y="40" width="540" height="399"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Fwg-BZ-hzn" firstAttribute="trailing" secondItem="HmU-Ci-fRo" secondAttribute="trailing" id="GNj-wC-sBQ"/>
-                <constraint firstAttribute="bottom" secondItem="Fwg-BZ-hzn" secondAttribute="bottom" constant="161" id="ST6-jW-4VU"/>
-                <constraint firstItem="Fwg-BZ-hzn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="40" id="SUM-Gc-ef3"/>
-                <constraint firstItem="HmU-Ci-fRo" firstAttribute="top" secondItem="Fwg-BZ-hzn" secondAttribute="bottom" constant="52" id="jxb-2y-oLO"/>
-                <constraint firstAttribute="trailing" secondItem="Fwg-BZ-hzn" secondAttribute="trailing" constant="40" id="r7f-q9-g33"/>
-                <constraint firstItem="Fwg-BZ-hzn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="vLl-UO-rFF"/>
+                <constraint firstAttribute="trailing" secondItem="Fwg-BZ-hzn" secondAttribute="trailing" constant="40" id="Bg6-AA-8YL"/>
+                <constraint firstItem="wVy-Qc-had" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="49" id="DYQ-3o-bYV"/>
+                <constraint firstItem="7Ag-Zi-E8o" firstAttribute="leading" secondItem="Xkz-gR-Wre" secondAttribute="trailing" constant="63" id="G2p-7F-fVE"/>
+                <constraint firstItem="7Ag-Zi-E8o" firstAttribute="baseline" secondItem="Xkz-gR-Wre" secondAttribute="baseline" id="GBm-1R-4YP"/>
+                <constraint firstItem="Xkz-gR-Wre" firstAttribute="baseline" secondItem="wVy-Qc-had" secondAttribute="baseline" id="HF6-JA-nBe"/>
+                <constraint firstItem="Fwg-BZ-hzn" firstAttribute="trailing" secondItem="HmU-Ci-fRo" secondAttribute="trailing" id="Hvw-NC-wHb"/>
+                <constraint firstItem="wVy-Qc-had" firstAttribute="top" secondItem="Fwg-BZ-hzn" secondAttribute="bottom" constant="96" id="Pdy-zD-3NU"/>
+                <constraint firstItem="Xkz-gR-Wre" firstAttribute="leading" secondItem="wVy-Qc-had" secondAttribute="trailing" constant="63" id="YGD-q1-Zmd"/>
+                <constraint firstItem="Fwg-BZ-hzn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="40" id="YMr-YL-qXa"/>
+                <constraint firstAttribute="bottom" secondItem="Fwg-BZ-hzn" secondAttribute="bottom" constant="200" id="d9H-Gn-cQq"/>
+                <constraint firstItem="Fwg-BZ-hzn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="g9Q-Pm-uH5"/>
+                <constraint firstItem="HmU-Ci-fRo" firstAttribute="top" secondItem="Fwg-BZ-hzn" secondAttribute="bottom" constant="45" id="l6S-ee-ZtC"/>
             </constraints>
         </view>
     </objects>

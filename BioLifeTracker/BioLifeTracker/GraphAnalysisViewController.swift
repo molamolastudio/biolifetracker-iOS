@@ -46,7 +46,7 @@ class GraphAnalysisViewController:  UIViewController {
             println("day")
             graphsVC.toggleGraph(.DayPlot)
             graphsVC.prepareNumberOfOccurances()
-            graphsVC.drawGraph2()
+            graphsVC.drawGraph()
         case 2:
             println("states")
             graphsVC.toggleGraph(.StateChart)
