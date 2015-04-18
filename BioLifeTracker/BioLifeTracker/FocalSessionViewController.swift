@@ -33,8 +33,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         setupTableViews()
         
         // Sets up the date formatter for converting dates to strings
-        formatter.dateStyle = NSDateFormatterStyle.LongStyle
-        formatter.timeStyle = .MediumStyle
+        formatter.dateStyle = .MediumStyle
+        formatter.timeStyle = .ShortStyle
         
         // Setup the individuals array
         individuals.append("All")

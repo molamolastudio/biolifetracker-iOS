@@ -15,65 +15,151 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBOutlet weak var leftArrow: UIButton!
     @IBOutlet weak var rightArrow: UIButton!
     
-    let animalsTag = 11
-    let statesTag = 12
+    let cellReuseIdentifier = "CircleCell"
     
-    let cellReuseIdentifier = "CollectionCell"
+    let animalsDefaultColor = UIColor.lightGrayColor()
+    let animalsSelectedColor = UIColor.greenColor()
+    let statesDefaultColor = UIColor.lightGrayColor()
+    let statesSelectedColor = UIColor.greenColor()
     
     var currentSession: Session? = nil
+    var selectedTimestamp: NSDate? = nil
+    
+    var observations = [Observation]()
+    var states = [BehaviourState]()
+    
+    var selectedObservation = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupCollectionViews()
+        getData()
+    }
+    
+    func setupCollectionViews() {
         animalsView.dataSource = self
         animalsView.delegate = self
         
         statesView.dataSource = self
         statesView.delegate = self
         
-        animalsView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
-        animalsView.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
+        animalsView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellWithReuseIdentifier: cellReuseIdentifier)
+        statesView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellWithReuseIdentifier: cellReuseIdentifier)
+        
+        // Sets the subviews to display under the navigation bar
+        self.edgesForExtendedLayout = UIRectEdge.None
+        self.extendedLayoutIncludesOpaqueBars = false
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+        // Sets the rounded corners for the table views
+        animalsView.layer.cornerRadius = 8;
+        animalsView.layer.masksToBounds = true;
+        statesView.layer.cornerRadius = 8;
+        statesView.layer.masksToBounds = true;
+        notesView.layer.cornerRadius = 8;
+        notesView.layer.masksToBounds = true;
+    }
+    
+    func getData() {
+        if currentSession != nil && selectedTimestamp != nil {
+            observations = currentSession!.getObservationsByTimestamp(selectedTimestamp!)
+            states = currentSession!.project.ethogram.behaviourStates
+        }
     }
     
     // UICollectionViewDataSource methods
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as! UICollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as! CircleCell
         
-        // Make it a circle
-        cell.contentView.layer.cornerRadius = 0.25
-        
-        if collectionView.tag == animalsTag {
-            
-        } else if collectionView.tag == statesTag {
-            
-        } else {
-            
+        if collectionView == animalsView {
+            cell.label.text = "A\(indexPath.row)"
+            cell.backgroundColor = animalsDefaultColor
+        } else if collectionView == statesView {
+            let name = states[indexPath.row].name
+            cell.label.text = name.substringToIndex(name.startIndex.successor())
+            cell.backgroundColor = statesDefaultColor
         }
-        return UICollectionViewCell()
+        return cell
+    }
+    
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView.tag == animalsTag {
-            
-        } else if collectionView.tag == statesTag {
-            
-        } else {
-            
+        if collectionView == animalsView {
+            return observations.count
+        } else if collectionView == statesView {
+            return states.count
         }
         return 0
     }
     
     // UICollectionViewDelegate methods
+    
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if collectionView.tag == animalsTag {
+        if collectionView == animalsView {
+            selectedObservation = indexPath.row
+            showObservationAtIndex(indexPath)
             
-        } else if collectionView.tag == statesTag {
-            
-        } else {
-            
+        } else if collectionView == statesView {
+            showStateAsSelected(indexPath.row)
+            observations[selectedObservation].changeBehaviourState(states[indexPath.row])
         }
     }
-
+    
+    func showObservationAtIndex(indexPath: NSIndexPath) {
+        showAnimalAsSelected(indexPath.row)
+        
+        let observation = observations[indexPath.row]
+        showStateAsSelected(getIndexOfState(observation.state))
+    }
+    
+    func showAnimalAsSelected(selectedIndex: Int) {
+        if selectedIndex < observations.count {
+            for i in 0...observations.count - 1 {
+                let index = NSIndexPath(forRow: i, inSection: 0)
+                if i == selectedIndex {
+                    animalsView.cellForItemAtIndexPath(index)!.backgroundColor = animalsSelectedColor
+                } else {
+                    animalsView.cellForItemAtIndexPath(index)!.backgroundColor = animalsDefaultColor
+                }
+            }
+        }
+    }
+    
+    func showStateAsSelected(selectedIndex: Int) {
+        if selectedIndex < states.count {
+            for i in 0...states.count - 1 {
+                let index = NSIndexPath(forRow: i, inSection: 0)
+                if i == selectedIndex {
+                    statesView.cellForItemAtIndexPath(index)!.backgroundColor = statesSelectedColor
+                } else {
+                    println(index)
+                    statesView.cellForItemAtIndexPath(index)!.backgroundColor = statesDefaultColor
+                }
+            }
+        }
+    }
+    
+    func setCellAsDefault() {
+        
+    }
+    
+    func setCellAsSelected() {
+        
+    }
+    
+    func getIndexOfState(state: BehaviourState) -> Int {
+        for i in 0...states.count {
+            if states[i] == state {
+                return i
+            }
+        }
+        return 0
+    }
+    
     @IBAction func leftArrowPressed(sender: UIButton) {
         
     }

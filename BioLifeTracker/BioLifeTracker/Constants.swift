@@ -16,6 +16,6 @@ struct Constants {
     }
     
     struct WebServer {
-        static let serverUrl: String = "http://bltserver.herokuapp.com"
+        static let serverUrl: String = "https://bltserver.herokuapp.com"
     }
 }

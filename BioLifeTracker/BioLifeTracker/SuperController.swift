@@ -301,6 +301,27 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         detailNav.pushViewController(vc, animated: true)
     }
     
+    func showObservationPage() {
+        
+    }
+    
+    func showScanPage(session: Session, timestamp: NSDate) {
+        let vc = ScanViewController(nibName: "ScanView", bundle: nil)
+        
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .MediumStyle
+        formatter.timeStyle = .ShortStyle
+        
+        vc.title = formatter.stringFromDate(timestamp)
+        vc.currentSession = session
+        vc.selectedTimestamp = timestamp
+        
+        var createBtn = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("saveScanData:"))
+        vc.navigationItem.rightBarButtonItem = createBtn
+        
+        detailNav.pushViewController(vc, animated: true)
+    }
+    
     func showCreateObservationPage() {
         // Observation Form VC
     }
@@ -470,6 +491,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     // ScanSessionViewControllerDelegate methods
     func userDidSelectScan(session: Session, timestamp: NSDate) {
         // Open the ScanView
+        showScanPage(session, timestamp: timestamp)
     }
     
     // FocalSessionViewControllerDelegate methods
