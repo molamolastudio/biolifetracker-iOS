@@ -40,7 +40,7 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         super.viewDidAppear(animated)
         
         // If user is logged in
-        if isSignedIn {
+        if UserAuthService.sharedInstance.hasAccessToken() {
             view.hidden = true
             showSuperVC()
         } else {
@@ -79,7 +79,7 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     }
     
     func showSuperVC() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(false, completion: nil)
     }
     
     // Facebook Delegate Methods

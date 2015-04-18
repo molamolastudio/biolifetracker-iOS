@@ -26,7 +26,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     override func viewDidLoad() {
         // Load data
-        UserAuthService.sharedInstance.useDefaultUser()
+        //UserAuthService.sharedInstance.useDefaultUser()
         //setupForDemo()
         
         setupSplitView()
@@ -36,6 +36,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         super.viewDidAppear(animated)
         
         showStartPage()
+        //setupForDemo()
     }
     
     // Closes the master view of the split view.
@@ -153,7 +154,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func setupMenu() {
-        menu.title = "BioLifeTracker"
+        menu.title = UserAuthService.sharedInstance.user.name
         menu.delegate = self
     }
     
@@ -171,10 +172,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     // Methods to show pages
     func showStartPage() {
         // If user is logged in
-        if UserAuthService.sharedInstance.getCurrentUserFromServer() != nil {
+        if UserAuthService.sharedInstance.hasAccessToken() {
             showProjectsPage()
         } else {
-            //dismissMenuView()
             showLoginPage()
         }
     }
