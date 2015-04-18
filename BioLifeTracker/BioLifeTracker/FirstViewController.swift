@@ -31,6 +31,7 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         // If user is logged in, move to super vc immediately
         if trySilentAuthentication() {
             showSuperVC()
+            UserAuthService.sharedInstance.initialiseManagers()
         }
         
     }

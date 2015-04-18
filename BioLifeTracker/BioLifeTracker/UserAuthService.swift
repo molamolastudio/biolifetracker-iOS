@@ -47,7 +47,7 @@ class UserAuthService {
         return accessToken != nil
     }
     
-    private func initialiseManagers() {
+    func initialiseManagers() {
         let loadedProjectMng = ProjectManager.loadFromArchives(UserAuthService.sharedInstance.user.toString()) as? ProjectManager
         if loadedProjectMng != nil {
             ProjectManager.sharedInstance.updateProjects(loadedProjectMng!.projects)
