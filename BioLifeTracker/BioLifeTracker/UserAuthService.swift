@@ -32,15 +32,20 @@ class UserAuthService {
         return Singleton.instance
     }
     
+    init() {
+        tryLoadTokenFromDisk()
+    }
+    
     func useDefaultUser() {
         initialiseManagers()
     }
     
-//    func setUserAuth(user: User, accessToken: String) {
-//        self._user = user
-//        self._accessToken = accessToken
-//        initialiseManagers()
-//    }
+    func hasAccessToken() -> Bool {
+        if accessToken == nil {
+           tryLoadTokenFromDisk()
+        }
+        return accessToken != nil
+    }
     
     private func initialiseManagers() {
         let loadedProjectMng = ProjectManager.loadFromArchives(String(UserAuthService.sharedInstance.user.id)) as! ProjectManager?
@@ -68,7 +73,8 @@ class UserAuthService {
         _authProvider = .Google
     }
     
-    /// Login to server using the specified OAuth social login provider,
+    
+    /// [Async] Login to server using the specified OAuth social login provider,
     /// and the corresponding OAuth token from the specified provider.
     /// Will set _user and _accessToken upon successful login.
     /// This function runs asynchronously on network queue and will immediately return.
@@ -92,27 +98,29 @@ class UserAuthService {
         })
     }
     
-    /// Gets the currently logged in user information from server. The server
+
+    /// [Async] Gets the currently logged in user information from server. The server
     /// will deduce the currently logged in user from the access token sent in
     /// HTTP Header. If the token is not accepted, this function will return nil.
-    func getCurrentUserFromServer() {
-        if _accessToken == nil {
-            tryLoadTokenFromDisk()
-        }
-
-        let destinationUrl = NSURL(string: Constants.WebServer.serverUrl)!
-            .URLByAppendingPathComponent("auth")
-            .URLByAppendingPathComponent("current_user")
-            .URLByAppendingSlash()
-        let responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "GET", withPayload: nil)
-        assert(responseData != nil, "No response from server")
-        let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)
-        assert(responseDictionary != nil, "Error parsing JSON")
-        if let id = responseDictionary!["id"] as? Int {
-            self._user = User(dictionary: responseDictionary!)
-            self.trySaveTokenToDisk()
-            self.initialiseManagers()
-        }
+    private func getCurrentUserFromServer() {
+        dispatch_async(CloudStorage.networkThread, {
+            if self._accessToken == nil {
+                self.tryLoadTokenFromDisk()
+            }
+            let destinationUrl = NSURL(string: Constants.WebServer.serverUrl)!
+                .URLByAppendingPathComponent("auth")
+                .URLByAppendingPathComponent("current_user")
+                .URLByAppendingSlash()
+            let responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "GET", withPayload: nil)
+            assert(responseData != nil, "No response from server")
+            let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)
+            assert(responseDictionary != nil, "Error parsing JSON")
+            if let id = responseDictionary!["id"] as? Int {
+                self._user = User(dictionary: responseDictionary!)
+                self.trySaveTokenToDisk()
+                self.initialiseManagers()
+            }
+        })
     }
     
     func handleLogOut() {
