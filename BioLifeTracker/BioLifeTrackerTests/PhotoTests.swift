@@ -33,7 +33,8 @@ class PhotoTests: XCTestCase {
         let photo = Photo(image: image!)
         let uploadTask = UploadTask(item: photo)
         uploadTask.execute()
-        assert(photo.id != nil, "Uploading photo does not work correctly")
+        XCTAssertTrue(photo.id != nil, "Uploading photo does not work correctly")
+        if photo.id == nil { return }
         
         let photoId = photo.id!
         let downloadTask = DownloadTask(classUrl: Photo.ClassUrl, itemId: photoId)

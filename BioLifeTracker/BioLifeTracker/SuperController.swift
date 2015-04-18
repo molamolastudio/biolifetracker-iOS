@@ -26,18 +26,17 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     override func viewDidLoad() {
         // Load data
-        UserAuthService.sharedInstance.useDefaultUser()
+        //UserAuthService.sharedInstance.useDefaultUser()
         //setupForDemo()
         
         setupSplitView()
-        
-        showStartPage()
     }
     
-    // Closes the master view of the split view before this view disappears.
-    override func viewWillDisappear(animated: Bool) {
-        dismissMenuView()
-        super.viewWillDisappear(animated)
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        showStartPage()
+        //setupForDemo()
     }
     
     // Closes the master view of the split view.
@@ -155,7 +154,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func setupMenu() {
-        menu.title = "BioLifeTracker"
+        menu.title = UserAuthService.sharedInstance.user.name
         menu.delegate = self
     }
     
@@ -172,7 +171,18 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     // Methods to show pages
     func showStartPage() {
-        showProjectsPage()
+        // If user is logged in
+        if UserAuthService.sharedInstance.hasAccessToken() {
+            showProjectsPage()
+        } else {
+            showLoginPage()
+        }
+    }
+    
+    func showLoginPage() {
+        let vc = FirstViewController(nibName: "FirstView", bundle: nil)
+        vc.modalPresentationStyle = .FullScreen
+        self.presentViewController(vc, animated: true, completion: nil)
     }
     
     func showNewProjectPage() {
@@ -325,7 +335,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.currentSession = session
         vc.selectedTimestamp = timestamp
         
-        var createBtn = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("saveScanData:"))
+        var createBtn = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("saveScanData"))
         vc.navigationItem.rightBarButtonItem = createBtn
         
         detailNav.pushViewController(vc, animated: true)
@@ -400,6 +410,10 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         }
     }
     
+    func saveScanData() {
+        
+    }
+    
     func syncProject() {
         let project = currentProject!
         
@@ -449,11 +463,17 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func userDidSelectLogout() {
-        UserAuthService.sharedInstance.handleLogOut()
+        // Log out ProjectManager and EthogramManager first before logging user out
+        // Requires the user info to clear directories
         ProjectManager.sharedInstance.handleLogOut()
         EthogramManager.sharedInstance.handleLogOut()
+        UserAuthService.sharedInstance.handleLogOut()
+        
+        GPPSignIn.sharedInstance().signOut()
+        FBSession.activeSession().closeAndClearTokenInformation()
         
         // Move back to start page
+        dismissMenuView()
         self.dismissViewControllerAnimated(false, completion: nil)
     }
     

@@ -64,7 +64,7 @@ class ProjectManager: NSObject, Storable {
         
         if ((dirs) != nil) {
             let dir = dirs![0]; //documents directory
-            let path = dir.stringByAppendingPathComponent("Existing projects of" + UserAuthService.sharedInstance.user.toString())
+            let path = dir.stringByAppendingPathComponent("Existing projects of" + String(UserAuthService.sharedInstance.user.id))
             
             let data = NSMutableData();
             let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
@@ -92,14 +92,35 @@ class ProjectManager: NSObject, Storable {
         }
         
         let archiver = NSKeyedUnarchiver(forReadingWithData: data!)
-        var projectManager = archiver.decodeObjectForKey("projects") as! ProjectManager?
+        var projectManager = archiver.decodeObjectForKey("projects") as? ProjectManager
         
         return projectManager
     }
     
     class func deleteFromArchives(identifier: String) -> Bool {
         // Cannot delete user projects
-        return false
+        let dirs: [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        
+        if (dirs == nil) {
+            return false
+        }
+        
+        // documents directory
+        let dir = dirs![0]
+        let path = dir.stringByAppendingPathComponent("Existing projects of" + identifier)
+        
+        let fileManager = NSFileManager.defaultManager()
+        if fileManager.fileExistsAtPath(path) {
+            // Delete the file and see if it was successful
+            var error: NSError?
+            let success = fileManager.removeItemAtPath(path, error: &error)
+            if error != nil {
+                println(error)
+            }
+            return success;
+        } else {
+            return true
+        }
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -121,6 +142,7 @@ class ProjectManager: NSObject, Storable {
     
     func handleLogOut() {
         // Please do anything to manage user data here
+        ProjectManager.deleteFromArchives(String(UserAuthService.sharedInstance.user.id))
     }
 }
 

@@ -56,7 +56,7 @@ class EthogramManager: NSObject, Storable {
         
         if ((dirs) != nil) {
             let dir = dirs![0]; //documents directory
-            let path = dir.stringByAppendingPathComponent("Existing ethograms of" + UserAuthService.sharedInstance.user.toString())
+            let path = dir.stringByAppendingPathComponent("Existing ethograms of" + String(UserAuthService.sharedInstance.user.id))
             
             let data = NSMutableData();
             let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
@@ -84,14 +84,35 @@ class EthogramManager: NSObject, Storable {
         }
         
         let archiver = NSKeyedUnarchiver(forReadingWithData: data!)
-        var ethogramManager = archiver.decodeObjectForKey("ethograms") as! EthogramManager?
+        var ethogramManager = archiver.decodeObjectForKey("ethograms") as? EthogramManager
 
         return ethogramManager
     }
     
     class func deleteFromArchives(identifier: String) -> Bool {
         // Cannot delete user ethograms
-        return false
+        let dirs: [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        
+        if (dirs == nil) {
+            return false
+        }
+        
+        // documents directory
+        let dir = dirs![0]
+        let path = dir.stringByAppendingPathComponent("Existing ethograms of" + identifier)
+        
+        let fileManager = NSFileManager.defaultManager()
+        if fileManager.fileExistsAtPath(path) {
+            // Delete the file and see if it was successful
+            var error: NSError?
+            let success = fileManager.removeItemAtPath(path, error: &error)
+            if error != nil {
+                println(error)
+            }
+            return success;
+        } else {
+            return true // nothing to clear
+        }
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -113,6 +134,7 @@ class EthogramManager: NSObject, Storable {
     
     func handleLogOut() {
         // Please do anything to manage user data here
+        EthogramManager.deleteFromArchives(String(UserAuthService.sharedInstance.user.toString()))
     }
 }
 

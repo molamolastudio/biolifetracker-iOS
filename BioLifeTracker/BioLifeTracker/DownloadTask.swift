@@ -16,6 +16,7 @@ class DownloadTask: CloudStorageTask {
     private var classUrl: String
     private var itemId: Int?
     private var results = [NSDictionary]()
+    var completedSuccessfully: Bool?
     var description: String {
         return "DownloadTask for \(classUrl) : \(itemId)"
     }
@@ -41,18 +42,21 @@ class DownloadTask: CloudStorageTask {
                 .URLByAppendingSlash()
         }
         let responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "GET", withPayload: nil)
-        assert(responseData != nil, "There is no response from server")
-        
-        if (itemId == nil) {
-            let responseArray = CloudStorage.readFromJsonAsArray(responseData!)
-            assert(responseArray != nil, "Fail to translate JSON to array")
-            for item in responseArray! {
-                results.append(item as! NSDictionary)
-            }
+        if responseData == nil {
+            completedSuccessfully = false
         } else {
-            let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)
-            assert(responseDictionary != nil, "Fail to translate JSON to dictionary")
-            results.append(responseDictionary!)
+            if (itemId == nil) {
+                let responseArray = CloudStorage.readFromJsonAsArray(responseData!)
+                assert(responseArray != nil, "Fail to translate JSON to array")
+                for item in responseArray! {
+                    results.append(item as! NSDictionary)
+                }
+            } else {
+                let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)
+                assert(responseDictionary != nil, "Fail to translate JSON to dictionary")
+                results.append(responseDictionary!)
+            }
+            completedSuccessfully = true
         }
     }
     

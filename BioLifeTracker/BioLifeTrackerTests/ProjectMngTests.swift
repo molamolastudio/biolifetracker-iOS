@@ -31,6 +31,8 @@ class ProjectMngTests: XCTestCase {
         
         // ProjectManager retrieved the state last saved
         UserAuthService.sharedInstance.useDefaultUser()
+        XCTAssert(ProjectManager.sharedInstance.projects.count > 0)
+        if ProjectManager.sharedInstance.projects.count == 0 { return }
         XCTAssert(ProjectManager.sharedInstance.projects[0].name == "A Day in a Fiddler Crab life", "Project not retrieved properly")
         
         // Edit ProjectManager with saving

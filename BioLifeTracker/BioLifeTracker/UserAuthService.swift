@@ -32,23 +32,28 @@ class UserAuthService {
         return Singleton.instance
     }
     
+    init() {
+        tryLoadTokenFromDisk()
+    }
+    
     func useDefaultUser() {
         initialiseManagers()
     }
     
-    func setUserAuth(user: User, accessToken: String) {
-        self._user = user
-        self._accessToken = accessToken
-        initialiseManagers()
+    func hasAccessToken() -> Bool {
+        if accessToken == nil {
+           tryLoadTokenFromDisk()
+        }
+        return accessToken != nil
     }
     
     private func initialiseManagers() {
-        let loadedProjectMng = ProjectManager.loadFromArchives(UserAuthService.sharedInstance.user.toString()) as! ProjectManager?
+        let loadedProjectMng = ProjectManager.loadFromArchives(UserAuthService.sharedInstance.user.toString()) as? ProjectManager
         if loadedProjectMng != nil {
             ProjectManager.sharedInstance.updateProjects(loadedProjectMng!.projects)
         }
         
-        let loadedEthogramMng = EthogramManager.loadFromArchives(UserAuthService.sharedInstance.user.toString()) as! EthogramManager?
+        let loadedEthogramMng = EthogramManager.loadFromArchives(String(UserAuthService.sharedInstance.user.id)) as! EthogramManager?
         if loadedEthogramMng != nil {
             EthogramManager.sharedInstance.updateEthograms(loadedEthogramMng!.ethograms)
         }
@@ -68,7 +73,8 @@ class UserAuthService {
         _authProvider = .Google
     }
     
-    /// Login to server using the specified OAuth social login provider,
+    
+    /// [Async] Login to server using the specified OAuth social login provider,
     /// and the corresponding OAuth token from the specified provider.
     /// Will set _user and _accessToken upon successful login.
     /// This function runs asynchronously on network queue and will immediately return.
@@ -82,40 +88,39 @@ class UserAuthService {
             postDictionary.setValue(token, forKey: "access_token")
             let postData = CloudStorage.dictionaryToJsonData(postDictionary)
             let responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "POST", withPayload: postData)
-            assert(responseData != nil, "The server rejects the \(provider) token. This shouldn't happen.")
+            if responseData == nil { return }
             let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)!
             let serverToken = responseDictionary["key"] as! String
             self._accessToken = serverToken
-            let user = self.getCurrentUserFromServer()
-            assert(user != nil, "Token is not accepted by server")
-            self._user = user!
-            self.trySaveTokenToDisk()
+            self.getCurrentUserFromServer()
+            let user = self.user
+            assert(user != User(name: "Default", email: "Default"), "Token is not accepted by server")
         })
     }
     
-    /// Gets the currently logged in user information from server. The server
+
+    /// [Async] Gets the currently logged in user information from server. The server
     /// will deduce the currently logged in user from the access token sent in
     /// HTTP Header. If the token is not accepted, this function will return nil.
-    func getCurrentUserFromServer() -> User? {
-        if _accessToken == nil {
-            tryLoadTokenFromDisk()
-        }
-        if _accessToken == nil {
-            return nil
-        }
-        let destinationUrl = NSURL(string: Constants.WebServer.serverUrl)!
-            .URLByAppendingPathComponent("auth")
-            .URLByAppendingPathComponent("current_user")
-            .URLByAppendingSlash()
-        let responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "GET", withPayload: nil)
-        assert(responseData != nil, "No response from server")
-        let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)
-        assert(responseDictionary != nil, "Error parsing JSON")
-        if let id = responseDictionary!["id"] as? Int {
-            return User(dictionary: responseDictionary!)
-        } else {
-            return nil
-        }
+    private func getCurrentUserFromServer() {
+        dispatch_async(CloudStorage.networkThread, {
+            if self.accessToken == nil {
+                self.tryLoadTokenFromDisk()
+            }
+            let destinationUrl = NSURL(string: Constants.WebServer.serverUrl)!
+                .URLByAppendingPathComponent("auth")
+                .URLByAppendingPathComponent("current_user")
+                .URLByAppendingSlash()
+            let responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "GET", withPayload: nil)
+            assert(responseData != nil, "No response from server")
+            let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)
+            assert(responseDictionary != nil, "Error parsing JSON")
+            if let id = responseDictionary!["id"] as? Int {
+                self._user = User(dictionary: responseDictionary!)
+                self.trySaveTokenToDisk()
+                self.initialiseManagers()
+            }
+        })
     }
     
     func handleLogOut() {
@@ -128,6 +133,9 @@ class UserAuthService {
             if let dir = dirs?[0] {
                 let path = dir.stringByAppendingPathComponent("servertoken")
                 let success = token.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding)
+                if success {
+                    saveUserToDisk()
+                }
             }
         }
     }
@@ -137,7 +145,10 @@ class UserAuthService {
         if let dir = dirs?[0] {
             let path = dir.stringByAppendingPathComponent("servertoken")
             if let token = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil) {
-                _accessToken = token as String
+                let userDataIsAvailable = loadUserFromDisk()
+                if userDataIsAvailable {
+                    _accessToken = token as String
+                }
             }
         }
     }
@@ -147,7 +158,47 @@ class UserAuthService {
         if let dir = dirs?[0] {
             let path = dir.stringByAppendingPathComponent("servertoken")
             let fileManager = NSFileManager.defaultManager()
-            fileManager.removeItemAtPath(path, error: nil)
+            if fileManager.fileExistsAtPath(path) {
+                let success = fileManager.removeItemAtPath(path, error: nil)
+                if success {
+                    deleteUserFromDisk()
+                }
+            }
+        }
+    }
+    
+    private func saveUserToDisk() {
+        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        
+        if let dir = dirs?[0] {
+            let path = dir.stringByAppendingPathComponent("current_user")
+            let success = NSKeyedArchiver.archiveRootObject(user, toFile: path)
+        }
+    }
+    
+    private func loadUserFromDisk() -> Bool {
+        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        if let dir = dirs?[0] {
+            let path = dir.stringByAppendingPathComponent("current_user")
+            let user = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? User
+            if user == nil {
+                return false
+            } else {
+                _user = user!
+                return true
+            }
+        }
+        return false
+    }
+    
+    private func deleteUserFromDisk() {
+        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        if let dir = dirs?[0] {
+            let path = dir.stringByAppendingPathComponent("current_user")
+            let fileManager = NSFileManager.defaultManager()
+            if fileManager.fileExistsAtPath(path) {
+                let success = fileManager.removeItemAtPath(path, error: nil)
+            }
         }
     }
     

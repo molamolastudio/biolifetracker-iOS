@@ -23,4 +23,5 @@ protocol CloudStorageTask {
     /// Short description of the CloudStorageTask.
     var description: String { get }
     
+    var completedSuccessfully: Bool? { get }
 }

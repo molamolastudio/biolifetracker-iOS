@@ -58,8 +58,9 @@ class UploadTaskTests: XCTestCase {
         var dummyItem = DummyModel()
         var uploadTask = UploadTask(item: dummyItem)
         uploadTask.execute()
-        assert(dummyItem.id != nil, "First upload not successful")
-
+        XCTAssertTrue(dummyItem.id != nil, "First upload not successful")
+        if dummyItem.id == nil { return }
+        
         let itemId = dummyItem.id!
         let newIntProperty = random()
         let newStringProperty = dummyItem.stringProperty + " -- Updated"
