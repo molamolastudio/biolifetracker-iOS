@@ -118,7 +118,11 @@ class UserAuthService {
         }
     }
     
-    func trySaveTokenToDisk() {
+    func handleLogOut() {
+        deleteTokenFromDisk()
+    }
+    
+    private func trySaveTokenToDisk() {
         let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
         if let token = _accessToken {
             if let dir = dirs?[0] {
@@ -128,13 +132,22 @@ class UserAuthService {
         }
     }
     
-    func tryLoadTokenFromDisk() {
+    private func tryLoadTokenFromDisk() {
         let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
         if let dir = dirs?[0] {
             let path = dir.stringByAppendingPathComponent("servertoken")
             if let token = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil) {
                 _accessToken = token as String
             }
+        }
+    }
+    
+    private func deleteTokenFromDisk() {
+        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        if let dir = dirs?[0] {
+            let path = dir.stringByAppendingPathComponent("servertoken")
+            let fileManager = NSFileManager.defaultManager()
+            fileManager.removeItemAtPath(path, error: nil)
         }
     }
     

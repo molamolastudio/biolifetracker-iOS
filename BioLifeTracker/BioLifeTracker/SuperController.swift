@@ -415,7 +415,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func userDidSelectLogout() {
-        // INSERT LOGOUT CODE HERE
+        UserAuthService.sharedInstance.handleLogOut()
+        ProjectManager.sharedInstance.handleLogOut()
+        EthogramManager.sharedInstance.handleLogOut()
         
         // Move back to start page
         self.dismissViewControllerAnimated(false, completion: nil)
