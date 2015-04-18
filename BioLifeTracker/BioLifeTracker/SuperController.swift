@@ -25,6 +25,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     var currentSession: Session? = nil
     
     override func viewDidLoad() {
+        // Load data
+        UserAuthService.sharedInstance.useDefaultUser()
         //setupForDemo()
         
         setupSplitView()
@@ -274,7 +276,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showFocalSessionPage(session: Session) {
-        let vc = FocalSessionViewController()
+        let vc = FocalSessionViewController(nibName: "FocalSessionView", bundle: nil)
         
         vc.delegate = self
         vc.title = session.name
