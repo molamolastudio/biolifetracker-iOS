@@ -101,15 +101,18 @@ class ProjectManager: NSObject, Storable {
         let dir = dirs![0]
         let path = dir.stringByAppendingPathComponent("Existing projects of" + identifier)
         
-        // Delete the file and see if it was successful
-        var error: NSError?
-        let success :Bool = NSFileManager.defaultManager().removeItemAtPath(path, error: &error)
-        
-        if error != nil {
-            println(error)
+        let fileManager = NSFileManager.defaultManager()
+        if fileManager.fileExistsAtPath(path) {
+            // Delete the file and see if it was successful
+            var error: NSError?
+            let success = fileManager.removeItemAtPath(path, error: &error)
+            if error != nil {
+                println(error)
+            }
+            return success;
+        } else {
+            return true
         }
-        
-        return success;
     }
     
     required init(coder aDecoder: NSCoder) {

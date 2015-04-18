@@ -101,15 +101,18 @@ class EthogramManager: NSObject, Storable {
         let dir = dirs![0]
         let path = dir.stringByAppendingPathComponent("Existing ethograms of" + identifier)
         
-        // Delete the file and see if it was successful
-        var error: NSError?
-        let success :Bool = NSFileManager.defaultManager().removeItemAtPath(path, error: &error)
-        
-        if error != nil {
-            println(error)
+        let fileManager = NSFileManager.defaultManager()
+        if fileManager.fileExistsAtPath(path) {
+            // Delete the file and see if it was successful
+            var error: NSError?
+            let success = fileManager.removeItemAtPath(path, error: &error)
+            if error != nil {
+                println(error)
+            }
+            return success;
+        } else {
+            return true // nothing to clear
         }
-        
-        return success;
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -131,7 +134,7 @@ class EthogramManager: NSObject, Storable {
     
     func handleLogOut() {
         // Please do anything to manage user data here
-        EthogramManager.deleteFromArchives(String(UserAuthService.sharedInstance.user.id))
+        EthogramManager.deleteFromArchives(String(UserAuthService.sharedInstance.user.toString()))
     }
 }
 
