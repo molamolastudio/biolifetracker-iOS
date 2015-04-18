@@ -28,29 +28,10 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         setupFacebookLoginButton()
         setupGoogleLoginButton()
         
-        // If user is logged in, move to super vc immediately
-        if trySilentAuthentication() {
-            showSuperVC()
-            UserAuthService.sharedInstance.initialiseManagers()
-        }
-        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        // If user is logged in
-        if UserAuthService.sharedInstance.hasAccessToken() {
-            view.hidden = true
-            showSuperVC()
-        } else {
-            view.hidden = false
-        }
-    }
-    
-    func trySilentAuthentication() -> Bool {
-        var isSignedIn = false
-        return UserAuthService.sharedInstance.hasAccessToken()
     }
     
     func setupFacebookLoginButton() {
