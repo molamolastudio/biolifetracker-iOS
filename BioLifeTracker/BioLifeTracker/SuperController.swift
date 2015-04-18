@@ -25,9 +25,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     var currentSession: Session? = nil
     
     override func viewDidLoad() {
-        // Load data
-        //UserAuthService.sharedInstance.useDefaultUser()
-        //setupForDemo()
         
         setupSplitView()
     }
@@ -36,7 +33,10 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         super.viewDidAppear(animated)
         
         showStartPage()
-        //setupForDemo()
+        
+        if UserAuthService.sharedInstance.user.email != "Default" {
+            setupForDemo()
+        }
     }
     
     // Closes the master view of the split view.
@@ -138,6 +138,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
         ProjectManager.sharedInstance.saveToArchives()
         EthogramManager.sharedInstance.saveToArchives()
+        
+        println(UserAuthService.sharedInstance.user.id)
     }
     
     // Setup methods
