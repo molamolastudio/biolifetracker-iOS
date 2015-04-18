@@ -25,6 +25,7 @@ class NotificationService {
     /// Schedules notification for the next 24 hours.
     func sessionHasStarted(session: Session) {
         if session.interval == nil { return }
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
         
         let sessionExpiryTime = NSDate().dateByAddingTimeInterval(
             NSTimeInterval(1440) // 24 hours * 60 minutes per hour
