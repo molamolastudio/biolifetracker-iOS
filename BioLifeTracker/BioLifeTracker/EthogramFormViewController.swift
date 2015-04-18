@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EthogramFormViewController: UITableViewController {
+class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
     
     let nameCellIdentifier = "SingleLineTextCell"
     let stateCellIdentifier = "BehaviourStateCell"
@@ -93,6 +93,7 @@ class EthogramFormViewController: UITableViewController {
     func getCellForSecondSection(indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier(stateCellIdentifier) as! BehaviourStateCell
         let textField = cell.textField
+        textField.delegate = self
         
         if ethogram.behaviourStates.count > indexPath.row {
             textField.text = ethogram.behaviourStates[indexPath.row].name
@@ -104,6 +105,8 @@ class EthogramFormViewController: UITableViewController {
             textField.removeTarget(self, action: Selector("textFieldDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
             textField.addTarget(self, action: Selector("extraRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
         }
+        
+        textField.tag = indexPath.row
         textField.userInteractionEnabled = true
         cell.button.hidden = true
         return cell
@@ -215,6 +218,21 @@ class EthogramFormViewController: UITableViewController {
                 }
             }
         }
+    }
+    
+    // UITextFieldDelegate methods
+    // After user presses enter key, call the methods to update the behaviour states.
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField.text != "" {
+            let cell = textField.superview! as! BehaviourStateCell
+            if isExtraRow(textField.tag) {
+                addButtonPressed(cell.button)
+            } else {
+                editButtonPressed(cell.button)
+            }
+            return true
+        }
+        return false
     }
     
     // HELPER METHODS

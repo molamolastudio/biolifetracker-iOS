@@ -37,6 +37,11 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         getData()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        showObservationAtIndex(NSIndexPath(forRow: 0, inSection: 0))
+    }
+    
     func setupCollectionViews() {
         animalsView.dataSource = self
         animalsView.delegate = self
@@ -127,6 +132,18 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
                 }
             }
         }
+        
+        // Toggle visibility of arrows
+        if selectedIndex == 0 {
+            leftArrow.hidden = true
+            rightArrow.hidden = false
+        } else if selectedIndex == observations.count - 1 {
+            leftArrow.hidden = false
+            rightArrow.hidden = true
+        } else {
+            leftArrow.hidden = false
+            rightArrow.hidden = false
+        }
     }
     
     func showStateAsSelected(selectedIndex: Int) {
@@ -136,7 +153,6 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
                 if i == selectedIndex {
                     statesView.cellForItemAtIndexPath(index)!.backgroundColor = statesSelectedColor
                 } else {
-                    println(index)
                     statesView.cellForItemAtIndexPath(index)!.backgroundColor = statesDefaultColor
                 }
             }
@@ -161,11 +177,13 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     @IBAction func leftArrowPressed(sender: UIButton) {
-        
+        selectedObservation = selectedObservation - 1
+        showObservationAtIndex(NSIndexPath(forRow: selectedObservation, inSection: 0))
     }
     
     @IBAction func rightArrowPressed(sender: UIButton) {
-        
+        selectedObservation = selectedObservation + 1
+        showObservationAtIndex(NSIndexPath(forRow: selectedObservation, inSection: 0))
     }
     
 }
