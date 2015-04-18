@@ -89,6 +89,7 @@ class UserAuthService {
             let user = self.getCurrentUserFromServer()
             assert(user != nil, "Token is not accepted by server")
             self._user = user!
+            self.trySaveTokenToDisk()
         })
     }
     
@@ -96,6 +97,12 @@ class UserAuthService {
     /// will deduce the currently logged in user from the access token sent in
     /// HTTP Header. If the token is not accepted, this function will return nil.
     func getCurrentUserFromServer() -> User? {
+        if _accessToken == nil {
+            tryLoadTokenFromDisk()
+        }
+        if _accessToken == nil {
+            return nil
+        }
         let destinationUrl = NSURL(string: Constants.WebServer.serverUrl)!
             .URLByAppendingPathComponent("auth")
             .URLByAppendingPathComponent("current_user")
@@ -104,10 +111,44 @@ class UserAuthService {
         assert(responseData != nil, "No response from server")
         let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)
         assert(responseDictionary != nil, "Error parsing JSON")
-        if responseDictionary!["id"] == nil {
-            return nil
-        } else {
+        if let id = responseDictionary!["id"] as? Int {
             return User(dictionary: responseDictionary!)
+        } else {
+            return nil
         }
     }
+    
+    func handleLogOut() {
+        deleteTokenFromDisk()
+    }
+    
+    private func trySaveTokenToDisk() {
+        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        if let token = _accessToken {
+            if let dir = dirs?[0] {
+                let path = dir.stringByAppendingPathComponent("servertoken")
+                let success = token.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding)
+            }
+        }
+    }
+    
+    private func tryLoadTokenFromDisk() {
+        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        if let dir = dirs?[0] {
+            let path = dir.stringByAppendingPathComponent("servertoken")
+            if let token = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil) {
+                _accessToken = token as String
+            }
+        }
+    }
+    
+    private func deleteTokenFromDisk() {
+        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        if let dir = dirs?[0] {
+            let path = dir.stringByAppendingPathComponent("servertoken")
+            let fileManager = NSFileManager.defaultManager()
+            fileManager.removeItemAtPath(path, error: nil)
+        }
+    }
+    
 }

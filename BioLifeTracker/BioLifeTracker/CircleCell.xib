@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CircleCell" customModule="BioLifeTracker" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O4f-ug-Nnv">
+                    <rect key="frame" x="2" y="2" width="596" height="596"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="O4f-ug-Nnv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="2" id="7lC-cD-mCe"/>
+                <constraint firstAttribute="trailing" secondItem="O4f-ug-Nnv" secondAttribute="trailing" constant="2" id="Fiq-I8-BIX"/>
+                <constraint firstItem="O4f-ug-Nnv" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="2" id="Ref-gC-fh7"/>
+                <constraint firstAttribute="bottom" secondItem="O4f-ug-Nnv" secondAttribute="bottom" constant="2" id="h5Q-oB-0sB"/>
+            </constraints>
+            <connections>
+                <outlet property="label" destination="O4f-ug-Nnv" id="5ho-XZ-xzT"/>
+            </connections>
+        </view>
+    </objects>
+</document>

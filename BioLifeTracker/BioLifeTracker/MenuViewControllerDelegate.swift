@@ -11,13 +11,9 @@ import Foundation
 protocol MenuViewControllerDelegate {
     func userDidSelectProjects()
     func userDidSelectEthograms()
-    func userDidSelectGraphs()
-    func userDidSelectData()
+    func userDidSelectAnalysis()
     func userDidSelectSettings()
-    func userDidSelectFacebookLogin()
-    func userDidSelectGoogleLogin()
     func userDidSelectLogout()
     func userDidSelectSessions(project: Project)
     func userDidSelectIndividuals(project: Project)
-    func userDidSelectObservations(project: Project, session: Session)
 }

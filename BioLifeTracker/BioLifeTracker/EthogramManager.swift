@@ -110,6 +110,10 @@ class EthogramManager: NSObject, Storable {
         }
         super.init()
     }
+    
+    func handleLogOut() {
+        // Please do anything to manage user data here
+    }
 }
 
 extension EthogramManager: NSCoding {

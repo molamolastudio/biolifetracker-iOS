@@ -14,11 +14,9 @@ class MenuViewController: UITableViewController {
     
     let cellReuseIdentifier = "SingleLineTextCell"
     
-    let homeSection = ["Home"]
     let projectSection = ["Projects", "Ethograms", "Analyse"]
     let settingsSection = ["Settings"]
-    let socialSectionLoggedIn = ["Email", "Logout"]
-    let socialSectionLoggedOut = ["Google+ Login", "Facebook Login"]
+    let socialSectionLoggedIn = ["Logout"]
     
     var user: User = UserAuthService.sharedInstance.user
     
@@ -38,23 +36,15 @@ class MenuViewController: UITableViewController {
         
         switch indexPath.section {
         case 0:
-            cell.label.text = homeSection[indexPath.row]
-            break
-        case 1:
             cell.label.text = projectSection[indexPath.row]
             break
-        case 2:
+        case 1:
             cell.label.text = settingsSection[indexPath.row]
             break
-        case 3:
-            if loggedIn {
-                cell.label.text = socialSectionLoggedIn[indexPath.row]
-                if indexPath.row == 0 {
-                    cell.textField.text = user.name + "@gmail.com"
-                }
-            } else {
-                cell.label.text = socialSectionLoggedOut[indexPath.row]
-            }
+        case 2:
+            
+            cell.label.text = socialSectionLoggedIn[indexPath.row]
+            
             break
         default:
             break
@@ -68,7 +58,7 @@ class MenuViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if delegate != nil {
             switch indexPath.section {
-            case 1:
+            case 0:
                 switch indexPath.row {
                 case 0:
                     delegate!.userDidSelectProjects()
@@ -77,21 +67,16 @@ class MenuViewController: UITableViewController {
                     delegate!.userDidSelectEthograms()
                     break
                 case 2:
-                    delegate!.userDidSelectGraphs()
-                    break
-                case 3:
-                    delegate!.userDidSelectData()
+                    delegate!.userDidSelectAnalysis()
                     break
                 default:
                     break
                 }
-            case 2:
+            case 1:
                 delegate!.userDidSelectSettings()
                 break
-            case 3:
-                if indexPath.row == 1 {
-                    delegate!.userDidSelectLogout()
-                }
+            case 2:
+                delegate!.userDidSelectLogout()
                 break
             default:
                 break
@@ -100,23 +85,17 @@ class MenuViewController: UITableViewController {
     }
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 4
+        return 3
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return homeSection.count
-        case 1:
             return projectSection.count
-        case 2:
+        case 1:
             return settingsSection.count
-        case 3:
-            if loggedIn {
-                return socialSectionLoggedIn.count
-            } else {
-                return socialSectionLoggedOut.count
-            }
+        case 2:
+            return socialSectionLoggedIn.count
         default:
             return 0
         }

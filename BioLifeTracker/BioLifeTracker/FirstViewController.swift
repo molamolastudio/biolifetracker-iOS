@@ -9,38 +9,12 @@
 import UIKit
 
 class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
-    var delegate: FirstViewControllerDelegate? = nil
-    
-    @IBOutlet weak var displayProject: UILabel!
-    @IBOutlet weak var displaySession: UILabel!
-    @IBOutlet weak var displaySessionTitle: UILabel!
-    @IBOutlet weak var btnCreateProject: UIButton!
-    @IBOutlet weak var btnCreateSession: UIButton!
 
     @IBOutlet weak var btnLogin: FBLoginView!
     @IBOutlet weak var btnLoginGoogle: GPPSignInButton!
-    
-    
-    @IBAction func projectBtnPressed(sender: UIButton) {
-        if delegate != nil {
-            delegate!.userDidSelectCreateProjectButton()
-        }
-    }
 
-    @IBAction func sessionBtnPressed(sender: UIButton) {
-        if delegate != nil {
-            delegate!.userDidSelectCreateSessionButton()
-        }
-    }
-
-    // IMPORTANT CHANGE TO SIGN OUT NAME
-    @IBAction func btnLoginGoogle(sender: UIButton) {
-        println("pressed")
-        signIn!.signOut()
-    }
-    
     var signIn: GPPSignIn?
-
+    
     var isSignedIn = false
     
     let labelCreateSession = "Create A Session"
@@ -52,11 +26,35 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Facebook login
+        setupFacebookLoginButton()
+        setupGoogleLoginButton()
+        
+        // If user is logged in, move to super vc immediately
+        
+        
+        //        println(UserAuthService.sharedInstance.user.name)
+        //        println(UserAuthService.sharedInstance.user.email)
+        //        println(UserAuthService.sharedInstance.accessToken)
+
+        //       signIn?.trySilentAuthentication()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if isSignedIn {
+            view.hidden = true
+            showSuperVC()
+        } else {
+            view.hidden = false
+        }
+    }
+    
+    func setupFacebookLoginButton() {
         self.btnLogin.delegate = self
         self.btnLogin.readPermissions = ["public_profile", "email", "user_friends"]
-        
-        // Google plus
+    }
+    
+    func setupGoogleLoginButton() {
         signIn = GPPSignIn.sharedInstance()
         signIn?.shouldFetchGooglePlusUser = true
         signIn?.shouldFetchGoogleUserID = true
@@ -64,55 +62,21 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         signIn?.clientID = "47253329705-c8p8oqi7j036p5lakqia2jl3v3j1np2g.apps.googleusercontent.com"
         signIn?.scopes = ["profile", "email"]
         signIn?.delegate = self
-
-//        println(UserAuthService.sharedInstance.user.name)
-//        println(UserAuthService.sharedInstance.user.email)
-//        println(UserAuthService.sharedInstance.accessToken)
-
- //       signIn?.trySilentAuthentication()
-        
-        refreshView()
-    }
-
-    // Changes the visibility of UI elements based on state variables.
-    func refreshView() {
-        
-        // May need to change due to button having log in and log out function
- /*       if Data.isLoggedIn {
-            btnLogin.hidden = true
-        } else {
-            btnLogin.hidden = false
-        } */
-        
-        // There is a project currently selected
-        if let project = Data.selectedProject {
-            displayProject.text = project.getDisplayName()
-            showSessionSection()
-            
-            if let session = Data.selectedSession {
-                displaySession.text = session.getDisplayName()
-                btnCreateSession.titleLabel!.text = labelStartTracking
-            } else {
-                displaySession.text = messageNoSessions
-                btnCreateSession.titleLabel!.text = labelCreateSession
-            }
-        } else {
-            // Else, show the appropriate text.
-            displayProject.text = messageNoProjects
-            hideSessionSection()
-        }
     }
     
-    func showSessionSection() {
-        displaySessionTitle.hidden = false
-        displaySession.hidden = false
-        btnCreateSession.hidden = false
+    // IMPORTANT CHANGE TO SIGN OUT NAME
+    @IBAction func btnLoginGoogle(sender: UIButton) {
+        println("pressed")
+        signIn!.signOut()
     }
     
-    func hideSessionSection() {
-        displaySessionTitle.hidden = true
-        displaySession.hidden = true
-        btnCreateSession.hidden = true
+    @IBAction func showSuperVC(sender: AnyObject) {
+        showSuperVC()
+    }
+    
+    func showSuperVC() {
+        let vc = SuperController()
+        presentViewController(vc, animated: false, completion: nil)
     }
     
     // Facebook Delegate Methods
