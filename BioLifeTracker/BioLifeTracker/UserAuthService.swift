@@ -89,6 +89,7 @@ class UserAuthService {
             let user = self.getCurrentUserFromServer()
             assert(user != nil, "Token is not accepted by server")
             self._user = user!
+            self.trySaveTokenToDisk()
         })
     }
     
@@ -96,6 +97,12 @@ class UserAuthService {
     /// will deduce the currently logged in user from the access token sent in
     /// HTTP Header. If the token is not accepted, this function will return nil.
     func getCurrentUserFromServer() -> User? {
+        if _accessToken == nil {
+            tryLoadTokenFromDisk()
+        }
+        if _accessToken == nil {
+            return nil
+        }
         let destinationUrl = NSURL(string: Constants.WebServer.serverUrl)!
             .URLByAppendingPathComponent("auth")
             .URLByAppendingPathComponent("current_user")
@@ -110,4 +117,25 @@ class UserAuthService {
             return nil
         }
     }
+    
+    func trySaveTokenToDisk() {
+        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        if let token = _accessToken {
+            if let dir = dirs?[0] {
+                let path = dir.stringByAppendingPathComponent("servertoken")
+                let success = token.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding)
+            }
+        }
+    }
+    
+    func tryLoadTokenFromDisk() {
+        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        if let dir = dirs?[0] {
+            let path = dir.stringByAppendingPathComponent("servertoken")
+            if let token = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil) {
+                _accessToken = token as String
+            }
+        }
+    }
+    
 }
