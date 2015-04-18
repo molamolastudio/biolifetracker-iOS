@@ -82,7 +82,7 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         println("User Logged In")
-        btnLoginGoogle.hidden = true
+        showSuperVC()
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
@@ -106,9 +106,9 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
         if error == nil {
+            println("User Logged In")
             UserAuthService.sharedInstance.loginToServerUsingGoogleToken(auth.accessToken)
-            btnLogin.hidden = true
-            btnLoginGoogle.hidden = true
+            showSuperVC()
         } else {
             println("Error: \(error)")
         }
