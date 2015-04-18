@@ -40,12 +40,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         splitVC.view.frame = self.view.frame
         
         showStartPage()
-        println(ProjectManager.sharedInstance.projects.count)
-        println(EthogramManager.sharedInstance.ethograms.count)
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(true)
     }
     
     func setupForDemo() {
@@ -395,11 +389,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         showEthogramsPage()
     }
     
-    func userDidSelectGraphs() {
-        
-    }
-    
-    func userDidSelectData() {
+    func userDidSelectAnalysis() {
         
     }
     
@@ -407,16 +397,11 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
     }
     
-    func userDidSelectFacebookLogin() {
-        // user logs in through facebook
-    }
-    
-    func userDidSelectGoogleLogin() {
-        // user logs in through google
-    }
-    
     func userDidSelectLogout() {
-        // logout
+        // INSERT LOGOUT CODE HERE
+        
+        // Move back to start page
+        //self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func userDidSelectSessions(project: Project) {
@@ -424,19 +409,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func userDidSelectIndividuals(project: Project) {
-        
-    }
-    
-    func userDidSelectObservations(project: Project, session: Session) {
-        
-    }
-    
-    // FirstViewControllerDelegate methods
-    func userDidSelectCreateProjectButton() {
-        showNewProjectPage()
-    }
-    
-    func userDidSelectCreateSessionButton() {
         
     }
     

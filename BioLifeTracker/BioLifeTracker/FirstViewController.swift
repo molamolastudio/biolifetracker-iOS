@@ -26,11 +26,34 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Facebook login
+        setupFacebookLoginButton()
+        setupGoogleLoginButton()
+        
+        // If user is logged in, move to super vc immediately
+        
+        
+        //        println(UserAuthService.sharedInstance.user.name)
+        //        println(UserAuthService.sharedInstance.user.email)
+        //        println(UserAuthService.sharedInstance.accessToken)
+
+        //       signIn?.trySilentAuthentication()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // If user is logged in
+        //if UserAuthService.sharedInstance.getCurrentUserFromServer() != nil {
+        // showSuperVC()
+        //}
+    }
+    
+    func setupFacebookLoginButton() {
         self.btnLogin.delegate = self
         self.btnLogin.readPermissions = ["public_profile", "email", "user_friends"]
-        
-        // Google plus
+    }
+    
+    func setupGoogleLoginButton() {
         signIn = GPPSignIn.sharedInstance()
         signIn?.shouldFetchGooglePlusUser = true
         signIn?.shouldFetchGoogleUserID = true
@@ -38,12 +61,6 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         signIn?.clientID = "47253329705-c8p8oqi7j036p5lakqia2jl3v3j1np2g.apps.googleusercontent.com"
         signIn?.scopes = ["profile", "email"]
         signIn?.delegate = self
-
-//        println(UserAuthService.sharedInstance.user.name)
-//        println(UserAuthService.sharedInstance.user.email)
-//        println(UserAuthService.sharedInstance.accessToken)
-
- //       signIn?.trySilentAuthentication()
     }
     
     // IMPORTANT CHANGE TO SIGN OUT NAME
@@ -53,7 +70,12 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     }
     
     @IBAction func showSuperVC(sender: AnyObject) {
+        showSuperVC()
+    }
+    
+    func showSuperVC() {
         let vc = SuperController()
+        vc.modalPresentationStyle = .FullScreen
         presentViewController(vc, animated: true, completion: nil)
     }
     
