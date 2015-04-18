@@ -62,9 +62,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if url.absoluteString!.hasSuffix(".bltproject") {
             incomingFileUrl = url
             var deserializer = BLTProjectDeserializer()
-            let decodedProject = deserializer.process(url)
-            ProjectManager.sharedInstance.addProject(decodedProject)
-            initialViewController?.showProjectsPage()
+            if let decodedProject = deserializer.process(url) {
+                ProjectManager.sharedInstance.addProject(decodedProject)
+                initialViewController?.showProjectsPage()
+            } else {
+                // display message to user that import has failed
+            }
             return true
         }
         return false

@@ -45,7 +45,9 @@ class BLTProjectDeserializer {
     /// Otherwise, returns nil.
     func readFromJsonAsDictionary(data: NSData) -> NSDictionary? {
         var readingError: NSError?
-        var dictionary = NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions(0), error: &readingError) as? NSDictionary
+        var dictionary = NSJSONSerialization.JSONObjectWithData(data,
+            options: NSJSONReadingOptions(0),
+            error: &readingError) as? NSDictionary
         if readingError != nil {
             NSLog("JSON Reading Error: %@", readingError!.localizedDescription)
             return nil
