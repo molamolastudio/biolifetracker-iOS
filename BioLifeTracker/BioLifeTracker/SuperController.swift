@@ -433,19 +433,21 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     // MenuViewDelegate methods
     func userDidSelectProjects() {
+        dismissMenuView()
         showProjectsPage()
     }
     
     func userDidSelectEthograms() {
+        dismissMenuView()
         showEthogramsPage()
     }
     
     func userDidSelectAnalysis() {
-        
+        dismissMenuView()
     }
     
     func userDidSelectSettings() {
-        
+        dismissMenuView()
     }
     
     func userDidSelectLogout() {
@@ -458,11 +460,11 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func userDidSelectSessions(project: Project) {
-        
+        dismissMenuView()
     }
     
     func userDidSelectIndividuals(project: Project) {
-        
+        dismissMenuView()
     }
     
     // ProjectsViewControllerDelegate methods
