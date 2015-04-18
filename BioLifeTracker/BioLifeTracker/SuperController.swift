@@ -138,8 +138,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
         ProjectManager.sharedInstance.saveToArchives()
         EthogramManager.sharedInstance.saveToArchives()
-        
-        println(UserAuthService.sharedInstance.user.id)
     }
     
     // Setup methods
@@ -175,6 +173,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func showStartPage() {
         // If user is logged in
         if UserAuthService.sharedInstance.hasAccessToken() {
+            UserAuthService.sharedInstance.initialiseManagers()
             showProjectsPage()
         } else {
             showLoginPage()
