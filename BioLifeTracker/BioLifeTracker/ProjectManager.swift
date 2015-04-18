@@ -91,7 +91,25 @@ class ProjectManager: NSObject, Storable {
     
     class func deleteFromArchives(identifier: String) -> Bool {
         // Cannot delete user projects
-        return false
+        let dirs: [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        
+        if (dirs == nil) {
+            return false
+        }
+        
+        // documents directory
+        let dir = dirs![0]
+        let path = dir.stringByAppendingPathComponent("Existing projects of" + identifier)
+        
+        // Delete the file and see if it was successful
+        var error: NSError?
+        let success :Bool = NSFileManager.defaultManager().removeItemAtPath(path, error: &error)
+        
+        if error != nil {
+            println(error)
+        }
+        
+        return success;
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -113,6 +131,7 @@ class ProjectManager: NSObject, Storable {
     
     func handleLogOut() {
         // Please do anything to manage user data here
+        ProjectManager.deleteFromArchives(UserAuthService.sharedInstance.user.toString())
     }
 }
 

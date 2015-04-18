@@ -12,6 +12,14 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
+    func trySilentAuthentication() -> Bool {
+        var isSignedIn = false
+        
+        UserAuthService.sharedInstance.getCurrentUserFromServer()
+        
+        return !(UserAuthService.sharedInstance.user == User(name: "Default", email: "Default"))
+    }
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -21,6 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         initialViewController.title = "Home"
         
         // load user here
+        if trySilentAuthentication() {
+            let vc = SuperController()
+            window!.rootViewController = vc
+        }
         
         window!.rootViewController = initialViewController
         window!.makeKeyAndVisible()

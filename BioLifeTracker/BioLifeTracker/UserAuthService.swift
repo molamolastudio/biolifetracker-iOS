@@ -36,11 +36,11 @@ class UserAuthService {
         initialiseManagers()
     }
     
-    func setUserAuth(user: User, accessToken: String) {
-        self._user = user
-        self._accessToken = accessToken
-        initialiseManagers()
-    }
+//    func setUserAuth(user: User, accessToken: String) {
+//        self._user = user
+//        self._accessToken = accessToken
+//        initialiseManagers()
+//    }
     
     private func initialiseManagers() {
         let loadedProjectMng = ProjectManager.loadFromArchives(UserAuthService.sharedInstance.user.toString()) as! ProjectManager?
@@ -86,23 +86,20 @@ class UserAuthService {
             let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)!
             let serverToken = responseDictionary["key"] as! String
             self._accessToken = serverToken
-            let user = self.getCurrentUserFromServer()
-            assert(user != nil, "Token is not accepted by server")
-            self._user = user!
-            self.trySaveTokenToDisk()
+            self.getCurrentUserFromServer()
+            let user = self.user
+            assert(user != User(name: "Default", email: "Default"), "Token is not accepted by server")
         })
     }
     
     /// Gets the currently logged in user information from server. The server
     /// will deduce the currently logged in user from the access token sent in
     /// HTTP Header. If the token is not accepted, this function will return nil.
-    func getCurrentUserFromServer() -> User? {
+    func getCurrentUserFromServer() {
         if _accessToken == nil {
             tryLoadTokenFromDisk()
         }
-        if _accessToken == nil {
-            return nil
-        }
+
         let destinationUrl = NSURL(string: Constants.WebServer.serverUrl)!
             .URLByAppendingPathComponent("auth")
             .URLByAppendingPathComponent("current_user")
@@ -112,9 +109,9 @@ class UserAuthService {
         let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)
         assert(responseDictionary != nil, "Error parsing JSON")
         if let id = responseDictionary!["id"] as? Int {
-            return User(dictionary: responseDictionary!)
-        } else {
-            return nil
+            self._user = User(dictionary: responseDictionary!)
+            self.trySaveTokenToDisk()
+            self.initialiseManagers()
         }
     }
     
