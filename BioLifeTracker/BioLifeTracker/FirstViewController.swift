@@ -41,11 +41,12 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
-        // If user is logged in
-        //if UserAuthService.sharedInstance.getCurrentUserFromServer() != nil {
-        // showSuperVC()
-        //}
+        if isSignedIn {
+            view.hidden = true
+            showSuperVC()
+        } else {
+            view.hidden = false
+        }
     }
     
     func setupFacebookLoginButton() {
@@ -75,7 +76,7 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     
     func showSuperVC() {
         let vc = SuperController()
-        presentViewController(vc, animated: true, completion: nil)
+        presentViewController(vc, animated: false, completion: nil)
     }
     
     // Facebook Delegate Methods

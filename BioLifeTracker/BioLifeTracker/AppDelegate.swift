@@ -23,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // load user here
         
         window!.rootViewController = initialViewController
+        
         window!.makeKeyAndVisible()
 
         return true
