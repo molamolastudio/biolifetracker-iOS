@@ -22,12 +22,14 @@ class Session: BiolifeModel {
     private var _typeValue: String
     private var _observations: [Observation]
     private var _individuals: [Individual]
+    private var _interval: Int?
     
     var type: SessionType { return SessionType(rawValue: _typeValue)! }
     var name: String { get { return _name } }
     var project: Project { get { return _project } }
     var observations: [Observation] { get { return _observations } }
     var individuals: [Individual] { get { return _individuals } }
+    var interval: Int? { get { return _interval } }
     
     init(project: Project, name: String, type: SessionType) {
         self._name = name
@@ -154,6 +156,11 @@ class Session: BiolifeModel {
         for index in individualIndexes {
             self._individuals.removeAtIndex(index)
         }
+        updateSession()
+    }
+
+    func setInterval(interval: Int?) {
+        _interval = interval
         updateSession()
     }
     

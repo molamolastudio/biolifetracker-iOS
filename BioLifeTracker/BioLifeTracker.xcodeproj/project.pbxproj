@@ -31,6 +31,7 @@
 		242C6E071AC80F050024ECEF /* BiolifeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242C6E061AC80F050024ECEF /* BiolifeModel.swift */; };
 		242C6E091AC86BFD0024ECEF /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242C6E081AC86BFD0024ECEF /* Tag.swift */; };
 		2439AABA1AC7DC7900389195 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2439AAB91AC7DC7900389195 /* FacebookSDK.framework */; };
+		24842FAE1AE1E9520071D395 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24842FAD1AE1E9520071D395 /* NotificationService.swift */; };
 		248464841ADA481F0001C5E3 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248464831ADA481F0001C5E3 /* Photo.swift */; };
 		2486AB3F1AD64C3A00573618 /* DownloadTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2486AB3E1AD64C3A00573618 /* DownloadTaskTests.swift */; };
 		2486AB411AD64C7D00573618 /* UploadTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2486AB401AD64C7D00573618 /* UploadTaskTests.swift */; };
@@ -201,6 +202,7 @@
 		2439AAB91AC7DC7900389195 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = BioLifeTracker/FacebookSDK.framework; sourceTree = "<group>"; };
 		2439AABE1AC7DD8900389195 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		244BB57F1AD4656C004EC65F /* BiolifeDateFormatter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiolifeDateFormatter.swift; sourceTree = "<group>"; };
+		24842FAD1AE1E9520071D395 /* NotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		248464831ADA481F0001C5E3 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		2486AB3E1AD64C3A00573618 /* DownloadTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTaskTests.swift; sourceTree = "<group>"; };
 		2486AB401AD64C7D00573618 /* UploadTaskTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadTaskTests.swift; sourceTree = "<group>"; };
@@ -618,6 +620,7 @@
 			isa = PBXGroup;
 			children = (
 				ACDCC0F01ACD05E1001590B8 /* UserAuthService.swift */,
+				24842FAD1AE1E9520071D395 /* NotificationService.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -799,6 +802,7 @@
 				329B29391AD15BBF007ADC65 /* FormPopupDelegate.swift in Sources */,
 				248464841ADA481F0001C5E3 /* Photo.swift in Sources */,
 				326773B71ACAEFB000899745 /* CustomPickerPopup.swift in Sources */,
+				24842FAE1AE1E9520071D395 /* NotificationService.swift in Sources */,
 				32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */,
 				240FEF051AD60ACF000FD9F3 /* BiolifeDateFormatter.swift in Sources */,
 				32423B831ADF768600AFA2F8 /* BehaviourStateCell.swift in Sources */,
