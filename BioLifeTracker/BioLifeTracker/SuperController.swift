@@ -401,7 +401,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         // INSERT LOGOUT CODE HERE
         
         // Move back to start page
-        //self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func userDidSelectSessions(project: Project) {

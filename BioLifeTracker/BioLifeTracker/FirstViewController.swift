@@ -14,7 +14,7 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     @IBOutlet weak var btnLoginGoogle: GPPSignInButton!
 
     var signIn: GPPSignIn?
-
+    
     var isSignedIn = false
     
     let labelCreateSession = "Create A Session"
@@ -75,7 +75,6 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     
     func showSuperVC() {
         let vc = SuperController()
-        vc.modalPresentationStyle = .FullScreen
         presentViewController(vc, animated: true, completion: nil)
     }
     
