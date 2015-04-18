@@ -15,7 +15,6 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
 
     var signIn: GPPSignIn?
     
-    var isSignedIn = false
     
     let labelCreateSession = "Create A Session"
     let labelStartTracking = "Start Tracking"
@@ -79,31 +78,35 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     }
     
     func showSuperVC() {
-        self.dismissViewControllerAnimated(false, completion: nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    // Facebook Delegate Methods
+    
+    
+    // FACEBOOK METHODS
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
-        println("User Logged In")
-        showSuperVC()
+        // this method is called before loginViewFetchedUserInfo
+        // do nothing
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
-        isSignedIn = true
         let userAuth = UserAuthService.sharedInstance
-        userAuth.loginToServerUsingFacebookToken(FBSession.activeSession().accessTokenData.accessToken)
+        userAuth.loginToServerUsingFacebookToken(
+            FBSession.activeSession().accessTokenData.accessToken,
+            onCompletion: showSuperVC)
     }
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
-        isSignedIn = false
     }
     
     func loginView(loginView : FBLoginView!, handleError:NSError) {
         println("Error: \(handleError.localizedDescription)")
     }
     
-    // Google Plus Sign in
+    
+    
+    // GOOGLE PLUS METHODS
     func refreshInterfaceBasedOnSignIn() {
 
     }
@@ -111,8 +114,9 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
         if error == nil {
             println("User Logged In")
-            UserAuthService.sharedInstance.loginToServerUsingGoogleToken(auth.accessToken)
-            showSuperVC()
+            UserAuthService.sharedInstance.loginToServerUsingGoogleToken(
+                auth.accessToken,
+                onCompletion: showSuperVC)
         } else {
             println("Error: \(error)")
         }

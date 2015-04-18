@@ -61,15 +61,21 @@ class UserAuthService {
     
     /// Login to server using Facebook token asynchronously.
     /// Will set user and accessToken upon successful login.
-    func loginToServerUsingFacebookToken(facebookToken: String) {
-        loginToServerWithSocialLogin("facebook", withToken: facebookToken)
+    func loginToServerUsingFacebookToken(
+        facebookToken: String,
+        onCompletion: (() -> ())?) {
+            
+        loginToServerWithSocialLogin("facebook", withToken: facebookToken, onCompletion: onCompletion)
         _authProvider = .Facebook
     }
     
     /// Login to server using Google token asynchronously.
     /// Will set user and accessToken upon successful login.
-    func loginToServerUsingGoogleToken(googleToken: String) {
-        loginToServerWithSocialLogin("google", withToken: googleToken)
+    func loginToServerUsingGoogleToken(
+        googleToken: String,
+        onCompletion: (() -> ())?) {
+            
+        loginToServerWithSocialLogin("google", withToken: googleToken, onCompletion: onCompletion)
         _authProvider = .Google
     }
     
@@ -78,7 +84,11 @@ class UserAuthService {
     /// and the corresponding OAuth token from the specified provider.
     /// Will set _user and _accessToken upon successful login.
     /// This function runs asynchronously on network queue and will immediately return.
-    private func loginToServerWithSocialLogin(provider: String, withToken token: String) {
+    private func loginToServerWithSocialLogin(
+        provider: String,
+        withToken token: String,
+        onCompletion: (() -> ())?) {
+            
         dispatch_async(CloudStorage.networkThread, {
             let destinationUrl = NSURL(string: Constants.WebServer.serverUrl)!
                 .URLByAppendingPathComponent("auth")
@@ -95,6 +105,7 @@ class UserAuthService {
             self.getCurrentUserFromServer()
             let user = self.user
             assert(user != User(name: "Default", email: "Default"), "Token is not accepted by server")
+            onCompletion?()
         })
     }
     

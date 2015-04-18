@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBLoginView.self
         
         let initialViewController = SuperController()
-        
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.rootViewController = initialViewController
         
         window!.makeKeyAndVisible()
