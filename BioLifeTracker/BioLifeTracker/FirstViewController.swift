@@ -92,10 +92,7 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     }
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
-        // TODO: Make facebook login button hidden
-        
         isSignedIn = false
-        println("User Logged Out")
     }
     
     func loginView(loginView : FBLoginView!, handleError:NSError) {

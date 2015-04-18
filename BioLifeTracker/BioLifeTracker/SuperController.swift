@@ -457,6 +457,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         EthogramManager.sharedInstance.handleLogOut()
         UserAuthService.sharedInstance.handleLogOut()
         
+        GPPSignIn.sharedInstance().signOut()
+        FBSession.activeSession().close()
+        
         // Move back to start page
         self.dismissViewControllerAnimated(false, completion: nil)
     }
