@@ -104,10 +104,10 @@ class UserAuthService {
         assert(responseData != nil, "No response from server")
         let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)
         assert(responseDictionary != nil, "Error parsing JSON")
-        if responseDictionary!["id"] == nil {
-            return nil
-        } else {
+        if let id = responseDictionary!["id"] as? Int {
             return User(dictionary: responseDictionary!)
+        } else {
+            return nil
         }
     }
 }
