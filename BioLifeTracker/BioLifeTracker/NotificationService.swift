@@ -25,11 +25,13 @@ class NotificationService {
     /// Schedules notification for the next 24 hours.
     func sessionHasStarted(session: Session) {
         if session.interval == nil { return }
+        UIApplication.sharedApplication().cancelAllLocalNotifications()
         
         let sessionExpiryTime = NSDate().dateByAddingTimeInterval(
             NSTimeInterval(1440) // 24 hours * 60 minutes per hour
         )
         var notificationTime: NSDate
+        var counter = 0
         do {
             notificationTime = NSDate().dateByAddingTimeInterval(
                 NSTimeInterval(session.interval!)
@@ -43,7 +45,8 @@ class NotificationService {
             notification.soundName = UILocalNotificationDefaultSoundName
             notification.applicationIconBadgeNumber = 1
             UIApplication.sharedApplication().scheduleLocalNotification(notification)
-        } while sessionExpiryTime.timeIntervalSinceDate(notificationTime) > 0
+            counter++
+        } while counter < 128 && sessionExpiryTime.timeIntervalSinceDate(notificationTime) > 0
     }
     
     /// Cancels all notifications.
