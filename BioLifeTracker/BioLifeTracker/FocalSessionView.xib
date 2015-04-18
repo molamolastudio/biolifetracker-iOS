@@ -18,26 +18,48 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ZOj-xJ-iln">
-                    <rect key="frame" x="0.0" y="8" width="300" height="592"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="15" y="45" width="278" height="540"/>
                 </tableView>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Cdt-ag-g9n">
-                    <rect key="frame" x="300" y="8" width="300" height="592"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="50" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Cdt-ag-g9n">
+                    <rect key="frame" x="308" y="45" width="277" height="540"/>
                 </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INDIVIDUALS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lXf-iC-BLP">
+                    <rect key="frame" x="15" y="23" width="88" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OBSERVATIONS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BkB-pZ-XPA">
+                    <rect key="frame" x="308" y="23" width="107" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <constraints>
+                <constraint firstItem="ZOj-xJ-iln" firstAttribute="top" secondItem="lXf-iC-BLP" secondAttribute="bottom" constant="5" id="11z-X9-Ut8"/>
                 <constraint firstItem="ZOj-xJ-iln" firstAttribute="bottom" secondItem="Cdt-ag-g9n" secondAttribute="bottom" id="2RV-zs-y9O"/>
-                <constraint firstItem="ZOj-xJ-iln" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="Brx-pZ-Vsz"/>
+                <constraint firstItem="lXf-iC-BLP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="2uW-26-P9L"/>
+                <constraint firstItem="BkB-pZ-XPA" firstAttribute="leading" secondItem="Cdt-ag-g9n" secondAttribute="leading" id="C0b-Kh-iuW"/>
                 <constraint firstItem="Cdt-ag-g9n" firstAttribute="width" secondItem="ZOj-xJ-iln" secondAttribute="width" id="D55-qu-ese"/>
-                <constraint firstItem="ZOj-xJ-iln" firstAttribute="trailing" secondItem="Cdt-ag-g9n" secondAttribute="leading" id="Rw2-Z1-kfK"/>
-                <constraint firstAttribute="bottom" secondItem="ZOj-xJ-iln" secondAttribute="bottom" id="U1l-8u-W2e"/>
-                <constraint firstItem="ZOj-xJ-iln" firstAttribute="top" secondItem="Cdt-ag-g9n" secondAttribute="top" id="bOA-N3-Sks"/>
-                <constraint firstItem="ZOj-xJ-iln" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="f4Q-qz-ZLG"/>
+                <constraint firstItem="Cdt-ag-g9n" firstAttribute="leading" secondItem="ZOj-xJ-iln" secondAttribute="trailing" constant="15" id="Rw2-Z1-kfK"/>
+                <constraint firstAttribute="bottom" secondItem="ZOj-xJ-iln" secondAttribute="bottom" constant="15" id="U1l-8u-W2e"/>
+                <constraint firstItem="lXf-iC-BLP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" constant="15" id="cez-Br-tcM"/>
+                <constraint firstItem="BkB-pZ-XPA" firstAttribute="bottom" secondItem="lXf-iC-BLP" secondAttribute="bottom" id="fxM-M1-YJP"/>
                 <constraint firstItem="Cdt-ag-g9n" firstAttribute="height" secondItem="ZOj-xJ-iln" secondAttribute="height" id="jzl-0M-DWQ"/>
-                <constraint firstAttribute="trailing" secondItem="Cdt-ag-g9n" secondAttribute="trailing" id="oJv-X8-MRJ"/>
+                <constraint firstItem="BkB-pZ-XPA" firstAttribute="top" secondItem="lXf-iC-BLP" secondAttribute="top" id="kO6-hK-20g"/>
+                <constraint firstAttribute="trailing" secondItem="Cdt-ag-g9n" secondAttribute="trailing" constant="15" id="oJv-X8-MRJ"/>
+                <constraint firstItem="ZOj-xJ-iln" firstAttribute="top" secondItem="Cdt-ag-g9n" secondAttribute="top" id="oaq-Wi-0a9"/>
+                <constraint firstItem="lXf-iC-BLP" firstAttribute="leading" secondItem="ZOj-xJ-iln" secondAttribute="leading" id="rna-Rq-N3l"/>
             </constraints>
         </view>
+        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="h4M-3S-g7d">
+            <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <state key="normal" title="Button">
+                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+            </state>
+        </button>
     </objects>
 </document>

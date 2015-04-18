@@ -15,7 +15,6 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     @IBOutlet weak var rightTableView: UITableView!
     
     let cellReuseIdentifier = "SubtitleTableCell"
-    let cellHeight: CGFloat = 50
     
     let numSections = 1
     
@@ -30,8 +29,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        leftTableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
-        rightTableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
+        
+        setupTableViews()
         
         // Sets up the date formatter for converting dates to strings
         formatter.dateStyle = NSDateFormatterStyle.LongStyle
@@ -44,6 +43,29 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
             individuals.append(i.label)
             individualObservations[i.label] = currentSession!.getAllObservationsForIndividual(i)
         }
+    }
+    
+    func setupTableViews() {
+        leftTableView.dataSource = self
+        leftTableView.delegate = self
+        
+        rightTableView.dataSource = self
+        rightTableView.delegate = self
+        
+        
+        leftTableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
+        rightTableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
+        
+        // Sets the table views to display under the navigation bar
+        self.edgesForExtendedLayout = UIRectEdge.None
+        self.extendedLayoutIncludesOpaqueBars = false
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+        // Sets the rounded corners for the table views
+        leftTableView.layer.cornerRadius = 8;
+        leftTableView.layer.masksToBounds = true;
+        rightTableView.layer.cornerRadius = 8;
+        rightTableView.layer.masksToBounds = true;
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS
@@ -88,10 +110,6 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return numSections
-    }
-    
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return cellHeight
     }
 }
 
