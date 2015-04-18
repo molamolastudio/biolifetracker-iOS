@@ -19,16 +19,15 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     let menu = MenuViewController(style: UITableViewStyle.Grouped)
     
-    let ethogramPickerValues = ["Ethogram 1", "Ethogram 2"]
-    
     let popup = CustomPickerPopup()
     
     var currentProject: Project? = nil
     var currentSession: Session? = nil
     
     override func viewDidLoad() {
-        UserAuthService.sharedInstance.useDefaultUser()
-        //setupForDemo()
+        // Load data
+        //UserAuthService.sharedInstance.useDefaultUser()
+        setupForDemo()
         
         setupMenu()
         
@@ -41,6 +40,12 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         splitVC.view.frame = self.view.frame
         
         showStartPage()
+        println(ProjectManager.sharedInstance.projects.count)
+        println(EthogramManager.sharedInstance.ethograms.count)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(true)
     }
     
     func setupForDemo() {
@@ -130,9 +135,12 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         session4.addObservation([observation20, observation21])
         
         project.addSessions([session1, session2, session3, session4])
+        
         ProjectManager.sharedInstance.addProject(project)
+        EthogramManager.sharedInstance.addEthogram(ethogram)
         
         ProjectManager.sharedInstance.saveToArchives()
+        EthogramManager.sharedInstance.saveToArchives()
     }
     
     // Setup methods
@@ -294,9 +302,14 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     // Methods for creating form data
     func getFormDataForNewProject() -> FormFieldData {
+        var ethogramNames = [String]()
+        for e in EthogramManager.sharedInstance.ethograms {
+            ethogramNames.append(e.name)
+        }
+        
         let data = FormFieldData(sections: 2)
         data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
-        data.addPickerCell(section: 0, label: "Ethogram", pickerValues: ethogramPickerValues, isCustomPicker: true)
+        data.addPickerCell(section: 0, label: "Ethogram", pickerValues: ethogramNames, isCustomPicker: true)
         data.setSectionTitle(1, title: "Members")
         data.addTextCell(section: 1, label: "Enter Member Here", hasSingleLine: true) // To be decided
         return data

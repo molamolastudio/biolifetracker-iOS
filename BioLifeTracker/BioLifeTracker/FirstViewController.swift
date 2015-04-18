@@ -9,30 +9,10 @@
 import UIKit
 
 class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
-    var delegate: FirstViewControllerDelegate? = nil
 
     @IBOutlet weak var btnLogin: FBLoginView!
     @IBOutlet weak var btnLoginGoogle: GPPSignInButton!
-    
-    
-    @IBAction func projectBtnPressed(sender: UIButton) {
-        if delegate != nil {
-            delegate!.userDidSelectCreateProjectButton()
-        }
-    }
 
-    @IBAction func sessionBtnPressed(sender: UIButton) {
-        if delegate != nil {
-            delegate!.userDidSelectCreateSessionButton()
-        }
-    }
-
-    // IMPORTANT CHANGE TO SIGN OUT NAME
-    @IBAction func btnLoginGoogle(sender: UIButton) {
-        println("pressed")
-        signIn!.signOut()
-    }
-    
     var signIn: GPPSignIn?
 
     var isSignedIn = false
@@ -64,49 +44,17 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
 //        println(UserAuthService.sharedInstance.accessToken)
 
  //       signIn?.trySilentAuthentication()
-        
-        refreshView()
-    }
-
-    // Changes the visibility of UI elements based on state variables.
-    func refreshView() {
-        
-        // May need to change due to button having log in and log out function
- /*       if Data.isLoggedIn {
-            btnLogin.hidden = true
-        } else {
-            btnLogin.hidden = false
-        } */
-        
-        // There is a project currently selected
-        if let project = Data.selectedProject {
-            displayProject.text = project.getDisplayName()
-            showSessionSection()
-            
-            if let session = Data.selectedSession {
-                displaySession.text = session.getDisplayName()
-                btnCreateSession.titleLabel!.text = labelStartTracking
-            } else {
-                displaySession.text = messageNoSessions
-                btnCreateSession.titleLabel!.text = labelCreateSession
-            }
-        } else {
-            // Else, show the appropriate text.
-            displayProject.text = messageNoProjects
-            hideSessionSection()
-        }
     }
     
-    func showSessionSection() {
-        displaySessionTitle.hidden = false
-        displaySession.hidden = false
-        btnCreateSession.hidden = false
+    // IMPORTANT CHANGE TO SIGN OUT NAME
+    @IBAction func btnLoginGoogle(sender: UIButton) {
+        println("pressed")
+        signIn!.signOut()
     }
     
-    func hideSessionSection() {
-        displaySessionTitle.hidden = true
-        displaySession.hidden = true
-        btnCreateSession.hidden = true
+    @IBAction func showSuperVC(sender: AnyObject) {
+        let vc = SuperController()
+        presentViewController(vc, animated: true, completion: nil)
     }
     
     // Facebook Delegate Methods

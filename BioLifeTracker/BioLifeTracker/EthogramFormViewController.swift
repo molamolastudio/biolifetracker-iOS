@@ -170,6 +170,16 @@ class EthogramFormViewController: UITableViewController {
         refreshView()
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if isFirstSection(indexPath.section) {
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! SingleLineTextCell
+            cell.textField.becomeFirstResponder()
+        } else {
+            let cell = tableView.cellForRowAtIndexPath(indexPath) as! BehaviourStateCell
+            cell.textField.becomeFirstResponder()
+        }
+    }
+    
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sectionTitles[section]
     }
