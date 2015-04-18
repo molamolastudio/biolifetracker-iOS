@@ -47,10 +47,7 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     
     func trySilentAuthentication() -> Bool {
         var isSignedIn = false
-        
-        UserAuthService.sharedInstance.getCurrentUserFromServer()
-        
-        return UserAuthService.sharedInstance.user.email != "Default"
+        return UserAuthService.sharedInstance.hasAccessToken()
     }
     
     func setupFacebookLoginButton() {

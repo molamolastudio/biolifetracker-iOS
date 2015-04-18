@@ -48,7 +48,7 @@ class UserAuthService {
     }
     
     private func initialiseManagers() {
-        let loadedProjectMng = ProjectManager.loadFromArchives(String(UserAuthService.sharedInstance.user.id)) as! ProjectManager?
+        let loadedProjectMng = ProjectManager.loadFromArchives(UserAuthService.sharedInstance.user.toString()) as? ProjectManager
         if loadedProjectMng != nil {
             ProjectManager.sharedInstance.updateProjects(loadedProjectMng!.projects)
         }
@@ -88,7 +88,7 @@ class UserAuthService {
             postDictionary.setValue(token, forKey: "access_token")
             let postData = CloudStorage.dictionaryToJsonData(postDictionary)
             let responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "POST", withPayload: postData)
-            assert(responseData != nil, "The server rejects the \(provider) token. This shouldn't happen.")
+            if responseData == nil { return }
             let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)!
             let serverToken = responseDictionary["key"] as! String
             self._accessToken = serverToken
@@ -104,7 +104,7 @@ class UserAuthService {
     /// HTTP Header. If the token is not accepted, this function will return nil.
     private func getCurrentUserFromServer() {
         dispatch_async(CloudStorage.networkThread, {
-            if self._accessToken == nil {
+            if self.accessToken == nil {
                 self.tryLoadTokenFromDisk()
             }
             let destinationUrl = NSURL(string: Constants.WebServer.serverUrl)!
@@ -133,6 +133,9 @@ class UserAuthService {
             if let dir = dirs?[0] {
                 let path = dir.stringByAppendingPathComponent("servertoken")
                 let success = token.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding)
+                if success {
+                    saveUserToDisk()
+                }
             }
         }
     }
@@ -142,7 +145,10 @@ class UserAuthService {
         if let dir = dirs?[0] {
             let path = dir.stringByAppendingPathComponent("servertoken")
             if let token = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil) {
-                _accessToken = token as String
+                let userDataIsAvailable = loadUserFromDisk()
+                if userDataIsAvailable {
+                    _accessToken = token as String
+                }
             }
         }
     }
@@ -151,6 +157,44 @@ class UserAuthService {
         let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
         if let dir = dirs?[0] {
             let path = dir.stringByAppendingPathComponent("servertoken")
+            let fileManager = NSFileManager.defaultManager()
+            if fileManager.fileExistsAtPath(path) {
+                let success = fileManager.removeItemAtPath(path, error: nil)
+                if success {
+                    deleteUserFromDisk()
+                }
+            }
+        }
+    }
+    
+    private func saveUserToDisk() {
+        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        
+        if let dir = dirs?[0] {
+            let path = dir.stringByAppendingPathComponent("current_user")
+            let success = NSKeyedArchiver.archiveRootObject(user, toFile: path)
+        }
+    }
+    
+    private func loadUserFromDisk() -> Bool {
+        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        if let dir = dirs?[0] {
+            let path = dir.stringByAppendingPathComponent("current_user")
+            let user = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? User
+            if user == nil {
+                return false
+            } else {
+                _user = user!
+                return true
+            }
+        }
+        return false
+    }
+    
+    private func deleteUserFromDisk() {
+        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        if let dir = dirs?[0] {
+            let path = dir.stringByAppendingPathComponent("current_user")
             let fileManager = NSFileManager.defaultManager()
             if fileManager.fileExistsAtPath(path) {
                 let success = fileManager.removeItemAtPath(path, error: nil)

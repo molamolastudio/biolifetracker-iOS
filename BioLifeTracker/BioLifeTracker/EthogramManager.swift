@@ -84,7 +84,7 @@ class EthogramManager: NSObject, Storable {
         }
         
         let archiver = NSKeyedUnarchiver(forReadingWithData: data!)
-        var ethogramManager = archiver.decodeObjectForKey("ethograms") as! EthogramManager?
+        var ethogramManager = archiver.decodeObjectForKey("ethograms") as? EthogramManager
 
         return ethogramManager
     }

@@ -19,6 +19,7 @@ class DeleteTask: CloudStorageTask {
     var description: String {
         return "DeleteTask for \(item.classUrl) : \(item.id)"
     }
+    var completedSuccessfully: Bool?
     
     init(item: CloudStorable) {
         self.item = item
@@ -32,9 +33,13 @@ class DeleteTask: CloudStorageTask {
                 .URLByAppendingPathComponent(String(id))
                 .URLByAppendingSlash()
             let responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "DELETE", withPayload: nil)
-            item.setId(nil)
-            item.unlock()
-            assert(responseData != nil)
+            if responseData == nil {
+                completedSuccessfully = false
+            } else {
+                completedSuccessfully = true
+                item.setId(nil)
+                item.unlock()
+            }
         }
     }
 }

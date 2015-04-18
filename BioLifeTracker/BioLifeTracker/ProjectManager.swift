@@ -84,7 +84,7 @@ class ProjectManager: NSObject, Storable {
         }
         
         let archiver = NSKeyedUnarchiver(forReadingWithData: data!)
-        var projectManager = archiver.decodeObjectForKey("projects") as! ProjectManager?
+        var projectManager = archiver.decodeObjectForKey("projects") as? ProjectManager
         
         return projectManager
     }
