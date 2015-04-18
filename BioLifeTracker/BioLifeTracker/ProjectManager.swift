@@ -39,7 +39,15 @@ class ProjectManager: NSObject, Storable {
     }
     
     func removeProjects(indexes: [Int]) {
-        for index in indexes {
+        var decreasingIndexes = sorted(indexes) { $0 > $1 } // sort indexes in non-increasing order
+        var prev = -1
+        for (var i = 0; i < decreasingIndexes.count; i++) {
+            let index = decreasingIndexes[i]
+            if prev == index {
+                continue;
+            } else {
+                prev = index
+            }
             self._projects.removeAtIndex(index)
         }
     }

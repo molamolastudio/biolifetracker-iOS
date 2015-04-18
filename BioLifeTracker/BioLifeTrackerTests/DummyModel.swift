@@ -22,7 +22,7 @@ class DummyModel: BiolifeModel {
         super.init()
     }
 
-    override required init(dictionary: NSDictionary) {
+    required init(dictionary: NSDictionary) {
         let dateFormatter = BiolifeDateFormatter()
         
         dateProperty = dateFormatter.getDate(dictionary["dateProperty"] as! String)
@@ -31,7 +31,7 @@ class DummyModel: BiolifeModel {
         stringProperty = dictionary["stringProperty"] as! String
         friends = DummyModel.retrieveFriends(dictionary["friends"] as! [Int])
         
-        super.init(dictionary: dictionary)
+        super.init(dictionary: dictionary, recursive: false)
     }
     
     required init(coder decoder: NSCoder) {
