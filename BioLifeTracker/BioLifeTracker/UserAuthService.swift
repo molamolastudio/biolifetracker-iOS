@@ -136,6 +136,8 @@ class UserAuthService {
     
     func handleLogOut() {
         deleteTokenFromDisk()
+        _accessToken = nil
+        _user = User(name: "Default", email: "Default")
     }
     
     private func trySaveTokenToDisk() {

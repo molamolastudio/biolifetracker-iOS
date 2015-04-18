@@ -474,7 +474,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
         // Move back to start page
         dismissMenuView()
-        self.dismissViewControllerAnimated(false, completion: nil)
+        showLoginPage()
     }
     
     func userDidSelectSessions(project: Project) {
