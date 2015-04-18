@@ -458,7 +458,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         UserAuthService.sharedInstance.handleLogOut()
         
         GPPSignIn.sharedInstance().signOut()
-        FBSession.activeSession().close()
+        FBSession.activeSession().closeAndClearTokenInformation()
         
         // Move back to start page
         self.dismissViewControllerAnimated(false, completion: nil)
