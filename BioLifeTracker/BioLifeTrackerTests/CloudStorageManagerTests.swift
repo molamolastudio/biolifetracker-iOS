@@ -37,11 +37,18 @@ class CloudStorageManagerTests: XCTestCase {
         let uploadTask = UploadTask(item: A)
         uploadTask.execute()
         
-        assert(A.id != nil)
-        assert(B.id != nil)
-        assert(C.id != nil)
-        assert(D.id != nil)
-        assert(E.id != nil)
+        XCTAssertTrue(A.id != nil)
+        XCTAssertTrue(B.id != nil)
+        XCTAssertTrue(C.id != nil)
+        XCTAssertTrue(D.id != nil)
+        XCTAssertTrue(E.id != nil)
+        if (A.id == nil ||
+            B.id == nil ||
+            C.id == nil ||
+            D.id == nil ||
+            E.id == nil) {
+            return
+        }
         
         let manager = CloudStorageManager.sharedInstance
         manager.clearCache()

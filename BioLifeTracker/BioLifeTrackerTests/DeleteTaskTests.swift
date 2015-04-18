@@ -24,7 +24,8 @@ class DeleteTaskTests: XCTestCase {
         dummy.optionalStringProperty = "Error if this item persists in server after test"
         let uploadTask = UploadTask(item: dummy)
         uploadTask.execute()
-        assert(dummy.id != nil, "Upload task failed")
+        XCTAssertTrue(dummy.id != nil, "Upload task failed")
+        if dummy.id == nil { return }
         let itemId = dummy.id!
         
         let deleteTask = DeleteTask(item: dummy)
