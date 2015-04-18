@@ -25,21 +25,23 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     var currentSession: Session? = nil
     
     override func viewDidLoad() {
-        // Load data
-        //UserAuthService.sharedInstance.useDefaultUser()
-        setupForDemo()
+        //setupForDemo()
         
-        setupMenu()
-        
-        masterNav.setViewControllers([menu], animated: true)
-        
-        splitVC.viewControllers = [masterNav, detailNav]
-        splitVC.delegate = self
-        
-        self.view.addSubview(splitVC.view)
-        splitVC.view.frame = self.view.frame
+        setupSplitView()
         
         showStartPage()
+    }
+    
+    // Closes the master view of the split view before dismissing self.
+    override func dismissViewControllerAnimated(flag: Bool, completion: (() -> Void)?) {
+        dismissMenuView()
+        super.dismissViewControllerAnimated(flag, completion: completion)
+    }
+    
+    // Closes the master view of the split view.
+    func dismissMenuView() {
+        let barButtonItem = splitVC.displayModeButtonItem()
+        UIApplication.sharedApplication().sendAction(barButtonItem.action, to: barButtonItem.target, from: nil, forEvent: nil)
     }
     
     func setupForDemo() {
@@ -138,6 +140,21 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     // Setup methods
+    func setupSplitView() {
+        setupMenu()
+        
+        masterNav.setViewControllers([menu], animated: true)
+        
+        splitVC.viewControllers = [masterNav, detailNav]
+        splitVC.delegate = self
+        
+        self.view.addSubview(splitVC.view)
+        splitVC.view.frame = self.view.frame
+        
+        self.addChildViewController(splitVC)
+        splitVC.didMoveToParentViewController(self)
+    }
+    
     func setupMenu() {
         menu.title = "BioLifeTracker"
         menu.delegate = self
@@ -401,7 +418,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         // INSERT LOGOUT CODE HERE
         
         // Move back to start page
-        //self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismissViewControllerAnimated(false, completion: nil)
     }
     
     func userDidSelectSessions(project: Project) {
@@ -457,7 +474,4 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func userDidSelectObservation(session: Session, observation: Observation) {
         // Open the Observation View
     }
-    
-    // Methods for managing login
-    
 }
