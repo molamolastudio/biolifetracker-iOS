@@ -56,7 +56,7 @@ class EthogramManager: NSObject, Storable {
         
         if ((dirs) != nil) {
             let dir = dirs![0]; //documents directory
-            let path = dir.stringByAppendingPathComponent("Existing ethograms of" + UserAuthService.sharedInstance.user.toString())
+            let path = dir.stringByAppendingPathComponent("Existing ethograms of" + String(UserAuthService.sharedInstance.user.id))
             
             let data = NSMutableData();
             let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
