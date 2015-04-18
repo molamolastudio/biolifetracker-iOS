@@ -3,18 +3,14 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FirstViewController" customModule="BioLifeTracker">
             <connections>
-                <outlet property="btnCreateProject" destination="IZi-tF-61q" id="WP2-44-w8c"/>
-                <outlet property="btnCreateSession" destination="IVj-Lp-QOO" id="B0C-RR-Mp6"/>
                 <outlet property="btnLogin" destination="6h0-J9-TBw" id="q2c-gq-qXg"/>
                 <outlet property="btnLoginGoogle" destination="eq2-tV-nam" id="cGP-bO-Esk"/>
-                <outlet property="displayProject" destination="l8Y-Gf-Kq2" id="UZk-jp-43v"/>
-                <outlet property="displaySession" destination="V5j-CI-aqJ" id="utK-KE-Itf"/>
-                <outlet property="displaySessionTitle" destination="Nwb-qk-voH" id="6mF-mO-NU9"/>
                 <outlet property="view" destination="iN0-l3-epB" id="2oj-fs-oVZ"/>
             </connections>
         </placeholder>
@@ -23,15 +19,6 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IZi-tF-61q">
-                    <rect key="frame" x="234" y="170" width="133" height="30"/>
-                    <state key="normal" title="Create New Project">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="projectBtnPressed:" destination="-1" eventType="touchUpInside" id="JD7-5w-qfT"/>
-                    </connections>
-                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ufx-lW-NPk">
                     <rect key="frame" x="249" y="433" width="102" height="34"/>
                     <state key="normal" title="Google login">
@@ -41,39 +28,6 @@
                         <action selector="btnLoginGoogle:" destination="-1" eventType="touchUpInside" id="PIx-cW-qfh"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IVj-Lp-QOO">
-                    <rect key="frame" x="231" y="285" width="139" height="30"/>
-                    <state key="normal" title="Create New Session">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="sessionBtnPressed:" destination="-1" eventType="touchUpInside" id="IOw-k0-Cdh"/>
-                    </connections>
-                </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Project:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mnS-jd-SBr">
-                    <rect key="frame" x="246" y="111" width="108" height="18"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Session:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nwb-qk-voH">
-                    <rect key="frame" x="243" y="226" width="114" height="18"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Project Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l8Y-Gf-Kq2">
-                    <rect key="frame" x="248" y="139" width="105" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Session Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5j-CI-aqJ">
-                    <rect key="frame" x="245" y="254" width="111" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6h0-J9-TBw" customClass="FBLoginView">
                     <rect key="frame" x="160" y="482" width="280" height="51"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -102,34 +56,24 @@
                         </mask>
                     </variation>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bio Life Tracker" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="31D-Cx-WIA">
+                    <rect key="frame" x="241" y="150" width="119" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="IVj-Lp-QOO" firstAttribute="top" secondItem="V5j-CI-aqJ" secondAttribute="bottom" constant="10" id="1ye-FG-ez6"/>
-                <constraint firstAttribute="centerX" secondItem="IZi-tF-61q" secondAttribute="centerX" id="6ha-9f-66v"/>
-                <constraint firstItem="IZi-tF-61q" firstAttribute="top" secondItem="l8Y-Gf-Kq2" secondAttribute="bottom" constant="10" id="7nE-5L-fr6"/>
+                <constraint firstItem="31D-Cx-WIA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="centerYWithinMargins" multiplier="0.5" id="3Z3-R0-9dL"/>
                 <constraint firstItem="6h0-J9-TBw" firstAttribute="top" secondItem="eq2-tV-nam" secondAttribute="bottom" constant="15" id="G5s-yS-YhD"/>
-                <constraint firstItem="l8Y-Gf-Kq2" firstAttribute="top" secondItem="mnS-jd-SBr" secondAttribute="bottom" constant="10" id="GGW-CL-TI0"/>
-                <constraint firstItem="mnS-jd-SBr" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="0.4" id="JZR-IW-b0J"/>
                 <constraint firstAttribute="centerX" secondItem="eq2-tV-nam" secondAttribute="centerX" id="RFl-KY-ewG"/>
-                <constraint firstAttribute="centerX" secondItem="V5j-CI-aqJ" secondAttribute="centerX" id="Vdx-SQ-fWq"/>
-                <constraint firstItem="V5j-CI-aqJ" firstAttribute="top" secondItem="Nwb-qk-voH" secondAttribute="bottom" constant="10" id="Xpm-n8-kPT"/>
-                <constraint firstAttribute="centerX" secondItem="IVj-Lp-QOO" secondAttribute="centerX" id="aep-ks-mbK"/>
-                <constraint firstItem="Nwb-qk-voH" firstAttribute="top" secondItem="IZi-tF-61q" secondAttribute="bottom" constant="26.5" id="d4a-Mg-SZ6"/>
-                <constraint firstAttribute="centerX" secondItem="Nwb-qk-voH" secondAttribute="centerX" id="dUl-0R-oDS"/>
-                <constraint firstAttribute="centerX" secondItem="l8Y-Gf-Kq2" secondAttribute="centerX" id="h6o-7G-pdN"/>
                 <constraint firstItem="Ufx-lW-NPk" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="1.5" id="jaU-lu-lFB"/>
                 <constraint firstAttribute="centerX" secondItem="6h0-J9-TBw" secondAttribute="centerX" id="qKC-ih-HjY"/>
-                <constraint firstAttribute="bottom" secondItem="Ufx-lW-NPk" secondAttribute="bottom" constant="70" id="sj1-7a-3qJ"/>
+                <constraint firstAttribute="centerX" secondItem="31D-Cx-WIA" secondAttribute="centerX" id="u9g-pq-nui"/>
                 <constraint firstAttribute="centerX" secondItem="Ufx-lW-NPk" secondAttribute="centerX" id="xXV-un-7zT"/>
                 <constraint firstItem="6h0-J9-TBw" firstAttribute="top" secondItem="Ufx-lW-NPk" secondAttribute="bottom" constant="15" id="ytM-1d-grI"/>
-                <constraint firstAttribute="centerX" secondItem="mnS-jd-SBr" secondAttribute="centerX" id="zYg-Db-KKJ"/>
             </constraints>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="sj1-7a-3qJ"/>
-                </mask>
-            </variation>
         </view>
     </objects>
 </document>

@@ -11,7 +11,7 @@
 
 import UIKit
 
-class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate, FirstViewControllerDelegate, ProjectsViewControllerDelegate, EthogramsViewControllerDelegate, ProjectHomeViewControllerDelegate, ScanSessionViewControllerDelegate, FocalSessionViewControllerDelegate {
+class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate,ProjectsViewControllerDelegate, EthogramsViewControllerDelegate, ProjectHomeViewControllerDelegate, ScanSessionViewControllerDelegate, FocalSessionViewControllerDelegate {
     
     let splitVC = UISplitViewController()
     let masterNav = UINavigationController()

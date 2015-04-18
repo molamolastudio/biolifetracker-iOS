@@ -10,12 +10,6 @@ import UIKit
 
 class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
     var delegate: FirstViewControllerDelegate? = nil
-    
-    @IBOutlet weak var displayProject: UILabel!
-    @IBOutlet weak var displaySession: UILabel!
-    @IBOutlet weak var displaySessionTitle: UILabel!
-    @IBOutlet weak var btnCreateProject: UIButton!
-    @IBOutlet weak var btnCreateSession: UIButton!
 
     @IBOutlet weak var btnLogin: FBLoginView!
     @IBOutlet weak var btnLoginGoogle: GPPSignInButton!
