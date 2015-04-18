@@ -131,7 +131,7 @@ class EthogramManager: NSObject, Storable {
     
     func handleLogOut() {
         // Please do anything to manage user data here
-        EthogramManager.deleteFromArchives(UserAuthService.sharedInstance.user.toString())
+        EthogramManager.deleteFromArchives(String(UserAuthService.sharedInstance.user.id))
     }
 }
 
