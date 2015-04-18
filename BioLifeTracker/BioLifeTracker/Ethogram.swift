@@ -52,7 +52,7 @@ class Ethogram: BiolifeModel, Storable {
     /************Ethogram********************/
     
     func updateName(name: String) {
-        Ethogram.deleteFromArchives(self.name)
+    //    Ethogram.deleteFromArchives(self.name)
         self._name = name
         updateEthogram()
     }
@@ -156,7 +156,7 @@ class Ethogram: BiolifeModel, Storable {
     }
     
     class func deleteFromArchives(identifier: String) -> Bool {
-        
+        let fileManager = NSFileManager.defaultManager()
         let dirs: [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
         
         if (dirs == nil) {
@@ -167,15 +167,17 @@ class Ethogram: BiolifeModel, Storable {
         let dir = dirs![0]
         let path = dir.stringByAppendingPathComponent("Ethogram" + identifier)
         
-        // Delete the file and see if it was successful
-        var error: NSError?
-        let success :Bool = NSFileManager.defaultManager().removeItemAtPath(path, error: &error)
+        if fileManager.fileExistsAtPath(path) {
+            // Delete the file and see if it was successful
+            var error: NSError?
+            let success :Bool = NSFileManager.defaultManager().removeItemAtPath(path, error: &error)
         
-        if error != nil {
-            println(error)
+            if error != nil {
+                println(error)
+            }
+            return success
         }
-        
-        return success;
+        return false
     }
     
     class func ethogramWithId(id: Int) -> Ethogram {
