@@ -34,10 +34,10 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         showStartPage()
     }
     
-    // Closes the master view of the split view before dismissing self.
-    override func dismissViewControllerAnimated(flag: Bool, completion: (() -> Void)?) {
+    // Closes the master view of the split view before this view disappears.
+    override func viewWillDisappear(animated: Bool) {
         dismissMenuView()
-        super.dismissViewControllerAnimated(flag, completion: completion)
+        super.viewWillDisappear(animated)
     }
     
     // Closes the master view of the split view.
@@ -152,9 +152,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
         self.view.addSubview(splitVC.view)
         splitVC.view.frame = self.view.frame
-        
-        self.addChildViewController(splitVC)
-        splitVC.didMoveToParentViewController(self)
     }
     
     func setupMenu() {
@@ -218,13 +215,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showEthogramsPage() {
-        for n in EthogramManager.sharedInstance.ethograms {
-            println(n.name)
-        }
-        if Data.selectedEthogram != nil {
-            println(Data.selectedEthogram!)
-        }
-        
         let vc = EthogramsViewController()
         
         vc.delegate = self
@@ -250,12 +240,20 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func showEthogramDetailsPage() {
         let vc = EthogramFormViewController()
         
+        vc.title = Data.selectedEthogram!.name
         vc.ethogram = Data.selectedEthogram!
         
-        var createBtn = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showEthogramsPage"))
+        var createBtn = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("dismissCurrentPage"))
         vc.navigationItem.rightBarButtonItem = createBtn
         
         detailNav.pushViewController(vc, animated: true)
+    }
+    
+    func dismissCurrentPage() {
+        // Do not allow dismissal if only one view controller is left.
+        if detailNav.viewControllers.count > 1 {
+            detailNav.popViewControllerAnimated(true)
+        }
     }
     
     func showNewSessionPage() {
@@ -469,7 +467,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     // ProjectsViewControllerDelegate methods
     func userDidSelectProject(selectedProject: Project) {
-        println(selectedProject.name)
         currentProject = selectedProject
         showProjectHomePage()
     }

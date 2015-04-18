@@ -42,10 +42,6 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
         self.tableView.registerNib(UINib(nibName: nameCellIdentifier, bundle: nil), forCellReuseIdentifier: nameCellIdentifier)
         self.tableView.registerNib(UINib(nibName: stateCellIdentifier, bundle: nil), forCellReuseIdentifier: stateCellIdentifier)
         
-        if ethogram.name != "" { // Is not empty Ethogram
-            self.navigationItem.title = ethogram.name
-        }
-        
         setupAlertController()
     }
     
@@ -63,7 +59,7 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
         if ethogram.name != "" {
             return ethogram
         } else {
-            self.presentViewController(alert, animated: true, completion: nil)
+            presentViewController(alert, animated: true, completion: nil)
             return nil
         }
     }
