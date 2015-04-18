@@ -20,6 +20,7 @@ class UploadTask: CloudStorageTask {
     var serverUrl = NSURL(string: Constants.WebServer.serverUrl)!
     var item: CloudStorable
     var itemStack = [CloudStorable]()
+    var completedSuccessfully: Bool?
     var description: String {
         return "UploadTask for \(item.classUrl) : \(item.id)"
     }
@@ -52,22 +53,24 @@ class UploadTask: CloudStorageTask {
             
             if responseData == nil {
                 NSLog("There is no response from server")
-            }
-            assert(responseData != nil)
-            
-            let responseDictionary = (responseData == nil) ? nil : CloudStorage.readFromJsonAsDictionary(responseData!)
-            
-            if responseDictionary == nil {
-                NSLog("Response dictionary is nil. Cannot set item id.")
             } else {
-                CloudStorage.checkForItemCongruency(dictionary, target: responseDictionary!)
-                let newId = responseDictionary!["id"] as? Int
-                assert(newId != nil, "The server does not return item ID for \(currentItem.classUrl)")
-                currentItem.setId(newId!)
+                let responseDictionary = (responseData == nil) ? nil : CloudStorage.readFromJsonAsDictionary(responseData!)
+                
+                if responseDictionary == nil {
+                    NSLog("Response dictionary is nil. Cannot set item id.")
+                } else {
+                    CloudStorage.checkForItemCongruency(dictionary, target: responseDictionary!)
+                    let newId = responseDictionary!["id"] as? Int
+                    assert(newId != nil, "The server does not return item ID for \(currentItem.classUrl)")
+                    currentItem.setId(newId!)
+                    completedSuccessfully = true
+                }
             }
             
             // Unlock item
             currentItem.unlock()
+            
+            if !(completedSuccessfully == true) { break }
         }
     }
     

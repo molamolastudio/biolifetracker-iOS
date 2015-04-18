@@ -27,6 +27,8 @@ class CloudStorageWorkerTests: XCTestCase {
         var queryResultExpectation = self.expectationWithDescription("Check that the query produces result")
         
         worker.setOnFinished({
+            XCTAssert(task.completedSuccessfully == true)
+            if task.completedSuccessfully != true { return }
             XCTAssertNotEqual(0, task.getResults().count, "We assume there are some dummy objects on server")
             queryResultExpectation.fulfill()
             XCTAssertNotNil(task.getResults()[0]["id"], "Object ID must be present")
@@ -46,6 +48,8 @@ class CloudStorageWorkerTests: XCTestCase {
         let downloadExpectation = self.expectationWithDescription("Check that requested item is downloaded")
         let uploadExpectation = self.expectationWithDescription("Check that item has been uploaded")
         worker.setOnFinished({
+            XCTAssert(downloadTask.completedSuccessfully == true)
+            if downloadTask.completedSuccessfully != true { return }
             XCTAssertNotEqual(0, downloadTask.getResults().count, "Check download task has result")
             XCTAssertEqual(1, downloadTask.getResults()[0]["id"] as! Int, "Check for correct downloaded id")
             downloadExpectation.fulfill()

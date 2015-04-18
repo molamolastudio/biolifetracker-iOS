@@ -463,9 +463,14 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func userDidSelectLogout() {
-        UserAuthService.sharedInstance.handleLogOut()
+        // Log out ProjectManager and EthogramManager first before logging user out
+        // Requires the user info to clear directories
         ProjectManager.sharedInstance.handleLogOut()
         EthogramManager.sharedInstance.handleLogOut()
+        UserAuthService.sharedInstance.handleLogOut()
+        
+        GPPSignIn.sharedInstance().signOut()
+        FBSession.activeSession().closeAndClearTokenInformation()
         
         // Move back to start page
         dismissMenuView()
