@@ -30,14 +30,12 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         //setupForDemo()
         
         setupSplitView()
-        
-        showStartPage()
     }
     
-    // Closes the master view of the split view before this view disappears.
-    override func viewWillDisappear(animated: Bool) {
-        dismissMenuView()
-        super.viewWillDisappear(animated)
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        showStartPage()
     }
     
     // Closes the master view of the split view.
@@ -172,7 +170,19 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     // Methods to show pages
     func showStartPage() {
-        showProjectsPage()
+        // If user is logged in
+        if UserAuthService.sharedInstance.getCurrentUserFromServer() != nil {
+            showProjectsPage()
+        } else {
+            //dismissMenuView()
+            showLoginPage()
+        }
+    }
+    
+    func showLoginPage() {
+        let vc = FirstViewController(nibName: "FirstView", bundle: nil)
+        vc.modalPresentationStyle = .FullScreen
+        self.presentViewController(vc, animated: true, completion: nil)
     }
     
     func showNewProjectPage() {
@@ -458,6 +468,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         EthogramManager.sharedInstance.handleLogOut()
         
         // Move back to start page
+        dismissMenuView()
         self.dismissViewControllerAnimated(false, completion: nil)
     }
     

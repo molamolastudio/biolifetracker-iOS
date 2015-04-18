@@ -17,10 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FBLoginView.self
         
-        let initialViewController = FirstViewController(nibName: "FirstView", bundle: nil)
-        initialViewController.title = "Home"
-        
-        // load user here
+        let initialViewController = SuperController()
         
         window!.rootViewController = initialViewController
         
