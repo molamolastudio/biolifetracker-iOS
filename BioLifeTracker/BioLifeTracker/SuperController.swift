@@ -325,7 +325,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.currentSession = session
         vc.selectedTimestamp = timestamp
         
-        var createBtn = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("saveScanData:"))
+        var createBtn = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("saveScanData"))
         vc.navigationItem.rightBarButtonItem = createBtn
         
         detailNav.pushViewController(vc, animated: true)
@@ -398,6 +398,10 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
                 detailNav.popViewControllerAnimated(true)
             }
         }
+    }
+    
+    func saveScanData() {
+        
     }
     
     func syncProject() {

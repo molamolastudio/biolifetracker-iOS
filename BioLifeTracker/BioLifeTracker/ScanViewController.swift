@@ -76,8 +76,6 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     // UICollectionViewDataSource methods
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        
-        
         if collectionView == animalsView {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(circleCellIdentifier, forIndexPath: indexPath) as! CircleCell
             
@@ -160,10 +158,11 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         if selectedIndex < states.count {
             for i in 0...states.count - 1 {
                 let index = NSIndexPath(forRow: i, inSection: 0)
+                let cell = statesView.cellForItemAtIndexPath(index) as! CircleWithLabelCell
                 if i == selectedIndex {
-                    statesView.cellForItemAtIndexPath(index)!.backgroundColor = statesSelectedColor
+                    cell.circleView.backgroundColor = statesSelectedColor
                 } else {
-                    statesView.cellForItemAtIndexPath(index)!.backgroundColor = statesDefaultColor
+                    cell.circleView.backgroundColor = statesDefaultColor
                 }
             }
         }
