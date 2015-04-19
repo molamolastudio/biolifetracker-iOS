@@ -58,7 +58,14 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         if alert != nil {
             alert!.dismissViewControllerAnimated(true, completion: nil)
         }
-        
+        let userAuthService = UserAuthService.sharedInstance
+        if !userAuthService.hasAccessToken() {
+            let failAlert = UIAlertController(title: "Login Fail", message: "The server rejected your social account login", preferredStyle: .Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            failAlert.addAction(defaultAction)
+            self.presentViewController(failAlert, animated: true, completion: nil)
+            return
+        }
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

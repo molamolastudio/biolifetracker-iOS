@@ -36,7 +36,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         showStartPage()
         
         if UserAuthService.sharedInstance.user.email != "Default" {
-            //setupForDemo()
+            setupForDemo()
         }
     }
     
@@ -532,7 +532,10 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func exportToExcel(sender: UIBarButtonItem) {
-        // ANDHIEKA
+        if let project = currentProject {
+            let exportService = ExportObservationsService(project: project)
+            exportService.openInOtherApps(sender)
+        }
     }
     
     // MenuViewDelegate methods

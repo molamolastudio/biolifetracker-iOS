@@ -64,9 +64,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             var deserializer = BLTProjectDeserializer()
             if let decodedProject = deserializer.process(url) {
                 ProjectManager.sharedInstance.addProject(decodedProject)
-                initialViewController!.showProjectsPage()
+                initialViewController?.showProjectsPage()
             } else {
-                // display message to user that import has failed
+                initialViewController?.showCorruptFileAlert()
             }
             return true
         }
