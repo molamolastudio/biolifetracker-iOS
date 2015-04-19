@@ -249,7 +249,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showEthogramDetailsPage() {
-        let vc = EthogramFormViewController()
+        let vc = EthogramDetailsViewController()
         
         vc.title = Data.selectedEthogram!.name
         vc.ethogram = Data.selectedEthogram!
@@ -464,7 +464,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func updateEditButtonForEthogram() {
-        if let vc = detailNav.visibleViewController as? EthogramFormViewController {
+        if let vc = detailNav.visibleViewController as? EthogramDetailsViewController {
             vc.makeEditable(true)
             var btn = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: Selector("saveEthogramData"))
             vc.navigationItem.rightBarButtonItem = btn
@@ -480,14 +480,16 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func saveEthogramData() {
-        if let vc = detailNav.visibleViewController as? EthogramFormViewController {
+        if let vc = detailNav.visibleViewController as? EthogramDetailsViewController {
             vc.saveData()
+            dismissCurrentPage()
         }
     }
     
     func saveScanData() {
         if let vc = detailNav.visibleViewController as? ScanViewController {
             vc.saveData()
+            dismissCurrentPage()
         }
     }
     

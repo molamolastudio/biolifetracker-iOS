@@ -1,5 +1,5 @@
 //
-//  EthogramFormViewController.swift
+//  EthogramDetailsViewController.swift
 //  BioLifeTracker
 //
 //  Created by Michelle Tan on 11/3/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
+class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate {
     
     let nameCellIdentifier = "SingleLineTextCell"
     let stateCellIdentifier = "BehaviourStateCell"
@@ -31,7 +31,10 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
     let alertTitle = "Incomplete Ethogram"
     let alertMessage = "You must add a name for the ethogram."
     
+    var editable = false
+    
     // Collected data
+    var originalEthogram: Ethogram? = nil
     var ethogram = Ethogram()
     
     override func viewDidLoad() {
@@ -51,17 +54,39 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
         alert.addAction(actionOk)
     }
     
-    func refreshView() {
-        self.tableView.reloadData()
+    func makeEditable(value: Bool) {
+        editable = value
+        refreshView()
     }
     
-    func getEthogram() -> Ethogram? {
-        if ethogram.name != "" {
-            return ethogram
-        } else {
-            presentViewController(alert, animated: true, completion: nil)
-            return nil
+    // Copies the data of the original ethogram into a temporary ethogram for editing.
+    func getData() {
+        if originalEthogram != nil {
+            // Copy over original ethogram
+            ethogram = Ethogram()
+            for s in originalEthogram!.behaviourStates {
+                let state = BehaviourState(name: s.name, information: s.information)
+                ethogram.addBehaviourState(state)
+            }
         }
+    }
+    
+    // Copies over the edited behaviour states into the original ethogram.
+    func saveData() {
+        if originalEthogram != nil {
+            for i in 0...ethogram.behaviourStates.count {
+                if i < originalEthogram!.behaviourStates.count {
+                    originalEthogram!.behaviourStates[i].updateName(ethogram.behaviourStates[i].name)
+                    originalEthogram!.behaviourStates[i].updateInformation(ethogram.behaviourStates[i].name)
+                } else {
+                    originalEthogram!.addBehaviourState(ethogram.behaviourStates[i])
+                }
+            }
+        }
+    }
+    
+    func refreshView() {
+        self.tableView.reloadData()
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS
@@ -76,6 +101,8 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
     // Sets up data in the cells
     func getCellForFirstSection(indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier(nameCellIdentifier) as! SingleLineTextCell
+        
+        cell.textField.userInteractionEnabled = editable
         
         cell.label.text = "Name"
         cell.textField.text = ethogram.name
@@ -96,13 +123,14 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
             textField.removeTarget(self, action: Selector("extraRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
             textField.addTarget(self, action: Selector("textFieldDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
             cell.button.tag = indexPath.row
-
+            
         } else if ethogram.behaviourStates.count == indexPath.row {
             textField.placeholder = messageNewState
             textField.removeTarget(self, action: Selector("textFieldDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
             textField.addTarget(self, action: Selector("extraRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
         }
         
+        textField.userInteractionEnabled = editable
         textField.tag = indexPath.row
         cell.button.hidden = true
         
@@ -184,7 +212,12 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
         if isFirstSection(section) {
             return firstSectionNumRows
         } else {
-            return ethogram.behaviourStates.count + 1
+            // Adds an extra row if this ethogram is editable
+            if editable {
+                return ethogram.behaviourStates.count + 1
+            } else {
+                return ethogram.behaviourStates.count
+            }
         }
     }
     
@@ -194,7 +227,11 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
     
     // For deleting extra behaviour states
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return isSecondSection(indexPath.section) && !isExtraRow(indexPath.row)
+        if editable {
+            return isSecondSection(indexPath.section) && !isExtraRow(indexPath.row)
+        } else {
+            return false
+        }
     }
     
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
@@ -205,7 +242,7 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-
+                
                 if !isExtraRow(indexPath.row) {
                     ethogram.removeBehaviourState(indexPath.row)
                 }
