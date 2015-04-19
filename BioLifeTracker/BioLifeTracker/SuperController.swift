@@ -181,17 +181,23 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showNewProjectPage() {
-        let vc = FormViewController(style: UITableViewStyle.Grouped)
-        
-        vc.title = "New Project"
-        vc.setFormData(getFormDataForNewProject())
-        vc.cellHorizontalPadding = 10
-        vc.roundedCells = true
-        
-        var btn = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("createNewProject"))
-        vc.navigationItem.rightBarButtonItem = btn
-        
-        detailNav.pushViewController(vc, animated: true)
+        // If there are ethograms saved, present the new project page
+        if !EthogramManager.sharedInstance.ethograms.isEmpty {
+            let vc = FormViewController(style: UITableViewStyle.Grouped)
+            
+            vc.title = "New Project"
+            vc.setFormData(getFormDataForNewProject())
+            vc.cellHorizontalPadding = 10
+            vc.roundedCells = true
+            
+            var btn = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("createNewProject"))
+            vc.navigationItem.rightBarButtonItem = btn
+            
+            detailNav.pushViewController(vc, animated: true)
+        } else {
+            // If there are no ethograms saved, display an alert
+            displayAlert("No Ethograms Saved", message: "Please create an ethogram before creating a project.")
+        }
     }
     
     func showProjectsPage() {
@@ -437,7 +443,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         if let vc = detailNav.visibleViewController as? FormViewController {
             let values = vc.getFormData()
             
-            if let name = values[0] as? String {
+            let name = values[0] as! String
+            if name != "" {
                 if let index = values[1] as? Int {
                     let project = Project(name: name, ethogram: EthogramManager.sharedInstance.ethograms[index])
                     
