@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7531" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GraphAnalysisViewController" customModule="BioLifeTracker" customModuleProvider="target">
+            <connections>
+                <outlet property="background" destination="zjg-Pj-9I7" id="Seg-yY-gLz"/>
+                <outlet property="graphSwitch" destination="HmU-Ci-fRo" id="GmF-kU-PzP"/>
+                <outlet property="graphsView" destination="Fwg-BZ-hzn" id="DrF-OU-cSx"/>
+                <outlet property="view" destination="iN0-l3-epB" id="n6s-61-Mhh"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fwg-BZ-hzn">
+                    <rect key="frame" x="20" y="40" width="540" height="360"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVy-Qc-had">
+                    <rect key="frame" x="49" y="496" width="40" height="30"/>
+                    <state key="normal" title="Users">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xkz-gR-Wre">
+                    <rect key="frame" x="152" y="496" width="62" height="30"/>
+                    <state key="normal" title="Sessions">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ag-Zi-E8o">
+                    <rect key="frame" x="277" y="496" width="117" height="30"/>
+                    <state key="normal" title="Behaviour States">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="HmU-Ci-fRo">
+                    <rect key="frame" x="363" y="445" width="197" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="197" id="fcD-Pm-MIC"/>
+                    </constraints>
+                    <segments>
+                        <segment title="Hour"/>
+                        <segment title="Day"/>
+                        <segment title="States"/>
+                    </segments>
+                    <connections>
+                        <action selector="graphIndexChanged:" destination="-1" eventType="valueChanged" id="DZ1-TO-QfP"/>
+                    </connections>
+                </segmentedControl>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zjg-Pj-9I7" userLabel="BG">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="zjg-Pj-9I7" secondAttribute="trailing" id="1KN-We-tVZ"/>
+                <constraint firstItem="Fwg-BZ-hzn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="40" id="4Pz-xk-wCG"/>
+                <constraint firstAttribute="bottom" secondItem="zjg-Pj-9I7" secondAttribute="bottom" id="4r4-K0-Ucq"/>
+                <constraint firstItem="7Ag-Zi-E8o" firstAttribute="leading" secondItem="Xkz-gR-Wre" secondAttribute="trailing" constant="63" id="59N-99-nhZ"/>
+                <constraint firstItem="wVy-Qc-had" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="49" id="8KJ-s0-8wf"/>
+                <constraint firstItem="HmU-Ci-fRo" firstAttribute="trailing" secondItem="Fwg-BZ-hzn" secondAttribute="trailing" id="DpL-rH-0Tn"/>
+                <constraint firstItem="Fwg-BZ-hzn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Ibv-SW-Tzr"/>
+                <constraint firstAttribute="trailing" secondItem="Fwg-BZ-hzn" secondAttribute="trailing" constant="40" id="KCZ-SB-dbU"/>
+                <constraint firstItem="Xkz-gR-Wre" firstAttribute="leading" secondItem="wVy-Qc-had" secondAttribute="trailing" constant="63" id="Qr9-Bp-Mjh"/>
+                <constraint firstAttribute="bottom" secondItem="wVy-Qc-had" secondAttribute="bottom" constant="74" id="XxB-N5-UcR"/>
+                <constraint firstItem="Xkz-gR-Wre" firstAttribute="baseline" secondItem="7Ag-Zi-E8o" secondAttribute="baseline" id="bbz-gS-3Yi"/>
+                <constraint firstItem="zjg-Pj-9I7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="cO7-4Z-tJH"/>
+                <constraint firstItem="zjg-Pj-9I7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="nDH-qR-Zsv"/>
+                <constraint firstItem="wVy-Qc-had" firstAttribute="baseline" secondItem="Xkz-gR-Wre" secondAttribute="baseline" id="riF-41-h23"/>
+                <constraint firstItem="7Ag-Zi-E8o" firstAttribute="top" secondItem="HmU-Ci-fRo" secondAttribute="bottom" constant="23" id="uzj-En-2Co"/>
+                <constraint firstItem="HmU-Ci-fRo" firstAttribute="top" secondItem="Fwg-BZ-hzn" secondAttribute="bottom" constant="45" id="z7p-A7-q3U"/>
+            </constraints>
+            <point key="canvasLocation" x="235" y="244"/>
+        </view>
+    </objects>
+</document>
