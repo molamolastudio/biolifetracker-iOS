@@ -160,14 +160,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showCorruptFileAlert() {
-        let alertTitle = "Save File Corrupt"
-        let alertMessage = "Unable to load save file."
-        
-        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
-        let actionOk = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-        alert.addAction(actionOk)
-        
-        self.presentViewController(alert, animated: true, completion: nil)
+        displayAlert("Save File Corrupt", message: "Unable to load save file.")
     }
     
     // Methods to show pages
@@ -451,7 +444,13 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
                     ProjectManager.sharedInstance.addProject(project)
                     
                     showProjectsPage()
+                } else {
+                    // Show an alert to tell user to select an ethogram
+                    displayAlert("Incomplete Project", message: "Please select an ethogram.")
                 }
+            } else {
+                // Show an alert to tell user to enter a project name
+                displayAlert("Incomplete Project", message: "Please enter a project name.")
             }
         }
     }
@@ -616,5 +615,16 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     // FocalSessionViewControllerDelegate methods
     func userDidSelectObservation(session: Session, observation: Observation) {
         // Open the Observation View
+    }
+    
+    // Helper methods
+    
+    // Displays an alert controller with given title and message, with an OK button.
+    // Dismisses upon pressing the OK button.
+    func displayAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let actionOk = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alert.addAction(actionOk)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 }

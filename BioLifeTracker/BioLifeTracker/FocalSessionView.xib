@@ -54,12 +54,5 @@
                 <constraint firstItem="lXf-iC-BLP" firstAttribute="leading" secondItem="ZOj-xJ-iln" secondAttribute="leading" id="rna-Rq-N3l"/>
             </constraints>
         </view>
-        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="h4M-3S-g7d">
-            <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <state key="normal" title="Button">
-                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-            </state>
-        </button>
     </objects>
 </document>
