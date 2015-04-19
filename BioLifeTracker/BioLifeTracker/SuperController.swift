@@ -218,8 +218,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.title = currentProject!.name
         vc.currentProject = currentProject!
         
-        var createBtn = UIBarButtonItem(title: "Sync", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("syncProject"))
-        vc.navigationItem.rightBarButtonItem = createBtn
+        var exportBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: Selector("exportToExcel"))
+        var syncBtn = UIBarButtonItem(title: "Sync", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("syncProject"))
+        vc.navigationItem.rightBarButtonItems = [exportBtn, syncBtn]
         
         detailNav.pushViewController(vc, animated: true)
     }
@@ -498,6 +499,10 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
         //presentViewController(alert, animated: true, completion: nil)
         //worker.startExecution()
+    }
+    
+    func exportToExcel() {
+        // ANDHIEKA
     }
     
     // MenuViewDelegate methods
