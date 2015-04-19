@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FBLoginView.self
         
-        let initialViewController = SuperController()
+        initialViewController = SuperController()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.rootViewController = initialViewController
         
@@ -64,7 +64,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             var deserializer = BLTProjectDeserializer()
             if let decodedProject = deserializer.process(url) {
                 ProjectManager.sharedInstance.addProject(decodedProject)
-                initialViewController?.showProjectsPage()
+                initialViewController!.showProjectsPage()
             } else {
                 // display message to user that import has failed
             }

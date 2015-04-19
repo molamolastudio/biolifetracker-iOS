@@ -19,17 +19,8 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ufx-lW-NPk">
-                    <rect key="frame" x="249" y="433" width="102" height="34"/>
-                    <state key="normal" title="Google login">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="btnLoginGoogle:" destination="-1" eventType="touchUpInside" id="PIx-cW-qfh"/>
-                    </connections>
-                </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6h0-J9-TBw" customClass="FBLoginView">
-                    <rect key="frame" x="160" y="482" width="280" height="51"/>
+                    <rect key="frame" x="160" y="491" width="280" height="51"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="6h0-J9-TBw" secondAttribute="height" multiplier="2:1" id="2Be-pH-NeU"/>
@@ -43,7 +34,7 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eq2-tV-nam" customClass="GPPSignInButton">
-                    <rect key="frame" x="160" y="416" width="280" height="51"/>
+                    <rect key="frame" x="160" y="425" width="280" height="51"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="51" id="IAD-js-VZr"/>
@@ -75,15 +66,13 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="31D-Cx-WIA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="centerYWithinMargins" multiplier="0.5" id="3Z3-R0-9dL"/>
+                <constraint firstItem="eq2-tV-nam" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="1.5" id="E9V-xf-n4f"/>
                 <constraint firstItem="6h0-J9-TBw" firstAttribute="top" secondItem="eq2-tV-nam" secondAttribute="bottom" constant="15" id="G5s-yS-YhD"/>
                 <constraint firstItem="7Ba-S0-Vvx" firstAttribute="centerX" secondItem="31D-Cx-WIA" secondAttribute="centerX" constant="0.5" id="IYz-UX-3XN"/>
                 <constraint firstAttribute="centerX" secondItem="eq2-tV-nam" secondAttribute="centerX" id="RFl-KY-ewG"/>
                 <constraint firstAttribute="centerY" secondItem="7Ba-S0-Vvx" secondAttribute="centerY" constant="46" id="YXP-5Q-GwG"/>
-                <constraint firstItem="Ufx-lW-NPk" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" multiplier="1.5" id="jaU-lu-lFB"/>
                 <constraint firstAttribute="centerX" secondItem="6h0-J9-TBw" secondAttribute="centerX" id="qKC-ih-HjY"/>
                 <constraint firstAttribute="centerX" secondItem="31D-Cx-WIA" secondAttribute="centerX" id="u9g-pq-nui"/>
-                <constraint firstAttribute="centerX" secondItem="Ufx-lW-NPk" secondAttribute="centerX" id="xXV-un-7zT"/>
-                <constraint firstItem="6h0-J9-TBw" firstAttribute="top" secondItem="Ufx-lW-NPk" secondAttribute="bottom" constant="15" id="ytM-1d-grI"/>
             </constraints>
         </view>
     </objects>

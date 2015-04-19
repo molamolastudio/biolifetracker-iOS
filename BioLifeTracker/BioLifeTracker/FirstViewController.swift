@@ -9,12 +9,11 @@
 import UIKit
 
 class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
-
+    
     @IBOutlet weak var btnLogin: FBLoginView!
     @IBOutlet weak var btnLoginGoogle: GPPSignInButton!
-
-    var signIn: GPPSignIn?
     
+    var signIn: GPPSignIn?
     
     let labelCreateSession = "Create A Session"
     let labelStartTracking = "Start Tracking"
@@ -22,16 +21,18 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     let messageNoProjects = "You don't have any projects."
     let messageNoSessions = "You don't have any sessions."
     
+    var alert: UIAlertController? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupFacebookLoginButton()
         setupGoogleLoginButton()
         
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+        // Set up alert controller
+        let alertTitle = "Loading Your Data"
+        let alertMessage = "Loading..."
+        alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
     }
     
     func setupFacebookLoginButton() {
@@ -49,21 +50,17 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         signIn?.delegate = self
     }
     
-    // IMPORTANT CHANGE TO SIGN OUT NAME
-    @IBAction func btnLoginGoogle(sender: UIButton) {
-        println("pressed")
-        signIn!.signOut()
-    }
-    
     @IBAction func showSuperVC(sender: AnyObject) {
         showSuperVC()
     }
     
     func showSuperVC() {
+        if alert != nil {
+            alert!.dismissViewControllerAnimated(true, completion: nil)
+        }
+        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-    
-    
     
     // FACEBOOK METHODS
     
@@ -73,6 +70,9 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
+        // Show loading alert
+        self.presentViewController(alert!, animated: false, completion: nil)
+        
         let userAuth = UserAuthService.sharedInstance
         userAuth.loginToServerUsingFacebookToken(
             FBSession.activeSession().accessTokenData.accessToken,
@@ -86,16 +86,18 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         println("Error: \(handleError.localizedDescription)")
     }
     
-    
-    
     // GOOGLE PLUS METHODS
     func refreshInterfaceBasedOnSignIn() {
-
+        
     }
     
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
         if error == nil {
             println("User Logged In")
+            
+            // Show loading alert
+            self.presentViewController(alert!, animated: false, completion: nil)
+            
             UserAuthService.sharedInstance.loginToServerUsingGoogleToken(
                 auth.accessToken,
                 onCompletion: showSuperVC)

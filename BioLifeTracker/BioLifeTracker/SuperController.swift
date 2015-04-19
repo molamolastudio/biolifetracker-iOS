@@ -25,7 +25,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     var currentSession: Session? = nil
     
     override func viewDidLoad() {
-        
         setupSplitView()
     }
     
@@ -35,7 +34,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         showStartPage()
         
         if UserAuthService.sharedInstance.user.email != "Default" {
-            setupForDemo()
+            //setupForDemo()
         }
     }
     
