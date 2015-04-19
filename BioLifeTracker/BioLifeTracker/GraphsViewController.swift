@@ -670,30 +670,19 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     func barPlot(plot: CPTBarPlot!, barWasSelectedAtRecordIndex idx: UInt) {
 
         var x = Double(idx) + 0.5
-        if idx == 0 {
-            x = Double(idx) + 0.5
-        }
-        
-        var y = Double(idx)
-        var plotXValue = chosenBehaviourStates[Int(idx)]
         var plotYValue = yMaxStates - numberOfStatesOccurences[Int(idx)]
         
         var plotPoint = [x, Double(plotYValue)]
         
         var pos = plot.plotSpace.plotAreaViewPointForPlotPoint(plotPoint)
-        println(pos.x.description)
-        println(pos.y.description)
 
         var popoverContent = GraphDetailsViewController(nibName: "PopoverLabelView", bundle: nil)
         popoverContent.modalPresentationStyle = UIModalPresentationStyle.Popover
         var popover = popoverContent.popoverPresentationController
-        popoverContent.preferredContentSize = CGSizeMake(100,30)
+        popoverContent.preferredContentSize = CGSizeMake(70,30)
         popover!.delegate = self
         
         var anchorPoint  = plot.graph.convertPoint(CGPointMake(pos.x, pos.y), fromLayer: plot.graph.plotAreaFrame.plotArea)
-        
-        println(anchorPoint.x)
-        println(anchorPoint.y)
         
         var popoverAnchor = CGRectMake(anchorPoint.x, anchorPoint.y, 0, 0)
         popover!.sourceView = self.graphHostingView
@@ -741,61 +730,46 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     
     func scatterPlot(plot: CPTScatterPlot!, plotSymbolWasSelectedAtRecordIndex idx: UInt) {
 
-        if (self.symbolTextAnnotation != nil) {
-            plot.graph.plotAreaFrame.plotArea.removeAllAnnotations()
-            self.symbolTextAnnotation = nil
-            
-        }
-        
-        // Setup a style for the annotation
-        var hitAnnotationTextStyle = CPTMutableTextStyle()
-        hitAnnotationTextStyle.color = CPTColor.redColor()
-        hitAnnotationTextStyle.fontSize = 16.0
-        hitAnnotationTextStyle.fontName = "Helvetica-Bold"
-        
         // Determine point of symbol in plot coordinates
-        var x: NSNumber!
-        var y: NSNumber!
-        var text: String!
+        var x: Double!
+        var y: Double!
+        var final: String!
         switch current {
         case .DayPlot:
-            x = Int(idx) as NSNumber
-            y = x
+            x = Double(idx)
+            y = Double(yMaxDays - numberOfDayOccurences[Int(idx)])
+            final = String(numberOfDayOccurences[Int(idx)])
             
         case .HourPlot:
-            x = Int(idx) as NSNumber
-            y = x
-            
+            x = Double(idx)
+            y = Double(yMaxHours - numberOfHourOccurences[Int(idx)])
+            final = String(numberOfHourOccurences[Int(idx)])
         default:
             break
         }
         
-        var anchorPoint = [x, y]
+//        var pos = plot.plotAreaPointOfVisiblePointAtIndex(idx)
         
-        // Add annotation
+        var plotPoint = [x, y]
         
-        // Now add the annotation to the plot area
+        var pos = plot.plotSpace.plotAreaViewPointForPlotPoint(plotPoint)
         
-        var ystr = String(stringInterpolationSegment: y)
-        text = ystr
+        var popoverContent = GraphDetailsViewController(nibName: "PopoverLabelView", bundle: nil)
+        popoverContent.modalPresentationStyle = UIModalPresentationStyle.Popover
+        var popover = popoverContent.popoverPresentationController
+        popoverContent.preferredContentSize = CGSizeMake(70,30)
+        popover!.delegate = self
         
-        var textLayer = CPTTextLayer(text: text, style: hitAnnotationTextStyle)
-//        var bg = CPTImage(CGImage: UIImage(named: "blah")?.CGImage)
-//        textLayer.paddingLeft   = 2.0;
-//        textLayer.paddingTop    = 2.0;
-//        textLayer.paddingRight  = 2.0;
-//        textLayer.paddingBottom = 2.0;
+        var anchorPoint  = plot.graph.convertPoint(CGPointMake(pos.x, pos.y), fromLayer: plot.graph.plotAreaFrame.plotArea)
         
-        self.symbolTextAnnotation = CPTPlotSpaceAnnotation(plotSpace: plot.graph.plotSpaceAtIndex(idx) , anchorPlotPoint: anchorPoint)
+        var popoverAnchor = CGRectMake(anchorPoint.x, anchorPoint.y, 0, 0)
+        popover!.sourceView = self.graphHostingView
+        popover!.sourceRect = popoverAnchor
+        popover!.permittedArrowDirections = UIPopoverArrowDirection.Up
         
-        self.symbolTextAnnotation.contentLayer = textLayer;
-        //symbolTextAnnotation.contentAnchorPoint = CGPointMake(5, 0)
-        var pos = plot.plotAreaPointOfVisiblePointAtIndex(idx)
-        self.symbolTextAnnotation.displacement = CGPointMake(pos.x, pos.y + 10)
-        
-        
-        plot.graph.plotAreaFrame.plotArea.addAnnotation(symbolTextAnnotation)
-        
+        self.presentViewController(popoverContent, animated: true, completion: nil)
+        popoverContent.setLabelMessage(final)
+        plot.graph.reloadData()
 
     }
     
