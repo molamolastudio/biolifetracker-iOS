@@ -94,7 +94,15 @@ class Session: BiolifeModel {
     }
     
     func removeObservations(observationIndexes: [Int]) {
-        for index in observationIndexes {
+        var decreasingIndexes = sorted(observationIndexes) { $0 > $1 } // sort indexes in non-increasing order
+        var prev = -1
+        for (var i = 0; i < decreasingIndexes.count; i++) {
+            let index = decreasingIndexes[i]
+            if prev == index {
+                continue;
+            } else {
+                prev = index
+            }
             self._observations.removeAtIndex(index)
         }
         updateSession()
@@ -161,7 +169,15 @@ class Session: BiolifeModel {
     }
     
     func removeIndividuals(individualIndexes: [Int]) {
-        for index in individualIndexes {
+        var decreasingIndexes = sorted(individualIndexes) { $0 > $1 } // sort indexes in non-increasing order
+        var prev = -1
+        for (var i = 0; i < decreasingIndexes.count; i++) {
+            let index = decreasingIndexes[i]
+            if prev == index {
+                continue;
+            } else {
+                prev = index
+            }
             self._individuals.removeAtIndex(index)
         }
         updateSession()
