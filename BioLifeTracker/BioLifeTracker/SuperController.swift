@@ -158,8 +158,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showCorruptFileAlert() {
-        let alertTitle = "Save File Corrupt"
-        let alertMessage = "Unable to load save file."
+        let alertTitle = "Incompatible Format"
+        let alertMessage = "Unable to import BioLifeTracker project."
         
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
         let actionOk = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
