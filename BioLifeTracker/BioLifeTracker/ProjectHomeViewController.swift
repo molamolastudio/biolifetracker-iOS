@@ -62,10 +62,15 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func setupGraphView() {
+        // Sets the rounded corners for the graph view
+        graphView.layer.cornerRadius = 8;
+        graphView.layer.masksToBounds = true;
+        
         graphsVC = GraphsViewController(nibName: "GraphsView", bundle: nil)
         //self.addChildViewController(graphsVC)
         graphsVC.setProject(currentProject!)
-        graphsVC.view.frame = self.graphView.frame
+
+        graphsVC.view.frame = CGRectMake(0, 0, graphView.frame.width, graphView.frame.height)
         graphView.addSubview(graphsVC.view)
     }
     

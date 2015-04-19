@@ -34,7 +34,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         showStartPage()
         
         if UserAuthService.sharedInstance.user.email != "Default" {
-            //setupForDemo()
+            setupForDemo()
         }
     }
     
