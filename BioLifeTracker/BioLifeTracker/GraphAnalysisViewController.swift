@@ -35,9 +35,11 @@ class GraphAnalysisViewController:  UIViewController {
     
     func showGraphsView() {
         graphsVC = GraphsViewController(nibName: "GraphsView", bundle: nil)
-        self.addChildViewController(graphsVC)
+        //self.addChildViewController(graphsVC)
         var stub = ProjectStub()
-        graphsVC.projectInstance = stub.project
+        // set graph for now it's stub
+        graphsVC.setProject(stub.project)
+        graphsVC.toggleGraph(.HourPlot)
         graphsVC.view.frame = self.graphsView.frame
         graphsView.addSubview(graphsVC.view)
     }
@@ -47,21 +49,17 @@ class GraphAnalysisViewController:  UIViewController {
         case 0:
             println("hour")
             graphsVC.toggleGraph(.HourPlot)
-            graphsVC.prepareNumberOfOccurances()
-            graphsVC.drawGraph()
         case 1:
             println("day")
             graphsVC.toggleGraph(.DayPlot)
-            graphsVC.prepareNumberOfOccurances()
-            graphsVC.drawGraph()
         case 2:
             println("states")
             graphsVC.toggleGraph(.StateChart)
-            graphsVC.prepareNumberOfOccurances()
-            graphsVC.drawGraph()
         default:
             break
         }
+        
+        graphsVC.updateGraph()
     }
     
     override func didReceiveMemoryWarning() {

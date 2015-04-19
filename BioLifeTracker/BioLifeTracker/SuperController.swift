@@ -351,7 +351,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showAnalysisPage() {
+        let graphs = GraphAnalysisViewController(nibName: "GraphAnalysisView", bundle: nil)
         
+        detailNav.pushViewController(graphs, animated: true)
     }
     
     func clearNavigationStack() {

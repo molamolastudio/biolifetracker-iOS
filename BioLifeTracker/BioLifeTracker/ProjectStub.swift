@@ -25,8 +25,8 @@ class ProjectStub {
     let state5 = BehaviourState(name: "Mating", information: "Something similar to the Pizzaman")
     let state6 = BehaviourState(name: "Fighting", information: "With other humans mostly hunters")
     let state7 = BehaviourState(name: "Possessing", information: "Black/red smoke enters into humans")
-    let state8 = BehaviourState(name: "Possessing", information: "Black/red smoke enters into humans")
-    let state9 = BehaviourState(name: "Possessing", information: "Black/red smoke enters into humans")
+    let state8 = BehaviourState(name: "Watching tv", information: "Black/red smoke enters into humans")
+    let state9 = BehaviourState(name: "Cheese Tasting", information: "Black/red smoke enters into humans")
     let state10 = BehaviourState(name: "Drinking", information: "Black/red smoke enters into humans")
     let state11 = BehaviourState(name: "Meditating", information: "Black/red smoke enters into humans")
     let state12 = BehaviourState(name: "Angel Hunting", information: "Black/red smoke enters into humans")
@@ -134,11 +134,11 @@ class ProjectStub {
     }
     
     func createSessions() {
-        session1 = Session(project: project, type: SessionType.Scan)
-        session2 = Session(project: project, type: SessionType.Focal)
-        session3 = Session(project: project, type: SessionType.Scan)
-        session4 = Session(project: project, type: SessionType.Focal)
-        session5 = Session(project: project, type: SessionType.Scan)
+        session1 = Session(project: project, name: "SESSION 1", type: SessionType.Scan)
+        session2 = Session(project: project, name: "SESSION 2", type: SessionType.Focal)
+        session3 = Session(project: project, name: "SESSION 3", type: SessionType.Scan)
+        session4 = Session(project: project, name: "SESSION 4", type: SessionType.Focal)
+        session5 = Session(project: project, name: "SESSION 5", type: SessionType.Scan)
         session1.addIndividuals([individual1])
         session2.addIndividuals([individual1])
         session3.addIndividuals([individual1])

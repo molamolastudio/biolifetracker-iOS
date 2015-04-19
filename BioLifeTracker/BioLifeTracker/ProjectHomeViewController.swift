@@ -25,11 +25,13 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     
     var currentProject: Project? = nil
     
+    var graphsVC: GraphsViewController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupTableViews()
-        
+        setupGraphView()
         // Sets up the date formatter for converting dates to strings
         formatter.dateStyle = NSDateFormatterStyle.LongStyle
         formatter.timeStyle = .MediumStyle
@@ -57,6 +59,14 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         memberView.layer.masksToBounds = true;
         sessionView.layer.cornerRadius = 8;
         sessionView.layer.masksToBounds = true;
+    }
+    
+    func setupGraphView() {
+        graphsVC = GraphsViewController(nibName: "GraphsView", bundle: nil)
+        //self.addChildViewController(graphsVC)
+        graphsVC.setProject(currentProject!)
+        graphsVC.view.frame = self.graphView.frame
+        graphView.addSubview(graphsVC.view)
     }
     
     @IBAction func editMembersBtnPressed() {
