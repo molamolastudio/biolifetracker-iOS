@@ -31,6 +31,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        menu.title = UserAuthService.sharedInstance.user.name
+        
         showStartPage()
         
         if UserAuthService.sharedInstance.user.email != "Default" {
