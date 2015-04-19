@@ -55,8 +55,9 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
         self.tableView.reloadData()
     }
     
+    // Returns an ethogram if a name and at least 1 state has been set. Else, shows an alert.
     func getEthogram() -> Ethogram? {
-        if ethogram.name != "" {
+        if ethogram.name != "" && ethogram.behaviourStates.count > 0 {
             return ethogram
         } else {
             presentViewController(alert, animated: true, completion: nil)

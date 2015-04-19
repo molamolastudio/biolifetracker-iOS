@@ -17,6 +17,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var photoOverlayView: UIView!
     @IBOutlet weak var notesView: UITextView!
+    @IBOutlet weak var observationDisplay: UIView!
     
     let textCellIdentifier = "SingleLineTextCell"
     let circleCellIdentifier = "CircleCell"
@@ -28,6 +29,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     let statesSelectedColor = UIColor.greenColor()
     
     let numSections = 1
+    
+    let messageAdd = "+ Add"
     
     let formatter = NSDateFormatter()
     
@@ -50,7 +53,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         setupViews()
         
         // Sets up the date formatter for converting dates to strings
-        formatter.dateStyle = .MediumStyle
+        formatter.dateStyle = .ShortStyle
         formatter.timeStyle = .ShortStyle
         
         getData()
@@ -115,6 +118,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
             originalObservations[all] = currentSession!.observations
             newObservations[all] = getCopyOfObservations(currentSession!.observations)
             
+            println(currentSession!.project.individuals)
+            
             // Copy over observations
             for i in currentSession!.project.individuals {
                 individuals.append(i)
@@ -177,7 +182,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         let cell = individualsView.dequeueReusableCellWithReuseIdentifier(circleCellIdentifier, forIndexPath: indexPath) as! CircleCell
         
         if isExtraRowForIndividuals(indexPath.row) {
-            cell.label.text = "+ Add new individual"
+            cell.label.text = messageAdd
         } else {
             cell.label.text = individuals[indexPath.row].label
         }
@@ -239,11 +244,9 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
                 
                 // Reload views
                 individualsView.reloadData()
-                statesView.reloadData()
-            } else {
-                selectedIndividual = indexPath.row
-                showIndividualAtIndex(indexPath)
             }
+            selectedIndividual = indexPath.row
+            showIndividualAtIndex(indexPath)
             
         } else if collectionView == statesView {
             showStateAsSelected(indexPath.row)
@@ -274,10 +277,24 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     func showObservationsForIndividual(individual: Individual) {
         selectedObservations = newObservations[individual]!
         observationsView.reloadData()
+        observationsView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Top)
     }
     
     func showObservationAtIndex(indexPath: NSIndexPath) {
-        
+        if indexPath.row < selectedObservations.count {
+            
+            let observation = selectedObservations[indexPath.row]
+            
+            // Update views
+            showStateAsSelected(getIndexOfState(observation.state))
+            if observation.photo != nil {
+                photoView.image = observation.photo!.image
+            } else {
+                photoView.image = nil
+            }
+            notesView.text = observation.information
+            
+        }
     }
     
     func showStateAsSelected(selectedIndex: Int) {
@@ -298,22 +315,37 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier) as! SingleLineTextCell
         
-        let observation = selectedObservations[indexPath.row]
-        
-        cell.label.text = formatter.stringFromDate(observation.createdAt)
         cell.textField.hidden = true
+        
+        if isExtraRowForObservations(indexPath.row) {
+            cell.label.text = messageAdd
+        } else {
+            let observation = selectedObservations[indexPath.row]
+            cell.label.text = formatter.stringFromDate(observation.createdAt)
+        }
         
         return cell
     }
     
     // Sets the selected observation, updates the views for displaying observation fields.
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        // show observation
-        
+        if isExtraRowForObservations(indexPath.row) {
+            // Add new observation with default first state
+            let observation = Observation(session: currentSession!, individual: individuals[selectedIndividual], state: states.first!, timestamp: NSDate(), information: "")
+            newObservations[individuals[selectedIndividual]]!.append(observation)
+            
+            tableView.reloadData()
+        }
+        selectedObservation = indexPath.row
+        showObservationAtIndex(indexPath)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return selectedObservations.count
+        if editable {
+            return selectedObservations.count + 1
+        } else {
+            return selectedObservations.count
+        }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -322,6 +354,14 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     @IBAction func photoBtnPressed(sender: UIButton) {
         
+    }
+    
+    func hideObservationSection() {
+        observationDisplay.hidden = true
+    }
+    
+    func showObservationSection() {
+        observationDisplay.hidden = false
     }
     
     // Helper methods
@@ -336,6 +376,10 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     func isExtraRowForIndividuals(index: Int) -> Bool {
         return index == individuals.count
+    }
+    
+    func isExtraRowForObservations(index: Int) -> Bool {
+        return index == selectedObservations.count
     }
     
 }
