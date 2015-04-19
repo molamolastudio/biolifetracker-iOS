@@ -193,8 +193,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.cellHorizontalPadding = 10
         vc.roundedCells = true
         
-        var createBtn = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("createNewProject"))
-        vc.navigationItem.rightBarButtonItem = createBtn
+        var btn = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("createNewProject"))
+        vc.navigationItem.rightBarButtonItem = btn
         
         detailNav.pushViewController(vc, animated: true)
     }
@@ -205,8 +205,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.delegate = self
         vc.title = "Projects"
         
-        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showNewProjectPage"))
-        vc.navigationItem.rightBarButtonItem = createBtn
+        var btn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("showNewProjectPage"))
+        vc.navigationItem.rightBarButtonItem = btn
         
         detailNav.setViewControllers([vc], animated: false)
     }
@@ -218,8 +218,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.title = currentProject!.name
         vc.currentProject = currentProject!
         
-        var exportBtn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Action, target: self, action: Selector("exportToExcel"))
-        var syncBtn = UIBarButtonItem(title: "Sync", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("syncProject"))
+        var exportBtn = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: Selector("exportToExcel:"))
+        var syncBtn = UIBarButtonItem(title: "Sync", style: .Plain, target: self, action: Selector("syncProject"))
         vc.navigationItem.rightBarButtonItems = [exportBtn, syncBtn]
         
         detailNav.pushViewController(vc, animated: true)
@@ -231,8 +231,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.delegate = self
         vc.title = "Ethograms"
         
-        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showNewEthogramPage"))
-        vc.navigationItem.rightBarButtonItem = createBtn
+        var btn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("showNewEthogramPage"))
+        vc.navigationItem.rightBarButtonItem = btn
         
         detailNav.setViewControllers([vc], animated: false)
     }
@@ -242,8 +242,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
         vc.title = "Create New Ethogram"
         
-        var createBtn = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("createNewEthogram"))
-        vc.navigationItem.rightBarButtonItem = createBtn
+        var btn = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("createNewEthogram"))
+        vc.navigationItem.rightBarButtonItem = btn
         
         detailNav.pushViewController(vc, animated: true)
     }
@@ -254,8 +254,13 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.title = Data.selectedEthogram!.name
         vc.ethogram = Data.selectedEthogram!
         
-        var createBtn = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("dismissCurrentPage"))
-        vc.navigationItem.rightBarButtonItem = createBtn
+        vc.editable = false
+        
+        // If user created the object
+        if Data.selectedEthogram!.createdBy == UserAuthService.sharedInstance.user {
+            var btn = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("updateEditButtonForEthogram"))
+            vc.navigationItem.rightBarButtonItem = btn
+        }
         
         detailNav.pushViewController(vc, animated: true)
     }
@@ -302,8 +307,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.title = session.name
         vc.currentSession = session
         
-        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showCreateObservationPage"))
-        vc.navigationItem.rightBarButtonItem = createBtn
+        var btn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("showCreateObservationPage"))
+        vc.navigationItem.rightBarButtonItem = btn
         
         detailNav.pushViewController(vc, animated: true)
     }
@@ -315,8 +320,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.title = session.name
         vc.currentSession = session
         
-        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showCreateScanPagePopup"))
-        vc.navigationItem.rightBarButtonItem = createBtn
+        var btn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("showCreateScanPagePopup"))
+        vc.navigationItem.rightBarButtonItem = btn
         
         detailNav.pushViewController(vc, animated: true)
     }
@@ -338,8 +343,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
         // If user created the object
         if session.createdBy == UserAuthService.sharedInstance.user {
-            var createBtn = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("updateEditButtonForScan"))
-            vc.navigationItem.rightBarButtonItem = createBtn
+            var btn = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("updateEditButtonForScan"))
+            vc.navigationItem.rightBarButtonItem = btn
         }
         
         detailNav.pushViewController(vc, animated: true)
@@ -364,8 +369,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.title = "New Scan"
         vc.editable = true
         
-        var createBtn = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("updateEditButtonForScan"))
-        vc.navigationItem.rightBarButtonItem = createBtn
+        var btn = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("updateEditButtonForScan"))
+        vc.navigationItem.rightBarButtonItem = btn
         
         detailNav.pushViewController(vc, animated: true)
     }
@@ -458,11 +463,25 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         }
     }
     
+    func updateEditButtonForEthogram() {
+        if let vc = detailNav.visibleViewController as? EthogramFormViewController {
+            vc.makeEditable(true)
+            var btn = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: Selector("saveEthogramData"))
+            vc.navigationItem.rightBarButtonItem = btn
+        }
+    }
+    
     func updateEditButtonForScan() {
         if let vc = detailNav.visibleViewController as? ScanViewController {
             vc.makeEditable(true)
-            var createBtn = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("saveScanData"))
-            vc.navigationItem.rightBarButtonItem = createBtn
+            var btn = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: Selector("saveScanData"))
+            vc.navigationItem.rightBarButtonItem = btn
+        }
+    }
+    
+    func saveEthogramData() {
+        if let vc = detailNav.visibleViewController as? EthogramFormViewController {
+            vc.saveData()
         }
     }
     
@@ -501,7 +520,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         //worker.startExecution()
     }
     
-    func exportToExcel() {
+    func exportToExcel(sender: UIBarButtonItem) {
         // ANDHIEKA
     }
     

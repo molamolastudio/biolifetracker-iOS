@@ -53,6 +53,19 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
         alert.addAction(actionOk)
     }
     
+    func makeEditable(value: Bool) {
+        editable = value
+        refreshView()
+    }
+    
+    func getData() {
+        // TODO
+    }
+    
+    func saveData() {
+        // TODO
+    }
+    
     func refreshView() {
         self.tableView.reloadData()
     }
