@@ -102,6 +102,8 @@
 		32423B9B1AE2B1E600AFA2F8 /* CircleWithLabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423B9A1AE2B1E600AFA2F8 /* CircleWithLabelCell.swift */; };
 		32423B9D1AE2B1F300AFA2F8 /* CircleWithLabelCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32423B9C1AE2B1F300AFA2F8 /* CircleWithLabelCell.xib */; };
 		32423B9F1AE3A1BB00AFA2F8 /* EthogramDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423B9E1AE3A1BB00AFA2F8 /* EthogramDetailsViewController.swift */; };
+		32423BA61AE404FC00AFA2F8 /* Edit User-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 32423BA41AE404FC00AFA2F8 /* Edit User-50.png */; };
+		32423BA71AE404FC00AFA2F8 /* Plus-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 32423BA51AE404FC00AFA2F8 /* Plus-50.png */; };
 		326773B61ACAEFB000899745 /* BooleanPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773A91ACAEFB000899745 /* BooleanPickerCell.swift */; };
 		326773B71ACAEFB000899745 /* CustomPickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */; };
 		326773BA1ACAEFB000899745 /* BooleanPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 326773AD1ACAEFB000899745 /* BooleanPickerCell.xib */; };
@@ -318,6 +320,8 @@
 		32423B9A1AE2B1E600AFA2F8 /* CircleWithLabelCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleWithLabelCell.swift; sourceTree = "<group>"; };
 		32423B9C1AE2B1F300AFA2F8 /* CircleWithLabelCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CircleWithLabelCell.xib; sourceTree = "<group>"; };
 		32423B9E1AE3A1BB00AFA2F8 /* EthogramDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramDetailsViewController.swift; sourceTree = "<group>"; };
+		32423BA41AE404FC00AFA2F8 /* Edit User-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Edit User-50.png"; path = "Images.xcassets/Edit User-50.png"; sourceTree = "<group>"; };
+		32423BA51AE404FC00AFA2F8 /* Plus-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Plus-50.png"; path = "Images.xcassets/Plus-50.png"; sourceTree = "<group>"; };
 		32517A211AB1789100578C42 /* EthogramsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramsViewController.swift; sourceTree = "<group>"; };
 		326773A91ACAEFB000899745 /* BooleanPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BooleanPickerCell.swift; path = FormLibrary/BooleanPickerCell.swift; sourceTree = "<group>"; };
 		326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomPickerPopup.swift; path = FormLibrary/CustomPickerPopup.swift; sourceTree = "<group>"; };
@@ -658,6 +662,8 @@
 		3205E7671AAEDA38006F374D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				32423BA41AE404FC00AFA2F8 /* Edit User-50.png */,
+				32423BA51AE404FC00AFA2F8 /* Plus-50.png */,
 				2458F4CF1AE159A60006DFC7 /* icon-152.png */,
 				24D28D131ADA5A6800E70759 /* Images.xcassets */,
 			);
@@ -865,6 +871,7 @@
 				7838E75E1AE3501C007C2562 /* GraphAnalysisView.xib in Resources */,
 				32FB650A1AD94B6800391194 /* LaunchScreen.xib in Resources */,
 				AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */,
+				32423BA61AE404FC00AFA2F8 /* Edit User-50.png in Resources */,
 				24D28D141ADA5A6800E70759 /* Images.xcassets in Resources */,
 				2458F4D01AE159A60006DFC7 /* icon-152.png in Resources */,
 				32423B971AE23E2400AFA2F8 /* CircleCell.xib in Resources */,
@@ -872,6 +879,7 @@
 				329B293B1AD15BBF007ADC65 /* PhotoPickerCell.xib in Resources */,
 				32423B911AE0093B00AFA2F8 /* FocalSessionView.xib in Resources */,
 				32423B811ADF766200AFA2F8 /* BehaviourStateCell.xib in Resources */,
+				32423BA71AE404FC00AFA2F8 /* Plus-50.png in Resources */,
 				326773BF1ACAEFB000899745 /* SingleLineTextCell.xib in Resources */,
 				326773BE1ACAEFB000899745 /* MultiLineTextCell.xib in Resources */,
 				7838E7621AE3501C007C2562 /* GraphsView.xib in Resources */,

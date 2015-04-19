@@ -36,7 +36,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         showStartPage()
         
         if UserAuthService.sharedInstance.user.email != "Default" {
-            setupForDemo()
+            //setupForDemo()
         }
     }
     
@@ -258,7 +258,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.editable = false
         
         // If user created the object
-        if Data.selectedEthogram!.createdBy == UserAuthService.sharedInstance.user {
+        if Data.selectedEthogram!.createdBy.name == UserAuthService.sharedInstance.user.name {
             var btn = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("updateEditButtonForEthogram"))
             vc.navigationItem.rightBarButtonItem = btn
         }
@@ -307,9 +307,13 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.delegate = self
         vc.title = session.name
         vc.currentSession = session
+        vc.editable = false
         
-        var btn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("showCreateObservationPage"))
-        vc.navigationItem.rightBarButtonItem = btn
+        // If user created the object
+        if session.createdBy.name == UserAuthService.sharedInstance.user.name {
+            var btn = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("updateEditButtonForFocalSession"))
+            vc.navigationItem.rightBarButtonItem = btn
+        }
         
         detailNav.pushViewController(vc, animated: true)
     }
@@ -325,10 +329,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.navigationItem.rightBarButtonItem = btn
         
         detailNav.pushViewController(vc, animated: true)
-    }
-    
-    func showObservationPage() {
-        
     }
     
     func showScanPage(session: Session, timestamp: NSDate) {
@@ -349,10 +349,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         }
         
         detailNav.pushViewController(vc, animated: true)
-    }
-    
-    func showCreateObservationPage() {
-        // Observation Form VC
     }
     
     func showCreateScanPagePopup() {
@@ -487,6 +483,14 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         }
     }
     
+    func updateEditButtonForFocalSession() {
+        if let vc = detailNav.visibleViewController as? FocalSessionViewController {
+            vc.makeEditable(true)
+            var btn = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: Selector("saveFocalSessionData"))
+            vc.navigationItem.rightBarButtonItem = btn
+        }
+    }
+    
     func saveEthogramData() {
         if let vc = detailNav.visibleViewController as? EthogramDetailsViewController {
             vc.saveData()
@@ -498,6 +502,12 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         if let vc = detailNav.visibleViewController as? ScanViewController {
             vc.saveData()
             dismissCurrentPage()
+        }
+    }
+    
+    func saveFocalSessionData() {
+        if let vc = detailNav.visibleViewController as? FocalSessionViewController {
+            vc.saveData()
         }
     }
     

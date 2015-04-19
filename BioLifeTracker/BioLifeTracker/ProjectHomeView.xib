@@ -3,6 +3,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -27,9 +28,17 @@
                 </tableView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GRAPH" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1y-yj-JfN">
                     <rect key="frame" x="15" y="28" width="50" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="TQ3-5N-emH"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.43529411764705883" green="0.44313725490196076" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="TQ3-5N-emH"/>
+                        </mask>
+                    </variation>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SESSIONS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HaF-kn-3id">
                     <rect key="frame" x="308" y="28" width="71" height="30"/>
@@ -47,18 +56,25 @@
                     <rect key="frame" x="15" y="63" width="277" height="237"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSr-Mi-AdS">
-                    <rect key="frame" x="539" y="28" width="46" height="30"/>
-                    <state key="normal" title="Create">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSr-Mi-AdS">
+                    <rect key="frame" x="555" y="28" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="uSr-Mi-AdS" secondAttribute="height" multiplier="1:1" id="dYZ-gN-2Nf"/>
+                    </constraints>
+                    <state key="normal" image="Plus-50.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="createSessionBtnPressed" destination="-1" eventType="touchUpInside" id="BnX-e0-GkK"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0G8-Bo-fQD">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0G8-Bo-fQD">
                     <rect key="frame" x="262" y="305" width="30" height="30"/>
-                    <state key="normal" title="Edit">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="oKg-bK-Vbw"/>
+                        <constraint firstAttribute="width" secondItem="0G8-Bo-fQD" secondAttribute="height" multiplier="1:1" id="smd-WD-o63"/>
+                    </constraints>
+                    <state key="normal" image="Edit User-50.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
@@ -74,6 +90,7 @@
                 <constraint firstAttribute="trailing" secondItem="Cxe-u6-XLb" secondAttribute="trailing" constant="15" id="CGm-r8-czv"/>
                 <constraint firstItem="HaF-kn-3id" firstAttribute="bottom" secondItem="C1y-yj-JfN" secondAttribute="bottom" id="DrL-Tg-2ao"/>
                 <constraint firstItem="uSr-Mi-AdS" firstAttribute="trailing" secondItem="Cxe-u6-XLb" secondAttribute="trailing" id="G6C-ge-Ly4"/>
+                <constraint firstItem="C1y-yj-JfN" firstAttribute="height" secondItem="hEe-TV-tjv" secondAttribute="height" id="IAk-Z7-AiH"/>
                 <constraint firstItem="C1y-yj-JfN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="Iu9-iI-HTg"/>
                 <constraint firstItem="wC8-Gm-uSp" firstAttribute="leading" secondItem="hEe-TV-tjv" secondAttribute="leading" id="IyH-Uw-mcb"/>
                 <constraint firstItem="Cxe-u6-XLb" firstAttribute="top" secondItem="HaF-kn-3id" secondAttribute="bottom" constant="5" id="Jfy-Aa-U9m"/>
@@ -98,4 +115,8 @@
             <point key="canvasLocation" x="233" y="241"/>
         </view>
     </objects>
+    <resources>
+        <image name="Edit User-50.png" width="50" height="50"/>
+        <image name="Plus-50.png" width="50" height="50"/>
+    </resources>
 </document>
