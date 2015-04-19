@@ -34,7 +34,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         showStartPage()
         
         if UserAuthService.sharedInstance.user.email != "Default" {
-            setupForDemo()
+            //setupForDemo()
         }
     }
     
@@ -314,7 +314,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.title = session.name
         vc.currentSession = session
         
-        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showCreateScanPage"))
+        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showCreateScanPagePopup"))
         vc.navigationItem.rightBarButtonItem = createBtn
         
         detailNav.pushViewController(vc, animated: true)
@@ -332,11 +332,14 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         formatter.timeStyle = .ShortStyle
         
         vc.title = formatter.stringFromDate(timestamp)
-        vc.currentSession = session
-        vc.selectedTimestamp = timestamp
+        vc.setData(session, timestamp: timestamp)
+        vc.editable = false
         
-        var createBtn = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("saveScanData"))
-        vc.navigationItem.rightBarButtonItem = createBtn
+        // If user created the object
+        if session.createdBy == UserAuthService.sharedInstance.user {
+            var createBtn = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("updateEditButtonForScan"))
+            vc.navigationItem.rightBarButtonItem = createBtn
+        }
         
         detailNav.pushViewController(vc, animated: true)
     }
@@ -345,14 +348,44 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         // Observation Form VC
     }
     
+    func showCreateScanPagePopup() {
+        // Popup settings page
+        // If all fields entered then showCreateScanPage
+    }
+    
     func showCreateScanPage() {
-        // Scan View
+        let vc = ScanViewController(nibName: "ScanView", bundle: nil)
+        
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .MediumStyle
+        formatter.timeStyle = .ShortStyle
+        
+        vc.title = "New Scan"
+        vc.editable = true
+        
+        var createBtn = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("updateEditButtonForScan"))
+        vc.navigationItem.rightBarButtonItem = createBtn
+        
+        detailNav.pushViewController(vc, animated: true)
     }
     
     func showAnalysisPage() {
-        let graphs = GraphAnalysisViewController(nibName: "GraphAnalysisView", bundle: nil)
+        let vc = GraphAnalysisViewController(nibName: "GraphAnalysisView", bundle: nil)
         
-        detailNav.pushViewController(graphs, animated: true)
+        vc.title = "Analyse"
+        
+        detailNav.setViewControllers([vc], animated: false)
+    }
+    
+    func showSettingsPage() {
+        let vc = FormViewController(style: UITableViewStyle.Grouped)
+        
+        vc.title = "Settings"
+        vc.setFormData(getFormDataForSettings())
+        vc.cellHorizontalPadding = 10
+        vc.roundedCells = true
+        
+        detailNav.setViewControllers([vc], animated: false)
     }
     
     func clearNavigationStack() {
@@ -390,6 +423,14 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         return data
     }
     
+    func getFormDataForSettings() -> FormFieldData {
+        let data = FormFieldData(sections: 1)
+        
+        // ANDHIEKA
+        
+        return data
+    }
+    
     // Selectors for navigation bar items
     func createNewProject() {
         if let vc = detailNav.visibleViewController as? FormViewController {
@@ -416,8 +457,18 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         }
     }
     
+    func updateEditButtonForScan() {
+        if let vc = detailNav.visibleViewController as? ScanViewController {
+            vc.makeEditable(true)
+            var createBtn = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("saveScanData"))
+            vc.navigationItem.rightBarButtonItem = createBtn
+        }
+    }
+    
     func saveScanData() {
-        
+        if let vc = detailNav.visibleViewController as? ScanViewController {
+            vc.saveData()
+        }
     }
     
     func syncProject() {
@@ -467,6 +518,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     func userDidSelectSettings() {
         dismissMenuView()
+        showSettingsPage()
     }
     
     func userDidSelectLogout() {

@@ -23,9 +23,12 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     let statesDefaultColor = UIColor.lightGrayColor()
     let statesSelectedColor = UIColor.greenColor()
     
+    var editable = false
+    
     var currentSession: Session? = nil
     var selectedTimestamp: NSDate? = nil
     
+    var originalObservations = [Observation]()
     var observations = [Observation]()
     var states = [BehaviourState]()
     
@@ -67,33 +70,89 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         notesView.layer.masksToBounds = true;
     }
     
+    func makeEditable(value: Bool) {
+        editable = value
+        animalsView.reloadData()
+        statesView.reloadData()
+    }
+    
+    // Sets the data source of this controller.
+    func setData(session: Session, timestamp: NSDate) {
+        currentSession = session
+        selectedTimestamp = timestamp
+    }
+    
+    // Copy over the information in the edited observations to the original observations.
+    func saveData() {
+        for i in 0...observations.count {
+            if i < originalObservations.count {
+                // Copy over the updated information of the observation
+                copyOverObservation(observations[i], to: originalObservations[i])
+            } else {
+                // Add a new observation
+                originalObservations.append(observations[i])
+            }
+        }
+    }
+    
+    // Copy fields of 'from' to 'to'.
+    func copyOverObservation(from: Observation, to: Observation) {
+        to.changeBehaviourState(from.state)
+        to.updateInformation(from.information)
+    }
+    
     func getData() {
         if currentSession != nil && selectedTimestamp != nil {
-            observations = currentSession!.getObservationsByTimestamp(selectedTimestamp!)
+            originalObservations = currentSession!.getObservationsByTimestamp(selectedTimestamp!)
             states = currentSession!.project.ethogram.behaviourStates
+            
+            observations.removeAll()
+            for o in originalObservations {
+                let newObservation = Observation(session: o.session, state: o.state, timestamp: o.timestamp, information: o.information)
+                observations.append(newObservation)
+            }
         }
     }
     
     // UICollectionViewDataSource methods
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
         if collectionView == animalsView {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(circleCellIdentifier, forIndexPath: indexPath) as! CircleCell
-            
-            cell.label.text = "A\(indexPath.row)"
-            cell.backgroundColor = animalsDefaultColor
-            
-            return cell
+            return getCellForAnimalsView(indexPath)
         } else if collectionView == statesView {
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier(circleLabelCellIdentifier, forIndexPath: indexPath) as! CircleWithLabelCell
-            
-            let name = states[indexPath.row].name
-            cell.circleViewLabel.text = name.substringToIndex(name.startIndex.successor())
-            cell.label.text = name
-            cell.circleView.backgroundColor = statesDefaultColor
-            
-            return cell
+            return getCellForStatesView(indexPath)
         }
         return UICollectionViewCell()
+    }
+    
+    // Returns a cell that displays an animal in a scan.
+    func getCellForAnimalsView(indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = animalsView.dequeueReusableCellWithReuseIdentifier(circleCellIdentifier, forIndexPath: indexPath) as! CircleCell
+        
+        if isExtraRow(indexPath.row) {
+            cell.label.text = "+"
+        } else {
+            cell.label.text = "A\(indexPath.row)"
+        }
+        
+        cell.backgroundColor = animalsDefaultColor
+        
+        return cell
+    }
+    
+    // Returns a cell that displays a behaviour state. User interaction is disabled if this
+    // view controller is not editable.
+    func getCellForStatesView(indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = statesView.dequeueReusableCellWithReuseIdentifier(circleLabelCellIdentifier, forIndexPath: indexPath) as! CircleWithLabelCell
+        
+        let name = states[indexPath.row].name
+        cell.circleViewLabel.text = name.substringToIndex(name.startIndex.successor())
+        cell.label.text = name
+        cell.circleView.backgroundColor = statesDefaultColor
+        
+        cell.userInteractionEnabled = editable
+        
+        return cell
     }
     
     func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
@@ -101,19 +160,40 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        var itemCount = 0
+        
         if collectionView == animalsView {
-            return observations.count
+            itemCount = observations.count
+            
+            if editable {
+                // Add an extra cell for the add button
+                itemCount = itemCount + 1
+            }
+            
         } else if collectionView == statesView {
-            return states.count
+            itemCount = states.count
         }
-        return 0
+        return itemCount
     }
     
     // UICollectionViewDelegate methods
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if collectionView == animalsView {
+            
             selectedObservation = indexPath.row
+            
+            // User wants to add an extra animal
+            if isExtraRow(indexPath.row) {
+                // Add a new observation
+                let observation = Observation(session: currentSession!, state: states.first!, timestamp: selectedTimestamp!, information: "")
+                observations.append(observation)
+                
+                // Reload views
+                animalsView.reloadData()
+                statesView.reloadData()
+            }
+            
             showObservationAtIndex(indexPath)
             
         } else if collectionView == statesView {
@@ -176,6 +256,18 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         
     }
     
+    // Actions for arrow buttons
+    @IBAction func leftArrowPressed(sender: UIButton) {
+        selectedObservation = selectedObservation - 1
+        showObservationAtIndex(NSIndexPath(forRow: selectedObservation, inSection: 0))
+    }
+    
+    @IBAction func rightArrowPressed(sender: UIButton) {
+        selectedObservation = selectedObservation + 1
+        showObservationAtIndex(NSIndexPath(forRow: selectedObservation, inSection: 0))
+    }
+    
+    // Helper methods
     func getIndexOfState(state: BehaviourState) -> Int {
         for i in 0...states.count {
             if states[i] == state {
@@ -185,14 +277,8 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         return 0
     }
     
-    @IBAction func leftArrowPressed(sender: UIButton) {
-        selectedObservation = selectedObservation - 1
-        showObservationAtIndex(NSIndexPath(forRow: selectedObservation, inSection: 0))
-    }
-    
-    @IBAction func rightArrowPressed(sender: UIButton) {
-        selectedObservation = selectedObservation + 1
-        showObservationAtIndex(NSIndexPath(forRow: selectedObservation, inSection: 0))
+    func isExtraRow(index: Int) -> Bool {
+        return index == observations.count
     }
     
 }

@@ -31,6 +31,8 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
     let alertTitle = "Incomplete Ethogram"
     let alertMessage = "You must add a name for the ethogram."
     
+    var editable = false
+    
     // Collected data
     var ethogram = Ethogram()
     
@@ -77,7 +79,7 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
     func getCellForFirstSection(indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier(nameCellIdentifier) as! SingleLineTextCell
         
-        cell.textField.userInteractionEnabled = true
+        cell.textField.userInteractionEnabled = editable
         
         cell.label.text = "Name"
         cell.textField.text = ethogram.name
@@ -88,23 +90,27 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
     // Populates behaviour states in second section and sets up listeners for adding new state.
     func getCellForSecondSection(indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier(stateCellIdentifier) as! BehaviourStateCell
+        
         let textField = cell.textField
         textField.delegate = self
         
+        // Set up cells that have been filled out
         if ethogram.behaviourStates.count > indexPath.row {
             textField.text = ethogram.behaviourStates[indexPath.row].name
             textField.removeTarget(self, action: Selector("extraRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
             textField.addTarget(self, action: Selector("textFieldDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
             cell.button.tag = indexPath.row
+
         } else if ethogram.behaviourStates.count == indexPath.row {
             textField.placeholder = messageNewState
             textField.removeTarget(self, action: Selector("textFieldDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
             textField.addTarget(self, action: Selector("extraRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
         }
         
+        textField.userInteractionEnabled = editable
         textField.tag = indexPath.row
-        textField.userInteractionEnabled = true
         cell.button.hidden = true
+        
         return cell
     }
     
@@ -160,10 +166,6 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
         let state = BehaviourState(name: cell.textField.text!, information: "must add information")
         ethogram.addBehaviourState(state)
         
-        //        state.saveInBackgroundWithBlock { (success, error) in
-        //            println("Saving behaviour state success: \(success)\nError: \(error.debugDescription)")
-        //        }
-        
         cell.button.hidden = true
         
         refreshView()
@@ -197,7 +199,11 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
     
     // For deleting extra behaviour states
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        if editable {
         return isSecondSection(indexPath.section) && !isExtraRow(indexPath.row)
+        } else {
+            return false
+        }
     }
     
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
@@ -208,7 +214,7 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-                // Unable to delete cell, array out of bounds or hang
+
                 if !isExtraRow(indexPath.row) {
                     ethogram.removeBehaviourState(indexPath.row)
                 }
