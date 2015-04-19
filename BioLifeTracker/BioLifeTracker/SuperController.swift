@@ -349,6 +349,12 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         // Scan View
     }
     
+    func showAnalysisPage() {
+        let graphs = GraphAnalysisViewController(nibName: "GraphAnalysisView", bundle: nil)
+        
+        detailNav.pushViewController(graphs, animated: true)
+    }
+    
     func clearNavigationStack() {
         detailNav.popToRootViewControllerAnimated(false)
     }
@@ -456,6 +462,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     func userDidSelectAnalysis() {
         dismissMenuView()
+        showAnalysisPage()
     }
     
     func userDidSelectSettings() {
