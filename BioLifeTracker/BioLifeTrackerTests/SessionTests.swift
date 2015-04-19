@@ -199,7 +199,7 @@ class SessionTests: XCTestCase {
         var observation17 = Observation(session: session3, individual: individual1, state: state3, timestamp: NSDate(), information: "")
         var observation18 = Observation(session: session3, individual: individual2, state: state2, timestamp: NSDate(), information: "")
         
-        session3.addObservation([observation16, observation17, observation18])
+        session3.addObservation([observation16, observation17])
         let observations = session3.getAllObservationsForIndividual(individual1)
         
         XCTAssert(containObservation(session3.observations, observation: observation16), "Cannot retrieve by individual")
