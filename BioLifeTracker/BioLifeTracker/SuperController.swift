@@ -307,6 +307,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.delegate = self
         vc.title = session.name
         vc.currentSession = session
+        vc.editable = false
         
         var btn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("showCreateObservationPage"))
         vc.navigationItem.rightBarButtonItem = btn

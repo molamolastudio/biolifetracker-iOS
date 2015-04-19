@@ -82,25 +82,6 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         selectedTimestamp = timestamp
     }
     
-    // Copy over the information in the edited observations to the original observations.
-    func saveData() {
-        for i in 0...observations.count {
-            if i < originalObservations.count {
-                // Copy over the updated information of the observation
-                copyOverObservation(observations[i], to: originalObservations[i])
-            } else {
-                // Add a new observation
-                originalObservations.append(observations[i])
-            }
-        }
-    }
-    
-    // Copy fields of 'from' to 'to'.
-    func copyOverObservation(from: Observation, to: Observation) {
-        to.changeBehaviourState(from.state)
-        to.updateInformation(from.information)
-    }
-    
     func getData() {
         if currentSession != nil && selectedTimestamp != nil {
             originalObservations = currentSession!.getObservationsByTimestamp(selectedTimestamp!)
@@ -112,6 +93,25 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
                 observations.append(newObservation)
             }
         }
+    }
+    
+    // Copy over the information in the edited observations to the original observations.
+    func saveData() {
+        for i in 0...observations.count {
+            if i < originalObservations.count {
+                // Copy over the updated information of the observation
+                copyOverObservation(observations[i], to: originalObservations[i])
+            } else {
+                // Add a new observation
+                currentSession!.addObservation([observations[i]])
+            }
+        }
+    }
+    
+    // Copy fields of 'from' to 'to'.
+    func copyOverObservation(from: Observation, to: Observation) {
+        to.changeBehaviourState(from.state)
+        to.updateInformation(from.information)
     }
     
     // UICollectionViewDataSource methods
@@ -227,6 +227,9 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
             rightArrow.hidden = false
         } else if selectedIndex == observations.count - 1 {
             leftArrow.hidden = false
+            rightArrow.hidden = true
+        } else if observations.count == 1 {
+            leftArrow.hidden = true
             rightArrow.hidden = true
         } else {
             leftArrow.hidden = false
