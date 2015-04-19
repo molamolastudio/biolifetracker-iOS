@@ -15,10 +15,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     @IBOutlet weak var observationsView: UITableView!
     @IBOutlet weak var statesView: UICollectionView!
     @IBOutlet weak var photoView: UIImageView!
+    @IBOutlet weak var photoOverlayView: UIView!
     @IBOutlet weak var notesView: UITextView!
-    
-    @IBOutlet weak var leftArrow: UIButton!
-    @IBOutlet weak var rightArrow: UIButton!
     
     let textCellIdentifier = "SingleLineTextCell"
     let circleCellIdentifier = "CircleCell"
@@ -56,6 +54,10 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         formatter.timeStyle = .ShortStyle
         
         getData()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         showIndividualAtIndex(NSIndexPath(forRow: 0, inSection: 0))
     }
     
@@ -87,6 +89,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         statesView.layer.masksToBounds = true;
         photoView.layer.cornerRadius = 8;
         photoView.layer.masksToBounds = true;
+        photoOverlayView.layer.cornerRadius = 8;
+        photoOverlayView.layer.masksToBounds = true;
         notesView.layer.cornerRadius = 8;
         notesView.layer.masksToBounds = true;
     }
@@ -265,21 +269,6 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
                 }
             }
         }
-        
-        // Toggle visibility of arrows
-        if selectedIndex == 0 {
-            leftArrow.hidden = true
-            rightArrow.hidden = false
-        } else if selectedIndex == individuals.count - 1 {
-            leftArrow.hidden = false
-            rightArrow.hidden = true
-        } else if individuals.count == 1 {
-            leftArrow.hidden = true
-            rightArrow.hidden = true
-        } else {
-            leftArrow.hidden = false
-            rightArrow.hidden = false
-        }
     }
     
     func showObservationsForIndividual(individual: Individual) {
@@ -329,17 +318,6 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return numSections
-    }
-    
-    // Actions for buttons
-    @IBAction func leftArrowPressed(sender: UIButton) {
-        selectedObservation = selectedObservation - 1
-        showObservationAtIndex(NSIndexPath(forRow: selectedObservation, inSection: 0))
-    }
-    
-    @IBAction func rightArrowPressed(sender: UIButton) {
-        selectedObservation = selectedObservation + 1
-        showObservationAtIndex(NSIndexPath(forRow: selectedObservation, inSection: 0))
     }
     
     @IBAction func photoBtnPressed(sender: UIButton) {
