@@ -40,7 +40,7 @@ class GraphAnalysisViewController:  UIViewController {
         // set graph for now it's stub
         graphsVC.setProject(stub.project)
         graphsVC.toggleGraph(.HourPlot)
-        graphsVC.view.frame = self.graphsView.frame
+        graphsVC.view.frame = CGRectMake(0, 0, graphsView.frame.width, graphsView.frame.height)
         graphsView.addSubview(graphsVC.view)
     }
     
