@@ -131,6 +131,18 @@
 		7838E7521AE34F04007C2562 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7838E7511AE34F04007C2562 /* Accelerate.framework */; };
 		7838E7541AE34F11007C2562 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7838E7531AE34F11007C2562 /* QuartzCore.framework */; };
 		7838E7561AE34F22007C2562 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7838E7551AE34F22007C2562 /* libCorePlot-CocoaTouch.a */; };
+		7838E75E1AE3501C007C2562 /* GraphAnalysisView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7838E7581AE3501C007C2562 /* GraphAnalysisView.xib */; };
+		7838E75F1AE3501C007C2562 /* GraphAnalysisView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7838E7581AE3501C007C2562 /* GraphAnalysisView.xib */; };
+		7838E7601AE3501C007C2562 /* GraphAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E7591AE3501C007C2562 /* GraphAnalysisViewController.swift */; };
+		7838E7611AE3501C007C2562 /* GraphAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E7591AE3501C007C2562 /* GraphAnalysisViewController.swift */; };
+		7838E7621AE3501C007C2562 /* GraphsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7838E75A1AE3501C007C2562 /* GraphsView.xib */; };
+		7838E7631AE3501C007C2562 /* GraphsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7838E75A1AE3501C007C2562 /* GraphsView.xib */; };
+		7838E7641AE3501C007C2562 /* GraphsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75B1AE3501C007C2562 /* GraphsViewController.swift */; };
+		7838E7651AE3501C007C2562 /* GraphsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75B1AE3501C007C2562 /* GraphsViewController.swift */; };
+		7838E7661AE3501C007C2562 /* GraphsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */; };
+		7838E7671AE3501C007C2562 /* GraphsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */; };
+		7838E7681AE3501C007C2562 /* ProjectStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75D1AE3501C007C2562 /* ProjectStub.swift */; };
+		7838E7691AE3501C007C2562 /* ProjectStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75D1AE3501C007C2562 /* ProjectStub.swift */; };
 		AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AC18814A1ACFC84600CE450B /* GooglePlus.bundle */; };
 		AC18814E1ACFC84600CE450B /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814B1ACFC84600CE450B /* GooglePlus.framework */; };
 		AC1881501ACFD05D00CE450B /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814F1ACFD05D00CE450B /* GoogleOpenSource.framework */; };
@@ -331,6 +343,12 @@
 		7838E7511AE34F04007C2562 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		7838E7531AE34F11007C2562 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7838E7551AE34F22007C2562 /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libCorePlot-CocoaTouch.a"; path = "BioLifeTracker/libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
+		7838E7581AE3501C007C2562 /* GraphAnalysisView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GraphAnalysisView.xib; sourceTree = "<group>"; };
+		7838E7591AE3501C007C2562 /* GraphAnalysisViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphAnalysisViewController.swift; sourceTree = "<group>"; };
+		7838E75A1AE3501C007C2562 /* GraphsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GraphsView.xib; sourceTree = "<group>"; };
+		7838E75B1AE3501C007C2562 /* GraphsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphsViewController.swift; sourceTree = "<group>"; };
+		7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphsViewControllerDelegate.swift; sourceTree = "<group>"; };
+		7838E75D1AE3501C007C2562 /* ProjectStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectStub.swift; sourceTree = "<group>"; };
 		AC18814A1ACFC84600CE450B /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
 		AC18814B1ACFC84600CE450B /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
 		AC18814F1ACFD05D00CE450B /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
@@ -571,6 +589,7 @@
 				240D042B1AB6CA6800D8BB9F /* Authentication */,
 				24E32D3C1AB19954003C4E0A /* Model */,
 				AC9162AA1ACA69BF00FED714 /* Cloud Storage */,
+				7838E7571AE34FD3007C2562 /* Analysis */,
 				3205E76F1AAEDA85006F374D /* Constants.swift */,
 				3205E7701AAEDA85006F374D /* Data.swift */,
 				3205E7471AAED9F9006F374D /* AppDelegate.swift */,
@@ -671,6 +690,19 @@
 				32423B8A1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib */,
 			);
 			name = "Form Library";
+			sourceTree = "<group>";
+		};
+		7838E7571AE34FD3007C2562 /* Analysis */ = {
+			isa = PBXGroup;
+			children = (
+				7838E7581AE3501C007C2562 /* GraphAnalysisView.xib */,
+				7838E7591AE3501C007C2562 /* GraphAnalysisViewController.swift */,
+				7838E75A1AE3501C007C2562 /* GraphsView.xib */,
+				7838E75B1AE3501C007C2562 /* GraphsViewController.swift */,
+				7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */,
+				7838E75D1AE3501C007C2562 /* ProjectStub.swift */,
+			);
+			name = Analysis;
 			sourceTree = "<group>";
 		};
 		AC6A24981ADD1A8100CF33D6 /* BLTProtocols */ = {
@@ -827,6 +859,7 @@
 				329B292F1AD15BAF007ADC65 /* DatePickerCell.xib in Resources */,
 				326773BA1ACAEFB000899745 /* BooleanPickerCell.xib in Resources */,
 				32423B8B1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib in Resources */,
+				7838E75E1AE3501C007C2562 /* GraphAnalysisView.xib in Resources */,
 				32FB650A1AD94B6800391194 /* LaunchScreen.xib in Resources */,
 				AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */,
 				24D28D141ADA5A6800E70759 /* Images.xcassets in Resources */,
@@ -838,6 +871,7 @@
 				32423B811ADF766200AFA2F8 /* BehaviourStateCell.xib in Resources */,
 				326773BF1ACAEFB000899745 /* SingleLineTextCell.xib in Resources */,
 				326773BE1ACAEFB000899745 /* MultiLineTextCell.xib in Resources */,
+				7838E7621AE3501C007C2562 /* GraphsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -845,6 +879,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7838E75F1AE3501C007C2562 /* GraphAnalysisView.xib in Resources */,
+				7838E7631AE3501C007C2562 /* GraphsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -902,6 +938,9 @@
 				242C6E071AC80F050024ECEF /* BiolifeModel.swift in Sources */,
 				32423B891ADFDC8600AFA2F8 /* CustomPickerPopupCell.swift in Sources */,
 				32423B871ADFDA3900AFA2F8 /* FormPopupController.swift in Sources */,
+				7838E7601AE3501C007C2562 /* GraphAnalysisViewController.swift in Sources */,
+				7838E7661AE3501C007C2562 /* GraphsViewControllerDelegate.swift in Sources */,
+				7838E7681AE3501C007C2562 /* ProjectStub.swift in Sources */,
 				326773BB1ACAEFB000899745 /* FormCell.swift in Sources */,
 				3205E7781AAEDA85006F374D /* Data.swift in Sources */,
 				32423B8F1AE0025900AFA2F8 /* FocalSessionViewControllerDelegate.swift in Sources */,
@@ -921,6 +960,7 @@
 				323CBD961ADD58EA00A7C970 /* ScanViewController.swift in Sources */,
 				32423B8D1AE0023400AFA2F8 /* FocalSessionViewController.swift in Sources */,
 				321D62C51AD2618800CF9BE9 /* EthogramsViewControllerDelegate.swift in Sources */,
+				7838E7641AE3501C007C2562 /* GraphsViewController.swift in Sources */,
 				3205E77B1AAEDA85006F374D /* Project.swift in Sources */,
 				329B29361AD15BBF007ADC65 /* DefaultPickerCell.swift in Sources */,
 				24F0F6C71AD7717200C6CC23 /* DeleteTask.swift in Sources */,
@@ -946,6 +986,7 @@
 				240FEF0C1AD60AF6000FD9F3 /* CloudStorageTask.swift in Sources */,
 				240FEF0D1AD60AF6000FD9F3 /* CloudStorageWorker.swift in Sources */,
 				240FEF0E1AD60AF6000FD9F3 /* DownloadTask.swift in Sources */,
+				7838E7671AE3501C007C2562 /* GraphsViewControllerDelegate.swift in Sources */,
 				240FEF0F1AD60AF6000FD9F3 /* UploadTask.swift in Sources */,
 				AC6A24B01ADD233D00CF33D6 /* BLTEthogramProtocol.swift in Sources */,
 				AC6A24BA1ADD26BA00CF33D6 /* DownloadTaskTests.swift in Sources */,
@@ -965,9 +1006,11 @@
 				AC7B6DD61AD25482002D3EE6 /* Weather.swift in Sources */,
 				AC7B6DDD1AD25498002D3EE6 /* Storable.swift in Sources */,
 				AC6A24B51ADD234F00CF33D6 /* BLTTagProtocol.swift in Sources */,
+				7838E7611AE3501C007C2562 /* GraphAnalysisViewController.swift in Sources */,
 				AC7B6DC01AD2543D002D3EE6 /* IndividualTests.swift in Sources */,
 				AC7B6DDE1AD2549B002D3EE6 /* Project.swift in Sources */,
 				AC7B6DDF1AD2549E002D3EE6 /* BiolifeModel.swift in Sources */,
+				7838E7691AE3501C007C2562 /* ProjectStub.swift in Sources */,
 				AC6A24AE1ADD233900CF33D6 /* BLTSessionProtocol.swift in Sources */,
 				AC7B6DC31AD25445002D3EE6 /* SessionTests.swift in Sources */,
 				AC7B6DC21AD25443002D3EE6 /* BehaviourStateTests.swift in Sources */,
@@ -987,6 +1030,7 @@
 				24CE59421ADD42AB000571A3 /* NSDate+Encoding.swift in Sources */,
 				AC7B6DBF1AD2543B002D3EE6 /* LocationTests.swift in Sources */,
 				AC7B6DE11AD254A6002D3EE6 /* UserAuthService.swift in Sources */,
+				7838E7651AE3501C007C2562 /* GraphsViewController.swift in Sources */,
 				AC7B6DE01AD254A1002D3EE6 /* User.swift in Sources */,
 				AC7B6DBE1AD25438002D3EE6 /* WeatherTests.swift in Sources */,
 				AC6A24B21ADD234200CF33D6 /* BLTIndividualProtocol.swift in Sources */,

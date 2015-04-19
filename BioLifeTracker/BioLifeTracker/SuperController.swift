@@ -350,6 +350,10 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         // Scan View
     }
     
+    func showAnalysisPage() {
+        
+    }
+    
     func clearNavigationStack() {
         detailNav.popToRootViewControllerAnimated(false)
     }
@@ -457,6 +461,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     func userDidSelectAnalysis() {
         dismissMenuView()
+        showAnalysisPage()
     }
     
     func userDidSelectSettings() {
