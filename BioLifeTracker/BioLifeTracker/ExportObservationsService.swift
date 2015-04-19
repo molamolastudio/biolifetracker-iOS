@@ -18,7 +18,7 @@ class ExportObservationsService {
         self.plistPath = ""
     }
     
-    func createObservationsCSV() {
+    private func createObservationsCSV() {
         let csvWriter = CSVWriter()
         let dateFormatter = BiolifeDateFormatter()
         
@@ -59,19 +59,29 @@ class ExportObservationsService {
             true) as? [String]
     
         if let directories = directories {
+            // find target directory
             let targetDirectory = directories[0]
             let plistFileName = "\(project.name).csv"
             plistPath = targetDirectory
                 .stringByAppendingPathComponent(plistFileName)
+            
+            // delete item with the same file name
+            let fileManager = NSFileManager.defaultManager()
+            if fileManager.fileExistsAtPath(plistPath) {
+                fileManager.removeItemAtPath(plistPath, error: nil)
+            }
+            
+            // write csv to disk
             csvString.writeToFile(plistPath, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
         }
     }
     
-    func openInOtherApps(vc: UIViewController) {
+    func openInOtherApps(button: UIBarButtonItem) {
+        createObservationsCSV()
         if let fileURL = NSURL.fileURLWithPath(plistPath) {
             ExportObservationsService.documentInteractionVC = UIDocumentInteractionController(URL: fileURL)
             ExportObservationsService.documentInteractionVC.UTI = "public.comma-separated-values-text"
-            ExportObservationsService.documentInteractionVC.presentOptionsMenuFromRect(CGRectZero, inView: vc.view, animated: true)
+            ExportObservationsService.documentInteractionVC.presentOpenInMenuFromBarButtonItem(button, animated: true)
         }
     }
 }

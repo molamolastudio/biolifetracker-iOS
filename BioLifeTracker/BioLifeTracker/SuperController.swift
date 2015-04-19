@@ -531,7 +531,10 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func exportToExcel(sender: UIBarButtonItem) {
-        // ANDHIEKA
+        if let project = currentProject {
+            let exportService = ExportObservationsService(project: project)
+            exportService.openInOtherApps(sender)
+        }
     }
     
     // MenuViewDelegate methods
