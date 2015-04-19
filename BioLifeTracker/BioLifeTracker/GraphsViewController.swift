@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotDataSource, CPTBarPlotDelegate, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CPTPlotSpaceDelegate{
+class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotDataSource, CPTBarPlotDelegate, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CPTPlotSpaceDelegate, UIPopoverPresentationControllerDelegate {
     var delegate: GraphsViewControllerDelegate!
     
     
@@ -91,6 +91,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         initialiseGraph()
     }
     
@@ -160,17 +161,6 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         configureAxes()
         
         graphHostingView.hostedGraph.reloadData()
-//        if chartByState {
-//            configureGraph()
-//            configureBarPlots()
-//            configureAxes()
-//        } else {
-//            configureGraph()
-//            configurePlots()
-//            configureAxes()
-//            
-//        }
-//        hostingView.hostedGraph.reloadData()
     }
     
     func toggleGraph(type: GraphType) {
@@ -628,7 +618,6 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
             case .StateChart:
                 return numberOfStatesOccurences[Int(idx)]
             }
-                
                 //}else if plot.identifier.isEqual("states") {
                  //   return arr[Int(idx)]
                 //}
@@ -675,71 +664,68 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
             }
         }
         return newRange
-        
+    
     }
     
     func barPlot(plot: CPTBarPlot!, barWasSelectedAtRecordIndex idx: UInt) {
+
+        var x = Double(idx) + 0.5
+        if idx == 0 {
+            x = Double(idx) + 0.5
+        }
         
-//        var plotXValue = chosenBehaviourStates[Int(idx)]
-//        if let bar = plot {
-//            
-//            
-//            
-//            var axis = plot.graph.axisSet as! CPTXYAxisSet
-//            var x = axis.xAxis.majorTickLocations.
-//            
-//        var plotYValue = numberOfStatesOccurences[Int(idx)]
-//        
-//        var plotSpace = plot.graph.defaultPlotSpace
-//        
-//        var cgPlotPoint = CGPointMake(plotXValue.floatValue, plotYValue.floatValue)
-//        
-//        
-//            CGPoint cgPlotAreaPoint =
-//                [graph convertPoint:cgPlotPoint toLayer:graph.plotAreaFrame.plotArea];
-//            
-//            NSDecimal plotAreaPoint[2];
-//            plotAreaPoint[CPTCoordinateX] =
-//                CPTDecimalFromFloat(cgPlotAreaPoint.x);
-//            plotAreaPoint[CPTCoordinateY] =
-//                CPTDecimalFromFloat(cgPlotAreaPoint.y);
-//            
-//            CGPoint dataPoint = [plotSpace
-//                
-//                
-//                plotAreaViewPointForPlotPoint:plotAreaPoint];
-//            NSLog(@"datapoint (CGPoint) coordinates tapped: %@",NSStringFromCGPoint(dataPoint));
-//            
-//            GrowthChartInfoTableViewController *infoViewController = [self.storyboard
-//            instantiateViewControllerWithIdentifier:@"GrowthChartInfo"];
-//            
-//            
-//            
-//            self.popover = nil;
-//            self.popover = [[UIPopoverController alloc]
-//            
-//            
-//            initWithContentViewController:infoViewController];
-//            self.popover.popoverContentSize = CGSizeMake(250, 200);
-//            self.popover.delegate = self;
-//            CGRect popoverAnchor =
-//            CGRectMake(dataPoint.x + graph.paddingLeft,
-//            dataPoint.y - graph.paddingTop + graph.paddingBottom,
-//            (CGFloat)1.0f, (CGFloat)1.0f);
-//            
-//            [self.popover presentPopoverFromRect:popoverAnchor
-//            inView:self.view
-//            permittedArrowDirections:UIPopoverArrowDirectionUp
-//            animated:YES];
-//        }
+        var y = Double(idx)
+        var plotXValue = chosenBehaviourStates[Int(idx)]
+        var plotYValue = yMaxStates - numberOfStatesOccurences[Int(idx)]
+        
+        var plotPoint = [x, Double(plotYValue)]
+        
+        var pos = plot.plotSpace.plotAreaViewPointForPlotPoint(plotPoint)
+        println(pos.x.description)
+        println(pos.y.description)
+
+        var popoverContent = GraphDetailsViewController(nibName: "PopoverLabelView", bundle: nil)
+        popoverContent.modalPresentationStyle = UIModalPresentationStyle.Popover
+        var popover = popoverContent.popoverPresentationController
+        popoverContent.preferredContentSize = CGSizeMake(100,30)
+        popover!.delegate = self
+        
+        var anchorPoint  = plot.graph.convertPoint(CGPointMake(pos.x, pos.y), fromLayer: plot.graph.plotAreaFrame.plotArea)
+        
+        println(anchorPoint.x)
+        println(anchorPoint.y)
+        
+        var popoverAnchor = CGRectMake(anchorPoint.x, anchorPoint.y, 0, 0)
+        popover!.sourceView = self.graphHostingView
+        popover!.sourceRect = popoverAnchor
+        popover!.permittedArrowDirections = UIPopoverArrowDirection.Up
+        
+        self.presentViewController(popoverContent, animated: true, completion: nil)
+        var final = String(numberOfStatesOccurences[Int(idx)])
+        popoverContent.setLabelMessage(final)
+        plot.graph.reloadData()
     }
+    
+    
     
     func barFillForBarPlot(barPlot: CPTBarPlot!, recordIndex idx: UInt) -> CPTFill! {
         return CPTFill(color: CPTColor.blueColor())
-        //add colours here
+        //if selected[Int(idx)] {
+            //choose colour highlighted
+            // each bar has a dedicated colour
+        //} else {
+            // choose normal colour > at rndom
+        //}
     }
     
     func symbolForScatterPlot(plot: CPTScatterPlot!, recordIndex idx: UInt) -> CPTPlotSymbol! {
+        
+        //if selected[Int(idx)] {
+            //choose colour highlighted
+            // each bar has a dedicated colour
+            //} else {
+            // choose normal colour > at rndom
+            //}
         
         var symbol = CPTPlotSymbol()
         symbol.symbolType = CPTPlotSymbolType.Ellipse

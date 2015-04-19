@@ -128,6 +128,8 @@
 		329B293F1AD15E6F007ADC65 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 329B293E1AD15E6F007ADC65 /* FirstView.xib */; };
 		329B29411AD16058007ADC65 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329B29401AD16058007ADC65 /* FirstViewController.swift */; };
 		32FB650A1AD94B6800391194 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3205E7501AAED9F9006F374D /* LaunchScreen.xib */; };
+		781FD4661AE3E5C300BBC0E0 /* PopoverLabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 781FD4651AE3E5C300BBC0E0 /* PopoverLabelView.xib */; };
+		781FD4671AE3E5C300BBC0E0 /* PopoverLabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 781FD4651AE3E5C300BBC0E0 /* PopoverLabelView.xib */; };
 		7838E7521AE34F04007C2562 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7838E7511AE34F04007C2562 /* Accelerate.framework */; };
 		7838E7541AE34F11007C2562 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7838E7531AE34F11007C2562 /* QuartzCore.framework */; };
 		7838E7561AE34F22007C2562 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7838E7551AE34F22007C2562 /* libCorePlot-CocoaTouch.a */; };
@@ -143,6 +145,8 @@
 		7838E7671AE3501C007C2562 /* GraphsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */; };
 		7838E7681AE3501C007C2562 /* ProjectStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75D1AE3501C007C2562 /* ProjectStub.swift */; };
 		7838E7691AE3501C007C2562 /* ProjectStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75D1AE3501C007C2562 /* ProjectStub.swift */; };
+		7838E76B1AE3B177007C2562 /* GraphDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E76A1AE3B177007C2562 /* GraphDetailsViewController.swift */; };
+		7838E76C1AE3BD54007C2562 /* GraphDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E76A1AE3B177007C2562 /* GraphDetailsViewController.swift */; };
 		AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AC18814A1ACFC84600CE450B /* GooglePlus.bundle */; };
 		AC18814E1ACFC84600CE450B /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814B1ACFC84600CE450B /* GooglePlus.framework */; };
 		AC1881501ACFD05D00CE450B /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814F1ACFD05D00CE450B /* GoogleOpenSource.framework */; };
@@ -340,6 +344,7 @@
 		329B29351AD15BBF007ADC65 /* PhotoPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoPickerCell.xib; path = FormLibrary/PhotoPickerCell.xib; sourceTree = "<group>"; };
 		329B293E1AD15E6F007ADC65 /* FirstView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstView.xib; sourceTree = "<group>"; };
 		329B29401AD16058007ADC65 /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		781FD4651AE3E5C300BBC0E0 /* PopoverLabelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopoverLabelView.xib; sourceTree = "<group>"; };
 		7838E7511AE34F04007C2562 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		7838E7531AE34F11007C2562 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7838E7551AE34F22007C2562 /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libCorePlot-CocoaTouch.a"; path = "BioLifeTracker/libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
@@ -349,6 +354,7 @@
 		7838E75B1AE3501C007C2562 /* GraphsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphsViewController.swift; sourceTree = "<group>"; };
 		7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphsViewControllerDelegate.swift; sourceTree = "<group>"; };
 		7838E75D1AE3501C007C2562 /* ProjectStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectStub.swift; sourceTree = "<group>"; };
+		7838E76A1AE3B177007C2562 /* GraphDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphDetailsViewController.swift; sourceTree = "<group>"; };
 		AC18814A1ACFC84600CE450B /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
 		AC18814B1ACFC84600CE450B /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
 		AC18814F1ACFD05D00CE450B /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
@@ -699,6 +705,8 @@
 				7838E7591AE3501C007C2562 /* GraphAnalysisViewController.swift */,
 				7838E75A1AE3501C007C2562 /* GraphsView.xib */,
 				7838E75B1AE3501C007C2562 /* GraphsViewController.swift */,
+				781FD4651AE3E5C300BBC0E0 /* PopoverLabelView.xib */,
+				7838E76A1AE3B177007C2562 /* GraphDetailsViewController.swift */,
 				7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */,
 				7838E75D1AE3501C007C2562 /* ProjectStub.swift */,
 			);
@@ -857,6 +865,7 @@
 				323CBD941ADD526600A7C970 /* ScanView.xib in Resources */,
 				329B293F1AD15E6F007ADC65 /* FirstView.xib in Resources */,
 				329B292F1AD15BAF007ADC65 /* DatePickerCell.xib in Resources */,
+				781FD4661AE3E5C300BBC0E0 /* PopoverLabelView.xib in Resources */,
 				326773BA1ACAEFB000899745 /* BooleanPickerCell.xib in Resources */,
 				32423B8B1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib in Resources */,
 				7838E75E1AE3501C007C2562 /* GraphAnalysisView.xib in Resources */,
@@ -880,6 +889,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7838E75F1AE3501C007C2562 /* GraphAnalysisView.xib in Resources */,
+				781FD4671AE3E5C300BBC0E0 /* PopoverLabelView.xib in Resources */,
 				7838E7631AE3501C007C2562 /* GraphsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -920,6 +930,7 @@
 				AC6A24A21ADD1AF700CF33D6 /* BLTObservationProtocol.swift in Sources */,
 				248DBBE41ADD5348001CA04F /* BLTProjectSerializer.swift in Sources */,
 				AC9EE3471ACEC57200939476 /* BehaviourState.swift in Sources */,
+				7838E76B1AE3B177007C2562 /* GraphDetailsViewController.swift in Sources */,
 				326773B61ACAEFB000899745 /* BooleanPickerCell.swift in Sources */,
 				321D62C71AD261D300CF9BE9 /* SuperController.swift in Sources */,
 				320920711ACA9A1600E8A456 /* MenuViewController.swift in Sources */,
@@ -1018,6 +1029,7 @@
 				AC6A24B81ADD26B400CF33D6 /* DummyModel.swift in Sources */,
 				AC7B6DE31AD254B2002D3EE6 /* ProjectManager.swift in Sources */,
 				2458F4D31AE160F00006DFC7 /* BLTProjectSerializer.swift in Sources */,
+				7838E76C1AE3BD54007C2562 /* GraphDetailsViewController.swift in Sources */,
 				AC6A24B41ADD234800CF33D6 /* BLTLocationProtocol.swift in Sources */,
 				AC7B6DC71AD25451002D3EE6 /* ProjectMngTests.swift in Sources */,
 				AC7B6DDC1AD25495002D3EE6 /* BehaviourState.swift in Sources */,
