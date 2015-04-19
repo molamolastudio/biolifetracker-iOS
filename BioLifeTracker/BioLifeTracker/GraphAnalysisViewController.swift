@@ -14,11 +14,18 @@ class GraphAnalysisViewController:  UIViewController {
     @IBOutlet weak var graphsView: UIView!
     @IBOutlet weak var graphSwitch: UISegmentedControl!
     
+    @IBOutlet weak var background: UIView!
     var graphsVC: GraphsViewController!
+    
+    var AliceBlue = UIColor(red: 228.0/255.0, green: 241.0/255.0, blue: 254.0/255.0, alpha: 1)
+    var HummingBird = UIColor(red: 197.0/255.0, green: 239.0/255.0, blue: 247.0/255.0, alpha: 1)
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.background.backgroundColor = AliceBlue
+        self.view.backgroundColor = AliceBlue
+        self.view.sendSubviewToBack(self.background)
         
         showGraphsView();
         

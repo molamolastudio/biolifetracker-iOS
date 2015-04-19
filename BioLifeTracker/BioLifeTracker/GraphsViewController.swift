@@ -84,9 +84,13 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     var allSessions: [Session]!
     
     var symbolTextAnnotation: CPTPlotSpaceAnnotation!
+    var AliceBlue = UIColor(red: 228.0/255.0, green: 241.0/255.0, blue: 254.0/255.0, alpha: 1)
+    var HummingBird = UIColor(red: 197.0/255.0, green: 239.0/255.0, blue: 247.0/255.0, alpha: 1)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         initConditions()
         prepareNumberOfOccurances()
@@ -314,6 +318,10 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         graph.plotAreaFrame.paddingRight = 40
         graph.plotAreaFrame.paddingBottom = 40
         graph.plotAreaFrame.paddingTop = 40
+        
+        graph.plotAreaFrame.fill = CPTFill(color: CPTColor(CGColor: HummingBird.CGColor))
+        graph.plotAreaFrame.plotArea.fill = CPTFill(color: CPTColor(CGColor: HummingBird.CGColor))
+        graph.fill = CPTFill(color: CPTColor(CGColor: AliceBlue.CGColor))
         
         
         var plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
@@ -660,8 +668,61 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         return newRange
         
     }
+    
     func barPlot(plot: CPTBarPlot!, barWasSelectedAtRecordIndex idx: UInt) {
         
+//        var plotXValue = chosenBehaviourStates[Int(idx)]
+        if let bar = plot {
+            
+            
+            
+            var axis = plot.graph.axisSet as! CPTXYAxisSet
+            var x = axis.xAxis.majorTickLocations.
+            
+        var plotYValue = numberOfStatesOccurences[Int(idx)]
+        
+        var plotSpace = plot.graph.defaultPlotSpace
+        
+        var cgPlotPoint = CGPointMake(plotXValue.floatValue, plotYValue.floatValue)
+        
+        
+            CGPoint cgPlotAreaPoint =
+                [graph convertPoint:cgPlotPoint toLayer:graph.plotAreaFrame.plotArea];
+            
+            NSDecimal plotAreaPoint[2];
+            plotAreaPoint[CPTCoordinateX] =
+                CPTDecimalFromFloat(cgPlotAreaPoint.x);
+            plotAreaPoint[CPTCoordinateY] =
+                CPTDecimalFromFloat(cgPlotAreaPoint.y);
+            
+            CGPoint dataPoint = [plotSpace
+                
+                
+                plotAreaViewPointForPlotPoint:plotAreaPoint];
+            NSLog(@"datapoint (CGPoint) coordinates tapped: %@",NSStringFromCGPoint(dataPoint));
+            
+            GrowthChartInfoTableViewController *infoViewController = [self.storyboard
+            instantiateViewControllerWithIdentifier:@"GrowthChartInfo"];
+            
+            
+            
+            self.popover = nil;
+            self.popover = [[UIPopoverController alloc]
+            
+            
+            initWithContentViewController:infoViewController];
+            self.popover.popoverContentSize = CGSizeMake(250, 200);
+            self.popover.delegate = self;
+            CGRect popoverAnchor =
+            CGRectMake(dataPoint.x + graph.paddingLeft,
+            dataPoint.y - graph.paddingTop + graph.paddingBottom,
+            (CGFloat)1.0f, (CGFloat)1.0f);
+            
+            [self.popover presentPopoverFromRect:popoverAnchor
+            inView:self.view
+            permittedArrowDirections:UIPopoverArrowDirectionUp
+            animated:YES];
+        }
     }
     
     func barFillForBarPlot(barPlot: CPTBarPlot!, recordIndex idx: UInt) -> CPTFill! {
@@ -680,24 +741,6 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         
         return symbol
     }
-    
-    
-//    func scatterPlot(plot: CPTScatterPlot!, plotSymbolTouchDownAtRecordIndex idx: UInt) {
-    //        var symbolLineStyle = CPTMutableLineStyle()
-//    symbolLineStyle.lineWidth = 2.0
-//    symbolLineStyle.lineColor = CPTColor.redColor()
-//    
-//    plot.plotSymbolForRecordIndex(idx).lineStyle = symbolLineStyle
-//    }
-//
-//    func scatterPlot(plot: CPTScatterPlot!, plotSymbolTouchUpAtRecordIndex idx: UInt) {
-//        var symbolLineStyle = CPTMutableLineStyle()
-//        symbolLineStyle.lineWidth = 2.0
-//        symbolLineStyle.lineColor = CPTColor.blackColor()
-//        
-//        
-//        plot.plotSymbolForRecordIndex(idx).lineStyle = symbolLineStyle
-//    }
     
     
     func scatterPlot(plot: CPTScatterPlot!, plotSymbolWasSelectedAtRecordIndex idx: UInt) {

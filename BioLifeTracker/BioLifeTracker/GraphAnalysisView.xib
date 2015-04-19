@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GraphAnalysisViewController" customModule="BioLifeTracker" customModuleProvider="target">
             <connections>
+                <outlet property="background" destination="zjg-Pj-9I7" id="Seg-yY-gLz"/>
                 <outlet property="graphSwitch" destination="HmU-Ci-fRo" id="GmF-kU-PzP"/>
                 <outlet property="graphsView" destination="Fwg-BZ-hzn" id="DrF-OU-cSx"/>
                 <outlet property="view" destination="iN0-l3-epB" id="n6s-61-Mhh"/>
@@ -41,7 +42,7 @@
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="HmU-Ci-fRo">
                     <rect key="frame" x="363" y="445" width="197" height="29"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="197" id="5FR-d5-HVY"/>
+                        <constraint firstAttribute="width" constant="197" id="fcD-Pm-MIC"/>
                     </constraints>
                     <segments>
                         <segment title="Hour"/>
@@ -52,22 +53,31 @@
                         <action selector="graphIndexChanged:" destination="-1" eventType="valueChanged" id="DZ1-TO-QfP"/>
                     </connections>
                 </segmentedControl>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zjg-Pj-9I7" userLabel="BG">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="Fwg-BZ-hzn" secondAttribute="trailing" constant="40" id="Bg6-AA-8YL"/>
-                <constraint firstItem="wVy-Qc-had" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="49" id="DYQ-3o-bYV"/>
-                <constraint firstItem="7Ag-Zi-E8o" firstAttribute="leading" secondItem="Xkz-gR-Wre" secondAttribute="trailing" constant="63" id="G2p-7F-fVE"/>
-                <constraint firstItem="7Ag-Zi-E8o" firstAttribute="baseline" secondItem="Xkz-gR-Wre" secondAttribute="baseline" id="GBm-1R-4YP"/>
-                <constraint firstItem="Xkz-gR-Wre" firstAttribute="baseline" secondItem="wVy-Qc-had" secondAttribute="baseline" id="HF6-JA-nBe"/>
-                <constraint firstItem="Fwg-BZ-hzn" firstAttribute="trailing" secondItem="HmU-Ci-fRo" secondAttribute="trailing" id="Hvw-NC-wHb"/>
-                <constraint firstItem="wVy-Qc-had" firstAttribute="top" secondItem="Fwg-BZ-hzn" secondAttribute="bottom" constant="96" id="Pdy-zD-3NU"/>
-                <constraint firstItem="Xkz-gR-Wre" firstAttribute="leading" secondItem="wVy-Qc-had" secondAttribute="trailing" constant="63" id="YGD-q1-Zmd"/>
-                <constraint firstItem="Fwg-BZ-hzn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="40" id="YMr-YL-qXa"/>
-                <constraint firstAttribute="bottom" secondItem="Fwg-BZ-hzn" secondAttribute="bottom" constant="200" id="d9H-Gn-cQq"/>
-                <constraint firstItem="Fwg-BZ-hzn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="g9Q-Pm-uH5"/>
-                <constraint firstItem="HmU-Ci-fRo" firstAttribute="top" secondItem="Fwg-BZ-hzn" secondAttribute="bottom" constant="45" id="l6S-ee-ZtC"/>
+                <constraint firstAttribute="trailing" secondItem="zjg-Pj-9I7" secondAttribute="trailing" id="1KN-We-tVZ"/>
+                <constraint firstItem="Fwg-BZ-hzn" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="40" id="4Pz-xk-wCG"/>
+                <constraint firstAttribute="bottom" secondItem="zjg-Pj-9I7" secondAttribute="bottom" id="4r4-K0-Ucq"/>
+                <constraint firstItem="7Ag-Zi-E8o" firstAttribute="leading" secondItem="Xkz-gR-Wre" secondAttribute="trailing" constant="63" id="59N-99-nhZ"/>
+                <constraint firstItem="wVy-Qc-had" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="49" id="8KJ-s0-8wf"/>
+                <constraint firstItem="HmU-Ci-fRo" firstAttribute="trailing" secondItem="Fwg-BZ-hzn" secondAttribute="trailing" id="DpL-rH-0Tn"/>
+                <constraint firstItem="Fwg-BZ-hzn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="Ibv-SW-Tzr"/>
+                <constraint firstAttribute="trailing" secondItem="Fwg-BZ-hzn" secondAttribute="trailing" constant="40" id="KCZ-SB-dbU"/>
+                <constraint firstItem="Xkz-gR-Wre" firstAttribute="leading" secondItem="wVy-Qc-had" secondAttribute="trailing" constant="63" id="Qr9-Bp-Mjh"/>
+                <constraint firstAttribute="bottom" secondItem="wVy-Qc-had" secondAttribute="bottom" constant="74" id="XxB-N5-UcR"/>
+                <constraint firstItem="Xkz-gR-Wre" firstAttribute="baseline" secondItem="7Ag-Zi-E8o" secondAttribute="baseline" id="bbz-gS-3Yi"/>
+                <constraint firstItem="zjg-Pj-9I7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="cO7-4Z-tJH"/>
+                <constraint firstItem="zjg-Pj-9I7" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="nDH-qR-Zsv"/>
+                <constraint firstItem="wVy-Qc-had" firstAttribute="baseline" secondItem="Xkz-gR-Wre" secondAttribute="baseline" id="riF-41-h23"/>
+                <constraint firstItem="7Ag-Zi-E8o" firstAttribute="top" secondItem="HmU-Ci-fRo" secondAttribute="bottom" constant="23" id="uzj-En-2Co"/>
+                <constraint firstItem="HmU-Ci-fRo" firstAttribute="top" secondItem="Fwg-BZ-hzn" secondAttribute="bottom" constant="45" id="z7p-A7-q3U"/>
             </constraints>
+            <point key="canvasLocation" x="235" y="244"/>
         </view>
     </objects>
 </document>

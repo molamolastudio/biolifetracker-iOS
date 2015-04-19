@@ -17,15 +17,15 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Usk-x2-7KD" userLabel="Hosting View" customClass="CPTGraphHostingView">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Usk-x2-7KD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Xbt-0I-tGE"/>
-                <constraint firstAttribute="bottom" secondItem="Usk-x2-7KD" secondAttribute="bottom" id="Yci-bU-DHb"/>
-                <constraint firstAttribute="trailing" secondItem="Usk-x2-7KD" secondAttribute="trailing" id="toc-XV-Hf7"/>
-                <constraint firstItem="Usk-x2-7KD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="xZ2-hg-wEe"/>
+                <constraint firstItem="Usk-x2-7KD" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="23v-xR-KhF"/>
+                <constraint firstAttribute="bottom" secondItem="Usk-x2-7KD" secondAttribute="bottom" id="KEp-ix-TXS"/>
+                <constraint firstAttribute="trailing" secondItem="Usk-x2-7KD" secondAttribute="trailing" id="Vc5-cC-a3o"/>
+                <constraint firstItem="Usk-x2-7KD" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="oKw-er-BoC"/>
             </constraints>
             <point key="canvasLocation" x="221" y="245"/>
         </view>
