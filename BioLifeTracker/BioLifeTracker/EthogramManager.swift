@@ -27,21 +27,25 @@ class EthogramManager: NSObject, Storable {
     
     func updateEthograms(ethograms: [Ethogram]) {
         self._ethograms = ethograms
+        saveToArchives()
     }
     
     func addEthogram(ethogram: Ethogram) {
         self._ethograms.append(ethogram)
+        saveToArchives()
     }
     
     func updateEthogram(index: Int, ethogram: Ethogram) {
         self._ethograms.removeAtIndex(index)
         self._ethograms.insert(ethogram, atIndex: index)
+        saveToArchives()
     }
     
     func removeEthograms(indexes: [Int]) {
         for index in indexes {
             self._ethograms.removeAtIndex(index)
         }
+        saveToArchives()
     }
     
     // For testing.

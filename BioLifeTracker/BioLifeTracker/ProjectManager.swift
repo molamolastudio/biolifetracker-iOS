@@ -27,10 +27,12 @@ class ProjectManager: NSObject, Storable {
     
     func updateProjects(projects: [Project]) {
         self._projects = projects
+        saveToArchives()
     }
     
     func addProject(project: Project) {
         self._projects.append(project)
+        saveToArchives()
     }
     
     func updateProject(index: Int, project: Project) {
@@ -50,6 +52,7 @@ class ProjectManager: NSObject, Storable {
             }
             self._projects.removeAtIndex(index)
         }
+        saveToArchives()
     }
     
     // For testing.
