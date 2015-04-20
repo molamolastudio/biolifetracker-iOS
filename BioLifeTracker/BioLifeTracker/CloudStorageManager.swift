@@ -50,6 +50,7 @@ class CloudStorageManager {
             assert(retrievedItem["id"] as! Int == itemId) // assert that item has correct id
             classCache[itemId] = retrievedItem
             globalCache[classUrl] = classCache
+            
             return retrievedItem
         }
     }
@@ -65,6 +66,19 @@ class CloudStorageManager {
             let individual = Individual(dictionary: individualDictionary)
             individualCache[id] = individual
             return individual
+        }
+    }
+    
+    func putIntoCache(classUrl: String, itemInfo: NSDictionary) {
+        if globalCache[classUrl] == nil {
+            globalCache[classUrl] = [Int: NSDictionary]()
+        }
+        var classCache = globalCache[classUrl]! // classCache is guaranteed to exist
+        
+        if let itemId = itemInfo["id"] as? Int {
+            classCache[itemId] = itemInfo
+            globalCache[classUrl] = classCache
+            assert(globalCache[classUrl]![itemId] == itemInfo)
         }
     }
 }

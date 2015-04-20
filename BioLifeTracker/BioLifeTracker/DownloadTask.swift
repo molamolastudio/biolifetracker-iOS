@@ -18,7 +18,11 @@ class DownloadTask: CloudStorageTask {
     private var results = [NSDictionary]()
     var completedSuccessfully: Bool?
     var description: String {
-        return "DownloadTask for \(classUrl) : \(itemId)"
+        if let itemId = itemId {
+            return "Downloading \(classUrl) with id \(itemId)"
+        } else {
+            return "Downloading all \(classUrl)"
+        }
     }
     
     init(classUrl: String) {

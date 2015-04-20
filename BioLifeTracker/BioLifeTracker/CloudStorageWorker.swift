@@ -46,7 +46,7 @@ class CloudStorageWorker {
             while !self.pendingTasks.isEmpty {
                 let percentage = self.getPercentageCompletion()
                 let task = self.pendingTasks.removeAtIndex(0)
-                let message = "Executing \(task.description)"
+                let message = task.description
                 self.onProgressUpdate?(percentage, message)
                 task.execute()
             }

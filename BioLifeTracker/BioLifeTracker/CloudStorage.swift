@@ -37,6 +37,8 @@ struct CloudStorage {
     }
     
     static func makeRequestToUrl(url: NSURL, withMethod method: String, withPayload payload: NSData?, withHeaders headers: [String: String]) -> NSData? {
+        NSLog("%@ %@", method, url)
+        
         // sets up URL request
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = method

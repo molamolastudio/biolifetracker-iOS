@@ -576,7 +576,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
         GPPSignIn.sharedInstance().signOut()
         FBSession.activeSession().closeAndClearTokenInformation()
+        
         UserAuthService.sharedInstance.handleLogOut()
+        CloudStorageManager.sharedInstance.clearCache()
         
         // Move back to start page
         dismissMenuView()
@@ -652,18 +654,100 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     
     func startDownloadingProjectsFromServer() {
-        dispatch_async(CloudStorage.networkThread, {
-            let downloadTask = DownloadTask(classUrl: Project.ClassUrl)
-            downloadTask.execute()
-            let projectInfos = downloadTask.getResults()
-            for projectInfo in projectInfos {
+        let worker = CloudStorageWorker()
+        
+        // downloading items one by one is too slow, we have to warm cache
+        // by downloading in batches first
+        let downloadUser = DownloadTask(classUrl: User.ClassUrl)
+        let downloadLocation = DownloadTask(classUrl: Location.ClassUrl)
+        let downloadWeather = DownloadTask(classUrl: Weather.ClassUrl)
+        let downloadTag = DownloadTask(classUrl: Tag.ClassUrl)
+        let downloadIndividual = DownloadTask(classUrl: Individual.ClassUrl)
+        let downloadObservation = DownloadTask(classUrl: Observation.ClassUrl)
+        let downloadSession = DownloadTask(classUrl: Session.ClassUrl)
+        let downloadBehaviourState = DownloadTask(classUrl: BehaviourState.ClassUrl)
+        let downloadEthogram = DownloadTask(classUrl: Ethogram.ClassUrl)
+        let downloadProject = DownloadTask(classUrl: Project.ClassUrl)
+        // must put to cache
+        // think of how not to erase the cache between workers
+        let tasks = [
+            downloadUser,
+            downloadLocation,
+            downloadWeather,
+            downloadTag,
+            downloadIndividual,
+            downloadObservation,
+            downloadSession,
+            downloadBehaviourState,
+            downloadEthogram,
+            downloadProject
+        ]
+        tasks.map { worker.enqueueTask($0) }
+        
+        let manager = CloudStorageManager.sharedInstance
+        worker.setOnFinished {
+            // put all info into cache
+            for userInfo in downloadUser.getResults() {
+                manager.putIntoCache(User.ClassUrl, itemInfo: userInfo)
+            }
+            for locationInfo in downloadLocation.getResults() {
+                manager.putIntoCache(Location.ClassUrl, itemInfo: locationInfo)
+            }
+            for weatherInfo in downloadWeather.getResults() {
+                manager.putIntoCache(Weather.ClassUrl, itemInfo: weatherInfo)
+            }
+            for tagInfo in downloadTag.getResults() {
+                manager.putIntoCache(Tag.ClassUrl, itemInfo: tagInfo)
+            }
+            for individualInfo in downloadIndividual.getResults() {
+                manager.putIntoCache(Individual.ClassUrl, itemInfo: individualInfo)
+            }
+            for observationInfo in downloadObservation.getResults() {
+                manager.putIntoCache(Observation.ClassUrl, itemInfo: observationInfo)
+            }
+            for sessionInfo in downloadSession.getResults() {
+                manager.putIntoCache(Session.ClassUrl, itemInfo: sessionInfo)
+            }
+            for behaviourInfo in downloadBehaviourState.getResults() {
+                manager.putIntoCache(BehaviourState.ClassUrl, itemInfo: behaviourInfo)
+            }
+            for ethogramInfo in downloadEthogram.getResults() {
+                manager.putIntoCache(Ethogram.ClassUrl, itemInfo: ethogramInfo)
+            }
+            for projectInfo in downloadProject.getResults() {
+                manager.putIntoCache(Project.ClassUrl, itemInfo: projectInfo)
+            }
+            
+            // add users to UserManager
+            for userInfo in downloadUser.getResults() {
+                let user = User(dictionary: userInfo)
+                UserManager.sharedInstance.addUser(user)
+            }
+            
+            // add projects to ProjectManager
+            for projectInfo in downloadProject.getResults() {
                 let project = Project(dictionary: projectInfo)
                 ProjectManager.sharedInstance.addProject(project)
             }
+            
+            // add ethograms to EthogramManager
+            for ethogramInfo in downloadEthogram.getResults() {
+                let ethogram = Ethogram(dictionary: ethogramInfo)
+                EthogramManager.sharedInstance.addEthogram(ethogram)
+            }
+            
             dispatch_async(dispatch_get_main_queue(), {
                 self.loadingAlert?.dismissViewControllerAnimated(true, completion: nil)
                 self.showProjectsPage()
             })
-        })
+        }
+        worker.setOnProgressUpdate { percentage, message in
+            self.loadingAlert?.dismissViewControllerAnimated(false, completion: {
+                let title = self.loadingAlert!.title
+//                self.loadingAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+//                self.presentViewController(self.loadingAlert!, animated: false, completion: nil)
+            })
+        }
+        worker.startExecution()
     }
 }
