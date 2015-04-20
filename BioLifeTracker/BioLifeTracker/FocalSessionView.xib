@@ -159,9 +159,9 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="GRF-DS-bkA"/>
+                            <exclude reference="Ull-Mo-5L8"/>
                             <exclude reference="2Ak-VV-DqQ"/>
                             <exclude reference="oPL-OI-7Ec"/>
-                            <exclude reference="Ull-Mo-5L8"/>
                         </mask>
                     </variation>
                 </view>

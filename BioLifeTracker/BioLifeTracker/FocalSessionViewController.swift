@@ -112,8 +112,6 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func refreshViews() {
-        selectedIndividual = 0
-        selectedObservation = 0
         selectedObservations = [Observation]()
         
         individuals = [Individual]()

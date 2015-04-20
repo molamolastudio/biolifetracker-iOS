@@ -82,12 +82,22 @@
                         <action selector="addMembersBtnPressed" destination="-1" eventType="touchUpInside" id="2oi-DS-Vbr"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vkl-jG-bPK">
+                    <rect key="frame" x="224" y="28" width="68" height="25"/>
+                    <state key="normal" title="Analyse &gt;">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="analyseBtnPressed:" destination="-1" eventType="touchUpInside" id="cSD-Ge-6cN"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.90674321338383834" green="0.90674321338383834" blue="0.90674321338383834" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="HaF-kn-3id" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" constant="20" id="3qu-G4-hxG"/>
                 <constraint firstItem="0sh-hb-5kC" firstAttribute="width" secondItem="Cxe-u6-XLb" secondAttribute="width" id="5Bp-Ur-d3j"/>
                 <constraint firstItem="0G8-Bo-fQD" firstAttribute="bottom" secondItem="hEe-TV-tjv" secondAttribute="bottom" id="BT1-cg-aoi"/>
+                <constraint firstItem="C1y-yj-JfN" firstAttribute="top" secondItem="vkl-jG-bPK" secondAttribute="top" id="CDn-CF-455"/>
                 <constraint firstAttribute="trailing" secondItem="Cxe-u6-XLb" secondAttribute="trailing" constant="15" id="CGm-r8-czv"/>
                 <constraint firstItem="HaF-kn-3id" firstAttribute="bottom" secondItem="C1y-yj-JfN" secondAttribute="bottom" id="DrL-Tg-2ao"/>
                 <constraint firstItem="uSr-Mi-AdS" firstAttribute="trailing" secondItem="Cxe-u6-XLb" secondAttribute="trailing" id="G6C-ge-Ly4"/>
@@ -101,7 +111,9 @@
                 <constraint firstItem="0G8-Bo-fQD" firstAttribute="top" secondItem="hEe-TV-tjv" secondAttribute="top" id="MT2-Gd-hsa"/>
                 <constraint firstItem="hEe-TV-tjv" firstAttribute="top" secondItem="0sh-hb-5kC" secondAttribute="bottom" constant="5" id="MlW-cO-FJ4"/>
                 <constraint firstItem="uSr-Mi-AdS" firstAttribute="top" secondItem="HaF-kn-3id" secondAttribute="top" id="RLV-l1-IU9"/>
+                <constraint firstItem="C1y-yj-JfN" firstAttribute="bottom" secondItem="vkl-jG-bPK" secondAttribute="bottom" id="RVN-NC-24l"/>
                 <constraint firstItem="HaF-kn-3id" firstAttribute="top" secondItem="C1y-yj-JfN" secondAttribute="top" id="UTq-Lg-e1m"/>
+                <constraint firstItem="0sh-hb-5kC" firstAttribute="trailing" secondItem="vkl-jG-bPK" secondAttribute="trailing" id="W9i-9o-6k3"/>
                 <constraint firstAttribute="bottom" secondItem="Cxe-u6-XLb" secondAttribute="bottom" constant="15" id="cfc-By-li1"/>
                 <constraint firstAttribute="centerY" secondItem="0sh-hb-5kC" secondAttribute="bottom" id="dOt-tU-UxQ"/>
                 <constraint firstItem="0sh-hb-5kC" firstAttribute="top" secondItem="C1y-yj-JfN" secondAttribute="bottom" constant="5" id="kvU-Uo-BIU"/>

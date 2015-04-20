@@ -77,6 +77,12 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         graphView.addSubview(graphsVC.view)
     }
     
+    @IBAction func analyseBtnPressed(sender: AnyObject) {
+        if delegate != nil {
+            delegate!.userDidSelectGraph(currentProject!)
+        }
+    }
+    
     @IBAction func addMembersBtnPressed() {
         showMemberPicker()
     }
