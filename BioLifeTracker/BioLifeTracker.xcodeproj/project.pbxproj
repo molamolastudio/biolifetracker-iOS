@@ -123,6 +123,7 @@
 		32850BE21AB9625500C49D33 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E77F1AAEDB03006F374D /* ProjectsViewController.swift */; };
 		32850BE41AB9625500C49D33 /* EthogramFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */; };
 		32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A211AB1789100578C42 /* EthogramsViewController.swift */; };
+		32880DBE1AE5342F009A3B31 /* MemberPickerViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32880DBD1AE5342F009A3B31 /* MemberPickerViewControllerDelegate.swift */; };
 		329B292C1AD15BAF007ADC65 /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329B29281AD15BAF007ADC65 /* ButtonCell.swift */; };
 		329B292D1AD15BAF007ADC65 /* ButtonCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 329B29291AD15BAF007ADC65 /* ButtonCell.xib */; };
 		329B292E1AD15BAF007ADC65 /* DatePickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329B292A1AD15BAF007ADC65 /* DatePickerCell.swift */; };
@@ -356,6 +357,7 @@
 		326773B41ACAEFB000899745 /* MultiLineTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiLineTextCell.swift; path = FormLibrary/MultiLineTextCell.swift; sourceTree = "<group>"; };
 		326773B51ACAEFB000899745 /* SingleLineTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleLineTextCell.swift; path = FormLibrary/SingleLineTextCell.swift; sourceTree = "<group>"; };
 		326773C41ACD7C9A00899745 /* MenuViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewControllerDelegate.swift; sourceTree = "<group>"; };
+		32880DBD1AE5342F009A3B31 /* MemberPickerViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberPickerViewControllerDelegate.swift; sourceTree = "<group>"; };
 		329B29281AD15BAF007ADC65 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonCell.swift; path = FormLibrary/ButtonCell.swift; sourceTree = "<group>"; };
 		329B29291AD15BAF007ADC65 /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ButtonCell.xib; path = FormLibrary/ButtonCell.xib; sourceTree = "<group>"; };
 		329B292A1AD15BAF007ADC65 /* DatePickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatePickerCell.swift; path = FormLibrary/DatePickerCell.swift; sourceTree = "<group>"; };
@@ -652,6 +654,7 @@
 				32EA4B491AE51E5200EC7B8C /* ProjectFormViewController.swift */,
 				32EA4B451AE51B5C00EC7B8C /* ProjectFormView.xib */,
 				32EA4B511AE5310000EC7B8C /* MemberPickerViewController.swift */,
+				32880DBD1AE5342F009A3B31 /* MemberPickerViewControllerDelegate.swift */,
 				32EA4B4F1AE530EE00EC7B8C /* MemberPickerView.xib */,
 				32EA4B4B1AE522AC00EC7B8C /* MemberCell.swift */,
 				32EA4B4D1AE522B600EC7B8C /* MemberCell.xib */,
@@ -996,6 +999,7 @@
 				AC6A249C1ADD1AC000CF33D6 /* BLTSessionProtocol.swift in Sources */,
 				321D62C01AD2604400CF9BE9 /* SubtitleTableCell.swift in Sources */,
 				32850BE21AB9625500C49D33 /* ProjectsViewController.swift in Sources */,
+				32880DBE1AE5342F009A3B31 /* MemberPickerViewControllerDelegate.swift in Sources */,
 				323CBD921ADB96F600A7C970 /* ProjectHomeViewControllerDelegate.swift in Sources */,
 				781FD46C1AE415BE00BBC0E0 /* AnalysisTableViewController.swift in Sources */,
 				32EA4B4A1AE51E5200EC7B8C /* ProjectFormViewController.swift in Sources */,

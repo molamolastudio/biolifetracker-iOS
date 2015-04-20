@@ -30,20 +30,20 @@
                     <rect key="frame" x="0.0" y="177" width="600" height="423"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rU1-oY-nyQ">
-                            <rect key="frame" x="25" y="50" width="550" height="358"/>
+                            <rect key="frame" x="25" y="40" width="550" height="368"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </tableView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MEMBERS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PgK-5l-0I2">
-                            <rect key="frame" x="25" y="10" width="72" height="35"/>
+                            <rect key="frame" x="25" y="10" width="72" height="25"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lVs-xR-FeP">
-                            <rect key="frame" x="540" y="10" width="35" height="35"/>
+                            <rect key="frame" x="550" y="10" width="25" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="lVs-xR-FeP" secondAttribute="height" multiplier="1:1" id="ocs-pu-sGk"/>
-                                <constraint firstAttribute="width" constant="35" id="uvH-iC-Jzv"/>
+                                <constraint firstAttribute="width" constant="25" id="uvH-iC-Jzv"/>
                             </constraints>
                             <state key="normal" image="Add User Filled-50.png">
                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>

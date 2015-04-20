@@ -4,12 +4,50 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MemberPickerViewController" customModule="BioLifeTracker" customModuleProvider="target">
+            <connections>
+                <outlet property="button" destination="J2U-wQ-LIb" id="WV3-yQ-QlG"/>
+                <outlet property="tableView" destination="ev2-r9-Mu3" id="Gju-6g-Bdp"/>
+                <outlet property="view" destination="iN0-l3-epB" id="XWi-bt-P8a"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SELECT MEMBER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jbI-dQ-Vnu">
+                    <rect key="frame" x="15" y="15" width="120" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ev2-r9-Mu3">
+                    <rect key="frame" x="15" y="50" width="570" height="535"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J2U-wQ-LIb">
+                    <rect key="frame" x="548" y="15" width="37" height="30"/>
+                    <state key="normal" title="Done">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btnDonePressed:" destination="-1" eventType="touchUpInside" id="Oas-1J-jwt"/>
+                    </connections>
+                </button>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="J2U-wQ-LIb" firstAttribute="bottom" secondItem="jbI-dQ-Vnu" secondAttribute="bottom" id="6ck-7R-rUQ"/>
+                <constraint firstItem="J2U-wQ-LIb" firstAttribute="trailing" secondItem="ev2-r9-Mu3" secondAttribute="trailing" id="Fag-A8-w64"/>
+                <constraint firstItem="J2U-wQ-LIb" firstAttribute="top" secondItem="jbI-dQ-Vnu" secondAttribute="top" id="J4Y-LM-CVy"/>
+                <constraint firstItem="jbI-dQ-Vnu" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="QkP-XG-Pay"/>
+                <constraint firstItem="ev2-r9-Mu3" firstAttribute="top" secondItem="jbI-dQ-Vnu" secondAttribute="bottom" constant="5" id="Reh-Ik-mnK"/>
+                <constraint firstAttribute="trailing" secondItem="ev2-r9-Mu3" secondAttribute="trailing" constant="15" id="Roj-zm-Wdu"/>
+                <constraint firstItem="jbI-dQ-Vnu" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="aMX-P2-6t1"/>
+                <constraint firstItem="ev2-r9-Mu3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="kSw-lH-dfJ"/>
+                <constraint firstAttribute="bottom" secondItem="ev2-r9-Mu3" secondAttribute="bottom" constant="15" id="kYM-x7-EXD"/>
+            </constraints>
         </view>
     </objects>
 </document>

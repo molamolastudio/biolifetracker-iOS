@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProjectFormViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ProjectFormViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MemberPickerViewControllerDelegate, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var formPlaceholder: UIView!
     @IBOutlet weak var membersView: UITableView!
@@ -81,7 +81,30 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     @IBAction func addMembersBtnPressed(sender: UIButton) {
-        // Call members picker popup
+        showMemberPicker()
+    }
+    
+    func showMemberPicker() {
+        let memberPicker = MemberPickerViewController(nibName: "MemberPickerView", bundle: nil)
+        
+        memberPicker.delegate = self
+        memberPicker.modalPresentationStyle = .Popover
+        memberPicker.preferredContentSize = CGSizeMake(400, 400)
+        
+        memberPicker.members = UserManager.sharedInstance.getUsersExcept(members)
+        
+        let popoverController = memberPicker.popoverPresentationController!
+        popoverController.permittedArrowDirections = .Any
+        popoverController.delegate = self
+        popoverController.sourceView = addMembersButton
+        popoverController.sourceRect = CGRectMake(0, 0, 0, 0)
+        
+        presentViewController(memberPicker, animated: true, completion: nil)
+    }
+    
+    // MemberPickerViewControllerDelegate methods
+    func userDidSelectMember(member: User) {
+        members.append(member)
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS
@@ -152,6 +175,11 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
             deleteMemberAtIndex(indexPath.row - 1)
             membersView.reloadData()
         }
+    }
+    
+    // UIPopoverPresentationControllerDelegate method
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle{
+        return .None
     }
     
     // Selectors for buttons
