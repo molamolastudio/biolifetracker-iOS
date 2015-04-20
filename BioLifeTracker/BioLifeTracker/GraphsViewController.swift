@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotDataSource, CPTBarPlotDelegate, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CPTPlotSpaceDelegate{
+class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotDataSource, CPTBarPlotDelegate, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CPTPlotSpaceDelegate, UIPopoverPresentationControllerDelegate {
     var delegate: GraphsViewControllerDelegate!
     
     
@@ -85,12 +85,15 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     private var chosenSessions: [Session]!
     private var allSessions: [Session]!
     
-    var symbolTextAnnotation: CPTPlotSpaceAnnotation!
+    private var popover: UIPopoverPresentationController!
+    private var popoverContent: GraphDetailsViewController!
+    
     var AliceBlue = UIColor(red: 228.0/255.0, green: 241.0/255.0, blue: 254.0/255.0, alpha: 1)
     var HummingBird = UIColor(red: 197.0/255.0, green: 239.0/255.0, blue: 247.0/255.0, alpha: 1)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         initialiseGraph()
     }
     
@@ -104,9 +107,9 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     }
 
     func initConditions() {
-        getAllUsers()
-        getAllSessions()
-        getAllBehaviourStates()
+        setAllUsers()
+        setAllSessions()
+        setAllBehaviourStates()
         
     }
     
@@ -123,20 +126,45 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         
     }
     
-    func getAllUsers() {
+    func setAllUsers() {
         allUsers = projectInstance.members
         chosenUsers = allUsers
     }
     
-    func getAllSessions() {
+    func setAllSessions() {
         allSessions = projectInstance.sessions
         chosenSessions = allSessions
     }
     
-    func getAllBehaviourStates() {
+    func setAllBehaviourStates() {
         allBehaviourStates = projectInstance.ethogram.behaviourStates
         chosenBehaviourStates = allBehaviourStates
     }
+    
+    func getAllUsers() -> [User]{
+        return allUsers
+    }
+    
+    func getAllSessions() -> [Session]{
+        return allSessions
+    }
+    
+    func getAllBehaviourStates() -> [BehaviourState]{
+        return allBehaviourStates
+    }
+    
+    func getChosenUsers() -> [User]{
+        return chosenUsers
+    }
+    
+    func getChosenSessions() -> [Session]{
+        return chosenSessions
+    }
+    
+    func getChosenBehaviourStates() -> [BehaviourState]{
+        return chosenBehaviourStates
+    }
+    
     
     
     /*********************** UPDATE FOR GRAPH ********************/
@@ -160,17 +188,6 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         configureAxes()
         
         graphHostingView.hostedGraph.reloadData()
-//        if chartByState {
-//            configureGraph()
-//            configureBarPlots()
-//            configureAxes()
-//        } else {
-//            configureGraph()
-//            configurePlots()
-//            configureAxes()
-//            
-//        }
-//        hostingView.hostedGraph.reloadData()
     }
     
     func toggleGraph(type: GraphType) {
@@ -628,7 +645,6 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
             case .StateChart:
                 return numberOfStatesOccurences[Int(idx)]
             }
-                
                 //}else if plot.identifier.isEqual("states") {
                  //   return arr[Int(idx)]
                 //}
@@ -675,71 +691,57 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
             }
         }
         return newRange
-        
+    
     }
     
     func barPlot(plot: CPTBarPlot!, barWasSelectedAtRecordIndex idx: UInt) {
+
+        var x = Double(idx) + 0.5
+        var plotYValue = yMaxStates - numberOfStatesOccurences[Int(idx)]
         
-//        var plotXValue = chosenBehaviourStates[Int(idx)]
-//        if let bar = plot {
-//            
-//            
-//            
-//            var axis = plot.graph.axisSet as! CPTXYAxisSet
-//            var x = axis.xAxis.majorTickLocations.
-//            
-//        var plotYValue = numberOfStatesOccurences[Int(idx)]
-//        
-//        var plotSpace = plot.graph.defaultPlotSpace
-//        
-//        var cgPlotPoint = CGPointMake(plotXValue.floatValue, plotYValue.floatValue)
-//        
-//        
-//            CGPoint cgPlotAreaPoint =
-//                [graph convertPoint:cgPlotPoint toLayer:graph.plotAreaFrame.plotArea];
-//            
-//            NSDecimal plotAreaPoint[2];
-//            plotAreaPoint[CPTCoordinateX] =
-//                CPTDecimalFromFloat(cgPlotAreaPoint.x);
-//            plotAreaPoint[CPTCoordinateY] =
-//                CPTDecimalFromFloat(cgPlotAreaPoint.y);
-//            
-//            CGPoint dataPoint = [plotSpace
-//                
-//                
-//                plotAreaViewPointForPlotPoint:plotAreaPoint];
-//            NSLog(@"datapoint (CGPoint) coordinates tapped: %@",NSStringFromCGPoint(dataPoint));
-//            
-//            GrowthChartInfoTableViewController *infoViewController = [self.storyboard
-//            instantiateViewControllerWithIdentifier:@"GrowthChartInfo"];
-//            
-//            
-//            
-//            self.popover = nil;
-//            self.popover = [[UIPopoverController alloc]
-//            
-//            
-//            initWithContentViewController:infoViewController];
-//            self.popover.popoverContentSize = CGSizeMake(250, 200);
-//            self.popover.delegate = self;
-//            CGRect popoverAnchor =
-//            CGRectMake(dataPoint.x + graph.paddingLeft,
-//            dataPoint.y - graph.paddingTop + graph.paddingBottom,
-//            (CGFloat)1.0f, (CGFloat)1.0f);
-//            
-//            [self.popover presentPopoverFromRect:popoverAnchor
-//            inView:self.view
-//            permittedArrowDirections:UIPopoverArrowDirectionUp
-//            animated:YES];
-//        }
+        var plotPoint = [x, Double(plotYValue)]
+        
+        var pos = plot.plotSpace.plotAreaViewPointForPlotPoint(plotPoint)
+
+        var popoverContent = GraphDetailsViewController(nibName: "PopoverLabelView", bundle: nil)
+        popoverContent.modalPresentationStyle = UIModalPresentationStyle.Popover
+        var popover = popoverContent.popoverPresentationController
+        popoverContent.preferredContentSize = CGSizeMake(70,30)
+        popover!.delegate = self
+        
+        var anchorPoint  = plot.graph.convertPoint(CGPointMake(pos.x, pos.y), fromLayer: plot.graph.plotAreaFrame.plotArea)
+        
+        var popoverAnchor = CGRectMake(anchorPoint.x, anchorPoint.y, 0, 0)
+        popover!.sourceView = self.graphHostingView
+        popover!.sourceRect = popoverAnchor
+        popover!.permittedArrowDirections = UIPopoverArrowDirection.Up
+        
+        self.presentViewController(popoverContent, animated: true, completion: nil)
+        var final = String(numberOfStatesOccurences[Int(idx)])
+        popoverContent.setLabelMessage(final)
+        plot.graph.reloadData()
     }
+    
+    
     
     func barFillForBarPlot(barPlot: CPTBarPlot!, recordIndex idx: UInt) -> CPTFill! {
         return CPTFill(color: CPTColor.blueColor())
-        //add colours here
+        //if selected[Int(idx)] {
+            //choose colour highlighted
+            // each bar has a dedicated colour
+        //} else {
+            // choose normal colour > at rndom
+        //}
     }
     
     func symbolForScatterPlot(plot: CPTScatterPlot!, recordIndex idx: UInt) -> CPTPlotSymbol! {
+        
+        //if selected[Int(idx)] {
+            //choose colour highlighted
+            // each bar has a dedicated colour
+            //} else {
+            // choose normal colour > at rndom
+            //}
         
         var symbol = CPTPlotSymbol()
         symbol.symbolType = CPTPlotSymbolType.Ellipse
@@ -754,62 +756,47 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     
     
     func scatterPlot(plot: CPTScatterPlot!, plotSymbolWasSelectedAtRecordIndex idx: UInt) {
-
-        if (self.symbolTextAnnotation != nil) {
-            plot.graph.plotAreaFrame.plotArea.removeAllAnnotations()
-            self.symbolTextAnnotation = nil
-            
-        }
-        
-        // Setup a style for the annotation
-        var hitAnnotationTextStyle = CPTMutableTextStyle()
-        hitAnnotationTextStyle.color = CPTColor.redColor()
-        hitAnnotationTextStyle.fontSize = 16.0
-        hitAnnotationTextStyle.fontName = "Helvetica-Bold"
         
         // Determine point of symbol in plot coordinates
-        var x: NSNumber!
-        var y: NSNumber!
-        var text: String!
+        var x: Double!
+        var y: Double!
+        var final: String!
         switch current {
         case .DayPlot:
-            x = Int(idx) as NSNumber
-            y = x
+            x = Double(idx)
+            y = Double(yMaxDays - numberOfDayOccurences[Int(idx)])
+            final = String(numberOfDayOccurences[Int(idx)])
             
         case .HourPlot:
-            x = Int(idx) as NSNumber
-            y = x
-            
+            x = Double(idx)
+            y = Double(yMaxHours - numberOfHourOccurences[Int(idx)])
+            final = String(numberOfHourOccurences[Int(idx)])
         default:
             break
         }
         
-        var anchorPoint = [x, y]
+//        var pos = plot.plotAreaPointOfVisiblePointAtIndex(idx)
         
-        // Add annotation
+        var plotPoint = [x, y]
         
-        // Now add the annotation to the plot area
+        var pos = plot.plotSpace.plotAreaViewPointForPlotPoint(plotPoint)
         
-        var ystr = String(stringInterpolationSegment: y)
-        text = ystr
+        popoverContent = GraphDetailsViewController(nibName: "PopoverLabelView", bundle: nil)
+        popoverContent.modalPresentationStyle = UIModalPresentationStyle.Popover
+        popover = popoverContent.popoverPresentationController
+        popoverContent.preferredContentSize = CGSizeMake(70,30)
+        popover!.delegate = self
         
-        var textLayer = CPTTextLayer(text: text, style: hitAnnotationTextStyle)
-//        var bg = CPTImage(CGImage: UIImage(named: "blah")?.CGImage)
-//        textLayer.paddingLeft   = 2.0;
-//        textLayer.paddingTop    = 2.0;
-//        textLayer.paddingRight  = 2.0;
-//        textLayer.paddingBottom = 2.0;
+        var anchorPoint  = plot.graph.convertPoint(CGPointMake(pos.x, pos.y), fromLayer: plot.graph.plotAreaFrame.plotArea)
         
-        self.symbolTextAnnotation = CPTPlotSpaceAnnotation(plotSpace: plot.graph.plotSpaceAtIndex(idx) , anchorPlotPoint: anchorPoint)
-        
-        self.symbolTextAnnotation.contentLayer = textLayer;
-        //symbolTextAnnotation.contentAnchorPoint = CGPointMake(5, 0)
-        var pos = plot.plotAreaPointOfVisiblePointAtIndex(idx)
-        self.symbolTextAnnotation.displacement = CGPointMake(pos.x, pos.y + 10)
-        
-        
-        plot.graph.plotAreaFrame.plotArea.addAnnotation(symbolTextAnnotation)
-        
+        var popoverAnchor = CGRectMake(anchorPoint.x, anchorPoint.y, 0, 0)
+        popover!.sourceView = self.graphHostingView
+        popover!.sourceRect = popoverAnchor
+        popover!.permittedArrowDirections = UIPopoverArrowDirection.Up
+
+        self.presentViewController(popoverContent, animated: true, completion: nil)
+        popoverContent.setLabelMessage(final)
+        plot.graph.reloadData()
 
     }
     

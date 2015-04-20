@@ -67,7 +67,6 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         graphView.layer.masksToBounds = true;
         
         graphsVC = GraphsViewController(nibName: "GraphsView", bundle: nil)
-        //self.addChildViewController(graphsVC)
         graphsVC.setProject(currentProject!)
 
         graphsVC.view.frame = CGRectMake(0, 0, graphView.frame.width, graphView.frame.height)
