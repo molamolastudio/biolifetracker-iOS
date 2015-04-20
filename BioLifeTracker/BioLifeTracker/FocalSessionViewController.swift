@@ -114,6 +114,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         getData()
         individualsView.reloadData()
         observationsView.reloadData()
+        statesView.reloadData()
         hideObservationSection()
     }
     
@@ -279,7 +280,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
             
         } else if collectionView == statesView {
             showStateAsSelected(indexPath.row)
-            let observation = newObservations[individuals[selectedIndividual]]![indexPath.row]
+            let observation = selectedObservations[selectedObservation]
             observation.changeBehaviourState(states[indexPath.row])
         }
     }
