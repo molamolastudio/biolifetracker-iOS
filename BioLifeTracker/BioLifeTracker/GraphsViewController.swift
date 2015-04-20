@@ -229,7 +229,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
             
             //for number of hours
             numberOfHourOccurences = [Int](count: hours.count, repeatedValue:0)
-        
+
             for occurence in occurences {
                 if current == GraphType.DayPlot {
                     var day = getDayOfWeek(occurence.timestamp)
@@ -345,9 +345,8 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         graph.plotAreaFrame.paddingBottom = 40
         graph.plotAreaFrame.paddingTop = 40
         
-        graph.plotAreaFrame.fill = CPTFill(color: CPTColor(CGColor: HummingBird.CGColor))
-        graph.plotAreaFrame.plotArea.fill = CPTFill(color: CPTColor(CGColor: HummingBird.CGColor))
-        graph.fill = CPTFill(color: CPTColor(CGColor: AliceBlue.CGColor))
+        graph.plotAreaFrame.fill = CPTFill(color: CPTColor(CGColor: AliceBlue.CGColor))
+        graph.plotAreaFrame.plotArea.fill = CPTFill(color: CPTColor(CGColor: AliceBlue.CGColor))
         
         
         var plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
@@ -371,15 +370,24 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
             var xRange = plotSpace.xRange.mutableCopy() as! CPTMutablePlotRange
             var yRange = plotSpace.yRange.mutableCopy() as! CPTMutablePlotRange
             if current == .DayPlot {
+                
                 plotSpace.globalXRange = CPTPlotRange(location: 0, length: days.count)
                 plotSpace.globalYRange = CPTPlotRange(location: 0, length: yMaxDays)
                 xRange.length = days.count
                 yRange.length = yMaxDays
+                if yMaxDays == 0 {
+                    plotSpace.globalYRange = CPTPlotRange(location: 0, length: 1)
+                    yRange.length = 1
+                }
             } else {
                 plotSpace.globalXRange = CPTPlotRange(location: 0, length: hours.count)
                 plotSpace.globalYRange = CPTPlotRange(location: 0, length: yMaxHours)
                 xRange.length = hours.count
                 yRange.length = yMaxHours
+                if yMaxHours == 0 {
+                    plotSpace.globalYRange = CPTPlotRange(location: 0, length: 1)
+                    yRange.length = 1
+                }
             }
             
             plotSpace.xRange = xRange
@@ -416,8 +424,12 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
             plotSpace.globalXRange = CPTPlotRange(location: 0, length: chosenBehaviourStates.count)
             plotSpace.globalYRange = CPTPlotRange(location: 0, length: yMaxStates)
 
-            xRange.length = 5.5
+            xRange.length = 6.5
             yRange.length = yMaxStates
+            if yMaxStates == 0 {
+                plotSpace.globalYRange = CPTPlotRange(location: 0, length: 1)
+                yRange.length = 1
+            }
             
             plotSpace.xRange = xRange
             plotSpace.yRange = yRange
@@ -577,27 +589,41 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         var yMajorLocations = NSMutableSet()
         var yMinorLocations = NSMutableSet()
         
-        var majorIncrement = yMax/10.0 as CGFloat
-        var minorIncrement = yMax/20.0 as CGFloat
-        
-        for var j: CGFloat = 0; j <= yMax; j += minorIncrement {
-            var mod = j % majorIncrement
+        if yMax != 0 {
+            var majorIncrement = yMax/10.0 as CGFloat
+            var minorIncrement = yMax/20.0 as CGFloat
             
-            if mod == 0 {
-                var jstr = String(format: "%.0f", j)
-                var label = CPTAxisLabel(text: jstr, textStyle: y.labelTextStyle)
-                label.offset = -y.majorTickLength - y.labelOffset
-                label.tickLocation = j
-                yLabels.addObject(label)
+            for var j: CGFloat = 0; j <= yMax; j += minorIncrement {
+                var mod = j % majorIncrement
                 
-                yMajorLocations.addObject(j)
+                if mod == 0 {
+                    var jstr = String(format: "%.0f", j)
+                    var label = CPTAxisLabel(text: jstr, textStyle: y.labelTextStyle)
+                    label.offset = -y.majorTickLength - y.labelOffset
+                    label.tickLocation = j
+                    yLabels.addObject(label)
+                    
+                    yMajorLocations.addObject(j)
+                    
+                } else {
+                    yMinorLocations.addObject(j)
+                }
                 
-            } else {
-                yMinorLocations.addObject(j)
             }
-            
+        } else {
+            for var j: CGFloat = 0; j <= 1; j += 1 {
+                    var jstr = String(format: "%.0f", j)
+                    var label = CPTAxisLabel(text: jstr, textStyle: y.labelTextStyle)
+                    label.offset = -y.majorTickLength - y.labelOffset
+                    label.tickLocation = j
+                    yLabels.addObject(label)
+                    
+                    yMajorLocations.addObject(j)
+                
+            }
         }
-        y.axisLabels = yLabels as Set<NSObject>;    
+        
+        y.axisLabels = yLabels as Set<NSObject>;
         y.majorTickLocations = yMajorLocations as Set<NSObject>;
         y.minorTickLocations = yMinorLocations as Set<NSObject>;
         
@@ -608,11 +634,23 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     func numberOfRecordsForPlot(plot: CPTPlot!) -> UInt {
         switch current {
         case .DayPlot:
-            return UInt(numberOfDayOccurences.count)
+//            if numberOfDayOccurences.count == 0  {
+//                return UInt(1)
+//            } else {
+                return UInt(numberOfDayOccurences.count)
+//            }
         case .HourPlot:
-            return UInt(numberOfHourOccurences.count)
+//            if numberOfHourOccurences.count == 0  {
+//                return UInt(1)
+//            } else {
+                return UInt(numberOfHourOccurences.count)
+//            }
         case .StateChart:
-            return UInt(numberOfStatesOccurences.count)
+//            if numberOfStatesOccurences.count == 0  {
+//                return UInt(1)
+//            } else {
+                return UInt(numberOfStatesOccurences.count)
+//            }
         }
         
     }
@@ -636,19 +674,21 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         case UInt(CPTScatterPlotField.Y.rawValue):
             //if plot.identifier != nil {
                 //if plot.identifier.isEqual("occurence") {
-                
+            
             switch current {
             case .DayPlot:
-                return numberOfDayOccurences[Int(idx)]
+                if numberOfDayOccurences != nil {
+                    return numberOfDayOccurences[Int(idx)]
+                }
             case .HourPlot:
-                return numberOfHourOccurences[Int(idx)]
+                if numberOfHourOccurences != nil {
+                    return numberOfHourOccurences[Int(idx)]
+                }
             case .StateChart:
-                return numberOfStatesOccurences[Int(idx)]
+                if numberOfStatesOccurences != nil {
+                    return numberOfStatesOccurences[Int(idx)]
+                }
             }
-                //}else if plot.identifier.isEqual("states") {
-                 //   return arr[Int(idx)]
-                //}
-            //}
         default:
             break;
         }

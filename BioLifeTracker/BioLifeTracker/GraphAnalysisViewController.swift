@@ -25,8 +25,8 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.background.backgroundColor = AliceBlue
-        self.view.backgroundColor = AliceBlue
+        self.background.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.whiteColor()
         self.view.sendSubviewToBack(self.background)
         
         showGraphsView();
@@ -37,7 +37,7 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
 
         var stub = ProjectStub()
         // set graph for now it's stub
-        graphsVC.setProject(stub.project)
+        graphsVC.setProject(stub.empty)
         graphsVC.toggleGraph(.HourPlot)
         graphsVC.view.frame = CGRectMake(0, 0, graphsView.frame.width, graphsView.frame.height)
         graphsView.addSubview(graphsVC.view)
@@ -74,6 +74,7 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
     }
     
     @IBAction func buttonIsPressed(sender: UIButton) {
+
         var name = sender.titleLabel?.text
         
         var popoverContent = AnalysisTableViewController()
@@ -96,7 +97,11 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
         } else if name == "Sessions" {
             popoverContent.setHeaderTitle(name!)
             popoverContent.toggleTable(.Sessions)
-            popoverContent.initSessions(graphsVC.getAllSessions(), chosen: graphsVC.getChosenSessions())
+            if graphsVC.getAllSessions().count == 0 {
+                popoverContent.initEmpty()
+            } else {
+                popoverContent.initSessions(graphsVC.getAllSessions(), chosen: graphsVC.getChosenSessions())
+            }
         } else if name == "Behaviour States" {
             popoverContent.setHeaderTitle(name!)
             popoverContent.toggleTable(.States)
@@ -105,6 +110,7 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
         popoverContent.delegate = self
         
         self.presentViewController(popoverContent, animated: true, completion: nil)
+            
     }
     
     
