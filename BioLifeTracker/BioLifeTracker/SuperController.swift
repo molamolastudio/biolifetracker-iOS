@@ -706,8 +706,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         let downloadBehaviourState = DownloadTask(classUrl: BehaviourState.ClassUrl)
         let downloadEthogram = DownloadTask(classUrl: Ethogram.ClassUrl)
         let downloadProject = DownloadTask(classUrl: Project.ClassUrl)
-        // must put to cache
-        // think of how not to erase the cache between workers
         let tasks = [
             downloadUser,
             downloadLocation,
@@ -780,10 +778,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
             })
         }
         worker.setOnProgressUpdate { percentage, message in
-            self.loadingAlert?.dismissViewControllerAnimated(false, completion: {
-                let title = self.loadingAlert!.title
-//                self.loadingAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-//                self.presentViewController(self.loadingAlert!, animated: false, completion: nil)
+            dispatch_async(dispatch_get_main_queue(), {
+                self.loadingAlert?.message = message
+                
             })
         }
         worker.startExecution()
