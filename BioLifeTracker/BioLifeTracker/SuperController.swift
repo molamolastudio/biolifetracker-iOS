@@ -372,9 +372,23 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showAnalysisPage() {
+        if !ProjectManager.sharedInstance.projects.isEmpty {
+            let vc = GraphAnalysisViewController(nibName: "GraphAnalysisView", bundle: nil)
+            
+            vc.title = "Analyse"
+            
+            detailNav.setViewControllers([vc], animated: false)
+        } else {
+            // If there are no projects saved, display alert
+            displayAlert("No Projects To Analyse", message: "")
+        }
+    }
+    
+    func showAnalysisPageWithProject(project: Project) {
         let vc = GraphAnalysisViewController(nibName: "GraphAnalysisView", bundle: nil)
         
         vc.title = "Analyse"
+        vc.setProject(project)
         
         detailNav.setViewControllers([vc], animated: false)
     }
@@ -623,7 +637,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func userDidSelectGraph(project: Project) {
-        // Show analysis with the particular project
+        showAnalysisPageWithProject(project)
     }
     
     func userDidSelectCreateSession() {
