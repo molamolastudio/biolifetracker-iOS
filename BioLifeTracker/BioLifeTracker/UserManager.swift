@@ -45,7 +45,7 @@ class UserManager {
             while (j < excludedUsers.count && candidate.name > excludedUsers[j].name) {
                 j++
             }
-            if candidate.name != excludedUsers[j].name {
+            if j == excludedUsers.count || candidate.name != excludedUsers[j].name {
                 result.append(candidate)
             }
             i++
