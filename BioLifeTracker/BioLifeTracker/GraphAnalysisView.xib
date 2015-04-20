@@ -9,6 +9,9 @@
                 <outlet property="background" destination="zjg-Pj-9I7" id="Seg-yY-gLz"/>
                 <outlet property="graphSwitch" destination="HmU-Ci-fRo" id="GmF-kU-PzP"/>
                 <outlet property="graphsView" destination="Fwg-BZ-hzn" id="DrF-OU-cSx"/>
+                <outlet property="sessionButton" destination="Xkz-gR-Wre" id="5Ml-lc-eZf"/>
+                <outlet property="statesButton" destination="7Ag-Zi-E8o" id="ses-WZ-cXc"/>
+                <outlet property="userButton" destination="wVy-Qc-had" id="THy-Bh-SfL"/>
                 <outlet property="view" destination="iN0-l3-epB" id="n6s-61-Mhh"/>
             </connections>
         </placeholder>
@@ -30,18 +33,27 @@
                     <state key="normal" title="Users">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="buttonIsPressed:" destination="-1" eventType="touchUpInside" id="oBc-Z4-BGy"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xkz-gR-Wre">
                     <rect key="frame" x="152" y="496" width="62" height="30"/>
                     <state key="normal" title="Sessions">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="buttonIsPressed:" destination="-1" eventType="touchUpInside" id="IUP-zG-HSm"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ag-Zi-E8o">
                     <rect key="frame" x="277" y="496" width="117" height="30"/>
                     <state key="normal" title="Behaviour States">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="buttonIsPressed:" destination="-1" eventType="touchUpInside" id="Yk9-Jw-etI"/>
+                    </connections>
                 </button>
                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="HmU-Ci-fRo">
                     <rect key="frame" x="363" y="445" width="197" height="29"/>

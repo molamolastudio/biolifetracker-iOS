@@ -85,7 +85,9 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     private var chosenSessions: [Session]!
     private var allSessions: [Session]!
     
-    var symbolTextAnnotation: CPTPlotSpaceAnnotation!
+    private var popover: UIPopoverPresentationController!
+    private var popoverContent: GraphDetailsViewController!
+    
     var AliceBlue = UIColor(red: 228.0/255.0, green: 241.0/255.0, blue: 254.0/255.0, alpha: 1)
     var HummingBird = UIColor(red: 197.0/255.0, green: 239.0/255.0, blue: 247.0/255.0, alpha: 1)
     
@@ -105,9 +107,9 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     }
 
     func initConditions() {
-        getAllUsers()
-        getAllSessions()
-        getAllBehaviourStates()
+        setAllUsers()
+        setAllSessions()
+        setAllBehaviourStates()
         
     }
     
@@ -124,20 +126,45 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         
     }
     
-    func getAllUsers() {
+    func setAllUsers() {
         allUsers = projectInstance.members
         chosenUsers = allUsers
     }
     
-    func getAllSessions() {
+    func setAllSessions() {
         allSessions = projectInstance.sessions
         chosenSessions = allSessions
     }
     
-    func getAllBehaviourStates() {
+    func setAllBehaviourStates() {
         allBehaviourStates = projectInstance.ethogram.behaviourStates
         chosenBehaviourStates = allBehaviourStates
     }
+    
+    func getAllUsers() -> [User]{
+        return allUsers
+    }
+    
+    func getAllSessions() -> [Session]{
+        return allSessions
+    }
+    
+    func getAllBehaviourStates() -> [BehaviourState]{
+        return allBehaviourStates
+    }
+    
+    func getChosenUsers() -> [User]{
+        return chosenUsers
+    }
+    
+    func getChosenSessions() -> [Session]{
+        return chosenSessions
+    }
+    
+    func getChosenBehaviourStates() -> [BehaviourState]{
+        return chosenBehaviourStates
+    }
+    
     
     
     /*********************** UPDATE FOR GRAPH ********************/
@@ -729,7 +756,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     
     
     func scatterPlot(plot: CPTScatterPlot!, plotSymbolWasSelectedAtRecordIndex idx: UInt) {
-
+        
         // Determine point of symbol in plot coordinates
         var x: Double!
         var y: Double!
@@ -754,9 +781,9 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         
         var pos = plot.plotSpace.plotAreaViewPointForPlotPoint(plotPoint)
         
-        var popoverContent = GraphDetailsViewController(nibName: "PopoverLabelView", bundle: nil)
+        popoverContent = GraphDetailsViewController(nibName: "PopoverLabelView", bundle: nil)
         popoverContent.modalPresentationStyle = UIModalPresentationStyle.Popover
-        var popover = popoverContent.popoverPresentationController
+        popover = popoverContent.popoverPresentationController
         popoverContent.preferredContentSize = CGSizeMake(70,30)
         popover!.delegate = self
         
@@ -766,7 +793,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         popover!.sourceView = self.graphHostingView
         popover!.sourceRect = popoverAnchor
         popover!.permittedArrowDirections = UIPopoverArrowDirection.Up
-        
+
         self.presentViewController(popoverContent, animated: true, completion: nil)
         popoverContent.setLabelMessage(final)
         plot.graph.reloadData()

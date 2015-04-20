@@ -129,24 +129,19 @@
 		329B29411AD16058007ADC65 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329B29401AD16058007ADC65 /* FirstViewController.swift */; };
 		32FB650A1AD94B6800391194 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3205E7501AAED9F9006F374D /* LaunchScreen.xib */; };
 		781FD4661AE3E5C300BBC0E0 /* PopoverLabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 781FD4651AE3E5C300BBC0E0 /* PopoverLabelView.xib */; };
-		781FD4671AE3E5C300BBC0E0 /* PopoverLabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 781FD4651AE3E5C300BBC0E0 /* PopoverLabelView.xib */; };
+		781FD4691AE4159B00BBC0E0 /* AnalysisTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 781FD4681AE4159B00BBC0E0 /* AnalysisTableHeader.xib */; };
+		781FD46C1AE415BE00BBC0E0 /* AnalysisTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781FD46B1AE415BE00BBC0E0 /* AnalysisTableViewController.swift */; };
+		781FD46F1AE466EB00BBC0E0 /* AnalysisTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781FD46E1AE466EB00BBC0E0 /* AnalysisTableHeader.swift */; };
 		7838E7521AE34F04007C2562 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7838E7511AE34F04007C2562 /* Accelerate.framework */; };
 		7838E7541AE34F11007C2562 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7838E7531AE34F11007C2562 /* QuartzCore.framework */; };
 		7838E7561AE34F22007C2562 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7838E7551AE34F22007C2562 /* libCorePlot-CocoaTouch.a */; };
 		7838E75E1AE3501C007C2562 /* GraphAnalysisView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7838E7581AE3501C007C2562 /* GraphAnalysisView.xib */; };
-		7838E75F1AE3501C007C2562 /* GraphAnalysisView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7838E7581AE3501C007C2562 /* GraphAnalysisView.xib */; };
 		7838E7601AE3501C007C2562 /* GraphAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E7591AE3501C007C2562 /* GraphAnalysisViewController.swift */; };
-		7838E7611AE3501C007C2562 /* GraphAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E7591AE3501C007C2562 /* GraphAnalysisViewController.swift */; };
 		7838E7621AE3501C007C2562 /* GraphsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7838E75A1AE3501C007C2562 /* GraphsView.xib */; };
-		7838E7631AE3501C007C2562 /* GraphsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7838E75A1AE3501C007C2562 /* GraphsView.xib */; };
 		7838E7641AE3501C007C2562 /* GraphsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75B1AE3501C007C2562 /* GraphsViewController.swift */; };
-		7838E7651AE3501C007C2562 /* GraphsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75B1AE3501C007C2562 /* GraphsViewController.swift */; };
 		7838E7661AE3501C007C2562 /* GraphsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */; };
-		7838E7671AE3501C007C2562 /* GraphsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */; };
 		7838E7681AE3501C007C2562 /* ProjectStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75D1AE3501C007C2562 /* ProjectStub.swift */; };
-		7838E7691AE3501C007C2562 /* ProjectStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75D1AE3501C007C2562 /* ProjectStub.swift */; };
 		7838E76B1AE3B177007C2562 /* GraphDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E76A1AE3B177007C2562 /* GraphDetailsViewController.swift */; };
-		7838E76C1AE3BD54007C2562 /* GraphDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E76A1AE3B177007C2562 /* GraphDetailsViewController.swift */; };
 		AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AC18814A1ACFC84600CE450B /* GooglePlus.bundle */; };
 		AC18814E1ACFC84600CE450B /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814B1ACFC84600CE450B /* GooglePlus.framework */; };
 		AC1881501ACFD05D00CE450B /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814F1ACFD05D00CE450B /* GoogleOpenSource.framework */; };
@@ -345,6 +340,9 @@
 		329B293E1AD15E6F007ADC65 /* FirstView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstView.xib; sourceTree = "<group>"; };
 		329B29401AD16058007ADC65 /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		781FD4651AE3E5C300BBC0E0 /* PopoverLabelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopoverLabelView.xib; sourceTree = "<group>"; };
+		781FD4681AE4159B00BBC0E0 /* AnalysisTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalysisTableHeader.xib; sourceTree = "<group>"; };
+		781FD46B1AE415BE00BBC0E0 /* AnalysisTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisTableViewController.swift; sourceTree = "<group>"; };
+		781FD46E1AE466EB00BBC0E0 /* AnalysisTableHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisTableHeader.swift; sourceTree = "<group>"; };
 		7838E7511AE34F04007C2562 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		7838E7531AE34F11007C2562 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7838E7551AE34F22007C2562 /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libCorePlot-CocoaTouch.a"; path = "BioLifeTracker/libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
@@ -705,7 +703,10 @@
 				7838E7591AE3501C007C2562 /* GraphAnalysisViewController.swift */,
 				7838E75A1AE3501C007C2562 /* GraphsView.xib */,
 				7838E75B1AE3501C007C2562 /* GraphsViewController.swift */,
+				781FD46B1AE415BE00BBC0E0 /* AnalysisTableViewController.swift */,
+				781FD4681AE4159B00BBC0E0 /* AnalysisTableHeader.xib */,
 				781FD4651AE3E5C300BBC0E0 /* PopoverLabelView.xib */,
+				781FD46E1AE466EB00BBC0E0 /* AnalysisTableHeader.swift */,
 				7838E76A1AE3B177007C2562 /* GraphDetailsViewController.swift */,
 				7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */,
 				7838E75D1AE3501C007C2562 /* ProjectStub.swift */,
@@ -861,6 +862,7 @@
 				321D62C11AD2604400CF9BE9 /* SubtitleTableCell.xib in Resources */,
 				32423B9D1AE2B1F300AFA2F8 /* CircleWithLabelCell.xib in Resources */,
 				329B292D1AD15BAF007ADC65 /* ButtonCell.xib in Resources */,
+				781FD4691AE4159B00BBC0E0 /* AnalysisTableHeader.xib in Resources */,
 				323CBD901ADB901200A7C970 /* ProjectHomeView.xib in Resources */,
 				323CBD941ADD526600A7C970 /* ScanView.xib in Resources */,
 				329B293F1AD15E6F007ADC65 /* FirstView.xib in Resources */,
@@ -888,9 +890,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7838E75F1AE3501C007C2562 /* GraphAnalysisView.xib in Resources */,
-				781FD4671AE3E5C300BBC0E0 /* PopoverLabelView.xib in Resources */,
-				7838E7631AE3501C007C2562 /* GraphsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -913,11 +912,13 @@
 				326773BD1ACAEFB000899745 /* FormFieldData.swift in Sources */,
 				321D62C31AD2615B00CF9BE9 /* ProjectsViewControllerDelegate.swift in Sources */,
 				242C6E091AC86BFD0024ECEF /* Tag.swift in Sources */,
+				781FD46F1AE466EB00BBC0E0 /* AnalysisTableHeader.swift in Sources */,
 				2458F4CE1AE0F5320006DFC7 /* NSDate+Encoding.swift in Sources */,
 				AC6A249C1ADD1AC000CF33D6 /* BLTSessionProtocol.swift in Sources */,
 				321D62C01AD2604400CF9BE9 /* SubtitleTableCell.swift in Sources */,
 				32850BE21AB9625500C49D33 /* ProjectsViewController.swift in Sources */,
 				323CBD921ADB96F600A7C970 /* ProjectHomeViewControllerDelegate.swift in Sources */,
+				781FD46C1AE415BE00BBC0E0 /* AnalysisTableViewController.swift in Sources */,
 				329B293A1AD15BBF007ADC65 /* PhotoPickerCell.swift in Sources */,
 				AC6A24A61ADD1B2300CF33D6 /* BLTWeatherProtocol.swift in Sources */,
 				326773C21ACAEFB000899745 /* SingleLineTextCell.swift in Sources */,
@@ -997,7 +998,6 @@
 				240FEF0C1AD60AF6000FD9F3 /* CloudStorageTask.swift in Sources */,
 				240FEF0D1AD60AF6000FD9F3 /* CloudStorageWorker.swift in Sources */,
 				240FEF0E1AD60AF6000FD9F3 /* DownloadTask.swift in Sources */,
-				7838E7671AE3501C007C2562 /* GraphsViewControllerDelegate.swift in Sources */,
 				240FEF0F1AD60AF6000FD9F3 /* UploadTask.swift in Sources */,
 				AC6A24B01ADD233D00CF33D6 /* BLTEthogramProtocol.swift in Sources */,
 				AC6A24BA1ADD26BA00CF33D6 /* DownloadTaskTests.swift in Sources */,
@@ -1017,11 +1017,9 @@
 				AC7B6DD61AD25482002D3EE6 /* Weather.swift in Sources */,
 				AC7B6DDD1AD25498002D3EE6 /* Storable.swift in Sources */,
 				AC6A24B51ADD234F00CF33D6 /* BLTTagProtocol.swift in Sources */,
-				7838E7611AE3501C007C2562 /* GraphAnalysisViewController.swift in Sources */,
 				AC7B6DC01AD2543D002D3EE6 /* IndividualTests.swift in Sources */,
 				AC7B6DDE1AD2549B002D3EE6 /* Project.swift in Sources */,
 				AC7B6DDF1AD2549E002D3EE6 /* BiolifeModel.swift in Sources */,
-				7838E7691AE3501C007C2562 /* ProjectStub.swift in Sources */,
 				AC6A24AE1ADD233900CF33D6 /* BLTSessionProtocol.swift in Sources */,
 				AC7B6DC31AD25445002D3EE6 /* SessionTests.swift in Sources */,
 				AC7B6DC21AD25443002D3EE6 /* BehaviourStateTests.swift in Sources */,
@@ -1029,7 +1027,6 @@
 				AC6A24B81ADD26B400CF33D6 /* DummyModel.swift in Sources */,
 				AC7B6DE31AD254B2002D3EE6 /* ProjectManager.swift in Sources */,
 				2458F4D31AE160F00006DFC7 /* BLTProjectSerializer.swift in Sources */,
-				7838E76C1AE3BD54007C2562 /* GraphDetailsViewController.swift in Sources */,
 				AC6A24B41ADD234800CF33D6 /* BLTLocationProtocol.swift in Sources */,
 				AC7B6DC71AD25451002D3EE6 /* ProjectMngTests.swift in Sources */,
 				AC7B6DDC1AD25495002D3EE6 /* BehaviourState.swift in Sources */,
@@ -1042,7 +1039,6 @@
 				24CE59421ADD42AB000571A3 /* NSDate+Encoding.swift in Sources */,
 				AC7B6DBF1AD2543B002D3EE6 /* LocationTests.swift in Sources */,
 				AC7B6DE11AD254A6002D3EE6 /* UserAuthService.swift in Sources */,
-				7838E7651AE3501C007C2562 /* GraphsViewController.swift in Sources */,
 				AC7B6DE01AD254A1002D3EE6 /* User.swift in Sources */,
 				AC7B6DBE1AD25438002D3EE6 /* WeatherTests.swift in Sources */,
 				AC6A24B21ADD234200CF33D6 /* BLTIndividualProtocol.swift in Sources */,

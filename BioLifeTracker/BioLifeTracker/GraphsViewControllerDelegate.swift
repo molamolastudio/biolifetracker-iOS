@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 
 protocol GraphsViewControllerDelegate {
-    
-    
+    func didAddUser(user: User)
+    func didRemoveUser(user: User)
+    func didAddSession(session: Session)
+    func didRemoveSession(session: Session)
+    func didAddState(state: BehaviourState)
+    func didRemoveState(state: BehaviourState)
 }
