@@ -47,6 +47,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
             self.presentViewController(loadingAlert!, animated: true, completion: nil)
             startDownloadingProjectsFromServer()
             freshLogin = false
+        } else {
+            refreshUserList()
         }
         
         if UserAuthService.sharedInstance.user.email != "Default" {
@@ -661,6 +663,23 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         let actionOk = UIAlertAction(title: "OK", style: .Default, handler: nil)
         alert.addAction(actionOk)
         self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func refreshUserList() {
+        let worker = CloudStorageWorker()
+        let downloadUser = DownloadTask(classUrl: User.ClassUrl)
+        worker.enqueueTask(downloadUser)
+        worker.setOnFinished {
+            if downloadUser.completedSuccessfully == true {
+                UserManager.sharedInstance.clearUsers()
+                for userInfo in downloadUser.getResults() {
+                    let user = User(dictionary: userInfo)
+                    UserManager.sharedInstance.addUser(user)
+                }
+                UserManager.sharedInstance.saveUsersToDisk()
+            }
+        }
+        worker.startExecution()
     }
     
     
