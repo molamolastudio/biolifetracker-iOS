@@ -21,13 +21,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" tag="3" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Cxe-u6-XLb">
-                    <rect key="frame" x="308" y="63" width="277" height="522"/>
+                    <rect key="frame" x="308" y="58" width="277" height="527"/>
                 </tableView>
                 <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="wC8-Gm-uSp">
-                    <rect key="frame" x="15" y="340" width="277" height="245"/>
+                    <rect key="frame" x="15" y="335" width="277" height="250"/>
                 </tableView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GRAPH" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C1y-yj-JfN">
-                    <rect key="frame" x="15" y="28" width="50" height="30"/>
+                    <rect key="frame" x="15" y="28" width="50" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="TQ3-5N-emH"/>
                     </constraints>
@@ -41,23 +41,23 @@
                     </variation>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SESSIONS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HaF-kn-3id">
-                    <rect key="frame" x="308" y="28" width="71" height="30"/>
+                    <rect key="frame" x="308" y="28" width="71" height="25"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MEMBERS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hEe-TV-tjv">
-                    <rect key="frame" x="15" y="305" width="72" height="30"/>
+                    <rect key="frame" x="15" y="305" width="72" height="25"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0sh-hb-5kC">
-                    <rect key="frame" x="15" y="63" width="277" height="237"/>
+                    <rect key="frame" x="15" y="58" width="277" height="242"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uSr-Mi-AdS">
-                    <rect key="frame" x="555" y="28" width="30" height="30"/>
+                    <rect key="frame" x="560" y="28" width="25" height="25"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="uSr-Mi-AdS" secondAttribute="height" multiplier="1:1" id="dYZ-gN-2Nf"/>
                     </constraints>
@@ -69,16 +69,16 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0G8-Bo-fQD">
-                    <rect key="frame" x="262" y="305" width="30" height="30"/>
+                    <rect key="frame" x="267" y="305" width="25" height="25"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="oKg-bK-Vbw"/>
+                        <constraint firstAttribute="height" constant="25" id="oKg-bK-Vbw"/>
                         <constraint firstAttribute="width" secondItem="0G8-Bo-fQD" secondAttribute="height" multiplier="1:1" id="smd-WD-o63"/>
                     </constraints>
-                    <state key="normal" image="Edit User-50.png">
+                    <state key="normal" image="Add User Filled-50.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="editMembersBtnPressed" destination="-1" eventType="touchUpInside" id="NO6-VG-0iQ"/>
+                        <action selector="addMembersBtnPressed" destination="-1" eventType="touchUpInside" id="CnY-Iz-pea"/>
                     </connections>
                 </button>
             </subviews>
@@ -116,7 +116,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Edit User-50.png" width="50" height="50"/>
+        <image name="Add User Filled-50.png" width="50" height="50"/>
         <image name="Plus-50.png" width="50" height="50"/>
     </resources>
 </document>
