@@ -341,8 +341,10 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         graph.plotAreaFrame.paddingBottom = 40
         graph.plotAreaFrame.paddingTop = 40
         
-        graph.plotAreaFrame.fill = CPTFill(color: CPTColor(CGColor: AliceBlue.CGColor))
-        graph.plotAreaFrame.plotArea.fill = CPTFill(color: CPTColor(CGColor: AliceBlue.CGColor))
+//        graph.plotAreaFrame.fill = CPTFill(color: CPTColor(CGColor: AliceBlue.CGColor))
+        graph.plotAreaFrame.fill = CPTFill(color: CPTColor.whiteColor())
+//        graph.plotAreaFrame.plotArea.fill = CPTFill(color: CPTColor(CGColor: AliceBlue.CGColor))
+        graph.plotAreaFrame.plotArea.fill = CPTFill(color: CPTColor.whiteColor())
         
         
         var plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
