@@ -435,6 +435,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     // Selectors for navigation bar items
+    // Methods to create new model objects
     func createNewProject() {
         if let vc = detailNav.visibleViewController as? FormViewController {
             let values = vc.getFormData()
@@ -462,11 +463,12 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         if let vc = detailNav.visibleViewController as? EthogramFormViewController {
             if let ethogram = vc.getEthogram() {
                 EthogramManager.sharedInstance.addEthogram(vc.ethogram)
-                detailNav.popViewControllerAnimated(true)
+                dismissCurrentPage()
             }
         }
     }
     
+    // Methods to toggle between save and edit states
     func updateEditButtonForEthogram() {
         if let vc = detailNav.visibleViewController as? EthogramDetailsViewController {
             vc.makeEditable(true)
@@ -495,19 +497,27 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         if let vc = detailNav.visibleViewController as? EthogramDetailsViewController {
             vc.saveData()
             dismissCurrentPage()
+            vc.makeEditable(false)
+            var btn = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("updateEditButtonForEthogram"))
+            vc.navigationItem.rightBarButtonItem = btn
         }
     }
     
     func saveScanData() {
         if let vc = detailNav.visibleViewController as? ScanViewController {
             vc.saveData()
-            dismissCurrentPage()
+            vc.makeEditable(false)
+            var btn = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("updateEditButtonForScan"))
+            vc.navigationItem.rightBarButtonItem = btn
         }
     }
     
     func saveFocalSessionData() {
         if let vc = detailNav.visibleViewController as? FocalSessionViewController {
             vc.saveData()
+            vc.makeEditable(false)
+            var btn = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("updateEditButtonForFocalSession"))
+            vc.navigationItem.rightBarButtonItem = btn
         }
     }
     

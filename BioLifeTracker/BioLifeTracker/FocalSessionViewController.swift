@@ -51,17 +51,14 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         super.viewDidLoad()
         hideObservationSection()
         setupViews()
-        
+        getData()
         // Sets up the date formatter for converting dates to strings
         formatter.dateStyle = .ShortStyle
         formatter.timeStyle = .ShortStyle
-        
-        getData()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        showIndividualAtIndex(NSIndexPath(forRow: 0, inSection: 0))
     }
     
     func setupViews() {
@@ -100,9 +97,23 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     func makeEditable(value: Bool) {
         editable = value
+        
+        refreshViews()
+    }
+    
+    func refreshViews() {
+        selectedIndividual = 0
+        selectedObservation = 0
+        selectedObservations = [Observation]()
+        
+        individuals = [Individual]()
+        originalObservations = [Individual: [Observation]]()
+        newObservations = [Individual: [Observation]]()
+        
+        getData()
         individualsView.reloadData()
         observationsView.reloadData()
-        statesView.reloadData()
+        hideObservationSection()
     }
     
     // Sets the data source of this controller.
@@ -115,6 +126,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
             // Setup the individuals array
             let all = Individual(label: "All")
             individuals.append(all)
+            newObservations[all] = []
             
             // If there are no individuals defined, do nothing
             if currentSession!.project.individuals.count > 0 {
@@ -136,21 +148,41 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    // Copy over the information in the edited observations to the original observations.
+    // Copies over the information in the edited individuals to the original individuals.
+    // Copies over the information in the edited observations to the original observations.
+    // Adds new individuals or observations.
     func saveData() {
-        for i in individuals {
-            let observations = newObservations[i]!
-            let original = originalObservations[i]!
-            println(observations.count)
-            for j in 0...observations.count {
-                if j < original.count {
-                    // Copy over the updated information of the observation
-                    copyOverObservation(observations[j], to: original[j])
-                } else {
-                    // Add a new observation
-                    currentSession!.addObservation([observations[j]])
+        let originalIndividuals = currentSession!.project.individuals
+        
+        individuals.removeAtIndex(0) // Remove the 'All' individual
+        for i in 0...individuals.count - 1 {
+            let individual = individuals[i] // Get the individual
+            
+            // If this individual exists in the project
+            if i < originalIndividuals.count {
+                
+                let observations = newObservations[individual]!
+                let original = originalObservations[individual]!
+                
+                if observations.count > 0 {
+                    for j in 0...observations.count - 1 {
+                        if j < original.count {
+                            // Copy over the updated information of the observation
+                            copyOverObservation(observations[j], to: original[j])
+                        } else {
+                            // Add a new observation
+                            currentSession!.addObservation([observations[j]])
+                        }
+                    }
                 }
+            } else { // If this individual does not exist in the project
+                // Add it to the project
+                currentSession!.project.addIndividuals([individual])
+                
+                // Add its observations to the session
+                currentSession!.addObservation(newObservations[individual]!)
             }
+            
         }
     }
     
@@ -235,83 +267,18 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if collectionView == individualsView {
-            
             // User wants to add an extra individual
             if isExtraRowForIndividuals(indexPath.row) {
                 // Popup a alert view with text field
-                
-                // Add a new individual
-                let individual = Individual(label: "")
-                individuals.append(individual)
-                newObservations[individual] = []
-                
-                // Reload views
-                individualsView.reloadData()
+                showFormForIndividual(indexPath)
+            } else {
+                showIndividualAtIndex(indexPath)
             }
-            selectedIndividual = indexPath.row
-            showIndividualAtIndex(indexPath)
             
         } else if collectionView == statesView {
             showStateAsSelected(indexPath.row)
             let observation = newObservations[individuals[selectedIndividual]]![indexPath.row]
             observation.changeBehaviourState(states[indexPath.row])
-        }
-    }
-    
-    func showIndividualAtIndex(indexPath: NSIndexPath) {
-        showIndividualAsSelected(indexPath.row)
-        
-        showObservationsForIndividual(individuals[indexPath.row])
-        hideObservationSection()
-    }
-    
-    func showIndividualAsSelected(selectedIndex: Int) {
-        if selectedIndex < individuals.count {
-            for i in 0...individuals.count - 1 {
-                let index = NSIndexPath(forRow: i, inSection: 0)
-                if i == selectedIndex {
-                    individualsView.cellForItemAtIndexPath(index)!.backgroundColor = individualsSelectedColor
-                } else {
-                    individualsView.cellForItemAtIndexPath(index)!.backgroundColor = individualsDefaultColor
-                }
-            }
-        }
-    }
-    
-    func showObservationsForIndividual(individual: Individual) {
-        selectedObservations = newObservations[individual]!
-        observationsView.reloadData()
-    }
-    
-    func showObservationAtIndex(indexPath: NSIndexPath) {
-        if indexPath.row < selectedObservations.count {
-            showObservationSection()
-            
-            let observation = selectedObservations[indexPath.row]
-            
-            // Update views
-            showStateAsSelected(getIndexOfState(observation.state))
-            if observation.photo != nil {
-                photoView.image = observation.photo!.image
-            } else {
-                photoView.image = nil
-            }
-            notesView.text = observation.information
-            
-        }
-    }
-    
-    func showStateAsSelected(selectedIndex: Int) {
-        if selectedIndex < states.count {
-            for i in 0...states.count - 1 {
-                let index = NSIndexPath(forRow: i, inSection: 0)
-                let cell = statesView.cellForItemAtIndexPath(index) as! CircleWithLabelCell
-                if i == selectedIndex {
-                    cell.circleView.backgroundColor = statesSelectedColor
-                } else {
-                    cell.circleView.backgroundColor = statesDefaultColor
-                }
-            }
         }
     }
     
@@ -356,8 +323,68 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         return numSections
     }
     
-    @IBAction func photoBtnPressed(sender: UIButton) {
-        
+    // End delegate methods
+    
+    // Methods to toggle views
+    func showIndividualAtIndex(indexPath: NSIndexPath) {
+        if isValidIndexForIndividuals(indexPath.row) {
+            selectedIndividual = indexPath.row
+            
+            showIndividualAsSelected(indexPath.row)
+            
+            showObservationsForIndividual(individuals[indexPath.row])
+            hideObservationSection()
+        }
+    }
+    
+    func showIndividualAsSelected(selectedIndex: Int) {
+        if isValidIndexForIndividuals(selectedIndex) {
+            for i in 0...individuals.count - 1 {
+                let index = NSIndexPath(forRow: i, inSection: 0)
+                if i == selectedIndex {
+                    individualsView.cellForItemAtIndexPath(index)!.backgroundColor = individualsSelectedColor
+                } else {
+                    individualsView.cellForItemAtIndexPath(index)!.backgroundColor = individualsDefaultColor
+                }
+            }
+        }
+    }
+    
+    func showObservationsForIndividual(individual: Individual) {
+        selectedObservations = newObservations[individual]!
+        observationsView.reloadData()
+    }
+    
+    func showObservationAtIndex(indexPath: NSIndexPath) {
+        if !isExtraRowForObservations(indexPath.row) {
+            showObservationSection()
+            
+            let observation = selectedObservations[indexPath.row]
+            
+            // Update views
+            showStateAsSelected(getIndexOfState(observation.state))
+            if observation.photo != nil {
+                photoView.image = observation.photo!.image
+            } else {
+                photoView.image = nil
+            }
+            notesView.text = observation.information
+            
+        }
+    }
+    
+    func showStateAsSelected(selectedIndex: Int) {
+        if selectedIndex < states.count {
+            for i in 0...states.count - 1 {
+                let index = NSIndexPath(forRow: i, inSection: 0)
+                let cell = statesView.cellForItemAtIndexPath(index) as! CircleWithLabelCell
+                if i == selectedIndex {
+                    cell.circleView.backgroundColor = statesSelectedColor
+                } else {
+                    cell.circleView.backgroundColor = statesDefaultColor
+                }
+            }
+        }
     }
     
     func hideObservationSection() {
@@ -366,6 +393,49 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     func showObservationSection() {
         observationDisplay.hidden = false
+    }
+    
+    func showFormForIndividual(indexPath: NSIndexPath) {
+        let alert = UIAlertController(title: "New Individual", message: "", preferredStyle: .Alert)
+        
+        // Adds buttons
+        let actionCancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let actionOk = UIAlertAction(title: "OK", style: .Default, handler: {action in
+            let textField = alert.textFields!.first as! UITextField
+            
+            let individual = Individual(label: textField.text)
+            self.addIndividual(individual)
+            
+            self.individualsView.reloadData()
+            self.showIndividualAtIndex(indexPath)
+        })
+        actionOk.enabled = false
+        alert.addAction(actionOk)
+        alert.addAction(actionCancel)
+        
+        // Adds a text field for the label
+        alert.addTextFieldWithConfigurationHandler({textField in
+            textField.placeholder = "Label (eg: M1, F1)"
+            
+            NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
+                actionOk.enabled = textField.text != ""
+            }
+        })
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func addIndividual(individual: Individual) {
+        individuals.append(individual)
+        
+        newObservations[individual] = []
+        
+        individualsView.reloadData()
+    }
+    
+    // IBActions for buttons
+    @IBAction func photoBtnPressed(sender: UIButton) {
+        
     }
     
     // Helper methods
@@ -378,12 +448,21 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         return 0
     }
     
+    func isValidIndexForIndividuals(index: Int) -> Bool {
+        if editable {
+            return !isExtraRowForIndividuals(index)
+        } else {
+            return index < individuals.count
+        }
+        
+    }
+    
     func isExtraRowForIndividuals(index: Int) -> Bool {
         return index == individuals.count
     }
     
     func isExtraRowForObservations(index: Int) -> Bool {
-        return index == selectedObservations.count
+        return index >= selectedObservations.count
     }
     
 }
