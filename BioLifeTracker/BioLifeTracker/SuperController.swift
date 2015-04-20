@@ -50,7 +50,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         }
         
         if UserAuthService.sharedInstance.user.email != "Default" {
-            //setupForDemo()
+            setupForDemo()
         }
     }
     
@@ -522,28 +522,22 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
         // Set up alert controller
         let alertTitle = "Sync In Progress"
-        let alertMessage = "Starting sync..."
+        let alertMessage = "Uploading your project..."
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        // Set up cloud storage worker
-        let worker = CloudStorageWorker()
+        self.presentViewController(alert, animated: true, completion: nil)
+
         let uploadTask = UploadTask(item: project)
-        worker.enqueueTask(uploadTask)
-        worker.setOnProgressUpdate { percentage, message in
-            // Update popup here
-            alert.message = "\(message) [\(percentage)%]"
-        }
+        dispatch_async(CloudStorage.networkThread, {
+            uploadTask.execute()
+            dispatch_async(dispatch_get_main_queue(), {
+                alert.dismissViewControllerAnimated(true, completion: {
+                    if (uploadTask.completedSuccessfully != true) {
+                        self.displayAlert("Fail to Upload", message: "Cannot connect to server")
+                    }
+                })
+            })
+        })
         
-        // worker.setOnFailure { dismiss alert and open new alert with ok button
-        //}
-        
-        worker.setOnFinished {
-            // Dismiss popup here
-            alert.dismissViewControllerAnimated(true, completion: nil)
-        }
-        
-        //presentViewController(alert, animated: true, completion: nil)
-        //worker.startExecution()
     }
     
     func exportToExcel(sender: UIBarButtonItem) {
