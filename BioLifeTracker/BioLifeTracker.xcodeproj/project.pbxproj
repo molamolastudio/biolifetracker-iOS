@@ -133,6 +133,13 @@
 		329B293B1AD15BBF007ADC65 /* PhotoPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 329B29351AD15BBF007ADC65 /* PhotoPickerCell.xib */; };
 		329B293F1AD15E6F007ADC65 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 329B293E1AD15E6F007ADC65 /* FirstView.xib */; };
 		329B29411AD16058007ADC65 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329B29401AD16058007ADC65 /* FirstViewController.swift */; };
+		32EA4B461AE51B5C00EC7B8C /* ProjectFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32EA4B451AE51B5C00EC7B8C /* ProjectFormView.xib */; };
+		32EA4B481AE51D7200EC7B8C /* Add User Filled-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 32EA4B471AE51D7200EC7B8C /* Add User Filled-50.png */; };
+		32EA4B4A1AE51E5200EC7B8C /* ProjectFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EA4B491AE51E5200EC7B8C /* ProjectFormViewController.swift */; };
+		32EA4B4C1AE522AC00EC7B8C /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EA4B4B1AE522AC00EC7B8C /* MemberCell.swift */; };
+		32EA4B4E1AE522B600EC7B8C /* MemberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32EA4B4D1AE522B600EC7B8C /* MemberCell.xib */; };
+		32EA4B501AE530EE00EC7B8C /* MemberPickerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32EA4B4F1AE530EE00EC7B8C /* MemberPickerView.xib */; };
+		32EA4B521AE5310000EC7B8C /* MemberPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EA4B511AE5310000EC7B8C /* MemberPickerViewController.swift */; };
 		32FB650A1AD94B6800391194 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3205E7501AAED9F9006F374D /* LaunchScreen.xib */; };
 		781FD4661AE3E5C300BBC0E0 /* PopoverLabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 781FD4651AE3E5C300BBC0E0 /* PopoverLabelView.xib */; };
 		781FD4691AE4159B00BBC0E0 /* AnalysisTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 781FD4681AE4159B00BBC0E0 /* AnalysisTableHeader.xib */; };
@@ -358,6 +365,13 @@
 		329B29351AD15BBF007ADC65 /* PhotoPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoPickerCell.xib; path = FormLibrary/PhotoPickerCell.xib; sourceTree = "<group>"; };
 		329B293E1AD15E6F007ADC65 /* FirstView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstView.xib; sourceTree = "<group>"; };
 		329B29401AD16058007ADC65 /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		32EA4B451AE51B5C00EC7B8C /* ProjectFormView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectFormView.xib; sourceTree = "<group>"; };
+		32EA4B471AE51D7200EC7B8C /* Add User Filled-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Add User Filled-50.png"; path = "Images.xcassets/Add User Filled-50.png"; sourceTree = "<group>"; };
+		32EA4B491AE51E5200EC7B8C /* ProjectFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectFormViewController.swift; sourceTree = "<group>"; };
+		32EA4B4B1AE522AC00EC7B8C /* MemberCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberCell.swift; sourceTree = "<group>"; };
+		32EA4B4D1AE522B600EC7B8C /* MemberCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemberCell.xib; sourceTree = "<group>"; };
+		32EA4B4F1AE530EE00EC7B8C /* MemberPickerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MemberPickerView.xib; sourceTree = "<group>"; };
+		32EA4B511AE5310000EC7B8C /* MemberPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberPickerViewController.swift; sourceTree = "<group>"; };
 		781FD4651AE3E5C300BBC0E0 /* PopoverLabelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopoverLabelView.xib; sourceTree = "<group>"; };
 		781FD4681AE4159B00BBC0E0 /* AnalysisTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalysisTableHeader.xib; sourceTree = "<group>"; };
 		781FD46B1AE415BE00BBC0E0 /* AnalysisTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisTableViewController.swift; sourceTree = "<group>"; };
@@ -633,11 +647,17 @@
 				323CBD8D1ADB8FF000A7C970 /* ProjectHomeViewController.swift */,
 				323CBD911ADB96F600A7C970 /* ProjectHomeViewControllerDelegate.swift */,
 				323CBD8F1ADB901200A7C970 /* ProjectHomeView.xib */,
+				32EA4B491AE51E5200EC7B8C /* ProjectFormViewController.swift */,
+				32EA4B451AE51B5C00EC7B8C /* ProjectFormView.xib */,
+				32EA4B511AE5310000EC7B8C /* MemberPickerViewController.swift */,
+				32EA4B4F1AE530EE00EC7B8C /* MemberPickerView.xib */,
+				32EA4B4B1AE522AC00EC7B8C /* MemberCell.swift */,
+				32EA4B4D1AE522B600EC7B8C /* MemberCell.xib */,
 				32423B8C1AE0023400AFA2F8 /* FocalSessionViewController.swift */,
 				32423B901AE0093B00AFA2F8 /* FocalSessionView.xib */,
-				32423BAE1AE5087200AFA2F8 /* ScanSessionView.xib */,
 				323CBD971ADD624D00A7C970 /* ScanSessionViewController.swift */,
 				323CBD991ADD634400A7C970 /* ScanSessionViewControllerDelegate.swift */,
+				32423BAE1AE5087200AFA2F8 /* ScanSessionView.xib */,
 				323CBD951ADD58EA00A7C970 /* ScanViewController.swift */,
 				323CBD931ADD526600A7C970 /* ScanView.xib */,
 				32423B9A1AE2B1E600AFA2F8 /* CircleWithLabelCell.swift */,
@@ -689,6 +709,7 @@
 		3205E7671AAEDA38006F374D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				32EA4B471AE51D7200EC7B8C /* Add User Filled-50.png */,
 				AC530C6A1AE4F214008E1A17 /* bltlogo.png */,
 				32423BA41AE404FC00AFA2F8 /* Edit User-50.png */,
 				AC530C701AE4F281008E1A17 /* bltname.png */,
@@ -901,6 +922,7 @@
 				321D62C11AD2604400CF9BE9 /* SubtitleTableCell.xib in Resources */,
 				32423B9D1AE2B1F300AFA2F8 /* CircleWithLabelCell.xib in Resources */,
 				329B292D1AD15BAF007ADC65 /* ButtonCell.xib in Resources */,
+				32EA4B501AE530EE00EC7B8C /* MemberPickerView.xib in Resources */,
 				781FD4691AE4159B00BBC0E0 /* AnalysisTableHeader.xib in Resources */,
 				323CBD901ADB901200A7C970 /* ProjectHomeView.xib in Resources */,
 				323CBD941ADD526600A7C970 /* ScanView.xib in Resources */,
@@ -909,6 +931,7 @@
 				329B292F1AD15BAF007ADC65 /* DatePickerCell.xib in Resources */,
 				781FD4661AE3E5C300BBC0E0 /* PopoverLabelView.xib in Resources */,
 				326773BA1ACAEFB000899745 /* BooleanPickerCell.xib in Resources */,
+				32EA4B481AE51D7200EC7B8C /* Add User Filled-50.png in Resources */,
 				32423B8B1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib in Resources */,
 				7838E75E1AE3501C007C2562 /* GraphAnalysisView.xib in Resources */,
 				32FB650A1AD94B6800391194 /* LaunchScreen.xib in Resources */,
@@ -919,6 +942,7 @@
 				2458F4D01AE159A60006DFC7 /* icon-152.png in Resources */,
 				32423B971AE23E2400AFA2F8 /* CircleCell.xib in Resources */,
 				AC530C6E1AE4F23C008E1A17 /* bg_horizontal.png in Resources */,
+				32EA4B461AE51B5C00EC7B8C /* ProjectFormView.xib in Resources */,
 				329B29371AD15BBF007ADC65 /* DefaultPickerCell.xib in Resources */,
 				AC530C6F1AE4F23C008E1A17 /* bg_vertical.png in Resources */,
 				329B293B1AD15BBF007ADC65 /* PhotoPickerCell.xib in Resources */,
@@ -927,6 +951,7 @@
 				32423BA71AE404FC00AFA2F8 /* Plus-50.png in Resources */,
 				32423BAF1AE5087200AFA2F8 /* ScanSessionView.xib in Resources */,
 				AC530C741AE4F424008E1A17 /* bltlogo_transparent.png in Resources */,
+				32EA4B4E1AE522B600EC7B8C /* MemberCell.xib in Resources */,
 				326773BF1ACAEFB000899745 /* SingleLineTextCell.xib in Resources */,
 				AC530C6B1AE4F214008E1A17 /* bltlogo.png in Resources */,
 				326773BE1ACAEFB000899745 /* MultiLineTextCell.xib in Resources */,
@@ -956,6 +981,7 @@
 				240FEF081AD60AE1000FD9F3 /* CloudStorageWorker.swift in Sources */,
 				240FEF091AD60AE1000FD9F3 /* DownloadTask.swift in Sources */,
 				240FEF0A1AD60AE1000FD9F3 /* UploadTask.swift in Sources */,
+				32EA4B4C1AE522AC00EC7B8C /* MemberCell.swift in Sources */,
 				78C382771AE4E1E600645C07 /* AnalysisProjectViewController.swift in Sources */,
 				329B29411AD16058007ADC65 /* FirstViewController.swift in Sources */,
 				326773C11ACAEFB000899745 /* MultiLineTextCell.swift in Sources */,
@@ -969,11 +995,13 @@
 				32850BE21AB9625500C49D33 /* ProjectsViewController.swift in Sources */,
 				323CBD921ADB96F600A7C970 /* ProjectHomeViewControllerDelegate.swift in Sources */,
 				781FD46C1AE415BE00BBC0E0 /* AnalysisTableViewController.swift in Sources */,
+				32EA4B4A1AE51E5200EC7B8C /* ProjectFormViewController.swift in Sources */,
 				329B293A1AD15BBF007ADC65 /* PhotoPickerCell.swift in Sources */,
 				AC6A24A61ADD1B2300CF33D6 /* BLTWeatherProtocol.swift in Sources */,
 				32423BAB1AE4F5CF00AFA2F8 /* WeatherViewController.swift in Sources */,
 				326773C21ACAEFB000899745 /* SingleLineTextCell.swift in Sources */,
 				ACDE13AD1AD0C0540075AC35 /* EthogramManager.swift in Sources */,
+				32EA4B521AE5310000EC7B8C /* MemberPickerViewController.swift in Sources */,
 				3205E7791AAEDA85006F374D /* Ethogram.swift in Sources */,
 				AC6A24AC1ADD1B8100CF33D6 /* BLTPhotoProtocol.swift in Sources */,
 				326773C51ACD7C9A00899745 /* MenuViewControllerDelegate.swift in Sources */,
