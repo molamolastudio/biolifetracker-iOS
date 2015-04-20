@@ -24,6 +24,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     var currentProject: Project? = nil
     var currentSession: Session? = nil
     
+    var loadingAlert: UIAlertController?
     var freshLogin = false
     
     override func viewDidLoad() {
@@ -32,15 +33,21 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-
-        menu.title = UserAuthService.sharedInstance.user.name
-        
-        if freshLogin {
-            
-            freshLogin = false
+        let userAuth = UserAuthService.sharedInstance
+        if !userAuth.hasAccessToken() { // user has not logged in
+            showLoginPage()
+            return
         }
         
-        showStartPage()
+        // User has logged in
+        menu.title = userAuth.user.name
+        showProjectsPage()
+        if freshLogin {
+            loadingAlert = UIAlertController(title: "Loading Data", message: "Downloading your projects from server", preferredStyle: .Alert)
+            self.presentViewController(loadingAlert!, animated: true, completion: nil)
+            startDownloadingProjectsFromServer()
+            freshLogin = false
+        }
         
         if UserAuthService.sharedInstance.user.email != "Default" {
             //setupForDemo()
@@ -171,18 +178,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     // Methods to show pages
-    func showStartPage() {
-        // If user is logged in
-        if UserAuthService.sharedInstance.hasAccessToken() {
-            UserAuthService.sharedInstance.initialiseManagers()
-            showProjectsPage()
-        } else {
-            freshLogin = true
-            showLoginPage()
-        }
-    }
     
     func showLoginPage() {
+        freshLogin = true
         let vc = FirstViewController(nibName: "FirstView", bundle: nil)
         vc.modalPresentationStyle = .FullScreen
         self.presentViewController(vc, animated: true, completion: nil)
@@ -581,14 +579,16 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         // Requires the user info to clear directories
         ProjectManager.sharedInstance.handleLogOut()
         EthogramManager.sharedInstance.handleLogOut()
-        UserAuthService.sharedInstance.handleLogOut()
         
         GPPSignIn.sharedInstance().signOut()
         FBSession.activeSession().closeAndClearTokenInformation()
+        UserAuthService.sharedInstance.handleLogOut()
         
         // Move back to start page
         dismissMenuView()
         showLoginPage()
+        
+        assert(ProjectManager.sharedInstance.projects.count == 0)
     }
     
     func userDidSelectSessions(project: Project) {
@@ -654,5 +654,22 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         let actionOk = UIAlertAction(title: "OK", style: .Default, handler: nil)
         alert.addAction(actionOk)
         self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    
+    func startDownloadingProjectsFromServer() {
+        dispatch_async(CloudStorage.networkThread, {
+            let downloadTask = DownloadTask(classUrl: Project.ClassUrl)
+            downloadTask.execute()
+            let projectInfos = downloadTask.getResults()
+            for projectInfo in projectInfos {
+                let project = Project(dictionary: projectInfo)
+                ProjectManager.sharedInstance.addProject(project)
+            }
+            dispatch_async(dispatch_get_main_queue(), {
+                self.loadingAlert?.dismissViewControllerAnimated(true, completion: nil)
+                self.showProjectsPage()
+            })
+        })
     }
 }
