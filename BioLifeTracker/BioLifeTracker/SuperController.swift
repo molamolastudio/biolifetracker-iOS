@@ -31,10 +31,12 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        menu.title = UserAuthService.sharedInstance.user.name
+        
         showStartPage()
         
         if UserAuthService.sharedInstance.user.email != "Default" {
-            setupForDemo()
+            //setupForDemo()
         }
     }
     
@@ -158,14 +160,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showCorruptFileAlert() {
-        let alertTitle = "Save File Corrupt"
-        let alertMessage = "Unable to load save file."
-        
-        let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
-        let actionOk = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil)
-        alert.addAction(actionOk)
-        
-        self.presentViewController(alert, animated: true, completion: nil)
+        displayAlert("Save File Corrupt", message: "Unable to load save file.")
     }
     
     // Methods to show pages
@@ -186,17 +181,23 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showNewProjectPage() {
-        let vc = FormViewController(style: UITableViewStyle.Grouped)
-        
-        vc.title = "New Project"
-        vc.setFormData(getFormDataForNewProject())
-        vc.cellHorizontalPadding = 10
-        vc.roundedCells = true
-        
-        var createBtn = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("createNewProject"))
-        vc.navigationItem.rightBarButtonItem = createBtn
-        
-        detailNav.pushViewController(vc, animated: true)
+        // If there are ethograms saved, present the new project page
+        if !EthogramManager.sharedInstance.ethograms.isEmpty {
+            let vc = FormViewController(style: UITableViewStyle.Grouped)
+            
+            vc.title = "New Project"
+            vc.setFormData(getFormDataForNewProject())
+            vc.cellHorizontalPadding = 10
+            vc.roundedCells = true
+            
+            var btn = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("createNewProject"))
+            vc.navigationItem.rightBarButtonItem = btn
+            
+            detailNav.pushViewController(vc, animated: true)
+        } else {
+            // If there are no ethograms saved, display an alert
+            displayAlert("No Ethograms Saved", message: "Please create an ethogram before creating a project.")
+        }
     }
     
     func showProjectsPage() {
@@ -205,8 +206,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.delegate = self
         vc.title = "Projects"
         
-        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showNewProjectPage"))
-        vc.navigationItem.rightBarButtonItem = createBtn
+        var btn = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Add, target: self, action: Selector("showNewProjectPage"))
+        vc.navigationItem.rightBarButtonItem = btn
         
         detailNav.setViewControllers([vc], animated: false)
     }
@@ -218,8 +219,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.title = currentProject!.name
         vc.currentProject = currentProject!
         
-        var createBtn = UIBarButtonItem(title: "Sync", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("syncProject"))
-        vc.navigationItem.rightBarButtonItem = createBtn
+        var exportBtn = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: Selector("exportToExcel:"))
+        var syncBtn = UIBarButtonItem(title: "Sync", style: .Plain, target: self, action: Selector("syncProject"))
+        vc.navigationItem.rightBarButtonItems = [exportBtn, syncBtn]
         
         detailNav.pushViewController(vc, animated: true)
     }
@@ -230,8 +232,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.delegate = self
         vc.title = "Ethograms"
         
-        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showNewEthogramPage"))
-        vc.navigationItem.rightBarButtonItem = createBtn
+        var btn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("showNewEthogramPage"))
+        vc.navigationItem.rightBarButtonItem = btn
         
         detailNav.setViewControllers([vc], animated: false)
     }
@@ -241,20 +243,25 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
         vc.title = "Create New Ethogram"
         
-        var createBtn = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("createNewEthogram"))
-        vc.navigationItem.rightBarButtonItem = createBtn
+        var btn = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("createNewEthogram"))
+        vc.navigationItem.rightBarButtonItem = btn
         
         detailNav.pushViewController(vc, animated: true)
     }
     
     func showEthogramDetailsPage() {
-        let vc = EthogramFormViewController()
+        let vc = EthogramDetailsViewController()
         
         vc.title = Data.selectedEthogram!.name
         vc.ethogram = Data.selectedEthogram!
         
-        var createBtn = UIBarButtonItem(title: "Done", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("dismissCurrentPage"))
-        vc.navigationItem.rightBarButtonItem = createBtn
+        vc.editable = false
+        
+        // If user created the object
+        if Data.selectedEthogram!.createdBy.name == UserAuthService.sharedInstance.user.name {
+            var btn = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("updateEditButtonForEthogram"))
+            vc.navigationItem.rightBarButtonItem = btn
+        }
         
         detailNav.pushViewController(vc, animated: true)
     }
@@ -300,9 +307,13 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.delegate = self
         vc.title = session.name
         vc.currentSession = session
+        vc.editable = false
         
-        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showCreateObservationPage"))
-        vc.navigationItem.rightBarButtonItem = createBtn
+        // If user created the object
+        if session.createdBy.name == UserAuthService.sharedInstance.user.name {
+            var btn = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("updateEditButtonForFocalSession"))
+            vc.navigationItem.rightBarButtonItem = btn
+        }
         
         detailNav.pushViewController(vc, animated: true)
     }
@@ -314,14 +325,10 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.title = session.name
         vc.currentSession = session
         
-        var createBtn = UIBarButtonItem(title: "Create", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("showCreateScanPage"))
-        vc.navigationItem.rightBarButtonItem = createBtn
+        var btn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("showCreateScanPagePopup"))
+        vc.navigationItem.rightBarButtonItem = btn
         
         detailNav.pushViewController(vc, animated: true)
-    }
-    
-    func showObservationPage() {
-        
     }
     
     func showScanPage(session: Session, timestamp: NSDate) {
@@ -332,27 +339,56 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         formatter.timeStyle = .ShortStyle
         
         vc.title = formatter.stringFromDate(timestamp)
-        vc.currentSession = session
-        vc.selectedTimestamp = timestamp
+        vc.setData(session, timestamp: timestamp)
+        vc.editable = false
         
-        var createBtn = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Plain, target: self, action: Selector("saveScanData"))
-        vc.navigationItem.rightBarButtonItem = createBtn
+        // If user created the object
+        if session.createdBy == UserAuthService.sharedInstance.user {
+            var btn = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("updateEditButtonForScan"))
+            vc.navigationItem.rightBarButtonItem = btn
+        }
         
         detailNav.pushViewController(vc, animated: true)
     }
     
-    func showCreateObservationPage() {
-        // Observation Form VC
+    func showCreateScanPagePopup() {
+        // Popup settings page
+        // If all fields entered then showCreateScanPage
     }
     
     func showCreateScanPage() {
-        // Scan View
+        let vc = ScanViewController(nibName: "ScanView", bundle: nil)
+        
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .MediumStyle
+        formatter.timeStyle = .ShortStyle
+        
+        vc.title = "New Scan"
+        vc.editable = true
+        
+        var btn = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("updateEditButtonForScan"))
+        vc.navigationItem.rightBarButtonItem = btn
+        
+        detailNav.pushViewController(vc, animated: true)
     }
     
     func showAnalysisPage() {
-        let graphs = GraphAnalysisViewController(nibName: "GraphAnalysisView", bundle: nil)
+        let vc = GraphAnalysisViewController(nibName: "GraphAnalysisView", bundle: nil)
         
-        detailNav.pushViewController(graphs, animated: true)
+        vc.title = "Analyse"
+        
+        detailNav.setViewControllers([vc], animated: false)
+    }
+    
+    func showSettingsPage() {
+        let vc = FormViewController(style: UITableViewStyle.Grouped)
+        
+        vc.title = "Settings"
+        vc.setFormData(getFormDataForSettings())
+        vc.cellHorizontalPadding = 10
+        vc.roundedCells = true
+        
+        detailNav.setViewControllers([vc], animated: false)
     }
     
     func clearNavigationStack() {
@@ -390,19 +426,34 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         return data
     }
     
+    func getFormDataForSettings() -> FormFieldData {
+        let data = FormFieldData(sections: 1)
+        
+        // ANDHIEKA
+        
+        return data
+    }
+    
     // Selectors for navigation bar items
     func createNewProject() {
         if let vc = detailNav.visibleViewController as? FormViewController {
             let values = vc.getFormData()
             
-            if let name = values[0] as? String {
+            let name = values[0] as! String
+            if name != "" {
                 if let index = values[1] as? Int {
                     let project = Project(name: name, ethogram: EthogramManager.sharedInstance.ethograms[index])
                     
                     ProjectManager.sharedInstance.addProject(project)
                     
                     showProjectsPage()
+                } else {
+                    // Show an alert to tell user to select an ethogram
+                    displayAlert("Incomplete Project", message: "Please select an ethogram.")
                 }
+            } else {
+                // Show an alert to tell user to enter a project name
+                displayAlert("Incomplete Project", message: "Please enter a project name.")
             }
         }
     }
@@ -416,8 +467,48 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         }
     }
     
+    func updateEditButtonForEthogram() {
+        if let vc = detailNav.visibleViewController as? EthogramDetailsViewController {
+            vc.makeEditable(true)
+            var btn = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: Selector("saveEthogramData"))
+            vc.navigationItem.rightBarButtonItem = btn
+        }
+    }
+    
+    func updateEditButtonForScan() {
+        if let vc = detailNav.visibleViewController as? ScanViewController {
+            vc.makeEditable(true)
+            var btn = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: Selector("saveScanData"))
+            vc.navigationItem.rightBarButtonItem = btn
+        }
+    }
+    
+    func updateEditButtonForFocalSession() {
+        if let vc = detailNav.visibleViewController as? FocalSessionViewController {
+            vc.makeEditable(true)
+            var btn = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: Selector("saveFocalSessionData"))
+            vc.navigationItem.rightBarButtonItem = btn
+        }
+    }
+    
+    func saveEthogramData() {
+        if let vc = detailNav.visibleViewController as? EthogramDetailsViewController {
+            vc.saveData()
+            dismissCurrentPage()
+        }
+    }
+    
     func saveScanData() {
-        
+        if let vc = detailNav.visibleViewController as? ScanViewController {
+            vc.saveData()
+            dismissCurrentPage()
+        }
+    }
+    
+    func saveFocalSessionData() {
+        if let vc = detailNav.visibleViewController as? FocalSessionViewController {
+            vc.saveData()
+        }
     }
     
     func syncProject() {
@@ -449,6 +540,13 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         //worker.startExecution()
     }
     
+    func exportToExcel(sender: UIBarButtonItem) {
+        if let project = currentProject {
+            let exportService = ExportObservationsService(project: project)
+            exportService.openInOtherApps(sender)
+        }
+    }
+    
     // MenuViewDelegate methods
     func userDidSelectProjects() {
         dismissMenuView()
@@ -467,6 +565,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     func userDidSelectSettings() {
         dismissMenuView()
+        showSettingsPage()
     }
     
     func userDidSelectLogout() {
@@ -536,5 +635,16 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     // FocalSessionViewControllerDelegate methods
     func userDidSelectObservation(session: Session, observation: Observation) {
         // Open the Observation View
+    }
+    
+    // Helper methods
+    
+    // Displays an alert controller with given title and message, with an OK button.
+    // Dismisses upon pressing the OK button.
+    func displayAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
+        let actionOk = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alert.addAction(actionOk)
+        self.presentViewController(alert, animated: true, completion: nil)
     }
 }

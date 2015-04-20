@@ -68,7 +68,8 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cjT-Ji-3hy">
-                    <rect key="frame" x="10" y="73" width="30" height="30"/>
+                    <rect key="frame" x="10" y="67" width="30" height="42"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
                     <state key="normal" title="&lt;">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -77,7 +78,8 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t5c-sz-EX2">
-                    <rect key="frame" x="560" y="73" width="30" height="30"/>
+                    <rect key="frame" x="560" y="67" width="30" height="42"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
                     <state key="normal" title="&gt;">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>

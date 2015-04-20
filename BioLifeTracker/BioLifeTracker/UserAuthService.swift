@@ -98,13 +98,13 @@ class UserAuthService {
             postDictionary.setValue(token, forKey: "access_token")
             let postData = CloudStorage.dictionaryToJsonData(postDictionary)
             let responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "POST", withPayload: postData)
-            if responseData == nil { return }
-            let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)!
-            let serverToken = responseDictionary["key"] as! String
+            if responseData == nil { onCompletion?(); return }
+            let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)
+            if responseDictionary == nil { onCompletion?(); return }
+            let serverToken = responseDictionary!["key"] as! String
             self._accessToken = serverToken
             self.getCurrentUserFromServer()
             let user = self.user
-            assert(user != User(name: "Default", email: "Default"), "Token is not accepted by server")
             onCompletion?()
         })
     }

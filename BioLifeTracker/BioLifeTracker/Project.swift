@@ -111,7 +111,15 @@ class Project: BiolifeModel, Storable {
     }
     
     func removeAdmins(adminIndexes: [Int]) {
-        for index in adminIndexes {
+        var decreasingIndexes = sorted(adminIndexes) { $0 > $1 } // sort indexes in non-increasing order
+        var prev = -1
+        for (var i = 0; i < decreasingIndexes.count; i++) {
+            let index = decreasingIndexes[i]
+            if prev == index {
+                continue;
+            } else {
+                prev = index
+            }
             self._admins.removeAtIndex(index)
         }
         updateProject()
@@ -124,7 +132,15 @@ class Project: BiolifeModel, Storable {
     }
     
     func removeMembers(memberIndexes: [Int]) {
-        for index in memberIndexes {
+        var decreasingIndexes = sorted(memberIndexes) { $0 > $1 } // sort indexes in non-increasing order
+        var prev = -1
+        for (var i = 0; i < decreasingIndexes.count; i++) {
+            let index = decreasingIndexes[i]
+            if prev == index {
+                continue;
+            } else {
+                prev = index
+            }
             self._members.removeAtIndex(index)
         }
         updateProject()
@@ -143,7 +159,15 @@ class Project: BiolifeModel, Storable {
     }
     
     func removeSessions(sessionIndexes: [Int]) {
-        for index in sessionIndexes {
+        var decreasingIndexes = sorted(sessionIndexes) { $0 > $1 } // sort indexes in non-increasing order
+        var prev = -1
+        for (var i = 0; i < decreasingIndexes.count; i++) {
+            let index = decreasingIndexes[i]
+            if prev == index {
+                continue;
+            } else {
+                prev = index
+            }
             self._sessions.removeAtIndex(index)
         }
         updateProject()
@@ -162,7 +186,15 @@ class Project: BiolifeModel, Storable {
     }
     
     func removeIndividuals(individualIndexes: [Int]) {
-        for index in individualIndexes {
+        var decreasingIndexes = sorted(individualIndexes) { $0 > $1 } // sort indexes in non-increasing order
+        var prev = -1
+        for (var i = 0; i < decreasingIndexes.count; i++) {
+            let index = decreasingIndexes[i]
+            if prev == index {
+                continue;
+            } else {
+                prev = index
+            }
             self._individuals.removeAtIndex(index)
         }
         updateProject()

@@ -22,12 +22,14 @@ class User: NSObject, NSCoding {
     }
     
     required init(coder aDecoder: NSCoder) {
+        self.id = aDecoder.decodeObjectForKey("id") as! Int
         self.email = aDecoder.decodeObjectForKey("email") as! String
         self.name = aDecoder.decodeObjectForKey("name") as! String
         super.init()
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(id, forKey: "id")
         aCoder.encodeObject(email, forKey: "email")
         aCoder.encodeObject(name, forKey: "name")
     }
