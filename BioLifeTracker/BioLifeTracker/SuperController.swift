@@ -24,14 +24,21 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     var currentProject: Project? = nil
     var currentSession: Session? = nil
     
+    var freshLogin = false
+    
     override func viewDidLoad() {
         setupSplitView()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         menu.title = UserAuthService.sharedInstance.user.name
+        
+        if freshLogin {
+            
+            freshLogin = false
+        }
         
         showStartPage()
         
@@ -170,6 +177,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
             UserAuthService.sharedInstance.initialiseManagers()
             showProjectsPage()
         } else {
+            freshLogin = true
             showLoginPage()
         }
     }

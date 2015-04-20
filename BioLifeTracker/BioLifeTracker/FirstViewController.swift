@@ -30,8 +30,8 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         setupGoogleLoginButton()
         
         // Set up alert controller
-        let alertTitle = "Loading Your Data"
-        let alertMessage = "Loading..."
+        let alertTitle = "Signing In"
+        let alertMessage = "Please wait..."
         alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
     }
     
