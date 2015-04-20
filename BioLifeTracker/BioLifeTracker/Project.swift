@@ -372,7 +372,7 @@ class Project: BiolifeModel, Storable {
         var individual: Individual?
         while true {
             individual = enumerator.nextObject() as! Individual?
-            if session == nil {
+            if individual == nil {
                 break
             }
             self._individuals.append(individual!)
