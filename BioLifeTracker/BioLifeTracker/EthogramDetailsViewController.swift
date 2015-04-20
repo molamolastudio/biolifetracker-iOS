@@ -125,6 +125,7 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
             cell.button.tag = indexPath.row
             
         } else if ethogram.behaviourStates.count == indexPath.row {
+            textField.text = ""
             textField.placeholder = messageNewState
             textField.removeTarget(self, action: Selector("textFieldDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
             textField.addTarget(self, action: Selector("extraRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
@@ -245,6 +246,8 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
                 
                 if !isExtraRow(indexPath.row) {
                     ethogram.removeBehaviourState(indexPath.row)
+                    
+                    refreshView()
                 }
             }
         }
