@@ -102,6 +102,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func refreshViews() {
+        println("refresh")
         selectedIndividual = 0
         selectedObservation = 0
         selectedObservations = [Observation]()
@@ -272,7 +273,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
                 // Popup a alert view with text field
                 showFormForIndividual(indexPath)
             } else {
-                showIndividualAtIndex(indexPath)
+                selectedIndividual = indexPath.row
+                refreshObservations()
             }
             
         } else if collectionView == statesView {
@@ -288,14 +290,10 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         
         cell.textField.hidden = true
         
-        // Show extra row for adding observations for all individuals except 'All' 
-        if selectedIndividual != 0 {
-            if isExtraRowForObservations(indexPath.row) {
-                cell.label.text = messageAdd
-            } else {
-                let observation = selectedObservations[indexPath.row]
-                cell.label.text = formatter.stringFromDate(observation.createdAt)
-            }
+        // Show extra row for adding observations for all individuals except 'All'
+        if selectedIndividual != 0 && isExtraRowForObservations(indexPath.row) {
+            cell.label.text = messageAdd
+            
         } else {
             let observation = selectedObservations[indexPath.row]
             cell.label.text = formatter.stringFromDate(observation.createdAt)
@@ -318,7 +316,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if editable {
+        if editable && selectedIndividual != 0 {
             return selectedObservations.count + 1
         } else {
             return selectedObservations.count
@@ -339,6 +337,15 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     // End delegate methods
     
     func refreshObservations() {
+        var allObservations = [Observation]()
+        for i in 1...individuals.count - 1 {
+            for o in newObservations[individuals[i]]! {
+                allObservations.append(o)
+            }
+        }
+        newObservations[individuals[0]] = allObservations
+        
+        
         showIndividualAtIndex(NSIndexPath(forRow: selectedIndividual, inSection: 0))
         observationsView.reloadData()
     }
