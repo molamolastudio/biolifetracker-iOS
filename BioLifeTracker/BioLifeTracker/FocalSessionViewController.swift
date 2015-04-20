@@ -49,7 +49,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        hideObservationSection()
         setupViews()
         
         // Sets up the date formatter for converting dates to strings
@@ -115,17 +115,20 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
             // Setup the individuals array
             let all = Individual(label: "All")
             individuals.append(all)
-            originalObservations[all] = currentSession!.observations
-            newObservations[all] = getCopyOfObservations(currentSession!.observations)
             
-            println(currentSession!.project.individuals)
-            
-            // Copy over observations
-            for i in currentSession!.project.individuals {
-                individuals.append(i)
-                let observations = currentSession!.getAllObservationsForIndividual(i)
-                originalObservations[i] = observations
-                newObservations[i] = getCopyOfObservations(observations)
+            // If there are no individuals defined, do nothing
+            if currentSession!.project.individuals.count > 0 {
+                
+                originalObservations[all] = currentSession!.observations
+                newObservations[all] = getCopyOfObservations(currentSession!.observations)
+                
+                // Copy over observations
+                for i in currentSession!.project.individuals {
+                    individuals.append(i)
+                    let observations = currentSession!.getAllObservationsForIndividual(i)
+                    originalObservations[i] = observations
+                    newObservations[i] = getCopyOfObservations(observations)
+                }
             }
             
             // Get states
@@ -138,7 +141,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         for i in individuals {
             let observations = newObservations[i]!
             let original = originalObservations[i]!
-            
+            println(observations.count)
             for j in 0...observations.count {
                 if j < original.count {
                     // Copy over the updated information of the observation
@@ -259,6 +262,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         showIndividualAsSelected(indexPath.row)
         
         showObservationsForIndividual(individuals[indexPath.row])
+        hideObservationSection()
     }
     
     func showIndividualAsSelected(selectedIndex: Int) {
@@ -277,11 +281,11 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     func showObservationsForIndividual(individual: Individual) {
         selectedObservations = newObservations[individual]!
         observationsView.reloadData()
-        observationsView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Top)
     }
     
     func showObservationAtIndex(indexPath: NSIndexPath) {
         if indexPath.row < selectedObservations.count {
+            showObservationSection()
             
             let observation = selectedObservations[indexPath.row]
             
