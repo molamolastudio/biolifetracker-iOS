@@ -11,7 +11,7 @@
 
 import UIKit
 
-class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate,ProjectsViewControllerDelegate, EthogramsViewControllerDelegate, ProjectHomeViewControllerDelegate, ScanSessionViewControllerDelegate, FocalSessionViewControllerDelegate {
+class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate,ProjectsViewControllerDelegate, EthogramsViewControllerDelegate, ProjectHomeViewControllerDelegate, ScanSessionViewControllerDelegate {
     
     let splitVC = UISplitViewController()
     let masterNav = UINavigationController()
@@ -36,7 +36,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         showStartPage()
         
         if UserAuthService.sharedInstance.user.email != "Default" {
-            setupForDemo()
+            //setupForDemo()
         }
     }
     
@@ -304,7 +304,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func showFocalSessionPage(session: Session) {
         let vc = FocalSessionViewController(nibName: "FocalSessionView", bundle: nil)
         
-        vc.delegate = self
         vc.title = session.name
         vc.currentSession = session
         vc.editable = false
@@ -637,8 +636,28 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func userDidSelectCreateSession() {
-        // Popup options: name, type
-        // After popup -> create then show the type of session
+        let alert = UIAlertController(title: "New Individual", message: "", preferredStyle: .Alert)
+        
+        // Adds buttons
+        let actionCancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let actionOk = UIAlertAction(title: "OK", style: .Default, handler: {action in
+            let textField = alert.textFields!.first as! UITextField
+            
+        })
+        actionOk.enabled = false
+        alert.addAction(actionOk)
+        alert.addAction(actionCancel)
+        
+        // Adds a text field for the label
+        alert.addTextFieldWithConfigurationHandler({textField in
+            textField.placeholder = "Label (eg: M1, F1)"
+            
+            NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
+                actionOk.enabled = textField.text != ""
+            }
+        })
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     func userDidSelectEditMembers() {
@@ -649,11 +668,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func userDidSelectScan(session: Session, timestamp: NSDate) {
         // Open the ScanView
         showScanPage(session, timestamp: timestamp)
-    }
-    
-    // FocalSessionViewControllerDelegate methods
-    func userDidSelectObservation(session: Session, observation: Observation) {
-        // Open the Observation View
     }
     
     // Helper methods

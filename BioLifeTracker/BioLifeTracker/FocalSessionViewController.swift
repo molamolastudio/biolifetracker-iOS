@@ -9,7 +9,6 @@
 import UIKit
 
 class FocalSessionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate  {
-    var delegate: FocalSessionViewControllerDelegate? = nil
     
     @IBOutlet weak var individualsView: UICollectionView!
     @IBOutlet weak var observationsView: UITableView!
@@ -99,12 +98,11 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     func makeEditable(value: Bool) {
         editable = value
-        photoOverlayView.hidden = !value
-        notesView.userInteractionEnabled = value
         refreshViews()
     }
     
     func refreshViews() {
+        println("refresh")
         selectedIndividual = 0
         selectedObservation = 0
         selectedObservations = [Observation]()
@@ -116,6 +114,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         getData()
         individualsView.reloadData()
         observationsView.reloadData()
+        statesView.reloadData()
         hideObservationSection()
     }
     
@@ -275,12 +274,13 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
                 // Popup a alert view with text field
                 showFormForIndividual(indexPath)
             } else {
-                showIndividualAtIndex(indexPath)
+                selectedIndividual = indexPath.row
+                refreshObservations()
             }
             
         } else if collectionView == statesView {
             showStateAsSelected(indexPath.row)
-            let observation = newObservations[individuals[selectedIndividual]]![indexPath.row]
+            let observation = selectedObservations[selectedObservation]
             observation.changeBehaviourState(states[indexPath.row])
         }
     }
@@ -291,8 +291,10 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         
         cell.textField.hidden = true
         
-        if isExtraRowForObservations(indexPath.row) {
+        // Show extra row for adding observations for all individuals except 'All'
+        if selectedIndividual != 0 && isExtraRowForObservations(indexPath.row) {
             cell.label.text = messageAdd
+            
         } else {
             let observation = selectedObservations[indexPath.row]
             cell.label.text = formatter.stringFromDate(observation.createdAt)
@@ -315,7 +317,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if editable {
+        if editable && selectedIndividual != 0 {
             return selectedObservations.count + 1
         } else {
             return selectedObservations.count
@@ -336,6 +338,15 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     // End delegate methods
     
     func refreshObservations() {
+        var allObservations = [Observation]()
+        for i in 1...individuals.count - 1 {
+            for o in newObservations[individuals[i]]! {
+                allObservations.append(o)
+            }
+        }
+        newObservations[individuals[0]] = allObservations
+        
+        
         showIndividualAtIndex(NSIndexPath(forRow: selectedIndividual, inSection: 0))
         observationsView.reloadData()
     }
@@ -406,6 +417,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func showObservationSection() {
+        photoOverlayView.hidden = !editable
+        notesView.userInteractionEnabled = editable
         observationDisplay.hidden = false
     }
     
@@ -419,9 +432,6 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
             
             let individual = Individual(label: textField.text)
             self.addIndividual(individual)
-            
-            self.individualsView.reloadData()
-            self.showIndividualAtIndex(indexPath)
         })
         actionOk.enabled = false
         alert.addAction(actionOk)
@@ -445,6 +455,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         newObservations[individual] = []
         
         individualsView.reloadData()
+        self.showObservationsForIndividual(individual)
     }
     
     // IBActions for buttons
