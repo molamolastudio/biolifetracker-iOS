@@ -18,8 +18,11 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     let memberTag = 2
     let sessionTag = 3
     
-    let cellReuseIdentifier = "SingleLineTextCell"
-    let cellHeight: CGFloat = 44
+    let textCellIdentifier = "SingleLineTextCell"
+    let memberCellIdentifier = "MemberCell"
+    
+    let textCellHeight: CGFloat = 44
+    let memberCellHeight: CGFloat = 50
     
     let formatter = NSDateFormatter()
     
@@ -46,8 +49,8 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         sessionView.delegate = self
         
         // Registers the nibs used for the table cells
-        memberView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
-        sessionView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
+        memberView.registerNib(UINib(nibName: memberCellIdentifier, bundle: nil), forCellReuseIdentifier: memberCellIdentifier)
+        sessionView.registerNib(UINib(nibName: textCellIdentifier, bundle: nil), forCellReuseIdentifier: textCellIdentifier)
         
         // Sets the table views to display under the navigation bar
         self.edgesForExtendedLayout = UIRectEdge.None
@@ -68,15 +71,13 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         
         graphsVC = GraphsViewController(nibName: "GraphsView", bundle: nil)
         graphsVC.setProject(currentProject!)
-
+        
         graphsVC.view.frame = CGRectMake(0, 0, graphView.frame.width, graphView.frame.height)
         graphView.addSubview(graphsVC.view)
     }
     
-    @IBAction func editMembersBtnPressed() {
-        if delegate != nil {
-            delegate!.userDidSelectEditMembers()
-        }
+    @IBAction func addMembersBtnPressed() {
+        
     }
     
     @IBAction func createSessionBtnPressed() {
@@ -87,54 +88,82 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     
     // UITableViewDataSource and UITableViewDelegate METHODS
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SingleLineTextCell
+        
+        if tableView == memberView {
+            // Displays all admins and members
+            return getCellForMembers(indexPath)
+        } else {
+            // Displays all sessions of this project
+            return getCellForSessions(indexPath)
+        }
+    }
+    
+    func getCellForMembers(indexPath: NSIndexPath) -> MemberCell {
+        let cell = memberView.dequeueReusableCellWithIdentifier(memberCellIdentifier) as! MemberCell
+        
+        // Remove previous cell targets
+        cell.button.removeTarget(self, action: Selector("removeAdmin:"), forControlEvents: .TouchUpInside)
+        cell.button.removeTarget(self, action: Selector("makeAdmin:"), forControlEvents: .TouchUpInside)
+        
+        let member = currentProject!.members[indexPath.row]
+        
+        // Set fields of cell
+        cell.label.text = member.name
+        cell.button.hidden = false
+        
+        // If this member is an admin
+        if contains(currentProject!.admins, member) {
+            cell.button.setTitle("Remove Admin", forState: .Normal)
+            cell.button.addTarget(self, action: Selector("removeAdmin:"), forControlEvents: .TouchUpInside)
+            cell.adminLabel.hidden = false
+        } else {
+            cell.button.setTitle("Make Admin", forState: .Normal)
+            cell.button.addTarget(self, action: Selector("makeAdmin:"), forControlEvents: .TouchUpInside)
+            cell.adminLabel.hidden = true
+        }
+        
+        cell.button.tag = indexPath.row
+        
+        return cell
+    }
+    
+    func getCellForSessions(indexPath: NSIndexPath) -> SingleLineTextCell {
+        let cell = sessionView.dequeueReusableCellWithIdentifier(textCellIdentifier) as! SingleLineTextCell
         
         cell.textField.userInteractionEnabled = false
         
-        if tableView.tag == memberTag {
-            // Displays all admins and members
-            if indexPath.row < currentProject!.admins.count {
-                cell.label.text = currentProject!.admins[indexPath.row].name
-            } else {
-                cell.label.text = currentProject!.members[indexPath.row - currentProject!.admins.count].name
-            }
-        } else if tableView.tag == sessionTag {
-            // Displays all sessions of this project
-            let session = currentProject!.sessions[indexPath.row]
-            let dateString = formatter.stringFromDate(session.createdAt)
-            cell.label.text = dateString
-            
-            if session.type == .Focal {
-                cell.textField.text = "F"
-            } else {
-                cell.textField.text = "S"
-            }
+        let session = currentProject!.sessions[indexPath.row]
+        let dateString = formatter.stringFromDate(session.createdAt)
+        cell.label.text = dateString
+        
+        if session.type == .Focal {
+            cell.textField.text = "F"
+        } else {
+            cell.textField.text = "S"
         }
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if delegate != nil {
-            if tableView.tag == memberTag {
+            if tableView == memberView {
                 if indexPath.row < currentProject!.admins.count {
                     delegate!.userDidSelectMember(currentProject!, member: currentProject!.admins[indexPath.row])
                 } else {
                     delegate!.userDidSelectMember(currentProject!, member: currentProject!.members[indexPath.row - currentProject!.admins.count])
                 }
                 
-            } else if tableView.tag == sessionTag {
+            } else {
                 delegate!.userDidSelectSession(currentProject!, session: currentProject!.sessions[indexPath.row])
             }
         }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView.tag == memberTag {
+        if tableView == memberView {
             return currentProject!.admins.count + currentProject!.members.count
-        } else if tableView.tag == sessionTag {
-            return currentProject!.sessions.count
         } else {
-            return 0
+            return currentProject!.sessions.count
         }
     }
     
@@ -143,6 +172,11 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return cellHeight
+        if tableView == memberView {
+            return memberCellHeight
+        } else {
+            return textCellHeight
+        }
+        
     }
 }

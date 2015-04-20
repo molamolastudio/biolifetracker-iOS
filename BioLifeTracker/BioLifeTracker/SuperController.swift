@@ -611,16 +611,12 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         showSession()
     }
     
-    func userDidSelectMember(project: Project, member: User) {
-        
-    }
-    
     func userDidSelectGraph(project: Project) {
         showAnalysisPageWithProject(project)
     }
     
     func userDidSelectCreateSession() {
-        let alert = UIAlertController(title: "New Individual", message: "", preferredStyle: .Alert)
+        let alert = UIAlertController(title: "New Session", message: "", preferredStyle: .Alert)
         
         // Adds buttons
         let actionCancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
@@ -642,10 +638,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         })
         
         self.presentViewController(alert, animated: true, completion: nil)
-    }
-    
-    func userDidSelectEditMembers() {
-        
     }
     
     // ScanSessionViewControllerDelegate methods
