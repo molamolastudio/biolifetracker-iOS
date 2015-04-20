@@ -11,7 +11,7 @@
 
 import UIKit
 
-class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate,ProjectsViewControllerDelegate, EthogramsViewControllerDelegate, ProjectHomeViewControllerDelegate, ScanSessionViewControllerDelegate, FocalSessionViewControllerDelegate {
+class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate,ProjectsViewControllerDelegate, EthogramsViewControllerDelegate, ProjectHomeViewControllerDelegate, ScanSessionViewControllerDelegate {
     
     let splitVC = UISplitViewController()
     let masterNav = UINavigationController()
@@ -36,7 +36,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         showStartPage()
         
         if UserAuthService.sharedInstance.user.email != "Default" {
-            setupForDemo()
+            //setupForDemo()
         }
     }
     
@@ -304,7 +304,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func showFocalSessionPage(session: Session) {
         let vc = FocalSessionViewController(nibName: "FocalSessionView", bundle: nil)
         
-        vc.delegate = self
         vc.title = session.name
         vc.currentSession = session
         vc.editable = false
@@ -641,12 +640,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         // Open the ScanView
         showScanPage(session, timestamp: timestamp)
     }
-    
-    // FocalSessionViewControllerDelegate methods
-    func userDidSelectObservation(session: Session, observation: Observation) {
-        // Open the Observation View
-    }
-    
+
     // Helper methods
     
     // Displays an alert controller with given title and message, with an OK button.

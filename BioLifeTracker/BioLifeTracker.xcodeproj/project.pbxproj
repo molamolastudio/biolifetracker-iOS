@@ -95,7 +95,6 @@
 		32423B891ADFDC8600AFA2F8 /* CustomPickerPopupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423B881ADFDC8600AFA2F8 /* CustomPickerPopupCell.swift */; };
 		32423B8B1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32423B8A1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib */; };
 		32423B8D1AE0023400AFA2F8 /* FocalSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423B8C1AE0023400AFA2F8 /* FocalSessionViewController.swift */; };
-		32423B8F1AE0025900AFA2F8 /* FocalSessionViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423B8E1AE0025900AFA2F8 /* FocalSessionViewControllerDelegate.swift */; };
 		32423B911AE0093B00AFA2F8 /* FocalSessionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32423B901AE0093B00AFA2F8 /* FocalSessionView.xib */; };
 		32423B951AE23E0D00AFA2F8 /* CircleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423B941AE23E0D00AFA2F8 /* CircleCell.swift */; };
 		32423B971AE23E2400AFA2F8 /* CircleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32423B961AE23E2400AFA2F8 /* CircleCell.xib */; };
@@ -312,7 +311,6 @@
 		32423B881ADFDC8600AFA2F8 /* CustomPickerPopupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPickerPopupCell.swift; sourceTree = "<group>"; };
 		32423B8A1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomPickerPopupCell.xib; sourceTree = "<group>"; };
 		32423B8C1AE0023400AFA2F8 /* FocalSessionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocalSessionViewController.swift; sourceTree = "<group>"; };
-		32423B8E1AE0025900AFA2F8 /* FocalSessionViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocalSessionViewControllerDelegate.swift; sourceTree = "<group>"; };
 		32423B901AE0093B00AFA2F8 /* FocalSessionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FocalSessionView.xib; sourceTree = "<group>"; };
 		32423B941AE23E0D00AFA2F8 /* CircleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleCell.swift; sourceTree = "<group>"; };
 		32423B961AE23E2400AFA2F8 /* CircleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CircleCell.xib; sourceTree = "<group>"; };
@@ -614,7 +612,6 @@
 				323CBD911ADB96F600A7C970 /* ProjectHomeViewControllerDelegate.swift */,
 				323CBD8F1ADB901200A7C970 /* ProjectHomeView.xib */,
 				32423B8C1AE0023400AFA2F8 /* FocalSessionViewController.swift */,
-				32423B8E1AE0025900AFA2F8 /* FocalSessionViewControllerDelegate.swift */,
 				32423B901AE0093B00AFA2F8 /* FocalSessionView.xib */,
 				323CBD971ADD624D00A7C970 /* ScanSessionViewController.swift */,
 				323CBD991ADD634400A7C970 /* ScanSessionViewControllerDelegate.swift */,
@@ -966,7 +963,6 @@
 				7838E7681AE3501C007C2562 /* ProjectStub.swift in Sources */,
 				326773BB1ACAEFB000899745 /* FormCell.swift in Sources */,
 				3205E7781AAEDA85006F374D /* Data.swift in Sources */,
-				32423B8F1AE0025900AFA2F8 /* FocalSessionViewControllerDelegate.swift in Sources */,
 				3205E77A1AAEDA85006F374D /* Observation.swift in Sources */,
 				AC9162AC1ACA6A0400FED714 /* CloudStorable.swift in Sources */,
 				329B29391AD15BBF007ADC65 /* FormPopupDelegate.swift in Sources */,
