@@ -18,6 +18,15 @@ class ExportObservationsService {
         self.plistPath = ""
     }
     
+    func openInOtherApps(button: UIBarButtonItem) {
+        startWritingCSVToDisk()
+        if let fileURL = NSURL.fileURLWithPath(plistPath) {
+            ExportObservationsService.documentInteractionVC = UIDocumentInteractionController(URL: fileURL)
+            ExportObservationsService.documentInteractionVC.UTI = "public.comma-separated-values-text"
+            ExportObservationsService.documentInteractionVC.presentOpenInMenuFromBarButtonItem(button, animated: true)
+        }
+    }
+    
     /// [Semi-Async]
     /// Effect: plistPath will be updated after this method returns.
     /// Async-effect: some time after this function returns, the CSV document
@@ -51,16 +60,7 @@ class ExportObservationsService {
         }
     }
     
-    func openInOtherApps(button: UIBarButtonItem) {
-        startWritingCSVToDisk()
-        if let fileURL = NSURL.fileURLWithPath(plistPath) {
-            ExportObservationsService.documentInteractionVC = UIDocumentInteractionController(URL: fileURL)
-            ExportObservationsService.documentInteractionVC.UTI = "public.comma-separated-values-text"
-            ExportObservationsService.documentInteractionVC.presentOpenInMenuFromBarButtonItem(button, animated: true)
-        }
-    }
-    
-    func generateCSV() -> String {
+    private func generateCSV() -> String {
         let csvWriter = CSVWriter()
         let dateFormatter = BiolifeDateFormatter()
         
