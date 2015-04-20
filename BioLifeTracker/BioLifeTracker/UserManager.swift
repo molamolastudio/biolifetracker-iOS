@@ -24,6 +24,7 @@ class UserManager {
         users.append(user)
     }
     
+    /// Returns all users in alphabetical order (by name)
     func getAllUsers() -> [User] {
         sort(&users, { $0.name < $1.name })
         return users
@@ -47,6 +48,19 @@ class UserManager {
         return result
     }
     
+    /// Same as getAllUsers(), but returns array of string (users' names).
+    func getAllUsernames() -> [String] {
+        let result = getAllUsers()
+        return result.map { $0.name }
+    }
+    
+    /// Same as getUsersExcept(:), but returns array of string (users' names).
+    func getUsernamesExcept(var excludedUsers: [User]) -> [String] {
+        let result = getUsersExcept(excludedUsers)
+        return result.map { $0.name }
+    }
+    
+    /// Get users with the given name, if found. Otherwise returns nil.
     func getUserWithName(name: String) -> User? {
         return usersByName[name]
     }
