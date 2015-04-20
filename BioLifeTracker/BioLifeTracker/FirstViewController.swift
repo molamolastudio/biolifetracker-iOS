@@ -30,8 +30,8 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         setupGoogleLoginButton()
         
         // Set up alert controller
-        let alertTitle = "Loading Your Data"
-        let alertMessage = "Loading..."
+        let alertTitle = "Signing In"
+        let alertMessage = "Please wait..."
         alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
     }
     
@@ -55,9 +55,9 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     }
     
     func showSuperVC() {
-        if alert != nil {
-            alert!.dismissViewControllerAnimated(true, completion: nil)
-        }
+        
+        alert?.dismissViewControllerAnimated(true, completion: nil)
+        
         let userAuthService = UserAuthService.sharedInstance
         if !userAuthService.hasAccessToken() {
             let failAlert = UIAlertController(title: "Login Fail", message: "The server rejected your social account login", preferredStyle: .Alert)
@@ -65,9 +65,11 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
             failAlert.addAction(defaultAction)
             self.presentViewController(failAlert, animated: true, completion: nil)
             return
+        } else {
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
-        self.dismissViewControllerAnimated(true, completion: nil)
     }
+
     
     // FACEBOOK METHODS
     

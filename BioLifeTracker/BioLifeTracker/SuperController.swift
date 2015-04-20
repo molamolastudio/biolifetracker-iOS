@@ -24,19 +24,33 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     var currentProject: Project? = nil
     var currentSession: Session? = nil
     
+    var loadingAlert: UIAlertController?
+    var freshLogin = false
+    
     override func viewDidLoad() {
         setupSplitView()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        let userAuth = UserAuthService.sharedInstance
+        if !userAuth.hasAccessToken() { // user has not logged in
+            showLoginPage()
+            return
+        }
         
-        menu.title = UserAuthService.sharedInstance.user.name
-        
-        showStartPage()
+        // User has logged in
+        menu.title = userAuth.user.name
+        showProjectsPage()
+        if freshLogin {
+            loadingAlert = UIAlertController(title: "Loading Data", message: "Downloading your projects from server", preferredStyle: .Alert)
+            self.presentViewController(loadingAlert!, animated: true, completion: nil)
+            startDownloadingProjectsFromServer()
+            freshLogin = false
+        }
         
         if UserAuthService.sharedInstance.user.email != "Default" {
-            //setupForDemo()
+            setupForDemo()
         }
     }
     
@@ -164,17 +178,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     // Methods to show pages
-    func showStartPage() {
-        // If user is logged in
-        if UserAuthService.sharedInstance.hasAccessToken() {
-            UserAuthService.sharedInstance.initialiseManagers()
-            showProjectsPage()
-        } else {
-            showLoginPage()
-        }
-    }
     
     func showLoginPage() {
+        freshLogin = true
         let vc = FirstViewController(nibName: "FirstView", bundle: nil)
         vc.modalPresentationStyle = .FullScreen
         self.presentViewController(vc, animated: true, completion: nil)
@@ -512,28 +518,22 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
         // Set up alert controller
         let alertTitle = "Sync In Progress"
-        let alertMessage = "Starting sync..."
+        let alertMessage = "Uploading your project..."
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        // Set up cloud storage worker
-        let worker = CloudStorageWorker()
+        self.presentViewController(alert, animated: true, completion: nil)
+
         let uploadTask = UploadTask(item: project)
-        worker.enqueueTask(uploadTask)
-        worker.setOnProgressUpdate { percentage, message in
-            // Update popup here
-            alert.message = "\(message) [\(percentage)%]"
-        }
+        dispatch_async(CloudStorage.networkThread, {
+            uploadTask.execute()
+            dispatch_async(dispatch_get_main_queue(), {
+                alert.dismissViewControllerAnimated(true, completion: {
+                    if (uploadTask.completedSuccessfully != true) {
+                        self.displayAlert("Fail to Upload", message: "Cannot connect to server")
+                    }
+                })
+            })
+        })
         
-        // worker.setOnFailure { dismiss alert and open new alert with ok button
-        //}
-        
-        worker.setOnFinished {
-            // Dismiss popup here
-            alert.dismissViewControllerAnimated(true, completion: nil)
-        }
-        
-        //presentViewController(alert, animated: true, completion: nil)
-        //worker.startExecution()
     }
     
     func exportToExcel(sender: UIBarButtonItem) {
@@ -569,14 +569,18 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         // Requires the user info to clear directories
         ProjectManager.sharedInstance.handleLogOut()
         EthogramManager.sharedInstance.handleLogOut()
-        UserAuthService.sharedInstance.handleLogOut()
         
         GPPSignIn.sharedInstance().signOut()
         FBSession.activeSession().closeAndClearTokenInformation()
         
+        UserAuthService.sharedInstance.handleLogOut()
+        CloudStorageManager.sharedInstance.clearCache()
+        
         // Move back to start page
         dismissMenuView()
         showLoginPage()
+        
+        assert(ProjectManager.sharedInstance.projects.count == 0)
     }
     
     func userDidSelectSessions(project: Project) {
@@ -657,5 +661,104 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         let actionOk = UIAlertAction(title: "OK", style: .Default, handler: nil)
         alert.addAction(actionOk)
         self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    
+    func startDownloadingProjectsFromServer() {
+        let worker = CloudStorageWorker()
+        
+        // downloading items one by one is too slow, we have to warm cache
+        // by downloading in batches first
+        let downloadUser = DownloadTask(classUrl: User.ClassUrl)
+        let downloadLocation = DownloadTask(classUrl: Location.ClassUrl)
+        let downloadWeather = DownloadTask(classUrl: Weather.ClassUrl)
+        let downloadTag = DownloadTask(classUrl: Tag.ClassUrl)
+        let downloadIndividual = DownloadTask(classUrl: Individual.ClassUrl)
+        let downloadObservation = DownloadTask(classUrl: Observation.ClassUrl)
+        let downloadSession = DownloadTask(classUrl: Session.ClassUrl)
+        let downloadBehaviourState = DownloadTask(classUrl: BehaviourState.ClassUrl)
+        let downloadEthogram = DownloadTask(classUrl: Ethogram.ClassUrl)
+        let downloadProject = DownloadTask(classUrl: Project.ClassUrl)
+        // must put to cache
+        // think of how not to erase the cache between workers
+        let tasks = [
+            downloadUser,
+            downloadLocation,
+            downloadWeather,
+            downloadTag,
+            downloadIndividual,
+            downloadObservation,
+            downloadSession,
+            downloadBehaviourState,
+            downloadEthogram,
+            downloadProject
+        ]
+        tasks.map { worker.enqueueTask($0) }
+        
+        let manager = CloudStorageManager.sharedInstance
+        worker.setOnFinished {
+            // put all info into cache
+            for userInfo in downloadUser.getResults() {
+                manager.putIntoCache(User.ClassUrl, itemInfo: userInfo)
+            }
+            for locationInfo in downloadLocation.getResults() {
+                manager.putIntoCache(Location.ClassUrl, itemInfo: locationInfo)
+            }
+            for weatherInfo in downloadWeather.getResults() {
+                manager.putIntoCache(Weather.ClassUrl, itemInfo: weatherInfo)
+            }
+            for tagInfo in downloadTag.getResults() {
+                manager.putIntoCache(Tag.ClassUrl, itemInfo: tagInfo)
+            }
+            for individualInfo in downloadIndividual.getResults() {
+                manager.putIntoCache(Individual.ClassUrl, itemInfo: individualInfo)
+            }
+            for observationInfo in downloadObservation.getResults() {
+                manager.putIntoCache(Observation.ClassUrl, itemInfo: observationInfo)
+            }
+            for sessionInfo in downloadSession.getResults() {
+                manager.putIntoCache(Session.ClassUrl, itemInfo: sessionInfo)
+            }
+            for behaviourInfo in downloadBehaviourState.getResults() {
+                manager.putIntoCache(BehaviourState.ClassUrl, itemInfo: behaviourInfo)
+            }
+            for ethogramInfo in downloadEthogram.getResults() {
+                manager.putIntoCache(Ethogram.ClassUrl, itemInfo: ethogramInfo)
+            }
+            for projectInfo in downloadProject.getResults() {
+                manager.putIntoCache(Project.ClassUrl, itemInfo: projectInfo)
+            }
+            
+            // add users to UserManager
+            for userInfo in downloadUser.getResults() {
+                let user = User(dictionary: userInfo)
+                UserManager.sharedInstance.addUser(user)
+            }
+            
+            // add projects to ProjectManager
+            for projectInfo in downloadProject.getResults() {
+                let project = Project(dictionary: projectInfo)
+                ProjectManager.sharedInstance.addProject(project)
+            }
+            
+            // add ethograms to EthogramManager
+            for ethogramInfo in downloadEthogram.getResults() {
+                let ethogram = Ethogram(dictionary: ethogramInfo)
+                EthogramManager.sharedInstance.addEthogram(ethogram)
+            }
+            
+            dispatch_async(dispatch_get_main_queue(), {
+                self.loadingAlert?.dismissViewControllerAnimated(true, completion: nil)
+                self.showProjectsPage()
+            })
+        }
+        worker.setOnProgressUpdate { percentage, message in
+            self.loadingAlert?.dismissViewControllerAnimated(false, completion: {
+                let title = self.loadingAlert!.title
+//                self.loadingAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+//                self.presentViewController(self.loadingAlert!, animated: false, completion: nil)
+            })
+        }
+        worker.startExecution()
     }
 }
