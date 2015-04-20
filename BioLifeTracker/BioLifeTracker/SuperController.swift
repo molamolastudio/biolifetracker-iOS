@@ -755,10 +755,12 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
             }
             
             // add users to UserManager
+            UserManager.sharedInstance.clearUsers()
             for userInfo in downloadUser.getResults() {
                 let user = User(dictionary: userInfo)
                 UserManager.sharedInstance.addUser(user)
             }
+            UserManager.sharedInstance.saveUsersToDisk()
             
             // add projects to ProjectManager
             for projectInfo in downloadProject.getResults() {

@@ -19,6 +19,10 @@ class UserManager {
         return Singleton.instance
     }
     
+    init() {
+        loadUsersFromDisk()
+    }
+    
     func addUser(user: User) {
         usersByName[user.name] = user
         users.append(user)
@@ -63,6 +67,32 @@ class UserManager {
     /// Get users with the given name, if found. Otherwise returns nil.
     func getUserWithName(name: String) -> User? {
         return usersByName[name]
+    }
+    
+    func clearUsers() {
+        users.removeAll(keepCapacity: false)
+        usersByName.removeAll(keepCapacity: false)
+    }
+    
+    func saveUsersToDisk() -> Bool {
+        let dirs: [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        
+        if let dir = dirs?[0] {
+            let path = dir.stringByAppendingPathComponent("all_users")
+            let success = NSKeyedArchiver.archiveRootObject(users, toFile: path)
+            return success
+        }
+        return false
+    }
+    
+    func loadUsersFromDisk() {
+        let dirs: [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        
+        if let dir = dirs?[0] {
+            let path = dir.stringByAppendingPathComponent("all_users")
+            let loadedUsers = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? [User]
+            if loadedUsers != nil { self.users = loadedUsers! }
+        }
     }
     
 }
