@@ -35,6 +35,7 @@ class MemberPickerViewController: UIViewController, UITableViewDataSource, UITab
     @IBAction func btnDonePressed(sender: UIButton) {
         if delegate != nil && selectedMember != nil {
             delegate!.userDidSelectMember(members[selectedMember!])
+            self.dismissViewControllerAnimated(true, completion: nil)
         }
     }
     

@@ -47,6 +47,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
             self.presentViewController(loadingAlert!, animated: true, completion: nil)
             startDownloadingProjectsFromServer()
             freshLogin = false
+        } else {
+            refreshUserList()
         }
         
         if UserAuthService.sharedInstance.user.email != "Default" {
@@ -663,6 +665,23 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
+    func refreshUserList() {
+        let worker = CloudStorageWorker()
+        let downloadUser = DownloadTask(classUrl: User.ClassUrl)
+        worker.enqueueTask(downloadUser)
+        worker.setOnFinished {
+            if downloadUser.completedSuccessfully == true {
+                UserManager.sharedInstance.clearUsers()
+                for userInfo in downloadUser.getResults() {
+                    let user = User(dictionary: userInfo)
+                    UserManager.sharedInstance.addUser(user)
+                }
+                UserManager.sharedInstance.saveUsersToDisk()
+            }
+        }
+        worker.startExecution()
+    }
+    
     
     func startDownloadingProjectsFromServer() {
         let worker = CloudStorageWorker()
@@ -679,8 +698,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         let downloadBehaviourState = DownloadTask(classUrl: BehaviourState.ClassUrl)
         let downloadEthogram = DownloadTask(classUrl: Ethogram.ClassUrl)
         let downloadProject = DownloadTask(classUrl: Project.ClassUrl)
-        // must put to cache
-        // think of how not to erase the cache between workers
         let tasks = [
             downloadUser,
             downloadLocation,
@@ -730,10 +747,12 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
             }
             
             // add users to UserManager
+            UserManager.sharedInstance.clearUsers()
             for userInfo in downloadUser.getResults() {
                 let user = User(dictionary: userInfo)
                 UserManager.sharedInstance.addUser(user)
             }
+            UserManager.sharedInstance.saveUsersToDisk()
             
             // add projects to ProjectManager
             for projectInfo in downloadProject.getResults() {
@@ -753,10 +772,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
             })
         }
         worker.setOnProgressUpdate { percentage, message in
-            self.loadingAlert?.dismissViewControllerAnimated(false, completion: {
-                let title = self.loadingAlert!.title
-//                self.loadingAlert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-//                self.presentViewController(self.loadingAlert!, animated: false, completion: nil)
+            dispatch_async(dispatch_get_main_queue(), {
+                self.loadingAlert?.message = message
+                
             })
         }
         worker.startExecution()
