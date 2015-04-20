@@ -16,4 +16,5 @@ protocol GraphsViewControllerDelegate {
     func didRemoveSession(session: Session)
     func didAddState(state: BehaviourState)
     func didRemoveState(state: BehaviourState)
+    func userDidSelectProject(project: Project)
 }

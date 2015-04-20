@@ -20,6 +20,8 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
     @IBOutlet weak var background: UIView!
     var graphsVC: GraphsViewController!
     
+    private var currentProject: Project!
+    
     var AliceBlue = UIColor(red: 228.0/255.0, green: 241.0/255.0, blue: 254.0/255.0, alpha: 1)
     var HummingBird = UIColor(red: 197.0/255.0, green: 239.0/255.0, blue: 247.0/255.0, alpha: 1)
     
@@ -29,18 +31,40 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
         self.view.backgroundColor = UIColor.whiteColor()
         self.view.sendSubviewToBack(self.background)
         
-        showGraphsView();
+        //DEVELOPER TEST PROJECT
+//        var stub = ProjectStub()
+//        setProject(stub.project)
+//        
+        
+        if currentProject == nil {
+            showSelectProjectView()
+        } else {
+            showGraphsView();
+        }
+    }
+    func setProject(project: Project) {
+        currentProject = project
     }
     
     func showGraphsView() {
         graphsVC = GraphsViewController(nibName: "GraphsView", bundle: nil)
-
-        var stub = ProjectStub()
-        // set graph for now it's stub
-        graphsVC.setProject(stub.empty)
+        graphsVC.setProject(currentProject)
         graphsVC.toggleGraph(.HourPlot)
         graphsVC.view.frame = CGRectMake(0, 0, graphsView.frame.width, graphsView.frame.height)
         graphsView.addSubview(graphsVC.view)
+    }
+    
+    func showSelectProjectView() {
+        var projectVC = AnalysisProjectViewController()
+        projectVC.delegate = self
+        projectVC.modalPresentationStyle = UIModalPresentationStyle.FormSheet
+        self.presentViewController(projectVC, animated: false, completion: nil)
+    }
+    
+    func hideSelectProjectView() {
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+
     }
     
     @IBAction func graphIndexChanged(sender: AnyObject) {
@@ -48,18 +72,18 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
         case 0:
             println("hour")
             graphsVC.toggleGraph(.HourPlot)
-            userButton.hidden = false
-            sessionButton.hidden = false
+//            userButton.hidden = false
+//            sessionButton.hidden = false
         case 1:
             println("day")
             graphsVC.toggleGraph(.DayPlot)
-            userButton.hidden = false
-            sessionButton.hidden = false
+//            userButton.hidden = false
+//            sessionButton.hidden = false
         case 2:
             println("states")
             graphsVC.toggleGraph(.StateChart)
-            userButton.hidden = true
-            sessionButton.hidden = true
+//            userButton.hidden = true
+//            sessionButton.hidden = true
             
         default:
             break
@@ -157,6 +181,12 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
         chosen.removeAtIndex(i!)
         graphsVC.updateBehaviourStates(chosen)
         graphsVC.updateGraph()
+    }
+    
+    func userDidSelectProject(project: Project) {
+        setProject(project)
+        hideSelectProjectView()
+        showGraphsView()
     }
     
 }
