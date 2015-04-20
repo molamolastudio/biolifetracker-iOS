@@ -100,8 +100,15 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
             }
         } else if tableView.tag == sessionTag {
             // Displays all sessions of this project
-            let dateString = formatter.stringFromDate(currentProject!.sessions[indexPath.row].createdAt)
+            let session = currentProject!.sessions[indexPath.row]
+            let dateString = formatter.stringFromDate(session.createdAt)
             cell.label.text = dateString
+            
+            if session.type == .Focal {
+                cell.textField.text = "F"
+            } else {
+                cell.textField.text = "S"
+            }
         }
         return cell
     }
