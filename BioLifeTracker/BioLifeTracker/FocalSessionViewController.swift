@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FocalSessionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate  {
+class FocalSessionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate  {
     var delegate: FocalSessionViewControllerDelegate? = nil
     
     @IBOutlet weak var individualsView: UICollectionView!
@@ -71,6 +71,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         statesView.dataSource = self
         statesView.delegate = self
         
+        notesView.delegate = self
+        
         observationsView.registerNib(UINib(nibName: textCellIdentifier, bundle: nil), forCellReuseIdentifier: textCellIdentifier)
         individualsView.registerNib(UINib(nibName: circleCellIdentifier, bundle: nil), forCellWithReuseIdentifier: circleCellIdentifier)
         statesView.registerNib(UINib(nibName: circleLabelCellIdentifier, bundle: nil), forCellWithReuseIdentifier: circleLabelCellIdentifier)
@@ -97,7 +99,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     func makeEditable(value: Bool) {
         editable = value
-        
+        photoOverlayView.hidden = !value
+        notesView.userInteractionEnabled = value
         refreshViews()
     }
     
@@ -305,7 +308,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
             let observation = Observation(session: currentSession!, individual: individuals[selectedIndividual], state: states.first!, timestamp: NSDate(), information: "")
             newObservations[individuals[selectedIndividual]]!.append(observation)
             
-            tableView.reloadData()
+            refreshObservations()
         }
         selectedObservation = indexPath.row
         showObservationAtIndex(indexPath)
@@ -323,7 +326,19 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         return numSections
     }
     
+    // UITextViewDelegate methods
+    // Updates the currently displayed observation's text when user types in the text view.
+    func textViewDidChange(textView: UITextView) {
+        let observation = selectedObservations[selectedObservation]
+        observation.updateInformation(textView.text)
+    }
+    
     // End delegate methods
+    
+    func refreshObservations() {
+        showIndividualAtIndex(NSIndexPath(forRow: selectedIndividual, inSection: 0))
+        observationsView.reloadData()
+    }
     
     // Methods to toggle views
     func showIndividualAtIndex(indexPath: NSIndexPath) {
@@ -369,7 +384,6 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
                 photoView.image = nil
             }
             notesView.text = observation.information
-            
         }
     }
     
