@@ -42,14 +42,8 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         case fivepm = 11
         case sixpm = 12
     }
-
-//    @IBOutlet var hostingViews: [CPTGraphHostingView]!
-//
-    @IBOutlet weak var graphHostingView: CPTGraphHostingView!
     
-//    @IBOutlet weak var hourPlotHostingView: CPTGraphHostingView!
-//    @IBOutlet weak var stateChartHostingView: CPTGraphHostingView!
-//    @IBOutlet weak var dayPlotHostingView: CPTGraphHostingView!
+    @IBOutlet weak var graphHostingView: CPTGraphHostingView!
     
     private var projectInstance: Project!
     var project: Project { get { return projectInstance } }
@@ -90,7 +84,9 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     
     var AliceBlue = UIColor(red: 228.0/255.0, green: 241.0/255.0, blue: 254.0/255.0, alpha: 1)
     var HummingBird = UIColor(red: 197.0/255.0, green: 239.0/255.0, blue: 247.0/255.0, alpha: 1)
-    
+    // Returns an array of twenty colors at hue of 120
+    let colors = randomColorsCount(20, hue: .Random, luminosity: .Light)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -345,8 +341,10 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         graph.plotAreaFrame.paddingBottom = 40
         graph.plotAreaFrame.paddingTop = 40
         
-        graph.plotAreaFrame.fill = CPTFill(color: CPTColor(CGColor: AliceBlue.CGColor))
-        graph.plotAreaFrame.plotArea.fill = CPTFill(color: CPTColor(CGColor: AliceBlue.CGColor))
+//        graph.plotAreaFrame.fill = CPTFill(color: CPTColor(CGColor: AliceBlue.CGColor))
+        graph.plotAreaFrame.fill = CPTFill(color: CPTColor.whiteColor())
+//        graph.plotAreaFrame.plotArea.fill = CPTFill(color: CPTColor(CGColor: AliceBlue.CGColor))
+        graph.plotAreaFrame.plotArea.fill = CPTFill(color: CPTColor.whiteColor())
         
         
         var plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
@@ -769,13 +767,13 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     
     
     func barFillForBarPlot(barPlot: CPTBarPlot!, recordIndex idx: UInt) -> CPTFill! {
-        return CPTFill(color: CPTColor.blueColor())
-        //if selected[Int(idx)] {
-            //choose colour highlighted
-            // each bar has a dedicated colour
-        //} else {
-            // choose normal colour > at rndom
-        //}
+        
+        var chosenColor = colors[Int(idx)]
+        
+        
+        return CPTFill(color: CPTColor(CGColor: chosenColor.CGColor))
+        
+        
     }
     
     func symbolForScatterPlot(plot: CPTScatterPlot!, recordIndex idx: UInt) -> CPTPlotSymbol! {
