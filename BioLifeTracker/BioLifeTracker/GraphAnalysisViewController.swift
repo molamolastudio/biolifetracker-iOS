@@ -35,12 +35,13 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
 //        var stub = ProjectStub()
 //        setProject(stub.project)
 //        
-        
+
         if currentProject == nil {
             showSelectProjectView()
         } else {
             showGraphsView();
         }
+    
     }
     func setProject(project: Project) {
         currentProject = project

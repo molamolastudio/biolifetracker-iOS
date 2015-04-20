@@ -372,11 +372,16 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showAnalysisPage() {
-        let vc = GraphAnalysisViewController(nibName: "GraphAnalysisView", bundle: nil)
-        
-        vc.title = "Analyse"
-        
-        detailNav.setViewControllers([vc], animated: false)
+        if !ProjectManager.sharedInstance.projects.isEmpty {
+            let vc = GraphAnalysisViewController(nibName: "GraphAnalysisView", bundle: nil)
+            
+            vc.title = "Analyse"
+            
+            detailNav.setViewControllers([vc], animated: false)
+        } else {
+            // If there are no projects saved, display alert
+            displayAlert("No Projects To Analyse", message: "")
+        }
     }
     
     func showAnalysisPageWithProject(project: Project) {
