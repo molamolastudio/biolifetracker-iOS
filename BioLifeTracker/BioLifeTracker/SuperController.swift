@@ -380,6 +380,15 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         detailNav.setViewControllers([vc], animated: false)
     }
     
+    func showAnalysisPageWithProject(project: Project) {
+        let vc = GraphAnalysisViewController(nibName: "GraphAnalysisView", bundle: nil)
+        
+        vc.title = "Analyse"
+        vc.setProject(project)
+        
+        detailNav.setViewControllers([vc], animated: false)
+    }
+    
     func showSettingsPage() {
         let vc = FormViewController(style: UITableViewStyle.Grouped)
         
@@ -624,7 +633,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func userDidSelectGraph(project: Project) {
-        // Show analysis with the particular project
+        showAnalysisPageWithProject(project)
     }
     
     func userDidSelectCreateSession() {
