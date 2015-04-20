@@ -96,6 +96,9 @@ class AnalysisTableViewController: UITableViewController {
             }
         }
     }
+    func initEmpty() {
+        totalSessions = [Session]()
+    }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -178,17 +181,21 @@ class AnalysisTableViewController: UITableViewController {
 
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        selectedIndices.append(indexPath.row)
-        switch tableType {
-        case .Users:
-            var user = totalUsers[indexPath.row]
-            delegate!.didAddUser(user)
-        case .Sessions:
-            var session = totalSessions[indexPath.row]
-            delegate!.didAddSession(session)
-        case .States:
-            var state = totalStates[indexPath.row]
-            delegate!.didAddState(state)
+        var i = indexPath.row
+        var ind = find(selectedIndices, i)
+        if ind == nil {
+            selectedIndices.append(indexPath.row)
+            switch tableType {
+            case .Users:
+                var user = totalUsers[indexPath.row]
+                delegate!.didAddUser(user)
+            case .Sessions:
+                var session = totalSessions[indexPath.row]
+                delegate!.didAddSession(session)
+            case .States:
+                var state = totalStates[indexPath.row]
+                delegate!.didAddState(state)
+            }
         }
     }
     
@@ -198,7 +205,11 @@ class AnalysisTableViewController: UITableViewController {
         case .Users:
             ttl = totalUsers.count - 1
         case .Sessions:
-            ttl = totalSessions.count - 1
+            if totalSessions.count != 0 {
+                ttl = totalSessions.count - 1
+            } else {
+                ttl = 0
+            }
         case .States:
             ttl = totalStates.count - 1
         }
