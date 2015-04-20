@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FocalSessionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate  {
+class FocalSessionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, WeatherViewControllerDelegate  {
     
     @IBOutlet weak var individualsView: UICollectionView!
     @IBOutlet weak var observationsView: UITableView!
@@ -17,6 +17,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     @IBOutlet weak var photoOverlayView: UIView!
     @IBOutlet weak var notesView: UITextView!
     @IBOutlet weak var observationDisplay: UIView!
+    @IBOutlet weak var weatherOverlayView: UIView!
     
     let textCellIdentifier = "SingleLineTextCell"
     let circleCellIdentifier = "CircleCell"
@@ -31,6 +32,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     let messageAdd = "+ Add"
     
+    let weatherVC = WeatherViewController(nibName: "WeatherView", bundle: nil)
     let formatter = NSDateFormatter()
     
     var editable = false
@@ -61,6 +63,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func setupViews() {
+        setupWeatherController()
+        
         observationsView.dataSource = self
         observationsView.delegate = self
         
@@ -96,13 +100,18 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         notesView.layer.masksToBounds = true;
     }
     
+    func setupWeatherController() {
+        weatherVC.delegate = self
+        weatherVC.view.frame = CGRectMake(0, 0, weatherOverlayView.frame.width, weatherOverlayView.frame.height)
+        weatherOverlayView.addSubview(weatherVC.view)
+    }
+    
     func makeEditable(value: Bool) {
         editable = value
         refreshViews()
     }
     
     func refreshViews() {
-        println("refresh")
         selectedIndividual = 0
         selectedObservation = 0
         selectedObservations = [Observation]()
@@ -188,10 +197,15 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
+    // Returns a deep copy of the given array of observations.
     func getCopyOfObservations(array: [Observation]) -> [Observation]{
         var newArray = [Observation]()
         for o in array {
             let observation = Observation(session: o.session, individual: o.individual!, state: o.state, timestamp: o.timestamp, information: o.information)
+            observation.updatePhoto(o.photo)
+            if o.weather != nil {
+                observation.changeWeather(o.weather!)
+            }
             newArray.append(observation)
         }
         return newArray
@@ -201,6 +215,10 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     func copyOverObservation(from: Observation, to: Observation) {
         to.changeBehaviourState(from.state)
         to.updateInformation(from.information)
+        to.updatePhoto(from.photo)
+        if from.weather != nil {
+            to.changeWeather(from.weather!)
+        }
     }
     
     // UICollectionViewDataSource methods
@@ -335,6 +353,17 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         observation.updateInformation(textView.text)
     }
     
+    // WeatherViewControllerDelegate methods
+    // Updates the currently displayed observation's weather when user changes the weather.
+    func userDidSelectWeather(weather: Weather?) {
+        let observation = selectedObservations[selectedObservation]
+        if weather != nil {
+            observation.changeWeather(weather!)
+        } else {
+            observation.changeWeather(Weather())
+        }
+    }
+    
     // End delegate methods
     
     func refreshObservations() {
@@ -395,6 +424,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
                 photoView.image = nil
             }
             notesView.text = observation.information
+            
+            weatherVC.setWeather(observation.weather)
         }
     }
     
@@ -419,6 +450,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     func showObservationSection() {
         photoOverlayView.hidden = !editable
         notesView.userInteractionEnabled = editable
+        weatherVC.view.userInteractionEnabled = editable
         observationDisplay.hidden = false
     }
     
