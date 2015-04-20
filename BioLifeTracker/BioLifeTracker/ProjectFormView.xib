@@ -20,17 +20,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yvc-oa-AaF">
-                    <rect key="frame" x="0.0" y="37" width="600" height="140"/>
+                    <rect key="frame" x="0.0" y="7" width="600" height="140"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="140" id="VzI-gj-RkO"/>
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ajC-CQ-I8l">
-                    <rect key="frame" x="0.0" y="177" width="600" height="423"/>
+                    <rect key="frame" x="0.0" y="147" width="600" height="453"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="rU1-oY-nyQ">
-                            <rect key="frame" x="25" y="40" width="550" height="368"/>
+                            <rect key="frame" x="25" y="40" width="550" height="398"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </tableView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MEMBERS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PgK-5l-0I2">
@@ -80,7 +80,7 @@
                 <constraint firstItem="8LX-fF-wKH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="CGm-Mt-Xl5"/>
                 <constraint firstItem="yvc-oa-AaF" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" multiplier="0.3" id="FRE-g0-T14"/>
                 <constraint firstItem="yvc-oa-AaF" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Guo-97-Sk3"/>
-                <constraint firstItem="yvc-oa-AaF" firstAttribute="top" secondItem="8LX-fF-wKH" secondAttribute="bottom" constant="5" id="GxK-CJ-kjh"/>
+                <constraint firstItem="yvc-oa-AaF" firstAttribute="top" secondItem="8LX-fF-wKH" secondAttribute="bottom" constant="-25" id="GxK-CJ-kjh"/>
                 <constraint firstItem="ajC-CQ-I8l" firstAttribute="trailing" secondItem="yvc-oa-AaF" secondAttribute="trailing" id="T4Q-xv-EOz"/>
                 <constraint firstAttribute="trailing" secondItem="yvc-oa-AaF" secondAttribute="trailing" id="ZTx-8k-dkq"/>
                 <constraint firstAttribute="bottom" secondItem="ajC-CQ-I8l" secondAttribute="bottom" id="sbp-fK-P8z"/>

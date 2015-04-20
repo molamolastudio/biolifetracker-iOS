@@ -60,7 +60,7 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
     
     func setupFormVC() {
         form.setFormData(getFormDataForNewProject())
-        form.cellHorizontalPadding = 10
+        form.cellHorizontalPadding = 25
         form.roundedCells = true
         form.tableView.scrollEnabled = false
         
@@ -105,6 +105,7 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
     // MemberPickerViewControllerDelegate methods
     func userDidSelectMember(member: User) {
         members.append(member)
+        membersView.reloadData()
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS
@@ -124,7 +125,8 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
             
         } else if indexPath.row <= admins.count {
             // Displaying admins
-            let member = members[indexPath.row]
+            let index = indexPath.row - 1
+            let member = admins[index]
             cell.label.text = member.name
             cell.button.setTitle("Remove Admin", forState: .Normal)
             cell.button.addTarget(self, action: Selector("removeAdmin:"), forControlEvents: .TouchUpInside)
@@ -132,7 +134,7 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
             
         } else {
             // Displaying members
-            let index = indexPath.row - admins.count
+            let index = indexPath.row - admins.count - 1
             let member = members[index]
             cell.label.text = member.name
             cell.button.setTitle("Make Admin", forState: .Normal)
@@ -184,16 +186,18 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
     
     // Selectors for buttons
     func removeAdmin(sender: UIButton) {
-        let member = admins[sender.tag]
-        admins.removeAtIndex(sender.tag)
+        let index = sender.tag - 1
+        let member = admins[index]
+        admins.removeAtIndex(index)
         members.append(member)
         
         membersView.reloadData()
     }
     
     func makeAdmin(sender: UIButton) {
-        let member = members[sender.tag]
-        members.removeAtIndex(sender.tag)
+        let index = sender.tag - admins.count - 1
+        let member = members[index]
+        members.removeAtIndex(index)
         admins.append(member)
         
         membersView.reloadData()

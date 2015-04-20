@@ -15,6 +15,8 @@ class EthogramsViewController: UITableViewController {
     let cellHeight: CGFloat = 50
     let messageCellSubtitle = "States: "
     
+    let horizontalPadding: CGFloat = 25
+    
     let numSections = 1
     
     override func viewDidLoad() {
@@ -35,6 +37,8 @@ class EthogramsViewController: UITableViewController {
         
         cell.title.text = ethogram.name
         cell.subtitle.text = messageCellSubtitle + String(ethogram.behaviourStates.count)
+        cell.rounded = true
+        cell.horizontalPadding = horizontalPadding
         
         return cell
     }

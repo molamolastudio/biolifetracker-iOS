@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SubtitleTableCell: UITableViewCell {
+class SubtitleTableCell: FormCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
 }

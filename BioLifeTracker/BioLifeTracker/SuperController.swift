@@ -206,7 +206,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showProjectsPage() {
-        let vc = ProjectsViewController()
+        let vc = ProjectsViewController(style: UITableViewStyle.Grouped)
         
         vc.delegate = self
         vc.title = "Projects"
@@ -232,7 +232,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showEthogramsPage() {
-        let vc = EthogramsViewController()
+        let vc = EthogramsViewController(style: UITableViewStyle.Grouped)
         
         vc.delegate = self
         vc.title = "Ethograms"
@@ -290,7 +290,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
         vc.title = "New Individual"
         vc.setFormData(getFormDataForNewIndividual())
-        vc.cellHorizontalPadding = 10
+        vc.cellHorizontalPadding = 25
         vc.roundedCells = true
         
         detailNav.pushViewController(vc, animated: true)
@@ -403,7 +403,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
         vc.title = "Settings"
         vc.setFormData(getFormDataForSettings())
-        vc.cellHorizontalPadding = 10
+        vc.cellHorizontalPadding = 25
         vc.roundedCells = true
         
         detailNav.setViewControllers([vc], animated: false)

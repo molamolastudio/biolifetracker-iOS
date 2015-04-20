@@ -13,6 +13,7 @@ class ProjectsViewController: UITableViewController {
     
     let cellReuseIdentifier = "SubtitleTableCell"
     let cellHeight: CGFloat = 50
+    let horizontalPadding: CGFloat = 25
     
     let numSections = 1
     
@@ -29,6 +30,8 @@ class ProjectsViewController: UITableViewController {
         
         cell.title.text = project.getDisplayName()
         cell.subtitle.text = "Created by: " + project.admins.first!.name
+        cell.rounded = true
+        cell.horizontalPadding = horizontalPadding
         
         return cell
     }
