@@ -96,7 +96,6 @@
 		32423B891ADFDC8600AFA2F8 /* CustomPickerPopupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423B881ADFDC8600AFA2F8 /* CustomPickerPopupCell.swift */; };
 		32423B8B1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32423B8A1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib */; };
 		32423B8D1AE0023400AFA2F8 /* FocalSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423B8C1AE0023400AFA2F8 /* FocalSessionViewController.swift */; };
-		32423B8F1AE0025900AFA2F8 /* FocalSessionViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423B8E1AE0025900AFA2F8 /* FocalSessionViewControllerDelegate.swift */; };
 		32423B911AE0093B00AFA2F8 /* FocalSessionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32423B901AE0093B00AFA2F8 /* FocalSessionView.xib */; };
 		32423B951AE23E0D00AFA2F8 /* CircleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423B941AE23E0D00AFA2F8 /* CircleCell.swift */; };
 		32423B971AE23E2400AFA2F8 /* CircleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32423B961AE23E2400AFA2F8 /* CircleCell.xib */; };
@@ -105,6 +104,10 @@
 		32423B9F1AE3A1BB00AFA2F8 /* EthogramDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423B9E1AE3A1BB00AFA2F8 /* EthogramDetailsViewController.swift */; };
 		32423BA61AE404FC00AFA2F8 /* Edit User-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 32423BA41AE404FC00AFA2F8 /* Edit User-50.png */; };
 		32423BA71AE404FC00AFA2F8 /* Plus-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 32423BA51AE404FC00AFA2F8 /* Plus-50.png */; };
+		32423BA91AE4F54500AFA2F8 /* WeatherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32423BA81AE4F54500AFA2F8 /* WeatherView.xib */; };
+		32423BAB1AE4F5CF00AFA2F8 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423BAA1AE4F5CF00AFA2F8 /* WeatherViewController.swift */; };
+		32423BAD1AE5068600AFA2F8 /* WeatherViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423BAC1AE5068600AFA2F8 /* WeatherViewControllerDelegate.swift */; };
+		32423BAF1AE5087200AFA2F8 /* ScanSessionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32423BAE1AE5087200AFA2F8 /* ScanSessionView.xib */; };
 		326773B61ACAEFB000899745 /* BooleanPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773A91ACAEFB000899745 /* BooleanPickerCell.swift */; };
 		326773B71ACAEFB000899745 /* CustomPickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */; };
 		326773BA1ACAEFB000899745 /* BooleanPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 326773AD1ACAEFB000899745 /* BooleanPickerCell.xib */; };
@@ -132,21 +135,21 @@
 		329B293F1AD15E6F007ADC65 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 329B293E1AD15E6F007ADC65 /* FirstView.xib */; };
 		329B29411AD16058007ADC65 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329B29401AD16058007ADC65 /* FirstViewController.swift */; };
 		32FB650A1AD94B6800391194 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3205E7501AAED9F9006F374D /* LaunchScreen.xib */; };
+		781FD4661AE3E5C300BBC0E0 /* PopoverLabelView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 781FD4651AE3E5C300BBC0E0 /* PopoverLabelView.xib */; };
+		781FD4691AE4159B00BBC0E0 /* AnalysisTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 781FD4681AE4159B00BBC0E0 /* AnalysisTableHeader.xib */; };
+		781FD46C1AE415BE00BBC0E0 /* AnalysisTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781FD46B1AE415BE00BBC0E0 /* AnalysisTableViewController.swift */; };
+		781FD46F1AE466EB00BBC0E0 /* AnalysisTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781FD46E1AE466EB00BBC0E0 /* AnalysisTableHeader.swift */; };
 		7838E7521AE34F04007C2562 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7838E7511AE34F04007C2562 /* Accelerate.framework */; };
 		7838E7541AE34F11007C2562 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7838E7531AE34F11007C2562 /* QuartzCore.framework */; };
 		7838E7561AE34F22007C2562 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7838E7551AE34F22007C2562 /* libCorePlot-CocoaTouch.a */; };
 		7838E75E1AE3501C007C2562 /* GraphAnalysisView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7838E7581AE3501C007C2562 /* GraphAnalysisView.xib */; };
-		7838E75F1AE3501C007C2562 /* GraphAnalysisView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7838E7581AE3501C007C2562 /* GraphAnalysisView.xib */; };
 		7838E7601AE3501C007C2562 /* GraphAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E7591AE3501C007C2562 /* GraphAnalysisViewController.swift */; };
-		7838E7611AE3501C007C2562 /* GraphAnalysisViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E7591AE3501C007C2562 /* GraphAnalysisViewController.swift */; };
 		7838E7621AE3501C007C2562 /* GraphsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7838E75A1AE3501C007C2562 /* GraphsView.xib */; };
-		7838E7631AE3501C007C2562 /* GraphsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7838E75A1AE3501C007C2562 /* GraphsView.xib */; };
 		7838E7641AE3501C007C2562 /* GraphsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75B1AE3501C007C2562 /* GraphsViewController.swift */; };
-		7838E7651AE3501C007C2562 /* GraphsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75B1AE3501C007C2562 /* GraphsViewController.swift */; };
 		7838E7661AE3501C007C2562 /* GraphsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */; };
-		7838E7671AE3501C007C2562 /* GraphsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */; };
 		7838E7681AE3501C007C2562 /* ProjectStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75D1AE3501C007C2562 /* ProjectStub.swift */; };
-		7838E7691AE3501C007C2562 /* ProjectStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75D1AE3501C007C2562 /* ProjectStub.swift */; };
+		7838E76B1AE3B177007C2562 /* GraphDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E76A1AE3B177007C2562 /* GraphDetailsViewController.swift */; };
+		78C382771AE4E1E600645C07 /* AnalysisProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C382761AE4E1E600645C07 /* AnalysisProjectViewController.swift */; };
 		AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AC18814A1ACFC84600CE450B /* GooglePlus.bundle */; };
 		AC18814E1ACFC84600CE450B /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814B1ACFC84600CE450B /* GooglePlus.framework */; };
 		AC1881501ACFD05D00CE450B /* GoogleOpenSource.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814F1ACFD05D00CE450B /* GoogleOpenSource.framework */; };
@@ -154,6 +157,12 @@
 		AC1881521ACFD0E400CE450B /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814B1ACFC84600CE450B /* GooglePlus.framework */; };
 		AC1881531ACFD0E400CE450B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2439AAB91AC7DC7900389195 /* FacebookSDK.framework */; };
 		AC188C7C1AC2B11A00CB08C0 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC188C7B1AC2B11A00CB08C0 /* Storable.swift */; };
+		AC530C6B1AE4F214008E1A17 /* bltlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C6A1AE4F214008E1A17 /* bltlogo.png */; };
+		AC530C6E1AE4F23C008E1A17 /* bg_horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C6C1AE4F23C008E1A17 /* bg_horizontal.png */; };
+		AC530C6F1AE4F23C008E1A17 /* bg_vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C6D1AE4F23C008E1A17 /* bg_vertical.png */; };
+		AC530C711AE4F281008E1A17 /* bltname.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C701AE4F281008E1A17 /* bltname.png */; };
+		AC530C741AE4F424008E1A17 /* bltlogo_transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C721AE4F424008E1A17 /* bltlogo_transparent.png */; };
+		AC530C751AE4F424008E1A17 /* bltname_transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C731AE4F424008E1A17 /* bltname_transparent.png */; };
 		AC6A249A1ADD1AAA00CF33D6 /* BLTProjectProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6A24991ADD1AAA00CF33D6 /* BLTProjectProtocol.swift */; };
 		AC6A249C1ADD1AC000CF33D6 /* BLTSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6A249B1ADD1AC000CF33D6 /* BLTSessionProtocol.swift */; };
 		AC6A249E1ADD1AD300CF33D6 /* BLTBehaviourStateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6A249D1ADD1AD300CF33D6 /* BLTBehaviourStateProtocol.swift */; };
@@ -315,7 +324,6 @@
 		32423B881ADFDC8600AFA2F8 /* CustomPickerPopupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPickerPopupCell.swift; sourceTree = "<group>"; };
 		32423B8A1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomPickerPopupCell.xib; sourceTree = "<group>"; };
 		32423B8C1AE0023400AFA2F8 /* FocalSessionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocalSessionViewController.swift; sourceTree = "<group>"; };
-		32423B8E1AE0025900AFA2F8 /* FocalSessionViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FocalSessionViewControllerDelegate.swift; sourceTree = "<group>"; };
 		32423B901AE0093B00AFA2F8 /* FocalSessionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FocalSessionView.xib; sourceTree = "<group>"; };
 		32423B941AE23E0D00AFA2F8 /* CircleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleCell.swift; sourceTree = "<group>"; };
 		32423B961AE23E2400AFA2F8 /* CircleCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CircleCell.xib; sourceTree = "<group>"; };
@@ -324,6 +332,10 @@
 		32423B9E1AE3A1BB00AFA2F8 /* EthogramDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramDetailsViewController.swift; sourceTree = "<group>"; };
 		32423BA41AE404FC00AFA2F8 /* Edit User-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Edit User-50.png"; path = "Images.xcassets/Edit User-50.png"; sourceTree = "<group>"; };
 		32423BA51AE404FC00AFA2F8 /* Plus-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Plus-50.png"; path = "Images.xcassets/Plus-50.png"; sourceTree = "<group>"; };
+		32423BA81AE4F54500AFA2F8 /* WeatherView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherView.xib; sourceTree = "<group>"; };
+		32423BAA1AE4F5CF00AFA2F8 /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
+		32423BAC1AE5068600AFA2F8 /* WeatherViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewControllerDelegate.swift; sourceTree = "<group>"; };
+		32423BAE1AE5087200AFA2F8 /* ScanSessionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScanSessionView.xib; sourceTree = "<group>"; };
 		32517A211AB1789100578C42 /* EthogramsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramsViewController.swift; sourceTree = "<group>"; };
 		326773A91ACAEFB000899745 /* BooleanPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BooleanPickerCell.swift; path = FormLibrary/BooleanPickerCell.swift; sourceTree = "<group>"; };
 		326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomPickerPopup.swift; path = FormLibrary/CustomPickerPopup.swift; sourceTree = "<group>"; };
@@ -348,6 +360,10 @@
 		329B29351AD15BBF007ADC65 /* PhotoPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoPickerCell.xib; path = FormLibrary/PhotoPickerCell.xib; sourceTree = "<group>"; };
 		329B293E1AD15E6F007ADC65 /* FirstView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstView.xib; sourceTree = "<group>"; };
 		329B29401AD16058007ADC65 /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		781FD4651AE3E5C300BBC0E0 /* PopoverLabelView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopoverLabelView.xib; sourceTree = "<group>"; };
+		781FD4681AE4159B00BBC0E0 /* AnalysisTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalysisTableHeader.xib; sourceTree = "<group>"; };
+		781FD46B1AE415BE00BBC0E0 /* AnalysisTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisTableViewController.swift; sourceTree = "<group>"; };
+		781FD46E1AE466EB00BBC0E0 /* AnalysisTableHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisTableHeader.swift; sourceTree = "<group>"; };
 		7838E7511AE34F04007C2562 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		7838E7531AE34F11007C2562 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7838E7551AE34F22007C2562 /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libCorePlot-CocoaTouch.a"; path = "BioLifeTracker/libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
@@ -357,6 +373,8 @@
 		7838E75B1AE3501C007C2562 /* GraphsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphsViewController.swift; sourceTree = "<group>"; };
 		7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphsViewControllerDelegate.swift; sourceTree = "<group>"; };
 		7838E75D1AE3501C007C2562 /* ProjectStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectStub.swift; sourceTree = "<group>"; };
+		7838E76A1AE3B177007C2562 /* GraphDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphDetailsViewController.swift; sourceTree = "<group>"; };
+		78C382761AE4E1E600645C07 /* AnalysisProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisProjectViewController.swift; sourceTree = "<group>"; };
 		AC18814A1ACFC84600CE450B /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
 		AC18814B1ACFC84600CE450B /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
 		AC18814F1ACFD05D00CE450B /* GoogleOpenSource.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleOpenSource.framework; sourceTree = "<group>"; };
@@ -368,6 +386,12 @@
 		AC18815E1AD02F6E00CE450B /* SessionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTests.swift; sourceTree = "<group>"; };
 		AC1881601AD02F8600CE450B /* BehaviourStateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviourStateTests.swift; sourceTree = "<group>"; };
 		AC188C7B1AC2B11A00CB08C0 /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
+		AC530C6A1AE4F214008E1A17 /* bltlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bltlogo.png; sourceTree = "<group>"; };
+		AC530C6C1AE4F23C008E1A17 /* bg_horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_horizontal.png; sourceTree = "<group>"; };
+		AC530C6D1AE4F23C008E1A17 /* bg_vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_vertical.png; sourceTree = "<group>"; };
+		AC530C701AE4F281008E1A17 /* bltname.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bltname.png; sourceTree = "<group>"; };
+		AC530C721AE4F424008E1A17 /* bltlogo_transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bltlogo_transparent.png; sourceTree = "<group>"; };
+		AC530C731AE4F424008E1A17 /* bltname_transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bltname_transparent.png; sourceTree = "<group>"; };
 		AC6A24991ADD1AAA00CF33D6 /* BLTProjectProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTProjectProtocol.swift; sourceTree = "<group>"; };
 		AC6A249B1ADD1AC000CF33D6 /* BLTSessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTSessionProtocol.swift; sourceTree = "<group>"; };
 		AC6A249D1ADD1AD300CF33D6 /* BLTBehaviourStateProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTBehaviourStateProtocol.swift; sourceTree = "<group>"; };
@@ -612,8 +636,8 @@
 				323CBD911ADB96F600A7C970 /* ProjectHomeViewControllerDelegate.swift */,
 				323CBD8F1ADB901200A7C970 /* ProjectHomeView.xib */,
 				32423B8C1AE0023400AFA2F8 /* FocalSessionViewController.swift */,
-				32423B8E1AE0025900AFA2F8 /* FocalSessionViewControllerDelegate.swift */,
 				32423B901AE0093B00AFA2F8 /* FocalSessionView.xib */,
+				32423BAE1AE5087200AFA2F8 /* ScanSessionView.xib */,
 				323CBD971ADD624D00A7C970 /* ScanSessionViewController.swift */,
 				323CBD991ADD634400A7C970 /* ScanSessionViewControllerDelegate.swift */,
 				323CBD951ADD58EA00A7C970 /* ScanViewController.swift */,
@@ -628,6 +652,9 @@
 				32423B9E1AE3A1BB00AFA2F8 /* EthogramDetailsViewController.swift */,
 				32423B821ADF768600AFA2F8 /* BehaviourStateCell.swift */,
 				32423B801ADF766200AFA2F8 /* BehaviourStateCell.xib */,
+				32423BAA1AE4F5CF00AFA2F8 /* WeatherViewController.swift */,
+				32423BAC1AE5068600AFA2F8 /* WeatherViewControllerDelegate.swift */,
+				32423BA81AE4F54500AFA2F8 /* WeatherView.xib */,
 				321D62BE1AD2604400CF9BE9 /* SubtitleTableCell.swift */,
 				321D62BF1AD2604400CF9BE9 /* SubtitleTableCell.xib */,
 				3205E7501AAED9F9006F374D /* LaunchScreen.xib */,
@@ -664,8 +691,14 @@
 		3205E7671AAEDA38006F374D /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				AC530C6A1AE4F214008E1A17 /* bltlogo.png */,
 				32423BA41AE404FC00AFA2F8 /* Edit User-50.png */,
+				AC530C701AE4F281008E1A17 /* bltname.png */,
+				AC530C721AE4F424008E1A17 /* bltlogo_transparent.png */,
+				AC530C731AE4F424008E1A17 /* bltname_transparent.png */,
 				32423BA51AE404FC00AFA2F8 /* Plus-50.png */,
+				AC530C6D1AE4F23C008E1A17 /* bg_vertical.png */,
+				AC530C6C1AE4F23C008E1A17 /* bg_horizontal.png */,
 				2458F4CF1AE159A60006DFC7 /* icon-152.png */,
 				24D28D131ADA5A6800E70759 /* Images.xcassets */,
 			);
@@ -709,7 +742,13 @@
 				7838E7581AE3501C007C2562 /* GraphAnalysisView.xib */,
 				7838E7591AE3501C007C2562 /* GraphAnalysisViewController.swift */,
 				7838E75A1AE3501C007C2562 /* GraphsView.xib */,
+				78C382761AE4E1E600645C07 /* AnalysisProjectViewController.swift */,
 				7838E75B1AE3501C007C2562 /* GraphsViewController.swift */,
+				781FD46B1AE415BE00BBC0E0 /* AnalysisTableViewController.swift */,
+				781FD4681AE4159B00BBC0E0 /* AnalysisTableHeader.xib */,
+				781FD4651AE3E5C300BBC0E0 /* PopoverLabelView.xib */,
+				781FD46E1AE466EB00BBC0E0 /* AnalysisTableHeader.swift */,
+				7838E76A1AE3B177007C2562 /* GraphDetailsViewController.swift */,
 				7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */,
 				7838E75D1AE3501C007C2562 /* ProjectStub.swift */,
 			);
@@ -865,26 +904,36 @@
 				321D62C11AD2604400CF9BE9 /* SubtitleTableCell.xib in Resources */,
 				32423B9D1AE2B1F300AFA2F8 /* CircleWithLabelCell.xib in Resources */,
 				329B292D1AD15BAF007ADC65 /* ButtonCell.xib in Resources */,
+				781FD4691AE4159B00BBC0E0 /* AnalysisTableHeader.xib in Resources */,
 				323CBD901ADB901200A7C970 /* ProjectHomeView.xib in Resources */,
 				323CBD941ADD526600A7C970 /* ScanView.xib in Resources */,
+				32423BA91AE4F54500AFA2F8 /* WeatherView.xib in Resources */,
 				329B293F1AD15E6F007ADC65 /* FirstView.xib in Resources */,
 				329B292F1AD15BAF007ADC65 /* DatePickerCell.xib in Resources */,
+				781FD4661AE3E5C300BBC0E0 /* PopoverLabelView.xib in Resources */,
 				326773BA1ACAEFB000899745 /* BooleanPickerCell.xib in Resources */,
 				32423B8B1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib in Resources */,
 				7838E75E1AE3501C007C2562 /* GraphAnalysisView.xib in Resources */,
 				32FB650A1AD94B6800391194 /* LaunchScreen.xib in Resources */,
+				AC530C711AE4F281008E1A17 /* bltname.png in Resources */,
 				AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */,
 				32423BA61AE404FC00AFA2F8 /* Edit User-50.png in Resources */,
 				24D28D141ADA5A6800E70759 /* Images.xcassets in Resources */,
 				2458F4D01AE159A60006DFC7 /* icon-152.png in Resources */,
 				32423B971AE23E2400AFA2F8 /* CircleCell.xib in Resources */,
+				AC530C6E1AE4F23C008E1A17 /* bg_horizontal.png in Resources */,
 				329B29371AD15BBF007ADC65 /* DefaultPickerCell.xib in Resources */,
+				AC530C6F1AE4F23C008E1A17 /* bg_vertical.png in Resources */,
 				329B293B1AD15BBF007ADC65 /* PhotoPickerCell.xib in Resources */,
 				32423B911AE0093B00AFA2F8 /* FocalSessionView.xib in Resources */,
 				32423B811ADF766200AFA2F8 /* BehaviourStateCell.xib in Resources */,
 				32423BA71AE404FC00AFA2F8 /* Plus-50.png in Resources */,
+				32423BAF1AE5087200AFA2F8 /* ScanSessionView.xib in Resources */,
+				AC530C741AE4F424008E1A17 /* bltlogo_transparent.png in Resources */,
 				326773BF1ACAEFB000899745 /* SingleLineTextCell.xib in Resources */,
+				AC530C6B1AE4F214008E1A17 /* bltlogo.png in Resources */,
 				326773BE1ACAEFB000899745 /* MultiLineTextCell.xib in Resources */,
+				AC530C751AE4F424008E1A17 /* bltname_transparent.png in Resources */,
 				7838E7621AE3501C007C2562 /* GraphsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -893,8 +942,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7838E75F1AE3501C007C2562 /* GraphAnalysisView.xib in Resources */,
-				7838E7631AE3501C007C2562 /* GraphsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -912,28 +959,34 @@
 				240FEF081AD60AE1000FD9F3 /* CloudStorageWorker.swift in Sources */,
 				240FEF091AD60AE1000FD9F3 /* DownloadTask.swift in Sources */,
 				240FEF0A1AD60AE1000FD9F3 /* UploadTask.swift in Sources */,
+				78C382771AE4E1E600645C07 /* AnalysisProjectViewController.swift in Sources */,
 				329B29411AD16058007ADC65 /* FirstViewController.swift in Sources */,
 				326773C11ACAEFB000899745 /* MultiLineTextCell.swift in Sources */,
 				326773BD1ACAEFB000899745 /* FormFieldData.swift in Sources */,
 				321D62C31AD2615B00CF9BE9 /* ProjectsViewControllerDelegate.swift in Sources */,
 				242C6E091AC86BFD0024ECEF /* Tag.swift in Sources */,
+				781FD46F1AE466EB00BBC0E0 /* AnalysisTableHeader.swift in Sources */,
 				2458F4CE1AE0F5320006DFC7 /* NSDate+Encoding.swift in Sources */,
 				AC6A249C1ADD1AC000CF33D6 /* BLTSessionProtocol.swift in Sources */,
 				321D62C01AD2604400CF9BE9 /* SubtitleTableCell.swift in Sources */,
 				32850BE21AB9625500C49D33 /* ProjectsViewController.swift in Sources */,
 				323CBD921ADB96F600A7C970 /* ProjectHomeViewControllerDelegate.swift in Sources */,
+				781FD46C1AE415BE00BBC0E0 /* AnalysisTableViewController.swift in Sources */,
 				329B293A1AD15BBF007ADC65 /* PhotoPickerCell.swift in Sources */,
 				AC6A24A61ADD1B2300CF33D6 /* BLTWeatherProtocol.swift in Sources */,
+				32423BAB1AE4F5CF00AFA2F8 /* WeatherViewController.swift in Sources */,
 				326773C21ACAEFB000899745 /* SingleLineTextCell.swift in Sources */,
 				ACDE13AD1AD0C0540075AC35 /* EthogramManager.swift in Sources */,
 				3205E7791AAEDA85006F374D /* Ethogram.swift in Sources */,
 				AC6A24AC1ADD1B8100CF33D6 /* BLTPhotoProtocol.swift in Sources */,
 				326773C51ACD7C9A00899745 /* MenuViewControllerDelegate.swift in Sources */,
 				AC6A24AA1ADD1B5F00CF33D6 /* BLTTagProtocol.swift in Sources */,
+				32423BAD1AE5068600AFA2F8 /* WeatherViewControllerDelegate.swift in Sources */,
 				326773BC1ACAEFB000899745 /* FormField.swift in Sources */,
 				AC6A24A21ADD1AF700CF33D6 /* BLTObservationProtocol.swift in Sources */,
 				248DBBE41ADD5348001CA04F /* BLTProjectSerializer.swift in Sources */,
 				AC9EE3471ACEC57200939476 /* BehaviourState.swift in Sources */,
+				7838E76B1AE3B177007C2562 /* GraphDetailsViewController.swift in Sources */,
 				326773B61ACAEFB000899745 /* BooleanPickerCell.swift in Sources */,
 				321D62C71AD261D300CF9BE9 /* SuperController.swift in Sources */,
 				320920711ACA9A1600E8A456 /* MenuViewController.swift in Sources */,
@@ -957,7 +1010,6 @@
 				7838E7681AE3501C007C2562 /* ProjectStub.swift in Sources */,
 				326773BB1ACAEFB000899745 /* FormCell.swift in Sources */,
 				3205E7781AAEDA85006F374D /* Data.swift in Sources */,
-				32423B8F1AE0025900AFA2F8 /* FocalSessionViewControllerDelegate.swift in Sources */,
 				3205E77A1AAEDA85006F374D /* Observation.swift in Sources */,
 				AC9162AC1ACA6A0400FED714 /* CloudStorable.swift in Sources */,
 				329B29391AD15BBF007ADC65 /* FormPopupDelegate.swift in Sources */,
@@ -1002,7 +1054,6 @@
 				240FEF0C1AD60AF6000FD9F3 /* CloudStorageTask.swift in Sources */,
 				240FEF0D1AD60AF6000FD9F3 /* CloudStorageWorker.swift in Sources */,
 				240FEF0E1AD60AF6000FD9F3 /* DownloadTask.swift in Sources */,
-				7838E7671AE3501C007C2562 /* GraphsViewControllerDelegate.swift in Sources */,
 				240FEF0F1AD60AF6000FD9F3 /* UploadTask.swift in Sources */,
 				AC6A24B01ADD233D00CF33D6 /* BLTEthogramProtocol.swift in Sources */,
 				AC6A24BA1ADD26BA00CF33D6 /* DownloadTaskTests.swift in Sources */,
@@ -1022,11 +1073,9 @@
 				AC7B6DD61AD25482002D3EE6 /* Weather.swift in Sources */,
 				AC7B6DDD1AD25498002D3EE6 /* Storable.swift in Sources */,
 				AC6A24B51ADD234F00CF33D6 /* BLTTagProtocol.swift in Sources */,
-				7838E7611AE3501C007C2562 /* GraphAnalysisViewController.swift in Sources */,
 				AC7B6DC01AD2543D002D3EE6 /* IndividualTests.swift in Sources */,
 				AC7B6DDE1AD2549B002D3EE6 /* Project.swift in Sources */,
 				AC7B6DDF1AD2549E002D3EE6 /* BiolifeModel.swift in Sources */,
-				7838E7691AE3501C007C2562 /* ProjectStub.swift in Sources */,
 				AC6A24AE1ADD233900CF33D6 /* BLTSessionProtocol.swift in Sources */,
 				AC7B6DC31AD25445002D3EE6 /* SessionTests.swift in Sources */,
 				AC7B6DC21AD25443002D3EE6 /* BehaviourStateTests.swift in Sources */,
@@ -1046,7 +1095,6 @@
 				24CE59421ADD42AB000571A3 /* NSDate+Encoding.swift in Sources */,
 				AC7B6DBF1AD2543B002D3EE6 /* LocationTests.swift in Sources */,
 				AC7B6DE11AD254A6002D3EE6 /* UserAuthService.swift in Sources */,
-				7838E7651AE3501C007C2562 /* GraphsViewController.swift in Sources */,
 				AC7B6DE01AD254A1002D3EE6 /* User.swift in Sources */,
 				AC7B6DBE1AD25438002D3EE6 /* WeatherTests.swift in Sources */,
 				AC6A24B21ADD234200CF33D6 /* BLTIndividualProtocol.swift in Sources */,

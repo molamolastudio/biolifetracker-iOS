@@ -8,8 +8,7 @@
 
 import UIKit
 
-class FocalSessionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate  {
-    var delegate: FocalSessionViewControllerDelegate? = nil
+class FocalSessionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, WeatherViewControllerDelegate  {
     
     @IBOutlet weak var individualsView: UICollectionView!
     @IBOutlet weak var observationsView: UITableView!
@@ -18,6 +17,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     @IBOutlet weak var photoOverlayView: UIView!
     @IBOutlet weak var notesView: UITextView!
     @IBOutlet weak var observationDisplay: UIView!
+    @IBOutlet weak var weatherOverlayView: UIView!
     
     let textCellIdentifier = "SingleLineTextCell"
     let circleCellIdentifier = "CircleCell"
@@ -32,6 +32,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     let messageAdd = "+ Add"
     
+    let weatherVC = WeatherViewController(nibName: "WeatherView", bundle: nil)
     let formatter = NSDateFormatter()
     
     var editable = false
@@ -49,22 +50,21 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        hideObservationSection()
         setupViews()
-        
+        getData()
         // Sets up the date formatter for converting dates to strings
         formatter.dateStyle = .ShortStyle
         formatter.timeStyle = .ShortStyle
-        
-        getData()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        showIndividualAtIndex(NSIndexPath(forRow: 0, inSection: 0))
     }
     
     func setupViews() {
+        setupWeatherController()
+        
         observationsView.dataSource = self
         observationsView.delegate = self
         
@@ -73,6 +73,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         
         statesView.dataSource = self
         statesView.delegate = self
+        
+        notesView.delegate = self
         
         observationsView.registerNib(UINib(nibName: textCellIdentifier, bundle: nil), forCellReuseIdentifier: textCellIdentifier)
         individualsView.registerNib(UINib(nibName: circleCellIdentifier, bundle: nil), forCellWithReuseIdentifier: circleCellIdentifier)
@@ -98,11 +100,31 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         notesView.layer.masksToBounds = true;
     }
     
+    func setupWeatherController() {
+        weatherVC.delegate = self
+        weatherVC.view.frame = CGRectMake(0, 0, weatherOverlayView.frame.width, weatherOverlayView.frame.height)
+        weatherOverlayView.addSubview(weatherVC.view)
+    }
+    
     func makeEditable(value: Bool) {
         editable = value
+        refreshViews()
+    }
+    
+    func refreshViews() {
+        selectedIndividual = 0
+        selectedObservation = 0
+        selectedObservations = [Observation]()
+        
+        individuals = [Individual]()
+        originalObservations = [Individual: [Observation]]()
+        newObservations = [Individual: [Observation]]()
+        
+        getData()
         individualsView.reloadData()
         observationsView.reloadData()
         statesView.reloadData()
+        hideObservationSection()
     }
     
     // Sets the data source of this controller.
@@ -115,17 +137,21 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
             // Setup the individuals array
             let all = Individual(label: "All")
             individuals.append(all)
-            originalObservations[all] = currentSession!.observations
-            newObservations[all] = getCopyOfObservations(currentSession!.observations)
+            newObservations[all] = []
             
-            println(currentSession!.project.individuals)
-            
-            // Copy over observations
-            for i in currentSession!.project.individuals {
-                individuals.append(i)
-                let observations = currentSession!.getAllObservationsForIndividual(i)
-                originalObservations[i] = observations
-                newObservations[i] = getCopyOfObservations(observations)
+            // If there are no individuals defined, do nothing
+            if currentSession!.project.individuals.count > 0 {
+                
+                originalObservations[all] = currentSession!.observations
+                newObservations[all] = getCopyOfObservations(currentSession!.observations)
+                
+                // Copy over observations
+                for i in currentSession!.project.individuals {
+                    individuals.append(i)
+                    let observations = currentSession!.getAllObservationsForIndividual(i)
+                    originalObservations[i] = observations
+                    newObservations[i] = getCopyOfObservations(observations)
+                }
             }
             
             // Get states
@@ -133,28 +159,53 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    // Copy over the information in the edited observations to the original observations.
+    // Copies over the information in the edited individuals to the original individuals.
+    // Copies over the information in the edited observations to the original observations.
+    // Adds new individuals or observations.
     func saveData() {
-        for i in individuals {
-            let observations = newObservations[i]!
-            let original = originalObservations[i]!
+        let originalIndividuals = currentSession!.project.individuals
+        
+        individuals.removeAtIndex(0) // Remove the 'All' individual
+        for i in 0...individuals.count - 1 {
+            let individual = individuals[i] // Get the individual
             
-            for j in 0...observations.count {
-                if j < original.count {
-                    // Copy over the updated information of the observation
-                    copyOverObservation(observations[j], to: original[j])
-                } else {
-                    // Add a new observation
-                    currentSession!.addObservation([observations[j]])
+            // If this individual exists in the project
+            if i < originalIndividuals.count {
+                
+                let observations = newObservations[individual]!
+                let original = originalObservations[individual]!
+                
+                if observations.count > 0 {
+                    for j in 0...observations.count - 1 {
+                        if j < original.count {
+                            // Copy over the updated information of the observation
+                            copyOverObservation(observations[j], to: original[j])
+                        } else {
+                            // Add a new observation
+                            currentSession!.addObservation([observations[j]])
+                        }
+                    }
                 }
+            } else { // If this individual does not exist in the project
+                // Add it to the project
+                currentSession!.project.addIndividuals([individual])
+                
+                // Add its observations to the session
+                currentSession!.addObservation(newObservations[individual]!)
             }
+            
         }
     }
     
+    // Returns a deep copy of the given array of observations.
     func getCopyOfObservations(array: [Observation]) -> [Observation]{
         var newArray = [Observation]()
         for o in array {
             let observation = Observation(session: o.session, individual: o.individual!, state: o.state, timestamp: o.timestamp, information: o.information)
+            observation.updatePhoto(o.photo)
+            if o.weather != nil {
+                observation.changeWeather(o.weather!)
+            }
             newArray.append(observation)
         }
         return newArray
@@ -164,6 +215,10 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     func copyOverObservation(from: Observation, to: Observation) {
         to.changeBehaviourState(from.state)
         to.updateInformation(from.information)
+        to.updatePhoto(from.photo)
+        if from.weather != nil {
+            to.changeWeather(from.weather!)
+        }
     }
     
     // UICollectionViewDataSource methods
@@ -232,37 +287,113 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if collectionView == individualsView {
-            
             // User wants to add an extra individual
             if isExtraRowForIndividuals(indexPath.row) {
                 // Popup a alert view with text field
-                
-                // Add a new individual
-                let individual = Individual(label: "")
-                individuals.append(individual)
-                newObservations[individual] = []
-                
-                // Reload views
-                individualsView.reloadData()
+                showFormForIndividual(indexPath)
+            } else {
+                selectedIndividual = indexPath.row
+                refreshObservations()
             }
-            selectedIndividual = indexPath.row
-            showIndividualAtIndex(indexPath)
             
         } else if collectionView == statesView {
             showStateAsSelected(indexPath.row)
-            let observation = newObservations[individuals[selectedIndividual]]![indexPath.row]
+            let observation = selectedObservations[selectedObservation]
             observation.changeBehaviourState(states[indexPath.row])
         }
     }
     
-    func showIndividualAtIndex(indexPath: NSIndexPath) {
-        showIndividualAsSelected(indexPath.row)
+    // UITableViewDataSource and UITableViewDelegate METHODS
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier) as! SingleLineTextCell
         
-        showObservationsForIndividual(individuals[indexPath.row])
+        cell.textField.hidden = true
+        
+        // Show extra row for adding observations for all individuals except 'All'
+        if selectedIndividual != 0 && isExtraRowForObservations(indexPath.row) {
+            cell.label.text = messageAdd
+            
+        } else {
+            let observation = selectedObservations[indexPath.row]
+            cell.label.text = formatter.stringFromDate(observation.createdAt)
+        }
+        
+        return cell
+    }
+    
+    // Sets the selected observation, updates the views for displaying observation fields.
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if isExtraRowForObservations(indexPath.row) {
+            // Add new observation with default first state
+            let observation = Observation(session: currentSession!, individual: individuals[selectedIndividual], state: states.first!, timestamp: NSDate(), information: "")
+            newObservations[individuals[selectedIndividual]]!.append(observation)
+            
+            refreshObservations()
+        }
+        selectedObservation = indexPath.row
+        showObservationAtIndex(indexPath)
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if editable && selectedIndividual != 0 {
+            return selectedObservations.count + 1
+        } else {
+            return selectedObservations.count
+        }
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return numSections
+    }
+    
+    // UITextViewDelegate methods
+    // Updates the currently displayed observation's text when user types in the text view.
+    func textViewDidChange(textView: UITextView) {
+        let observation = selectedObservations[selectedObservation]
+        observation.updateInformation(textView.text)
+    }
+    
+    // WeatherViewControllerDelegate methods
+    // Updates the currently displayed observation's weather when user changes the weather.
+    func userDidSelectWeather(weather: Weather?) {
+        let observation = selectedObservations[selectedObservation]
+        if weather != nil {
+            observation.changeWeather(weather!)
+        } else {
+            observation.changeWeather(Weather())
+        }
+    }
+    
+    // End delegate methods
+    
+    func refreshObservations() {
+        var allObservations = [Observation]()
+        for i in 1...individuals.count - 1 {
+            for o in newObservations[individuals[i]]! {
+                allObservations.append(o)
+            }
+        }
+        newObservations[individuals[0]] = allObservations
+        
+        
+        showIndividualAtIndex(NSIndexPath(forRow: selectedIndividual, inSection: 0))
+        observationsView.reloadData()
+    }
+    
+    // Methods to toggle views
+    func showIndividualAtIndex(indexPath: NSIndexPath) {
+        if isValidIndexForIndividuals(indexPath.row) {
+            selectedIndividual = indexPath.row
+            
+            showIndividualAsSelected(indexPath.row)
+            
+            showObservationsForIndividual(individuals[indexPath.row])
+            hideObservationSection()
+        }
     }
     
     func showIndividualAsSelected(selectedIndex: Int) {
-        if selectedIndex < individuals.count {
+        if isValidIndexForIndividuals(selectedIndex) {
             for i in 0...individuals.count - 1 {
                 let index = NSIndexPath(forRow: i, inSection: 0)
                 if i == selectedIndex {
@@ -277,11 +408,11 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     func showObservationsForIndividual(individual: Individual) {
         selectedObservations = newObservations[individual]!
         observationsView.reloadData()
-        observationsView.selectRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0), animated: true, scrollPosition: UITableViewScrollPosition.Top)
     }
     
     func showObservationAtIndex(indexPath: NSIndexPath) {
-        if indexPath.row < selectedObservations.count {
+        if !isExtraRowForObservations(indexPath.row) {
+            showObservationSection()
             
             let observation = selectedObservations[indexPath.row]
             
@@ -294,6 +425,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
             }
             notesView.text = observation.information
             
+            weatherVC.setWeather(observation.weather)
         }
     }
     
@@ -311,57 +443,56 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    // UITableViewDataSource and UITableViewDelegate METHODS
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier) as! SingleLineTextCell
-        
-        cell.textField.hidden = true
-        
-        if isExtraRowForObservations(indexPath.row) {
-            cell.label.text = messageAdd
-        } else {
-            let observation = selectedObservations[indexPath.row]
-            cell.label.text = formatter.stringFromDate(observation.createdAt)
-        }
-        
-        return cell
-    }
-    
-    // Sets the selected observation, updates the views for displaying observation fields.
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if isExtraRowForObservations(indexPath.row) {
-            // Add new observation with default first state
-            let observation = Observation(session: currentSession!, individual: individuals[selectedIndividual], state: states.first!, timestamp: NSDate(), information: "")
-            newObservations[individuals[selectedIndividual]]!.append(observation)
-            
-            tableView.reloadData()
-        }
-        selectedObservation = indexPath.row
-        showObservationAtIndex(indexPath)
-    }
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if editable {
-            return selectedObservations.count + 1
-        } else {
-            return selectedObservations.count
-        }
-    }
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return numSections
-    }
-    
-    @IBAction func photoBtnPressed(sender: UIButton) {
-        
-    }
-    
     func hideObservationSection() {
         observationDisplay.hidden = true
     }
     
     func showObservationSection() {
+        photoOverlayView.hidden = !editable
+        notesView.userInteractionEnabled = editable
+        weatherVC.view.userInteractionEnabled = editable
         observationDisplay.hidden = false
+    }
+    
+    func showFormForIndividual(indexPath: NSIndexPath) {
+        let alert = UIAlertController(title: "New Individual", message: "", preferredStyle: .Alert)
+        
+        // Adds buttons
+        let actionCancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let actionOk = UIAlertAction(title: "OK", style: .Default, handler: {action in
+            let textField = alert.textFields!.first as! UITextField
+            
+            let individual = Individual(label: textField.text)
+            self.addIndividual(individual)
+        })
+        actionOk.enabled = false
+        alert.addAction(actionOk)
+        alert.addAction(actionCancel)
+        
+        // Adds a text field for the label
+        alert.addTextFieldWithConfigurationHandler({textField in
+            textField.placeholder = "Label (eg: M1, F1)"
+            
+            NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
+                actionOk.enabled = textField.text != ""
+            }
+        })
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    func addIndividual(individual: Individual) {
+        individuals.append(individual)
+        
+        newObservations[individual] = []
+        
+        individualsView.reloadData()
+        self.showObservationsForIndividual(individual)
+    }
+    
+    // IBActions for buttons
+    @IBAction func photoBtnPressed(sender: UIButton) {
+        
     }
     
     // Helper methods
@@ -374,12 +505,21 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         return 0
     }
     
+    func isValidIndexForIndividuals(index: Int) -> Bool {
+        if editable {
+            return !isExtraRowForIndividuals(index)
+        } else {
+            return index < individuals.count
+        }
+        
+    }
+    
     func isExtraRowForIndividuals(index: Int) -> Bool {
         return index == individuals.count
     }
     
     func isExtraRowForObservations(index: Int) -> Bool {
-        return index == selectedObservations.count
+        return index >= selectedObservations.count
     }
     
 }

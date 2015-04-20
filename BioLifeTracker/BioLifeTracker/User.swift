@@ -63,3 +63,18 @@ class User: NSObject, NSCoding {
         dictionary.setValue(name, forKey: "username")
     }
 }
+
+func ==(lhs: User, rhs: User) -> Bool {
+    println("lhs: \(lhs.name) \(lhs.email) \(lhs.id)")
+    println("rhs: \(rhs.name) \(rhs.email) \(rhs.id)")
+    
+    
+    if lhs.name != rhs.name { return false }
+    if lhs.email != rhs.email { return false }
+    if lhs.id != rhs.id { return false }
+    return true
+}
+
+func !=(lhs: User, rhs: User) -> Bool {
+    return !(lhs == rhs)
+}

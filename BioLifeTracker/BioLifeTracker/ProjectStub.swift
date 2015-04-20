@@ -38,6 +38,7 @@ class ProjectStub {
     let ethogram = Ethogram(name: "Demon Behaviour")
     
     var project: Project!
+    var empty: Project!
     
     var session1: Session!
     var session2: Session!
@@ -130,7 +131,8 @@ class ProjectStub {
     }
     
     func createProject() {
-         project = Project(name: "Study of Demons", ethogram: ethogram)
+        empty = Project(name: "Study of The Mark Of Cain", ethogram: ethogram)
+        project = Project(name: "Study of Demons", ethogram: ethogram)
     }
     
     func createSessions() {

@@ -6,7 +6,7 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FocalSessionViewController" customModule="BioLifeTracker" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScanSessionViewController" customModule="BioLifeTracker" customModuleProvider="target">
             <connections>
                 <outlet property="individualsView" destination="k5D-b2-UNi" id="cwi-Ii-RoN"/>
                 <outlet property="notesView" destination="M4h-Yd-TbQ" id="dcc-p4-AZN"/>
@@ -159,9 +159,9 @@
                     <variation key="default">
                         <mask key="constraints">
                             <exclude reference="GRF-DS-bkA"/>
+                            <exclude reference="Ull-Mo-5L8"/>
                             <exclude reference="2Ak-VV-DqQ"/>
                             <exclude reference="oPL-OI-7Ec"/>
-                            <exclude reference="Ull-Mo-5L8"/>
                         </mask>
                     </variation>
                 </view>

@@ -11,7 +11,7 @@
 
 import UIKit
 
-class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate,ProjectsViewControllerDelegate, EthogramsViewControllerDelegate, ProjectHomeViewControllerDelegate, ScanSessionViewControllerDelegate, FocalSessionViewControllerDelegate {
+class SuperController: UIViewController, UISplitViewControllerDelegate, MenuViewControllerDelegate,ProjectsViewControllerDelegate, EthogramsViewControllerDelegate, ProjectHomeViewControllerDelegate, ScanSessionViewControllerDelegate {
     
     let splitVC = UISplitViewController()
     let masterNav = UINavigationController()
@@ -310,7 +310,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func showFocalSessionPage(session: Session) {
         let vc = FocalSessionViewController(nibName: "FocalSessionView", bundle: nil)
         
-        vc.delegate = self
         vc.title = session.name
         vc.currentSession = session
         vc.editable = false
@@ -379,9 +378,23 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showAnalysisPage() {
+        if !ProjectManager.sharedInstance.projects.isEmpty {
+            let vc = GraphAnalysisViewController(nibName: "GraphAnalysisView", bundle: nil)
+            
+            vc.title = "Analyse"
+            
+            detailNav.setViewControllers([vc], animated: false)
+        } else {
+            // If there are no projects saved, display alert
+            displayAlert("No Projects To Analyse", message: "")
+        }
+    }
+    
+    func showAnalysisPageWithProject(project: Project) {
         let vc = GraphAnalysisViewController(nibName: "GraphAnalysisView", bundle: nil)
         
         vc.title = "Analyse"
+        vc.setProject(project)
         
         detailNav.setViewControllers([vc], animated: false)
     }
@@ -441,6 +454,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     // Selectors for navigation bar items
+    // Methods to create new model objects
     func createNewProject() {
         if let vc = detailNav.visibleViewController as? FormViewController {
             let values = vc.getFormData()
@@ -468,11 +482,12 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         if let vc = detailNav.visibleViewController as? EthogramFormViewController {
             if let ethogram = vc.getEthogram() {
                 EthogramManager.sharedInstance.addEthogram(vc.ethogram)
-                detailNav.popViewControllerAnimated(true)
+                dismissCurrentPage()
             }
         }
     }
     
+    // Methods to toggle between save and edit states
     func updateEditButtonForEthogram() {
         if let vc = detailNav.visibleViewController as? EthogramDetailsViewController {
             vc.makeEditable(true)
@@ -501,19 +516,27 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         if let vc = detailNav.visibleViewController as? EthogramDetailsViewController {
             vc.saveData()
             dismissCurrentPage()
+            vc.makeEditable(false)
+            var btn = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("updateEditButtonForEthogram"))
+            vc.navigationItem.rightBarButtonItem = btn
         }
     }
     
     func saveScanData() {
         if let vc = detailNav.visibleViewController as? ScanViewController {
             vc.saveData()
-            dismissCurrentPage()
+            vc.makeEditable(false)
+            var btn = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("updateEditButtonForScan"))
+            vc.navigationItem.rightBarButtonItem = btn
         }
     }
     
     func saveFocalSessionData() {
         if let vc = detailNav.visibleViewController as? FocalSessionViewController {
             vc.saveData()
+            vc.makeEditable(false)
+            var btn = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("updateEditButtonForFocalSession"))
+            vc.navigationItem.rightBarButtonItem = btn
         }
     }
     
@@ -618,12 +641,32 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func userDidSelectGraph(project: Project) {
-        // Show analysis with the particular project
+        showAnalysisPageWithProject(project)
     }
     
     func userDidSelectCreateSession() {
-        // Popup options: name, type
-        // After popup -> create then show the type of session
+        let alert = UIAlertController(title: "New Individual", message: "", preferredStyle: .Alert)
+        
+        // Adds buttons
+        let actionCancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let actionOk = UIAlertAction(title: "OK", style: .Default, handler: {action in
+            let textField = alert.textFields!.first as! UITextField
+            
+        })
+        actionOk.enabled = false
+        alert.addAction(actionOk)
+        alert.addAction(actionCancel)
+        
+        // Adds a text field for the label
+        alert.addTextFieldWithConfigurationHandler({textField in
+            textField.placeholder = "Label (eg: M1, F1)"
+            
+            NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
+                actionOk.enabled = textField.text != ""
+            }
+        })
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     func userDidSelectEditMembers() {
@@ -634,11 +677,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func userDidSelectScan(session: Session, timestamp: NSDate) {
         // Open the ScanView
         showScanPage(session, timestamp: timestamp)
-    }
-    
-    // FocalSessionViewControllerDelegate methods
-    func userDidSelectObservation(session: Session, observation: Observation) {
-        // Open the Observation View
     }
     
     // Helper methods

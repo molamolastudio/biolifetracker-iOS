@@ -67,7 +67,6 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         graphView.layer.masksToBounds = true;
         
         graphsVC = GraphsViewController(nibName: "GraphsView", bundle: nil)
-        //self.addChildViewController(graphsVC)
         graphsVC.setProject(currentProject!)
 
         graphsVC.view.frame = CGRectMake(0, 0, graphView.frame.width, graphView.frame.height)
@@ -101,8 +100,15 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
             }
         } else if tableView.tag == sessionTag {
             // Displays all sessions of this project
-            let dateString = formatter.stringFromDate(currentProject!.sessions[indexPath.row].createdAt)
+            let session = currentProject!.sessions[indexPath.row]
+            let dateString = formatter.stringFromDate(session.createdAt)
             cell.label.text = dateString
+            
+            if session.type == .Focal {
+                cell.textField.text = "F"
+            } else {
+                cell.textField.text = "S"
+            }
         }
         return cell
     }
