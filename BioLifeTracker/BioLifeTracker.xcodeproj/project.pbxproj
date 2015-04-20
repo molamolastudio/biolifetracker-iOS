@@ -135,7 +135,6 @@
 		329B293B1AD15BBF007ADC65 /* PhotoPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 329B29351AD15BBF007ADC65 /* PhotoPickerCell.xib */; };
 		329B293F1AD15E6F007ADC65 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 329B293E1AD15E6F007ADC65 /* FirstView.xib */; };
 		329B29411AD16058007ADC65 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329B29401AD16058007ADC65 /* FirstViewController.swift */; };
-		32A71E201AE5497A009B7F71 /* ProjectHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 323CBD8D1ADB8FF000A7C970 /* ProjectHomeViewController.swift */; };
 		32EA4B461AE51B5C00EC7B8C /* ProjectFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32EA4B451AE51B5C00EC7B8C /* ProjectFormView.xib */; };
 		32EA4B481AE51D7200EC7B8C /* Add User Filled-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 32EA4B471AE51D7200EC7B8C /* Add User Filled-50.png */; };
 		32EA4B4A1AE51E5200EC7B8C /* ProjectFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EA4B491AE51E5200EC7B8C /* ProjectFormViewController.swift */; };
@@ -1166,7 +1165,6 @@
 				AC7B6DD81AD25488002D3EE6 /* Individual.swift in Sources */,
 				AC6A24BD1ADD26C100CF33D6 /* CloudStorageManagerTests.swift in Sources */,
 				2458F4D21AE160ED0006DFC7 /* BLTProjectDeserializer.swift in Sources */,
-				32A71E201AE5497A009B7F71 /* ProjectHomeViewController.swift in Sources */,
 				AC6A24B61ADD235300CF33D6 /* BLTPhotoProtocol.swift in Sources */,
 				AC7B6DD41AD2547A002D3EE6 /* Data.swift in Sources */,
 			);

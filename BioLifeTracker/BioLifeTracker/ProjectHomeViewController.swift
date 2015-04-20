@@ -8,12 +8,13 @@
 
 import UIKit
 
-class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MemberPickerViewControllerDelegate, UIPopoverPresentationControllerDelegate {
     var delegate: ProjectHomeViewControllerDelegate? = nil
     
     @IBOutlet weak var graphView: UIView!
     @IBOutlet weak var memberView: UITableView!
     @IBOutlet weak var sessionView: UITableView!
+    @IBOutlet weak var addMembersButton: UIButton!
     
     let memberTag = 2
     let sessionTag = 3
@@ -77,7 +78,31 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     @IBAction func addMembersBtnPressed() {
+        showMemberPicker()
+    }
+    
+    func showMemberPicker() {
+        let memberPicker = MemberPickerViewController(nibName: "MemberPickerView", bundle: nil)
         
+        memberPicker.delegate = self
+        memberPicker.modalPresentationStyle = .Popover
+        memberPicker.preferredContentSize = CGSizeMake(400, 400)
+        
+        memberPicker.members = UserManager.sharedInstance.getUsersExcept(currentProject!.members)
+        
+        let popoverController = memberPicker.popoverPresentationController!
+        popoverController.permittedArrowDirections = .Any
+        popoverController.delegate = self
+        popoverController.sourceView = addMembersButton
+        popoverController.sourceRect = CGRectMake(0, 0, 0, 0)
+        
+        presentViewController(memberPicker, animated: true, completion: nil)
+    }
+    
+    // MemberPickerViewControllerDelegate methods
+    func userDidSelectMember(member: User) {
+        currentProject!.addMembers([member])
+        memberView.reloadData()
     }
     
     @IBAction func createSessionBtnPressed() {
@@ -122,6 +147,10 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
             cell.adminLabel.hidden = true
         }
         
+        if member == UserAuthService.sharedInstance.user {
+            cell.button.hidden = true
+        }
+        
         cell.button.tag = indexPath.row
         
         return cell
@@ -146,14 +175,7 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if delegate != nil {
-            if tableView == memberView {
-                if indexPath.row < currentProject!.admins.count {
-                    delegate!.userDidSelectMember(currentProject!, member: currentProject!.admins[indexPath.row])
-                } else {
-                    delegate!.userDidSelectMember(currentProject!, member: currentProject!.members[indexPath.row - currentProject!.admins.count])
-                }
-                
-            } else {
+            if tableView == sessionView {
                 delegate!.userDidSelectSession(currentProject!, session: currentProject!.sessions[indexPath.row])
             }
         }
@@ -161,7 +183,7 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == memberView {
-            return currentProject!.admins.count + currentProject!.members.count
+            return currentProject!.members.count
         } else {
             return currentProject!.sessions.count
         }
@@ -178,5 +200,44 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
             return textCellHeight
         }
         
+    }
+    
+    // UIPopoverPresentationControllerDelegate method
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle{
+        return .None
+    }
+    
+    // Selectors for buttons
+    func removeAdmin(sender: UIButton) {
+        let members = currentProject!.members
+        let member = members[sender.tag]
+        let index = getAdminIndexForMember(member)
+        
+        if index != -1 {
+            currentProject!.removeAdmins([index])
+        }
+        memberView.reloadData()
+    }
+    
+    func makeAdmin(sender: UIButton) {
+        let members = currentProject!.members
+        let member = members[sender.tag]
+        
+        currentProject!.addAdmins([member])
+        
+        memberView.reloadData()
+    }
+    
+    // Helper methods
+    func getAdminIndexForMember(member: User) -> Int {
+        let admins = currentProject!.admins
+        
+        var result = -1
+        for a in 0...admins.count {
+            if member == admins[a] {
+                result = a
+            }
+        }
+        return result
     }
 }
