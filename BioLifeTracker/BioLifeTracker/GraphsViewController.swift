@@ -335,7 +335,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     
     func configureGraph(inout graph: CPTXYGraph) {
     
-        graphHostingView.allowPinchScaling = true
+        graphHostingView.allowPinchScaling = false
         graph = CPTXYGraph(frame: CGRectZero)
         graph.applyTheme(CPTTheme(named: kCPTPlainWhiteTheme))
         graphHostingView.hostedGraph = graph
@@ -466,7 +466,11 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         tickLineStyle.lineWidth = 2.0
         
         var gridLineStyle = CPTMutableLineStyle()
-        gridLineStyle.lineColor = CPTColor.whiteColor()
+        if yMaxDays == 0 || yMaxHours == 0 || yMaxStates == 0 {
+            gridLineStyle.lineColor = CPTColor(CGColor: AliceBlue.CGColor)
+        } else {
+            gridLineStyle.lineColor = CPTColor.whiteColor()
+        }
         gridLineStyle.lineWidth = 1.0
         
         // 2 - Get axis set
