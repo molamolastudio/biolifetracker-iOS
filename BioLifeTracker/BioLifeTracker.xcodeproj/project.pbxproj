@@ -925,11 +925,8 @@
 				32423B911AE0093B00AFA2F8 /* FocalSessionView.xib in Resources */,
 				32423B811ADF766200AFA2F8 /* BehaviourStateCell.xib in Resources */,
 				32423BA71AE404FC00AFA2F8 /* Plus-50.png in Resources */,
-<<<<<<< HEAD
 				32423BAF1AE5087200AFA2F8 /* ScanSessionView.xib in Resources */,
-=======
 				AC530C741AE4F424008E1A17 /* bltlogo_transparent.png in Resources */,
->>>>>>> 517aeb43401335c6536d9674e1c03eef8fa002e4
 				326773BF1ACAEFB000899745 /* SingleLineTextCell.xib in Resources */,
 				AC530C6B1AE4F214008E1A17 /* bltlogo.png in Resources */,
 				326773BE1ACAEFB000899745 /* MultiLineTextCell.xib in Resources */,
