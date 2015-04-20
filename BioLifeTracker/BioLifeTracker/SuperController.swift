@@ -445,12 +445,12 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
             let project = vc.getProject()
             if project != nil {
                 ProjectManager.sharedInstance.addProject(project!)
+                showProjectsPage()
             } else {
                 // Show an alert to user
                 displayAlert("Incomplete Project", message: "Please enter a project name and select an ethogram.")
             }
         }
-        showProjectsPage()
     }
     
     func createNewEthogram() {

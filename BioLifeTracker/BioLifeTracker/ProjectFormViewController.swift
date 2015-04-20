@@ -112,8 +112,8 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! MemberCell
         
-        //cell.button.removeTarget(self, action: Selector("removeAdmin:"), forControlEvents: .TouchUpInside)
-        //cell.button.removeTarget(self, action: Selector("makeAdmin:"), forControlEvents: .TouchUpInside)
+        cell.button.removeTarget(self, action: Selector("removeAdmin:"), forControlEvents: .TouchUpInside)
+        cell.button.removeTarget(self, action: Selector("makeAdmin:"), forControlEvents: .TouchUpInside)
         
         cell.button.hidden = false
         
@@ -187,6 +187,7 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
     // Selectors for buttons
     func removeAdmin(sender: UIButton) {
         let index = sender.tag - 1
+
         let member = admins[index]
         admins.removeAtIndex(index)
         members.append(member)
@@ -196,6 +197,7 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
     
     func makeAdmin(sender: UIButton) {
         let index = sender.tag - admins.count - 1
+
         let member = members[index]
         members.removeAtIndex(index)
         admins.append(member)
