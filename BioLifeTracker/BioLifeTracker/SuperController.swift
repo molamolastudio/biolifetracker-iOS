@@ -189,12 +189,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func showNewProjectPage() {
         // If there are ethograms saved, present the new project page
         if !EthogramManager.sharedInstance.ethograms.isEmpty {
-            let vc = FormViewController(style: UITableViewStyle.Grouped)
+            let vc = ProjectFormViewController(nibName: "ProjectFormView", bundle: nil)
             
             vc.title = "New Project"
-            vc.setFormData(getFormDataForNewProject())
-            vc.cellHorizontalPadding = 10
-            vc.roundedCells = true
             
             var btn = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("createNewProject"))
             vc.navigationItem.rightBarButtonItem = btn
@@ -415,20 +412,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     // Methods for creating form data
-    func getFormDataForNewProject() -> FormFieldData {
-        var ethogramNames = [String]()
-        for e in EthogramManager.sharedInstance.ethograms {
-            ethogramNames.append(e.name)
-        }
-        
-        let data = FormFieldData(sections: 2)
-        data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
-        data.addPickerCell(section: 0, label: "Ethogram", pickerValues: ethogramNames, isCustomPicker: true)
-        data.setSectionTitle(1, title: "Members")
-        data.addTextCell(section: 1, label: "Enter Member Here", hasSingleLine: true) // To be decided
-        return data
-    }
-    
     func getFormDataForNewIndividual() -> FormFieldData {
         let data = FormFieldData(sections: 1)
         data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
@@ -456,26 +439,16 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     // Selectors for navigation bar items
     // Methods to create new model objects
     func createNewProject() {
-        if let vc = detailNav.visibleViewController as? FormViewController {
-            let values = vc.getFormData()
-            
-            let name = values[0] as! String
-            if name != "" {
-                if let index = values[1] as? Int {
-                    let project = Project(name: name, ethogram: EthogramManager.sharedInstance.ethograms[index])
-                    
-                    ProjectManager.sharedInstance.addProject(project)
-                    
-                    showProjectsPage()
-                } else {
-                    // Show an alert to tell user to select an ethogram
-                    displayAlert("Incomplete Project", message: "Please select an ethogram.")
-                }
+        if let vc = detailNav.visibleViewController as? ProjectFormViewController {
+            let project = vc.getProject()
+            if project != nil {
+                ProjectManager.sharedInstance.addProject(project!)
             } else {
-                // Show an alert to tell user to enter a project name
-                displayAlert("Incomplete Project", message: "Please enter a project name.")
+                // Show an alert to user
+                displayAlert("Incomplete Project", message: "Please enter a project name and select an ethogram.")
             }
         }
+        showProjectsPage()
     }
     
     func createNewEthogram() {

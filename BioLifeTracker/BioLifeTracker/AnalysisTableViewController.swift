@@ -181,22 +181,7 @@ class AnalysisTableViewController: UITableViewController {
 
     }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var i = indexPath.row
-        var ind = find(selectedIndices, i)
-        if ind == nil {
-            selectedIndices.append(indexPath.row)
-            switch tableType {
-            case .Users:
-                var user = totalUsers[indexPath.row]
-                delegate!.didAddUser(user)
-            case .Sessions:
-                var session = totalSessions[indexPath.row]
-                delegate!.didAddSession(session)
-            case .States:
-                var state = totalStates[indexPath.row]
-                delegate!.didAddState(state)
-            }
-        }
+        updateChosen(indexPath.row)
     }
     
     func selectAllPressed(sender: UIButton!) {
@@ -217,8 +202,27 @@ class AnalysisTableViewController: UITableViewController {
         for i in 0...ttl {
             var idx = NSIndexPath(forRow: i, inSection: 0)
             tableView.selectRowAtIndexPath(idx, animated: true, scrollPosition: .None)
+            updateChosen(i)
         }
         
+    }
+    
+    func updateChosen(index: Int) {
+        var ind = find(selectedIndices, index)
+        if ind == nil {
+            selectedIndices.append(index)
+            switch tableType {
+            case .Users:
+                var user = totalUsers[index]
+                delegate!.didAddUser(user)
+            case .Sessions:
+                var session = totalSessions[index]
+                delegate!.didAddSession(session)
+            case .States:
+                var state = totalStates[index]
+                delegate!.didAddState(state)
+            }
+        }
     }
     
 }
