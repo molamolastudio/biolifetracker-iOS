@@ -147,6 +147,10 @@
 		781FD4691AE4159B00BBC0E0 /* AnalysisTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 781FD4681AE4159B00BBC0E0 /* AnalysisTableHeader.xib */; };
 		781FD46C1AE415BE00BBC0E0 /* AnalysisTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781FD46B1AE415BE00BBC0E0 /* AnalysisTableViewController.swift */; };
 		781FD46F1AE466EB00BBC0E0 /* AnalysisTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781FD46E1AE466EB00BBC0E0 /* AnalysisTableHeader.swift */; };
+		782EEB591AE53DA200DB0384 /* ColorDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782EEB541AE53DA200DB0384 /* ColorDefinition.swift */; };
+		782EEB5A1AE53DA200DB0384 /* Hue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782EEB551AE53DA200DB0384 /* Hue.swift */; };
+		782EEB5B1AE53DA200DB0384 /* Luminosity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782EEB561AE53DA200DB0384 /* Luminosity.swift */; };
+		782EEB5C1AE53DA200DB0384 /* RandomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782EEB581AE53DA200DB0384 /* RandomColor.swift */; };
 		7838E7521AE34F04007C2562 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7838E7511AE34F04007C2562 /* Accelerate.framework */; };
 		7838E7541AE34F11007C2562 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7838E7531AE34F11007C2562 /* QuartzCore.framework */; };
 		7838E7561AE34F22007C2562 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7838E7551AE34F22007C2562 /* libCorePlot-CocoaTouch.a */; };
@@ -165,12 +169,12 @@
 		AC1881521ACFD0E400CE450B /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814B1ACFC84600CE450B /* GooglePlus.framework */; };
 		AC1881531ACFD0E400CE450B /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2439AAB91AC7DC7900389195 /* FacebookSDK.framework */; };
 		AC188C7C1AC2B11A00CB08C0 /* Storable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC188C7B1AC2B11A00CB08C0 /* Storable.swift */; };
-		AC530C6B1AE4F214008E1A17 /* bltlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C6A1AE4F214008E1A17 /* bltlogo.png */; };
 		AC530C6E1AE4F23C008E1A17 /* bg_horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C6C1AE4F23C008E1A17 /* bg_horizontal.png */; };
 		AC530C6F1AE4F23C008E1A17 /* bg_vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C6D1AE4F23C008E1A17 /* bg_vertical.png */; };
 		AC530C711AE4F281008E1A17 /* bltname.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C701AE4F281008E1A17 /* bltname.png */; };
-		AC530C741AE4F424008E1A17 /* bltlogo_transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C721AE4F424008E1A17 /* bltlogo_transparent.png */; };
 		AC530C751AE4F424008E1A17 /* bltname_transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C731AE4F424008E1A17 /* bltname_transparent.png */; };
+		AC530C771AE53EAF008E1A17 /* bltlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C761AE53EAF008E1A17 /* bltlogo.png */; };
+		AC530C791AE53EBD008E1A17 /* bltlogo_transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C781AE53EBD008E1A17 /* bltlogo_transparent.png */; };
 		AC6A249A1ADD1AAA00CF33D6 /* BLTProjectProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6A24991ADD1AAA00CF33D6 /* BLTProjectProtocol.swift */; };
 		AC6A249C1ADD1AC000CF33D6 /* BLTSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6A249B1ADD1AC000CF33D6 /* BLTSessionProtocol.swift */; };
 		AC6A249E1ADD1AD300CF33D6 /* BLTBehaviourStateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC6A249D1ADD1AD300CF33D6 /* BLTBehaviourStateProtocol.swift */; };
@@ -380,6 +384,11 @@
 		781FD4681AE4159B00BBC0E0 /* AnalysisTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalysisTableHeader.xib; sourceTree = "<group>"; };
 		781FD46B1AE415BE00BBC0E0 /* AnalysisTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisTableViewController.swift; sourceTree = "<group>"; };
 		781FD46E1AE466EB00BBC0E0 /* AnalysisTableHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisTableHeader.swift; sourceTree = "<group>"; };
+		782EEB541AE53DA200DB0384 /* ColorDefinition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorDefinition.swift; path = RandomColor/ColorDefinition.swift; sourceTree = "<group>"; };
+		782EEB551AE53DA200DB0384 /* Hue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Hue.swift; path = RandomColor/Hue.swift; sourceTree = "<group>"; };
+		782EEB561AE53DA200DB0384 /* Luminosity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Luminosity.swift; path = RandomColor/Luminosity.swift; sourceTree = "<group>"; };
+		782EEB571AE53DA200DB0384 /* RandomColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RandomColor.h; path = RandomColor/RandomColor.h; sourceTree = "<group>"; };
+		782EEB581AE53DA200DB0384 /* RandomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RandomColor.swift; path = RandomColor/RandomColor.swift; sourceTree = "<group>"; };
 		7838E7511AE34F04007C2562 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		7838E7531AE34F11007C2562 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		7838E7551AE34F22007C2562 /* libCorePlot-CocoaTouch.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = "libCorePlot-CocoaTouch.a"; path = "BioLifeTracker/libCorePlot-CocoaTouch.a"; sourceTree = "<group>"; };
@@ -402,12 +411,12 @@
 		AC18815E1AD02F6E00CE450B /* SessionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionTests.swift; sourceTree = "<group>"; };
 		AC1881601AD02F8600CE450B /* BehaviourStateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviourStateTests.swift; sourceTree = "<group>"; };
 		AC188C7B1AC2B11A00CB08C0 /* Storable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Storable.swift; sourceTree = "<group>"; };
-		AC530C6A1AE4F214008E1A17 /* bltlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bltlogo.png; sourceTree = "<group>"; };
 		AC530C6C1AE4F23C008E1A17 /* bg_horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_horizontal.png; sourceTree = "<group>"; };
 		AC530C6D1AE4F23C008E1A17 /* bg_vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_vertical.png; sourceTree = "<group>"; };
 		AC530C701AE4F281008E1A17 /* bltname.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bltname.png; sourceTree = "<group>"; };
-		AC530C721AE4F424008E1A17 /* bltlogo_transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bltlogo_transparent.png; sourceTree = "<group>"; };
 		AC530C731AE4F424008E1A17 /* bltname_transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bltname_transparent.png; sourceTree = "<group>"; };
+		AC530C761AE53EAF008E1A17 /* bltlogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bltlogo.png; sourceTree = "<group>"; };
+		AC530C781AE53EBD008E1A17 /* bltlogo_transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bltlogo_transparent.png; sourceTree = "<group>"; };
 		AC6A24991ADD1AAA00CF33D6 /* BLTProjectProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTProjectProtocol.swift; sourceTree = "<group>"; };
 		AC6A249B1ADD1AC000CF33D6 /* BLTSessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTSessionProtocol.swift; sourceTree = "<group>"; };
 		AC6A249D1ADD1AD300CF33D6 /* BLTBehaviourStateProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTBehaviourStateProtocol.swift; sourceTree = "<group>"; };
@@ -610,6 +619,7 @@
 		3205E7391AAED9F9006F374D = {
 			isa = PBXGroup;
 			children = (
+				782EEB5D1AE53DA800DB0384 /* RandomColor */,
 				3205E7671AAEDA38006F374D /* Images */,
 				320920491AC957E700E8A456 /* Form Library */,
 				3205E7441AAED9F9006F374D /* BioLifeTracker */,
@@ -715,10 +725,10 @@
 			isa = PBXGroup;
 			children = (
 				32EA4B471AE51D7200EC7B8C /* Add User Filled-50.png */,
-				AC530C6A1AE4F214008E1A17 /* bltlogo.png */,
 				32423BA41AE404FC00AFA2F8 /* Edit User-50.png */,
+				AC530C761AE53EAF008E1A17 /* bltlogo.png */,
+				AC530C781AE53EBD008E1A17 /* bltlogo_transparent.png */,
 				AC530C701AE4F281008E1A17 /* bltname.png */,
-				AC530C721AE4F424008E1A17 /* bltlogo_transparent.png */,
 				AC530C731AE4F424008E1A17 /* bltname_transparent.png */,
 				32423BA51AE404FC00AFA2F8 /* Plus-50.png */,
 				AC530C6D1AE4F23C008E1A17 /* bg_vertical.png */,
@@ -758,6 +768,18 @@
 				32423B8A1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib */,
 			);
 			name = "Form Library";
+			sourceTree = "<group>";
+		};
+		782EEB5D1AE53DA800DB0384 /* RandomColor */ = {
+			isa = PBXGroup;
+			children = (
+				782EEB581AE53DA200DB0384 /* RandomColor.swift */,
+				782EEB571AE53DA200DB0384 /* RandomColor.h */,
+				782EEB551AE53DA200DB0384 /* Hue.swift */,
+				782EEB561AE53DA200DB0384 /* Luminosity.swift */,
+				782EEB541AE53DA200DB0384 /* ColorDefinition.swift */,
+			);
+			name = RandomColor;
 			sourceTree = "<group>";
 		};
 		7838E7571AE34FD3007C2562 /* Analysis */ = {
@@ -937,6 +959,7 @@
 				329B292F1AD15BAF007ADC65 /* DatePickerCell.xib in Resources */,
 				781FD4661AE3E5C300BBC0E0 /* PopoverLabelView.xib in Resources */,
 				326773BA1ACAEFB000899745 /* BooleanPickerCell.xib in Resources */,
+				AC530C791AE53EBD008E1A17 /* bltlogo_transparent.png in Resources */,
 				32EA4B481AE51D7200EC7B8C /* Add User Filled-50.png in Resources */,
 				32423B8B1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib in Resources */,
 				7838E75E1AE3501C007C2562 /* GraphAnalysisView.xib in Resources */,
@@ -955,11 +978,10 @@
 				32423B911AE0093B00AFA2F8 /* FocalSessionView.xib in Resources */,
 				32423B811ADF766200AFA2F8 /* BehaviourStateCell.xib in Resources */,
 				32423BA71AE404FC00AFA2F8 /* Plus-50.png in Resources */,
+				AC530C771AE53EAF008E1A17 /* bltlogo.png in Resources */,
 				32423BAF1AE5087200AFA2F8 /* ScanSessionView.xib in Resources */,
-				AC530C741AE4F424008E1A17 /* bltlogo_transparent.png in Resources */,
 				32EA4B4E1AE522B600EC7B8C /* MemberCell.xib in Resources */,
 				326773BF1ACAEFB000899745 /* SingleLineTextCell.xib in Resources */,
-				AC530C6B1AE4F214008E1A17 /* bltlogo.png in Resources */,
 				326773BE1ACAEFB000899745 /* MultiLineTextCell.xib in Resources */,
 				AC530C751AE4F424008E1A17 /* bltname_transparent.png in Resources */,
 				7838E7621AE3501C007C2562 /* GraphsView.xib in Resources */,
@@ -982,6 +1004,7 @@
 			files = (
 				240FEF061AD60AE1000FD9F3 /* CloudStorageManager.swift in Sources */,
 				240FEF071AD60AE1000FD9F3 /* CloudStorageTask.swift in Sources */,
+				782EEB5A1AE53DA200DB0384 /* Hue.swift in Sources */,
 				AC803E101ADCC1D8003E2A98 /* ExportObservationsService.swift in Sources */,
 				2458E86A1ADCF3AE0001D75E /* CSVWriter.swift in Sources */,
 				240FEF081AD60AE1000FD9F3 /* CloudStorageWorker.swift in Sources */,
@@ -1023,6 +1046,7 @@
 				321D62C71AD261D300CF9BE9 /* SuperController.swift in Sources */,
 				320920711ACA9A1600E8A456 /* MenuViewController.swift in Sources */,
 				AC6A24A81ADD1B3100CF33D6 /* BLTLocationProtocol.swift in Sources */,
+				782EEB5B1AE53DA200DB0384 /* Luminosity.swift in Sources */,
 				329B292C1AD15BAF007ADC65 /* ButtonCell.swift in Sources */,
 				ACDE13AB1AD0C03F0075AC35 /* ProjectManager.swift in Sources */,
 				323CBD9A1ADD634400A7C970 /* ScanSessionViewControllerDelegate.swift in Sources */,
@@ -1036,6 +1060,7 @@
 				2458F4D11AE160EC0006DFC7 /* BLTProjectDeserializer.swift in Sources */,
 				242C6E071AC80F050024ECEF /* BiolifeModel.swift in Sources */,
 				32423B891ADFDC8600AFA2F8 /* CustomPickerPopupCell.swift in Sources */,
+				782EEB591AE53DA200DB0384 /* ColorDefinition.swift in Sources */,
 				32423B871ADFDA3900AFA2F8 /* FormPopupController.swift in Sources */,
 				7838E7601AE3501C007C2562 /* GraphAnalysisViewController.swift in Sources */,
 				7838E7661AE3501C007C2562 /* GraphsViewControllerDelegate.swift in Sources */,
@@ -1071,6 +1096,7 @@
 				323CBD8E1ADB8FF000A7C970 /* ProjectHomeViewController.swift in Sources */,
 				32423B951AE23E0D00AFA2F8 /* CircleCell.swift in Sources */,
 				323CBD981ADD624D00A7C970 /* ScanSessionViewController.swift in Sources */,
+				782EEB5C1AE53DA200DB0384 /* RandomColor.swift in Sources */,
 				32423B9F1AE3A1BB00AFA2F8 /* EthogramDetailsViewController.swift in Sources */,
 				AC188C7C1AC2B11A00CB08C0 /* Storable.swift in Sources */,
 				AC6A249A1ADD1AAA00CF33D6 /* BLTProjectProtocol.swift in Sources */,

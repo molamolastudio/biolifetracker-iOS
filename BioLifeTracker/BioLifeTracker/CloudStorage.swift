@@ -78,11 +78,6 @@ struct CloudStorage {
             let key = keyObject as! String
             assert(source[key] != nil)
             assert(target[key] != nil, "The entry for \(key) is missing from server reply")
-            let originalValue = source[key] as! NSObject
-            let newValue = target[key] as! NSObject
-            if originalValue != newValue {
-                NSLog("Returned value for key %@, (%@) does not match original (%@)", key, newValue, originalValue)
-            }
         }
     }
     
