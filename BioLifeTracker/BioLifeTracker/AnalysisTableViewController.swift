@@ -36,14 +36,11 @@ class AnalysisTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+
         tableView.allowsMultipleSelection = true
         
         self.tableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
         self.tableView.registerNib(UINib(nibName: cellReuseIdentifierHead, bundle: nil), forHeaderFooterViewReuseIdentifier: cellReuseIdentifierHead)
-        
-        
     }
     
     func toggleTable(type: TableType) {
@@ -140,10 +137,7 @@ class AnalysisTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
-        
         var header = view as! UITableViewHeaderFooterView
-
-
         
     }
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -163,7 +157,6 @@ class AnalysisTableViewController: UITableViewController {
         var i = indexPath.row
         var ind = find(selectedIndices, i)
         selectedIndices.removeAtIndex(ind!)
-        
         switch tableType {
         case .Users:
             var user = totalUsers[indexPath.row]
@@ -178,6 +171,7 @@ class AnalysisTableViewController: UITableViewController {
 
 
     }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         updateChosen(indexPath.row)
     }
@@ -202,7 +196,6 @@ class AnalysisTableViewController: UITableViewController {
             tableView.selectRowAtIndexPath(idx, animated: true, scrollPosition: .None)
             updateChosen(i)
         }
-        
     }
     
     func updateChosen(index: Int) {

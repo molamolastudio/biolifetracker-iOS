@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class GraphDetailsViewController: UIViewController {
+class PopoverLabelViewController: UIViewController {
 
     @IBOutlet weak var popoverLabel: UILabel!
     override func viewDidLoad() {
