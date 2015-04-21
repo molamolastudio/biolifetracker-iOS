@@ -96,8 +96,8 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     //var GreenSeaHighLight = UIColor(red: 183.0/255.0, green: 88.0/255.0, blue: 77.0/255.0, alpha: 1)
     var PlotSelectRed = UIColor(red: 234.0/255.0, green: 79.0/255.0, blue: 88.0/255.0, alpha: 1)
     
-    // Returns an array of twenty colors at hue of 120
-    let colors = randomColorsCount(20, hue: .Random, luminosity: .Light)
+    // Returns an array of hundred colors at hue of 120
+    let colors = randomColorsCount(100, hue: .Random, luminosity: .Light)
     
     override func loadView() {
         self.view = NSBundle.mainBundle().loadNibNamed("GraphsView", owner: self, options: nil).first as! UIView
@@ -1031,7 +1031,8 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     
     func barFillForBarPlot(barPlot: CPTBarPlot!, recordIndex idx: UInt) -> CPTFill! {
         
-        var chosenColor = colors[Int(idx)]
+        var number = arc4random_uniform(100)
+        var chosenColor = colors[Int(number)]
         return CPTFill(color: CPTColor(CGColor: chosenColor.CGColor))
     }
     

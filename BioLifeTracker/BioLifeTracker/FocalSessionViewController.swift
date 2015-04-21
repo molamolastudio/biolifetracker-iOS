@@ -23,10 +23,10 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     let circleCellIdentifier = "CircleCell"
     let circleLabelCellIdentifier = "CircleWithLabelCell"
     
-    let individualsDefaultColor = UIColor.lightGrayColor()
-    let individualsSelectedColor = UIColor.greenColor()
-    let statesDefaultColor = UIColor.lightGrayColor()
-    let statesSelectedColor = UIColor.greenColor()
+//    let individualsDefaultColor = UIColor.lightGrayColor()
+    let individualsSelectedColor = UIColor.whiteColor()
+//    let statesDefaultColor = UIColor.lightGrayColor()
+    let statesSelectedColor = UIColor.whiteColor()
     
     let numSections = 1
     
@@ -47,6 +47,12 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     var originalObservations = [Individual: [Observation]]()
     var newObservations = [Individual: [Observation]]()
     var states = [BehaviourState]()
+    
+    // Pretty colours for the pretty circle cells. :D
+    // Returns an array of fifty shades of green
+    let indivColors = randomColorsCount(50, hue: .Green, luminosity: .Light)
+    let stateColors = randomColorsCount(50, hue: .Blue, luminosity: .Light)
+    
     
     override func loadView() {
         self.view = NSBundle.mainBundle().loadNibNamed("FocalSessionView", owner: self, options: nil).first as! UIView
@@ -244,7 +250,9 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
             cell.label.text = individuals[indexPath.row].label
         }
         
-        cell.backgroundColor = individualsDefaultColor
+        var num = arc4random_uniform(UInt32(indivColors.count))
+        var chosenColor = indivColors[Int(num)]
+        cell.backgroundColor = chosenColor
         
         return cell
     }
@@ -257,7 +265,10 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         let name = states[indexPath.row].name
         cell.circleViewLabel.text = name.substringToIndex(name.startIndex.successor())
         cell.label.text = name
-        cell.circleView.backgroundColor = statesDefaultColor
+        
+        var num = arc4random_uniform(UInt32(stateColors.count))
+        var chosenColor = stateColors[Int(num)]
+        cell.circleView.backgroundColor = chosenColor
         
         cell.userInteractionEnabled = editable
         
@@ -401,7 +412,9 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
                 if i == selectedIndex {
                     individualsView.cellForItemAtIndexPath(index)!.backgroundColor = individualsSelectedColor
                 } else {
-                    individualsView.cellForItemAtIndexPath(index)!.backgroundColor = individualsDefaultColor
+                    var num = arc4random_uniform(UInt32(indivColors.count))
+                    var chosenColor = indivColors[Int(num)]
+                    individualsView.cellForItemAtIndexPath(index)!.backgroundColor = chosenColor
                 }
             }
         }
@@ -439,7 +452,9 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
                 if i == selectedIndex {
                     cell.circleView.backgroundColor = statesSelectedColor
                 } else {
-                    cell.circleView.backgroundColor = statesDefaultColor
+                    var num = arc4random_uniform(UInt32(stateColors.count))
+                    var chosenColor = stateColors[Int(num)]
+                    cell.circleView.backgroundColor = chosenColor
                 }
             }
         }
