@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ScanViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class ScanViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate {
     @IBOutlet weak var animalsView: UICollectionView!
     @IBOutlet weak var statesView: UICollectionView!
     @IBOutlet weak var notesView: UITextView!
@@ -32,7 +32,8 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     var observations = [Observation]()
     var states = [BehaviourState]()
     
-    var selectedObservation = 0
+    var selectedObservation: Int? = nil
+    var selectedState: Int? = nil
     
     override func loadView() {
         self.view = NSBundle.mainBundle().loadNibNamed("ScanView", owner: self, options: nil).first as! UIView
@@ -43,6 +44,9 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         
         setupCollectionViews()
         getData()
+        updateArrows()
+        notesView.userInteractionEnabled = editable
+        notesView.delegate = self
     }
     
     func setupCollectionViews() {
@@ -71,8 +75,15 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func makeEditable(value: Bool) {
         editable = value
+        refreshView()
+    }
+    
+    func refreshView() {
         animalsView.reloadData()
         statesView.reloadData()
+        updateArrows()
+        notesView.text = ""
+        notesView.userInteractionEnabled = editable
     }
     
     // Sets the data source of this controller.
@@ -96,7 +107,7 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     // Copy over the information in the edited observations to the original observations.
     func saveData() {
-        for i in 0...observations.count { // intentionally include observations.count (last loop)
+        for i in 0...observations.count - 1 {
             if i < originalObservations.count {
                 // Copy over the updated information of the observation
                 copyOverObservation(observations[i], to: originalObservations[i])
@@ -116,8 +127,6 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     // UICollectionViewDataSource methods
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        println("cellForItemAtIndexPath")
-        
         if collectionView == animalsView {
             return getCellForAnimalsView(indexPath)
         } else if collectionView == statesView {
@@ -130,14 +139,20 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     func getCellForAnimalsView(indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = animalsView.dequeueReusableCellWithReuseIdentifier(circleCellIdentifier, forIndexPath: indexPath) as! CircleCell
         
+        cell.backgroundColor = animalsDefaultColor
+        
         if isExtraRow(indexPath.row) {
             cell.label.text = "+"
         } else {
             cell.label.text = "A\(indexPath.row)"
+            
+            // If this is the selected observation
+            if indexPath.row == selectedObservation {
+                cell.backgroundColor = animalsSelectedColor
+                selectedState = getIndexOfState(observations[selectedObservation!].state)
+                notesView.text = observations[selectedObservation!].information
+            }
         }
-        
-        cell.backgroundColor = animalsDefaultColor
-        
         return cell
     }
     
@@ -149,7 +164,12 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         let name = states[indexPath.row].name
         cell.circleViewLabel.text = name.substringToIndex(name.startIndex.successor())
         cell.label.text = name
-        cell.circleView.backgroundColor = statesDefaultColor
+        
+        if indexPath.row == selectedState {
+            cell.circleView.backgroundColor = statesSelectedColor
+        } else {
+            cell.circleView.backgroundColor = statesDefaultColor
+        }
         
         cell.userInteractionEnabled = editable
         
@@ -180,59 +200,39 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     // UICollectionViewDelegate methods
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        println("didSelectItemAtIndexPath")
         if collectionView == animalsView {
-            
-            selectedObservation = indexPath.row
-            
             // User wants to add an extra animal
             if isExtraRow(indexPath.row) {
                 // Add a new observation
                 let observation = Observation(session: currentSession!, state: states.first!, timestamp: selectedTimestamp!, information: "")
                 observations.append(observation)
-                
-                // Reload views
-                animalsView.reloadData()
-                statesView.reloadData()
             }
             
-            showObservationAtIndex(indexPath)
+            selectedObservation = indexPath.row
             
         } else if collectionView == statesView {
-            showStateAsSelected(indexPath.row)
-            observations[selectedObservation].changeBehaviourState(states[indexPath.row])
+            selectedState = indexPath.row
+            observations[selectedObservation!].changeBehaviourState(states[indexPath.row])
+        }
+        refreshView()
+    }
+    
+    // UITextViewDelegate methods
+    func textViewDidChange(textView: UITextView) {
+        if selectedObservation != nil {
+            observations[selectedObservation!].updateInformation(textView.text)
         }
     }
     
-    func showObservationAtIndex(indexPath: NSIndexPath) {
-        println("showObservationAtIndex")
-        showAnimalAsSelected(indexPath.row)
-        
-        let observation = observations[indexPath.row]
-        showStateAsSelected(getIndexOfState(observation.state))
-    }
-    
-    func showAnimalAsSelected(selectedIndex: Int) {
-        println("showAnimalAsSelected")
-        if selectedIndex < observations.count {
-            for i in 0...observations.count - 1 {
-                let index = NSIndexPath(forRow: i, inSection: 0)
-                if i == selectedIndex {
-                    animalsView.cellForItemAtIndexPath(index)!.backgroundColor = animalsSelectedColor
-                } else {
-                    animalsView.cellForItemAtIndexPath(index)!.backgroundColor = animalsDefaultColor
-                }
-            }
-        }
-        
-        // Toggle visibility of arrows
+    // Toggles visibility of arrows
+    func updateArrows() {
         if observations.count == 1 {
             leftArrow.hidden = true
             rightArrow.hidden = true
-        }else if selectedIndex == 0 {
+        }else if selectedObservation == 0 {
             leftArrow.hidden = true
             rightArrow.hidden = false
-        } else if selectedIndex == observations.count - 1 {
+        } else if selectedObservation == observations.count - 1 {
             leftArrow.hidden = false
             rightArrow.hidden = true
         } else  {
@@ -241,38 +241,17 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
-    func showStateAsSelected(selectedIndex: Int) {
-        println("showStateAsSelected")
-        if selectedIndex < states.count {
-            for i in 0...states.count - 1 {
-                let index = NSIndexPath(forRow: i, inSection: 0)
-                let cell = statesView.cellForItemAtIndexPath(index) as! CircleWithLabelCell
-                if i == selectedIndex {
-                    cell.circleView.backgroundColor = statesSelectedColor
-                } else {
-                    cell.circleView.backgroundColor = statesDefaultColor
-                }
-            }
-        }
-    }
-    
-    func setCellAsDefault() {
-        
-    }
-    
-    func setCellAsSelected() {
-        
-    }
-    
     // Actions for arrow buttons
     @IBAction func leftArrowPressed(sender: UIButton) {
-        selectedObservation = selectedObservation - 1
-        showObservationAtIndex(NSIndexPath(forRow: selectedObservation, inSection: 0))
+        selectedObservation = selectedObservation! - 1
+        updateArrows()
+        refreshView()
     }
     
     @IBAction func rightArrowPressed(sender: UIButton) {
-        selectedObservation = selectedObservation + 1
-        showObservationAtIndex(NSIndexPath(forRow: selectedObservation, inSection: 0))
+        selectedObservation = selectedObservation! + 1
+        updateArrows()
+        refreshView()
     }
     
     // Helper methods

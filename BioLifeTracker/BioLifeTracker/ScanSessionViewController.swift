@@ -55,6 +55,7 @@ class ScanSessionViewController: UIViewController, UITableViewDataSource, UITabl
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        timestamps = currentSession!.getTimestamps()
         self.tableView.reloadData()
     }
     
