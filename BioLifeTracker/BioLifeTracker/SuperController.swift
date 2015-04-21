@@ -48,11 +48,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
             startDownloadingProjectsFromServer()
             freshLogin = false
         } else {
-            refreshUserList()
-        }
-        
-        if UserAuthService.sharedInstance.user.email != "Default" {
-            setupForDemo()
+            loadingAlert = UIAlertController(title: "Loading Data", message: "Downloading your projects from server", preferredStyle: .Alert)
+            self.presentViewController(loadingAlert!, animated: true, completion: nil)
+            startDownloadingProjectsFromServer()
         }
     }
     
@@ -748,8 +746,12 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
             
             // add projects to ProjectManager
             for projectInfo in downloadProject.getResults() {
-                let project = Project(dictionary: projectInfo)
-                ProjectManager.sharedInstance.addProject(project)
+                if let id = projectInfo["id"] as? Int {
+                    if !ProjectManager.sharedInstance.hasProjectWithId(id) {
+                        let project = Project(dictionary: projectInfo)
+                        ProjectManager.sharedInstance.addProject(project)
+                    }
+                }
             }
             
             // add ethograms to EthogramManager

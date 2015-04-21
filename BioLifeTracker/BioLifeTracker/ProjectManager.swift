@@ -148,6 +148,15 @@ class ProjectManager: NSObject, Storable {
         ProjectManager.deleteFromArchives(String(UserAuthService.sharedInstance.user.id))
         ProjectManager.sharedInstance._projects = [] 
     }
+    
+    func hasProjectWithId(id: Int) -> Bool {
+        for project in projects {
+            if project.id == id {
+                return true
+            }
+        }
+        return false
+    }
 }
 
 extension ProjectManager: NSCoding {

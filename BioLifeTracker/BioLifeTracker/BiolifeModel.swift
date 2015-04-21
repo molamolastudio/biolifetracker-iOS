@@ -31,6 +31,7 @@ class BiolifeModel: NSObject, NSCoding {
     }
     
     required init(coder decoder: NSCoder) {
+        id = decoder.decodeObjectForKey("id") as? Int
         _createdAt = decoder.decodeObjectForKey("createdAt") as! NSDate
         _updatedAt = decoder.decodeObjectForKey("updatedAt") as! NSDate
         _createdBy = decoder.decodeObjectForKey("createdBy") as! User
@@ -98,6 +99,7 @@ class BiolifeModel: NSObject, NSCoding {
 
 extension BiolifeModel: NSCoding {    
     func encodeWithCoder(coder: NSCoder) {
+        coder.encodeObject(id, forKey: "id")
         coder.encodeObject(_createdAt, forKey: "createdAt")
         coder.encodeObject(_updatedAt, forKey: "updatedAt")
         coder.encodeObject(_createdBy, forKey: "createdBy")
