@@ -10,6 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProjectHomeViewController" customModule="BioLifeTracker" customModuleProvider="target">
             <connections>
                 <outlet property="addMembersButton" destination="0G8-Bo-fQD" id="yGb-3G-d5Z"/>
+                <outlet property="createSessionButton" destination="uSr-Mi-AdS" id="ios-Eo-AEg"/>
                 <outlet property="graphView" destination="0sh-hb-5kC" id="VcG-e3-sMg"/>
                 <outlet property="memberView" destination="wC8-Gm-uSp" id="Y2O-OG-RiI"/>
                 <outlet property="sessionView" destination="Cxe-u6-XLb" id="NPQ-D5-IIf"/>

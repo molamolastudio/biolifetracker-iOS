@@ -33,11 +33,16 @@ class UserAuthService {
     }
     
     init() {
-        tryLoadTokenFromDisk()
+        let success = self.tryLoadTokenFromDisk()
+        if success {
+            dispatch_async(dispatch_get_main_queue(), {
+                self.initialiseManagers(self.user.id)
+            })
+        }
     }
     
     func useDefaultUser() {
-        initialiseManagers()
+        initialiseManagers(user.id)
     }
     
     func hasAccessToken() -> Bool {
@@ -47,13 +52,15 @@ class UserAuthService {
         return accessToken != nil
     }
     
-    func initialiseManagers() {
-        let loadedProjectMng = ProjectManager.loadFromArchives(String(UserAuthService.sharedInstance.user.id)) as? ProjectManager
+    func initialiseManagers(id: Int) {
+        if self.user.id == 0 { return } // not logged in
+        
+        let loadedProjectMng = ProjectManager.loadFromArchives(String(id)) as? ProjectManager
         if loadedProjectMng != nil {
             ProjectManager.sharedInstance.updateProjects(loadedProjectMng!.projects)
         }
         
-        let loadedEthogramMng = EthogramManager.loadFromArchives(String(UserAuthService.sharedInstance.user.id)) as! EthogramManager?
+        let loadedEthogramMng = EthogramManager.loadFromArchives(String(id)) as! EthogramManager?
         if loadedEthogramMng != nil {
             EthogramManager.sharedInstance.updateEthograms(loadedEthogramMng!.ethograms)
         }
@@ -129,7 +136,7 @@ class UserAuthService {
             if let id = responseDictionary!["id"] as? Int {
                 self._user = User(dictionary: responseDictionary!)
                 self.trySaveTokenToDisk()
-                self.initialiseManagers()
+                self.initialiseManagers(self.user.id)
             }
         })
     }
@@ -153,7 +160,7 @@ class UserAuthService {
         }
     }
     
-    private func tryLoadTokenFromDisk() {
+    private func tryLoadTokenFromDisk() -> Bool {
         let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
         if let dir = dirs?[0] {
             let path = dir.stringByAppendingPathComponent("servertoken")
@@ -161,9 +168,11 @@ class UserAuthService {
                 let userDataIsAvailable = loadUserFromDisk()
                 if userDataIsAvailable {
                     _accessToken = token as String
+                    return true
                 }
             }
         }
+        return false
     }
     
     private func deleteTokenFromDisk() {

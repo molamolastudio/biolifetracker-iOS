@@ -149,8 +149,8 @@ class ProjectTests: XCTestCase {
         XCTAssert(project.ethogram.behaviourStates[0].name == "Fighting", "Project not updated properly")
 
         
-        project.addAdmins([user2])
-        project.addMembers([user3])
+        project.addAdmin(user2)
+        project.addMember(user3)
         
         var containsAdmin = false
         for admin in project.admins {
@@ -184,8 +184,8 @@ class ProjectTests: XCTestCase {
         }
         XCTAssert(containsMember == true, "Project not updated properly")
         
-        project.removeAdmins([1])
-        project.removeMembers([2])
+        project.removeAdmin(user2)
+        project.removeMember(user3)
         
         containsAdmin = false
         for admin in project.admins {
@@ -696,8 +696,11 @@ class ProjectTests: XCTestCase {
         session3.addObservation([observation16, observation17, observation18, observation19, observation20, observation21])
         
         // additional test data
-        project.addAdmins([UserAuthService.sharedInstance.user, User(name: "dummy user", email: "d@ummy.com")])
-        project.addMembers([UserAuthService.sharedInstance.user, User(name: "dummy user", email: "d@ummy.com")])
+        project.addAdmin(UserAuthService.sharedInstance.user)
+        project.addAdmin(User(name: "dummy user", email: "d@ummy.com"))
+        project.addMember(UserAuthService.sharedInstance.user)
+        project.addMember(User(name: "dummy user", email: "d@ummy.com"))
+        
         state1.updatePhoto(Photo(image: UIImage(named:"dummy_image")!))
         individual1.updatePhoto(Photo(image: UIImage(named: "dummy_image")!))
         individual2.addTag(Tag(name: "Test tag"))

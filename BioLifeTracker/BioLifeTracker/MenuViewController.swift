@@ -15,8 +15,9 @@ class MenuViewController: UITableViewController {
     let cellReuseIdentifier = "MenuCell"
     
     let projectSection = ["Projects", "Ethograms", "Analyse"]
-    let settingsSection = ["Settings"]
+    let projectSectionIcons = ["foldericon", "tableicon", "graphicon"]
     let socialSectionLoggedIn = ["Logout"]
+    let socialSectionLoggedInIcons = ["logouticon"]
     
     var user: User = UserAuthService.sharedInstance.user
     
@@ -31,36 +32,19 @@ class MenuViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! UITableViewCell
         
+        var icon: UIImageView
+        
         switch indexPath.section {
         case 0:
             cell.textLabel!.text = projectSection[indexPath.row]
-    
             var image: UIImage? = nil
-            switch indexPath.row {
-            case 0:
-                image = nil
-                break
-            case 1:
-                image = nil
-                break
-            case 2:
-                image = nil
-                break
-            default:
-                break
-            }
-            
+            image = UIImage(named: projectSectionIcons[indexPath.row])
             cell.imageView!.image = image
-            
-            break
         case 1:
-            cell.textLabel!.text = settingsSection[indexPath.row]
-            cell.imageView!.image = nil
-            break
-        case 2:
             cell.textLabel!.text = socialSectionLoggedIn[indexPath.row]
-            cell.imageView!.image = nil
-            break
+            var image: UIImage? = nil
+            image = UIImage(named: socialSectionLoggedInIcons[indexPath.row])
+            cell.imageView!.image = image
         default:
             break
         }
@@ -86,9 +70,6 @@ class MenuViewController: UITableViewController {
                     break
                 }
             case 1:
-                delegate!.userDidSelectSettings()
-                break
-            case 2:
                 delegate!.userDidSelectLogout()
                 break
             default:
@@ -106,8 +87,6 @@ class MenuViewController: UITableViewController {
         case 0:
             return projectSection.count
         case 1:
-            return settingsSection.count
-        case 2:
             return socialSectionLoggedIn.count
         default:
             return 0

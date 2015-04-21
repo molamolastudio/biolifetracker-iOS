@@ -31,7 +31,17 @@ class ProjectManager: NSObject, Storable {
     }
     
     func addProject(project: Project) {
-        self._projects.append(project)
+        var isReplace = false
+        for (var i = 0; i < _projects.count; i++) {
+            if _projects[i].id == project.id {
+                _projects[i] = project
+                isReplace = true
+                break
+            }
+        }
+        if !isReplace {
+            self._projects.append(project)
+        }
         saveToArchives()
     }
     
@@ -157,6 +167,15 @@ class ProjectManager: NSObject, Storable {
         // Please do anything to manage user data here
         ProjectManager.deleteFromArchives(String(UserAuthService.sharedInstance.user.id))
         ProjectManager.sharedInstance._projects = [] 
+    }
+    
+    func hasProjectWithId(id: Int) -> Bool {
+        for project in projects {
+            if project.id == id {
+                return true
+            }
+        }
+        return false
     }
 }
 

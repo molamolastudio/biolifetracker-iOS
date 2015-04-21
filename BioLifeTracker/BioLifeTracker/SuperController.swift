@@ -43,17 +43,12 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         menu.title = userAuth.user.name
         showProjectsPage()
         if freshLogin {
-            loadingAlert = UIAlertController(title: "Loading Data", message: "Downloading your projects from server", preferredStyle: .Alert)
-            self.presentViewController(loadingAlert!, animated: true, completion: nil)
             startDownloadingProjectsFromServer()
             freshLogin = false
         } else {
-            refreshUserList()
+            startDownloadingProjectsFromServer()
         }
-        
-        if UserAuthService.sharedInstance.user.email != "Default" {
-            setupForDemo()
-        }
+//        setupForDemo()
     }
     
     // Closes the master view of the split view.
@@ -175,11 +170,13 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         menu.delegate = self
     }
     
-    func showCorruptFileAlert() {
-        displayAlert("Save File Corrupt", message: "Unable to load save file.")
-    }
-    
     // Methods to show pages
+    func dismissCurrentPage() {
+        // Do not allow dismissal if only one view controller is left.
+        if detailNav.viewControllers.count > 1 {
+            detailNav.popViewControllerAnimated(true)
+        }
+    }
     
     func showLoginPage() {
         freshLogin = true
@@ -271,29 +268,33 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         detailNav.pushViewController(vc, animated: true)
     }
     
-    func dismissCurrentPage() {
-        // Do not allow dismissal if only one view controller is left.
-        if detailNav.viewControllers.count > 1 {
-            detailNav.popViewControllerAnimated(true)
-        }
-    }
-    
-    func showNewSessionPage() {
+    func showCreateSessionPopup() {
         // Popup instead
         // selector to create new session
         // set currentSession here
         // then showSession
-    }
-    
-    func showNewIndividualPage() {
-        let vc = FormViewController()
+        let alert = UIAlertController(title: "New Session", message: "", preferredStyle: .Alert)
         
-        vc.title = "New Individual"
-        vc.setFormData(getFormDataForNewIndividual())
-        vc.cellHorizontalPadding = 25
-        vc.roundedCells = true
+        // Adds buttons
+        let actionCancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let actionOk = UIAlertAction(title: "OK", style: .Default, handler: {action in
+            let textField = alert.textFields!.first as! UITextField
+            
+        })
+        actionOk.enabled = false
+        alert.addAction(actionOk)
+        alert.addAction(actionCancel)
         
-        detailNav.pushViewController(vc, animated: true)
+        // Adds a text field for the label
+        alert.addTextFieldWithConfigurationHandler({textField in
+            textField.placeholder = "Name"
+            
+            NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
+                actionOk.enabled = textField.text != ""
+            }
+        })
+        
+        self.presentViewController(alert, animated: true, completion: nil)
     }
     
     func showSession() {
@@ -358,6 +359,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func showCreateScanPagePopup() {
         // Popup settings page
         // If all fields entered then showCreateScanPage
+        
     }
     
     func showCreateScanPage() {
@@ -399,17 +401,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         detailNav.pushViewController(vc, animated: true)
     }
     
-    func showSettingsPage() {
-        let vc = FormViewController()
-        
-        vc.title = "Settings"
-        vc.setFormData(getFormDataForSettings())
-        vc.cellHorizontalPadding = 25
-        vc.roundedCells = true
-        
-        detailNav.setViewControllers([vc], animated: false)
-    }
-    
     func clearNavigationStack() {
         detailNav.popToRootViewControllerAnimated(false)
     }
@@ -428,14 +419,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
         data.addPickerCell(section: 0, label: "Locations", pickerValues: ["Location 1", "Location 2"], isCustomPicker: true)
         data.addPhotoPickerCell(section: 0, label: "Photos")
-        return data
-    }
-    
-    func getFormDataForSettings() -> FormFieldData {
-        let data = FormFieldData(sections: 1)
-        
-        // ANDHIEKA
-        
         return data
     }
     
@@ -532,11 +515,12 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
                 alert.dismissViewControllerAnimated(true, completion: {
                     if (uploadTask.completedSuccessfully != true) {
                         self.displayAlert("Fail to Upload", message: "Cannot connect to server")
+                    } else {
+                        self.startDownloadingProjectsFromServer()
                     }
                 })
             })
         })
-        
     }
     
     func exportToExcel(sender: UIBarButtonItem) {
@@ -560,11 +544,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func userDidSelectAnalysis() {
         dismissMenuView()
         showAnalysisPage()
-    }
-    
-    func userDidSelectSettings() {
-        dismissMenuView()
-        showSettingsPage()
     }
     
     func userDidSelectLogout() {
@@ -617,37 +596,18 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func userDidSelectCreateSession() {
-        let alert = UIAlertController(title: "New Session", message: "", preferredStyle: .Alert)
-        
-        // Adds buttons
-        let actionCancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        let actionOk = UIAlertAction(title: "OK", style: .Default, handler: {action in
-            let textField = alert.textFields!.first as! UITextField
-            
-        })
-        actionOk.enabled = false
-        alert.addAction(actionOk)
-        alert.addAction(actionCancel)
-        
-        // Adds a text field for the label
-        alert.addTextFieldWithConfigurationHandler({textField in
-            textField.placeholder = "Label (eg: M1, F1)"
-            
-            NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
-                actionOk.enabled = textField.text != ""
-            }
-        })
-        
-        self.presentViewController(alert, animated: true, completion: nil)
+        showCreateSessionPopup()
     }
     
     // ScanSessionViewControllerDelegate methods
     func userDidSelectScan(session: Session, timestamp: NSDate) {
-        // Open the ScanView
         showScanPage(session, timestamp: timestamp)
     }
     
     // Helper methods
+    func showCorruptFileAlert() {
+        displayAlert("Save File Corrupt", message: "Unable to load save file.")
+    }
     
     // Displays an alert controller with given title and message, with an OK button.
     // Dismisses upon pressing the OK button.
@@ -677,6 +637,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     
     func startDownloadingProjectsFromServer() {
+        loadingAlert = UIAlertController(title: "Loading Data", message: "Downloading your projects from server", preferredStyle: .Alert)
+        self.presentViewController(loadingAlert!, animated: true, completion: nil)
+
         let worker = CloudStorageWorker()
         
         // downloading items one by one is too slow, we have to warm cache
@@ -749,8 +712,13 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
             
             // add projects to ProjectManager
             for projectInfo in downloadProject.getResults() {
-                let project = Project(dictionary: projectInfo)
-                ProjectManager.sharedInstance.addProject(project)
+                if let id = projectInfo["id"] as? Int {
+                    if (id == self.currentProject?.id) ||
+                       (!ProjectManager.sharedInstance.hasProjectWithId(id)) {
+                        let project = Project(dictionary: projectInfo)
+                        ProjectManager.sharedInstance.addProject(project)
+                    }
+                }
             }
             
             // add ethograms to EthogramManager

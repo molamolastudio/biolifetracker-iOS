@@ -8,13 +8,16 @@
 
 import UIKit
 
-class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MemberPickerViewControllerDelegate, UIPopoverPresentationControllerDelegate {
+class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MemberPickerViewControllerDelegate, UIPopoverPresentationControllerDelegate, CreateSessionViewControllerDelegate {
     var delegate: ProjectHomeViewControllerDelegate? = nil
     
     @IBOutlet weak var graphView: UIView!
     @IBOutlet weak var memberView: UITableView!
     @IBOutlet weak var sessionView: UITableView!
     @IBOutlet weak var addMembersButton: UIButton!
+    @IBOutlet weak var createSessionButton: UIButton!
+    
+    let NOT_FOUND = -1
     
     let memberTag = 2
     let sessionTag = 3
@@ -111,14 +114,36 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     
     // MemberPickerViewControllerDelegate methods
     func userDidSelectMember(member: User) {
-        currentProject!.addMembers([member])
+        currentProject?.addMember(member)
         memberView.reloadData()
     }
     
     @IBAction func createSessionBtnPressed() {
-        if delegate != nil {
-            delegate!.userDidSelectCreateSession()
-        }
+        showCreateSession()
+    }
+    
+    func showCreateSession() {
+        let sessionForm = CreateSessionViewController()
+        
+        sessionForm.delegate = self
+        sessionForm.modalPresentationStyle = .Popover
+        sessionForm.preferredContentSize = CGSizeMake(400, 400)
+        
+        sessionForm.currentProject = currentProject
+        
+        let popoverController = sessionForm.popoverPresentationController!
+        popoverController.permittedArrowDirections = .Any
+        popoverController.delegate = self
+        popoverController.sourceView = createSessionButton
+        popoverController.sourceRect = CGRectMake(0, 0, 0, 0)
+        
+        presentViewController(sessionForm, animated: true, completion: nil)
+    }
+    
+    // CreateSessionViewControllerDelegate methods
+    func userDidFinishCreatingSession(session: Session) {
+        currentProject!.addSession(session)
+        sessionView.reloadData()
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS
@@ -221,33 +246,15 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     func removeAdmin(sender: UIButton) {
         let members = currentProject!.members
         let member = members[sender.tag]
-        let index = getAdminIndexForMember(member)
-        
-        if index != -1 {
-            currentProject!.removeAdmins([index])
-        }
+        currentProject?.removeAdmin(member)
         memberView.reloadData()
     }
     
     func makeAdmin(sender: UIButton) {
         let members = currentProject!.members
         let member = members[sender.tag]
-        
-        currentProject!.addAdmins([member])
-        
+        currentProject?.addAdmin(member)
         memberView.reloadData()
     }
-    
-    // Helper methods
-    func getAdminIndexForMember(member: User) -> Int {
-        let admins = currentProject!.admins
-        
-        var result = -1
-        for a in 0...admins.count {
-            if member == admins[a] {
-                result = a
-            }
-        }
-        return result
-    }
+
 }

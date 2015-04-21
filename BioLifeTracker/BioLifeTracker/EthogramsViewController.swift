@@ -45,6 +45,11 @@ class EthogramsViewController: UIViewController, UITableViewDataSource, UITableV
         self.tableView.reloadData()
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tableView.editing = false
+    }
+    
     // UITableViewDataSource and UITableViewDelegate METHODS
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SubtitleTableCell

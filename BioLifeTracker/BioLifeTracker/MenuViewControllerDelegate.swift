@@ -12,7 +12,6 @@ protocol MenuViewControllerDelegate {
     func userDidSelectProjects()
     func userDidSelectEthograms()
     func userDidSelectAnalysis()
-    func userDidSelectSettings()
     func userDidSelectLogout()
     func userDidSelectSessions(project: Project)
     func userDidSelectIndividuals(project: Project)
