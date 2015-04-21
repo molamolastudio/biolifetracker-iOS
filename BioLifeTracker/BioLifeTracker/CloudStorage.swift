@@ -12,13 +12,19 @@ import Foundation
 /// for use across cloud storage classes.
 struct CloudStorage {
     
+    static var defaultUrl: String = "https://bltserver.herokuapp.com"
+    static let userDefaults = NSUserDefaults.standardUserDefaults()
+    
     static var serverUrl: String {
         get {
-            let userDefaults = NSUserDefaults.standardUserDefaults()
             userDefaults.synchronize()
+            let useCustomUrl = userDefaults.boolForKey("use_custom_url_preference")
+            if !useCustomUrl {
+                return defaultUrl
+            }
             let preferredUrl = userDefaults.stringForKey("server_url_preference")!
             if preferredUrl.stringByTrimmingCharactersInSet(.whitespaceAndNewlineCharacterSet()) == "" {
-                return "https://bltserver.herokuapp.com"
+                return defaultUrl
             } else {
                 return preferredUrl
             }

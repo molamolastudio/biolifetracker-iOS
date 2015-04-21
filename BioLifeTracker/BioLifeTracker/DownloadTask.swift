@@ -51,6 +51,7 @@ class DownloadTask: CloudStorageTask {
         } else {
             if (itemId == nil) {
                 let responseArray = CloudStorage.readFromJsonAsArray(responseData!)
+                if (responseArray == nil) { completedSuccessfully = false; return }
                 assert(responseArray != nil, "Fail to translate JSON to array")
                 for item in responseArray! {
                     results.append(item as! NSDictionary)
