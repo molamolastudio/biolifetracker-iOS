@@ -31,7 +31,17 @@ class ProjectManager: NSObject, Storable {
     }
     
     func addProject(project: Project) {
-        self._projects.append(project)
+        var isReplace = false
+        for (var i = 0; i < _projects.count; i++) {
+            if _projects[i].id == project.id {
+                _projects[i] = project
+                isReplace = true
+                break
+            }
+        }
+        if !isReplace {
+            self._projects.append(project)
+        }
         saveToArchives()
     }
     
