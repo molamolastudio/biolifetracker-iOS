@@ -8,13 +8,14 @@
 
 import UIKit
 
-class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MemberPickerViewControllerDelegate, UIPopoverPresentationControllerDelegate {
+class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MemberPickerViewControllerDelegate, UIPopoverPresentationControllerDelegate, CreateSessionViewControllerDelegate {
     var delegate: ProjectHomeViewControllerDelegate? = nil
     
     @IBOutlet weak var graphView: UIView!
     @IBOutlet weak var memberView: UITableView!
     @IBOutlet weak var sessionView: UITableView!
     @IBOutlet weak var addMembersButton: UIButton!
+    @IBOutlet weak var createSessionButton: UIButton!
     
     let NOT_FOUND = -1
     
@@ -118,7 +119,31 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     @IBAction func createSessionBtnPressed() {
-        delegate?.userDidSelectCreateSession()
+        showCreateSession()
+    }
+    
+    func showCreateSession() {
+        let sessionForm = CreateSessionViewController()
+        
+        sessionForm.delegate = self
+        sessionForm.modalPresentationStyle = .Popover
+        sessionForm.preferredContentSize = CGSizeMake(400, 400)
+        
+        sessionForm.currentProject = currentProject
+        
+        let popoverController = sessionForm.popoverPresentationController!
+        popoverController.permittedArrowDirections = .Any
+        popoverController.delegate = self
+        popoverController.sourceView = createSessionButton
+        popoverController.sourceRect = CGRectMake(0, 0, 0, 0)
+        
+        presentViewController(sessionForm, animated: true, completion: nil)
+    }
+    
+    // CreateSessionViewControllerDelegate methods
+    func userDidFinishCreatingSession(session: Session) {
+        currentProject!.addSession(session)
+        sessionView.reloadData()
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS

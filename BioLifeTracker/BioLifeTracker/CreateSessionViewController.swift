@@ -26,13 +26,15 @@ class CreateSessionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        doneBtn.hidden = true
+        toggleViews()
+        
+        nameField.addTarget(self, action: Selector("toggleViews"), forControlEvents: UIControlEvents.EditingChanged)
+        intervalField.addTarget(self, action: Selector("toggleViews"), forControlEvents: UIControlEvents.EditingChanged)
     }
     
     // Hides interval field if the focal session type is chosen.
     @IBAction func booleanSwitchChanged(sender: UISwitch) {
-        intervalLabel.hidden = sender.on
-        intervalField.hidden = sender.on
+        toggleViews()
     }
     
     @IBAction func doneBtnPressed(sender: UIButton) {
@@ -40,17 +42,37 @@ class CreateSessionViewController: UIViewController {
         
         if currentProject != nil && delegate != nil && name != "" {
             
+            // If the scan session was chosen
             if booleanSwitch.on {
-                delegate!.userDidFinishCreatingSession(Session(project: currentProject!, name: name, type: .Focal))
-            } else {
+                
+                // Create a scan session
                 let interval = intervalField.text
                 if let int = interval.toInt() {
                     let session = Session(project: currentProject!, name: name, type: .Scan)
                     session.setInterval(int)
                     delegate!.userDidFinishCreatingSession(session)
                     
+                    self.dismissViewControllerAnimated(true, completion: nil)
                 }
+            } else {
+                // Create a focal session
+                delegate!.userDidFinishCreatingSession(Session(project: currentProject!, name: name, type: .Focal))
+                
+                self.dismissViewControllerAnimated(true, completion: nil)
             }
+        }
+    }
+    
+    // Toggles visibility of the done button. Hides the button if the required
+    // fields are not filled.
+    func toggleViews() {
+        intervalLabel.hidden = !booleanSwitch.on
+        intervalField.hidden = !booleanSwitch.on
+        
+        if booleanSwitch.on {
+            doneBtn.hidden = (nameField.text == "")
+        } else {
+            doneBtn.hidden = (nameField.text == "" && intervalField.text == "")
         }
     }
 }
