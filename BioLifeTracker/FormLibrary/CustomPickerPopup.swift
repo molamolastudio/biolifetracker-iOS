@@ -9,7 +9,9 @@
 import UIKit
 
 class CustomPickerPopup: FormPopupController, UITableViewDataSource, UITableViewDelegate {
-    let table = UITableView()
+
+    @IBOutlet weak var table: UITableView!
+    @IBOutlet weak var doneBtn: UIButton!
     
     let tableBorderWidth: CGFloat = 0.5
     let tableBorderColor = UIColor.lightGrayColor().CGColor
@@ -22,26 +24,21 @@ class CustomPickerPopup: FormPopupController, UITableViewDataSource, UITableView
     
     var data: [String] = []
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        table.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
-        setupTableView()
+    override func loadView() {
+        self.view = NSBundle.mainBundle().loadNibNamed("CustomPickerPopupView", owner: self, options: nil).first as! UIView
     }
     
-    override func viewDidDisappear(animated: Bool) {
-        if delegate != nil {
-            var message: String? = nil
-            if selectedIndex != nil {
-                message = data[selectedIndex!]
-            }
-            delegate!.userDidSelectValue(selectedIndex, valueAsString: message)
-        }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupTableView()
+        doneBtn.hidden = true
     }
     
     func setupTableView() {
-        table.frame = self.view.frame
         table.dataSource = self
         table.delegate = self
+        
+        table.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
         
         table.layer.borderWidth = tableBorderWidth
         table.layer.borderColor = tableBorderColor
@@ -52,6 +49,17 @@ class CustomPickerPopup: FormPopupController, UITableViewDataSource, UITableView
     func setSelectedIndex(index: Int) {
         selectedIndex = index
         table.reloadData()
+    }
+    
+    @IBAction func doneBtnPressed(sender: UIButton) {
+        if delegate != nil {
+            var message: String? = nil
+            if selectedIndex != nil {
+                message = data[selectedIndex!]
+            }
+            delegate!.userDidSelectValue(selectedIndex, valueAsString: message)
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
     }
     
     // Changes the accessory type of selected row to a checkmark.
@@ -72,7 +80,7 @@ class CustomPickerPopup: FormPopupController, UITableViewDataSource, UITableView
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         selectedIndex = indexPath.row
-        tableView.reloadData()
+        doneBtn.hidden = false
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

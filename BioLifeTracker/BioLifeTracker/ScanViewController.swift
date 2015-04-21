@@ -12,6 +12,10 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBOutlet weak var animalsView: UICollectionView!
     @IBOutlet weak var statesView: UICollectionView!
     @IBOutlet weak var notesView: UITextView!
+    @IBOutlet weak var photoView: UIImageView!
+    @IBOutlet weak var photoPickerView: UIView!
+    
+    @IBOutlet weak var photoButton: UIButton!
     @IBOutlet weak var leftArrow: UIButton!
     @IBOutlet weak var rightArrow: UIButton!
     

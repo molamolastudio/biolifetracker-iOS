@@ -144,6 +144,7 @@
 		329B293B1AD15BBF007ADC65 /* PhotoPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 329B29351AD15BBF007ADC65 /* PhotoPickerCell.xib */; };
 		329B293F1AD15E6F007ADC65 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 329B293E1AD15E6F007ADC65 /* FirstView.xib */; };
 		329B29411AD16058007ADC65 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 329B29401AD16058007ADC65 /* FirstViewController.swift */; };
+		32E426531AE6BD7F006D912D /* CustomPickerPopupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32E426521AE6BD7F006D912D /* CustomPickerPopupView.xib */; };
 		32EA4B461AE51B5C00EC7B8C /* ProjectFormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32EA4B451AE51B5C00EC7B8C /* ProjectFormView.xib */; };
 		32EA4B481AE51D7200EC7B8C /* Add User Filled-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 32EA4B471AE51D7200EC7B8C /* Add User Filled-50.png */; };
 		32EA4B4A1AE51E5200EC7B8C /* ProjectFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32EA4B491AE51E5200EC7B8C /* ProjectFormViewController.swift */; };
@@ -398,6 +399,7 @@
 		329B29351AD15BBF007ADC65 /* PhotoPickerCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoPickerCell.xib; path = FormLibrary/PhotoPickerCell.xib; sourceTree = "<group>"; };
 		329B293E1AD15E6F007ADC65 /* FirstView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FirstView.xib; sourceTree = "<group>"; };
 		329B29401AD16058007ADC65 /* FirstViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		32E426521AE6BD7F006D912D /* CustomPickerPopupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomPickerPopupView.xib; sourceTree = "<group>"; };
 		32EA4B451AE51B5C00EC7B8C /* ProjectFormView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectFormView.xib; sourceTree = "<group>"; };
 		32EA4B471AE51D7200EC7B8C /* Add User Filled-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Add User Filled-50.png"; path = "Images.xcassets/Add User Filled-50.png"; sourceTree = "<group>"; };
 		32EA4B491AE51E5200EC7B8C /* ProjectFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectFormViewController.swift; sourceTree = "<group>"; };
@@ -797,6 +799,7 @@
 				329B292A1AD15BAF007ADC65 /* DatePickerCell.swift */,
 				329B292B1AD15BAF007ADC65 /* DatePickerCell.xib */,
 				326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */,
+				32E426521AE6BD7F006D912D /* CustomPickerPopupView.xib */,
 				32423B881ADFDC8600AFA2F8 /* CustomPickerPopupCell.swift */,
 				32423B8A1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib */,
 			);
@@ -1037,6 +1040,7 @@
 				32698A721AE63DBE00D73E9D /* CreateSessionView.xib in Resources */,
 				AC95FB401AE6208A00EE8FFE /* logouticon.png in Resources */,
 				329B293B1AD15BBF007ADC65 /* PhotoPickerCell.xib in Resources */,
+				32E426531AE6BD7F006D912D /* CustomPickerPopupView.xib in Resources */,
 				AC95FB3A1AE61C6300EE8FFE /* foldericon.png in Resources */,
 				32423B911AE0093B00AFA2F8 /* FocalSessionView.xib in Resources */,
 				24034F101AE6329E00756980 /* PaddedTableView.xib in Resources */,
