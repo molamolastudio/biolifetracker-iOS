@@ -93,9 +93,69 @@ class EthogramsViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            EthogramManager.sharedInstance.removeEthograms([indexPath.row])
-            self.tableView.reloadData()
+            let ethogramManager = EthogramManager.sharedInstance
+            let projectManager = ProjectManager.sharedInstance
+            let ethogram = ethogramManager.ethograms[indexPath.row]
+            if projectManager.hasProjectUsingEthogram(ethogram) {
+                let failAlert = UIAlertController(title: "Cannot Delete", message: "Some projects in this device depend on this ethogram", preferredStyle: .Alert)
+                let actionOK = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                failAlert.addAction(actionOK)
+                presentViewController(failAlert, animated: true, completion: nil)
+                self.tableView.reloadData()
+            } else {
+                if ethogram.id == nil {
+                    ethogramManager.removeEthograms([indexPath.row])
+                    self.tableView.reloadData()
+                } else {
+                    let alert = UIAlertController(title: "Checking Dependency", message: "Checking for projects using this ethogram", preferredStyle: .Alert)
+                    presentViewController(alert, animated: true, completion: nil)
+                    let worker = CloudStorageWorker()
+                    let downloadTask = DownloadTask(classUrl: Ethogram.ClassUrl, itemId: ethogram.id!)
+                    worker.enqueueTask(downloadTask)
+                    worker.setOnFinished {
+                        if downloadTask.completedSuccessfully == true {
+                            let ethogramInfo = downloadTask.getResults()[0]
+                            let dependants = ethogramInfo["project_set"] as! [Int]
+                            if dependants.count > 0 {
+                                dispatch_async(dispatch_get_main_queue(), {
+                                    let failAlert = UIAlertController(title: "Cannot Delete", message: "Some projects in server depend on this ethogram", preferredStyle: .Alert)
+                                    let actionOK = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                                    failAlert.addAction(actionOK)
+                                    
+                                    alert.dismissViewControllerAnimated(true, completion: {
+                                        self.presentViewController(failAlert, animated: true, completion: nil)
+                                    })
+                                })
+                            } else {
+                                dispatch_async(dispatch_get_main_queue(), {
+                                    ethogramManager.removeEthograms([indexPath.row])
+                                    self.tableView.reloadData()
+                                    self.issueEthogramDeleteRequest(ethogram)
+                                })
+                            }
+                        } else {
+                            dispatch_async(dispatch_get_main_queue(), {
+                                self.tableView.reloadData()
+                                let failAlert = UIAlertController(title: "Cannot Delete", message: "The server cannot be contacted at the moment", preferredStyle: .Alert)
+                                let actionOK = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                                failAlert.addAction(actionOK)
+                                alert.dismissViewControllerAnimated(true, completion: {
+                                    self.presentViewController(failAlert, animated: true, completion: nil)
+                                })
+                            })
+                        }
+                    }
+                    worker.startExecution()
+                }
+            }
         }
+    }
+    
+    private func issueEthogramDeleteRequest(ethogram: Ethogram) {
+        let deleteTask = DeleteTask(item: ethogram)
+        let worker = CloudStorageWorker()
+        worker.enqueueTask(deleteTask)
+        worker.startExecution()
     }
 }
 

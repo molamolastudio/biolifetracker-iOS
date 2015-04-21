@@ -179,6 +179,15 @@ class ProjectManager: NSObject, Storable {
         }
         return false
     }
+    
+    func hasProjectUsingEthogram(ethogram: Ethogram) -> Bool {
+        for project in projects {
+            if project.ethogram == ethogram {
+                return true
+            }
+        }
+        return false
+    }
 }
 
 extension ProjectManager: NSCoding {
