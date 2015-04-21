@@ -65,7 +65,7 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
     func setupFormVC() {
         form.setFormData(getFormDataForNewProject())
         form.roundedCells = true
-        form.horizontalPadding = 25
+        form.cellHorizontalPadding = 7.5
         
         form.view.frame = CGRectMake(0, 0, formPlaceholder.frame.width, formPlaceholder.frame.height)
         formPlaceholder.addSubview(form.view)

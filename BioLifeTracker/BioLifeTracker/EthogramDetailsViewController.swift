@@ -55,7 +55,21 @@ class EthogramDetailsViewController: UIViewController, UITableViewDataSource, UI
         self.tableView.registerNib(UINib(nibName: nameCellIdentifier, bundle: nil), forCellReuseIdentifier: nameCellIdentifier)
         self.tableView.registerNib(UINib(nibName: stateCellIdentifier, bundle: nil), forCellReuseIdentifier: stateCellIdentifier)
         
+        // Sets the subviews to display under the navigation bar
+        self.edgesForExtendedLayout = UIRectEdge.None
+        self.extendedLayoutIncludesOpaqueBars = false
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+        // Sets rounded corners
+        self.tableView.layer.cornerRadius = 8
+        self.tableView.layer.masksToBounds = true
+        
         setupAlertController()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tableView.editing = false
     }
     
     func setupAlertController() {

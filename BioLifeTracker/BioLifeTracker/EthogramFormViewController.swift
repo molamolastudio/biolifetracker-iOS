@@ -18,7 +18,6 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
     let messageNewState = "+ Add new state"
     
     let rowHeight: CGFloat = 44
-    let horizontalPadding: CGFloat = 25
     
     let numSections = 2
     let firstSection = 0
@@ -32,7 +31,7 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
     
     var alert = UIAlertController()
     let alertTitle = "Incomplete Ethogram"
-    let alertMessage = "You must add a name for the ethogram."
+    let alertMessage = "You must add a name and behaviour state for the ethogram."
     
     // Collected data
     var ethogram = Ethogram()
@@ -52,7 +51,21 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         self.tableView.registerNib(UINib(nibName: nameCellIdentifier, bundle: nil), forCellReuseIdentifier: nameCellIdentifier)
         self.tableView.registerNib(UINib(nibName: stateCellIdentifier, bundle: nil), forCellReuseIdentifier: stateCellIdentifier)
         
+        // Sets the subviews to display under the navigation bar
+        self.edgesForExtendedLayout = UIRectEdge.None
+        self.extendedLayoutIncludesOpaqueBars = false
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+        // Sets rounded corners
+        self.tableView.layer.cornerRadius = 8
+        self.tableView.layer.masksToBounds = true
+        
         setupAlertController()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tableView.editing = false
     }
     
     func setupAlertController() {
@@ -92,9 +105,6 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         cell.textField.text = ethogram.name
         cell.textField.addTarget(self, action: Selector("nameRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
         
-        cell.rounded = true
-        cell.horizontalPadding = horizontalPadding
-        
         return cell
     }
     
@@ -104,6 +114,8 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         
         let textField = cell.textField
         textField.delegate = self
+        
+        println("refresh \(ethogram.behaviourStates)")
         
         // Set up cells that have been filled out
         if ethogram.behaviourStates.count > indexPath.row {
@@ -122,9 +134,6 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         textField.userInteractionEnabled = true
         textField.tag = indexPath.row
         cell.button.hidden = true
-        
-        cell.rounded = true
-        cell.horizontalPadding = horizontalPadding
         
         return cell
     }
@@ -150,6 +159,7 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func extraRowDidChange(sender: UITextField) {
+        println("extra row")
         let cell = sender.superview! as! BehaviourStateCell
         if sender.text != "" {
             cell.button.setTitle("Add", forState: .Normal)
@@ -187,6 +197,7 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        println("did select \(indexPath)")
         if isFirstSection(indexPath.section) {
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! SingleLineTextCell
             cell.textField.becomeFirstResponder()
@@ -214,11 +225,15 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
     
     // For deleting extra behaviour states
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return isSecondSection(indexPath.section) && !isExtraRow(indexPath.row)
+        return isSecondSection(indexPath.section)
     }
     
     func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        return UITableViewCellEditingStyle.Delete
+        if isSecondSection(indexPath.section) && !isExtraRow(indexPath.row) {
+            return UITableViewCellEditingStyle.Delete
+        } else {
+            return UITableViewCellEditingStyle.None
+        }
     }
     
     // If the cell is deleted, delete the behaviour state related to it.
@@ -228,7 +243,6 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
                 
                 if !isExtraRow(indexPath.row) {
                     ethogram.removeBehaviourState(indexPath.row)
-                    
                     refreshView()
                 }
             }

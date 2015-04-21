@@ -37,6 +37,15 @@ class ScanSessionViewController: UIViewController, UITableViewDataSource, UITabl
         
         self.tableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
         
+        // Sets the subviews to display under the navigation bar
+        self.edgesForExtendedLayout = UIRectEdge.None
+        self.extendedLayoutIncludesOpaqueBars = false
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+        // Sets rounded corners
+        self.tableView.layer.cornerRadius = 8
+        self.tableView.layer.masksToBounds = true
+        
         // Sets up the date formatter for converting dates to strings
         formatter.dateStyle = .MediumStyle
         formatter.timeStyle = .ShortStyle
@@ -47,6 +56,11 @@ class ScanSessionViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tableView.editing = false
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS

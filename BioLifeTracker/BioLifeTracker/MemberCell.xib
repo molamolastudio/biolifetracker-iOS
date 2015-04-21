@@ -11,13 +11,16 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="khC-Xz-SO6">
-                    <rect key="frame" x="424" y="285" width="86" height="30"/>
+                    <rect key="frame" x="400" y="285" width="110" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="110" id="pE3-hG-ct1"/>
+                    </constraints>
                     <state key="normal" title="Make Admin">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SuJ-8M-kFl">
-                    <rect key="frame" x="15" y="290" width="42" height="21"/>
+                    <rect key="frame" x="15" y="290" width="380" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                     <nil key="highlightedColor"/>
@@ -38,6 +41,7 @@
             <constraints>
                 <constraint firstItem="PVn-Pa-YQF" firstAttribute="leading" secondItem="khC-Xz-SO6" secondAttribute="trailing" constant="15" id="DtO-WQ-gbI"/>
                 <constraint firstAttribute="centerY" secondItem="SuJ-8M-kFl" secondAttribute="centerY" id="R6A-AH-ovF"/>
+                <constraint firstItem="khC-Xz-SO6" firstAttribute="leading" secondItem="SuJ-8M-kFl" secondAttribute="trailing" constant="5" id="Z9S-Od-Wnx"/>
                 <constraint firstItem="khC-Xz-SO6" firstAttribute="centerY" secondItem="SuJ-8M-kFl" secondAttribute="centerY" id="az8-IA-pcw"/>
                 <constraint firstItem="SuJ-8M-kFl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="i3S-FC-b8N"/>
                 <constraint firstAttribute="trailing" secondItem="PVn-Pa-YQF" secondAttribute="trailing" constant="15" id="nAy-Oi-NxX"/>

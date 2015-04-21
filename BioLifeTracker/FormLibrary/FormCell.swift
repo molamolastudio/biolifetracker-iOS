@@ -17,8 +17,6 @@ class FormCell: UITableViewCell {
     var horizontalPadding: CGFloat = 0
     var verticalPadding: CGFloat = 0
     
-    var updatedFrame = CGRect()
-    
     func getValueFromCell() -> AnyObject? {
         return nil
     }
@@ -30,15 +28,13 @@ class FormCell: UITableViewCell {
         
         // Apply padding
         if !sizeSet {
-            updatedFrame = CGRectMake(
+            self.frame = CGRectMake(
                 self.frame.origin.x + horizontalPadding,
                 self.frame.origin.y + verticalPadding,
                 self.frame.width - 2 * horizontalPadding,
                 self.frame.height - 2 * verticalPadding)
             sizeSet = true
         }
-        
-        self.frame = updatedFrame
         
         if rounded {
             let frame = self.frame
