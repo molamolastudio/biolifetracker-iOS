@@ -71,6 +71,16 @@ class ProjectManager: NSObject, Storable {
         saveToArchives()
     }
     
+    // Returns true if the given ethogram is being used in a project.
+    func isEthogramInProjects(ethogram: Ethogram) -> Bool {
+        for p in ProjectManager.sharedInstance.projects {
+            if p.ethogram == ethogram {
+                return true
+            }
+        }
+        return false
+    }
+    
     /**************Saving to Archives****************/
     func saveToArchives() {
         let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]

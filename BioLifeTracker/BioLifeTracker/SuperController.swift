@@ -178,7 +178,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     func showLoginPage() {
         freshLogin = true
-        let vc = FirstViewController(nibName: "FirstView", bundle: nil)
+        let vc = FirstViewController()
         vc.modalPresentationStyle = .FullScreen
         self.presentViewController(vc, animated: true, completion: nil)
     }
@@ -186,7 +186,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func showNewProjectPage() {
         // If there are ethograms saved, present the new project page
         if !EthogramManager.sharedInstance.ethograms.isEmpty {
-            let vc = ProjectFormViewController(nibName: "ProjectFormView", bundle: nil)
+            let vc = ProjectFormViewController()
             
             vc.title = "New Project"
             
@@ -201,7 +201,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showProjectsPage() {
-        let vc = ProjectsViewController(style: UITableViewStyle.Grouped)
+        let vc = ProjectsViewController()
         
         vc.delegate = self
         vc.title = "Projects"
@@ -213,7 +213,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showProjectHomePage() {
-        let vc = ProjectHomeViewController(nibName: "ProjectHomeView", bundle: nil)
+        let vc = ProjectHomeViewController()
         
         vc.delegate = self
         vc.title = currentProject!.name
@@ -227,7 +227,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showEthogramsPage() {
-        let vc = EthogramsViewController(style: UITableViewStyle.Grouped)
+        let vc = EthogramsViewController()
         
         vc.delegate = self
         vc.title = "Ethograms"
@@ -281,7 +281,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showNewIndividualPage() {
-        let vc = FormViewController(style: UITableViewStyle.Grouped)
+        let vc = FormViewController()
         
         vc.title = "New Individual"
         vc.setFormData(getFormDataForNewIndividual())
@@ -302,7 +302,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showFocalSessionPage(session: Session) {
-        let vc = FocalSessionViewController(nibName: "FocalSessionView", bundle: nil)
+        let vc = FocalSessionViewController()
         
         vc.title = session.name
         vc.currentSession = session
@@ -331,7 +331,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showScanPage(session: Session, timestamp: NSDate) {
-        let vc = ScanViewController(nibName: "ScanView", bundle: nil)
+        let vc = ScanViewController()
         
         let formatter = NSDateFormatter()
         formatter.dateStyle = .MediumStyle
@@ -356,7 +356,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showCreateScanPage() {
-        let vc = ScanViewController(nibName: "ScanView", bundle: nil)
+        let vc = ScanViewController()
         
         let formatter = NSDateFormatter()
         formatter.dateStyle = .MediumStyle
@@ -373,7 +373,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     func showAnalysisPage() {
         if !ProjectManager.sharedInstance.projects.isEmpty {
-            let vc = GraphAnalysisViewController(nibName: "GraphAnalysisView", bundle: nil)
+            let vc = GraphAnalysisViewController()
             
             vc.title = "Analyse"
             
@@ -385,16 +385,17 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showAnalysisPageWithProject(project: Project) {
-        let vc = GraphAnalysisViewController(nibName: "GraphAnalysisView", bundle: nil)
+        let vc = GraphAnalysisViewController()
         
         vc.title = "Analyse"
         vc.setProject(project)
         
-        detailNav.setViewControllers([vc], animated: false)
+        // Allow user to return to the selected project
+        detailNav.pushViewController(vc, animated: true)
     }
     
     func showSettingsPage() {
-        let vc = FormViewController(style: UITableViewStyle.Grouped)
+        let vc = FormViewController()
         
         vc.title = "Settings"
         vc.setFormData(getFormDataForSettings())
@@ -518,7 +519,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         let alertMessage = "Uploading your project..."
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
         self.presentViewController(alert, animated: true, completion: nil)
-
+        
         let uploadTask = UploadTask(item: project)
         dispatch_async(CloudStorage.networkThread, {
             uploadTask.execute()

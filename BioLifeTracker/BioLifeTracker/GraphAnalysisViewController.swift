@@ -25,6 +25,10 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
     var AliceBlue = UIColor(red: 228.0/255.0, green: 241.0/255.0, blue: 254.0/255.0, alpha: 1)
     var HummingBird = UIColor(red: 197.0/255.0, green: 239.0/255.0, blue: 247.0/255.0, alpha: 1)
     
+    override func loadView() {
+        self.view = NSBundle.mainBundle().loadNibNamed("GraphAnalysisView", owner: self, options: nil).first as! UIView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.background.backgroundColor = UIColor.whiteColor()
@@ -48,7 +52,7 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
     }
     
     func showGraphsView() {
-        graphsVC = GraphsViewController(nibName: "GraphsView", bundle: nil)
+        graphsVC = GraphsViewController()
         graphsVC.setProject(currentProject)
         graphsVC.toggleGraph(.HourPlot)
         graphsVC.view.frame = CGRectMake(0, 0, graphsView.frame.width, graphsView.frame.height)

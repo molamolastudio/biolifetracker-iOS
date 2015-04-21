@@ -8,7 +8,9 @@
 
 import UIKit
 
-class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate {
+class EthogramDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+    
+    @IBOutlet weak var tableView: UITableView!
     
     let nameCellIdentifier = "SingleLineTextCell"
     let stateCellIdentifier = "BehaviourStateCell"
@@ -32,13 +34,21 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
     let alertMessage = "You must add a name for the ethogram."
     
     var editable = false
+    var deletionEnabled = true
     
     // Collected data
     var originalEthogram: Ethogram? = nil
     var ethogram = Ethogram()
     
+    override func loadView() {
+        self.view = NSBundle.mainBundle().loadNibNamed("PaddedTableView", owner: self, options: nil).first as! UIView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
         
         self.tableView.rowHeight = rowHeight
         
@@ -62,6 +72,9 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
     // Copies the data of the original ethogram into a temporary ethogram for editing.
     func getData() {
         if originalEthogram != nil {
+            // Enables deletion if this ethogram is not being used
+            deletionEnabled = !ProjectManager.sharedInstance.isEthogramInProjects(originalEthogram!)
+            println(ProjectManager.sharedInstance.isEthogramInProjects(originalEthogram!))
             // Copy over original ethogram
             ethogram = Ethogram()
             for s in originalEthogram!.behaviourStates {
@@ -90,7 +103,7 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == firstSection {
             return getCellForFirstSection(indexPath)
         } else {
@@ -107,6 +120,7 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
         cell.label.text = "Name"
         cell.textField.text = ethogram.name
         cell.textField.addTarget(self, action: Selector("nameRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
+        
         return cell
     }
     
@@ -195,7 +209,7 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
         refreshView()
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if isFirstSection(indexPath.section) {
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! SingleLineTextCell
             cell.textField.becomeFirstResponder()
@@ -205,11 +219,11 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
         }
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sectionTitles[section]
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFirstSection(section) {
             return firstSectionNumRows
         } else {
@@ -222,12 +236,12 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
         }
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return numSections
     }
     
     // For deleting extra behaviour states
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         if editable {
             return isSecondSection(indexPath.section) && !isExtraRow(indexPath.row)
         } else {
@@ -235,16 +249,21 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
         }
     }
     
-    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        return UITableViewCellEditingStyle.Delete
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        if deletionEnabled {
+            return UITableViewCellEditingStyle.Delete
+        } else {
+            return UITableViewCellEditingStyle.None
+        }
     }
     
     // If the cell is deleted, delete the behaviour state related to it.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             if let cell = tableView.cellForRowAtIndexPath(indexPath) {
                 
                 if !isExtraRow(indexPath.row) {
+                    
                     ethogram.removeBehaviourState(indexPath.row)
                     
                     refreshView()

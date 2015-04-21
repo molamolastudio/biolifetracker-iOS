@@ -48,6 +48,10 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     var newObservations = [Individual: [Observation]]()
     var states = [BehaviourState]()
     
+    override func loadView() {
+        self.view = NSBundle.mainBundle().loadNibNamed("FocalSessionView", owner: self, options: nil).first as! UIView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         hideObservationSection()
@@ -86,18 +90,18 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         self.automaticallyAdjustsScrollViewInsets = false
         
         // Sets the rounded corners for the views
-        observationsView.layer.cornerRadius = 8;
-        observationsView.layer.masksToBounds = true;
-        individualsView.layer.cornerRadius = 8;
-        individualsView.layer.masksToBounds = true;
-        statesView.layer.cornerRadius = 8;
-        statesView.layer.masksToBounds = true;
-        photoView.layer.cornerRadius = 8;
-        photoView.layer.masksToBounds = true;
-        photoOverlayView.layer.cornerRadius = 8;
-        photoOverlayView.layer.masksToBounds = true;
-        notesView.layer.cornerRadius = 8;
-        notesView.layer.masksToBounds = true;
+        observationsView.layer.cornerRadius = 8
+        observationsView.layer.masksToBounds = true
+        individualsView.layer.cornerRadius = 8
+        individualsView.layer.masksToBounds = true
+        statesView.layer.cornerRadius = 8
+        statesView.layer.masksToBounds = true
+        photoView.layer.cornerRadius = 8
+        photoView.layer.masksToBounds = true
+        photoOverlayView.layer.cornerRadius = 8
+        photoOverlayView.layer.masksToBounds = true
+        notesView.layer.cornerRadius = 8
+        notesView.layer.masksToBounds = true
     }
     
     func setupWeatherController() {

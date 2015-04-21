@@ -12,11 +12,14 @@ class MenuViewController: UITableViewController {
     
     var delegate: MenuViewControllerDelegate? = nil
     
-    let cellReuseIdentifier = "SingleLineTextCell"
+    let cellReuseIdentifier = "MenuCell"
     
     let projectSection = ["Projects", "Ethograms", "Analyse"]
+    let projectSectionIcons = ["foldericon", "tableicon", "graphicon"]
     let settingsSection = ["Settings"]
+    let settingsSectionIcons = ["gearicon"]
     let socialSectionLoggedIn = ["Logout"]
+    let socialSectionLoggedInIcons = ["logouticon"]
     
     var user: User = UserAuthService.sharedInstance.user
     
@@ -24,33 +27,34 @@ class MenuViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.tableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
+
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SingleLineTextCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! UITableViewCell
         
-        cell.rounded = false
-        cell.textField.text = ""
+        var icon: UIImageView
         
         switch indexPath.section {
         case 0:
-            cell.label.text = projectSection[indexPath.row]
-            break
+            cell.textLabel!.text = projectSection[indexPath.row]
+            var image: UIImage? = nil
+            image = UIImage(named: projectSectionIcons[indexPath.row])
+            cell.imageView!.image = image
         case 1:
-            cell.label.text = settingsSection[indexPath.row]
-            break
+            cell.textLabel!.text = settingsSection[indexPath.row]
+            var image: UIImage? = nil
+            image = UIImage(named: settingsSectionIcons[indexPath.row])
+            cell.imageView!.image = image
         case 2:
-            
-            cell.label.text = socialSectionLoggedIn[indexPath.row]
-            
-            break
+            cell.textLabel!.text = socialSectionLoggedIn[indexPath.row]
+            var image: UIImage? = nil
+            image = UIImage(named: socialSectionLoggedInIcons[indexPath.row])
+            cell.imageView!.image = image
         default:
             break
         }
-        
-        cell.textField.enabled = false
         
         return cell
     }

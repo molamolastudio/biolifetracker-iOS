@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BehaviourStateCell: UITableViewCell {
+class BehaviourStateCell: FormCell {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var button: UIButton!
 }

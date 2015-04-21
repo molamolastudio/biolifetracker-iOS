@@ -19,11 +19,15 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
     
     let numSections = 1
     
-    let form = FormViewController(style: UITableViewStyle.Grouped)
+    let form = FormViewController()
     
     var project: Project? = nil
     var admins: [User] = []
     var members: [User] = []
+    
+    override func loadView() {
+        self.view = NSBundle.mainBundle().loadNibNamed("ProjectFormView", owner: self, options: nil).first as! UIView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,12 +64,13 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
     
     func setupFormVC() {
         form.setFormData(getFormDataForNewProject())
-        form.cellHorizontalPadding = 25
         form.roundedCells = true
-        form.tableView.scrollEnabled = false
+        form.horizontalPadding = 25
         
         form.view.frame = CGRectMake(0, 0, formPlaceholder.frame.width, formPlaceholder.frame.height)
         formPlaceholder.addSubview(form.view)
+        
+        form.tableView.scrollEnabled = false
     }
     
     func getFormDataForNewProject() -> FormFieldData {
@@ -166,7 +171,12 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        return UITableViewCellEditingStyle.Delete
+        // Do not allow deletion of self
+        if indexPath.row == 0 {
+            return UITableViewCellEditingStyle.None
+        } else {
+            return UITableViewCellEditingStyle.Delete
+        }
     }
     
     // If the cell is deleted, delete the project.
@@ -187,7 +197,7 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
     // Selectors for buttons
     func removeAdmin(sender: UIButton) {
         let index = sender.tag - 1
-
+        
         let member = admins[index]
         admins.removeAtIndex(index)
         members.append(member)
@@ -197,7 +207,7 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
     
     func makeAdmin(sender: UIButton) {
         let index = sender.tag - admins.count - 1
-
+        
         let member = members[index]
         members.removeAtIndex(index)
         admins.append(member)
