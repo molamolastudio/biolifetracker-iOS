@@ -334,7 +334,7 @@ class Project: BiolifeModel, Storable {
         enumerator = objectAdmins.objectEnumerator()
         self._admins = Array<User>()
         while true {
-            let admin = enumerator.nextObject() as! User?
+            let admin = enumerator.nextObject() as? User
             if admin == nil {
                 break
             } else {
@@ -346,7 +346,7 @@ class Project: BiolifeModel, Storable {
         enumerator = objectMembers.objectEnumerator()
         self._members = Array<User>()
         while true {
-            let user = enumerator.nextObject() as! User?
+            let user = enumerator.nextObject() as? User
             if user == nil {
                 break
             } else {
@@ -359,7 +359,7 @@ class Project: BiolifeModel, Storable {
         self._sessions = Array<Session>()
         var session: Session?
         while true {
-            session = enumerator.nextObject() as! Session?
+            session = enumerator.nextObject() as? Session
             if session == nil {
                 break
             }
@@ -371,7 +371,7 @@ class Project: BiolifeModel, Storable {
         self._individuals = Array<Individual>()
         var individual: Individual?
         while true {
-            individual = enumerator.nextObject() as! Individual?
+            individual = enumerator.nextObject() as? Individual
             if individual == nil {
                 break
             }
