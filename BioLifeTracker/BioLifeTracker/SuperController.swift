@@ -401,17 +401,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         detailNav.pushViewController(vc, animated: true)
     }
     
-    func showSettingsPage() {
-        let vc = FormViewController()
-        
-        vc.title = "Settings"
-        vc.setFormData(getFormDataForSettings())
-        vc.cellHorizontalPadding = 25
-        vc.roundedCells = true
-        
-        detailNav.setViewControllers([vc], animated: false)
-    }
-    
     func clearNavigationStack() {
         detailNav.popToRootViewControllerAnimated(false)
     }
@@ -430,14 +419,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
         data.addPickerCell(section: 0, label: "Locations", pickerValues: ["Location 1", "Location 2"], isCustomPicker: true)
         data.addPhotoPickerCell(section: 0, label: "Photos")
-        return data
-    }
-    
-    func getFormDataForSettings() -> FormFieldData {
-        let data = FormFieldData(sections: 1)
-        
-        // ANDHIEKA
-        
         return data
     }
     
@@ -563,11 +544,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func userDidSelectAnalysis() {
         dismissMenuView()
         showAnalysisPage()
-    }
-    
-    func userDidSelectSettings() {
-        dismissMenuView()
-        showSettingsPage()
     }
     
     func userDidSelectLogout() {
