@@ -102,51 +102,63 @@ class Project: BiolifeModel, Storable {
     }
     
     /********************Admins*******************/
-
-    func addAdmins(admins: [User]) {
-        self._admins += admins
-        // Admins are naturally members of a project
-        self._members += admins
-        updateProject()
+    //
+    /// Adds admin to the project if the admin is not previously contained
+    /// in the project. Otherwise, does nothing. Also adds admin as member
+    /// if he is not yet a member.
+    func addAdmin(admin: User) {
+        if !contains(admins, admin) {
+            _admins.append(admin)
+            updateProject()
+        }
+        addMember(admin) // admin must also be a member
+        assert(contains(members, admin), "Admin must first be the member of a project")
+        assert(contains(admins, admin))
     }
     
-    func removeAdmins(adminIndexes: [Int]) {
-        var decreasingIndexes = sorted(adminIndexes) { $0 > $1 } // sort indexes in non-increasing order
-        var prev = -1
-        for (var i = 0; i < decreasingIndexes.count; i++) {
-            let index = decreasingIndexes[i]
-            if prev == index {
-                continue;
-            } else {
-                prev = index
-            }
-            self._admins.removeAtIndex(index)
-        }
+    func removeAdmin(admin: User) {
+        _admins = _admins.filter { $0 != admin }
         updateProject()
+        assert(!contains(admins, admin))
     }
     
     /********************Members*******************/
-    func addMembers(members: [User]) {
-        self._members += members
-        updateProject()
+    //
+    /// Adds member to the project if the member is not previously contained
+    /// in the project. Otherwise, does nothing.
+    func addMember(member: User) {
+        if !contains(_members, member) {
+            _members.append(member)
+            updateProject()
+        }
+        assert(contains(members, member))
     }
     
-    func removeMembers(memberIndexes: [Int]) {
-        var decreasingIndexes = sorted(memberIndexes) { $0 > $1 } // sort indexes in non-increasing order
-        var prev = -1
-        for (var i = 0; i < decreasingIndexes.count; i++) {
-            let index = decreasingIndexes[i]
-            if prev == index {
-                continue;
-            } else {
-                prev = index
-            }
-            self._members.removeAtIndex(index)
-        }
+    func removeMember(member: User) {
+        _members = _members.filter { $0 != member }
         updateProject()
+        assert(!contains(members, member))
     }
     
     /******************Session*******************/
+    // new api
+    
+    /// Adds session to the project if the session is not previously contained
+    /// in the project. Otherwise, does nothing.
+    func addSession(session: Session) {
+        _sessions.append(session)
+        updateProject()
+        assert(contains(sessions, session))
+    }
+    
+    /// Remove session from the project if the session is currently inside the 
+    /// project. Otherwise, does nothing.
+    func removeSession(session: Session) {
+        _sessions = _sessions.filter { $0 != session }
+        updateProject()
+    }
+    
+    // old api
     func addSessions(sessions: [Session]) {
         self._sessions += sessions
         updateProject()

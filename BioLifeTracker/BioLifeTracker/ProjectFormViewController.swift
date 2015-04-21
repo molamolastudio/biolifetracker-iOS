@@ -53,8 +53,9 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
             if let index = values[1] as? Int {
                 let project = Project(name: name, ethogram: EthogramManager.sharedInstance.ethograms[index])
                 
-                project.addAdmins(admins)
-                project.addMembers(admins + members)
+                admins.map { project.addMember($0) }
+                admins.map { project.addAdmin($0) }
+                members.map { project.addMember($0) }
                 
                 return project
             }

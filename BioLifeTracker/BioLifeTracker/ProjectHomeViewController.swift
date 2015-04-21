@@ -113,14 +113,12 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     
     // MemberPickerViewControllerDelegate methods
     func userDidSelectMember(member: User) {
-        currentProject!.addMembers([member])
+        currentProject?.addMember(member)
         memberView.reloadData()
     }
     
     @IBAction func createSessionBtnPressed() {
-        if delegate != nil {
-            delegate!.userDidSelectCreateSession()
-        }
+        delegate?.userDidSelectCreateSession()
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS
@@ -223,31 +221,15 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     func removeAdmin(sender: UIButton) {
         let members = currentProject!.members
         let member = members[sender.tag]
-        let index = getAdminIndexForMember(member)
-        
-        if index != NOT_FOUND {
-            currentProject!.removeAdmins([index])
-        }
+        currentProject?.removeAdmin(member)
         memberView.reloadData()
     }
     
     func makeAdmin(sender: UIButton) {
         let members = currentProject!.members
         let member = members[sender.tag]
-        
-        currentProject!.addAdmins([member])
-        
+        currentProject?.addAdmin(member)
         memberView.reloadData()
     }
-    
-    // Helper methods
-    func getAdminIndexForMember(member: User) -> Int {
-        let admins = currentProject!.admins
-        for (var i = 0; i < admins.count; i++) {
-            if member == admins[i] {
-                return i
-            }
-        }
-        return NOT_FOUND
-    }
+
 }
