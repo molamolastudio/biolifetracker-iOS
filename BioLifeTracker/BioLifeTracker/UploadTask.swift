@@ -17,7 +17,7 @@ import Foundation
 /// of POST request.
 class UploadTask: CloudStorageTask {
     
-    var serverUrl = NSURL(string: Constants.WebServer.serverUrl)!
+    var serverUrl = NSURL(string: CloudStorage.serverUrl)!
     var item: CloudStorable
     var itemStack = [CloudStorable]()
     var completedSuccessfully: Bool?

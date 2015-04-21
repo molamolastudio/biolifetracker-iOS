@@ -97,7 +97,7 @@ class UserAuthService {
         onCompletion: (() -> ())?) {
             
         dispatch_async(CloudStorage.networkThread, {
-            let destinationUrl = NSURL(string: Constants.WebServer.serverUrl)!
+            let destinationUrl = NSURL(string: CloudStorage.serverUrl)!
                 .URLByAppendingPathComponent("auth")
                 .URLByAppendingPathComponent(provider)
                 .URLByAppendingSlash()
@@ -125,7 +125,7 @@ class UserAuthService {
             if self.accessToken == nil {
                 self.tryLoadTokenFromDisk()
             }
-            let destinationUrl = NSURL(string: Constants.WebServer.serverUrl)!
+            let destinationUrl = NSURL(string: CloudStorage.serverUrl)!
                 .URLByAppendingPathComponent("auth")
                 .URLByAppendingPathComponent("current_user")
                 .URLByAppendingSlash()

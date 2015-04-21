@@ -11,7 +11,7 @@ import Foundation
 /// Prepares a task to download item(s) from the server. After execution,
 /// you can retrieve the results using the provided getResults() function.
 class DownloadTask: CloudStorageTask {
-    private let serverUrl = NSURL(string: Constants.WebServer.serverUrl)!
+    private let serverUrl = NSURL(string: CloudStorage.serverUrl)!
     
     private var classUrl: String
     private var itemId: Int?

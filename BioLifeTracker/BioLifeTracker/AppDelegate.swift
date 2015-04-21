@@ -22,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         initialViewController = SuperController()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.rootViewController = initialViewController
-        
         window!.makeKeyAndVisible()
 
         return true
