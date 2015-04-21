@@ -226,16 +226,16 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
         
         // Toggle visibility of arrows
-        if selectedIndex == 0 {
+        if observations.count == 1 {
+            leftArrow.hidden = true
+            rightArrow.hidden = true
+        }else if selectedIndex == 0 {
             leftArrow.hidden = true
             rightArrow.hidden = false
         } else if selectedIndex == observations.count - 1 {
             leftArrow.hidden = false
             rightArrow.hidden = true
-        } else if observations.count == 1 {
-            leftArrow.hidden = true
-            rightArrow.hidden = true
-        } else {
+        } else  {
             leftArrow.hidden = false
             rightArrow.hidden = false
         }

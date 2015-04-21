@@ -121,6 +121,9 @@
 		326773C51ACD7C9A00899745 /* MenuViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773C41ACD7C9A00899745 /* MenuViewControllerDelegate.swift */; };
 		32698A651AE60C1100D73E9D /* PaddedTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32698A641AE60C1100D73E9D /* PaddedTableView.xib */; };
 		32698A691AE6171C00D73E9D /* FormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32698A681AE6171C00D73E9D /* FormView.xib */; };
+		32698A701AE63D0900D73E9D /* CreateSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32698A6F1AE63D0900D73E9D /* CreateSessionViewController.swift */; };
+		32698A721AE63DBE00D73E9D /* CreateSessionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32698A711AE63DBE00D73E9D /* CreateSessionView.xib */; };
+		32698A741AE6423100D73E9D /* CreateSessionViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32698A731AE6423100D73E9D /* CreateSessionViewControllerDelegate.swift */; };
 		32850BE21AB9625500C49D33 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E77F1AAEDB03006F374D /* ProjectsViewController.swift */; };
 		32850BE41AB9625500C49D33 /* EthogramFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */; };
 		32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A211AB1789100578C42 /* EthogramsViewController.swift */; };
@@ -370,6 +373,9 @@
 		326773C41ACD7C9A00899745 /* MenuViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewControllerDelegate.swift; sourceTree = "<group>"; };
 		32698A641AE60C1100D73E9D /* PaddedTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaddedTableView.xib; sourceTree = "<group>"; };
 		32698A681AE6171C00D73E9D /* FormView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormView.xib; sourceTree = "<group>"; };
+		32698A6F1AE63D0900D73E9D /* CreateSessionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateSessionViewController.swift; sourceTree = "<group>"; };
+		32698A711AE63DBE00D73E9D /* CreateSessionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateSessionView.xib; sourceTree = "<group>"; };
+		32698A731AE6423100D73E9D /* CreateSessionViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateSessionViewControllerDelegate.swift; sourceTree = "<group>"; };
 		32880DBD1AE5342F009A3B31 /* MemberPickerViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberPickerViewControllerDelegate.swift; sourceTree = "<group>"; };
 		329B29281AD15BAF007ADC65 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonCell.swift; path = FormLibrary/ButtonCell.swift; sourceTree = "<group>"; };
 		329B29291AD15BAF007ADC65 /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ButtonCell.xib; path = FormLibrary/ButtonCell.xib; sourceTree = "<group>"; };
@@ -682,6 +688,9 @@
 				32EA4B511AE5310000EC7B8C /* MemberPickerViewController.swift */,
 				32880DBD1AE5342F009A3B31 /* MemberPickerViewControllerDelegate.swift */,
 				32EA4B4F1AE530EE00EC7B8C /* MemberPickerView.xib */,
+				32698A6F1AE63D0900D73E9D /* CreateSessionViewController.swift */,
+				32698A731AE6423100D73E9D /* CreateSessionViewControllerDelegate.swift */,
+				32698A711AE63DBE00D73E9D /* CreateSessionView.xib */,
 				32423B8C1AE0023400AFA2F8 /* FocalSessionViewController.swift */,
 				32423B901AE0093B00AFA2F8 /* FocalSessionView.xib */,
 				323CBD971ADD624D00A7C970 /* ScanSessionViewController.swift */,
@@ -1008,6 +1017,7 @@
 				32EA4B461AE51B5C00EC7B8C /* ProjectFormView.xib in Resources */,
 				329B29371AD15BBF007ADC65 /* DefaultPickerCell.xib in Resources */,
 				AC530C6F1AE4F23C008E1A17 /* bg_vertical.png in Resources */,
+				32698A721AE63DBE00D73E9D /* CreateSessionView.xib in Resources */,
 				AC95FB401AE6208A00EE8FFE /* logouticon.png in Resources */,
 				329B293B1AD15BBF007ADC65 /* PhotoPickerCell.xib in Resources */,
 				AC95FB3A1AE61C6300EE8FFE /* foldericon.png in Resources */,
@@ -1100,6 +1110,7 @@
 				2458F4D11AE160EC0006DFC7 /* BLTProjectDeserializer.swift in Sources */,
 				242C6E071AC80F050024ECEF /* BiolifeModel.swift in Sources */,
 				32423B891ADFDC8600AFA2F8 /* CustomPickerPopupCell.swift in Sources */,
+				32698A701AE63D0900D73E9D /* CreateSessionViewController.swift in Sources */,
 				782EEB591AE53DA200DB0384 /* ColorDefinition.swift in Sources */,
 				32423B871ADFDA3900AFA2F8 /* FormPopupController.swift in Sources */,
 				7838E7601AE3501C007C2562 /* GraphAnalysisViewController.swift in Sources */,
@@ -1117,6 +1128,7 @@
 				32423B9B1AE2B1E600AFA2F8 /* CircleWithLabelCell.swift in Sources */,
 				785B8C891AE5E65800A204E0 /* AnalysisTableViewCell.swift in Sources */,
 				32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */,
+				32698A741AE6423100D73E9D /* CreateSessionViewControllerDelegate.swift in Sources */,
 				240FEF051AD60ACF000FD9F3 /* BiolifeDateFormatter.swift in Sources */,
 				32423B831ADF768600AFA2F8 /* BehaviourStateCell.swift in Sources */,
 				3205E7481AAED9F9006F374D /* AppDelegate.swift in Sources */,
