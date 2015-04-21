@@ -22,10 +22,16 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     let circleCellIdentifier = "CircleCell"
     let circleLabelCellIdentifier = "CircleWithLabelCell"
     
-    let animalsDefaultColor = UIColor.lightGrayColor()
-    let animalsSelectedColor = UIColor.greenColor()
-    let statesDefaultColor = UIColor.lightGrayColor()
-    let statesSelectedColor = UIColor.greenColor()
+//    let animalsDefaultColor = UIColor.lightGrayColor()
+    let animalsSelectedColor = UIColor.whiteColor()
+//    let statesDefaultColor = UIColor.lightGrayColor()
+    let statesSelectedColor = UIColor.whiteColor()
+    
+    // Pretty colours for the pretty circle cells. :D
+    // Returns an array of fifty shades of green
+    let animalsColors = randomColorsCount(50, hue: .Green, luminosity: .Light)
+    let statesColors = randomColorsCount(50, hue: .Blue, luminosity: .Light)
+    
     
     var editable = false
     
@@ -143,7 +149,9 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     func getCellForAnimalsView(indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = animalsView.dequeueReusableCellWithReuseIdentifier(circleCellIdentifier, forIndexPath: indexPath) as! CircleCell
         
-        cell.backgroundColor = animalsDefaultColor
+        var num = arc4random_uniform(UInt32(animalsColors.count))
+        var chosenColor = animalsColors[Int(num)]
+        cell.backgroundColor = chosenColor
         
         if isExtraRow(indexPath.row) {
             cell.label.text = "+"
@@ -172,7 +180,9 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         if indexPath.row == selectedState {
             cell.circleView.backgroundColor = statesSelectedColor
         } else {
-            cell.circleView.backgroundColor = statesDefaultColor
+            var num = arc4random_uniform(UInt32(statesColors.count))
+            var chosenColor = statesColors[Int(num)]
+            cell.circleView.backgroundColor = chosenColor
         }
         
         cell.userInteractionEnabled = editable

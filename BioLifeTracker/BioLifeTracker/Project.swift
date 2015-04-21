@@ -135,9 +135,11 @@ class Project: BiolifeModel, Storable {
     }
     
     func removeMember(member: User) {
+        removeAdmin(member) // non-member can't be admin
         _members = _members.filter { $0 != member }
         updateProject()
         assert(!contains(members, member))
+        assert(!contains(admins, member))
     }
     
     /******************Session*******************/

@@ -30,6 +30,15 @@ class EthogramManager: NSObject, Storable {
         saveToArchives()
     }
     
+    func hasEthogramWithId(id: Int) -> Bool {
+        for ethogram in ethograms {
+            if ethogram.id == id {
+                return true
+            }
+        }
+        return false
+    }
+    
     func addEthogram(ethogram: Ethogram) {
         self._ethograms.append(ethogram)
         saveToArchives()
