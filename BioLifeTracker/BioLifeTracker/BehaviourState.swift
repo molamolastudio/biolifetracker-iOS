@@ -74,7 +74,7 @@ class BehaviourState: BiolifeModel {
     required init(coder aDecoder: NSCoder) {
         self._name = aDecoder.decodeObjectForKey("name") as! String
         self._information = aDecoder.decodeObjectForKey("information") as! String
-        self._photo = aDecoder.decodeObjectForKey("photo") as! Photo?
+        self._photo = aDecoder.decodeObjectForKey("photo") as? Photo
         super.init(coder: aDecoder)
     }
     

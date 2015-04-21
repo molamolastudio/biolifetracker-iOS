@@ -105,10 +105,8 @@ class ProjectStub {
         setDates()
         createObservations()
         
-        project.addMembers([user1, user2, user3, user4])
-        project.addSessions([session1, session2, session3, session4, session5])
-        
-        
+        [user1, user2, user3, user4].map { self.project.addMember($0) }
+        [session1, session2, session3, session4, session5].map { self.project.addSession($0) }
     }
     
     func initialiseEthogram() {

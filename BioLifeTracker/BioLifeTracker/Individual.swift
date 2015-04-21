@@ -80,13 +80,13 @@ class Individual: BiolifeModel {
     required init(coder aDecoder: NSCoder) {
         var enumerator: NSEnumerator
         self._label = aDecoder.decodeObjectForKey("label") as! String
-        self._photo = aDecoder.decodeObjectForKey("photo") as! Photo?
+        self._photo = aDecoder.decodeObjectForKey("photo") as? Photo
         
         let objectTags: AnyObject = aDecoder.decodeObjectForKey("tags")!
         enumerator = objectTags.objectEnumerator()
         self._tags = []
         while true {
-            let tag = enumerator.nextObject() as! Tag?
+            let tag = enumerator.nextObject() as? Tag
             if tag == nil {
                 break
             }
