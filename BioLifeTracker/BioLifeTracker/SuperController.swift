@@ -705,7 +705,10 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
             // add ethograms to EthogramManager
             for ethogramInfo in downloadEthogram.getResults() {
                 let ethogram = Ethogram(dictionary: ethogramInfo)
-                EthogramManager.sharedInstance.addEthogram(ethogram)
+                let ethogramManager = EthogramManager.sharedInstance
+                if !ethogramManager.hasEthogramWithId(ethogram.id!) {
+                    ethogramManager.addEthogram(ethogram)
+                }
             }
             
             dispatch_async(dispatch_get_main_queue(), {

@@ -93,6 +93,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
             let projectManager = ProjectManager.sharedInstance
             let project = projectManager.projects[indexPath.row]
             if project.id == nil { // project has not been uploaded before
+                ProjectManager.sharedInstance.removeProjects([indexPath.row])
                 tableView.reloadData()
                 return
             }

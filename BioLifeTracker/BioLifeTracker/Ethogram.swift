@@ -230,6 +230,7 @@ extension Ethogram: CloudStorable {
         dictionary.setValue(name, forKey: "name")
         dictionary.setValue(information, forKey: "information")
         dictionary.setValue(behaviourStates.map { $0.id! }, forKey: "behaviours")
+        dictionary.setValue([], forKey: "project_set")
         super.encodeWithDictionary(dictionary)
     }
 }
