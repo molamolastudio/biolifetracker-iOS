@@ -173,6 +173,13 @@
 		7838E76B1AE3B177007C2562 /* PopoverLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E76A1AE3B177007C2562 /* PopoverLabelViewController.swift */; };
 		785B8C891AE5E65800A204E0 /* AnalysisTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785B8C881AE5E65800A204E0 /* AnalysisTableViewCell.swift */; };
 		785B8C8B1AE5E66800A204E0 /* AnalysisTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 785B8C8A1AE5E66800A204E0 /* AnalysisTableViewCell.xib */; };
+		78B0F7581AE6C6E000F97174 /* Air Element-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 78B0F7511AE6C6E000F97174 /* Air Element-50.png */; };
+		78B0F7591AE6C6E000F97174 /* Clouds-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 78B0F7521AE6C6E000F97174 /* Clouds-50.png */; };
+		78B0F75A1AE6C6E000F97174 /* Field-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 78B0F7531AE6C6E000F97174 /* Field-50.png */; };
+		78B0F75B1AE6C6E000F97174 /* Partly Cloudy Day-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 78B0F7541AE6C6E000F97174 /* Partly Cloudy Day-50.png */; };
+		78B0F75C1AE6C6E000F97174 /* Rain-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 78B0F7551AE6C6E000F97174 /* Rain-50.png */; };
+		78B0F75D1AE6C6E000F97174 /* Storm-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 78B0F7561AE6C6E000F97174 /* Storm-50.png */; };
+		78B0F75E1AE6C6E000F97174 /* Sun-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 78B0F7571AE6C6E000F97174 /* Sun-50.png */; };
 		78C382771AE4E1E600645C07 /* AnalysisProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C382761AE4E1E600645C07 /* AnalysisProjectViewController.swift */; };
 		AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AC18814A1ACFC84600CE450B /* GooglePlus.bundle */; };
 		AC18814E1ACFC84600CE450B /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814B1ACFC84600CE450B /* GooglePlus.framework */; };
@@ -428,6 +435,13 @@
 		7838E76A1AE3B177007C2562 /* PopoverLabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverLabelViewController.swift; sourceTree = "<group>"; };
 		785B8C881AE5E65800A204E0 /* AnalysisTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisTableViewCell.swift; sourceTree = "<group>"; };
 		785B8C8A1AE5E66800A204E0 /* AnalysisTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalysisTableViewCell.xib; sourceTree = "<group>"; };
+		78B0F7511AE6C6E000F97174 /* Air Element-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Air Element-50.png"; path = "Images.xcassets/Air Element-50.png"; sourceTree = "<group>"; };
+		78B0F7521AE6C6E000F97174 /* Clouds-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Clouds-50.png"; path = "Images.xcassets/Clouds-50.png"; sourceTree = "<group>"; };
+		78B0F7531AE6C6E000F97174 /* Field-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Field-50.png"; path = "Images.xcassets/Field-50.png"; sourceTree = "<group>"; };
+		78B0F7541AE6C6E000F97174 /* Partly Cloudy Day-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Partly Cloudy Day-50.png"; path = "Images.xcassets/Partly Cloudy Day-50.png"; sourceTree = "<group>"; };
+		78B0F7551AE6C6E000F97174 /* Rain-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Rain-50.png"; path = "Images.xcassets/Rain-50.png"; sourceTree = "<group>"; };
+		78B0F7561AE6C6E000F97174 /* Storm-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Storm-50.png"; path = "Images.xcassets/Storm-50.png"; sourceTree = "<group>"; };
+		78B0F7571AE6C6E000F97174 /* Sun-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Sun-50.png"; path = "Images.xcassets/Sun-50.png"; sourceTree = "<group>"; };
 		78C382761AE4E1E600645C07 /* AnalysisProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisProjectViewController.swift; sourceTree = "<group>"; };
 		AC18814A1ACFC84600CE450B /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
 		AC18814B1ACFC84600CE450B /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
@@ -759,6 +773,13 @@
 				AC530C781AE53EBD008E1A17 /* bltlogo_transparent.png */,
 				AC9FEFF91AE62F3E00C8833C /* gearicon.png */,
 				AC530C701AE4F281008E1A17 /* bltname.png */,
+				78B0F7511AE6C6E000F97174 /* Air Element-50.png */,
+				78B0F7521AE6C6E000F97174 /* Clouds-50.png */,
+				78B0F7531AE6C6E000F97174 /* Field-50.png */,
+				78B0F7541AE6C6E000F97174 /* Partly Cloudy Day-50.png */,
+				78B0F7551AE6C6E000F97174 /* Rain-50.png */,
+				78B0F7561AE6C6E000F97174 /* Storm-50.png */,
+				78B0F7571AE6C6E000F97174 /* Sun-50.png */,
 				AC95FB371AE61C6300EE8FFE /* foldericon.png */,
 				AC95FB381AE61C6300EE8FFE /* graphicon.png */,
 				AC95FB3F1AE6208A00EE8FFE /* logouticon.png */,
@@ -1009,8 +1030,10 @@
 				321D62C11AD2604400CF9BE9 /* SubtitleTableCell.xib in Resources */,
 				32423B9D1AE2B1F300AFA2F8 /* CircleWithLabelCell.xib in Resources */,
 				329B292D1AD15BAF007ADC65 /* ButtonCell.xib in Resources */,
+				78B0F75B1AE6C6E000F97174 /* Partly Cloudy Day-50.png in Resources */,
 				785B8C8B1AE5E66800A204E0 /* AnalysisTableViewCell.xib in Resources */,
 				32EA4B501AE530EE00EC7B8C /* MemberPickerView.xib in Resources */,
+				78B0F75D1AE6C6E000F97174 /* Storm-50.png in Resources */,
 				AC95FB3C1AE61C6300EE8FFE /* tableicon.png in Resources */,
 				781FD4691AE4159B00BBC0E0 /* AnalysisTableHeader.xib in Resources */,
 				323CBD901ADB901200A7C970 /* ProjectHomeView.xib in Resources */,
@@ -1018,20 +1041,24 @@
 				32423BA91AE4F54500AFA2F8 /* WeatherView.xib in Resources */,
 				329B293F1AD15E6F007ADC65 /* FirstView.xib in Resources */,
 				329B292F1AD15BAF007ADC65 /* DatePickerCell.xib in Resources */,
+				78B0F7591AE6C6E000F97174 /* Clouds-50.png in Resources */,
 				781FD4661AE3E5C300BBC0E0 /* PopoverLabelView.xib in Resources */,
 				326773BA1ACAEFB000899745 /* BooleanPickerCell.xib in Resources */,
 				AC530C791AE53EBD008E1A17 /* bltlogo_transparent.png in Resources */,
+				78B0F75E1AE6C6E000F97174 /* Sun-50.png in Resources */,
 				32EA4B481AE51D7200EC7B8C /* Add User Filled-50.png in Resources */,
 				32423B8B1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib in Resources */,
 				7838E75E1AE3501C007C2562 /* GraphAnalysisView.xib in Resources */,
 				328298E51AE6B26D00DB1488 /* MenuCell.xib in Resources */,
 				32FB650A1AD94B6800391194 /* LaunchScreen.xib in Resources */,
 				AC530C711AE4F281008E1A17 /* bltname.png in Resources */,
+				78B0F75C1AE6C6E000F97174 /* Rain-50.png in Resources */,
 				AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */,
 				32423BA61AE404FC00AFA2F8 /* Edit User-50.png in Resources */,
 				24D28D141ADA5A6800E70759 /* Images.xcassets in Resources */,
 				24C706161AE68E0900E48B94 /* Settings.bundle in Resources */,
 				2458F4D01AE159A60006DFC7 /* icon-152.png in Resources */,
+				78B0F75A1AE6C6E000F97174 /* Field-50.png in Resources */,
 				32423B971AE23E2400AFA2F8 /* CircleCell.xib in Resources */,
 				AC530C6E1AE4F23C008E1A17 /* bg_horizontal.png in Resources */,
 				32EA4B461AE51B5C00EC7B8C /* ProjectFormView.xib in Resources */,
@@ -1053,6 +1080,7 @@
 				326773BF1ACAEFB000899745 /* SingleLineTextCell.xib in Resources */,
 				326773BE1ACAEFB000899745 /* MultiLineTextCell.xib in Resources */,
 				AC530C751AE4F424008E1A17 /* bltname_transparent.png in Resources */,
+				78B0F7581AE6C6E000F97174 /* Air Element-50.png in Resources */,
 				AC9FEFFA1AE62F3E00C8833C /* gearicon.png in Resources */,
 				32698A691AE6171C00D73E9D /* FormView.xib in Resources */,
 				7838E7621AE3501C007C2562 /* GraphsView.xib in Resources */,
