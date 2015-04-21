@@ -8,8 +8,10 @@
 
 import UIKit
 
-class ScanSessionViewController: UITableViewController {
+class ScanSessionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var delegate: ScanSessionViewControllerDelegate? = nil
+    
+    @IBOutlet weak var tableView: UITableView!
     
     let cellReuseIdentifier = "SubtitleTableCell"
     let cellHeight: CGFloat = 50
@@ -23,8 +25,16 @@ class ScanSessionViewController: UITableViewController {
     
     var timestamps: [NSDate] = []
     
+    override func loadView() {
+        self.view = NSBundle.mainBundle().loadNibNamed("PaddedTableView", owner: self, options: nil).first as! UIView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        
         self.tableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
         
         // Sets up the date formatter for converting dates to strings
@@ -40,7 +50,7 @@ class ScanSessionViewController: UITableViewController {
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SubtitleTableCell
         
         cell.title.text = formatter.stringFromDate(timestamps[indexPath.row])
@@ -49,21 +59,21 @@ class ScanSessionViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if delegate != nil {
             delegate!.userDidSelectScan(currentSession!, timestamp: timestamps[indexPath.row])
         }
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return timestamps.count
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return numSections
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return cellHeight
     }
 }

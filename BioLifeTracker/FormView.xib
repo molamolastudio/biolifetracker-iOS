@@ -16,15 +16,15 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="OTV-gT-EKv">
-                    <rect key="frame" x="25" y="0.0" width="550" height="600"/>
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 </tableView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="OTV-gT-EKv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="25" id="3b4-VS-EOU"/>
+                <constraint firstItem="OTV-gT-EKv" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="3b4-VS-EOU"/>
                 <constraint firstAttribute="bottom" secondItem="OTV-gT-EKv" secondAttribute="bottom" id="Ghm-Fy-ZxX"/>
-                <constraint firstAttribute="trailing" secondItem="OTV-gT-EKv" secondAttribute="trailing" constant="25" id="hzT-my-CuH"/>
+                <constraint firstAttribute="trailing" secondItem="OTV-gT-EKv" secondAttribute="trailing" id="hzT-my-CuH"/>
                 <constraint firstItem="OTV-gT-EKv" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="jUe-Y6-MJU"/>
             </constraints>
         </view>

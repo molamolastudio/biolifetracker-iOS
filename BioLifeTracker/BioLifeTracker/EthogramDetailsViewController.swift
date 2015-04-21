@@ -8,7 +8,9 @@
 
 import UIKit
 
-class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate {
+class EthogramDetailsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+    
+    @IBOutlet weak var tableView: UITableView!
     
     let nameCellIdentifier = "SingleLineTextCell"
     let stateCellIdentifier = "BehaviourStateCell"
@@ -38,8 +40,15 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
     var originalEthogram: Ethogram? = nil
     var ethogram = Ethogram()
     
+    override func loadView() {
+        self.view = NSBundle.mainBundle().loadNibNamed("PaddedTableView", owner: self, options: nil).first as! UIView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
         
         self.tableView.rowHeight = rowHeight
         
@@ -94,7 +103,7 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == firstSection {
             return getCellForFirstSection(indexPath)
         } else {
@@ -200,7 +209,7 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
         refreshView()
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if isFirstSection(indexPath.section) {
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! SingleLineTextCell
             cell.textField.becomeFirstResponder()
@@ -210,11 +219,11 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
         }
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sectionTitles[section]
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFirstSection(section) {
             return firstSectionNumRows
         } else {
@@ -227,12 +236,12 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
         }
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return numSections
     }
     
     // For deleting extra behaviour states
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         if editable {
             return isSecondSection(indexPath.section) && !isExtraRow(indexPath.row)
         } else {
@@ -240,7 +249,7 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
         }
     }
     
-    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         if deletionEnabled {
             return UITableViewCellEditingStyle.Delete
         } else {
@@ -249,7 +258,7 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
     }
     
     // If the cell is deleted, delete the behaviour state related to it.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             if let cell = tableView.cellForRowAtIndexPath(indexPath) {
                 

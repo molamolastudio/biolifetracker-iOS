@@ -31,6 +31,10 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     
     var graphsVC: GraphsViewController!
     
+    override func loadView() {
+        self.view = NSBundle.mainBundle().loadNibNamed("ProjectHomeView", owner: self, options: nil).first as! UIView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -70,7 +74,7 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         graphView.layer.cornerRadius = 8;
         graphView.layer.masksToBounds = true;
         
-        graphsVC = GraphsViewController(nibName: "GraphsView", bundle: nil)
+        graphsVC = GraphsViewController()
         graphsVC.setProject(currentProject!)
         
         graphsVC.view.frame = CGRectMake(0, 0, graphView.frame.width, graphView.frame.height)

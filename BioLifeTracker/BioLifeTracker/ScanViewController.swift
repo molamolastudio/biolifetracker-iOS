@@ -34,6 +34,10 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     var selectedObservation = 0
     
+    override func loadView() {
+        self.view = NSBundle.mainBundle().loadNibNamed("ScanView", owner: self, options: nil).first as! UIView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

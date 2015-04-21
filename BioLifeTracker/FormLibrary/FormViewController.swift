@@ -24,6 +24,10 @@ class FormViewController: UIViewController, UITableViewDataSource, UITableViewDe
     var editable: Bool = true // Determines if the cells can be edited.
     var roundedCells: Bool = false // Determines if the cells have rounded corners.
     
+    // Variables for the padding between this view and its child tableview
+    var horizontalPadding: CGFloat = 0
+    var verticalPadding: CGFloat = 0
+    
     // Variables for the amount of cell padding.
     var cellHorizontalPadding: CGFloat = 0
     var cellVerticalPadding: CGFloat = 0
@@ -36,6 +40,12 @@ class FormViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.frame = CGRectMake(
+            self.view.frame.origin.x + horizontalPadding,
+            self.view.frame.origin.y + verticalPadding,
+            self.view.frame.width + 2 * horizontalPadding,
+            self.view.frame.height + 2 * verticalPadding)
         
         self.tableView.dataSource = self
         self.tableView.delegate = self

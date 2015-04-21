@@ -18,8 +18,13 @@ class EthogramsViewController: UIViewController, UITableViewDataSource, UITableV
     let messageCellSubtitle = "States: "
     let numSections = 1
     
+    override func loadView() {
+        self.view = NSBundle.mainBundle().loadNibNamed("PaddedTableView", owner: self, options: nil).first as! UIView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.tableView.dataSource = self
         self.tableView.delegate = self
         

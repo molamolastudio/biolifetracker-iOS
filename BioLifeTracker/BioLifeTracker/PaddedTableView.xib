@@ -5,7 +5,7 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProjectsViewController" customModule="BioLifeTracker" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner">
             <connections>
                 <outlet property="tableView" destination="ydY-en-wKQ" id="3hA-Fu-apz"/>
                 <outlet property="view" destination="iN0-l3-epB" id="26Y-L7-nyO"/>
