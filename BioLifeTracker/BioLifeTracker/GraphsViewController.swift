@@ -82,15 +82,27 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     private var popover: UIPopoverPresentationController!
     private var popoverContent: GraphDetailsViewController!
     
+    private var selectedPoint: Int = -1
+    
     var AliceBlue = UIColor(red: 228.0/255.0, green: 241.0/255.0, blue: 254.0/255.0, alpha: 1)
-    var HummingBird = UIColor(red: 197.0/255.0, green: 239.0/255.0, blue: 247.0/255.0, alpha: 1)
+    var GreenSea = UIColor(red: 22.0/255.0, green: 160.0/255.0, blue: 133.0/255.0, alpha: 1)
+    var GreenSeaHighLight = UIColor(red: 183.0/255.0, green: 88.0/255.0, blue: 77.0/255.0, alpha: 1)
+    
     // Returns an array of twenty colors at hue of 120
     let colors = randomColorsCount(20, hue: .Random, luminosity: .Light)
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initialiseGraph()
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: "rotated", name: UIDeviceOrientationDidChangeNotification, object: nil)
+        UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        UIDevice.currentDevice().endGeneratingDeviceOrientationNotifications()
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIDeviceOrientationDidChangeNotification, object: nil)
+
     }
     
     /********************* SET INITIAL DATA **********************/
@@ -341,11 +353,13 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         graph.plotAreaFrame.paddingBottom = 40
         graph.plotAreaFrame.paddingTop = 40
         
-//        graph.plotAreaFrame.fill = CPTFill(color: CPTColor(CGColor: AliceBlue.CGColor))
-        graph.plotAreaFrame.fill = CPTFill(color: CPTColor.whiteColor())
-//        graph.plotAreaFrame.plotArea.fill = CPTFill(color: CPTColor(CGColor: AliceBlue.CGColor))
-        graph.plotAreaFrame.plotArea.fill = CPTFill(color: CPTColor.whiteColor())
-        
+        if current == .HourPlot {
+            graph.plotAreaFrame.fill = CPTFill(color: CPTColor(CGColor: GreenSea.CGColor))
+            graph.plotAreaFrame.plotArea.fill = CPTFill(color: CPTColor(CGColor: GreenSea.CGColor))
+        } else {
+            graph.plotAreaFrame.fill = CPTFill(color: CPTColor.whiteColor())
+            graph.plotAreaFrame.plotArea.fill = CPTFill(color: CPTColor.whiteColor())
+        }
         
         var plotSpace = graph.defaultPlotSpace as! CPTXYPlotSpace
         plotSpace.allowsUserInteraction = true
@@ -360,7 +374,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
             var occurencePlot = CPTScatterPlot(frame: graph.frame)
             occurencePlot.dataSource = self
             occurencePlot.delegate = self
-            occurencePlot.plotSymbolMarginForHitDetection = 10
+            occurencePlot.plotSymbolMarginForHitDetection = 15
             var occurenceColor = CPTColor.darkGrayColor()
             
             graph.addPlot(occurencePlot, toPlotSpace: plotSpace)
@@ -446,26 +460,26 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     func configureAxes() {
         
         var axisTitleStyle = CPTMutableTextStyle()
-        axisTitleStyle.color = CPTColor.blackColor()
+        axisTitleStyle.color = CPTColor.whiteColor()
         axisTitleStyle.fontName = "Helvetica-Bold"
         axisTitleStyle.fontSize = 12.0
         
         var axisLineStyle = CPTMutableLineStyle()
         axisLineStyle.lineWidth = 2.0
-        axisLineStyle.lineColor = CPTColor.blackColor()
+        axisLineStyle.lineColor = CPTColor.whiteColor()
         
         var axisTextStyle = CPTMutableTextStyle()
-        axisTextStyle.color = CPTColor.blackColor()
+        axisTextStyle.color = CPTColor.whiteColor()
         axisTextStyle.fontName = "Helvetica-Bold"
         axisTextStyle.fontSize = 11.0
         
         var tickLineStyle = CPTMutableLineStyle()
-        tickLineStyle.lineColor = CPTColor.blackColor()
+        tickLineStyle.lineColor = CPTColor.whiteColor()
         tickLineStyle.lineWidth = 2.0
         
         var gridLineStyle = CPTMutableLineStyle()
         if yMaxDays == 0 || yMaxHours == 0 || yMaxStates == 0 {
-            gridLineStyle.lineColor = CPTColor(CGColor: AliceBlue.CGColor)
+            gridLineStyle.lineColor = CPTColor(CGColor: GreenSea.CGColor)
         } else {
             gridLineStyle.lineColor = CPTColor.whiteColor()
         }
@@ -764,8 +778,6 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         plot.graph.reloadData()
     }
     
-    
-    
     func barFillForBarPlot(barPlot: CPTBarPlot!, recordIndex idx: UInt) -> CPTFill! {
         
         var chosenColor = colors[Int(idx)]
@@ -778,26 +790,25 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     
     func symbolForScatterPlot(plot: CPTScatterPlot!, recordIndex idx: UInt) -> CPTPlotSymbol! {
         
-        //if selected[Int(idx)] {
-            //choose colour highlighted
-            // each bar has a dedicated colour
-            //} else {
-            // choose normal colour > at rndom
-            //}
-        
         var symbol = CPTPlotSymbol()
         symbol.symbolType = CPTPlotSymbolType.Ellipse
         var symbolLineStyle = CPTMutableLineStyle()
         symbolLineStyle.lineWidth = 2.0
-        symbolLineStyle.lineColor = CPTColor.blackColor()
+        if selectedPoint == Int(idx) {
+            symbolLineStyle.lineColor = CPTColor(CGColor: GreenSeaHighLight.CGColor)
+        } else {
+            symbolLineStyle.lineColor = CPTColor.blackColor()
+        }
         
         symbol.lineStyle = symbolLineStyle
         
         return symbol
     }
-    
+
     
     func scatterPlot(plot: CPTScatterPlot!, plotSymbolWasSelectedAtRecordIndex idx: UInt) {
+        
+        selectedPoint = Int(idx)
         
         // Determine point of symbol in plot coordinates
         var x: Double!
@@ -835,17 +846,42 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         popover!.sourceView = self.graphHostingView
         popover!.sourceRect = popoverAnchor
         popover!.permittedArrowDirections = UIPopoverArrowDirection.Up
-
+        
         self.presentViewController(popoverContent, animated: true, completion: nil)
         popoverContent.setLabelMessage(final)
         plot.graph.reloadData()
+        
 
+    }
+
+    func popoverPresentationControllerDidDismissPopover(popoverPresentationController: UIPopoverPresentationController) {
+            updateGraphDataAfterDeSelect()
+        
+    }
+    
+    func rotated() {
+        self.dismissViewControllerAnimated(false, completion: nil)
+        updateGraphDataAfterDeSelect()
+    }
+    
+    func updateGraphDataAfterDeSelect() {
+        selectedPoint = -1
+        
+        switch current {
+        case .DayPlot:
+            dayGraph.reloadData()
+        case .HourPlot:
+            hourGraph.reloadData()
+        case .StateChart:
+            statesGraph.reloadData()
+        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
 }
 
