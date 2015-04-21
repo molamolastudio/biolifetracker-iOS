@@ -22,8 +22,8 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     let memberTag = 2
     let sessionTag = 3
     
-    let textCellIdentifier = "SingleLineTextCell"
     let memberCellIdentifier = "MemberCell"
+    let sessionCellIdentifier = "SessionCell"
     
     let textCellHeight: CGFloat = 44
     let memberCellHeight: CGFloat = 50
@@ -43,9 +43,10 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         
         setupTableViews()
         setupGraphView()
+        
         // Sets up the date formatter for converting dates to strings
-        formatter.dateStyle = NSDateFormatterStyle.LongStyle
-        formatter.timeStyle = .MediumStyle
+        formatter.dateStyle = .ShortStyle
+        formatter.timeStyle = .ShortStyle
     }
     
     func setupTableViews() {
@@ -58,7 +59,7 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         
         // Registers the nibs used for the table cells
         memberView.registerNib(UINib(nibName: memberCellIdentifier, bundle: nil), forCellReuseIdentifier: memberCellIdentifier)
-        sessionView.registerNib(UINib(nibName: textCellIdentifier, bundle: nil), forCellReuseIdentifier: textCellIdentifier)
+        sessionView.registerNib(UINib(nibName: sessionCellIdentifier, bundle: nil), forCellReuseIdentifier: sessionCellIdentifier)
         
         // Sets the table views to display under the navigation bar
         self.edgesForExtendedLayout = UIRectEdge.None
@@ -170,20 +171,30 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         
         // Set fields of cell
         cell.label.text = member.name
-        cell.button.hidden = false
         
-        // If this member is an admin
-        if contains(currentProject!.admins, member) {
-            cell.button.setTitle("Remove Admin", forState: .Normal)
-            cell.button.addTarget(self, action: Selector("removeAdmin:"), forControlEvents: .TouchUpInside)
-            cell.adminLabel.hidden = false
+        // Show the admin label
+        cell.adminLabel.hidden = !contains(currentProject!.admins, member)
+        
+        // Allow admin privileges if current user is an admin
+        if contains(currentProject!.admins, UserAuthService.sharedInstance.user) {
+            cell.button.hidden = false
+            addMembersButton.hidden = false
+            println(currentProject!.admins)
+            println(member)
+            if contains(currentProject!.admins, member) {
+                cell.button.setTitle("Remove Admin", forState: .Normal)
+                cell.button.addTarget(self, action: Selector("removeAdmin:"), forControlEvents: .TouchUpInside)
+            } else {
+                cell.button.setTitle("Make Admin", forState: .Normal)
+                cell.button.addTarget(self, action: Selector("makeAdmin:"), forControlEvents: .TouchUpInside)
+            }
         } else {
-            cell.button.setTitle("Make Admin", forState: .Normal)
-            cell.button.addTarget(self, action: Selector("makeAdmin:"), forControlEvents: .TouchUpInside)
-            cell.adminLabel.hidden = true
+            cell.button.hidden = true
+            addMembersButton.hidden = false
         }
         
-        if member == UserAuthService.sharedInstance.user {
+        // If this member was the creator, do not allow removal of admin privileges
+        if member == currentProject!.createdBy {
             cell.button.hidden = true
         }
         
@@ -192,20 +203,25 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         return cell
     }
     
-    func getCellForSessions(indexPath: NSIndexPath) -> SingleLineTextCell {
-        let cell = sessionView.dequeueReusableCellWithIdentifier(textCellIdentifier) as! SingleLineTextCell
+    func getCellForSessions(indexPath: NSIndexPath) -> SessionCell {
+        let cell = sessionView.dequeueReusableCellWithIdentifier(sessionCellIdentifier) as! SessionCell
         
-        cell.textField.userInteractionEnabled = false
+        cell.button.removeTarget(self, action: Selector("deleteSession:"), forControlEvents: .TouchUpInside)
         
         let session = currentProject!.sessions[indexPath.row]
         let dateString = formatter.stringFromDate(session.createdAt)
         cell.label.text = dateString
         
         if session.type == .Focal {
-            cell.textField.text = "F"
+            cell.typeLabel.text = "F"
         } else {
-            cell.textField.text = "S"
+            cell.typeLabel.text = "S"
         }
+        
+        cell.button.hidden = false
+        cell.button.tag = indexPath.row
+        cell.button.addTarget(self, action: Selector("deleteSession:"), forControlEvents: .TouchUpInside)
+        
         return cell
     }
     
@@ -257,5 +273,11 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         currentProject?.addAdmin(member)
         memberView.reloadData()
     }
-
+    
+    func deleteSession(sender: UIButton) {
+        let session = currentProject!.sessions[sender.tag]
+        currentProject!.removeSession(session)
+        sessionView.reloadData()
+    }
+    
 }
