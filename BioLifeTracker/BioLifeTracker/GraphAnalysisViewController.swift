@@ -36,8 +36,8 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
         self.view.sendSubviewToBack(self.background)
         
         //DEVELOPER TEST PROJECT
-        var stub = ProjectStub()
-        setProject(stub.project)
+//        var stub = ProjectStub()
+//        setProject(stub.project)
 //        setProjectIstub.empty)
 
         if currentProject == nil {

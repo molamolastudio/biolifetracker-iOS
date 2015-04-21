@@ -87,11 +87,11 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     
     var AliceBlue = UIColor(red: 228.0/255.0, green: 241.0/255.0, blue: 254.0/255.0, alpha: 1)
     var HourBackgroundGreen = UIColor(red: 153.0/255.0, green: 235.0/255.0, blue: 202.0/255.0, alpha: 1)
-    var HourAxesBrown = UIColor(red: 158.0/255.0, green: 86.0/255.0, blue: 72.0/255.0, alpha: 1)
-    var DayBackgroundGreen = UIColor(red: 153.0/255.0, green: 235.0/255.0, blue: 202.0/255.0, alpha: 1)
-    var DayAxesBrown = UIColor(red: 158.0/255.0, green: 86.0/255.0, blue: 72.0/255.0, alpha: 1)
-    var StatesBackgroundGreen = UIColor(red: 153.0/255.0, green: 235.0/255.0, blue: 202.0/255.0, alpha: 1)
-    var StatesAxesBrown = UIColor(red: 158.0/255.0, green: 86.0/255.0, blue: 72.0/255.0, alpha: 1)
+    var HourAxesBrown = UIColor(red: 107.0/255.0, green: 58.0/255.0, blue: 48.0/255.0, alpha: 1)
+    var DayBackgroundGreen = UIColor(red: 223.0/255.0, green: 213.0/255.0, blue: 229.0/255.0, alpha: 1)
+    var DayAxesBrown = UIColor(red: 37.0/255.0, green: 46.0/255.0, blue: 6.0/255.0, alpha: 1)
+    var StatesBackgroundGreen = UIColor(red: 228.0/255.0, green: 241.0/255.0, blue: 254.0/255.0, alpha: 1)
+    var StatesAxesBrown = UIColor.blackColor()
     
     //var GreenSeaHighLight = UIColor(red: 183.0/255.0, green: 88.0/255.0, blue: 77.0/255.0, alpha: 1)
     var PlotSelectRed = UIColor(red: 234.0/255.0, green: 79.0/255.0, blue: 88.0/255.0, alpha: 1)
@@ -515,7 +515,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         plotSpace.yRange = yRange
         
         var statesLineStyle = statesPlot.lineStyle.mutableCopy() as! CPTMutableLineStyle
-        statesLineStyle.lineWidth = self.graphLineWidth
+        statesLineStyle.lineWidth = 1.0
         statesLineStyle.lineColor = CPTColor.blackColor()
         statesPlot.lineStyle = statesLineStyle
     }
