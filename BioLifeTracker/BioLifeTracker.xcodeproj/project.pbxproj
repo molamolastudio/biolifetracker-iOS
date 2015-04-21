@@ -107,7 +107,6 @@
 		32423BA91AE4F54500AFA2F8 /* WeatherView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32423BA81AE4F54500AFA2F8 /* WeatherView.xib */; };
 		32423BAB1AE4F5CF00AFA2F8 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423BAA1AE4F5CF00AFA2F8 /* WeatherViewController.swift */; };
 		32423BAD1AE5068600AFA2F8 /* WeatherViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32423BAC1AE5068600AFA2F8 /* WeatherViewControllerDelegate.swift */; };
-		32423BAF1AE5087200AFA2F8 /* ScanSessionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32423BAE1AE5087200AFA2F8 /* ScanSessionView.xib */; };
 		326773B61ACAEFB000899745 /* BooleanPickerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773A91ACAEFB000899745 /* BooleanPickerCell.swift */; };
 		326773B71ACAEFB000899745 /* CustomPickerPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */; };
 		326773BA1ACAEFB000899745 /* BooleanPickerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 326773AD1ACAEFB000899745 /* BooleanPickerCell.xib */; };
@@ -352,7 +351,6 @@
 		32423BA81AE4F54500AFA2F8 /* WeatherView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherView.xib; sourceTree = "<group>"; };
 		32423BAA1AE4F5CF00AFA2F8 /* WeatherViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		32423BAC1AE5068600AFA2F8 /* WeatherViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherViewControllerDelegate.swift; sourceTree = "<group>"; };
-		32423BAE1AE5087200AFA2F8 /* ScanSessionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScanSessionView.xib; sourceTree = "<group>"; };
 		32517A211AB1789100578C42 /* EthogramsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramsViewController.swift; sourceTree = "<group>"; };
 		326773A91ACAEFB000899745 /* BooleanPickerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BooleanPickerCell.swift; path = FormLibrary/BooleanPickerCell.swift; sourceTree = "<group>"; };
 		326773AA1ACAEFB000899745 /* CustomPickerPopup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomPickerPopup.swift; path = FormLibrary/CustomPickerPopup.swift; sourceTree = "<group>"; };
@@ -651,9 +649,9 @@
 		3205E7441AAED9F9006F374D /* BioLifeTracker */ = {
 			isa = PBXGroup;
 			children = (
+				24E32D771AB298D8003C4E0A /* BioLifeTracker-Bridging-Header.h */,
 				ACDE13A91AD0C0200075AC35 /* Managers */,
 				ACDCC0EF1ACD05C7001590B8 /* Services */,
-				24E32D771AB298D8003C4E0A /* BioLifeTracker-Bridging-Header.h */,
 				240D042B1AB6CA6800D8BB9F /* Authentication */,
 				24E32D3C1AB19954003C4E0A /* Model */,
 				AC9162AA1ACA69BF00FED714 /* Cloud Storage */,
@@ -677,31 +675,21 @@
 				32EA4B511AE5310000EC7B8C /* MemberPickerViewController.swift */,
 				32880DBD1AE5342F009A3B31 /* MemberPickerViewControllerDelegate.swift */,
 				32EA4B4F1AE530EE00EC7B8C /* MemberPickerView.xib */,
-				32EA4B4B1AE522AC00EC7B8C /* MemberCell.swift */,
-				32EA4B4D1AE522B600EC7B8C /* MemberCell.xib */,
 				32423B8C1AE0023400AFA2F8 /* FocalSessionViewController.swift */,
 				32423B901AE0093B00AFA2F8 /* FocalSessionView.xib */,
 				323CBD971ADD624D00A7C970 /* ScanSessionViewController.swift */,
 				323CBD991ADD634400A7C970 /* ScanSessionViewControllerDelegate.swift */,
-				32423BAE1AE5087200AFA2F8 /* ScanSessionView.xib */,
 				323CBD951ADD58EA00A7C970 /* ScanViewController.swift */,
 				323CBD931ADD526600A7C970 /* ScanView.xib */,
-				32423B9A1AE2B1E600AFA2F8 /* CircleWithLabelCell.swift */,
-				32423B9C1AE2B1F300AFA2F8 /* CircleWithLabelCell.xib */,
-				32423B941AE23E0D00AFA2F8 /* CircleCell.swift */,
-				32423B961AE23E2400AFA2F8 /* CircleCell.xib */,
 				32517A211AB1789100578C42 /* EthogramsViewController.swift */,
 				32698A661AE6132400D73E9D /* EthogramsView.xib */,
 				321D62C41AD2618800CF9BE9 /* EthogramsViewControllerDelegate.swift */,
 				3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */,
 				32423B9E1AE3A1BB00AFA2F8 /* EthogramDetailsViewController.swift */,
-				32423B821ADF768600AFA2F8 /* BehaviourStateCell.swift */,
-				32423B801ADF766200AFA2F8 /* BehaviourStateCell.xib */,
 				32423BAA1AE4F5CF00AFA2F8 /* WeatherViewController.swift */,
 				32423BAC1AE5068600AFA2F8 /* WeatherViewControllerDelegate.swift */,
 				32423BA81AE4F54500AFA2F8 /* WeatherView.xib */,
-				321D62BE1AD2604400CF9BE9 /* SubtitleTableCell.swift */,
-				321D62BF1AD2604400CF9BE9 /* SubtitleTableCell.xib */,
+				32698A6A1AE61E9A00D73E9D /* Custom Cells */,
 				3205E7501AAED9F9006F374D /* LaunchScreen.xib */,
 				3205E7451AAED9F9006F374D /* Supporting Files */,
 			);
@@ -781,6 +769,23 @@
 				32423B8A1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib */,
 			);
 			name = "Form Library";
+			sourceTree = "<group>";
+		};
+		32698A6A1AE61E9A00D73E9D /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				32EA4B4B1AE522AC00EC7B8C /* MemberCell.swift */,
+				32EA4B4D1AE522B600EC7B8C /* MemberCell.xib */,
+				32423B9A1AE2B1E600AFA2F8 /* CircleWithLabelCell.swift */,
+				32423B9C1AE2B1F300AFA2F8 /* CircleWithLabelCell.xib */,
+				32423B941AE23E0D00AFA2F8 /* CircleCell.swift */,
+				32423B961AE23E2400AFA2F8 /* CircleCell.xib */,
+				32423B821ADF768600AFA2F8 /* BehaviourStateCell.swift */,
+				32423B801ADF766200AFA2F8 /* BehaviourStateCell.xib */,
+				321D62BE1AD2604400CF9BE9 /* SubtitleTableCell.swift */,
+				321D62BF1AD2604400CF9BE9 /* SubtitleTableCell.xib */,
+			);
+			name = "Custom Cells";
 			sourceTree = "<group>";
 		};
 		782EEB5D1AE53DA800DB0384 /* RandomColor */ = {
@@ -997,7 +1002,6 @@
 				32423B811ADF766200AFA2F8 /* BehaviourStateCell.xib in Resources */,
 				32423BA71AE404FC00AFA2F8 /* Plus-50.png in Resources */,
 				AC530C771AE53EAF008E1A17 /* bltlogo.png in Resources */,
-				32423BAF1AE5087200AFA2F8 /* ScanSessionView.xib in Resources */,
 				32EA4B4E1AE522B600EC7B8C /* MemberCell.xib in Resources */,
 				326773BF1ACAEFB000899745 /* SingleLineTextCell.xib in Resources */,
 				326773BE1ACAEFB000899745 /* MultiLineTextCell.xib in Resources */,
