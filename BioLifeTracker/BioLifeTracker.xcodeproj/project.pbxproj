@@ -161,6 +161,8 @@
 		7838E7661AE3501C007C2562 /* GraphsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */; };
 		7838E7681AE3501C007C2562 /* ProjectStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75D1AE3501C007C2562 /* ProjectStub.swift */; };
 		7838E76B1AE3B177007C2562 /* GraphDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E76A1AE3B177007C2562 /* GraphDetailsViewController.swift */; };
+		785B8C891AE5E65800A204E0 /* AnalysisTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785B8C881AE5E65800A204E0 /* AnalysisTableViewCell.swift */; };
+		785B8C8B1AE5E66800A204E0 /* AnalysisTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 785B8C8A1AE5E66800A204E0 /* AnalysisTableViewCell.xib */; };
 		78C382771AE4E1E600645C07 /* AnalysisProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C382761AE4E1E600645C07 /* AnalysisProjectViewController.swift */; };
 		AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AC18814A1ACFC84600CE450B /* GooglePlus.bundle */; };
 		AC18814E1ACFC84600CE450B /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814B1ACFC84600CE450B /* GooglePlus.framework */; };
@@ -399,6 +401,8 @@
 		7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphsViewControllerDelegate.swift; sourceTree = "<group>"; };
 		7838E75D1AE3501C007C2562 /* ProjectStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectStub.swift; sourceTree = "<group>"; };
 		7838E76A1AE3B177007C2562 /* GraphDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphDetailsViewController.swift; sourceTree = "<group>"; };
+		785B8C881AE5E65800A204E0 /* AnalysisTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisTableViewCell.swift; sourceTree = "<group>"; };
+		785B8C8A1AE5E66800A204E0 /* AnalysisTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalysisTableViewCell.xib; sourceTree = "<group>"; };
 		78C382761AE4E1E600645C07 /* AnalysisProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisProjectViewController.swift; sourceTree = "<group>"; };
 		AC18814A1ACFC84600CE450B /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
 		AC18814B1ACFC84600CE450B /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
@@ -790,6 +794,8 @@
 				7838E75A1AE3501C007C2562 /* GraphsView.xib */,
 				7838E75B1AE3501C007C2562 /* GraphsViewController.swift */,
 				78C382761AE4E1E600645C07 /* AnalysisProjectViewController.swift */,
+				785B8C881AE5E65800A204E0 /* AnalysisTableViewCell.swift */,
+				785B8C8A1AE5E66800A204E0 /* AnalysisTableViewCell.xib */,
 				781FD4681AE4159B00BBC0E0 /* AnalysisTableHeader.xib */,
 				781FD46E1AE466EB00BBC0E0 /* AnalysisTableHeader.swift */,
 				781FD46B1AE415BE00BBC0E0 /* AnalysisTableViewController.swift */,
@@ -950,6 +956,7 @@
 				321D62C11AD2604400CF9BE9 /* SubtitleTableCell.xib in Resources */,
 				32423B9D1AE2B1F300AFA2F8 /* CircleWithLabelCell.xib in Resources */,
 				329B292D1AD15BAF007ADC65 /* ButtonCell.xib in Resources */,
+				785B8C8B1AE5E66800A204E0 /* AnalysisTableViewCell.xib in Resources */,
 				32EA4B501AE530EE00EC7B8C /* MemberPickerView.xib in Resources */,
 				781FD4691AE4159B00BBC0E0 /* AnalysisTableHeader.xib in Resources */,
 				323CBD901ADB901200A7C970 /* ProjectHomeView.xib in Resources */,
@@ -1075,6 +1082,7 @@
 				AC6A24A41ADD1B1500CF33D6 /* BLTIndividualProtocol.swift in Sources */,
 				24842FAE1AE1E9520071D395 /* NotificationService.swift in Sources */,
 				32423B9B1AE2B1E600AFA2F8 /* CircleWithLabelCell.swift in Sources */,
+				785B8C891AE5E65800A204E0 /* AnalysisTableViewCell.swift in Sources */,
 				32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */,
 				240FEF051AD60ACF000FD9F3 /* BiolifeDateFormatter.swift in Sources */,
 				32423B831ADF768600AFA2F8 /* BehaviourStateCell.swift in Sources */,

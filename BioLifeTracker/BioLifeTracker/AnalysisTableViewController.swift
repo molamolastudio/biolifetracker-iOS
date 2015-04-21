@@ -26,7 +26,7 @@ class AnalysisTableViewController: UITableViewController {
     private var selectedIndices = [Int]()
     
     let cellReuseIdentifierHead = "AnalysisTableHeader"
-    let cellReuseIdentifier = "SingleLineTextCell"
+    let cellReuseIdentifier = "AnalysisTableViewCell"
     
     let cellHeight: CGFloat = 50
     
@@ -102,7 +102,7 @@ class AnalysisTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SingleLineTextCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! AnalysisTableViewCell
         
         var title: String!
         
@@ -114,8 +114,7 @@ class AnalysisTableViewController: UITableViewController {
         case .States:
             title = totalStates[indexPath.row].name
         }
-        cell.textField.hidden = true
-        cell.label.text = title
+        cell.cellLabel.text = title
         return cell
         
     }
@@ -131,7 +130,6 @@ class AnalysisTableViewController: UITableViewController {
             return totalStates.count
         }
     }
-    
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var header = tableView.dequeueReusableHeaderFooterViewWithIdentifier(cellReuseIdentifierHead) as! AnalysisTableHeader
