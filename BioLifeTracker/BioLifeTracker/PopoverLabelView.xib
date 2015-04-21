@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GraphDetailsViewController" customModule="BioLifeTracker" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PopoverLabelViewController" customModule="BioLifeTracker" customModuleProvider="target">
             <connections>
                 <outlet property="popoverLabel" destination="idP-Sw-mbP" id="ZeY-51-uJd"/>
                 <outlet property="view" destination="idP-Sw-mbP" id="OZU-mW-1Vc"/>

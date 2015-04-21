@@ -163,7 +163,7 @@
 		7838E7641AE3501C007C2562 /* GraphsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75B1AE3501C007C2562 /* GraphsViewController.swift */; };
 		7838E7661AE3501C007C2562 /* GraphsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */; };
 		7838E7681AE3501C007C2562 /* ProjectStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75D1AE3501C007C2562 /* ProjectStub.swift */; };
-		7838E76B1AE3B177007C2562 /* GraphDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E76A1AE3B177007C2562 /* GraphDetailsViewController.swift */; };
+		7838E76B1AE3B177007C2562 /* PopoverLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E76A1AE3B177007C2562 /* PopoverLabelViewController.swift */; };
 		785B8C891AE5E65800A204E0 /* AnalysisTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785B8C881AE5E65800A204E0 /* AnalysisTableViewCell.swift */; };
 		785B8C8B1AE5E66800A204E0 /* AnalysisTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 785B8C8A1AE5E66800A204E0 /* AnalysisTableViewCell.xib */; };
 		78C382771AE4E1E600645C07 /* AnalysisProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C382761AE4E1E600645C07 /* AnalysisProjectViewController.swift */; };
@@ -406,7 +406,7 @@
 		7838E75B1AE3501C007C2562 /* GraphsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphsViewController.swift; sourceTree = "<group>"; };
 		7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphsViewControllerDelegate.swift; sourceTree = "<group>"; };
 		7838E75D1AE3501C007C2562 /* ProjectStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectStub.swift; sourceTree = "<group>"; };
-		7838E76A1AE3B177007C2562 /* GraphDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphDetailsViewController.swift; sourceTree = "<group>"; };
+		7838E76A1AE3B177007C2562 /* PopoverLabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverLabelViewController.swift; sourceTree = "<group>"; };
 		785B8C881AE5E65800A204E0 /* AnalysisTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisTableViewCell.swift; sourceTree = "<group>"; };
 		785B8C8A1AE5E66800A204E0 /* AnalysisTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalysisTableViewCell.xib; sourceTree = "<group>"; };
 		78C382761AE4E1E600645C07 /* AnalysisProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisProjectViewController.swift; sourceTree = "<group>"; };
@@ -802,6 +802,7 @@
 				7838E7591AE3501C007C2562 /* GraphAnalysisViewController.swift */,
 				7838E75A1AE3501C007C2562 /* GraphsView.xib */,
 				7838E75B1AE3501C007C2562 /* GraphsViewController.swift */,
+				7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */,
 				78C382761AE4E1E600645C07 /* AnalysisProjectViewController.swift */,
 				785B8C881AE5E65800A204E0 /* AnalysisTableViewCell.swift */,
 				785B8C8A1AE5E66800A204E0 /* AnalysisTableViewCell.xib */,
@@ -809,8 +810,7 @@
 				781FD46E1AE466EB00BBC0E0 /* AnalysisTableHeader.swift */,
 				781FD46B1AE415BE00BBC0E0 /* AnalysisTableViewController.swift */,
 				781FD4651AE3E5C300BBC0E0 /* PopoverLabelView.xib */,
-				7838E76A1AE3B177007C2562 /* GraphDetailsViewController.swift */,
-				7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */,
+				7838E76A1AE3B177007C2562 /* PopoverLabelViewController.swift */,
 				7838E75D1AE3501C007C2562 /* ProjectStub.swift */,
 			);
 			name = Analysis;
@@ -1060,7 +1060,7 @@
 				AC6A24A21ADD1AF700CF33D6 /* BLTObservationProtocol.swift in Sources */,
 				248DBBE41ADD5348001CA04F /* BLTProjectSerializer.swift in Sources */,
 				AC9EE3471ACEC57200939476 /* BehaviourState.swift in Sources */,
-				7838E76B1AE3B177007C2562 /* GraphDetailsViewController.swift in Sources */,
+				7838E76B1AE3B177007C2562 /* PopoverLabelViewController.swift in Sources */,
 				326773B61ACAEFB000899745 /* BooleanPickerCell.swift in Sources */,
 				321D62C71AD261D300CF9BE9 /* SuperController.swift in Sources */,
 				320920711ACA9A1600E8A456 /* MenuViewController.swift in Sources */,
