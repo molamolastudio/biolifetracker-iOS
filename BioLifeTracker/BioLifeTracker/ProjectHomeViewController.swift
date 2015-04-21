@@ -79,6 +79,7 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         
         graphsVC = GraphsViewController()
         graphsVC.setProject(currentProject!)
+        graphsVC.setThreshold(4)
         
         graphsVC.view.frame = CGRectMake(0, 0, graphView.frame.width, graphView.frame.height)
         graphView.addSubview(graphsVC.view)

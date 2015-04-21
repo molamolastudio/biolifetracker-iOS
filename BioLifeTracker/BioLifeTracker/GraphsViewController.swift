@@ -49,10 +49,10 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     var project: Project { get { return projectInstance } }
 
     private var graph: CPTXYGraph = CPTXYGraph(frame: CGRectZero)
-//    private var dayGraph: CPTXYGraph = CPTXYGraph(frame: CGRectZero)
-//    private var hourGraph: CPTXYGraph = CPTXYGraph(frame: CGRectZero)
-//    private var statesGraph: CPTXYGraph = CPTXYGraph(frame: CGRectZero)
+    
     private var graphLineWidth: CGFloat = 2.5
+    private var maxBarPlotLength: CGFloat = 5.5
+    private var threshold = 11
     
     // default setting
     private var current: GraphType = .StateChart
@@ -212,6 +212,10 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     
     func setProject(project: Project) {
         projectInstance = project
+    }
+    
+    func setThreshold(num: Int) {
+        threshold = num
     }
     
     /***************** PREPARE OCCURENCES ************/
@@ -494,7 +498,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         statesPlot.delegate = self
         //statesPlot.identifier = "states"
         
-        statesPlot.barWidth = 0.4
+        statesPlot.barWidth = 0.5
         statesPlot.barOffset = 0.5
         
         graph.addPlot(statesPlot, toPlotSpace: plotSpace)
@@ -504,7 +508,11 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         plotSpace.globalXRange = CPTPlotRange(location: 0, length: chosenBehaviourStates.count)
         plotSpace.globalYRange = CPTPlotRange(location: 0, length: yMaxStates)
         
-        xRange.length = 5.5
+        if chosenBehaviourStates.count < 6 {
+            plotSpace.globalXRange = CPTPlotRange(location: 0, length: maxBarPlotLength)
+        }
+        
+        xRange.length = maxBarPlotLength
         yRange.length = yMaxStates
         if yMaxStates == 0 {
             plotSpace.globalYRange = CPTPlotRange(location: 0, length: 1)
@@ -851,9 +859,16 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         var i = 0.5 as CGFloat
         
         for state in chosenBehaviourStates {
-            var label = CPTAxisLabel(text: state.name, textStyle: x.labelTextStyle) as CPTAxisLabel
-            var location: CGFloat = i++
+            var numChar = count(state.name)
+            var name = state.name
+            if numChar > threshold {
+                name = (name as NSString).substringToIndex(threshold)
+                name = name + "..."
+            }
+            
+            var label = CPTAxisLabel(text: name, textStyle: x.labelTextStyle) as CPTAxisLabel
             label.offset = x.majorTickLength
+            var location: CGFloat = i++
             label.tickLocation = location
             
             xLabels.addObject(label)
@@ -985,7 +1000,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         var x = 0 as NSDecimalNumber
         return x
     }
-
+    
     func barPlot(plot: CPTBarPlot!, barWasSelectedAtRecordIndex idx: UInt) {
 
         var x = Double(idx) + 0.5
