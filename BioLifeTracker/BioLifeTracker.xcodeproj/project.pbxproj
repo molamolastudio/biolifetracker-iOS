@@ -125,6 +125,10 @@
 		32698A701AE63D0900D73E9D /* CreateSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32698A6F1AE63D0900D73E9D /* CreateSessionViewController.swift */; };
 		32698A721AE63DBE00D73E9D /* CreateSessionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32698A711AE63DBE00D73E9D /* CreateSessionView.xib */; };
 		32698A741AE6423100D73E9D /* CreateSessionViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32698A731AE6423100D73E9D /* CreateSessionViewControllerDelegate.swift */; };
+		328298E11AE6A56000DB1488 /* SessionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328298E01AE6A56000DB1488 /* SessionCell.swift */; };
+		328298E31AE6A57800DB1488 /* SessionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 328298E21AE6A57800DB1488 /* SessionCell.xib */; };
+		328298E51AE6B26D00DB1488 /* MenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 328298E41AE6B26D00DB1488 /* MenuCell.xib */; };
+		328298E71AE6B27900DB1488 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 328298E61AE6B27900DB1488 /* MenuCell.swift */; };
 		32850BE21AB9625500C49D33 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E77F1AAEDB03006F374D /* ProjectsViewController.swift */; };
 		32850BE41AB9625500C49D33 /* EthogramFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */; };
 		32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A211AB1789100578C42 /* EthogramsViewController.swift */; };
@@ -378,6 +382,10 @@
 		32698A6F1AE63D0900D73E9D /* CreateSessionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateSessionViewController.swift; sourceTree = "<group>"; };
 		32698A711AE63DBE00D73E9D /* CreateSessionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreateSessionView.xib; sourceTree = "<group>"; };
 		32698A731AE6423100D73E9D /* CreateSessionViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateSessionViewControllerDelegate.swift; sourceTree = "<group>"; };
+		328298E01AE6A56000DB1488 /* SessionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionCell.swift; sourceTree = "<group>"; };
+		328298E21AE6A57800DB1488 /* SessionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SessionCell.xib; sourceTree = "<group>"; };
+		328298E41AE6B26D00DB1488 /* MenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuCell.xib; sourceTree = "<group>"; };
+		328298E61AE6B27900DB1488 /* MenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		32880DBD1AE5342F009A3B31 /* MemberPickerViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberPickerViewControllerDelegate.swift; sourceTree = "<group>"; };
 		329B29281AD15BAF007ADC65 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonCell.swift; path = FormLibrary/ButtonCell.swift; sourceTree = "<group>"; };
 		329B29291AD15BAF007ADC65 /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ButtonCell.xib; path = FormLibrary/ButtonCell.xib; sourceTree = "<group>"; };
@@ -798,6 +806,10 @@
 		32698A6A1AE61E9A00D73E9D /* Custom Cells */ = {
 			isa = PBXGroup;
 			children = (
+				328298E61AE6B27900DB1488 /* MenuCell.swift */,
+				328298E41AE6B26D00DB1488 /* MenuCell.xib */,
+				328298E01AE6A56000DB1488 /* SessionCell.swift */,
+				328298E21AE6A57800DB1488 /* SessionCell.xib */,
 				32EA4B4B1AE522AC00EC7B8C /* MemberCell.swift */,
 				32EA4B4D1AE522B600EC7B8C /* MemberCell.xib */,
 				32423B9A1AE2B1E600AFA2F8 /* CircleWithLabelCell.swift */,
@@ -1009,6 +1021,7 @@
 				32EA4B481AE51D7200EC7B8C /* Add User Filled-50.png in Resources */,
 				32423B8B1ADFDCC600AFA2F8 /* CustomPickerPopupCell.xib in Resources */,
 				7838E75E1AE3501C007C2562 /* GraphAnalysisView.xib in Resources */,
+				328298E51AE6B26D00DB1488 /* MenuCell.xib in Resources */,
 				32FB650A1AD94B6800391194 /* LaunchScreen.xib in Resources */,
 				AC530C711AE4F281008E1A17 /* bltname.png in Resources */,
 				AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */,
@@ -1030,6 +1043,7 @@
 				32423B811ADF766200AFA2F8 /* BehaviourStateCell.xib in Resources */,
 				32423BA71AE404FC00AFA2F8 /* Plus-50.png in Resources */,
 				AC530C771AE53EAF008E1A17 /* bltlogo.png in Resources */,
+				328298E31AE6A57800DB1488 /* SessionCell.xib in Resources */,
 				32EA4B4E1AE522B600EC7B8C /* MemberCell.xib in Resources */,
 				AC95FB3B1AE61C6300EE8FFE /* graphicon.png in Resources */,
 				326773BF1ACAEFB000899745 /* SingleLineTextCell.xib in Resources */,
@@ -1128,6 +1142,7 @@
 				326773B71ACAEFB000899745 /* CustomPickerPopup.swift in Sources */,
 				AC6A24A41ADD1B1500CF33D6 /* BLTIndividualProtocol.swift in Sources */,
 				24842FAE1AE1E9520071D395 /* NotificationService.swift in Sources */,
+				328298E11AE6A56000DB1488 /* SessionCell.swift in Sources */,
 				32423B9B1AE2B1E600AFA2F8 /* CircleWithLabelCell.swift in Sources */,
 				785B8C891AE5E65800A204E0 /* AnalysisTableViewCell.swift in Sources */,
 				32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */,
@@ -1156,6 +1171,7 @@
 				32423B9F1AE3A1BB00AFA2F8 /* EthogramDetailsViewController.swift in Sources */,
 				AC188C7C1AC2B11A00CB08C0 /* Storable.swift in Sources */,
 				AC6A249A1ADD1AAA00CF33D6 /* BLTProjectProtocol.swift in Sources */,
+				328298E71AE6B27900DB1488 /* MenuCell.swift in Sources */,
 				AC6A24A01ADD1AE600CF33D6 /* BLTEthogramProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

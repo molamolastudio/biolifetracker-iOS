@@ -236,6 +236,9 @@ class Session: BiolifeModel {
 }
 
 func ==(lhs: Session, rhs: Session) -> Bool {
+    if lhs.name != rhs.name { return false }
+    if lhs.type != rhs.type { return false }
+    if lhs.interval != rhs.interval { return false }
     if lhs.project != rhs.project { return false }
     if lhs.observations.count != rhs.observations.count { return false }
     if lhs.individuals.count != rhs.individuals.count { return false }

@@ -158,6 +158,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
         masterNav.setViewControllers([menu], animated: true)
         
+        splitVC.maximumPrimaryColumnWidth = 200
         splitVC.viewControllers = [masterNav, detailNav]
         splitVC.delegate = self
         

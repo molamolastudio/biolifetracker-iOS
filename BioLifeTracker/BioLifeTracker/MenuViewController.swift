@@ -26,25 +26,21 @@ class MenuViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
+        self.tableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! UITableViewCell
-        
-        var icon: UIImageView
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! MenuCell
         
         switch indexPath.section {
         case 0:
-            cell.textLabel!.text = projectSection[indexPath.row]
-            var image: UIImage? = nil
-            image = UIImage(named: projectSectionIcons[indexPath.row])
-            cell.imageView!.image = image
+            cell.label.text = projectSection[indexPath.row]
+            var image = UIImage(named: projectSectionIcons[indexPath.row])
+            cell.icon.image = image
         case 1:
-            cell.textLabel!.text = socialSectionLoggedIn[indexPath.row]
-            var image: UIImage? = nil
-            image = UIImage(named: socialSectionLoggedInIcons[indexPath.row])
-            cell.imageView!.image = image
+            cell.label.text = socialSectionLoggedIn[indexPath.row]
+            var image = UIImage(named: socialSectionLoggedInIcons[indexPath.row])
+            cell.icon.image = image
         default:
             break
         }
