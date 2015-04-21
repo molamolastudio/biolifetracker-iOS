@@ -10,12 +10,17 @@ import UIKit
 
 class ProjectsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var delegate: ProjectsViewControllerDelegate? = nil
+    
     @IBOutlet weak var tableView: UITableView!
     
     let cellReuseIdentifier = "SubtitleTableCell"
     let cellHeight: CGFloat = 50
     
     let numSections = 1
+    
+    override func loadView() {
+        self.view = NSBundle.mainBundle().loadNibNamed("PaddedTableView", owner: self, options: nil).first as! UIView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

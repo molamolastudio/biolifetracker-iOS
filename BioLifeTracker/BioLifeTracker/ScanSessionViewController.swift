@@ -26,7 +26,7 @@ class ScanSessionViewController: UIViewController, UITableViewDataSource, UITabl
     var timestamps: [NSDate] = []
     
     override func loadView() {
-        self.view = NSBundle.mainBundle().loadNibNamed("ScanSessionView", owner: self, options: nil).first as! UIView
+        self.view = NSBundle.mainBundle().loadNibNamed("PaddedTableView", owner: self, options: nil).first as! UIView
     }
     
     override func viewDidLoad() {

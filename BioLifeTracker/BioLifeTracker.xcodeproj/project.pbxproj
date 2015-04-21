@@ -119,10 +119,8 @@
 		326773C11ACAEFB000899745 /* MultiLineTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773B41ACAEFB000899745 /* MultiLineTextCell.swift */; };
 		326773C21ACAEFB000899745 /* SingleLineTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773B51ACAEFB000899745 /* SingleLineTextCell.swift */; };
 		326773C51ACD7C9A00899745 /* MenuViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773C41ACD7C9A00899745 /* MenuViewControllerDelegate.swift */; };
-		32698A651AE60C1100D73E9D /* ProjectsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32698A641AE60C1100D73E9D /* ProjectsView.xib */; };
-		32698A671AE6132400D73E9D /* EthogramsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32698A661AE6132400D73E9D /* EthogramsView.xib */; };
+		32698A651AE60C1100D73E9D /* PaddedTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32698A641AE60C1100D73E9D /* PaddedTableView.xib */; };
 		32698A691AE6171C00D73E9D /* FormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32698A681AE6171C00D73E9D /* FormView.xib */; };
-		32698A6C1AE620B000D73E9D /* ScanSessionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32698A6B1AE620B000D73E9D /* ScanSessionView.xib */; };
 		32850BE21AB9625500C49D33 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E77F1AAEDB03006F374D /* ProjectsViewController.swift */; };
 		32850BE41AB9625500C49D33 /* EthogramFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */; };
 		32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A211AB1789100578C42 /* EthogramsViewController.swift */; };
@@ -365,10 +363,8 @@
 		326773B41ACAEFB000899745 /* MultiLineTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiLineTextCell.swift; path = FormLibrary/MultiLineTextCell.swift; sourceTree = "<group>"; };
 		326773B51ACAEFB000899745 /* SingleLineTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleLineTextCell.swift; path = FormLibrary/SingleLineTextCell.swift; sourceTree = "<group>"; };
 		326773C41ACD7C9A00899745 /* MenuViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewControllerDelegate.swift; sourceTree = "<group>"; };
-		32698A641AE60C1100D73E9D /* ProjectsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectsView.xib; sourceTree = "<group>"; };
-		32698A661AE6132400D73E9D /* EthogramsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EthogramsView.xib; sourceTree = "<group>"; };
+		32698A641AE60C1100D73E9D /* PaddedTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaddedTableView.xib; sourceTree = "<group>"; };
 		32698A681AE6171C00D73E9D /* FormView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FormView.xib; sourceTree = "<group>"; };
-		32698A6B1AE620B000D73E9D /* ScanSessionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScanSessionView.xib; sourceTree = "<group>"; };
 		32880DBD1AE5342F009A3B31 /* MemberPickerViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberPickerViewControllerDelegate.swift; sourceTree = "<group>"; };
 		329B29281AD15BAF007ADC65 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonCell.swift; path = FormLibrary/ButtonCell.swift; sourceTree = "<group>"; };
 		329B29291AD15BAF007ADC65 /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ButtonCell.xib; path = FormLibrary/ButtonCell.xib; sourceTree = "<group>"; };
@@ -667,7 +663,6 @@
 				320920701ACA9A1600E8A456 /* MenuViewController.swift */,
 				326773C41ACD7C9A00899745 /* MenuViewControllerDelegate.swift */,
 				3205E77F1AAEDB03006F374D /* ProjectsViewController.swift */,
-				32698A641AE60C1100D73E9D /* ProjectsView.xib */,
 				321D62C21AD2615B00CF9BE9 /* ProjectsViewControllerDelegate.swift */,
 				323CBD8D1ADB8FF000A7C970 /* ProjectHomeViewController.swift */,
 				323CBD911ADB96F600A7C970 /* ProjectHomeViewControllerDelegate.swift */,
@@ -680,18 +675,17 @@
 				32423B8C1AE0023400AFA2F8 /* FocalSessionViewController.swift */,
 				32423B901AE0093B00AFA2F8 /* FocalSessionView.xib */,
 				323CBD971ADD624D00A7C970 /* ScanSessionViewController.swift */,
-				32698A6B1AE620B000D73E9D /* ScanSessionView.xib */,
 				323CBD991ADD634400A7C970 /* ScanSessionViewControllerDelegate.swift */,
 				323CBD951ADD58EA00A7C970 /* ScanViewController.swift */,
 				323CBD931ADD526600A7C970 /* ScanView.xib */,
 				32517A211AB1789100578C42 /* EthogramsViewController.swift */,
-				32698A661AE6132400D73E9D /* EthogramsView.xib */,
 				321D62C41AD2618800CF9BE9 /* EthogramsViewControllerDelegate.swift */,
 				3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */,
 				32423B9E1AE3A1BB00AFA2F8 /* EthogramDetailsViewController.swift */,
 				32423BAA1AE4F5CF00AFA2F8 /* WeatherViewController.swift */,
 				32423BAC1AE5068600AFA2F8 /* WeatherViewControllerDelegate.swift */,
 				32423BA81AE4F54500AFA2F8 /* WeatherView.xib */,
+				32698A641AE60C1100D73E9D /* PaddedTableView.xib */,
 				32698A6A1AE61E9A00D73E9D /* Custom Cells */,
 				3205E7501AAED9F9006F374D /* LaunchScreen.xib */,
 				3205E7451AAED9F9006F374D /* Supporting Files */,
@@ -1000,15 +994,13 @@
 				AC530C6F1AE4F23C008E1A17 /* bg_vertical.png in Resources */,
 				329B293B1AD15BBF007ADC65 /* PhotoPickerCell.xib in Resources */,
 				32423B911AE0093B00AFA2F8 /* FocalSessionView.xib in Resources */,
-				32698A671AE6132400D73E9D /* EthogramsView.xib in Resources */,
-				32698A651AE60C1100D73E9D /* ProjectsView.xib in Resources */,
+				32698A651AE60C1100D73E9D /* PaddedTableView.xib in Resources */,
 				32423B811ADF766200AFA2F8 /* BehaviourStateCell.xib in Resources */,
 				32423BA71AE404FC00AFA2F8 /* Plus-50.png in Resources */,
 				AC530C771AE53EAF008E1A17 /* bltlogo.png in Resources */,
 				32EA4B4E1AE522B600EC7B8C /* MemberCell.xib in Resources */,
 				326773BF1ACAEFB000899745 /* SingleLineTextCell.xib in Resources */,
 				326773BE1ACAEFB000899745 /* MultiLineTextCell.xib in Resources */,
-				32698A6C1AE620B000D73E9D /* ScanSessionView.xib in Resources */,
 				AC530C751AE4F424008E1A17 /* bltname_transparent.png in Resources */,
 				32698A691AE6171C00D73E9D /* FormView.xib in Resources */,
 				7838E7621AE3501C007C2562 /* GraphsView.xib in Resources */,

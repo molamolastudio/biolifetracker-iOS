@@ -48,6 +48,10 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     var newObservations = [Individual: [Observation]]()
     var states = [BehaviourState]()
     
+    override func loadView() {
+        self.view = NSBundle.mainBundle().loadNibNamed("FocalSessionView", owner: self, options: nil).first as! UIView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         hideObservationSection()

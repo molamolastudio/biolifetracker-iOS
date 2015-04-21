@@ -91,6 +91,10 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     // Returns an array of twenty colors at hue of 120
     let colors = randomColorsCount(20, hue: .Random, luminosity: .Light)
     
+    override func loadView() {
+        self.view = NSBundle.mainBundle().loadNibNamed("GraphsView", owner: self, options: nil).first as! UIView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

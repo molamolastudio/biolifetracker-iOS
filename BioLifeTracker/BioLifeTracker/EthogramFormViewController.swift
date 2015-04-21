@@ -8,7 +8,9 @@
 
 import UIKit
 
-class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
+class EthogramFormViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+    
+    @IBOutlet weak var tableView: UITableView!
     
     let nameCellIdentifier = "SingleLineTextCell"
     let stateCellIdentifier = "BehaviourStateCell"
@@ -35,8 +37,15 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
     // Collected data
     var ethogram = Ethogram()
     
+    override func loadView() {
+        self.view = NSBundle.mainBundle().loadNibNamed("PaddedTableView", owner: self, options: nil).first as! UIView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
         
         self.tableView.rowHeight = rowHeight
         
@@ -67,7 +76,7 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == firstSection {
             return getCellForFirstSection(indexPath)
         } else {
@@ -102,7 +111,7 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
             textField.removeTarget(self, action: Selector("extraRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
             textField.addTarget(self, action: Selector("textFieldDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
             cell.button.tag = indexPath.row
-
+            
         } else if ethogram.behaviourStates.count == indexPath.row {
             textField.text = ""
             textField.placeholder = messageNewState
@@ -177,7 +186,7 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
         refreshView()
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if isFirstSection(indexPath.section) {
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! SingleLineTextCell
             cell.textField.becomeFirstResponder()
@@ -187,11 +196,11 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sectionTitles[section]
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isFirstSection(section) {
             return firstSectionNumRows
         } else {
@@ -199,24 +208,24 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
         }
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return numSections
     }
     
     // For deleting extra behaviour states
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return isSecondSection(indexPath.section) && !isExtraRow(indexPath.row)
     }
     
-    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         return UITableViewCellEditingStyle.Delete
     }
     
     // If the cell is deleted, delete the behaviour state related to it.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-
+                
                 if !isExtraRow(indexPath.row) {
                     ethogram.removeBehaviourState(indexPath.row)
                     

@@ -23,6 +23,10 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     
     var alert: UIAlertController? = nil
     
+    override func loadView() {
+        self.view = NSBundle.mainBundle().loadNibNamed("FirstView", owner: self, options: nil).first as! UIView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -25,6 +25,10 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
     var admins: [User] = []
     var members: [User] = []
     
+    override func loadView() {
+        self.view = NSBundle.mainBundle().loadNibNamed("ProjectFormView", owner: self, options: nil).first as! UIView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
