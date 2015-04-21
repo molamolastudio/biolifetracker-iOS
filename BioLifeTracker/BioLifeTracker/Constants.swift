@@ -14,8 +14,4 @@ struct Constants {
         static let ethogram = "E"
         static let session = "S"
     }
-    
-    struct WebServer {
-        static let serverUrl: String = "https://bltserver.herokuapp.com"
-    }
 }

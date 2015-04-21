@@ -15,7 +15,7 @@ import Foundation
 class DeleteTask: CloudStorageTask {
     
     let item: CloudStorable
-    let serverUrl = NSURL(string: Constants.WebServer.serverUrl)!
+    let serverUrl = NSURL(string: CloudStorage.serverUrl)!
     var description: String {
         return "DeleteTask for \(item.classUrl) : \(item.id)"
     }

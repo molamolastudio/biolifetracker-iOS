@@ -12,6 +12,29 @@ import Foundation
 /// for use across cloud storage classes.
 struct CloudStorage {
     
+    static var defaultUrl: String = "https://bltserver.herokuapp.com"
+    static let userDefaults = NSUserDefaults.standardUserDefaults()
+    
+    static var serverUrl: String {
+        get {
+            userDefaults.synchronize()
+            let useCustomUrl = userDefaults.boolForKey("use_custom_url_preference")
+            if !useCustomUrl {
+                return defaultUrl
+            }
+            let preferredUrl = userDefaults.stringForKey("server_url_preference")!
+            if preferredUrl.stringByTrimmingCharactersInSet(.whitespaceAndNewlineCharacterSet()) == "" {
+                return defaultUrl
+            } else {
+                return preferredUrl
+            }
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: "server_url_preference")
+            NSUserDefaults.standardUserDefaults().synchronize()
+        }
+    }
+    
     static var networkThread: dispatch_queue_t = dispatch_queue_create(
         "com.cs3217.biolifetracker.network",
         DISPATCH_QUEUE_SERIAL)
