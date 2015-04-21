@@ -16,8 +16,6 @@ class MenuViewController: UITableViewController {
     
     let projectSection = ["Projects", "Ethograms", "Analyse"]
     let projectSectionIcons = ["foldericon", "tableicon", "graphicon"]
-    let settingsSection = ["Settings"]
-    let settingsSectionIcons = ["gearicon"]
     let socialSectionLoggedIn = ["Logout"]
     let socialSectionLoggedInIcons = ["logouticon"]
     
@@ -43,11 +41,6 @@ class MenuViewController: UITableViewController {
             image = UIImage(named: projectSectionIcons[indexPath.row])
             cell.imageView!.image = image
         case 1:
-            cell.textLabel!.text = settingsSection[indexPath.row]
-            var image: UIImage? = nil
-            image = UIImage(named: settingsSectionIcons[indexPath.row])
-            cell.imageView!.image = image
-        case 2:
             cell.textLabel!.text = socialSectionLoggedIn[indexPath.row]
             var image: UIImage? = nil
             image = UIImage(named: socialSectionLoggedInIcons[indexPath.row])
@@ -77,9 +70,6 @@ class MenuViewController: UITableViewController {
                     break
                 }
             case 1:
-                delegate!.userDidSelectSettings()
-                break
-            case 2:
                 delegate!.userDidSelectLogout()
                 break
             default:
@@ -97,8 +87,6 @@ class MenuViewController: UITableViewController {
         case 0:
             return projectSection.count
         case 1:
-            return settingsSection.count
-        case 2:
             return socialSectionLoggedIn.count
         default:
             return 0
