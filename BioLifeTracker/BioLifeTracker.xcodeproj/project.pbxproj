@@ -235,7 +235,12 @@
 		AC803E101ADCC1D8003E2A98 /* ExportObservationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC803E0F1ADCC1D8003E2A98 /* ExportObservationsService.swift */; };
 		AC9162AC1ACA6A0400FED714 /* CloudStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */; };
 		AC9162AD1ACA6CC300FED714 /* CloudStorable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */; };
+		AC95FB3A1AE61C6300EE8FFE /* foldericon.png in Resources */ = {isa = PBXBuildFile; fileRef = AC95FB371AE61C6300EE8FFE /* foldericon.png */; };
+		AC95FB3B1AE61C6300EE8FFE /* graphicon.png in Resources */ = {isa = PBXBuildFile; fileRef = AC95FB381AE61C6300EE8FFE /* graphicon.png */; };
+		AC95FB3C1AE61C6300EE8FFE /* tableicon.png in Resources */ = {isa = PBXBuildFile; fileRef = AC95FB391AE61C6300EE8FFE /* tableicon.png */; };
+		AC95FB401AE6208A00EE8FFE /* logouticon.png in Resources */ = {isa = PBXBuildFile; fileRef = AC95FB3F1AE6208A00EE8FFE /* logouticon.png */; };
 		AC9EE3471ACEC57200939476 /* BehaviourState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC9EE3461ACEC57200939476 /* BehaviourState.swift */; };
+		AC9FEFFA1AE62F3E00C8833C /* gearicon.png in Resources */ = {isa = PBXBuildFile; fileRef = AC9FEFF91AE62F3E00C8833C /* gearicon.png */; };
 		ACB073E91AC17BA3004E0BFC /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073E31AC17BA3004E0BFC /* AddressBook.framework */; };
 		ACB073EA1AC17BA3004E0BFC /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073E41AC17BA3004E0BFC /* AssetsLibrary.framework */; };
 		ACB073EB1AC17BA3004E0BFC /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACB073E51AC17BA3004E0BFC /* CoreText.framework */; };
@@ -435,9 +440,14 @@
 		AC6A24AB1ADD1B8100CF33D6 /* BLTPhotoProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTPhotoProtocol.swift; sourceTree = "<group>"; };
 		AC803E0F1ADCC1D8003E2A98 /* ExportObservationsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportObservationsService.swift; sourceTree = "<group>"; };
 		AC9162AB1ACA6A0400FED714 /* CloudStorable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorable.swift; sourceTree = "<group>"; };
+		AC95FB371AE61C6300EE8FFE /* foldericon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = foldericon.png; sourceTree = "<group>"; };
+		AC95FB381AE61C6300EE8FFE /* graphicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = graphicon.png; sourceTree = "<group>"; };
+		AC95FB391AE61C6300EE8FFE /* tableicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tableicon.png; sourceTree = "<group>"; };
+		AC95FB3F1AE6208A00EE8FFE /* logouticon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logouticon.png; sourceTree = "<group>"; };
 		AC9EE3381ACEC2C500939476 /* ProjectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectTests.swift; sourceTree = "<group>"; };
 		AC9EE33A1ACEC2E400939476 /* EthogramTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EthogramTests.swift; sourceTree = "<group>"; };
 		AC9EE3461ACEC57200939476 /* BehaviourState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BehaviourState.swift; sourceTree = "<group>"; };
+		AC9FEFF91AE62F3E00C8833C /* gearicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gearicon.png; sourceTree = "<group>"; };
 		ACB073E31AC17BA3004E0BFC /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		ACB073E41AC17BA3004E0BFC /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		ACB073E51AC17BA3004E0BFC /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -725,7 +735,12 @@
 				32423BA41AE404FC00AFA2F8 /* Edit User-50.png */,
 				AC530C761AE53EAF008E1A17 /* bltlogo.png */,
 				AC530C781AE53EBD008E1A17 /* bltlogo_transparent.png */,
+				AC9FEFF91AE62F3E00C8833C /* gearicon.png */,
 				AC530C701AE4F281008E1A17 /* bltname.png */,
+				AC95FB371AE61C6300EE8FFE /* foldericon.png */,
+				AC95FB381AE61C6300EE8FFE /* graphicon.png */,
+				AC95FB3F1AE6208A00EE8FFE /* logouticon.png */,
+				AC95FB391AE61C6300EE8FFE /* tableicon.png */,
 				AC530C731AE4F424008E1A17 /* bltname_transparent.png */,
 				32423BA51AE404FC00AFA2F8 /* Plus-50.png */,
 				AC530C6D1AE4F23C008E1A17 /* bg_vertical.png */,
@@ -969,6 +984,7 @@
 				329B292D1AD15BAF007ADC65 /* ButtonCell.xib in Resources */,
 				785B8C8B1AE5E66800A204E0 /* AnalysisTableViewCell.xib in Resources */,
 				32EA4B501AE530EE00EC7B8C /* MemberPickerView.xib in Resources */,
+				AC95FB3C1AE61C6300EE8FFE /* tableicon.png in Resources */,
 				781FD4691AE4159B00BBC0E0 /* AnalysisTableHeader.xib in Resources */,
 				323CBD901ADB901200A7C970 /* ProjectHomeView.xib in Resources */,
 				323CBD941ADD526600A7C970 /* ScanView.xib in Resources */,
@@ -992,16 +1008,21 @@
 				32EA4B461AE51B5C00EC7B8C /* ProjectFormView.xib in Resources */,
 				329B29371AD15BBF007ADC65 /* DefaultPickerCell.xib in Resources */,
 				AC530C6F1AE4F23C008E1A17 /* bg_vertical.png in Resources */,
+				AC95FB401AE6208A00EE8FFE /* logouticon.png in Resources */,
 				329B293B1AD15BBF007ADC65 /* PhotoPickerCell.xib in Resources */,
+				AC95FB3A1AE61C6300EE8FFE /* foldericon.png in Resources */,
 				32423B911AE0093B00AFA2F8 /* FocalSessionView.xib in Resources */,
+				32698A651AE60C1100D73E9D /* PaddedTableView.xib in Resources */,
 				32698A651AE60C1100D73E9D /* PaddedTableView.xib in Resources */,
 				32423B811ADF766200AFA2F8 /* BehaviourStateCell.xib in Resources */,
 				32423BA71AE404FC00AFA2F8 /* Plus-50.png in Resources */,
 				AC530C771AE53EAF008E1A17 /* bltlogo.png in Resources */,
 				32EA4B4E1AE522B600EC7B8C /* MemberCell.xib in Resources */,
+				AC95FB3B1AE61C6300EE8FFE /* graphicon.png in Resources */,
 				326773BF1ACAEFB000899745 /* SingleLineTextCell.xib in Resources */,
 				326773BE1ACAEFB000899745 /* MultiLineTextCell.xib in Resources */,
 				AC530C751AE4F424008E1A17 /* bltname_transparent.png in Resources */,
+				AC9FEFFA1AE62F3E00C8833C /* gearicon.png in Resources */,
 				32698A691AE6171C00D73E9D /* FormView.xib in Resources */,
 				7838E7621AE3501C007C2562 /* GraphsView.xib in Resources */,
 			);
