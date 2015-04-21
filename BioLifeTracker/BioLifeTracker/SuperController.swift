@@ -206,7 +206,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showProjectsPage() {
-        let vc = ProjectsViewController(style: UITableViewStyle.Grouped)
+        let vc = ProjectsViewController(nibName: "ProjectsView", bundle: nil)
         
         vc.delegate = self
         vc.title = "Projects"
@@ -244,7 +244,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showNewEthogramPage() {
-        let vc = EthogramFormViewController()
+        let vc = EthogramFormViewController(style: UITableViewStyle.Grouped)
         
         vc.title = "Create New Ethogram"
         
@@ -255,7 +255,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showEthogramDetailsPage() {
-        let vc = EthogramDetailsViewController()
+        let vc = EthogramDetailsViewController(style: UITableViewStyle.Grouped)
         
         vc.title = Data.selectedEthogram!.name
         vc.ethogram = Data.selectedEthogram!

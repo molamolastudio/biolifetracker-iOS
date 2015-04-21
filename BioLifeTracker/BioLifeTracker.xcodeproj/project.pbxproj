@@ -120,6 +120,7 @@
 		326773C11ACAEFB000899745 /* MultiLineTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773B41ACAEFB000899745 /* MultiLineTextCell.swift */; };
 		326773C21ACAEFB000899745 /* SingleLineTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773B51ACAEFB000899745 /* SingleLineTextCell.swift */; };
 		326773C51ACD7C9A00899745 /* MenuViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773C41ACD7C9A00899745 /* MenuViewControllerDelegate.swift */; };
+		32698A651AE60C1100D73E9D /* ProjectsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32698A641AE60C1100D73E9D /* ProjectsView.xib */; };
 		32850BE21AB9625500C49D33 /* ProjectsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E77F1AAEDB03006F374D /* ProjectsViewController.swift */; };
 		32850BE41AB9625500C49D33 /* EthogramFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7841AAFFE98006F374D /* EthogramFormViewController.swift */; };
 		32850BE51AB9625500C49D33 /* EthogramsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32517A211AB1789100578C42 /* EthogramsViewController.swift */; };
@@ -363,6 +364,7 @@
 		326773B41ACAEFB000899745 /* MultiLineTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultiLineTextCell.swift; path = FormLibrary/MultiLineTextCell.swift; sourceTree = "<group>"; };
 		326773B51ACAEFB000899745 /* SingleLineTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SingleLineTextCell.swift; path = FormLibrary/SingleLineTextCell.swift; sourceTree = "<group>"; };
 		326773C41ACD7C9A00899745 /* MenuViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewControllerDelegate.swift; sourceTree = "<group>"; };
+		32698A641AE60C1100D73E9D /* ProjectsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProjectsView.xib; sourceTree = "<group>"; };
 		32880DBD1AE5342F009A3B31 /* MemberPickerViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemberPickerViewControllerDelegate.swift; sourceTree = "<group>"; };
 		329B29281AD15BAF007ADC65 /* ButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ButtonCell.swift; path = FormLibrary/ButtonCell.swift; sourceTree = "<group>"; };
 		329B29291AD15BAF007ADC65 /* ButtonCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ButtonCell.xib; path = FormLibrary/ButtonCell.xib; sourceTree = "<group>"; };
@@ -661,6 +663,7 @@
 				320920701ACA9A1600E8A456 /* MenuViewController.swift */,
 				326773C41ACD7C9A00899745 /* MenuViewControllerDelegate.swift */,
 				3205E77F1AAEDB03006F374D /* ProjectsViewController.swift */,
+				32698A641AE60C1100D73E9D /* ProjectsView.xib */,
 				321D62C21AD2615B00CF9BE9 /* ProjectsViewControllerDelegate.swift */,
 				323CBD8D1ADB8FF000A7C970 /* ProjectHomeViewController.swift */,
 				323CBD911ADB96F600A7C970 /* ProjectHomeViewControllerDelegate.swift */,
@@ -983,6 +986,7 @@
 				AC530C6F1AE4F23C008E1A17 /* bg_vertical.png in Resources */,
 				329B293B1AD15BBF007ADC65 /* PhotoPickerCell.xib in Resources */,
 				32423B911AE0093B00AFA2F8 /* FocalSessionView.xib in Resources */,
+				32698A651AE60C1100D73E9D /* ProjectsView.xib in Resources */,
 				32423B811ADF766200AFA2F8 /* BehaviourStateCell.xib in Resources */,
 				32423BA71AE404FC00AFA2F8 /* Plus-50.png in Resources */,
 				AC530C771AE53EAF008E1A17 /* bltlogo.png in Resources */,

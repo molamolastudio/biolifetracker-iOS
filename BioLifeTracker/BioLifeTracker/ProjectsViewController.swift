@@ -8,8 +8,9 @@
 
 import UIKit
 
-class ProjectsViewController: UITableViewController {
+class ProjectsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var delegate: ProjectsViewControllerDelegate? = nil
+    @IBOutlet weak var tableView: UITableView!
     
     let cellReuseIdentifier = "SubtitleTableCell"
     let cellHeight: CGFloat = 50
@@ -19,52 +20,63 @@ class ProjectsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        
         self.tableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
+        
+        // Sets the subviews to display under the navigation bar
+        self.edgesForExtendedLayout = UIRectEdge.None
+        self.extendedLayoutIncludesOpaqueBars = false
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+        // Sets rounded corners
+        self.tableView.layer.cornerRadius = 8
+        self.tableView.layer.masksToBounds = true
     }
     
     // UITableViewDataSource and UITableViewDelegate METHODS
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SubtitleTableCell
         
         let project = ProjectManager.sharedInstance.projects[indexPath.row]
         
         cell.title.text = project.getDisplayName()
         cell.subtitle.text = "Created by: " + project.admins.first!.name
-        cell.rounded = true
-        cell.horizontalPadding = horizontalPadding
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if delegate != nil {
             delegate!.userDidSelectProject(ProjectManager.sharedInstance.projects[indexPath.row])
         }
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return ProjectManager.sharedInstance.projects.count
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return numSections
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return cellHeight
     }
     
     // For deleting projects
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
     
-    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+     func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         return UITableViewCellEditingStyle.Delete
     }
     
     // If the cell is deleted, delete the project.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         if editingStyle == UITableViewCellEditingStyle.Delete {
             ProjectManager.sharedInstance.removeProjects([indexPath.row])

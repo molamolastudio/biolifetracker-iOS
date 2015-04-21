@@ -32,6 +32,7 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
     let alertMessage = "You must add a name for the ethogram."
     
     var editable = false
+    var deletionEnabled = true
     
     // Collected data
     var originalEthogram: Ethogram? = nil
@@ -62,6 +63,9 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
     // Copies the data of the original ethogram into a temporary ethogram for editing.
     func getData() {
         if originalEthogram != nil {
+            // Enables deletion if this ethogram is not being used
+            deletionEnabled = !ProjectManager.sharedInstance.isEthogramInProjects(originalEthogram!)
+            println(ProjectManager.sharedInstance.isEthogramInProjects(originalEthogram!))
             // Copy over original ethogram
             ethogram = Ethogram()
             for s in originalEthogram!.behaviourStates {
@@ -107,6 +111,7 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
         cell.label.text = "Name"
         cell.textField.text = ethogram.name
         cell.textField.addTarget(self, action: Selector("nameRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
+        
         return cell
     }
     
@@ -236,7 +241,11 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
     }
     
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        return UITableViewCellEditingStyle.Delete
+        if deletionEnabled {
+            return UITableViewCellEditingStyle.Delete
+        } else {
+            return UITableViewCellEditingStyle.None
+        }
     }
     
     // If the cell is deleted, delete the behaviour state related to it.
@@ -245,6 +254,7 @@ class EthogramDetailsViewController: UITableViewController, UITextFieldDelegate 
             if let cell = tableView.cellForRowAtIndexPath(indexPath) {
                 
                 if !isExtraRow(indexPath.row) {
+                    
                     ethogram.removeBehaviourState(indexPath.row)
                     
                     refreshView()

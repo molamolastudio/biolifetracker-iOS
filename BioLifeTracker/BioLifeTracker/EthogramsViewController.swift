@@ -37,8 +37,6 @@ class EthogramsViewController: UITableViewController {
         
         cell.title.text = ethogram.name
         cell.subtitle.text = messageCellSubtitle + String(ethogram.behaviourStates.count)
-        cell.rounded = true
-        cell.horizontalPadding = horizontalPadding
         
         return cell
     }

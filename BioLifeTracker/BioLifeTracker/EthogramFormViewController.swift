@@ -16,6 +16,7 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
     let messageNewState = "+ Add new state"
     
     let rowHeight: CGFloat = 44
+    let horizontalPadding: CGFloat = 25
     
     let numSections = 2
     let firstSection = 0
@@ -81,6 +82,10 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
         cell.label.text = "Name"
         cell.textField.text = ethogram.name
         cell.textField.addTarget(self, action: Selector("nameRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
+        
+        cell.rounded = true
+        cell.horizontalPadding = horizontalPadding
+        
         return cell
     }
     
@@ -108,6 +113,9 @@ class EthogramFormViewController: UITableViewController, UITextFieldDelegate {
         textField.userInteractionEnabled = true
         textField.tag = indexPath.row
         cell.button.hidden = true
+        
+        cell.rounded = true
+        cell.horizontalPadding = horizontalPadding
         
         return cell
     }
