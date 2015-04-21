@@ -75,21 +75,17 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
     @IBAction func graphIndexChanged(sender: AnyObject) {
         switch graphSwitch.selectedSegmentIndex {
         case 0:
-            println("hour")
             graphsVC.toggleGraph(.HourPlot)
             userButton.hidden = false
             sessionButton.hidden = false
         case 1:
-            println("day")
             graphsVC.toggleGraph(.DayPlot)
             userButton.hidden = false
             sessionButton.hidden = false
         case 2:
-            println("states")
             graphsVC.toggleGraph(.StateChart)
             userButton.hidden = true
             sessionButton.hidden = true
-            
         default:
             break
         }
