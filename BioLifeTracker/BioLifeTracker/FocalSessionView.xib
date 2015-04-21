@@ -26,7 +26,7 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a0N-fC-MGu">
                     <rect key="frame" x="248" y="133" width="352" height="467"/>
-                    <color key="backgroundColor" red="0.33692086915690578" green="0.6525264427901869" blue="0.66666666666666663" alpha="0.41000000000000003" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.89275481511960419" green="0.89162207644297398" blue="0.91140819964349384" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lR0-eq-ggo">
                     <rect key="frame" x="248" y="133" width="352" height="467"/>
@@ -37,7 +37,7 @@
                                 <constraint firstAttribute="height" constant="25" id="RBd-5c-AT8"/>
                             </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -48,31 +48,32 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PHOTO" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ksA-xo-s0W">
                             <rect key="frame" x="15" y="242" width="50" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WEATHER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LJK-Ex-e9k">
-                            <rect key="frame" x="15" y="387" width="67" height="17"/>
+                            <rect key="frame" x="15" y="423" width="67" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOTES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gh8-gJ-Yzz">
                             <rect key="frame" x="184" y="242" width="48" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M4h-Yd-TbQ">
-                            <rect key="frame" x="184" y="264" width="153" height="118"/>
+                            <rect key="frame" x="184" y="264" width="153" height="154"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                         </textView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6TF-eT-tMk">
-                            <rect key="frame" x="15" y="264" width="154" height="118"/>
+                            <rect key="frame" x="15" y="264" width="154" height="154"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstAttribute="width" secondItem="6TF-eT-tMk" secondAttribute="height" multiplier="1:1" id="Nig-IF-NMH"/>
                                 <constraint firstAttribute="width" secondItem="6TF-eT-tMk" secondAttribute="height" multiplier="3:4" id="rSq-nj-JqL"/>
                             </constraints>
                             <variation key="default">
@@ -82,10 +83,13 @@
                             </variation>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c4H-Lz-lhs">
-                            <rect key="frame" x="15" y="332" width="154" height="50"/>
+                            <rect key="frame" x="15" y="368" width="154" height="50"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tbx-rI-Kd5">
                                     <rect key="frame" x="39" y="10" width="75" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="30" id="xkS-fF-Dvt"/>
+                                    </constraints>
                                     <state key="normal" title="Pick Photo">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -115,7 +119,7 @@
                             </collectionViewFlowLayout>
                         </collectionView>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H32-4Y-0Yq">
-                            <rect key="frame" x="15" y="409" width="322" height="50"/>
+                            <rect key="frame" x="15" y="445" width="322" height="50"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="ero-cu-wd1"/>
@@ -161,13 +165,14 @@
                             <exclude reference="GRF-DS-bkA"/>
                             <exclude reference="Ull-Mo-5L8"/>
                             <exclude reference="2Ak-VV-DqQ"/>
+                            <exclude reference="KYS-0C-2FT"/>
                             <exclude reference="oPL-OI-7Ec"/>
                         </mask>
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6vE-Wj-2sa">
                     <rect key="frame" x="0.0" y="133" width="248" height="467"/>
-                    <color key="backgroundColor" red="0.22722616619572336" green="0.44007687118810251" blue="0.44961332070707072" alpha="0.41000000000000003" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ZOj-xJ-iln">
                     <rect key="frame" x="15" y="170" width="220" height="415"/>
@@ -178,7 +183,7 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OBSERVATIONS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lXf-iC-BLP">
                     <rect key="frame" x="15" y="140" width="107" height="25"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="k5D-b2-UNi">
@@ -210,7 +215,7 @@
                     </variation>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="0.74117648601531982" green="0.93725496530532837" blue="0.93333339691162109" alpha="1" colorSpace="deviceRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="ZOj-xJ-iln" firstAttribute="top" secondItem="lXf-iC-BLP" secondAttribute="bottom" constant="5" id="11z-X9-Ut8"/>
                 <constraint firstItem="lXf-iC-BLP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="2uW-26-P9L"/>
