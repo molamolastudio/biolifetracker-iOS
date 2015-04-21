@@ -14,7 +14,6 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     let cellReuseIdentifier = "SubtitleTableCell"
     let cellHeight: CGFloat = 50
-    let horizontalPadding: CGFloat = 25
     
     let numSections = 1
     

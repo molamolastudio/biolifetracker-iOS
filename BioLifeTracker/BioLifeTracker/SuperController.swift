@@ -232,7 +232,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showEthogramsPage() {
-        let vc = EthogramsViewController(style: UITableViewStyle.Grouped)
+        let vc = EthogramsViewController(nibName: "EthogramsView", bundle: nil)
         
         vc.delegate = self
         vc.title = "Ethograms"
@@ -286,7 +286,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showNewIndividualPage() {
-        let vc = FormViewController(style: UITableViewStyle.Grouped)
+        let vc = FormViewController(nibName: "FormView", bundle: nil)
         
         vc.title = "New Individual"
         vc.setFormData(getFormDataForNewIndividual())
@@ -399,7 +399,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func showSettingsPage() {
-        let vc = FormViewController(style: UITableViewStyle.Grouped)
+        let vc = FormViewController(nibName: "FormView", bundle: nil)
         
         vc.title = "Settings"
         vc.setFormData(getFormDataForSettings())

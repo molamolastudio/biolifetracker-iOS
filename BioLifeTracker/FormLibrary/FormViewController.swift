@@ -8,7 +8,9 @@
 
 import UIKit
 
-class FormViewController: UITableViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
+class FormViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIPopoverPresentationControllerDelegate {
+    
+    @IBOutlet weak var tableView: UITableView!
     
     let defaultCellHeight: CGFloat = 44
     
@@ -28,8 +30,16 @@ class FormViewController: UITableViewController, UIImagePickerControllerDelegate
     
     var nibNames = ["SingleLineTextCell", "MultiLineTextCell", "BooleanPickerCell", "DatePickerCell", "DefaultPickerCell", "CustomPickerCell", "PhotoPickerCell", "ButtonCell"]
     
+    override func loadView() {
+        self.view = NSBundle.mainBundle().loadNibNamed("FormView", owner: self, options: nil).first as! UIView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        
         for var i = 0; i < nibNames.count; i++ {
             self.tableView.registerNib(UINib(nibName: nibNames[i], bundle: nil), forCellReuseIdentifier: nibNames[i])
         }
@@ -134,7 +144,7 @@ class FormViewController: UITableViewController, UIImagePickerControllerDelegate
     
     // UITableViewControllerDataSource and UITableViewDelegate methods
     // Returns a UITableViewCell based on the type of field in the given index path.
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = FormCell()
         if fields != nil {
             if let field = fields!.getFieldForIndex(indexPath) {
@@ -177,7 +187,7 @@ class FormViewController: UITableViewController, UIImagePickerControllerDelegate
     }
     
     // Returns the cell height depending on the type of cell in the row.
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if fields != nil {
             if let type = fields!.getFieldTypeForIndex(indexPath) {
                 if type == FormField.FieldType.TextMultiLine ||
@@ -344,7 +354,7 @@ class FormViewController: UITableViewController, UIImagePickerControllerDelegate
         return cell
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if fields != nil {
             return fields!.getNumberOfSections()
         } else {
@@ -352,7 +362,7 @@ class FormViewController: UITableViewController, UIImagePickerControllerDelegate
         }
     }
     
-    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if fields != nil {
             return fields!.getSectionTitle(section)
         } else {
@@ -360,7 +370,7 @@ class FormViewController: UITableViewController, UIImagePickerControllerDelegate
         }
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if fields != nil {
             return fields!.getNumberOfRowsForSection(section)
         } else {
@@ -368,7 +378,7 @@ class FormViewController: UITableViewController, UIImagePickerControllerDelegate
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         switch fields!.getFieldTypeForIndex(indexPath)! {
         case .TextSingleLine:
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! SingleLineTextCell
