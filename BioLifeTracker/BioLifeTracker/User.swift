@@ -11,7 +11,7 @@ import Foundation
 class User: NSObject, NSCoding {
     class var ClassUrl: String { return "users" }
     
-    var id: Int = 1
+    var id: Int = 0
     var email: String
     var name: String
     

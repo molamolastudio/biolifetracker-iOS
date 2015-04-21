@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		24034F101AE6329E00756980 /* PaddedTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32698A641AE60C1100D73E9D /* PaddedTableView.xib */; };
 		2408193A1AD503DD00DFE8AA /* NSURL+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240819391AD503DD00DFE8AA /* NSURL+Utils.swift */; };
 		240D04311AB718AE00D8BB9F /* Individual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D04301AB718AE00D8BB9F /* Individual.swift */; };
 		240D04331AB718EF00D8BB9F /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 240D04321AB718EF00D8BB9F /* Location.swift */; };
@@ -119,7 +120,6 @@
 		326773C11ACAEFB000899745 /* MultiLineTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773B41ACAEFB000899745 /* MultiLineTextCell.swift */; };
 		326773C21ACAEFB000899745 /* SingleLineTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773B51ACAEFB000899745 /* SingleLineTextCell.swift */; };
 		326773C51ACD7C9A00899745 /* MenuViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 326773C41ACD7C9A00899745 /* MenuViewControllerDelegate.swift */; };
-		32698A651AE60C1100D73E9D /* PaddedTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32698A641AE60C1100D73E9D /* PaddedTableView.xib */; };
 		32698A691AE6171C00D73E9D /* FormView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32698A681AE6171C00D73E9D /* FormView.xib */; };
 		32698A701AE63D0900D73E9D /* CreateSessionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 32698A6F1AE63D0900D73E9D /* CreateSessionViewController.swift */; };
 		32698A721AE63DBE00D73E9D /* CreateSessionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 32698A711AE63DBE00D73E9D /* CreateSessionView.xib */; };
@@ -1022,8 +1022,7 @@
 				329B293B1AD15BBF007ADC65 /* PhotoPickerCell.xib in Resources */,
 				AC95FB3A1AE61C6300EE8FFE /* foldericon.png in Resources */,
 				32423B911AE0093B00AFA2F8 /* FocalSessionView.xib in Resources */,
-				32698A651AE60C1100D73E9D /* PaddedTableView.xib in Resources */,
-				32698A651AE60C1100D73E9D /* PaddedTableView.xib in Resources */,
+				24034F101AE6329E00756980 /* PaddedTableView.xib in Resources */,
 				32423B811ADF766200AFA2F8 /* BehaviourStateCell.xib in Resources */,
 				32423BA71AE404FC00AFA2F8 /* Plus-50.png in Resources */,
 				AC530C771AE53EAF008E1A17 /* bltlogo.png in Resources */,

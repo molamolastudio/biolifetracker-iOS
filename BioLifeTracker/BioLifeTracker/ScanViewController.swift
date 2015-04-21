@@ -101,7 +101,7 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     // Copy over the information in the edited observations to the original observations.
     func saveData() {
-        for i in 0...observations.count {
+        for i in 0...observations.count { // intentionally include observations.count (last loop)
             if i < originalObservations.count {
                 // Copy over the updated information of the observation
                 copyOverObservation(observations[i], to: originalObservations[i])
@@ -276,7 +276,7 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     // Helper methods
     func getIndexOfState(state: BehaviourState) -> Int {
-        for i in 0...states.count {
+        for (var i = 0; i < states.count; i++) {
             if states[i] == state {
                 return i
             }

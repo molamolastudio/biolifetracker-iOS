@@ -43,17 +43,12 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         menu.title = userAuth.user.name
         showProjectsPage()
         if freshLogin {
-            loadingAlert = UIAlertController(title: "Loading Data", message: "Downloading your projects from server", preferredStyle: .Alert)
-            self.presentViewController(loadingAlert!, animated: true, completion: nil)
             startDownloadingProjectsFromServer()
             freshLogin = false
         } else {
-            refreshUserList()
+            startDownloadingProjectsFromServer()
         }
-        
-        if UserAuthService.sharedInstance.user.email != "Default" {
-            setupForDemo()
-        }
+//        setupForDemo()
     }
     
     // Closes the master view of the split view.
@@ -539,11 +534,12 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
                 alert.dismissViewControllerAnimated(true, completion: {
                     if (uploadTask.completedSuccessfully != true) {
                         self.displayAlert("Fail to Upload", message: "Cannot connect to server")
+                    } else {
+                        self.startDownloadingProjectsFromServer()
                     }
                 })
             })
         })
-        
     }
     
     func exportToExcel(sender: UIBarButtonItem) {
@@ -665,6 +661,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     
     func startDownloadingProjectsFromServer() {
+        loadingAlert = UIAlertController(title: "Loading Data", message: "Downloading your projects from server", preferredStyle: .Alert)
+        self.presentViewController(loadingAlert!, animated: true, completion: nil)
+
         let worker = CloudStorageWorker()
         
         // downloading items one by one is too slow, we have to warm cache
@@ -737,8 +736,13 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
             
             // add projects to ProjectManager
             for projectInfo in downloadProject.getResults() {
-                let project = Project(dictionary: projectInfo)
-                ProjectManager.sharedInstance.addProject(project)
+                if let id = projectInfo["id"] as? Int {
+                    if (id == self.currentProject?.id) ||
+                       (!ProjectManager.sharedInstance.hasProjectWithId(id)) {
+                        let project = Project(dictionary: projectInfo)
+                        ProjectManager.sharedInstance.addProject(project)
+                    }
+                }
             }
             
             // add ethograms to EthogramManager

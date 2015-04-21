@@ -499,7 +499,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     // Helper methods
     func getIndexOfState(state: BehaviourState) -> Int {
-        for i in 0...states.count {
+        for (var i = 0; i < states.count; i++) {
             if states[i] == state {
                 return i
             }

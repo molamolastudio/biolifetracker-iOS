@@ -40,7 +40,6 @@
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eq2-tV-nam" customClass="GPPSignInButton">
                     <rect key="frame" x="244" y="743" width="280" height="51"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="51" id="IAD-js-VZr"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="300" id="VVo-iv-8bH"/>
