@@ -12,7 +12,7 @@ class MenuViewController: UITableViewController {
     
     var delegate: MenuViewControllerDelegate? = nil
     
-    let cellReuseIdentifier = "SingleLineTextCell"
+    let cellReuseIdentifier = "MenuCell"
     
     let projectSection = ["Projects", "Ethograms", "Analyse"]
     let settingsSection = ["Settings"]
@@ -24,33 +24,46 @@ class MenuViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.tableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
+
+        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellReuseIdentifier)
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SingleLineTextCell
-        
-        cell.rounded = false
-        cell.textField.text = ""
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! UITableViewCell
         
         switch indexPath.section {
         case 0:
-            cell.label.text = projectSection[indexPath.row]
+            cell.textLabel!.text = projectSection[indexPath.row]
+    
+            var image: UIImage? = nil
+            switch indexPath.row {
+            case 0:
+                image = nil
+                break
+            case 1:
+                image = nil
+                break
+            case 2:
+                image = nil
+                break
+            default:
+                break
+            }
+            
+            cell.imageView!.image = image
+            
             break
         case 1:
-            cell.label.text = settingsSection[indexPath.row]
+            cell.textLabel!.text = settingsSection[indexPath.row]
+            cell.imageView!.image = nil
             break
         case 2:
-            
-            cell.label.text = socialSectionLoggedIn[indexPath.row]
-            
+            cell.textLabel!.text = socialSectionLoggedIn[indexPath.row]
+            cell.imageView!.image = nil
             break
         default:
             break
         }
-        
-        cell.textField.enabled = false
         
         return cell
     }
