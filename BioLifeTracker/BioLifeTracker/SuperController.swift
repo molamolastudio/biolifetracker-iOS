@@ -48,7 +48,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         } else {
             startDownloadingProjectsFromServer()
         }
-//        setupForDemo()
+        //        setupForDemo()
     }
     
     // Closes the master view of the split view.
@@ -330,7 +330,28 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         vc.title = session.name
         vc.currentSession = session
         
-        var btn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("showCreateScanPagePopup"))
+        // If user created the object
+        if session.createdBy == UserAuthService.sharedInstance.user {
+        var btn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("showCreateScanPage"))
+        vc.navigationItem.rightBarButtonItem = btn
+        }
+        
+        detailNav.pushViewController(vc, animated: true)
+    }
+    
+    func showCreateScanPage() {
+        let vc = ScanViewController()
+        
+        let formatter = NSDateFormatter()
+        formatter.dateStyle = .MediumStyle
+        formatter.timeStyle = .ShortStyle
+        
+        vc.title = "New Scan"
+        vc.editable = true
+        vc.currentSession = currentSession!
+        vc.selectedTimestamp = NSDate()
+        
+        var btn = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("createNewScan"))
         vc.navigationItem.rightBarButtonItem = btn
         
         detailNav.pushViewController(vc, animated: true)
@@ -352,28 +373,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
             var btn = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("updateEditButtonForScan"))
             vc.navigationItem.rightBarButtonItem = btn
         }
-        
-        detailNav.pushViewController(vc, animated: true)
-    }
-    
-    func showCreateScanPagePopup() {
-        // Popup settings page
-        // If all fields entered then showCreateScanPage
-        
-    }
-    
-    func showCreateScanPage() {
-        let vc = ScanViewController()
-        
-        let formatter = NSDateFormatter()
-        formatter.dateStyle = .MediumStyle
-        formatter.timeStyle = .ShortStyle
-        
-        vc.title = "New Scan"
-        vc.editable = true
-        
-        var btn = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("updateEditButtonForScan"))
-        vc.navigationItem.rightBarButtonItem = btn
         
         detailNav.pushViewController(vc, animated: true)
     }
@@ -443,6 +442,15 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
                 EthogramManager.sharedInstance.addEthogram(vc.ethogram)
                 dismissCurrentPage()
             }
+        }
+    }
+    
+    func createNewScan() {
+        if let vc = detailNav.visibleViewController as? ScanViewController {
+            if vc.observations.count > 0 {
+                currentSession!.addObservation(vc.observations)
+            }
+            dismissCurrentPage()
         }
     }
     
@@ -604,6 +612,11 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         showScanPage(session, timestamp: timestamp)
     }
     
+    // UIPopoverPresentationControllerDelegate method
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle{
+        return .None
+    }
+    
     // Helper methods
     func showCorruptFileAlert() {
         displayAlert("Save File Corrupt", message: "Unable to load save file.")
@@ -639,7 +652,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func startDownloadingProjectsFromServer() {
         loadingAlert = UIAlertController(title: "Loading Data", message: "Downloading your projects from server", preferredStyle: .Alert)
         self.presentViewController(loadingAlert!, animated: true, completion: nil)
-
+        
         let worker = CloudStorageWorker()
         
         // downloading items one by one is too slow, we have to warm cache
@@ -714,9 +727,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
             for projectInfo in downloadProject.getResults() {
                 if let id = projectInfo["id"] as? Int {
                     if (id == self.currentProject?.id) ||
-                       (!ProjectManager.sharedInstance.hasProjectWithId(id)) {
-                        let project = Project(dictionary: projectInfo)
-                        ProjectManager.sharedInstance.addProject(project)
+                        (!ProjectManager.sharedInstance.hasProjectWithId(id)) {
+                            let project = Project(dictionary: projectInfo)
+                            ProjectManager.sharedInstance.addProject(project)
                     }
                 }
             }
