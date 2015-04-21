@@ -16,6 +16,8 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet weak var sessionView: UITableView!
     @IBOutlet weak var addMembersButton: UIButton!
     
+    let NOT_FOUND = -1
+    
     let memberTag = 2
     let sessionTag = 3
     
@@ -223,7 +225,7 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         let member = members[sender.tag]
         let index = getAdminIndexForMember(member)
         
-        if index != -1 {
+        if index != NOT_FOUND {
             currentProject!.removeAdmins([index])
         }
         memberView.reloadData()
@@ -241,13 +243,11 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     // Helper methods
     func getAdminIndexForMember(member: User) -> Int {
         let admins = currentProject!.admins
-        
-        var result = -1
-        for a in 0...admins.count {
-            if member == admins[a] {
-                result = a
+        for (var i = 0; i < admins.count; i++) {
+            if member == admins[i] {
+                return i
             }
         }
-        return result
+        return NOT_FOUND
     }
 }

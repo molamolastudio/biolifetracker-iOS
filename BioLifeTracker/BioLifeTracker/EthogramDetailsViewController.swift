@@ -87,7 +87,7 @@ class EthogramDetailsViewController: UIViewController, UITableViewDataSource, UI
     // Copies over the edited behaviour states into the original ethogram.
     func saveData() {
         if originalEthogram != nil {
-            for i in 0...ethogram.behaviourStates.count {
+            for (var i = 0; i < ethogram.behaviourStates.count; i++) {
                 if i < originalEthogram!.behaviourStates.count {
                     originalEthogram!.behaviourStates[i].updateName(ethogram.behaviourStates[i].name)
                     originalEthogram!.behaviourStates[i].updateInformation(ethogram.behaviourStates[i].name)
