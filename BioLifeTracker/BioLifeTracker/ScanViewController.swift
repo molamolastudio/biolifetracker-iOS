@@ -45,11 +45,6 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         getData()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        showObservationAtIndex(NSIndexPath(forRow: 0, inSection: 0))
-    }
-    
     func setupCollectionViews() {
         animalsView.dataSource = self
         animalsView.delegate = self
@@ -121,6 +116,8 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     // UICollectionViewDataSource methods
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
+        println("cellForItemAtIndexPath")
+        
         if collectionView == animalsView {
             return getCellForAnimalsView(indexPath)
         } else if collectionView == statesView {
@@ -183,6 +180,7 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     // UICollectionViewDelegate methods
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        println("didSelectItemAtIndexPath")
         if collectionView == animalsView {
             
             selectedObservation = indexPath.row
@@ -207,6 +205,7 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func showObservationAtIndex(indexPath: NSIndexPath) {
+        println("showObservationAtIndex")
         showAnimalAsSelected(indexPath.row)
         
         let observation = observations[indexPath.row]
@@ -214,6 +213,7 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func showAnimalAsSelected(selectedIndex: Int) {
+        println("showAnimalAsSelected")
         if selectedIndex < observations.count {
             for i in 0...observations.count - 1 {
                 let index = NSIndexPath(forRow: i, inSection: 0)
@@ -242,6 +242,7 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     func showStateAsSelected(selectedIndex: Int) {
+        println("showStateAsSelected")
         if selectedIndex < states.count {
             for i in 0...states.count - 1 {
                 let index = NSIndexPath(forRow: i, inSection: 0)
