@@ -268,35 +268,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         detailNav.pushViewController(vc, animated: true)
     }
     
-    func showCreateSessionPopup() {
-        // Popup instead
-        // selector to create new session
-        // set currentSession here
-        // then showSession
-        let alert = UIAlertController(title: "New Session", message: "", preferredStyle: .Alert)
-        
-        // Adds buttons
-        let actionCancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
-        let actionOk = UIAlertAction(title: "OK", style: .Default, handler: {action in
-            let textField = alert.textFields!.first as! UITextField
-            
-        })
-        actionOk.enabled = false
-        alert.addAction(actionOk)
-        alert.addAction(actionCancel)
-        
-        // Adds a text field for the label
-        alert.addTextFieldWithConfigurationHandler({textField in
-            textField.placeholder = "Name"
-            
-            NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
-                actionOk.enabled = textField.text != ""
-            }
-        })
-        
-        self.presentViewController(alert, animated: true, completion: nil)
-    }
-    
     func showSession() {
         if currentSession != nil {
             if currentSession!.type == SessionType.Focal {
@@ -601,10 +572,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     func userDidSelectGraph(project: Project) {
         showAnalysisPageWithProject(project)
-    }
-    
-    func userDidSelectCreateSession() {
-        showCreateSessionPopup()
     }
     
     // ScanSessionViewControllerDelegate methods
