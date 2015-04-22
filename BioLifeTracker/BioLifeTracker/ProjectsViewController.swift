@@ -52,7 +52,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
         let project = ProjectManager.sharedInstance.projects[indexPath.row]
         
         cell.title.text = project.getDisplayName()
-        cell.subtitle.text = "Created by: " + project.admins.first!.name
+        cell.subtitle.text = "Created by: " + project.createdBy.name
         
         return cell
     }
@@ -102,7 +102,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
             presentViewController(alertController, animated: true, completion: nil)
             
             let currentUser = UserAuthService.sharedInstance.user
-            let isAdmin = (project.admins.filter { $0 == currentUser }).count > 0
+            let isAdmin = project.containsAdmin(currentUser)
             project.removeMember(currentUser)
             let worker = CloudStorageWorker()
             let uploadTask = UploadTask(item: project)

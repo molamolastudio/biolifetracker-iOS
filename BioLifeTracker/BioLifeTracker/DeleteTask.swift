@@ -17,7 +17,7 @@ class DeleteTask: CloudStorageTask {
     let item: CloudStorable
     let serverUrl = NSURL(string: CloudStorage.serverUrl)!
     var description: String {
-        return "DeleteTask for \(item.classUrl) : \(item.id)"
+        return "Deleting \(item.classUrl) with id \(item.id)"
     }
     var completedSuccessfully: Bool?
     
