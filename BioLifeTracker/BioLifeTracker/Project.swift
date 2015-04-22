@@ -122,6 +122,15 @@ class Project: BiolifeModel, Storable {
         assert(!contains(admins, admin))
     }
     
+    func containsAdmin(user: User) -> Bool {
+        for admin in admins {
+            if admin == user {
+                return true
+            }
+        }
+        return false
+    }
+    
     /********************Members*******************/
     //
     /// Adds member to the project if the member is not previously contained

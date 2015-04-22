@@ -167,15 +167,14 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         cell.label.text = member.name
         
         // Show the admin label
-        cell.adminLabel.hidden = !contains(currentProject!.admins, member)
+        cell.adminLabel.hidden = !(currentProject!.containsAdmin(member))
         
         // Allow admin privileges if current user is an admin
-        if contains(currentProject!.admins, UserAuthService.sharedInstance.user) {
+        let user = UserAuthService.sharedInstance.user
+        if currentProject!.containsAdmin(user) {
             cell.button.hidden = false
             addMembersButton.hidden = false
-            println(currentProject!.admins)
-            println(member)
-            if contains(currentProject!.admins, member) {
+            if currentProject!.containsAdmin(member) {
                 cell.button.setTitle("Remove Admin", forState: .Normal)
                 cell.button.addTarget(self, action: Selector("removeAdmin:"), forControlEvents: .TouchUpInside)
             } else {

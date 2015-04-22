@@ -9,5 +9,5 @@
 import Foundation
 
 protocol EthogramsViewControllerDelegate {
-    func userDidSelectEthogram(selectedEthogram: Ethogram)
+    func userDidSelectEthogram(selectedEthogram: Int)
 }

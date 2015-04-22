@@ -100,7 +100,8 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
         memberPicker.modalPresentationStyle = .Popover
         memberPicker.preferredContentSize = CGSizeMake(400, 400)
         
-        memberPicker.members = UserManager.sharedInstance.getUsersExcept(members)
+        memberPicker.members = UserManager.sharedInstance.getUsersExcept(
+            members + [UserAuthService.sharedInstance.user])
         
         let popoverController = memberPicker.popoverPresentationController!
         popoverController.permittedArrowDirections = .Any
