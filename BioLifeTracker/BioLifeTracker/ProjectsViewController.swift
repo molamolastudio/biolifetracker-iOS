@@ -114,6 +114,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
                     dispatch_async(dispatch_get_main_queue(), {
                         self.tableView.reloadData()
                         alertController.dismissViewControllerAnimated(false, completion: nil)
+                        self.deleteProjectIfHasNoMember(project)
                     })
                 } else {
                     project.addMember(currentUser)
@@ -129,6 +130,15 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
                     })
                 }
             }
+            worker.startExecution()
+        }
+    }
+    
+    func deleteProjectIfHasNoMember(project: Project) {
+        if project.members.count == 0 {
+            let deleteTask = DeleteTask(item: project)
+            let worker = CloudStorageWorker()
+            worker.enqueueTask(deleteTask)
             worker.startExecution()
         }
     }
