@@ -195,6 +195,8 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
                 
                 if observation.photo != nil {
                     photoView.image = observation.photo!.image
+                } else {
+                    photoView.image = nil
                 }
             } else {
                 cell.layer.borderWidth = borderDeselected

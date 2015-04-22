@@ -320,8 +320,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
                 // Popup a alert view with text field
                 showFormForIndividual(indexPath)
             } else {
-                refreshIndividuals()
-                refreshObservations()
+                refreshViews()
             }
             
         } else if collectionView == statesView {
@@ -441,6 +440,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         
         if observation.photo != nil {
             photoView.image = observation.photo!.image
+        } else {
+            photoView.image = nil
         }
     }
     
