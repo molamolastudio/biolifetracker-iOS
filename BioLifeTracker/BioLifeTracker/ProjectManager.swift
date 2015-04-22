@@ -50,6 +50,7 @@ class ProjectManager: NSObject, Storable {
     func updateProject(index: Int, project: Project) {
         self._projects.removeAtIndex(index)
         self._projects.insert(project, atIndex: index)
+        saveToArchives()
     }
     
     func removeProjects(indexes: [Int]) {

@@ -9,5 +9,5 @@
 import Foundation
 
 protocol ProjectsViewControllerDelegate {
-    func userDidSelectProject(selectedProject: Project)
+    func userDidSelectProject(selectedProject: Int)
 }

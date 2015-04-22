@@ -28,6 +28,7 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     let textCellHeight: CGFloat = 44
     let memberCellHeight: CGFloat = 50
     
+    var currentProjectIndex: Int? = nil
     var currentProject: Project? = nil
     
     var graphsVC: GraphsViewController!
@@ -41,6 +42,13 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         
         setupTableViews()
         setupGraphView()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        println("update before \(currentProject!.sessions.count)")
+        ProjectManager.sharedInstance.updateProject(currentProjectIndex!, project: currentProject!)
     }
     
     func setupTableViews() {
@@ -110,7 +118,7 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     
     // MemberPickerViewControllerDelegate methods
     func userDidSelectMember(member: User) {
-        currentProject?.addMember(member)
+        currentProject!.addMember(member)
         memberView.reloadData()
     }
     
@@ -138,7 +146,9 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     
     // CreateSessionViewControllerDelegate methods
     func userDidFinishCreatingSession(session: Session) {
+        println("before \(currentProject!.sessions.count)")
         currentProject!.addSession(session)
+        println("after \(currentProject!.sessions.count)")
         sessionView.reloadData()
     }
     

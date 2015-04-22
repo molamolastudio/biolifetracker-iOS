@@ -60,7 +60,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
     
      func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if delegate != nil {
-            delegate!.userDidSelectProject(ProjectManager.sharedInstance.projects[indexPath.row])
+            delegate!.userDidSelectProject(indexPath.row)
         }
     }
     
