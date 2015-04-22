@@ -88,8 +88,6 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         
         notesView.delegate = self
         
-        photoView.contentMode = UIViewContentMode.ScaleAspectFit
-        
         observationsView.registerNib(UINib(nibName: textCellIdentifier, bundle: nil), forCellReuseIdentifier: textCellIdentifier)
         individualsView.registerNib(UINib(nibName: circleCellIdentifier, bundle: nil), forCellWithReuseIdentifier: circleCellIdentifier)
         statesView.registerNib(UINib(nibName: circleLabelCellIdentifier, bundle: nil), forCellWithReuseIdentifier: circleLabelCellIdentifier)
