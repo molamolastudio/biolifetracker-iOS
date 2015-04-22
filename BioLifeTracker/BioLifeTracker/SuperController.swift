@@ -462,6 +462,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         if let vc = detailNav.visibleViewController as? ScanViewController {
             
             vc.saveData()
+            currentProject!.updateSession(currentSessionIndex!, updatedSession: vc.currentSession!)
             ProjectManager.sharedInstance.updateProject(currentProjectIndex!, project: currentProject!)
             
             vc.makeEditable(false)
@@ -474,6 +475,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         if let vc = detailNav.visibleViewController as? FocalSessionViewController {
             
             vc.saveData()
+            currentProject!.updateSession(currentSessionIndex!, updatedSession: vc.currentSession!)
             ProjectManager.sharedInstance.updateProject(currentProjectIndex!, project: currentProject!)
             
             vc.makeEditable(false)

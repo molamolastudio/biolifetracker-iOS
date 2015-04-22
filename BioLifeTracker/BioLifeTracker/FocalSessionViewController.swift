@@ -260,6 +260,12 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         var num = indexPath.row % individualColors.count
         cell.backgroundColor = individualColors[num]
         
+        if newObservations[individuals[indexPath.row]]!.count == 0 {
+            hideObservationSection()
+        } else {
+            showObservationSection()
+        }
+        
         return cell
     }
     
@@ -320,8 +326,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
                 // Popup a alert view with text field
                 showFormForIndividual(indexPath)
             } else {
-                refreshIndividuals()
-                refreshObservations()
+                refreshViews()
             }
             
         } else if collectionView == statesView {
@@ -441,6 +446,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         
         if observation.photo != nil {
             photoView.image = observation.photo!.image
+        } else {
+            photoView.image = nil
         }
     }
     

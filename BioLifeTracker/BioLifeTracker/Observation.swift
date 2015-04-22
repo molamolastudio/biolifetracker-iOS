@@ -134,6 +134,7 @@ class Observation: BiolifeModel {
         self._weather = aDecoder.decodeObjectForKey("weather") as? Weather
         self._individual = aDecoder.decodeObjectForKey("individual") as? Individual
         self._information = aDecoder.decodeObjectForKey("information") as! String
+        self._photo = aDecoder.decodeObjectForKey("photo") as? Photo
         super.init(coder: aDecoder)
     }
     
@@ -171,6 +172,7 @@ extension Observation: NSCoding {
         aCoder.encodeObject(_weather, forKey: "weather")
         aCoder.encodeObject(_individual, forKey: "individual")
         aCoder.encodeObject(_information, forKey: "information")
+        aCoder.encodeObject(_photo, forKey: "photo")
     }
 }
 
