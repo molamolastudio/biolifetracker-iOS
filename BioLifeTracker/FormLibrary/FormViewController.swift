@@ -112,6 +112,7 @@ class FormViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             popup.data = cell.pickerValues
             
+            
             // Sets the currently selected index if it exists.
             if let index = cell.selectedValue as? Int {
                 popup.selectedIndex = index
@@ -120,7 +121,7 @@ class FormViewController: UIViewController, UITableViewDataSource, UITableViewDe
             let popoverController = popup.popoverPresentationController!
             popoverController.permittedArrowDirections = .Any
             popoverController.delegate = self
-            popoverController.sourceView = cell
+            popoverController.sourceView = cell.button
             popoverController.sourceRect = CGRectMake(0, 0, 0, 0)
             
             presentViewController(popup, animated: true, completion: nil)
