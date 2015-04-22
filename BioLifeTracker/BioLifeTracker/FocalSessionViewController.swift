@@ -249,7 +249,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
             }
         }
         
-        cell.backgroundColor = individualColors[indexPath.row]
+        var num = indexPath.row % individualColors.count
+        cell.backgroundColor = individualColors[num]
         
         return cell
     }
@@ -271,7 +272,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
             cell.circleView.layer.borderWidth = borderDeselected
         }
         
-        cell.circleView.backgroundColor = stateColors[indexPath.row]
+        var num = indexPath.row % stateColors.count
+        cell.circleView.backgroundColor = stateColors[num]
         
         cell.userInteractionEnabled = editable
         

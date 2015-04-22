@@ -196,7 +196,8 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
             }
         }
         
-        cell.backgroundColor = animalColors[indexPath.row]
+        var num = indexPath.row % animalColors.count
+        cell.backgroundColor = animalColors[num]
         
         return cell
     }
@@ -218,7 +219,8 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
             cell.circleView.layer.borderWidth = borderDeselected
         }
         
-        cell.circleView.backgroundColor = stateColors[indexPath.row]
+        var num = indexPath.row % stateColors.count
+        cell.circleView.backgroundColor = stateColors[num]
         cell.userInteractionEnabled = editable
         
         return cell

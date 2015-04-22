@@ -1044,7 +1044,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     
     func barFillForBarPlot(barPlot: CPTBarPlot!, recordIndex idx: UInt) -> CPTFill! {
         
-        var number = Int(idx) % 100
+        var number = Int(idx) % colors.count
         var chosenColor = colors[number]
         return CPTFill(color: CPTColor(CGColor: chosenColor.CGColor))
     }
