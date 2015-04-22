@@ -24,6 +24,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var test: Int? = nil
         
         self.tableView.dataSource = self
         self.tableView.delegate = self

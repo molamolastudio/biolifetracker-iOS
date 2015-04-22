@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ScanViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, WeatherViewControllerDelegate {
+class ScanViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, WeatherViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     @IBOutlet weak var animalsView: UICollectionView!
     @IBOutlet weak var statesView: UICollectionView!
@@ -36,6 +36,7 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     let stateColors = randomColorsCount(50, hue: .Blue, luminosity: .Light)
     
     let weatherVC = WeatherViewController()
+    var imagePicker = UIAlertController()
     
     var editable = false
     
@@ -65,6 +66,7 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     
     func setupViews() {
         setupWeatherController()
+        setupImagePicker()
         
         animalsView.dataSource = self
         animalsView.delegate = self
@@ -108,6 +110,7 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         animalsView.reloadData()
         statesView.reloadData()
         updateArrows()
+        photoPickerView.hidden = !editable
         notesView.text = ""
         notesView.userInteractionEnabled = editable
         weatherVC.view.userInteractionEnabled = editable
@@ -127,6 +130,7 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
             observations.removeAll()
             for o in originalObservations {
                 let newObservation = Observation(session: o.session, state: o.state, timestamp: o.timestamp, information: o.information)
+                copyOverObservation(o, to: newObservation)
                 observations.append(newObservation)
             }
         }
@@ -149,6 +153,7 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     func copyOverObservation(from: Observation, to: Observation) {
         to.changeBehaviourState(from.state)
         to.updateInformation(from.information)
+        to.updatePhoto(from.photo)
         if from.weather != nil {
             to.changeWeather(from.weather!)
         }
@@ -314,6 +319,64 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         selectedObservation = selectedObservation! + 1
         updateArrows()
         refreshView()
+    }
+    
+    // Methods for showing image picker
+    // IBActions for buttons
+    @IBAction func photoBtnPressed(sender: UIButton) {
+        imagePicker.popoverPresentationController!.sourceView = sender
+        imagePicker.popoverPresentationController!.sourceRect = CGRectMake(0, 0, 0, 0)
+        self.presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    // Creates a UIAlertController to display a menu for choosing a source for picking photos.
+    func setupImagePicker() {
+        imagePicker = UIAlertController(title: "Pick Photo From", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
+        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
+            let actionCamera = UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default, handler: { UIAlertAction in self.openCameraPicker()})
+            imagePicker.addAction(actionCamera)
+        }
+        
+        let actionGallery = UIAlertAction(title: "Gallery", style: UIAlertActionStyle.Default, handler: { UIAlertAction in self.openGalleryPicker()})
+        let actionCancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        
+        imagePicker.addAction(actionGallery)
+        imagePicker.addAction(actionCancel)
+    }
+    
+    func openCameraPicker() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        picker.sourceType = UIImagePickerControllerSourceType.Camera
+        
+        self.presentViewController(picker, animated: true, completion: nil)
+    }
+    
+    func openGalleryPicker() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        self.presentViewController(picker, animated: true, completion: nil)
+    }
+    
+    // UIImagePickerControllerDelegate methods
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            if photoView != nil {
+                photoView.image = image
+                observations[selectedObservation!].updatePhoto(Photo(image: image))
+            }
+        }
+        
+        picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
     // Helper methods

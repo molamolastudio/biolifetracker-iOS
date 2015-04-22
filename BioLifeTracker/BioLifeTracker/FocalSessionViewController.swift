@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FocalSessionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, WeatherViewControllerDelegate  {
+class FocalSessionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, WeatherViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
     
     @IBOutlet weak var individualsView: UICollectionView!
     @IBOutlet weak var observationsView: UITableView!
@@ -36,6 +36,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     let messageAdd = "+ Add"
     
     let weatherVC = WeatherViewController()
+    var imagePicker = UIAlertController()
+    
     let formatter = NSDateFormatter()
     
     var editable = false
@@ -61,6 +63,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         hideObservationSection()
         setupViews()
         getData()
+        
         // Sets up the date formatter for converting dates to strings
         formatter.dateStyle = .ShortStyle
         formatter.timeStyle = .ShortStyle
@@ -72,6 +75,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     func setupViews() {
         setupWeatherController()
+        setupImagePicker()
         
         observationsView.dataSource = self
         observationsView.delegate = self
@@ -122,7 +126,9 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     func refreshViews() {
         refreshIndividuals()
         refreshObservations()
-        hideObservationSection()
+        if selectedObservation == nil {
+            hideObservationSection()
+        }
     }
     
     // Sets the data source of this controller.
@@ -333,7 +339,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         cell.textField.hidden = true
         
         // Show extra row for adding observations for all individuals except 'All'
-        if selectedIndividual != 0 && isExtraRowForObservations(indexPath.row) {
+        if (selectedIndividual != 0 || selectedIndividual != nil) && isExtraRowForObservations(indexPath.row) {
             cell.label.text = messageAdd
             
         } else {
@@ -357,8 +363,13 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if editable && selectedIndividual != 0 {
-            return selectedObservations.count + 1
+        // If observations can be added and an individual is selected
+        if editable && selectedIndividual != nil {
+            if selectedIndividual! == 0 { // 'All' is selected
+                return selectedObservations.count
+            } else {
+                return selectedObservations.count + 1
+            }
         } else {
             return selectedObservations.count
         }
@@ -488,9 +499,62 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         newObservations[individual] = []
     }
     
+    // Methods for showing image picker
     // IBActions for buttons
     @IBAction func photoBtnPressed(sender: UIButton) {
+        imagePicker.popoverPresentationController!.sourceView = sender
+        imagePicker.popoverPresentationController!.sourceRect = CGRectMake(0, 0, 0, 0)
+        self.presentViewController(imagePicker, animated: true, completion: nil)
+    }
+    
+    // Creates a UIAlertController to display a menu for choosing a source for picking photos.
+    func setupImagePicker() {
+        imagePicker = UIAlertController(title: "Pick Photo From", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
         
+        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
+            let actionCamera = UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default, handler: { UIAlertAction in self.openCameraPicker()})
+            imagePicker.addAction(actionCamera)
+        }
+        
+        let actionGallery = UIAlertAction(title: "Gallery", style: UIAlertActionStyle.Default, handler: { UIAlertAction in self.openGalleryPicker()})
+        let actionCancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        
+        imagePicker.addAction(actionGallery)
+        imagePicker.addAction(actionCancel)
+    }
+    
+    func openCameraPicker() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        picker.sourceType = UIImagePickerControllerSourceType.Camera
+        
+        self.presentViewController(picker, animated: true, completion: nil)
+    }
+    
+    func openGalleryPicker() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = true
+        picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        self.presentViewController(picker, animated: true, completion: nil)
+    }
+    
+    // UIImagePickerControllerDelegate methods
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        
+        if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
+            if photoView != nil {
+                photoView.image = image
+                selectedObservations[selectedObservation!].updatePhoto(Photo(image: image))
+            }
+        }
+        
+        picker.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(picker: UIImagePickerController) {
+        picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
     // Helper methods
