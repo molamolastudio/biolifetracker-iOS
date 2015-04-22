@@ -234,6 +234,15 @@ class EthogramDetailsViewController: UIViewController, UITableViewDataSource, UI
         } else {
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! BehaviourStateCell
             cell.textField.becomeFirstResponder()
+            
+            if cell.frame.origin.y + cell.frame.height > self.view.frame.height - 500 {
+                // Shift the tableviews when the keyboard is shown
+                NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil)
+                
+                if cell.textField.resignFirstResponder() {
+                    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil)
+                }
+            }
         }
     }
     
@@ -303,6 +312,15 @@ class EthogramDetailsViewController: UIViewController, UITableViewDataSource, UI
             return true
         }
         return false
+    }
+    
+    // For shifting of table views to accomodate the keyboards
+    func keyboardWillShow(sender: NSNotification) {
+        self.view.frame.origin.y -= 150
+    }
+    
+    func keyboardWillHide(sender: NSNotification) {
+        self.view.frame.origin.y += 150
     }
     
     // HELPER METHODS

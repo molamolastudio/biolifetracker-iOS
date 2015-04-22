@@ -197,15 +197,24 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        println("did select \(indexPath)")
         if isFirstSection(indexPath.section) {
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! SingleLineTextCell
             cell.textField.becomeFirstResponder()
         } else {
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! BehaviourStateCell
             cell.textField.becomeFirstResponder()
+            
+            if cell.frame.origin.y + cell.frame.height > self.view.frame.height - 500 {
+                // Shift the tableviews when the keyboard is shown
+                NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillShow:"), name:UIKeyboardWillShowNotification, object: nil)
+                
+                if cell.textField.resignFirstResponder() {
+                    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil)
+                }
+            }
         }
     }
+
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sectionTitles[section]
@@ -249,6 +258,8 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
+    
+    
     // UITextFieldDelegate methods
     // After user presses enter key, call the methods to update the behaviour states.
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -262,6 +273,15 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
             return true
         }
         return false
+    }
+    
+    // For shifting of table views to accomodate the keyboards
+    func keyboardWillShow(sender: NSNotification) {
+            self.view.frame.origin.y -= 150
+    }
+    
+    func keyboardWillHide(sender: NSNotification) {
+            self.view.frame.origin.y += 150
     }
     
     // HELPER METHODS
