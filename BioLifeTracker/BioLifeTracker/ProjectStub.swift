@@ -25,15 +25,6 @@ class ProjectStub {
     let state5 = BehaviourState(name: "Mating", information: "Something similar to the Pizzaman")
     let state6 = BehaviourState(name: "Fighting", information: "With other humans mostly hunters")
     let state7 = BehaviourState(name: "Possessing", information: "Black/red smoke enters into humans")
-    let state8 = BehaviourState(name: "Turning into Monsters", information: "Black/red smoke enters into humans")
-    let state9 = BehaviourState(name: "Sacrificing Lambs", information: "Black/red smoke enters into humans")
-    let state10 = BehaviourState(name: "Drinking", information: "Black/red smoke enters into humans")
-    let state11 = BehaviourState(name: "Meditating", information: "Black/red smoke enters into humans")
-    let state12 = BehaviourState(name: "Angel Hunting", information: "Black/red smoke enters into humans")
-    let state13 = BehaviourState(name: "Worshipping", information: "Black/red smoke enters into humans")
-    let state14 = BehaviourState(name: "Deer hunting", information: "Black/red smoke enters into humans")
-    let state15 = BehaviourState(name: "Looking for Lucifer", information: "Black/red smoke enters into humans")
-    
     
     let ethogram = Ethogram(name: "Demon Behaviour")
     
@@ -117,14 +108,6 @@ class ProjectStub {
         ethogram.addBehaviourState(state5)
         ethogram.addBehaviourState(state6)
         ethogram.addBehaviourState(state7)
-        ethogram.addBehaviourState(state8)
-        ethogram.addBehaviourState(state9)
-        ethogram.addBehaviourState(state10)
-        ethogram.addBehaviourState(state11)
-        ethogram.addBehaviourState(state12)
-        ethogram.addBehaviourState(state13)
-        ethogram.addBehaviourState(state14)
-        ethogram.addBehaviourState(state15)
         
     }
     
