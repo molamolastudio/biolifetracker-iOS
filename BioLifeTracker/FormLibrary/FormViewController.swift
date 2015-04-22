@@ -121,7 +121,7 @@ class FormViewController: UIViewController, UITableViewDataSource, UITableViewDe
             popoverController.permittedArrowDirections = .Any
             popoverController.delegate = self
             popoverController.sourceView = cell
-            popoverController.sourceRect = cell.frame
+            popoverController.sourceRect = CGRectMake(0, 0, 0, 0)
             
             presentViewController(popup, animated: true, completion: nil)
         }

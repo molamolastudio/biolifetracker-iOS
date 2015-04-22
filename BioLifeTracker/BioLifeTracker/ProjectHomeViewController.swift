@@ -28,8 +28,6 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     let textCellHeight: CGFloat = 44
     let memberCellHeight: CGFloat = 50
     
-    let formatter = NSDateFormatter()
-    
     var currentProject: Project? = nil
     
     var graphsVC: GraphsViewController!
@@ -43,10 +41,6 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         
         setupTableViews()
         setupGraphView()
-        
-        // Sets up the date formatter for converting dates to strings
-        formatter.dateStyle = .ShortStyle
-        formatter.timeStyle = .ShortStyle
     }
     
     func setupTableViews() {
@@ -129,7 +123,7 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         
         sessionForm.delegate = self
         sessionForm.modalPresentationStyle = .Popover
-        sessionForm.preferredContentSize = CGSizeMake(400, 400)
+        sessionForm.preferredContentSize = CGSizeMake(400, 200)
         
         sessionForm.currentProject = currentProject
         
@@ -209,8 +203,7 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         cell.button.removeTarget(self, action: Selector("deleteSession:"), forControlEvents: .TouchUpInside)
         
         let session = currentProject!.sessions[indexPath.row]
-        let dateString = formatter.stringFromDate(session.createdAt)
-        cell.label.text = dateString
+        cell.label.text = session.name
         
         if session.type == .Focal {
             cell.typeLabel.text = "F"

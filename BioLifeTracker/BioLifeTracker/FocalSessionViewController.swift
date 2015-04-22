@@ -23,36 +23,34 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     let circleCellIdentifier = "CircleCell"
     let circleLabelCellIdentifier = "CircleWithLabelCell"
     
-//    let individualsDefaultColor = UIColor.lightGrayColor()
-    let individualsSelectedColor = UIColor.whiteColor()
-//    let statesDefaultColor = UIColor.lightGrayColor()
-    let statesSelectedColor = UIColor.whiteColor()
+    let borderColor = UIColor.blueColor().CGColor
+    let borderSelected: CGFloat = 2.0
+    let borderDeselected: CGFloat = 0
+    
+    // Returns an array of fifty random shades of green/blue
+    let individualColors = randomColorsCount(50, hue: .Green, luminosity: .Light)
+    let stateColors = randomColorsCount(50, hue: .Blue, luminosity: .Light)
     
     let numSections = 1
     
     let messageAdd = "+ Add"
     
-    let weatherVC = WeatherViewController(nibName: "WeatherView", bundle: nil)
+    let weatherVC = WeatherViewController()
     let formatter = NSDateFormatter()
     
     var editable = false
     
     var currentSession: Session? = nil
-    var selectedIndividual = 0
-    var selectedObservation = 0
+    var selectedIndividual: Int? = nil
     var selectedObservations = [Observation]()
+    var selectedObservation: Int? = nil
+    var selectedState = 0
     
     var individuals = [Individual]()
     // Maps the individual's label to a list of its observations in this session
     var originalObservations = [Individual: [Observation]]()
     var newObservations = [Individual: [Observation]]()
     var states = [BehaviourState]()
-    
-    // Pretty colours for the pretty circle cells. :D
-    // Returns an array of fifty shades of green
-    let indivColors = randomColorsCount(50, hue: .Green, luminosity: .Light)
-    let stateColors = randomColorsCount(50, hue: .Blue, luminosity: .Light)
-    
     
     override func loadView() {
         self.view = NSBundle.mainBundle().loadNibNamed("FocalSessionView", owner: self, options: nil).first as! UIView
@@ -122,16 +120,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func refreshViews() {
-        selectedObservations = [Observation]()
-        
-        individuals = [Individual]()
-        originalObservations = [Individual: [Observation]]()
-        newObservations = [Individual: [Observation]]()
-        
-        getData()
         individualsView.reloadData()
-        observationsView.reloadData()
-        statesView.reloadData()
         hideObservationSection()
     }
     
@@ -173,8 +162,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     func saveData() {
         let originalIndividuals = currentSession!.project.individuals
         
-        individuals.removeAtIndex(0) // Remove the 'All' individual
-        for i in 0...individuals.count - 1 {
+        // Save individuals (exclude the 'All' individual)
+        for i in 1...individuals.count - 2 {
             let individual = individuals[i] // Get the individual
             
             // If this individual exists in the project
@@ -246,13 +235,20 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         
         if isExtraRowForIndividuals(indexPath.row) {
             cell.label.text = messageAdd
+            cell.layer.borderWidth = borderDeselected
         } else {
             cell.label.text = individuals[indexPath.row].label
+            
+            // If this individual cell is selected
+            if indexPath.row == selectedIndividual {
+                cell.layer.borderColor = borderColor
+                cell.layer.borderWidth = borderSelected
+            } else {
+                cell.layer.borderWidth = borderDeselected
+            }
         }
         
-        var num = arc4random_uniform(UInt32(indivColors.count))
-        var chosenColor = indivColors[Int(num)]
-        cell.backgroundColor = chosenColor
+        cell.backgroundColor = individualColors[indexPath.row]
         
         return cell
     }
@@ -266,9 +262,15 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         cell.circleViewLabel.text = name.substringToIndex(name.startIndex.successor())
         cell.label.text = name
         
-        var num = arc4random_uniform(UInt32(stateColors.count))
-        var chosenColor = stateColors[Int(num)]
-        cell.circleView.backgroundColor = chosenColor
+        // If this state is selected
+        if indexPath.row == selectedState {
+            cell.circleView.layer.borderColor = borderColor
+            cell.circleView.layer.borderWidth = borderSelected
+        } else {
+            cell.circleView.layer.borderWidth = borderDeselected
+        }
+        
+        cell.circleView.backgroundColor = stateColors[indexPath.row]
         
         cell.userInteractionEnabled = editable
         
@@ -300,19 +302,24 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if collectionView == individualsView {
+            selectedIndividual = indexPath.row
+            
             // User wants to add an extra individual
             if isExtraRowForIndividuals(indexPath.row) {
+                selectedIndividual = indexPath.row + 1
                 // Popup a alert view with text field
                 showFormForIndividual(indexPath)
             } else {
-                selectedIndividual = indexPath.row
                 refreshObservations()
             }
             
         } else if collectionView == statesView {
-            showStateAsSelected(indexPath.row)
-            let observation = selectedObservations[selectedObservation]
+            selectedState = indexPath.row
+            
+            let observation = selectedObservations[selectedObservation!]
             observation.changeBehaviourState(states[indexPath.row])
+            
+            refreshStates()
         }
     }
     
@@ -338,13 +345,12 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if isExtraRowForObservations(indexPath.row) {
             // Add new observation with default first state
-            let observation = Observation(session: currentSession!, individual: individuals[selectedIndividual], state: states.first!, timestamp: NSDate(), information: "")
-            newObservations[individuals[selectedIndividual]]!.append(observation)
-            
+            let observation = Observation(session: currentSession!, individual: individuals[selectedIndividual!], state: states.first!, timestamp: NSDate(), information: "")
+            newObservations[individuals[selectedIndividual!]]!.append(observation)
             refreshObservations()
         }
         selectedObservation = indexPath.row
-        showObservationAtIndex(indexPath)
+        showObservation()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -362,14 +368,14 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     // UITextViewDelegate methods
     // Updates the currently displayed observation's text when user types in the text view.
     func textViewDidChange(textView: UITextView) {
-        let observation = selectedObservations[selectedObservation]
+        let observation = selectedObservations[selectedObservation!]
         observation.updateInformation(textView.text)
     }
     
     // WeatherViewControllerDelegate methods
     // Updates the currently displayed observation's weather when user changes the weather.
     func userDidSelectWeather(weather: Weather?) {
-        let observation = selectedObservations[selectedObservation]
+        let observation = selectedObservations[selectedObservation!]
         if weather != nil {
             observation.changeWeather(weather!)
         } else {
@@ -379,86 +385,54 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     // End delegate methods
     
+    // Retrieves the observations for the selected individual and reloads the
+    // observation view.
     func refreshObservations() {
-        var allObservations = [Observation]()
-        for i in 1...individuals.count - 1 {
-            for o in newObservations[individuals[i]]! {
-                allObservations.append(o)
+        if selectedIndividual == nil || individuals.count == 1 {
+            selectedObservations = []
+        } else if selectedIndividual == 0 {
+            // If 'All' observations need to be refreshed
+            var allObservations = [Observation]()
+            for i in 1...individuals.count - 1 {
+                for o in newObservations[individuals[i]]! {
+                    allObservations.append(o)
+                }
             }
+            newObservations[individuals[0]] = allObservations
+            selectedObservations = allObservations
+        } else {
+            selectedObservations = newObservations[individuals[selectedIndividual!]]!
         }
-        newObservations[individuals[0]] = allObservations
         
-        
-        showIndividualAtIndex(NSIndexPath(forRow: selectedIndividual, inSection: 0))
         observationsView.reloadData()
-    }
-    
-    // Methods to toggle views
-    func showIndividualAtIndex(indexPath: NSIndexPath) {
-        if isValidIndexForIndividuals(indexPath.row) {
-            selectedIndividual = indexPath.row
-            
-            showIndividualAsSelected(indexPath.row)
-            
-            showObservationsForIndividual(individuals[indexPath.row])
+        
+        if selectedObservation == nil {
             hideObservationSection()
         }
     }
     
-    func showIndividualAsSelected(selectedIndex: Int) {
-        if isValidIndexForIndividuals(selectedIndex) {
-            for i in 0...individuals.count - 1 {
-                let index = NSIndexPath(forRow: i, inSection: 0)
-                if i == selectedIndex {
-                    individualsView.cellForItemAtIndexPath(index)!.backgroundColor = individualsSelectedColor
-                } else {
-                    var num = arc4random_uniform(UInt32(indivColors.count))
-                    var chosenColor = indivColors[Int(num)]
-                    individualsView.cellForItemAtIndexPath(index)!.backgroundColor = chosenColor
-                }
-            }
+    // Updates the views to display the information of the selected observation.
+    func showObservation() {
+        showObservationSection()
+        
+        let observation = selectedObservations[selectedObservation!]
+        
+        selectedState = getIndexOfState(observation.state)
+        statesView.reloadData() // Displays the selected state
+        
+        notesView.text = observation.information
+        weatherVC.setWeather(observation.weather)
+        
+        if observation.photo != nil {
+            photoView.image = observation.photo!.image
         }
     }
     
-    func showObservationsForIndividual(individual: Individual) {
-        selectedObservations = newObservations[individual]!
-        observationsView.reloadData()
+    func refreshStates() {
+        statesView.reloadData()
     }
     
-    func showObservationAtIndex(indexPath: NSIndexPath) {
-        if !isExtraRowForObservations(indexPath.row) {
-            showObservationSection()
-            
-            let observation = selectedObservations[indexPath.row]
-            
-            // Update views
-            showStateAsSelected(getIndexOfState(observation.state))
-            if observation.photo != nil {
-                photoView.image = observation.photo!.image
-            } else {
-                photoView.image = nil
-            }
-            notesView.text = observation.information
-            
-            weatherVC.setWeather(observation.weather)
-        }
-    }
-    
-    func showStateAsSelected(selectedIndex: Int) {
-        if selectedIndex < states.count {
-            for i in 0...states.count - 1 {
-                let index = NSIndexPath(forRow: i, inSection: 0)
-                let cell = statesView.cellForItemAtIndexPath(index) as! CircleWithLabelCell
-                if i == selectedIndex {
-                    cell.circleView.backgroundColor = statesSelectedColor
-                } else {
-                    var num = arc4random_uniform(UInt32(stateColors.count))
-                    var chosenColor = stateColors[Int(num)]
-                    cell.circleView.backgroundColor = chosenColor
-                }
-            }
-        }
-    }
+    // Methods to toggle views
     
     func hideObservationSection() {
         observationDisplay.hidden = true
@@ -481,7 +455,10 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
             
             let individual = Individual(label: textField.text)
             self.addIndividual(individual)
+            
+            self.refreshViews()
         })
+        
         actionOk.enabled = false
         alert.addAction(actionOk)
         alert.addAction(actionCancel)
@@ -502,9 +479,6 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         individuals.append(individual)
         
         newObservations[individual] = []
-        
-        individualsView.reloadData()
-        self.showObservationsForIndividual(individual)
     }
     
     // IBActions for buttons
