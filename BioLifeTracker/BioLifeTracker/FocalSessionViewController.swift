@@ -260,6 +260,12 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         var num = indexPath.row % individualColors.count
         cell.backgroundColor = individualColors[num]
         
+        if newObservations[individuals[indexPath.row]]!.count == 0 {
+            hideObservationSection()
+        } else {
+            showObservationSection()
+        }
+        
         return cell
     }
     
