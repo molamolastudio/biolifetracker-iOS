@@ -65,6 +65,7 @@ class EthogramDetailsViewController: UIViewController, UITableViewDataSource, UI
         self.tableView.layer.masksToBounds = true
         
         setupAlertController()
+        getData()
     }
     
     override func viewWillDisappear(animated: Bool) {

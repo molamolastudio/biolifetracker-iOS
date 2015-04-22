@@ -262,7 +262,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         let ethogram = EthogramManager.sharedInstance.ethograms[selectedEthogram!]
         
         vc.title = ethogram.name
-        vc.ethogram = ethogram
+        vc.originalEthogram = ethogram
         
         vc.editable = false
         
