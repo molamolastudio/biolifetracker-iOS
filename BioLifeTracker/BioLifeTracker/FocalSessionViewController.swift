@@ -172,7 +172,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         let originalIndividuals = currentSession!.project.individuals
         
         // Save individuals (exclude the 'All' individual)
-        for (var i = 1; i < individuals.count - 1; i++) {
+        for (var i = 1; i < individuals.count; i++) {
             let individual = individuals[i] // Get the individual
             
             // If this individual exists in the project
