@@ -162,8 +162,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     func saveData() {
         let originalIndividuals = currentSession!.project.individuals
         
-        individuals.removeAtIndex(0) // Remove the 'All' individual
-        for i in 0...individuals.count - 1 {
+        // Save individuals (exclude the 'All' individual)
+        for i in 1...individuals.count - 2 {
             let individual = individuals[i] // Get the individual
             
             // If this individual exists in the project
@@ -235,6 +235,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         
         if isExtraRowForIndividuals(indexPath.row) {
             cell.label.text = messageAdd
+            cell.layer.borderWidth = borderDeselected
         } else {
             cell.label.text = individuals[indexPath.row].label
             
@@ -301,6 +302,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if collectionView == individualsView {
+            selectedIndividual = indexPath.row
             
             // User wants to add an extra individual
             if isExtraRowForIndividuals(indexPath.row) {
@@ -308,7 +310,6 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
                 // Popup a alert view with text field
                 showFormForIndividual(indexPath)
             } else {
-                selectedIndividual = indexPath.row
                 refreshObservations()
             }
             
@@ -387,8 +388,10 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     // Retrieves the observations for the selected individual and reloads the
     // observation view.
     func refreshObservations() {
-        // If 'All' observations need to be refreshed
-        if selectedIndividual == 0 {
+        if selectedIndividual == nil || individuals.count == 1 {
+            selectedObservations = []
+        } else if selectedIndividual == 0 {
+            // If 'All' observations need to be refreshed
             var allObservations = [Observation]()
             for i in 1...individuals.count - 1 {
                 for o in newObservations[individuals[i]]! {
@@ -397,9 +400,6 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
             }
             newObservations[individuals[0]] = allObservations
             selectedObservations = allObservations
-            
-        } else if selectedIndividual == nil {
-            selectedObservations = []
         } else {
             selectedObservations = newObservations[individuals[selectedIndividual!]]!
         }

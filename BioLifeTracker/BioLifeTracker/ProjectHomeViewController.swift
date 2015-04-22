@@ -123,7 +123,7 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         
         sessionForm.delegate = self
         sessionForm.modalPresentationStyle = .Popover
-        sessionForm.preferredContentSize = CGSizeMake(400, 400)
+        sessionForm.preferredContentSize = CGSizeMake(400, 200)
         
         sessionForm.currentProject = currentProject
         
