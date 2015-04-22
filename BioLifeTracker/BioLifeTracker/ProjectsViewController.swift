@@ -97,6 +97,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
                 tableView.reloadData()
                 return
             }
+            
             let alertController = UIAlertController(title: "Exiting Project", message: "Contacting server to remove membership", preferredStyle: .Alert)
             presentViewController(alertController, animated: true, completion: nil)
             
@@ -105,6 +106,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
             project.removeMember(currentUser)
             let worker = CloudStorageWorker()
             let uploadTask = UploadTask(item: project)
+            
             worker.enqueueTask(uploadTask)
             worker.setOnFinished {
                 if uploadTask.completedSuccessfully == true {

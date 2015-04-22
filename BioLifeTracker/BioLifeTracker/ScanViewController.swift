@@ -8,12 +8,16 @@
 
 import UIKit
 
-class ScanViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate {
+class ScanViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, WeatherViewControllerDelegate {
+    
     @IBOutlet weak var animalsView: UICollectionView!
     @IBOutlet weak var statesView: UICollectionView!
     @IBOutlet weak var notesView: UITextView!
     @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var photoPickerView: UIView!
+    @IBOutlet weak var weatherOverlayView: UIView!
+    
+    @IBOutlet weak var observationView: UIView!
     
     @IBOutlet weak var photoButton: UIButton!
     @IBOutlet weak var leftArrow: UIButton!
@@ -22,16 +26,16 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     let circleCellIdentifier = "CircleCell"
     let circleLabelCellIdentifier = "CircleWithLabelCell"
     
-//    let animalsDefaultColor = UIColor.lightGrayColor()
-    let animalsSelectedColor = UIColor.whiteColor()
-//    let statesDefaultColor = UIColor.lightGrayColor()
-    let statesSelectedColor = UIColor.whiteColor()
+    let borderColor = UIColor.blueColor().CGColor
+    let borderSelected: CGFloat = 2.0
+    let borderDeselected: CGFloat = 0
     
     // Pretty colours for the pretty circle cells. :D
     // Returns an array of fifty shades of green
-    let animalsColors = randomColorsCount(50, hue: .Green, luminosity: .Light)
-    let statesColors = randomColorsCount(50, hue: .Blue, luminosity: .Light)
+    let animalColors = randomColorsCount(50, hue: .Green, luminosity: .Light)
+    let stateColors = randomColorsCount(50, hue: .Blue, luminosity: .Light)
     
+    let weatherVC = WeatherViewController()
     
     var editable = false
     
@@ -52,19 +56,24 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupCollectionViews()
+        setupViews()
         getData()
         updateArrows()
-        notesView.userInteractionEnabled = editable
-        notesView.delegate = self
+        
+        observationView.hidden = true
     }
     
-    func setupCollectionViews() {
+    func setupViews() {
+        setupWeatherController()
+        
         animalsView.dataSource = self
         animalsView.delegate = self
         
         statesView.dataSource = self
         statesView.delegate = self
+        
+        notesView.userInteractionEnabled = editable
+        notesView.delegate = self
         
         animalsView.registerNib(UINib(nibName: circleCellIdentifier, bundle: nil), forCellWithReuseIdentifier: circleCellIdentifier)
         statesView.registerNib(UINib(nibName: circleLabelCellIdentifier, bundle: nil), forCellWithReuseIdentifier: circleLabelCellIdentifier)
@@ -83,6 +92,13 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         notesView.layer.masksToBounds = true;
     }
     
+    func setupWeatherController() {
+        weatherVC.delegate = self
+        weatherVC.view.userInteractionEnabled = editable
+        weatherVC.view.frame = CGRectMake(0, 0, weatherOverlayView.frame.width, weatherOverlayView.frame.height)
+        weatherOverlayView.addSubview(weatherVC.view)
+    }
+    
     func makeEditable(value: Bool) {
         editable = value
         refreshView()
@@ -94,6 +110,7 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         updateArrows()
         notesView.text = ""
         notesView.userInteractionEnabled = editable
+        weatherVC.view.userInteractionEnabled = editable
     }
     
     // Sets the data source of this controller.
@@ -132,6 +149,9 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     func copyOverObservation(from: Observation, to: Observation) {
         to.changeBehaviourState(from.state)
         to.updateInformation(from.information)
+        if from.weather != nil {
+            to.changeWeather(from.weather!)
+        }
     }
     
     // UICollectionViewDataSource methods
@@ -149,22 +169,35 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     func getCellForAnimalsView(indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = animalsView.dequeueReusableCellWithReuseIdentifier(circleCellIdentifier, forIndexPath: indexPath) as! CircleCell
         
-        var num = arc4random_uniform(UInt32(animalsColors.count))
-        var chosenColor = animalsColors[Int(num)]
-        cell.backgroundColor = chosenColor
-        
         if isExtraRow(indexPath.row) {
             cell.label.text = "+"
+            cell.layer.borderWidth = borderDeselected
         } else {
             cell.label.text = "A\(indexPath.row)"
             
-            // If this is the selected observation
+            // If this is the selected observation, update views
             if indexPath.row == selectedObservation {
-                cell.backgroundColor = animalsSelectedColor
-                selectedState = getIndexOfState(observations[selectedObservation!].state)
-                notesView.text = observations[selectedObservation!].information
+                let observation = observations[selectedObservation!]
+                
+                cell.layer.borderColor = borderColor
+                cell.layer.borderWidth = borderSelected
+                
+                selectedState = getIndexOfState(observation.state)
+                statesView.reloadData()
+                
+                notesView.text = observation.information
+                weatherVC.setWeather(observation.weather)
+                
+                if observation.photo != nil {
+                    photoView.image = observation.photo!.image
+                }
+            } else {
+                cell.layer.borderWidth = borderDeselected
             }
         }
+        
+        cell.backgroundColor = animalColors[indexPath.row]
+        
         return cell
     }
     
@@ -177,14 +210,15 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         cell.circleViewLabel.text = name.substringToIndex(name.startIndex.successor())
         cell.label.text = name
         
+        // If this is the selected state, show the border
         if indexPath.row == selectedState {
-            cell.circleView.backgroundColor = statesSelectedColor
+            cell.circleView.layer.borderColor = borderColor
+            cell.circleView.layer.borderWidth = borderSelected
         } else {
-            var num = arc4random_uniform(UInt32(statesColors.count))
-            var chosenColor = statesColors[Int(num)]
-            cell.circleView.backgroundColor = chosenColor
+            cell.circleView.layer.borderWidth = borderDeselected
         }
         
+        cell.circleView.backgroundColor = stateColors[indexPath.row]
         cell.userInteractionEnabled = editable
         
         return cell
@@ -212,21 +246,22 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     }
     
     // UICollectionViewDelegate methods
-    
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if collectionView == animalsView {
+            observationView.hidden = false
+            
             // User wants to add an extra animal
             if isExtraRow(indexPath.row) {
                 // Add a new observation
                 let observation = Observation(session: currentSession!, state: states.first!, timestamp: selectedTimestamp!, information: "")
                 observations.append(observation)
             }
-            
             selectedObservation = indexPath.row
             
         } else if collectionView == statesView {
             selectedState = indexPath.row
             observations[selectedObservation!].changeBehaviourState(states[indexPath.row])
+            statesView.reloadData()
         }
         refreshView()
     }
@@ -238,12 +273,23 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
+    // WeatherViewControllerDelegate methods
+    // Updates the currently displayed observation's weather when user changes the weather.
+    func userDidSelectWeather(weather: Weather?) {
+        let observation = observations[selectedObservation!]
+        if weather != nil {
+            observation.changeWeather(weather!)
+        } else {
+            observation.changeWeather(Weather())
+        }
+    }
+    
     // Toggles visibility of arrows
     func updateArrows() {
-        if observations.count == 1 {
+        if selectedObservation == nil || observations.count <= 1 {
             leftArrow.hidden = true
             rightArrow.hidden = true
-        }else if selectedObservation == 0 {
+        } else if selectedObservation == 0 {
             leftArrow.hidden = true
             rightArrow.hidden = false
         } else if selectedObservation == observations.count - 1 {

@@ -16,6 +16,10 @@ class WeatherViewController: UIViewController {
     var selectedWeather: Weather? = nil
     var selectedIndex: Int? = nil
     
+    override func loadView() {
+        self.view = NSBundle.mainBundle().loadNibNamed("WeatherView", owner: self, options: nil).first as! UIView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setButtonAsSelected(selectedIndex)
@@ -55,10 +59,10 @@ class WeatherViewController: UIViewController {
     }
     
     func setButtonAsSelected(index: Int?) {
-            for i in 0...weatherNames.count - 1 {
-                let button = self.view.viewWithTag(i + 1) as! UIButton
-                button.highlighted = (index != i)
-            }
+        for i in 0...weatherNames.count - 1 {
+            let button = self.view.viewWithTag(i + 1) as! UIButton
+            button.highlighted = (index != i)
+        }
     }
     
     func getIndexOfWeather(weather: String) -> Int? {

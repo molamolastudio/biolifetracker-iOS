@@ -13,9 +13,6 @@ class CustomPickerPopup: FormPopupController, UITableViewDataSource, UITableView
     @IBOutlet weak var table: UITableView!
     @IBOutlet weak var doneBtn: UIButton!
     
-    let tableBorderWidth: CGFloat = 0.5
-    let tableBorderColor = UIColor.lightGrayColor().CGColor
-    
     let cellReuseIdentifier = "CustomPickerPopupCell"
     
     let numSections = 1
@@ -39,11 +36,6 @@ class CustomPickerPopup: FormPopupController, UITableViewDataSource, UITableView
         table.delegate = self
         
         table.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
-        
-        table.layer.borderWidth = tableBorderWidth
-        table.layer.borderColor = tableBorderColor
-
-        self.view.addSubview(table)
     }
     
     func setSelectedIndex(index: Int) {

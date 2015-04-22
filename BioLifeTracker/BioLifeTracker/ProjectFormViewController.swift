@@ -37,12 +37,15 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
         membersView.dataSource = self
         membersView.delegate = self
         membersView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
-        membersView.tableFooterView = UIView()
         
         // Sets the subviews to display under the navigation bar
         self.edgesForExtendedLayout = UIRectEdge.None
         self.extendedLayoutIncludesOpaqueBars = false
         self.automaticallyAdjustsScrollViewInsets = false
+        
+        // Sets rounded corners
+        membersView.layer.cornerRadius = 8
+        membersView.layer.masksToBounds = true
     }
     
     func getProject() -> Project? {
@@ -148,7 +151,6 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
             cell.adminLabel.hidden = true
         }
         
-        cell.rounded = true
         cell.button.tag = indexPath.row
         
         return cell
