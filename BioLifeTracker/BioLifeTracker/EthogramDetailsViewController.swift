@@ -31,7 +31,7 @@ class EthogramDetailsViewController: UIViewController, UITableViewDataSource, UI
     
     var alert = UIAlertController()
     let alertTitle = "Incomplete Ethogram"
-    let alertMessage = "You must add a name for the ethogram."
+    let alertMessage = "You must add a name and behaviour state for the ethogram."
     
     var editable = false
     var deletionEnabled = true
@@ -88,7 +88,7 @@ class EthogramDetailsViewController: UIViewController, UITableViewDataSource, UI
         if originalEthogram != nil {
             // Enables deletion if this ethogram is not being used
             deletionEnabled = !ProjectManager.sharedInstance.isEthogramInProjects(originalEthogram!)
-            println(ProjectManager.sharedInstance.isEthogramInProjects(originalEthogram!))
+
             // Copy over original ethogram
             ethogram = Ethogram()
             for s in originalEthogram!.behaviourStates {
@@ -99,7 +99,7 @@ class EthogramDetailsViewController: UIViewController, UITableViewDataSource, UI
     }
     
     // Copies over the edited behaviour states into the original ethogram.
-    func saveData() {
+    func saveData() -> Bool {
         if originalEthogram != nil {
             for (var i = 0; i < ethogram.behaviourStates.count; i++) {
                 if i < originalEthogram!.behaviourStates.count {
@@ -109,6 +109,10 @@ class EthogramDetailsViewController: UIViewController, UITableViewDataSource, UI
                     originalEthogram!.addBehaviourState(ethogram.behaviourStates[i])
                 }
             }
+            return true
+        } else {
+            self.presentViewController(alert, animated: true, completion: nil)
+            return false
         }
     }
     

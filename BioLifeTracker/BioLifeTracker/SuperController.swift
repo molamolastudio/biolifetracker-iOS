@@ -23,6 +23,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     var currentProject: Project? = nil
     var currentSession: Session? = nil
+    var selectedEthogram: Int? = nil
     
     var loadingAlert: UIAlertController?
     var freshLogin = false
@@ -255,13 +256,15 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     func showEthogramDetailsPage() {
         let vc = EthogramDetailsViewController()
         
-        vc.title = Data.selectedEthogram!.name
-        vc.ethogram = Data.selectedEthogram!
+        let ethogram = EthogramManager.sharedInstance.ethograms[selectedEthogram!]
+        
+        vc.title = ethogram.name
+        vc.ethogram = ethogram
         
         vc.editable = false
         
         // If user created the object
-        if Data.selectedEthogram!.createdBy.name == UserAuthService.sharedInstance.user.name {
+        if ethogram.createdBy.name == UserAuthService.sharedInstance.user.name {
             var btn = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("updateEditButtonForEthogram"))
             vc.navigationItem.rightBarButtonItem = btn
         }
@@ -304,8 +307,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
         // If user created the object
         if session.createdBy == UserAuthService.sharedInstance.user {
-        var btn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("showCreateScanPage"))
-        vc.navigationItem.rightBarButtonItem = btn
+            var btn = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("showCreateScanPage"))
+            vc.navigationItem.rightBarButtonItem = btn
         }
         
         detailNav.pushViewController(vc, animated: true)
@@ -453,11 +456,15 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     func saveEthogramData() {
         if let vc = detailNav.visibleViewController as? EthogramDetailsViewController {
-            vc.saveData()
-            dismissCurrentPage()
-            vc.makeEditable(false)
-            var btn = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("updateEditButtonForEthogram"))
-            vc.navigationItem.rightBarButtonItem = btn
+            if vc.saveData() {
+                dismissCurrentPage()
+                vc.makeEditable(false)
+                
+                EthogramManager.sharedInstance.updateEthogram(selectedEthogram!, ethogram: vc.originalEthogram!)
+                
+                var btn = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("updateEditButtonForEthogram"))
+                vc.navigationItem.rightBarButtonItem = btn
+            }
         }
     }
     
@@ -560,8 +567,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     // EthogramsViewControllerDelegate methods
-    func userDidSelectEthogram(selectedEthogram: Ethogram) {
-        Data.selectedEthogram = selectedEthogram
+    func userDidSelectEthogram(selectedEthogram: Int) {
+        self.selectedEthogram = selectedEthogram
         showEthogramDetailsPage()
     }
     

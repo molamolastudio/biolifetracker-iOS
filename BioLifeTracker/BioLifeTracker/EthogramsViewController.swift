@@ -64,7 +64,7 @@ class EthogramsViewController: UIViewController, UITableViewDataSource, UITableV
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if delegate != nil {
-            delegate!.userDidSelectEthogram(EthogramManager.sharedInstance.ethograms[indexPath.row])
+            delegate!.userDidSelectEthogram(indexPath.row)
         }
     }
     
