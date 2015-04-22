@@ -120,8 +120,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func refreshViews() {
-        individualsView.reloadData()
-        observationsView.reloadData()
+        refreshIndividuals()
+        refreshObservations()
         hideObservationSection()
     }
     
@@ -164,7 +164,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         let originalIndividuals = currentSession!.project.individuals
         
         // Save individuals (exclude the 'All' individual)
-        for i in 1...individuals.count - 2 {
+        for (var i = 1; i < individuals.count - 1; i++) {
             let individual = individuals[i] // Get the individual
             
             // If this individual exists in the project
@@ -307,7 +307,6 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
             
             // User wants to add an extra individual
             if isExtraRowForIndividuals(indexPath.row) {
-                selectedIndividual = indexPath.row + 1
                 // Popup a alert view with text field
                 showFormForIndividual(indexPath)
             } else {
