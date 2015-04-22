@@ -180,6 +180,9 @@
 		78B0F75C1AE6C6E000F97174 /* Rain-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 78B0F7551AE6C6E000F97174 /* Rain-50.png */; };
 		78B0F75D1AE6C6E000F97174 /* Storm-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 78B0F7561AE6C6E000F97174 /* Storm-50.png */; };
 		78B0F75E1AE6C6E000F97174 /* Sun-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 78B0F7571AE6C6E000F97174 /* Sun-50.png */; };
+		78B0F7611AE7573800F97174 /* Clock Filled-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 78B0F75F1AE7573800F97174 /* Clock Filled-50.png */; };
+		78B0F7621AE7573800F97174 /* Groups Filled-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 78B0F7601AE7573800F97174 /* Groups Filled-50.png */; };
+		78B0F7641AE7574800F97174 /* Running Rabbit Filled-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 78B0F7631AE7574800F97174 /* Running Rabbit Filled-50.png */; };
 		78C382771AE4E1E600645C07 /* AnalysisProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C382761AE4E1E600645C07 /* AnalysisProjectViewController.swift */; };
 		AC18814D1ACFC84600CE450B /* GooglePlus.bundle in Resources */ = {isa = PBXBuildFile; fileRef = AC18814A1ACFC84600CE450B /* GooglePlus.bundle */; };
 		AC18814E1ACFC84600CE450B /* GooglePlus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC18814B1ACFC84600CE450B /* GooglePlus.framework */; };
@@ -442,6 +445,9 @@
 		78B0F7551AE6C6E000F97174 /* Rain-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Rain-50.png"; path = "Images.xcassets/Rain-50.png"; sourceTree = "<group>"; };
 		78B0F7561AE6C6E000F97174 /* Storm-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Storm-50.png"; path = "Images.xcassets/Storm-50.png"; sourceTree = "<group>"; };
 		78B0F7571AE6C6E000F97174 /* Sun-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Sun-50.png"; path = "Images.xcassets/Sun-50.png"; sourceTree = "<group>"; };
+		78B0F75F1AE7573800F97174 /* Clock Filled-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Clock Filled-50.png"; path = "Images.xcassets/Clock Filled-50.png"; sourceTree = "<group>"; };
+		78B0F7601AE7573800F97174 /* Groups Filled-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Groups Filled-50.png"; path = "Images.xcassets/Groups Filled-50.png"; sourceTree = "<group>"; };
+		78B0F7631AE7574800F97174 /* Running Rabbit Filled-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Running Rabbit Filled-50.png"; path = "Images.xcassets/Running Rabbit Filled-50.png"; sourceTree = "<group>"; };
 		78C382761AE4E1E600645C07 /* AnalysisProjectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisProjectViewController.swift; sourceTree = "<group>"; };
 		AC18814A1ACFC84600CE450B /* GooglePlus.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GooglePlus.bundle; sourceTree = "<group>"; };
 		AC18814B1ACFC84600CE450B /* GooglePlus.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GooglePlus.framework; sourceTree = "<group>"; };
@@ -773,12 +779,15 @@
 				AC530C781AE53EBD008E1A17 /* bltlogo_transparent.png */,
 				AC9FEFF91AE62F3E00C8833C /* gearicon.png */,
 				AC530C701AE4F281008E1A17 /* bltname.png */,
+				78B0F7631AE7574800F97174 /* Running Rabbit Filled-50.png */,
 				78B0F7511AE6C6E000F97174 /* Air Element-50.png */,
 				78B0F7521AE6C6E000F97174 /* Clouds-50.png */,
 				78B0F7531AE6C6E000F97174 /* Field-50.png */,
 				78B0F7541AE6C6E000F97174 /* Partly Cloudy Day-50.png */,
 				78B0F7551AE6C6E000F97174 /* Rain-50.png */,
 				78B0F7561AE6C6E000F97174 /* Storm-50.png */,
+				78B0F75F1AE7573800F97174 /* Clock Filled-50.png */,
+				78B0F7601AE7573800F97174 /* Groups Filled-50.png */,
 				78B0F7571AE6C6E000F97174 /* Sun-50.png */,
 				AC95FB371AE61C6300EE8FFE /* foldericon.png */,
 				AC95FB381AE61C6300EE8FFE /* graphicon.png */,
@@ -1068,6 +1077,7 @@
 				AC95FB401AE6208A00EE8FFE /* logouticon.png in Resources */,
 				329B293B1AD15BBF007ADC65 /* PhotoPickerCell.xib in Resources */,
 				32E426531AE6BD7F006D912D /* CustomPickerPopupView.xib in Resources */,
+				78B0F7621AE7573800F97174 /* Groups Filled-50.png in Resources */,
 				AC95FB3A1AE61C6300EE8FFE /* foldericon.png in Resources */,
 				32423B911AE0093B00AFA2F8 /* FocalSessionView.xib in Resources */,
 				24034F101AE6329E00756980 /* PaddedTableView.xib in Resources */,
@@ -1083,6 +1093,8 @@
 				78B0F7581AE6C6E000F97174 /* Air Element-50.png in Resources */,
 				AC9FEFFA1AE62F3E00C8833C /* gearicon.png in Resources */,
 				32698A691AE6171C00D73E9D /* FormView.xib in Resources */,
+				78B0F7611AE7573800F97174 /* Clock Filled-50.png in Resources */,
+				78B0F7641AE7574800F97174 /* Running Rabbit Filled-50.png in Resources */,
 				7838E7621AE3501C007C2562 /* GraphsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
