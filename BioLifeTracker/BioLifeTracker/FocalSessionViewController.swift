@@ -121,6 +121,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     func refreshViews() {
         individualsView.reloadData()
+        observationsView.reloadData()
         hideObservationSection()
     }
     
@@ -310,6 +311,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
                 // Popup a alert view with text field
                 showFormForIndividual(indexPath)
             } else {
+                refreshIndividuals()
                 refreshObservations()
             }
             
@@ -426,6 +428,10 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         if observation.photo != nil {
             photoView.image = observation.photo!.image
         }
+    }
+    
+    func refreshIndividuals() {
+        individualsView.reloadData()
     }
     
     func refreshStates() {
