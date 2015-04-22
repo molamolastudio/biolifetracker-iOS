@@ -10,9 +10,11 @@ import Foundation
 
 class BiolifeDateFormatter {
     var dateFormatter = NSDateFormatter()
-
+    var dateFormatterNoMillis = NSDateFormatter()
+    
     init() {
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS'Z'"
+        dateFormatterNoMillis.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
     }
     
     func formatDate(date: NSDate) -> String {
@@ -21,6 +23,8 @@ class BiolifeDateFormatter {
     
     func getDate(string: String) -> NSDate {
         if let date = dateFormatter.dateFromString(string) {
+            return date
+        } else if let date = dateFormatterNoMillis.dateFromString(string) {
             return date
         } else {
             NSLog("Error retrieving date from string: %@. Returning default value...", string)

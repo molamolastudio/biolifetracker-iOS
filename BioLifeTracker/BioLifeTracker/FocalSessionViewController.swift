@@ -126,7 +126,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     func refreshViews() {
         refreshIndividuals()
         refreshObservations()
-        if selectedObservation == nil {
+        
+        if selectedObservation == nil || newObservations[individuals[selectedIndividual!]]!.count == 0 {
             hideObservationSection()
         } else {
             showObservationSection()
@@ -172,7 +173,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         let originalIndividuals = currentSession!.project.individuals
         
         // Save individuals (exclude the 'All' individual)
-        for (var i = 1; i < individuals.count - 1; i++) {
+        for (var i = 1; i < individuals.count; i++) {
             let individual = individuals[i] // Get the individual
             
             // If this individual exists in the project
@@ -260,11 +261,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         var num = indexPath.row % individualColors.count
         cell.backgroundColor = individualColors[num]
         
-        if newObservations[individuals[indexPath.row]]!.count == 0 {
-            hideObservationSection()
-        } else {
-            showObservationSection()
-        }
+ 
         
         return cell
     }
