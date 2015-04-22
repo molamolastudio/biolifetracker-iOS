@@ -14,6 +14,8 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
     @IBOutlet weak var graphsView: UIView!
     @IBOutlet weak var graphSwitch: UISegmentedControl!
 
+    @IBOutlet weak var sessionLabel: UILabel!
+    @IBOutlet weak var userLabel: UILabel!
     @IBOutlet weak var userButton: UIButton!
     @IBOutlet weak var sessionButton: UIButton!
     @IBOutlet weak var statesButton: UIButton!
@@ -76,16 +78,13 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
         switch graphSwitch.selectedSegmentIndex {
         case 0:
             graphsVC.toggleGraph(.HourPlot)
-            userButton.hidden = false
-            sessionButton.hidden = false
+            showUsersAndSessions()
         case 1:
             graphsVC.toggleGraph(.DayPlot)
-            userButton.hidden = false
-            sessionButton.hidden = false
+            showUsersAndSessions()
         case 2:
             graphsVC.toggleGraph(.StateChart)
-            userButton.hidden = true
-            sessionButton.hidden = true
+            hideUsersAndSessions()
         default:
             break
         }
@@ -93,14 +92,27 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
         graphsVC.updateGraph()
     }
     
+    func showUsersAndSessions() {
+        userButton.hidden = false
+        sessionButton.hidden = false
+        userLabel.hidden = false
+        sessionLabel.hidden = false
+    }
+    
+    func hideUsersAndSessions() {
+        userButton.hidden = true
+        sessionButton.hidden = true
+        userLabel.hidden = true
+        sessionLabel.hidden = true
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
     @IBAction func buttonIsPressed(sender: UIButton) {
-
-        var name = sender.titleLabel?.text
         
         var popoverContent = AnalysisTableViewController()
         popoverContent.modalPresentationStyle = UIModalPresentationStyle.Popover
@@ -115,22 +127,27 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
         popover!.sourceRect = popoverAnchor
         popover!.permittedArrowDirections = UIPopoverArrowDirection.Down
         
-        if name == "Users" {
-            popoverContent.setHeaderTitle(name!)
+        switch sender {
+            
+        case userButton:
+            popoverContent.setHeaderTitle("Users")
             popoverContent.toggleTable(.Users)
             popoverContent.initUsers(graphsVC.getAllUsers(), chosen: graphsVC.getChosenUsers())
-        } else if name == "Sessions" {
-            popoverContent.setHeaderTitle(name!)
+        case sessionButton:
+            popoverContent.setHeaderTitle("Sessions")
             popoverContent.toggleTable(.Sessions)
+            
             if graphsVC.getAllSessions().count == 0 {
                 popoverContent.initEmpty()
             } else {
                 popoverContent.initSessions(graphsVC.getAllSessions(), chosen: graphsVC.getChosenSessions())
             }
-        } else if name == "Behaviour States" {
-            popoverContent.setHeaderTitle(name!)
+        case statesButton:
+            popoverContent.setHeaderTitle("Behaviour States")
             popoverContent.toggleTable(.States)
             popoverContent.initStates(graphsVC.getAllBehaviourStates(), chosen: graphsVC.getChosenBehaviourStates())
+        default:
+            break
         }
         popoverContent.delegate = self
         
