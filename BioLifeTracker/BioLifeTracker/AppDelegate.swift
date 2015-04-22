@@ -19,6 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FBLoginView.self
         
+        UINavigationBar.appearance().barStyle = UIBarStyle.Black
+        UINavigationBar.appearance().barTintColor = UIColor(red: 27/255, green: 163/255, blue: 156/255, alpha: 1.0)
+        UINavigationBar.appearance().tintColor = UIColor(red: 200/255, green: 247/255, blue: 197/255, alpha: 1.0)
+        
+        
         initialViewController = SuperController()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.rootViewController = initialViewController
