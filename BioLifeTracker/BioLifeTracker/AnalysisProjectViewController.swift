@@ -33,7 +33,7 @@ class AnalysisProjectViewController: UITableViewController {
         let project = ProjectManager.sharedInstance.projects[indexPath.row]
         
         cell.title.text = project.getDisplayName()
-        cell.subtitle.text = "Created by: " + project.admins.first!.name
+        cell.subtitle.text = "Created by: " + project.createdBy.name
         
         return cell
     }

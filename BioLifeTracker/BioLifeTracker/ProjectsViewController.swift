@@ -24,6 +24,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var test: Int? = nil
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -52,14 +53,14 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
         let project = ProjectManager.sharedInstance.projects[indexPath.row]
         
         cell.title.text = project.getDisplayName()
-        cell.subtitle.text = "Created by: " + project.admins.first!.name
+        cell.subtitle.text = "Created by: " + project.createdBy.name
         
         return cell
     }
     
      func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if delegate != nil {
-            delegate!.userDidSelectProject(ProjectManager.sharedInstance.projects[indexPath.row])
+            delegate!.userDidSelectProject(indexPath.row)
         }
     }
     
@@ -102,7 +103,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
             presentViewController(alertController, animated: true, completion: nil)
             
             let currentUser = UserAuthService.sharedInstance.user
-            let isAdmin = (project.admins.filter { $0 == currentUser }).count > 0
+            let isAdmin = project.containsAdmin(currentUser)
             project.removeMember(currentUser)
             let worker = CloudStorageWorker()
             let uploadTask = UploadTask(item: project)
@@ -114,6 +115,7 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
                     dispatch_async(dispatch_get_main_queue(), {
                         self.tableView.reloadData()
                         alertController.dismissViewControllerAnimated(false, completion: nil)
+                        self.deleteProjectIfHasNoMember(project)
                     })
                 } else {
                     project.addMember(currentUser)
@@ -129,6 +131,15 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
                     })
                 }
             }
+            worker.startExecution()
+        }
+    }
+    
+    func deleteProjectIfHasNoMember(project: Project) {
+        if project.members.count == 0 {
+            let deleteTask = DeleteTask(item: project)
+            let worker = CloudStorageWorker()
+            worker.enqueueTask(deleteTask)
             worker.startExecution()
         }
     }

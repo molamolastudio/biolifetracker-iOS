@@ -22,6 +22,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     let popup = CustomPickerPopup()
     
     var currentProject: Project? = nil
+    var currentProjectIndex: Int? = nil
     var currentSession: Session? = nil
     var selectedEthogram: Int? = nil
     
@@ -221,7 +222,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         
         vc.delegate = self
         vc.title = currentProject!.name
-        vc.currentProject = currentProject!
+        vc.currentProjectIndex = currentProjectIndex
+        vc.currentProject = currentProject
         
         var exportBtn = UIBarButtonItem(barButtonSystemItem: .Action, target: self, action: Selector("exportToExcel:"))
         var syncBtn = UIBarButtonItem(title: "Sync", style: .Plain, target: self, action: Selector("syncProject"))
@@ -470,7 +472,10 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     func saveScanData() {
         if let vc = detailNav.visibleViewController as? ScanViewController {
+            
             vc.saveData()
+            ProjectManager.sharedInstance.updateProject(currentProjectIndex!, project: currentProject!)
+            
             vc.makeEditable(false)
             var btn = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("updateEditButtonForScan"))
             vc.navigationItem.rightBarButtonItem = btn
@@ -479,7 +484,10 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     func saveFocalSessionData() {
         if let vc = detailNav.visibleViewController as? FocalSessionViewController {
+            
             vc.saveData()
+            ProjectManager.sharedInstance.updateProject(currentProjectIndex!, project: currentProject!)
+            
             vc.makeEditable(false)
             var btn = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("updateEditButtonForFocalSession"))
             vc.navigationItem.rightBarButtonItem = btn
@@ -561,8 +569,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     // ProjectsViewControllerDelegate methods
-    func userDidSelectProject(selectedProject: Project) {
-        currentProject = selectedProject
+    func userDidSelectProject(selectedProject: Int) {
+        currentProjectIndex = selectedProject
+        currentProject = ProjectManager.sharedInstance.projects[selectedProject]
         showProjectHomePage()
     }
     
