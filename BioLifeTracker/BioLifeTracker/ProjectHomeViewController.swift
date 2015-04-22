@@ -230,7 +230,7 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if delegate != nil {
             if tableView == sessionView {
-                delegate!.userDidSelectSession(currentProject!, session: currentProject!.sessions[indexPath.row])
+                delegate!.userDidSelectSession(currentProject!, session: indexPath.row)
             }
         }
     }

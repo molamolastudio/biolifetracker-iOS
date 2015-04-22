@@ -88,6 +88,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         
         notesView.delegate = self
         
+        photoView.contentMode = UIViewContentMode.ScaleAspectFit
+        
         observationsView.registerNib(UINib(nibName: textCellIdentifier, bundle: nil), forCellReuseIdentifier: textCellIdentifier)
         individualsView.registerNib(UINib(nibName: circleCellIdentifier, bundle: nil), forCellWithReuseIdentifier: circleCellIdentifier)
         statesView.registerNib(UINib(nibName: circleLabelCellIdentifier, bundle: nil), forCellWithReuseIdentifier: circleLabelCellIdentifier)
@@ -128,6 +130,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         refreshObservations()
         if selectedObservation == nil {
             hideObservationSection()
+        } else {
+            showObservationSection()
         }
     }
     

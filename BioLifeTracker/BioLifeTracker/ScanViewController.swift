@@ -77,6 +77,8 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         notesView.userInteractionEnabled = editable
         notesView.delegate = self
         
+        photoView.contentMode = UIViewContentMode.ScaleAspectFit
+        
         animalsView.registerNib(UINib(nibName: circleCellIdentifier, bundle: nil), forCellWithReuseIdentifier: circleCellIdentifier)
         statesView.registerNib(UINib(nibName: circleLabelCellIdentifier, bundle: nil), forCellWithReuseIdentifier: circleLabelCellIdentifier)
         

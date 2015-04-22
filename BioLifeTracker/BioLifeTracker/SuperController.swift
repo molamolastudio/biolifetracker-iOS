@@ -24,6 +24,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     var currentProject: Project? = nil
     var currentProjectIndex: Int? = nil
     var currentSession: Session? = nil
+    var currentSessionIndex: Int? = nil
     var selectedEthogram: Int? = nil
     
     var loadingAlert: UIAlertController?
@@ -381,23 +382,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         detailNav.popToRootViewControllerAnimated(false)
     }
     
-    // Methods for creating form data
-    func getFormDataForNewIndividual() -> FormFieldData {
-        let data = FormFieldData(sections: 1)
-        data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
-        data.addTextCell(section: 0, label: "Tags", hasSingleLine: false)
-        data.addTextCell(section: 1, label: "Photos", hasSingleLine: true) // Photo picker cell
-        return data
-    }
-    
-    func getFormDataForNewSession() -> FormFieldData {
-        let data = FormFieldData(sections: 1)
-        data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
-        data.addPickerCell(section: 0, label: "Locations", pickerValues: ["Location 1", "Location 2"], isCustomPicker: true)
-        data.addPhotoPickerCell(section: 0, label: "Photos")
-        return data
-    }
-    
     // Selectors for navigation bar items
     // Methods to create new model objects
     func createNewProject() {
@@ -427,6 +411,10 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
             if vc.observations.count > 0 {
                 currentSession!.addObservation(vc.observations)
             }
+            
+            currentProject!.updateSession(currentSessionIndex!, updatedSession: currentSession!)
+            ProjectManager.sharedInstance.updateProject(currentProjectIndex!, project: currentProject!)
+            
             dismissCurrentPage()
         }
     }
@@ -582,8 +570,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     // ProjectHomeViewControllerDelegate methods
-    func userDidSelectSession(project: Project, session: Session) {
-        currentSession = session
+    func userDidSelectSession(project: Project, session: Int) {
+        currentSessionIndex = session
+        currentSession = project.sessions[session]
         showSession()
     }
     
