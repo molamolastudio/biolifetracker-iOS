@@ -49,9 +49,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
             startDownloadingProjectsFromServer()
             freshLogin = false
         } else {
-            //startDownloadingProjectsFromServer()
+            startDownloadingProjectsFromServer()
         }
-        //        setupForDemo()
     }
     
     // Closes the master view of the split view.

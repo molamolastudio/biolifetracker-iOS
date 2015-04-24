@@ -16,7 +16,9 @@ class Photo: BiolifeModel {
     var image: UIImage { get { return _image } }
     
     init(image: UIImage) {
-        self._image = image
+        // compress image first to a reasonable size
+        let compressedData = UIImageJPEGRepresentation(image, 0.9)
+        self._image = UIImage(data: compressedData)!
         super.init()
     }
     
@@ -91,7 +93,7 @@ extension Photo: CloudStorable {
 
 extension Photo {
     override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
-        let imageString = UIImageJPEGRepresentation(image, 1.0)
+        let imageString = UIImageJPEGRepresentation(image, 0.9)
             .base64EncodedStringWithOptions(nil)
         dictionary.setValue(imageString, forKey: "image")
         super.encodeRecursivelyWithDictionary(dictionary)

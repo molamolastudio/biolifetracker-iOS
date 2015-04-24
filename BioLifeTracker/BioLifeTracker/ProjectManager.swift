@@ -89,19 +89,23 @@ class ProjectManager: NSObject, Storable {
     }
     
     /**************Saving to Archives****************/
+    //
+    /// Asynchronously saves all projects into local storage
     func saveToArchives() {
-        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
-        
-        if ((dirs) != nil) {
-            let dir = dirs![0]; //documents directory
-            let path = dir.stringByAppendingPathComponent("Existing projects of" + String(UserAuthService.sharedInstance.user.id))
+        dispatch_async(ProjectManager.storageThread, {
+            let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
             
-            let data = NSMutableData();
-            let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
-            archiver.encodeObject(self, forKey: "projects")
-            archiver.finishEncoding()
-            let success = data.writeToFile(path, atomically: true)
-        }
+            if ((dirs) != nil) {
+                let dir = dirs![0]; //documents directory
+                let path = dir.stringByAppendingPathComponent("Existing projects of" + String(UserAuthService.sharedInstance.user.id))
+                
+                let data = NSMutableData();
+                let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
+                archiver.encodeObject(self, forKey: "projects")
+                archiver.finishEncoding()
+                let success = data.writeToFile(path, atomically: true)
+            }
+        })
     }
     
     class func loadFromArchives(identifier: String) -> NSObject? {
