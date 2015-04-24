@@ -5,19 +5,23 @@
 //  Created by Michelle Tan on 11/3/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
+//  This class displays a form to create an ethogram.
+//  The user must enter a name and at least one behaviour state to
+//  create an ethogram, otherwise an alert will be shown.
 
 import UIKit
 
-class EthogramFormViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+class EthogramFormViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
     let nameCellIdentifier = "SingleLineTextCell"
     let stateCellIdentifier = "BehaviourStateCell"
     
-    let messageNewState = "+ Add new state"
+    let messageNewState = " + Add new state"
     
-    let rowHeight: CGFloat = 44
+    let firstSectionRowHeight: CGFloat = 44
+    let secondSectionRowHeight: CGFloat = 120
     
     let numSections = 2
     let firstSection = 0
@@ -45,8 +49,6 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        
-        self.tableView.rowHeight = rowHeight
         
         self.tableView.registerNib(UINib(nibName: nameCellIdentifier, bundle: nil), forCellReuseIdentifier: nameCellIdentifier)
         self.tableView.registerNib(UINib(nibName: stateCellIdentifier, bundle: nil), forCellReuseIdentifier: stateCellIdentifier)
@@ -113,26 +115,42 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         let cell = self.tableView.dequeueReusableCellWithIdentifier(stateCellIdentifier) as! BehaviourStateCell
         
         let textField = cell.textField
-        textField.delegate = self
+        let textView = cell.textView
         
-        println("refresh \(ethogram.behaviourStates)")
+        // Sets delegates
+        textField.delegate = self
+        textView.delegate = self
+        
+        // Remove previous cell targets
+        textField.removeTarget(self, action: Selector("extraRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
+        textField.removeTarget(self, action: Selector("textFieldDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
         
         // Set up cells that have been filled out
         if ethogram.behaviourStates.count > indexPath.row {
             textField.text = ethogram.behaviourStates[indexPath.row].name
-            textField.removeTarget(self, action: Selector("extraRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
+            textView.text = ethogram.behaviourStates[indexPath.row].information
             textField.addTarget(self, action: Selector("textFieldDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
             cell.button.tag = indexPath.row
             
         } else if ethogram.behaviourStates.count == indexPath.row {
             textField.text = ""
+            textView.text = ""
             textField.placeholder = messageNewState
-            textField.removeTarget(self, action: Selector("textFieldDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
             textField.addTarget(self, action: Selector("extraRowDidChange:"), forControlEvents: UIControlEvents.EditingChanged)
         }
         
+        // Adds borders for text field and text view
+        textField.layer.borderColor = UIColor.lightGrayColor().CGColor
+        textField.layer.borderWidth = 1.0
+        textView.layer.borderColor = UIColor.lightGrayColor().CGColor
+        textView.layer.borderWidth = 1.0
+        
         textField.userInteractionEnabled = true
+        textView.userInteractionEnabled = true
+        
         textField.tag = indexPath.row
+        textView.tag = indexPath.row
+        
         cell.button.hidden = true
         
         return cell
@@ -145,31 +163,42 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
+    // Sets up the edit button after the existing behaviour states are edited.
     func textFieldDidChange(sender: UITextField) {
         let cell = sender.superview! as! BehaviourStateCell
         if sender.text != "" {
-            cell.button.setTitle("Edit", forState: .Normal)
-            cell.button.hidden = false
-            cell.button.removeTarget(self, action: Selector("addButtonPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
-            cell.button.addTarget(self, action: Selector("editButtonPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
+            showEditButton(cell)
         } else {
             sender.placeholder = messageNewState
             cell.button.hidden = true
         }
     }
     
+    // Sets up the add button after a new behaviour states is added.
     func extraRowDidChange(sender: UITextField) {
-        println("extra row")
         let cell = sender.superview! as! BehaviourStateCell
         if sender.text != "" {
-            cell.button.setTitle("Add", forState: .Normal)
-            cell.button.hidden = false
-            cell.button.removeTarget(self, action: Selector("editButtonPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
-            cell.button.addTarget(self, action: Selector("addButtonPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
+            showAddButton(cell)
         } else {
             sender.placeholder = messageNewState
             cell.button.hidden = true
         }
+    }
+    
+    // Sets the button on the given BehaviourStateCell to an 'Add' button.
+    func showAddButton(cell: BehaviourStateCell) {
+        cell.button.setTitle("Add", forState: .Normal)
+        cell.button.hidden = false
+        cell.button.removeTarget(self, action: Selector("editButtonPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
+        cell.button.addTarget(self, action: Selector("addButtonPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
+    }
+    
+    // Sets the button on the given BehaviourStateCell to an 'Edit' button.
+    func showEditButton(cell: BehaviourStateCell) {
+        cell.button.setTitle("Edit", forState: .Normal)
+        cell.button.hidden = false
+        cell.button.removeTarget(self, action: Selector("addButtonPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
+        cell.button.addTarget(self, action: Selector("editButtonPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     // Gets the name for the new behaviour state from the cell and updates the behaviour state
@@ -177,7 +206,7 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
     func editButtonPressed(sender: UIButton) {
         let cell = sender.superview! as! BehaviourStateCell
         ethogram.updateBehaviourStateName(cell.button.tag, bsName: cell.textField.text!)
-        
+        ethogram.updateBehaviourStateInformation(cell.button.tag, bsInformation: cell.textView.text!)
         cell.button.hidden = true
         
         refreshView()
@@ -188,7 +217,7 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
     func addButtonPressed(sender: UIButton) {
         let cell = sender.superview! as! BehaviourStateCell
         
-        let state = BehaviourState(name: cell.textField.text!, information: "must add information")
+        let state = BehaviourState(name: cell.textField.text!, information: cell.textView.text!)
         ethogram.addBehaviourState(state)
         
         cell.button.hidden = true
@@ -216,6 +245,14 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
             return firstSectionNumRows
         } else {
             return ethogram.behaviourStates.count + 1
+        }
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if isFirstSection(indexPath.section) {
+            return firstSectionRowHeight
+        } else {
+            return secondSectionRowHeight
         }
     }
     
@@ -262,6 +299,15 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
             return true
         }
         return false
+    }
+    
+    // UITextViewDelegate methods
+    // Shows the edit button if an existing behaviour state's information is edited.
+    func textViewDidChange(textView: UITextView) {
+        let cell = textView.superview as! BehaviourStateCell
+        if !isExtraRow(textView.tag) {
+            showEditButton(cell)
+        }
     }
     
     // HELPER METHODS
