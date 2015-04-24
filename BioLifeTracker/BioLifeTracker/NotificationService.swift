@@ -34,7 +34,7 @@ class NotificationService {
         var counter = 0
         do {
             notificationTime = NSDate().dateByAddingTimeInterval(
-                NSTimeInterval(session.interval!)
+                NSTimeInterval(counter * session.interval! * 60)
             )
             let notification = UILocalNotification()
             notification.fireDate = notificationTime

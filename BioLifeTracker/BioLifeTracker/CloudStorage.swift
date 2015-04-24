@@ -41,7 +41,8 @@ struct CloudStorage {
     
     static let boundary = "$$BOUNDARY$$"
     
-    // MARK: Network Operations
+    
+    // MARK: NETWORK OPERATIONS
     
     
     static func makeMultipartRequestToUrl(url: NSURL, withMethod method: String, withPayload payload: NSData?) -> NSData? {
@@ -79,7 +80,10 @@ struct CloudStorage {
         
         var uploadError: NSError?
         var response: NSURLResponse?
-        let responseData = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: &uploadError)
+        let responseData = NSURLConnection.sendSynchronousRequest(
+            request,
+            returningResponse: &response,
+            error: &uploadError)
         if (uploadError != nil) {
             NSLog("%@ Request To %@ Error: %@", method, url.description, uploadError!.userInfo!)
             return nil
@@ -88,7 +92,7 @@ struct CloudStorage {
     }
 
     
-    // MARK: NSDictionary Operations
+    // MARK: NSDICTIONARY OPERATIONS
     
     
     /// A debug "checkRep" function to assert that
@@ -105,7 +109,7 @@ struct CloudStorage {
     }
     
     
-    // MARK: Interaction between NSDictionary and NSData
+    // MARK: INTERACTION BETWEEN NSDICTIONARY AND NSDATA
     
     
     static func dictionaryToMultipartData(dictionary: NSDictionary) -> NSData {
