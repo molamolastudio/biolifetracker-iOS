@@ -127,7 +127,7 @@ struct CloudStorage {
         if let image = value as? UIImage {
             body.appendData(encode("Content-Disposition: form-data; name=\"\(key)\"; filename=\"image.jpg\"\r\n"))
             body.appendData(encode("Content-Type: application/octet-stream\r\n\r\n"))
-            body.appendData(UIImageJPEGRepresentation(image, 1.0))
+            body.appendData(UIImageJPEGRepresentation(image, 0.9))
         } else if let number = value as? NSNumber {
             body.appendData(encode("Content-Disposition: form-data; name=\"\(key)\"\r\n"))
             body.appendData(encode("Content-Type: text/plain\r\n\r\n"))
