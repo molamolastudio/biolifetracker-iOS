@@ -205,6 +205,13 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
             cell.button.hidden = true
         }
         
+        // Display an option to leave the project if this member is the current user
+        if member == user {
+            cell.button.hidden = false
+            cell.button.setTitle("Leave Project", forState: .Normal)
+            cell.button.addTarget(self, action: Selector("leaveProject:"), forControlEvents: .TouchUpInside)
+        }
+
         cell.button.tag = indexPath.row
         
         return cell
@@ -278,6 +285,11 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         let member = members[sender.tag]
         currentProject?.addAdmin(member)
         memberView.reloadData()
+    }
+    
+    func leaveProject(sender: UIButton) {
+        // Make current user leave current project
+        // ANDHIEKA
     }
     
     func deleteSession(sender: UIButton) {
