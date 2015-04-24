@@ -5,6 +5,9 @@
 //  Created by Michelle Tan on 11/3/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
+//  Custom picker that shows in a popup. 
+//  Used for CustomPickerPopupCell in FormViewController.
+//  Shows a table view with the given data.
 
 import UIKit
 
@@ -35,7 +38,8 @@ class CustomPickerPopup: FormPopupController, UITableViewDataSource, UITableView
         table.dataSource = self
         table.delegate = self
         
-        table.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
+        table.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil),
+            forCellReuseIdentifier: cellReuseIdentifier)
     }
     
     func setSelectedIndex(index: Int) {

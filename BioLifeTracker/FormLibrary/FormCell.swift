@@ -5,6 +5,10 @@
 //  Created by Michelle Tan on 30/3/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
+//  Custom UITableViewCell for use in a FormViewController.
+//  Acts as the base class with methods to adjust cell padding and add
+//  rounded corners.
+//  All cells used in FormViewController must inherit from this class.
 
 import UIKit
 
@@ -21,8 +25,8 @@ class FormCell: UITableViewCell {
         return nil
     }
     
-    // Applies padding if it has not been applied yet.
-    // Adds rounded corners if the cell is the top or bottom cell.
+    /// Applies padding if it has not been applied yet.
+    /// Adds rounded corners if the cell is the top or bottom cell.
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -36,6 +40,7 @@ class FormCell: UITableViewCell {
             sizeSet = true
         }
         
+        // Apply rounded corners
         if rounded {
             let frame = self.frame
             let top = frame.origin.y
@@ -61,7 +66,7 @@ class FormCell: UITableViewCell {
         }
     }
     
-    // Removes top and bottom seperators if the cell is the top or bottom cell.
+    /// Removes top and bottom seperators if the cell is the top or bottom cell.
     override func addSubview(view: UIView) {
         if rounded {
             if view.frame.origin.x > 0 || view.frame.size.width < self.frame.size.width {

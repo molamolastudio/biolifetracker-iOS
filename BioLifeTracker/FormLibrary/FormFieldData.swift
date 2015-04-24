@@ -5,9 +5,11 @@
 //  Created by Michelle Tan on 28/3/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
-//  This class holds data required to initialise the fields of a FormViewController.
-//  The user is expected to add fields to this object and pass it to a FormViewController
-//  to populate its view.
+//  This class holds data required to initialise the fields of a
+//  FormViewController.
+
+//  The user is expected to add fields to this object and pass it to a
+//  FormViewController to populate its view.
 //
 
 import Foundation
@@ -24,8 +26,9 @@ class FormFieldData {
         setupSections()
     }
     
-    // Creates a FormFieldData with the supplied number of sections. Must have at least 1 section.
-    // If the sections value is less than 1, the value is defaulted to 1.
+    /// Creates a FormFieldData with the supplied number of sections.
+    /// Must have at least 1 section. If the sections value is less
+    /// than 1, the value is defaulted to 1.
     init(sections: Int) {
         if sections > 0 {
             self.sections = sections
@@ -35,7 +38,7 @@ class FormFieldData {
         setupSections()
     }
     
-    // Initialise the sections in the dictionary.
+    /// Initialise the sections in the dictionary.
     func setupSections() {
         for var i = 0; i < sections; i++ {
             fields[i] = []
@@ -43,16 +46,16 @@ class FormFieldData {
         }
     }
     
-    // Sets the header title for the specified section.
-    // If the section does not exist, does nothing.
+    /// Sets the header title for the specified section.
+    /// If the section does not exist, does nothing.
     func setSectionTitle(section: Int, title: String) {
         if section < sections {
             sectionTitles[section] = title
         }
     }
     
-    // Returns the header title for the specified section.
-    // If the section does not exist, does nothing.
+    /// Returns the header title for the specified section.
+    /// If the section does not exist, does nothing.
     func getSectionTitle(section: Int) -> String? {
         if section < sections {
             return sectionTitles[section]
@@ -61,9 +64,11 @@ class FormFieldData {
         }
     }
     
-    // Adds a text cell to the first section of the form, unless specified.
-    // If the section does not exist, does nothing.
-    func addTextCell(section: Int = 0, label: String, hasSingleLine: Bool, value: AnyObject? = nil) {
+    /// Adds a text cell to the first section of the form, unless specified.
+    /// If the section does not exist, does nothing.
+    func addTextCell(section: Int = 0, label: String, hasSingleLine: Bool,
+                     value: AnyObject? = nil) {
+                        
         if let var array = fields[section] {
             var field = FormField()
             if hasSingleLine {
@@ -82,8 +87,8 @@ class FormFieldData {
         }
     }
     
-    // Adds a boolean picker cell to the first section of the form, unless specified.
-    // If the section does not exist, does nothing.
+    /// Adds a boolean picker cell to the first section of the form, unless
+    /// specified. If the section does not exist, does nothing.
     func addBooleanCell(section: Int = 0, label: String, value: Bool? = nil) {
         if let var array = fields[section] {
             var field = FormField()
@@ -99,9 +104,11 @@ class FormFieldData {
         }
     }
     
-    // Adds a date picker cell to the first section of the form, unless specified.
-    // If the section does not exist, does nothing.
-    func addDatePickerCell(section: Int = 0, label: String, selectedDate: NSDate? = nil) {
+    /// Adds a date picker cell to the first section of the form, unless
+    /// specified. If the section does not exist, does nothing.
+    func addDatePickerCell(section: Int = 0, label: String,
+                           selectedDate: NSDate? = nil) {
+            
         if let var array = fields[section] {
             var field = FormField()
             
@@ -116,9 +123,11 @@ class FormFieldData {
         }
     }
     
-    // Adds a picker cell with the given values to the first section of the form, unless specified.
-    // If the section does not exist, does nothing.
-    func addPickerCell(section: Int = 0, label: String, pickerValues: [String], isCustomPicker: Bool, selectedIndex: Int? = nil) {
+    /// Adds a picker cell with the given values to the first section of the
+    /// form, unless specified. If the section does not exist, does nothing.
+    func addPickerCell(section: Int = 0, label: String, pickerValues: [String],
+                       isCustomPicker: Bool, selectedIndex: Int? = nil) {
+            
         if let var array = fields[section] {
             var field = FormField()
             
@@ -139,15 +148,17 @@ class FormFieldData {
         }
     }
     
-    // Adds a photo picker cell to the first section of the form, unless specified.
-    // If the section does not exist, does nothing.
-    func addPhotoPickerCell(section: Int = 0, label: String, image: UIImage? = nil) {
+    /// Adds a photo picker cell to the first section of the form, unless
+    /// specified. If the section does not exist, does nothing.
+    func addPhotoPickerCell(section: Int = 0, label: String,
+                            image: UIImage? = nil) {
+            
         if let var array = fields[section] {
             var field = FormField()
-            
+                
             field.type = FormField.FieldType.PickerPhoto
             field.label = label
-            
+                
             if image != nil {
                 field.value = image
             }
@@ -156,22 +167,29 @@ class FormFieldData {
         }
     }
     
-    func addButtonCell(section: Int = 0, label: String, buttonTitle: String, target: AnyObject? = nil, action: String? = nil,  popup: UIViewController? = nil, selectedValue: AnyObject? = nil, selectedValueAsString: String? = nil) {
+    /// Adds a button cell to the first section of the form, unless
+    /// specified. If the section does not exist, does nothing.
+    func addButtonCell(section: Int = 0, label: String, buttonTitle: String,
+                       target: AnyObject? = nil, action: String? = nil,
+                       popup: UIViewController? = nil, selectedValue: AnyObject? = nil,
+                       selectedValueAsString: String? = nil) {
+            
         if let var array = fields[section] {
             var field = FormField()
             
             field.type = FormField.FieldType.Button
             field.label = label
             
-            field.buttonValues = [buttonTitle, target, action, popup, selectedValue, selectedValueAsString]
+            field.buttonValues = [buttonTitle, target, action, popup,
+                                  selectedValue, selectedValueAsString]
             
             array.append(field)
             fields[section] = array
         }
     }
     
-    // Returns the field for the specified index path in this form.
-    // If the section or row does not exist, returns nil.
+    /// Returns the field for the specified index path in this form.
+    /// If the section or row does not exist, returns nil.
     func getFieldForIndex(index: NSIndexPath) -> FormField? {
         if let var array = fields[index.section] {
             if index.row < array.count {
@@ -181,8 +199,8 @@ class FormFieldData {
         return nil
     }
     
-    // Returns the field type for the specified index path in this form.
-    // If the section or row does not exist, returns nil.
+    /// Returns the field type for the specified index path in this form.
+    /// If the section or row does not exist, returns nil.
     func getFieldTypeForIndex(index: NSIndexPath) -> FormField.FieldType? {
         if let field = getFieldForIndex(index) {
             return field.type
@@ -191,8 +209,8 @@ class FormFieldData {
         }
     }
     
-    // Returns the field label for the specified index path in this form.
-    // If the section or row does not exist, returns nil.
+    /// Returns the field label for the specified index path in this form.
+    /// If the section or row does not exist, returns nil.
     func getLabelForIndex(index: NSIndexPath) -> String? {
         if let field = getFieldForIndex(index) {
             return field.label
@@ -201,8 +219,9 @@ class FormFieldData {
         }
     }
     
-    // Returns the field picker values for the specified index path in this form.
-    // If the section or row does not exist or the field has no picker values, returns nil.
+    /// Returns the field picker values for the specified index path in this form.
+    /// If the section or row does not exist or the field has no picker values, 
+    /// returns nil.
     func getPickerValuesForIndex(index: NSIndexPath) -> [AnyObject?]? {
         if let field = getFieldForIndex(index) {
             return field.pickerValues
@@ -211,8 +230,9 @@ class FormFieldData {
         }
     }
     
-    // Returns the field value for the specified index path in this form.
-    // If the section or row does not exist or the field has no value, returns nil.
+    /// Returns the field value for the specified index path in this form.
+    /// If the section or row does not exist or the field has no value, 
+    /// returns nil.
     func getValueForIndex(index: NSIndexPath) -> AnyObject? {
         if let field = getFieldForIndex(index) {
             return field.value
@@ -221,13 +241,13 @@ class FormFieldData {
         }
     }
     
-    // Returns the number of sections in this form.
+    /// Returns the number of sections in this form.
     func getNumberOfSections() -> Int {
         return sections
     }
     
-    // Returns the number of rows in the specified section in this form.
-    // If the section does not exist, returns 0.
+    /// Returns the number of rows in the specified section in this form.
+    /// If the section does not exist, returns 0.
     func getNumberOfRowsForSection(section: Int) -> Int {
         if let var array = fields[section] {
             return array.count
