@@ -17,7 +17,7 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
     @IBOutlet weak var photoPickerView: UIView!
     @IBOutlet weak var weatherOverlayView: UIView!
     
-    @IBOutlet weak var observationView: UIView!
+    @IBOutlet weak var observationView: UIScrollView!
     
     @IBOutlet weak var photoButton: UIButton!
     @IBOutlet weak var leftArrow: UIButton!
