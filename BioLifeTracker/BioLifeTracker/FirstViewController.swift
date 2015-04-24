@@ -5,6 +5,9 @@
 //  Created by Michelle Tan on 2/3/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
+//  Presents the first view that the user sees upon opening the app.
+//  Contains login buttons for the user. If the user has logged in,
+//  this screen dismisses itself.
 
 import UIKit
 
@@ -54,17 +57,17 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         signIn?.delegate = self
     }
     
-    @IBAction func showSuperVC(sender: AnyObject) {
-        showSuperVC()
-    }
-    
-    func showSuperVC() {
+    func dismissSelf() {
         
         alert?.dismissViewControllerAnimated(true, completion: nil)
         
         let userAuthService = UserAuthService.sharedInstance
         if !userAuthService.hasAccessToken() {
-            let failAlert = UIAlertController(title: "Login Fail", message: "The server rejected your social account login", preferredStyle: .Alert)
+            
+            let failAlert = UIAlertController(title: "Login Fail",
+                message: "The server rejected your social account login",
+                preferredStyle: .Alert)
+            
             let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             failAlert.addAction(defaultAction)
             self.presentViewController(failAlert, animated: true, completion: nil)
@@ -89,7 +92,7 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         let userAuth = UserAuthService.sharedInstance
         userAuth.loginToServerUsingFacebookToken(
             FBSession.activeSession().accessTokenData.accessToken,
-            onCompletion: showSuperVC)
+            onCompletion: dismissSelf)
     }
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
@@ -113,7 +116,7 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
             
             UserAuthService.sharedInstance.loginToServerUsingGoogleToken(
                 auth.accessToken,
-                onCompletion: showSuperVC)
+                onCompletion: dismissSelf)
         } else {
             println("Error: \(error)")
         }
