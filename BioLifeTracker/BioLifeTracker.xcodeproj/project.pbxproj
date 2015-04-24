@@ -72,7 +72,6 @@
 		24F0F6C71AD7717200C6CC23 /* DeleteTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6C61AD7717200C6CC23 /* DeleteTask.swift */; };
 		24F0F6C81AD7728A00C6CC23 /* DeleteTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6C61AD7717200C6CC23 /* DeleteTask.swift */; };
 		3205E7481AAED9F9006F374D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7471AAED9F9006F374D /* AppDelegate.swift */; };
-		3205E7771AAEDA85006F374D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E76F1AAEDA85006F374D /* Constants.swift */; };
 		3205E7791AAEDA85006F374D /* Ethogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7711AAEDA85006F374D /* Ethogram.swift */; };
 		3205E77A1AAEDA85006F374D /* Observation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7721AAEDA85006F374D /* Observation.swift */; };
 		3205E77B1AAEDA85006F374D /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E7731AAEDA85006F374D /* Project.swift */; };
@@ -222,7 +221,6 @@
 		AC6A24BA1ADD26BA00CF33D6 /* DownloadTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2486AB3E1AD64C3A00573618 /* DownloadTaskTests.swift */; };
 		AC6A24BB1ADD26BC00CF33D6 /* UploadTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2486AB401AD64C7D00573618 /* UploadTaskTests.swift */; };
 		AC6A24BD1ADD26C100CF33D6 /* CloudStorageManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F5DF471AD8352200F76B6B /* CloudStorageManagerTests.swift */; };
-		AC702EEB1AC55FBC003C50C8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3205E76F1AAEDA85006F374D /* Constants.swift */; };
 		AC7B6DBD1AD25433002D3EE6 /* TagTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1881541AD02F2400CE450B /* TagTests.swift */; };
 		AC7B6DBE1AD25438002D3EE6 /* WeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1881561AD02F3100CE450B /* WeatherTests.swift */; };
 		AC7B6DBF1AD2543B002D3EE6 /* LocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC1881581AD02F3E00CE450B /* LocationTests.swift */; };
@@ -334,7 +332,6 @@
 		3205E7511AAED9F9006F374D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		3205E7571AAED9F9006F374D /* BioLifeTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BioLifeTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3205E75C1AAED9F9006F374D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3205E76F1AAEDA85006F374D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3205E7711AAEDA85006F374D /* Ethogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Ethogram.swift; sourceTree = "<group>"; };
 		3205E7721AAEDA85006F374D /* Observation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Observation.swift; sourceTree = "<group>"; };
 		3205E7731AAEDA85006F374D /* Project.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
@@ -700,7 +697,6 @@
 				24E32D3C1AB19954003C4E0A /* Model */,
 				AC9162AA1ACA69BF00FED714 /* Cloud Storage */,
 				7838E7571AE34FD3007C2562 /* Analysis */,
-				3205E76F1AAEDA85006F374D /* Constants.swift */,
 				3205E7471AAED9F9006F374D /* AppDelegate.swift */,
 				329B29401AD16058007ADC65 /* FirstViewController.swift */,
 				329B293E1AD15E6F007ADC65 /* FirstView.xib */,
@@ -1189,7 +1185,6 @@
 				240FEF051AD60ACF000FD9F3 /* BiolifeDateFormatter.swift in Sources */,
 				32423B831ADF768600AFA2F8 /* BehaviourStateCell.swift in Sources */,
 				3205E7481AAED9F9006F374D /* AppDelegate.swift in Sources */,
-				3205E7771AAEDA85006F374D /* Constants.swift in Sources */,
 				323CBD961ADD58EA00A7C970 /* ScanViewController.swift in Sources */,
 				32423B8D1AE0023400AFA2F8 /* FocalSessionViewController.swift in Sources */,
 				321D62C51AD2618800CF9BE9 /* EthogramsViewControllerDelegate.swift in Sources */,
@@ -1237,7 +1232,6 @@
 				AC6A24B11ADD234000CF33D6 /* BLTObservationProtocol.swift in Sources */,
 				AC6A24AF1ADD233B00CF33D6 /* BLTBehaviourStateProtocol.swift in Sources */,
 				AC7B6DC61AD2544E002D3EE6 /* EthogramMngTests.swift in Sources */,
-				AC702EEB1AC55FBC003C50C8 /* Constants.swift in Sources */,
 				AC7B6DE21AD254AF002D3EE6 /* EthogramManager.swift in Sources */,
 				AC7B6DD61AD25482002D3EE6 /* Weather.swift in Sources */,
 				AC7B6DDD1AD25498002D3EE6 /* Storable.swift in Sources */,
