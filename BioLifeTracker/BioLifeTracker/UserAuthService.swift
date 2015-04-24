@@ -35,6 +35,7 @@ class UserAuthService {
     init() {
         let success = self.tryLoadTokenFromDisk()
         if success {
+            // TODO: update after new ProjectManager saving mechanism
             dispatch_async(dispatch_get_main_queue(), {
                 self.initialiseManagers(self.user.id)
             })

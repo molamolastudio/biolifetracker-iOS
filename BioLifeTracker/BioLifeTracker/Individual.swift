@@ -95,12 +95,6 @@ class Individual: BiolifeModel {
 
         super.init(coder: aDecoder)
     }
-    
-    class func individualWithId(id: Int) -> Individual {
-        let manager = CloudStorageManager.sharedInstance
-        let individualDictionary = manager.getItemForClass(ClassUrl, itemId: id)
-        return Individual(dictionary: individualDictionary)
-    }
 }
 
 func ==(lhs: Individual, rhs: Individual) -> Bool {

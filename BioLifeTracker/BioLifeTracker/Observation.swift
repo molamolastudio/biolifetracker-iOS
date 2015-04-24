@@ -61,20 +61,37 @@ class Observation: BiolifeModel {
             if let individualInfo = dictionary["individual"] as? NSDictionary {
                 _individual = Individual(dictionary: individualInfo, recursive: true)
             }
-            let locationInfo = dictionary["location"] as! NSDictionary
-            _location = Location(dictionary: locationInfo, recursive: true)
-            let weatherInfo = dictionary["weather"] as! NSDictionary
-            _weather = Weather(dictionary: weatherInfo, recursive: true)
+            if let locationInfo = dictionary["location"] as? NSDictionary {
+                _location = Location(dictionary: locationInfo, recursive: true)
+            }
+            if let weatherInfo = dictionary["weather"] as? NSDictionary {
+                _weather = Weather(dictionary: weatherInfo, recursive: true)
+            }
+            if let photoInfo = dictionary["photo"] as? NSDictionary {
+                _photo = Photo(dictionary: photoInfo, recursive: true)
+            }
         } else {
-            _state = BehaviourState.behaviourStateWithId(dictionary["recorded_behaviour"] as! Int)
+            let manager = CloudStorageManager.sharedInstance
+            // compulsory properties
+            let stateId = dictionary["recorded_behaviour"] as! Int
+            let stateInfo = manager.getItemForClass(BehaviourState.ClassUrl, itemId: stateId)
+            _state = BehaviourState(dictionary: stateInfo)
+            // optional properties
             if let individualId = dictionary["individual"] as? Int {
-                _individual = Individual.individualWithId(individualId)
+                let individualInfo = manager.getItemForClass(Individual.ClassUrl, itemId: individualId)
+                _individual = Individual(dictionary: individualInfo)
             }
             if let locationId = dictionary["location"] as? Int {
-                _location = Location.locationWithId(locationId)
+                let locationInfo = manager.getItemForClass(Location.ClassUrl, itemId: locationId)
+                _location = Location(dictionary: locationInfo)
             }
             if let weatherId = dictionary["weather"] as? Int {
-                _weather = Weather.weatherWithId(weatherId)
+                let weatherInfo = manager.getItemForClass(Weather.ClassUrl, itemId: weatherId)
+                _weather = Weather(dictionary: weatherInfo)
+            }
+            if let photoId = dictionary["photo"] as? Int {
+                let photoInfo = manager.getItemForClass(Photo.ClassUrl, itemId: photoId)
+                _photo = Photo(dictionary: photoInfo)
             }
         }
         super.init(dictionary: dictionary, recursive: recursive)
@@ -207,28 +224,33 @@ extension Observation {
         // simple properties
         dictionary.setValue(information, forKey: "information")
         dictionary.setValue(timestamp.toBiolifeDateFormat(), forKey: "timestamp")
-        timestamp.toBiolifeDateFormat()
+        
         // complex properties
         var stateDictionary = NSMutableDictionary()
         state.encodeRecursivelyWithDictionary(stateDictionary)
         dictionary.setValue(stateDictionary, forKey: "recorded_behaviour")
         
-        var photoDictionary = NSMutableDictionary()
-        photo?.encodeRecursivelyWithDictionary(dictionary)
-        dictionary.setValue(photoDictionary, forKey: "photo")
-        
-        var individualDictionary = NSMutableDictionary()
-        individual?.encodeRecursivelyWithDictionary(individualDictionary)
-        dictionary.setValue(individualDictionary, forKey: "individual")
-        
-        var locationDictionary = NSMutableDictionary()
-        location?.encodeRecursivelyWithDictionary(locationDictionary)
-        dictionary.setValue(locationDictionary, forKey: "location")
-
-        var weatherDictionary = NSMutableDictionary()
-        weather?.encodeRecursivelyWithDictionary(weatherDictionary)
-        dictionary.setValue(weatherDictionary, forKey: "weather")
-        
+        // optional complex properties
+        if let photo = photo {
+            var photoDictionary = NSMutableDictionary()
+            photo.encodeRecursivelyWithDictionary(dictionary)
+            dictionary.setValue(photoDictionary, forKey: "photo")
+        }
+        if let individual = individual {
+            var individualDictionary = NSMutableDictionary()
+            individual.encodeRecursivelyWithDictionary(individualDictionary)
+            dictionary.setValue(individualDictionary, forKey: "individual")
+        }
+        if let location = location {
+            var locationDictionary = NSMutableDictionary()
+            location.encodeRecursivelyWithDictionary(locationDictionary)
+            dictionary.setValue(locationDictionary, forKey: "location")
+        }
+        if let weather = weather {
+            var weatherDictionary = NSMutableDictionary()
+            weather.encodeRecursivelyWithDictionary(weatherDictionary)
+            dictionary.setValue(weatherDictionary, forKey: "weather")
+        }
         super.encodeRecursivelyWithDictionary(dictionary)
     }
 }

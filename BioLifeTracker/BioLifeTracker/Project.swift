@@ -66,7 +66,10 @@ class Project: BiolifeModel, Storable {
             let sessionIds = dictionary["session_set"] as! [Int]
             _sessions = sessionIds.map { Session.sessionWithId($0) }
             let individualIds = dictionary["individuals"] as! [Int]
-            _individuals = individualIds.map { Individual.individualWithId($0) }
+            _individuals = individualIds.map {
+                let individualInfo = manager.getItemForClass(Individual.ClassUrl, itemId: $0)
+                return Individual(dictionary: individualInfo)
+            }
         }
         super.init(dictionary: dictionary, recursive: recursive)
         sessions.map { $0.setProject(self) }

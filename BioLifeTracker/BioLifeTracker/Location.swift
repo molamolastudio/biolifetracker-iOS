@@ -46,12 +46,6 @@ class Location: BiolifeModel {
     convenience required init(dictionary: NSDictionary) {
         self.init(dictionary: dictionary, recursive: false)
     }
-    
-    class func locationWithId(id: Int) -> Location {
-        let manager = CloudStorageManager.sharedInstance
-        let locationDictionary = manager.getItemForClass(ClassUrl, itemId: id)
-        return Location(dictionary: locationDictionary)
-    }
 }
 
 func ==(lhs: Location, rhs: Location) -> Bool {

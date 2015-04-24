@@ -9,6 +9,10 @@
 import Foundation
 
 class ProjectManager: NSObject, Storable {
+    static var storageThread: dispatch_queue_t = dispatch_queue_create(
+        "com.cs3217.biolifetracker.storage",
+        DISPATCH_QUEUE_SERIAL)
+    
     private var _projects: [Project] = []
     
     var projects: [Project] { get { return _projects } }

@@ -47,8 +47,12 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        println("update before \(currentProject!.sessions.count)")
-        ProjectManager.sharedInstance.updateProject(currentProjectIndex!, project: currentProject!)
+        // We have to use dispatch async. Super heavy operation.
+        dispatch_async(ProjectManager.storageThread, {
+            ProjectManager.sharedInstance.updateProject(self.currentProjectIndex!,
+                project: self.currentProject!)
+            println("Finish updating project at index \(self.currentProjectIndex!)")
+        })
     }
     
     func setupTableViews() {

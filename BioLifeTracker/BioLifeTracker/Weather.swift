@@ -47,11 +47,6 @@ class Weather: BiolifeModel {
         self.init(dictionary: dictionary, recursive: false)
     }
     
-    class func weatherWithId(id: Int) -> Weather {
-        let manager = CloudStorageManager.sharedInstance
-        let weatherDictionary = manager.getItemForClass(ClassUrl, itemId: id)
-        return Weather(dictionary: weatherDictionary)
-    }
 }
 
 func ==(lhs: Weather, rhs: Weather) -> Bool {

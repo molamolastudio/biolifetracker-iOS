@@ -46,8 +46,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        EthogramManager.sharedInstance.saveToArchives()
-        ProjectManager.sharedInstance.saveToArchives()
+        var bgTaskId: UIBackgroundTaskIdentifier?
+        let application = UIApplication.sharedApplication()
+        bgTaskId = application.beginBackgroundTaskWithExpirationHandler({
+            application.endBackgroundTask(bgTaskId!)
+            bgTaskId = UIBackgroundTaskInvalid
+        })
+        
+        dispatch_async(ProjectManager.storageThread, {
+            EthogramManager.sharedInstance.saveToArchives()
+            ProjectManager.sharedInstance.saveToArchives()
+            println("Finished saving projects before going to background.")
+        })
     }
 
     func applicationWillEnterForeground(application: UIApplication) {

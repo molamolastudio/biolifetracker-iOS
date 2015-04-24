@@ -49,7 +49,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
             startDownloadingProjectsFromServer()
             freshLogin = false
         } else {
-            startDownloadingProjectsFromServer()
+            //startDownloadingProjectsFromServer()
         }
         //        setupForDemo()
     }
@@ -532,20 +532,22 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     }
     
     func userDidSelectLogout() {
+        // We have to dismiss views first so that they can save edited data
+        dismissMenuView()
+        showLoginPage()
+        
         // Log out ProjectManager and EthogramManager first before logging user out
         // Requires the user info to clear directories
         ProjectManager.sharedInstance.handleLogOut()
         EthogramManager.sharedInstance.handleLogOut()
         
+        // Erase authentication info
         GPPSignIn.sharedInstance().signOut()
         FBSession.activeSession().closeAndClearTokenInformation()
-        
         UserAuthService.sharedInstance.handleLogOut()
-        CloudStorageManager.sharedInstance.clearCache()
         
-        // Move back to start page
-        dismissMenuView()
-        showLoginPage()
+        // Erase cached cloud storage data
+        CloudStorageManager.sharedInstance.clearCache()
         
         assert(ProjectManager.sharedInstance.projects.count == 0)
     }
@@ -625,8 +627,10 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
     
     
     func startDownloadingProjectsFromServer() {
-        loadingAlert = UIAlertController(title: "Loading Data", message: "Downloading your projects from server", preferredStyle: .Alert)
-        self.presentViewController(loadingAlert!, animated: true, completion: nil)
+        self.loadingAlert = UIAlertController(title: "Loading Data", message: "Downloading your projects from server", preferredStyle: .Alert)
+        dispatch_async(dispatch_get_main_queue(), {
+            self.presentViewController(self.loadingAlert!, animated: true, completion: nil)
+        })
         
         let worker = CloudStorageWorker()
         
@@ -726,7 +730,6 @@ class SuperController: UIViewController, UISplitViewControllerDelegate, MenuView
         worker.setOnProgressUpdate { percentage, message in
             dispatch_async(dispatch_get_main_queue(), {
                 self.loadingAlert?.message = message
-                
             })
         }
         worker.startExecution()
