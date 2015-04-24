@@ -51,6 +51,8 @@ class Session: BiolifeModel {
         assert(sessionType == "SCN" || sessionType == "FCL")
         _typeValue = sessionType
         
+        _interval = dictionary["interval"] as? Int
+        
         if recursive {
             let observationInfos = dictionary["observation_set"] as! [NSDictionary]
             _observations = observationInfos.map { Observation(dictionary: $0, recursive: true) }
@@ -198,6 +200,7 @@ class Session: BiolifeModel {
         
         self._typeValue = aDecoder.decodeObjectForKey("typeValue") as! String
         self._name = aDecoder.decodeObjectForKey("name") as! String
+        self._interval = aDecoder.decodeObjectForKey("interval") as? Int
         
         let objectObservations: AnyObject = aDecoder.decodeObjectForKey("observations")!
         enumerator = objectObservations.objectEnumerator()
@@ -255,6 +258,7 @@ extension Session: NSCoding {
         // project attribute is allocated when project is initialized
         aCoder.encodeObject(_typeValue, forKey: "typeValue")
         aCoder.encodeObject(_name, forKey: "name")
+        aCoder.encodeObject(_interval, forKey: "interval")
         aCoder.encodeObject(_observations, forKey: "observations")
         aCoder.encodeObject(_individuals, forKey: "individuals")
     }
@@ -277,6 +281,7 @@ extension Session: CloudStorable {
         dictionary.setValue(_typeValue, forKey: "session_type")
         dictionary.setValue(individuals.map { $0.id! }, forKey: "individuals")
         dictionary.setValue(name, forKey: "name")
+        dictionary.setValue(_interval, forKey: "interval")
         super.encodeWithDictionary(dictionary)
     }
 }
@@ -286,6 +291,7 @@ extension Session {
         // simple properties
         dictionary.setValue(_typeValue, forKey: "session_type")
         dictionary.setValue(name, forKey: "name")
+        dictionary.setValue(_interval, forKey: "interval")
         
         // complex properties
         var observationsArray = [NSDictionary]()

@@ -51,6 +51,14 @@ class ScanSessionViewController: UIViewController, UITableViewDataSource, UITabl
         formatter.timeStyle = .ShortStyle
         
         timestamps = currentSession!.getTimestamps()
+        
+        // start notifications for reminding users to take scan sampling
+        NotificationService.sharedInstance.sessionHasStarted(currentSession!)
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        // stop notifications
+        NotificationService.sharedInstance.sessionHasEnded()
     }
     
     override func viewDidAppear(animated: Bool) {
