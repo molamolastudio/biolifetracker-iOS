@@ -5,6 +5,9 @@
 //  Created by Michelle Tan on 20/4/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
+//  Presents a bar of weather icons for selection.
+//  It has 2 states: no weather type is selected, or 1 weather type is selected.
+//  Returns a Weather object to its delegate after a weather type is selected.
 
 import UIKit
 

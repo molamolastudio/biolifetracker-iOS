@@ -5,10 +5,13 @@
 //  Created by Michelle Tan on 14/4/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
+//  Shows a list of scan sessions grouped by timestamp to the user.
 
 import UIKit
 
-class ScanSessionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ScanSessionViewController: UIViewController, UITableViewDataSource,
+                                 UITableViewDelegate {
+    
     var delegate: ScanSessionViewControllerDelegate? = nil
     
     @IBOutlet weak var tableView: UITableView!
@@ -57,7 +60,8 @@ class ScanSessionViewController: UIViewController, UITableViewDataSource, UITabl
     }
     
     override func viewDidDisappear(animated: Bool) {
-        // stop notifications
+        super.viewDidDisappear(animated)
+        // Stop notifications
         NotificationService.sharedInstance.sessionHasEnded()
     }
     
@@ -67,7 +71,8 @@ class ScanSessionViewController: UIViewController, UITableViewDataSource, UITabl
         self.tableView.reloadData()
     }
     
-    // UITableViewDataSource and UITableViewDelegate METHODS
+    // MARK: UITableViewDataSource AND UITableViewDelegate METHODS
+    
      func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SubtitleTableCell
         

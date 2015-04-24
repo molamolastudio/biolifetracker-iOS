@@ -6,12 +6,14 @@
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
 //  This class displays a form to create an ethogram.
-//  The user must enter a name and at least one behaviour state to
+///  The user must enter a name and at least one behaviour state to
 //  create an ethogram, otherwise an alert will be shown.
 
 import UIKit
 
-class EthogramFormViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UITextViewDelegate {
+class EthogramFormViewController: UIViewController, UITableViewDataSource,
+                                  UITableViewDelegate, UITextFieldDelegate,
+                                  UITextViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -80,7 +82,8 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         self.tableView.reloadData()
     }
     
-    // Returns an ethogram if a name and at least 1 state has been set. Else, shows an alert.
+    /// Returns an ethogram if a name and at least 1 state has been set. 
+    /// Else, shows an alert.
     func getEthogram() -> Ethogram? {
         if ethogram.name != "" && ethogram.behaviourStates.count > 0 {
             return ethogram
@@ -90,7 +93,8 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    // UITableViewDataSource and UITableViewDelegate METHODS
+    // MARK: UITableViewDataSource AND UITableViewDelegate METHODS
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == firstSection {
             return getCellForFirstSection(indexPath)
@@ -99,7 +103,7 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    // Sets up data in the cells
+    /// Sets up data in the cells
     func getCellForFirstSection(indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier(nameCellIdentifier) as! SingleLineTextCell
         
@@ -110,14 +114,14 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         return cell
     }
     
-    // Populates behaviour states in second section and sets up listeners for adding new state.
+    /// Populates behaviour states in second section and sets up listeners for adding new state.
     func getCellForSecondSection(indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier(stateCellIdentifier) as! BehaviourStateCell
         
         let textField = cell.textField
         let textView = cell.textView
         
-        // Sets delegates
+        /// Sets delegates
         textField.delegate = self
         textView.delegate = self
         
@@ -156,14 +160,16 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         return cell
     }
     
-    // Selectors for text fields
+    // MARK: TARGETS FOR TEXT FIELDS
+    
+    /// Updates the name of the ethogram if its field is changed.
     func nameRowDidChange(sender: UITextField) {
         if sender.text != "" {
             ethogram.updateName(sender.text)
         }
     }
     
-    // Sets up the edit button after the existing behaviour states are edited.
+    /// Sets up the edit button after the existing behaviour states are edited.
     func textFieldDidChange(sender: UITextField) {
         let cell = sender.superview! as! BehaviourStateCell
         if sender.text != "" {
@@ -174,7 +180,7 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    // Sets up the add button after a new behaviour states is added.
+    /// Sets up the add button after a new behaviour states is added.
     func extraRowDidChange(sender: UITextField) {
         let cell = sender.superview! as! BehaviourStateCell
         if sender.text != "" {
@@ -185,7 +191,7 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    // Sets the button on the given BehaviourStateCell to an 'Add' button.
+    /// Sets the button on the given BehaviourStateCell to an 'Add' button.
     func showAddButton(cell: BehaviourStateCell) {
         cell.button.setTitle("Add", forState: .Normal)
         cell.button.hidden = false
@@ -193,7 +199,7 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         cell.button.addTarget(self, action: Selector("addButtonPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
     }
     
-    // Sets the button on the given BehaviourStateCell to an 'Edit' button.
+    /// Sets the button on the given BehaviourStateCell to an 'Edit' button.
     func showEditButton(cell: BehaviourStateCell) {
         cell.button.setTitle("Edit", forState: .Normal)
         cell.button.hidden = false
@@ -201,8 +207,8 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         cell.button.addTarget(self, action: Selector("editButtonPressed:"), forControlEvents: UIControlEvents.TouchUpInside)
     }
     
-    // Gets the name for the new behaviour state from the cell and updates the behaviour state
-    // of the ethogram, then refreshes the view.
+    /// Gets the name for the new behaviour state from the cell and updates the behaviour state
+    /// of the ethogram, then refreshes the view.
     func editButtonPressed(sender: UIButton) {
         let cell = sender.superview! as! BehaviourStateCell
         ethogram.updateBehaviourStateName(cell.button.tag, bsName: cell.textField.text!)
@@ -212,8 +218,8 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         refreshView()
     }
     
-    // Gets the name for the new behaviour state from the cell and adds it to the ethogram,
-    // then refreshes the view.
+    /// Gets the name for the new behaviour state from the cell and adds it to the ethogram,
+    /// then refreshes the view.
     func addButtonPressed(sender: UIButton) {
         let cell = sender.superview! as! BehaviourStateCell
         
@@ -260,7 +266,6 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         return numSections
     }
     
-    // For deleting extra behaviour states
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return isSecondSection(indexPath.section)
     }
@@ -273,7 +278,7 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    // If the cell is deleted, delete the behaviour state related to it.
+    /// If the cell is deleted, delete the behaviour state related to it.
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         if editingStyle == UITableViewCellEditingStyle.Delete {
             if let cell = tableView.cellForRowAtIndexPath(indexPath) {
@@ -286,8 +291,9 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    // UITextFieldDelegate methods
-    // After user presses enter key, call the methods to update the behaviour states.
+    // MARK: UITextFieldDelegate METHODS 
+    
+    /// After user presses enter key, call the methods to update the behaviour states.
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         if textField.text != "" {
             let cell = textField.superview! as! BehaviourStateCell
@@ -301,8 +307,9 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         return false
     }
     
-    // UITextViewDelegate methods
-    // Shows the edit button if an existing behaviour state's information is edited.
+    // MARK: UITextViewDelegate METHODS
+    
+    /// Shows the edit button if an existing behaviour state's information is edited.
     func textViewDidChange(textView: UITextView) {
         let cell = textView.superview as! BehaviourStateCell
         if !isExtraRow(textView.tag) {
@@ -310,7 +317,8 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    // HELPER METHODS
+    // MARK: HELPER METHODS
+    
     func isFirstSection(index: Int) -> Bool {
         return index == firstSection
     }

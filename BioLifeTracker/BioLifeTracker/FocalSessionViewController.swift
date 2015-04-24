@@ -5,10 +5,16 @@
 //  Created by Michelle Tan on 14/4/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
+//  Shows an interface for creating observations within a focal session.
+//  Allows user to create new individuals or observations for an individual.
 
 import UIKit
 
-class FocalSessionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, WeatherViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate  {
+class FocalSessionViewController: UIViewController, UITableViewDataSource,
+                                  UITableViewDelegate, UICollectionViewDataSource,
+                                  UICollectionViewDelegate, UITextViewDelegate,
+                                  WeatherViewControllerDelegate, UIImagePickerControllerDelegate,
+                                  UINavigationControllerDelegate  {
     
     @IBOutlet weak var individualsView: UICollectionView!
     @IBOutlet weak var observationsView: UITableView!
@@ -23,6 +29,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     let circleCellIdentifier = "CircleCell"
     let circleLabelCellIdentifier = "CircleWithLabelCell"
     
+    // Defines the borders for the cells
     let borderColor = UIColor.blueColor().CGColor
     let borderSelected: CGFloat = 2.0
     let borderDeselected: CGFloat = 0
@@ -42,6 +49,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     var editable = false
     
+    // Variables for the current and selected model objects
     var currentSession: Session? = nil
     var selectedIndividual: Int? = nil
     var selectedObservations = [Observation]()
@@ -49,6 +57,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     var selectedState = 0
     
     var individuals = [Individual]()
+    
     // Maps the individual's label to a list of its observations in this session
     var originalObservations = [Individual: [Observation]]()
     var newObservations = [Individual: [Observation]]()
@@ -60,6 +69,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         hideObservationSection()
         setupViews()
         getData()
@@ -67,10 +77,6 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         // Sets up the date formatter for converting dates to strings
         formatter.dateStyle = .ShortStyle
         formatter.timeStyle = .ShortStyle
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
     }
     
     func setupViews() {
@@ -127,18 +133,21 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         refreshIndividuals()
         refreshObservations()
         
-        if selectedObservation == nil || newObservations[individuals[selectedIndividual!]]!.count == 0 {
+        if selectedObservation == nil ||
+           newObservations[individuals[selectedIndividual!]]!.count == 0 {
             hideObservationSection()
         } else {
             showObservationSection()
         }
     }
     
-    // Sets the data source of this controller.
+    /// Sets the data source of this controller.
     func setData(session: Session) {
         currentSession = session
     }
     
+    /// Deep copies the data from the original model object into a temporary model
+    /// object in this controller.
     func getData() {
         if currentSession != nil {
             // Setup the individuals array
@@ -166,9 +175,9 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    // Copies over the information in the edited individuals to the original individuals.
-    // Copies over the information in the edited observations to the original observations.
-    // Adds new individuals or observations.
+    /// Copies over the information in the edited individuals to the original individuals.
+    /// Copies over the information in the edited observations to the original observations.
+    /// Adds new individuals or observations.
     func saveData() {
         let originalIndividuals = currentSession!.project.individuals
         
@@ -204,7 +213,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    // Returns a deep copy of the given array of observations.
+    /// Returns a deep copy of the given array of observations.
     func getCopyOfObservations(array: [Observation]) -> [Observation]{
         var newArray = [Observation]()
         for o in array {
@@ -218,7 +227,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         return newArray
     }
     
-    // Copy fields of 'from' to 'to'.
+    /// Copy fields of 'from' to 'to'.
     func copyOverObservation(from: Observation, to: Observation) {
         to.changeBehaviourState(from.state)
         to.updateInformation(from.information)
@@ -228,7 +237,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    // UICollectionViewDataSource methods
+    // MARK: UICollectionViewDataSource METHODS
+    
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
         if collectionView == individualsView {
@@ -312,7 +322,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         return itemCount
     }
     
-    // UICollectionViewDelegate methods
+    // MARK: UICollectionViewDelegate METHODS
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if collectionView == individualsView {
@@ -336,7 +346,8 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    // UITableViewDataSource and UITableViewDelegate METHODS
+    // MARK: UITableViewDataSource AND UITableViewDelegate METHODS
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier) as! SingleLineTextCell
         
@@ -383,14 +394,16 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         return numSections
     }
     
-    // UITextViewDelegate methods
+    // MARK: UITextViewDelegate METHODS
+    
     // Updates the currently displayed observation's text when user types in the text view.
     func textViewDidChange(textView: UITextView) {
         let observation = selectedObservations[selectedObservation!]
         observation.updateInformation(textView.text)
     }
     
-    // WeatherViewControllerDelegate methods
+    // MARK: WeatherViewControllerDelegate METHODS
+    
     // Updates the currently displayed observation's weather when user changes the weather.
     func userDidSelectWeather(weather: Weather?) {
         let observation = selectedObservations[selectedObservation!]
@@ -401,7 +414,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    // End delegate methods
+    // MARK: OTHER METHODS
     
     // Retrieves the observations for the selected individual and reloads the
     // observation view.
@@ -456,7 +469,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         statesView.reloadData()
     }
     
-    // Methods to toggle views
+    // MARK: METHODS TO TOGGLE VIEWS
     
     func hideObservationSection() {
         observationDisplay.hidden = true
@@ -505,25 +518,30 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         newObservations[individual] = []
     }
     
-    // Methods for showing image picker
-    // IBActions for buttons
+    // MARK: METHODS FOR IMAGE PICKER
+    
+    /// Presents an image picker.
     @IBAction func photoBtnPressed(sender: UIButton) {
         imagePicker.popoverPresentationController!.sourceView = sender
         imagePicker.popoverPresentationController!.sourceRect = CGRectMake(0, 0, 0, 0)
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
     
-    // Creates a UIAlertController to display a menu for choosing a source for picking photos.
+    /// Creates a UIAlertController to display a menu for choosing a source for 
+    /// picking photos.
     func setupImagePicker() {
-        imagePicker = UIAlertController(title: "Pick Photo From", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        imagePicker = UIAlertController(title: "Pick Photo From", message: "",
+                                        preferredStyle: .ActionSheet)
         
-        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
-            let actionCamera = UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default, handler: { UIAlertAction in self.openCameraPicker()})
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            let actionCamera = UIAlertAction(title: "Camera", style: .Default,
+                                            handler: { UIAlertAction in self.openCameraPicker()})
             imagePicker.addAction(actionCamera)
         }
         
-        let actionGallery = UIAlertAction(title: "Gallery", style: UIAlertActionStyle.Default, handler: { UIAlertAction in self.openGalleryPicker()})
-        let actionCancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        let actionGallery = UIAlertAction(title: "Gallery", style: .Default,
+                                          handler: { UIAlertAction in self.openGalleryPicker()})
+        let actionCancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         
         imagePicker.addAction(actionGallery)
         imagePicker.addAction(actionCancel)
@@ -546,8 +564,10 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         self.presentViewController(picker, animated: true, completion: nil)
     }
     
-    // UIImagePickerControllerDelegate methods
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    // MARK: UIImagePickerControllerDelegate METHODS
+    
+    func imagePickerController(picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
             if photoView != nil {
@@ -563,7 +583,7 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource, UITab
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    // Helper methods
+    // MARK: HELPER METHODS
     func getIndexOfState(state: BehaviourState) -> Int {
         for (var i = 0; i < states.count; i++) {
             if states[i] == state {

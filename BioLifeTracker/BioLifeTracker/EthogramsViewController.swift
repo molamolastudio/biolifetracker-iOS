@@ -5,10 +5,13 @@
 //  Created by Michelle Tan on 12/3/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
+//  Shows a list of ethograms to the user.
 
 import UIKit
 
-class EthogramsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class EthogramsViewController: UIViewController, UITableViewDataSource,
+                               UITableViewDelegate {
+    
     var delegate: EthogramsViewControllerDelegate? = nil
     
     @IBOutlet weak var tableView: UITableView!
@@ -50,7 +53,8 @@ class EthogramsViewController: UIViewController, UITableViewDataSource, UITableV
         self.tableView.editing = false
     }
     
-    // UITableViewDataSource and UITableViewDelegate METHODS
+    // MARK: UITableViewDataSource AND UITableViewDelegate METHODS
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SubtitleTableCell
         
@@ -80,7 +84,6 @@ class EthogramsViewController: UIViewController, UITableViewDataSource, UITableV
         return cellHeight
     }
     
-    // For deleting ethograms
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
@@ -89,36 +92,62 @@ class EthogramsViewController: UIViewController, UITableViewDataSource, UITableV
         return UITableViewCellEditingStyle.Delete
     }
     
-    // If the cell is deleted, delete the ethogram.
+    // Deletes the related ethogram if the cell is deleted.
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         if editingStyle == UITableViewCellEditingStyle.Delete {
+            
             let ethogramManager = EthogramManager.sharedInstance
             let projectManager = ProjectManager.sharedInstance
             let ethogram = ethogramManager.ethograms[indexPath.row]
+            
+            // If the ethogram is being used in any project
             if projectManager.hasProjectUsingEthogram(ethogram) {
-                let failAlert = UIAlertController(title: "Cannot Delete", message: "Some projects in this device depend on this ethogram", preferredStyle: .Alert)
+                
+                // Present an alert to say the ethogram cannot be deleted
+                let failAlert = UIAlertController(title: "Unable to Delete Ethogram",
+                    message: "Some projects in this device depend on this ethogram",
+                    preferredStyle: .Alert)
                 let actionOK = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 failAlert.addAction(actionOK)
+                
                 presentViewController(failAlert, animated: true, completion: nil)
                 self.tableView.reloadData()
+                
             } else {
+                
+                // Remove the ethogram from the EthogramManager
                 if ethogram.id == nil {
                     ethogramManager.removeEthograms([indexPath.row])
                     self.tableView.reloadData()
                 } else {
-                    let alert = UIAlertController(title: "Checking Dependency", message: "Checking for projects using this ethogram", preferredStyle: .Alert)
+                    
+                    // Present an alert to the user
+                    let alert = UIAlertController(title: "Checking Dependency",
+                        message: "Checking for projects using this ethogram",
+                        preferredStyle: .Alert)
                     presentViewController(alert, animated: true, completion: nil)
+                    
+                    // Start downloading
                     let worker = CloudStorageWorker()
                     let downloadTask = DownloadTask(classUrl: Ethogram.ClassUrl, itemId: ethogram.id!)
                     worker.enqueueTask(downloadTask)
+                    
+                    // When the worker is done
                     worker.setOnFinished {
+                        
                         if downloadTask.completedSuccessfully == true {
+                            
                             let ethogramInfo = downloadTask.getResults()[0]
                             let dependants = ethogramInfo["project_set"] as! [Int]
+                            
                             if dependants.count > 0 {
                                 dispatch_async(dispatch_get_main_queue(), {
-                                    let failAlert = UIAlertController(title: "Cannot Delete", message: "Some projects in server depend on this ethogram", preferredStyle: .Alert)
+                                    
+                                    // Present an alert indicating failure
+                                    let failAlert = UIAlertController(title: "Cannot Delete",
+                                        message: "Some projects in server depend on this ethogram",
+                                        preferredStyle: .Alert)
                                     let actionOK = UIAlertAction(title: "OK", style: .Default, handler: nil)
                                     failAlert.addAction(actionOK)
                                     
@@ -127,6 +156,7 @@ class EthogramsViewController: UIViewController, UITableViewDataSource, UITableV
                                     })
                                 })
                             } else {
+                                // Issue an ethogram delete request
                                 dispatch_async(dispatch_get_main_queue(), {
                                     ethogramManager.removeEthograms([indexPath.row])
                                     self.tableView.reloadData()
@@ -134,14 +164,19 @@ class EthogramsViewController: UIViewController, UITableViewDataSource, UITableV
                                 })
                             }
                         } else {
+                            // The worker was unable to download successfully
                             dispatch_async(dispatch_get_main_queue(), {
                                 self.tableView.reloadData()
-                                let failAlert = UIAlertController(title: "Cannot Delete", message: "The server cannot be contacted at the moment", preferredStyle: .Alert)
+                                let failAlert = UIAlertController(title: "Cannot Delete",
+                                    message: "The server cannot be contacted at the moment",
+                                    preferredStyle: .Alert)
                                 let actionOK = UIAlertAction(title: "OK", style: .Default, handler: nil)
                                 failAlert.addAction(actionOK)
+                                
                                 alert.dismissViewControllerAnimated(true, completion: {
                                     self.presentViewController(failAlert, animated: true, completion: nil)
                                 })
+                                
                             })
                         }
                     }

@@ -5,10 +5,15 @@
 //  Created by Michelle Tan on 14/4/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
+//  Shows an interface for creating observations within a scan session.
+//  Allows user to create multiple observations within a single scan.
 
 import UIKit
 
-class ScanViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate, WeatherViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ScanViewController: UIViewController, UICollectionViewDataSource,
+                          UICollectionViewDelegate, UITextViewDelegate,
+                          WeatherViewControllerDelegate, UIImagePickerControllerDelegate,
+                          UINavigationControllerDelegate {
     
     @IBOutlet weak var animalsView: UICollectionView!
     @IBOutlet weak var statesView: UICollectionView!
@@ -116,12 +121,14 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         weatherVC.view.userInteractionEnabled = editable
     }
     
-    // Sets the data source of this controller.
+    /// Sets the data source of this controller.
     func setData(session: Session, timestamp: NSDate) {
         currentSession = session
         selectedTimestamp = timestamp
     }
     
+    /// Deep copies the observations for the selected timestamp into a temporary
+    /// array of observations.
     func getData() {
         if currentSession != nil && selectedTimestamp != nil {
             originalObservations = currentSession!.getObservationsByTimestamp(selectedTimestamp!)
@@ -129,14 +136,15 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
             
             observations.removeAll()
             for o in originalObservations {
-                let newObservation = Observation(session: o.session, state: o.state, timestamp: o.timestamp, information: o.information)
+                let newObservation = Observation(session: o.session, state: o.state,
+                                                timestamp: o.timestamp, information: o.information)
                 copyOverObservation(o, to: newObservation)
                 observations.append(newObservation)
             }
         }
     }
     
-    // Copy over the information in the edited observations to the original observations.
+    /// Copy over the information in the edited observations to the original observations.
     func saveData() {
         for i in 0...observations.count - 1 {
             if i < originalObservations.count {
@@ -149,7 +157,7 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
-    // Copy fields of 'from' to 'to'.
+    /// Copy fields of 'from' to 'to'.
     func copyOverObservation(from: Observation, to: Observation) {
         to.changeBehaviourState(from.state)
         to.updateInformation(from.information)
@@ -159,8 +167,10 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
-    // UICollectionViewDataSource methods
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    // MARK: UICollectionViewDataSource METHODS
+    
+    func collectionView(collectionView: UICollectionView,cellForItemAtIndexPath
+        indexPath: NSIndexPath) -> UICollectionViewCell {
         
         if collectionView == animalsView {
             return getCellForAnimalsView(indexPath)
@@ -170,7 +180,7 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         return UICollectionViewCell()
     }
     
-    // Returns a cell that displays an animal in a scan.
+    /// Returns a cell that displays an animal in a scan.
     func getCellForAnimalsView(indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = animalsView.dequeueReusableCellWithReuseIdentifier(circleCellIdentifier, forIndexPath: indexPath) as! CircleCell
         
@@ -209,8 +219,8 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         return cell
     }
     
-    // Returns a cell that displays a behaviour state. User interaction is disabled if this
-    // view controller is not editable.
+    /// Returns a cell that displays a behaviour state. User interaction is disabled if this
+    /// view controller is not editable.
     func getCellForStatesView(indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = statesView.dequeueReusableCellWithReuseIdentifier(circleLabelCellIdentifier, forIndexPath: indexPath) as! CircleWithLabelCell
         
@@ -254,7 +264,8 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         return itemCount
     }
     
-    // UICollectionViewDelegate methods
+    // MARK: UICollectionViewDelegate METHODS
+    
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if collectionView == animalsView {
             observationView.hidden = false
@@ -275,15 +286,17 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         refreshView()
     }
     
-    // UITextViewDelegate methods
+    // MARK: UITextViewDelegate METHODS
+    
     func textViewDidChange(textView: UITextView) {
         if selectedObservation != nil {
             observations[selectedObservation!].updateInformation(textView.text)
         }
     }
     
-    // WeatherViewControllerDelegate methods
-    // Updates the currently displayed observation's weather when user changes the weather.
+    // MARK: WeatherViewControllerDelegate METHODS
+    
+    /// Updates the currently displayed observation's weather when user changes the weather.
     func userDidSelectWeather(weather: Weather?) {
         let observation = observations[selectedObservation!]
         if weather != nil {
@@ -293,7 +306,7 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
-    // Toggles visibility of arrows
+    /// Toggles visibility of arrows
     func updateArrows() {
         if selectedObservation == nil || observations.count <= 1 {
             leftArrow.hidden = true
@@ -310,7 +323,8 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         }
     }
     
-    // Actions for arrow buttons
+    // MARK: ACTIONS FOR ARROW BUTTONS
+    
     @IBAction func leftArrowPressed(sender: UIButton) {
         selectedObservation = selectedObservation! - 1
         updateArrows()
@@ -323,25 +337,29 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         refreshView()
     }
     
-    // Methods for showing image picker
-    // IBActions for buttons
+    // MARK: METHODS FOR SHOWING IMAGE PICKER
+
+    /// Shows an image picker.
     @IBAction func photoBtnPressed(sender: UIButton) {
         imagePicker.popoverPresentationController!.sourceView = sender
         imagePicker.popoverPresentationController!.sourceRect = CGRectMake(0, 0, 0, 0)
         self.presentViewController(imagePicker, animated: true, completion: nil)
     }
     
-    // Creates a UIAlertController to display a menu for choosing a source for picking photos.
+    /// Creates a UIAlertController to display a menu for choosing a source for picking photos.
     func setupImagePicker() {
-        imagePicker = UIAlertController(title: "Pick Photo From", message: "", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        imagePicker = UIAlertController(title: "Pick Photo From", message: "",
+                                        preferredStyle: .ActionSheet)
         
-        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)){
-            let actionCamera = UIAlertAction(title: "Camera", style: UIAlertActionStyle.Default, handler: { UIAlertAction in self.openCameraPicker()})
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            let actionCamera = UIAlertAction(title: "Camera", style: .Default,
+                handler: { UIAlertAction in self.openCameraPicker()})
             imagePicker.addAction(actionCamera)
         }
         
-        let actionGallery = UIAlertAction(title: "Gallery", style: UIAlertActionStyle.Default, handler: { UIAlertAction in self.openGalleryPicker()})
-        let actionCancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+        let actionGallery = UIAlertAction(title: "Gallery", style: .Default,
+            handler: { UIAlertAction in self.openGalleryPicker()})
+        let actionCancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
         
         imagePicker.addAction(actionGallery)
         imagePicker.addAction(actionCancel)
@@ -351,7 +369,7 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = true
-        picker.sourceType = UIImagePickerControllerSourceType.Camera
+        picker.sourceType = .Camera
         
         self.presentViewController(picker, animated: true, completion: nil)
     }
@@ -360,12 +378,15 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = true
-        picker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+        picker.sourceType = .PhotoLibrary
         self.presentViewController(picker, animated: true, completion: nil)
     }
     
-    // UIImagePickerControllerDelegate methods
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    // MARK: UIImagePickerControllerDelegate METHODS
+    
+    /// Sets the selected image after the user picks an image.
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo
+        info: [NSObject : AnyObject]) {
         
         if let image = info[UIImagePickerControllerEditedImage] as? UIImage {
             if photoView != nil {
@@ -381,7 +402,7 @@ class ScanViewController: UIViewController, UICollectionViewDataSource, UICollec
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    // Helper methods
+    // MARK: HELPER METHODS
     func getIndexOfState(state: BehaviourState) -> Int {
         for (var i = 0; i < states.count; i++) {
             if states[i] == state {
