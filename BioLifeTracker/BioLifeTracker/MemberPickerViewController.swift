@@ -5,6 +5,9 @@
 //  Created by Michelle Tan on 20/4/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
+//  Requires: A list of members.
+//  Presents a picker for a list of members to the user.
+//  Informs its delegate of the selected member when the done button is pressed.
 
 import UIKit
 
@@ -21,6 +24,10 @@ class MemberPickerViewController: UIViewController, UITableViewDataSource, UITab
     var members: [User] = []
     
     var selectedMember: Int? = nil
+    
+    override func loadView() {
+        self.view = NSBundle.mainBundle().loadNibNamed("MemberPickerView", owner: self, options: nil).first as! UIView
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +46,8 @@ class MemberPickerViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
-    // UITableViewDataSource and UITableViewDelegate METHODS
+    // MARK: UITableViewDataSource AND UITableViewDelegate METHODS
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SingleLineTextCell
         
@@ -61,9 +69,10 @@ class MemberPickerViewController: UIViewController, UITableViewDataSource, UITab
         return cellHeight
     }
     
+    /// Updates the selected member after a row is selected.
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         button.hidden = false
         selectedMember = indexPath.row
     }
-
+    
 }

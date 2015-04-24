@@ -580,8 +580,8 @@ class SuperController: UIViewController, UISplitViewControllerDelegate,
         displayAlert("Save File Corrupt", message: "Unable to load save file.")
     }
     
-    // Displays an alert controller with given title and message, with an OK button.
-    // Dismisses upon pressing the OK button.
+    /// Displays an alert controller with given title and message, with an OK button.
+    /// Dismisses upon pressing the OK button.
     func displayAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.Alert)
         let actionOk = UIAlertAction(title: "OK", style: .Default, handler: nil)

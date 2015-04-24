@@ -5,10 +5,21 @@
 //  Created by Michelle Tan on 13/4/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
+//  Displays a graph showing a summary of the collected data in this project,
+//  a list of members with options and a list of sessions.
+//
+//  Allows users to add users or create sessions.
+//
+//  Informs its delegate if the user has selected a graph for further analysis,
+//  or a session.
 
 import UIKit
 
-class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MemberPickerViewControllerDelegate, UIPopoverPresentationControllerDelegate, CreateSessionViewControllerDelegate {
+class ProjectHomeViewController: UIViewController, UITableViewDataSource,
+                                 UITableViewDelegate, MemberPickerViewControllerDelegate,
+                                 UIPopoverPresentationControllerDelegate,
+                                 CreateSessionViewControllerDelegate {
+    
     var delegate: ProjectHomeViewControllerDelegate? = nil
     
     @IBOutlet weak var graphView: UIView!
@@ -16,11 +27,6 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
     @IBOutlet weak var sessionView: UITableView!
     @IBOutlet weak var addMembersButton: UIButton!
     @IBOutlet weak var createSessionButton: UIButton!
-    
-    let NOT_FOUND = -1
-    
-    let memberTag = 2
-    let sessionTag = 3
     
     let memberCellIdentifier = "MemberCell"
     let sessionCellIdentifier = "SessionCell"
@@ -44,16 +50,17 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         setupGraphView()
     }
     
+    /// Updates the current project before the view disappears.
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        // We have to use dispatch async. Super heavy operation.
         dispatch_async(ProjectManager.storageThread, {
             ProjectManager.sharedInstance.updateProject(self.currentProjectIndex!,
-                project: self.currentProject!)
-            println("Finish updating project at index \(self.currentProjectIndex!)")
+                                                        project: self.currentProject!)
         })
     }
+    
+    // MARK: SETUP VIEW METHODS
     
     func setupTableViews() {
         // Sets the data source and delegates of table views to self
@@ -92,6 +99,8 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         graphView.addSubview(graphsVC.view)
     }
     
+    // MARK: IBACTIONS FOR BUTTONS
+    
     @IBAction func analyseBtnPressed(sender: AnyObject) {
         if delegate != nil {
             delegate!.userDidSelectGraph(currentProject!)
@@ -102,8 +111,14 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         showMemberPicker()
     }
     
+    @IBAction func createSessionBtnPressed() {
+        showCreateSession()
+    }
+    
+    // MARK: SELECTORS FOR BUTTON
+    
     func showMemberPicker() {
-        let memberPicker = MemberPickerViewController(nibName: "MemberPickerView", bundle: nil)
+        let memberPicker = MemberPickerViewController()
         
         memberPicker.delegate = self
         memberPicker.modalPresentationStyle = .Popover
@@ -118,16 +133,6 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         popoverController.sourceRect = CGRectMake(0, 0, 0, 0)
         
         presentViewController(memberPicker, animated: true, completion: nil)
-    }
-    
-    // MemberPickerViewControllerDelegate methods
-    func userDidSelectMember(member: User) {
-        currentProject!.addMember(member)
-        memberView.reloadData()
-    }
-    
-    @IBAction func createSessionBtnPressed() {
-        showCreateSession()
     }
     
     func showCreateSession() {
@@ -148,15 +153,22 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         presentViewController(sessionForm, animated: true, completion: nil)
     }
     
-    // CreateSessionViewControllerDelegate methods
+    // MARK: MemberPickerViewControllerDelegate METHODS
+    
+    func userDidSelectMember(member: User) {
+        currentProject!.addMember(member)
+        memberView.reloadData()
+    }
+
+    // MARK: CreateSessionViewControllerDelegate METHODS
+    
     func userDidFinishCreatingSession(session: Session) {
-        println("before \(currentProject!.sessions.count)")
         currentProject!.addSession(session)
-        println("after \(currentProject!.sessions.count)")
         sessionView.reloadData()
     }
     
-    // UITableViewDataSource and UITableViewDelegate METHODS
+    // MARK: UITableViewDataSource and UITableViewDelegate METHODS
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if tableView == memberView {
@@ -267,12 +279,12 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource, UITabl
         
     }
     
-    // UIPopoverPresentationControllerDelegate method
+    // MARK: UIPopoverPresentationControllerDelegate METHODS
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle{
         return .None
     }
     
-    // Selectors for buttons
+    // MARK: TARGETS FOR BUTTONS IN CELLS
     func removeAdmin(sender: UIButton) {
         let members = currentProject!.members
         let member = members[sender.tag]

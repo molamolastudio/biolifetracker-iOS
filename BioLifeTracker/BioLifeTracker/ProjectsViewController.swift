@@ -5,6 +5,8 @@
 //  Created by Michelle Tan on 10/3/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
+//  Displays a list of projects retrieved from ProjectManager.
+//  Informs its delegate if a project is selected.
 
 import UIKit
 
@@ -29,7 +31,8 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
-        self.tableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
+        self.tableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil),
+                                         forCellReuseIdentifier: cellReuseIdentifier)
         
         // Sets the subviews to display under the navigation bar
         self.edgesForExtendedLayout = UIRectEdge.None
@@ -46,7 +49,8 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
         self.tableView.editing = false
     }
     
-    // UITableViewDataSource and UITableViewDelegate METHODS
+    // MARK: UITableViewDataSource AND UITableViewDelegate METHODS
+    
      func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SubtitleTableCell
         
@@ -76,7 +80,6 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
         return cellHeight
     }
     
-    // For deleting projects
      func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
@@ -85,21 +88,25 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
         return UITableViewCellEditingStyle.Delete
     }
     
-    // If the cell is deleted, delete the project.
+    /// Deletes the related project if the cell is deleted.
      func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            // deleting a project means exiting the project
-            // other members can still see the project
+            
+            // Deleting a project means exiting the project
+            // Other members can still see the project
             let projectManager = ProjectManager.sharedInstance
             let project = projectManager.projects[indexPath.row]
-            if project.id == nil { // project has not been uploaded before
+            
+            if project.id == nil { // If project has not been uploaded before
                 ProjectManager.sharedInstance.removeProjects([indexPath.row])
                 tableView.reloadData()
                 return
             }
             
-            let alertController = UIAlertController(title: "Exiting Project", message: "Contacting server to remove membership", preferredStyle: .Alert)
+            let alertController = UIAlertController(title: "Exiting Project",
+                message: "Contacting server to remove membership", preferredStyle: .Alert)
+            
             presentViewController(alertController, animated: true, completion: nil)
             
             let currentUser = UserAuthService.sharedInstance.user

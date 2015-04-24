@@ -5,10 +5,13 @@
 //  Created by Michelle Tan on 20/4/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
+//  Displays a form for users to create a project.
 
 import UIKit
 
-class ProjectFormViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, MemberPickerViewControllerDelegate, UIPopoverPresentationControllerDelegate {
+class ProjectFormViewController: UIViewController, UITableViewDataSource,
+                                 UITableViewDelegate, MemberPickerViewControllerDelegate,
+                                 UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var formPlaceholder: UIView!
     @IBOutlet weak var membersView: UITableView!
@@ -33,21 +36,38 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
         super.viewDidLoad()
         
         setupFormVC()
-        
-        membersView.dataSource = self
-        membersView.delegate = self
-        membersView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
+        setupMembersView()
         
         // Sets the subviews to display under the navigation bar
         self.edgesForExtendedLayout = UIRectEdge.None
         self.extendedLayoutIncludesOpaqueBars = false
         self.automaticallyAdjustsScrollViewInsets = false
+    }
+    
+    // MARK: VIEW SETUP METHODS
+    
+    func setupFormVC() {
+        form.setFormData(getFormDataForNewProject())
+        form.roundedCells = true
+        form.cellHorizontalPadding = 7.5
+        
+        form.view.frame = CGRectMake(0, 0, formPlaceholder.frame.width, formPlaceholder.frame.height)
+        formPlaceholder.addSubview(form.view)
+        
+        form.tableView.scrollEnabled = false
+    }
+    
+    func setupMembersView() {
+        membersView.dataSource = self
+        membersView.delegate = self
+        membersView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
         
         // Sets rounded corners
         membersView.layer.cornerRadius = 8
         membersView.layer.masksToBounds = true
     }
     
+    /// Returns the project created in this controller.
     func getProject() -> Project? {
         let values = form.getFormData()
         
@@ -66,17 +86,7 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
         return nil
     }
     
-    func setupFormVC() {
-        form.setFormData(getFormDataForNewProject())
-        form.roundedCells = true
-        form.cellHorizontalPadding = 7.5
-        
-        form.view.frame = CGRectMake(0, 0, formPlaceholder.frame.width, formPlaceholder.frame.height)
-        formPlaceholder.addSubview(form.view)
-        
-        form.tableView.scrollEnabled = false
-    }
-    
+    /// Returns the form data for the project details form.
     func getFormDataForNewProject() -> FormFieldData {
         var ethogramNames = [String]()
         for e in EthogramManager.sharedInstance.ethograms {
@@ -112,13 +122,15 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
         presentViewController(memberPicker, animated: true, completion: nil)
     }
     
-    // MemberPickerViewControllerDelegate methods
+    // MARK: MemberPickerViewControllerDelegate METHODS
+    
     func userDidSelectMember(member: User) {
         members.append(member)
         membersView.reloadData()
     }
     
-    // UITableViewDataSource and UITableViewDelegate METHODS
+    // MARK: UITableViewDataSource and UITableViewDelegate METHODS
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! MemberCell
         
@@ -169,7 +181,6 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
         return cellHeight
     }
     
-    // For deleting members
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
@@ -183,22 +194,23 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
         }
     }
     
-    // If the cell is deleted, delete the project.
+    // Deletes the related project if the cell is deleted.
     func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            // Delete member
             deleteMemberAtIndex(indexPath.row - 1)
             membersView.reloadData()
         }
     }
     
-    // UIPopoverPresentationControllerDelegate method
+    // MARK: UIPopoverPresentationControllerDelegate METHODS
+    
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle{
         return .None
     }
     
-    // Selectors for buttons
+    // MARK: TARGETS FOR BUTTONS IN CELLS
+    
     func removeAdmin(sender: UIButton) {
         let index = sender.tag - 1
         
@@ -219,7 +231,8 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource, UITabl
         membersView.reloadData()
     }
     
-    // Helper methods
+    // MARK: HELPER METHODS
+    
     func deleteMemberAtIndex(index: Int) {
         if index < admins.count {
             // Delete admin
