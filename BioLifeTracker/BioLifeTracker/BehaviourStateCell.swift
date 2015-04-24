@@ -10,5 +10,6 @@ import UIKit
 
 class BehaviourStateCell: FormCell {
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var button: UIButton!
 }
