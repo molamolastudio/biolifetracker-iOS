@@ -11,4 +11,5 @@ import Foundation
 protocol ProjectHomeViewControllerDelegate {
     func userDidSelectSession(project: Project, session: Int)
     func userDidSelectGraph(project: Project)
+    func userDidLeaveProject()
 }

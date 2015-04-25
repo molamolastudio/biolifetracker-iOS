@@ -561,6 +561,12 @@ class SuperController: UIViewController, UISplitViewControllerDelegate,
         showAnalysisPageWithProject(project)
     }
     
+    func userDidLeaveProject() {
+        if let vc = detailNav.visibleViewController as? ProjectHomeViewController {
+            vc.dismissViewControllerAnimated(true, completion: nil)
+        }
+    }
+    
     // MARK: ScanSessionViewControllerDelegate METHODS
     
     func userDidSelectScan(session: Session, timestamp: NSDate) {

@@ -380,7 +380,9 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource,
     }
     
     func dismissSelf() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        if delegate != nil {
+            delegate!.userDidLeaveProject()
+        }
     }
     
 }
