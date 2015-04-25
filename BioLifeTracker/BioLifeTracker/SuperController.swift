@@ -563,8 +563,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate,
     
     func userDidLeaveProject() {
         if let vc = detailNav.visibleViewController as? ProjectHomeViewController {
-            vc.dismissViewControllerAnimated(true, completion: nil)
+            vc.dismissViewControllerAnimated(false, completion: nil)
         }
+        showProjectsPage()
     }
     
     // MARK: ScanSessionViewControllerDelegate METHODS
@@ -649,6 +650,9 @@ class SuperController: UIViewController, UISplitViewControllerDelegate,
         
         let manager = CloudStorageManager.sharedInstance
         worker.setOnFinished {
+            dispatch_async(dispatch_get_main_queue(), {
+                self.loadingAlert?.message = "Downloading photos..."
+            })
             // put all info into cache
             for userInfo in downloadUser.getResults() {
                 manager.putIntoCache(User.ClassUrl, itemInfo: userInfo)

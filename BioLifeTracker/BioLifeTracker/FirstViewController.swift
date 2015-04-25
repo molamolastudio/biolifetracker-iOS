@@ -86,13 +86,13 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     }
     
     func loginViewFetchedUserInfo(loginView : FBLoginView!, user: FBGraphUser) {
-        // Show loading alert
-        self.presentViewController(alert!, animated: false, completion: nil)
-        
         let userAuth = UserAuthService.sharedInstance
-        userAuth.loginToServerUsingFacebookToken(
-            FBSession.activeSession().accessTokenData.accessToken,
-            onCompletion: dismissSelf)
+        if let accessTokenData = FBSession.activeSession().accessTokenData {
+            // Show loading alert
+            self.presentViewController(alert!, animated: false, completion: nil)
+            let accessToken = accessTokenData.accessToken
+            userAuth.loginToServerUsingFacebookToken(accessToken, onCompletion: dismissSelf)
+        }
     }
     
     func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
