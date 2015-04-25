@@ -307,6 +307,7 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource,
     /// Make the current user exit the project.
     /// Other members will still be able to see the project.
     func exitProject(sender: UIButton) {
+        println("harro")
         if currentProject == nil { return }
         let project = currentProject!
         let currentUser = UserAuthService.sharedInstance.user
@@ -339,7 +340,7 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource,
                 self.deleteProjectIfHasNoMember(project)
                 dispatch_async(dispatch_get_main_queue(), {
                     alertController.dismissViewControllerAnimated(false, completion: nil)
-                    // MICHELLE: GO TO PROJECT LIST
+                    self.dismissSelf()
                 })
             } else {
                 project.addMember(currentUser)
@@ -376,6 +377,10 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource,
             worker.enqueueTask(deleteTask)
             worker.startExecution()
         }
+    }
+    
+    func dismissSelf() {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
 }
