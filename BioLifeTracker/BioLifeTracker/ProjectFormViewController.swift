@@ -95,7 +95,8 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource,
         
         let data = FormFieldData(sections: 1)
         data.addTextCell(section: 0, label: "Name", hasSingleLine: true)
-        data.addPickerCell(section: 0, label: "Ethogram", pickerValues: ethogramNames, isCustomPicker: true)
+        data.addPickerCell(section: 0, label: "Ethogram", pickerValues: ethogramNames,
+                           isCustomPicker: true)
         return data
     }
     
