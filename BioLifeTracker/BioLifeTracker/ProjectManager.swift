@@ -154,7 +154,7 @@ class ProjectManager: NSObject, Storable {
     }
     
     
-    // MARK: SAVING TO ARCHIVES
+    // MARK: IMPLEMENTATION OF STORABLE PROTOCOL
     
     
     /// This function asynchronously saves Projects list into local storage
