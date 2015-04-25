@@ -94,24 +94,54 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
         if editingStyle == UITableViewCellEditingStyle.Delete {
             let projectManager = ProjectManager.sharedInstance
             let project = projectManager.projects[indexPath.row]
-            if project.id == nil { // If project has not been uploaded before
-                ProjectManager.sharedInstance.removeProjects([indexPath.row])
+            if project.id == nil {
+                // allow to delete project has not been uploaded before
+                askForConfirmationToDeleteProject(project, projectIndex: indexPath.row)
                 tableView.reloadData()
                 return
             } else {
-                // ANDHIEKA
-                // DELETE PROJECT FROM SERVER IF USER IS AN ADMIN
                 let currentUser = UserAuthService.sharedInstance.user
                 if project.containsAdmin(currentUser) {
-                    let deleteTask = DeleteTask(item: project)
-                    let worker = CloudStorageWorker()
-                    worker.enqueueTask(deleteTask)
-                    // display alerts
-                    //worker.startExecution()
+                    // allow to delete project from server if user is an admin
+                    askForConfirmationToDeleteProject(project, projectIndex: indexPath.row)
+                } else {
+                    let alert = UIAlertController(title: "Delete Not Allowed", message: "You are not the administrator of these project.", preferredStyle: .Alert)
+                    let actionOk = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    alert.addAction(actionOk)
+                    presentViewController(alert, animated: true, completion: nil)
                 }
                 
             }
         }
+    }
+    
+    private func askForConfirmationToDeleteProject(project: Project, projectIndex: Int) {
+        let alert = UIAlertController(title: "Delete Project", message: "Are you sure you want to delete this project? This action is irreversible.", preferredStyle: .Alert)
+        let actionDelete = UIAlertAction(title: "Delete", style: .Destructive,
+            handler: { alertAction in
+                self.confirmDeleteProject(project, projectIndex: projectIndex)
+        })
+        let actionCancel = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        alert.addAction(actionDelete)
+        alert.addAction(actionCancel)
+        presentViewController(alert, animated: true, completion: nil)
+
+    }
+    
+    private func confirmDeleteProject(project: Project, projectIndex: Int) {
+        let deleteTask = DeleteTask(item: project)
+        let worker = CloudStorageWorker()
+        worker.enqueueTask(deleteTask)
+        let alert = UIAlertController(title: "Deleting Project", message: "Contacting server to delete project", preferredStyle: .Alert)
+        presentViewController(alert, animated: true, completion: nil)
+        worker.setOnFinished {
+            dispatch_async(dispatch_get_main_queue(), {
+                ProjectManager.sharedInstance.removeProjects([projectIndex])
+                alert.dismissViewControllerAnimated(true, completion: nil)
+                self.tableView.reloadData()
+            })
+        }
+        worker.startExecution()
     }
 
 }

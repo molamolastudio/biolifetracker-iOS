@@ -52,6 +52,10 @@ class ProjectManager: NSObject, Storable {
     }
     
     func updateProject(index: Int, project: Project) {
+        if index >= projects.count {
+            println("Tried to update project at out-of-range index \(index).")
+            return
+        }
         self._projects.removeAtIndex(index)
         self._projects.insert(project, atIndex: index)
         saveToArchives()

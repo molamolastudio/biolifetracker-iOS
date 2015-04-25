@@ -307,7 +307,6 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource,
     /// Make the current user exit the project.
     /// Other members will still be able to see the project.
     func exitProject(sender: UIButton) {
-        println("harro")
         if currentProject == nil { return }
         let project = currentProject!
         let currentUser = UserAuthService.sharedInstance.user
