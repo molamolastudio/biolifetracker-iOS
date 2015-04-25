@@ -47,7 +47,10 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource,
         super.viewDidLoad()
         
         setupTableViews()
-        setupGraphView()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        refreshGraphView()
     }
     
     /// Updates the current project before the view disappears.
@@ -99,6 +102,16 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource,
         
         graphsVC.view.frame = CGRectMake(0, 0, graphView.frame.width, graphView.frame.height)
         graphView.addSubview(graphsVC.view)
+    }
+    
+    // Recreates the graph to show updated statistics
+    func refreshGraphView() {
+        for view in graphView.subviews {
+            let view = view as! UIView
+            view.removeFromSuperview()
+        }
+        
+        setupGraphView()
     }
     
     // MARK: IBACTIONS FOR BUTTONS
@@ -367,6 +380,7 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource,
         let session = currentProject!.sessions[sender.tag]
         currentProject!.removeSession(session)
         sessionView.reloadData()
+        refreshGraphView()
     }
     
     func deleteProjectIfHasNoMember(project: Project) {
