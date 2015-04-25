@@ -92,62 +92,26 @@ class ProjectsViewController: UIViewController, UITableViewDataSource, UITableVi
      func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         if editingStyle == UITableViewCellEditingStyle.Delete {
-            
-            // Deleting a project means exiting the project
-            // Other members can still see the project
             let projectManager = ProjectManager.sharedInstance
             let project = projectManager.projects[indexPath.row]
-            
             if project.id == nil { // If project has not been uploaded before
                 ProjectManager.sharedInstance.removeProjects([indexPath.row])
                 tableView.reloadData()
                 return
-            }
-            
-            let alertController = UIAlertController(title: "Exiting Project",
-                message: "Contacting server to remove membership", preferredStyle: .Alert)
-            
-            presentViewController(alertController, animated: true, completion: nil)
-            
-            let currentUser = UserAuthService.sharedInstance.user
-            let isAdmin = project.containsAdmin(currentUser)
-            project.removeMember(currentUser)
-            let worker = CloudStorageWorker()
-            let uploadTask = UploadTask(item: project)
-            
-            worker.enqueueTask(uploadTask)
-            worker.setOnFinished {
-                if uploadTask.completedSuccessfully == true {
-                    ProjectManager.sharedInstance.removeProjects([indexPath.row])
-                    dispatch_async(dispatch_get_main_queue(), {
-                        self.tableView.reloadData()
-                        alertController.dismissViewControllerAnimated(false, completion: nil)
-                        self.deleteProjectIfHasNoMember(project)
-                    })
-                } else {
-                    project.addMember(currentUser)
-                    if isAdmin { project.addAdmin(currentUser) }
-                    dispatch_async(dispatch_get_main_queue(), {
-                        let failAlert = UIAlertController(title: "Fail to Exit Project", message: "The server cannot be contacted at the moment", preferredStyle: .Alert)
-                        let actionOk = UIAlertAction(title: "OK", style: .Default, handler: nil)
-                        failAlert.addAction(actionOk)
-                        alertController.dismissViewControllerAnimated(true, completion: {
-                            self.presentViewController(failAlert, animated: true, completion: nil)
-                        })
-                        self.tableView.reloadData()
-                    })
+            } else {
+                // ANDHIEKA
+                // DELETE PROJECT FROM SERVER IF USER IS AN ADMIN
+                let currentUser = UserAuthService.sharedInstance.user
+                if project.containsAdmin(currentUser) {
+                    let deleteTask = DeleteTask(item: project)
+                    let worker = CloudStorageWorker()
+                    worker.enqueueTask(deleteTask)
+                    // display alerts
+                    //worker.startExecution()
                 }
+                
             }
-            worker.startExecution()
         }
     }
-    
-    func deleteProjectIfHasNoMember(project: Project) {
-        if project.members.count == 0 {
-            let deleteTask = DeleteTask(item: project)
-            let worker = CloudStorageWorker()
-            worker.enqueueTask(deleteTask)
-            worker.startExecution()
-        }
-    }
+
 }

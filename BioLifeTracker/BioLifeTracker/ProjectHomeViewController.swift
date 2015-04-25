@@ -54,10 +54,12 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource,
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         
-        dispatch_async(ProjectManager.storageThread, {
-            ProjectManager.sharedInstance.updateProject(self.currentProjectIndex!,
-                                                        project: self.currentProject!)
-        })
+        if currentProject != nil {
+            dispatch_async(ProjectManager.storageThread, {
+                ProjectManager.sharedInstance.updateProject(self.currentProjectIndex!,
+                    project: self.currentProject!)
+            })
+        }
     }
     
     // MARK: SETUP VIEW METHODS
@@ -186,6 +188,7 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource,
         // Remove previous cell targets
         cell.button.removeTarget(self, action: Selector("removeAdmin:"), forControlEvents: .TouchUpInside)
         cell.button.removeTarget(self, action: Selector("makeAdmin:"), forControlEvents: .TouchUpInside)
+        cell.button.removeTarget(self, action: Selector("exitProject:"), forControlEvents: .TouchUpInside)
         
         let member = currentProject!.members[indexPath.row]
         
@@ -217,11 +220,13 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource,
             cell.button.hidden = true
         }
         
-        // Display an option to leave the project if this member is the current user
+        // Display an option to exit the project if this member is the current user
         if member == user {
+            cell.button.removeTarget(self, action: Selector("removeAdmin:"), forControlEvents: .TouchUpInside)
+            cell.button.removeTarget(self, action: Selector("makeAdmin:"), forControlEvents: .TouchUpInside)
             cell.button.hidden = false
-            cell.button.setTitle("Leave Project", forState: .Normal)
-            cell.button.addTarget(self, action: Selector("leaveProject:"), forControlEvents: .TouchUpInside)
+            cell.button.setTitle("Exit Project", forState: .Normal)
+            cell.button.addTarget(self, action: Selector("exitProject:"), forControlEvents: .TouchUpInside)
         }
 
         cell.button.tag = indexPath.row
@@ -299,15 +304,78 @@ class ProjectHomeViewController: UIViewController, UITableViewDataSource,
         memberView.reloadData()
     }
     
-    func leaveProject(sender: UIButton) {
-        // Make current user leave current project
-        // ANDHIEKA
+    /// Make the current user exit the project.
+    /// Other members will still be able to see the project.
+    func exitProject(sender: UIButton) {
+        if currentProject == nil { return }
+        let project = currentProject!
+        let currentUser = UserAuthService.sharedInstance.user
+        let isAdmin = project.containsAdmin(currentUser)
+        project.removeMember(currentUser)
+        
+        let projectManager = ProjectManager.sharedInstance
+
+        
+        if project.id == nil { // If project has not been uploaded before
+            ProjectManager.sharedInstance.removeProjects([currentProjectIndex!])
+            invalidateProject()
+            self.dismissViewControllerAnimated(true, completion: nil)
+            return
+        }
+        
+        let alertController = UIAlertController(title: "Exiting Project",
+            message: "Contacting server to remove membership", preferredStyle: .Alert)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+        
+        let worker = CloudStorageWorker()
+        let uploadTask = UploadTask(item: project)
+        
+        worker.enqueueTask(uploadTask)
+        worker.setOnFinished {
+            if uploadTask.completedSuccessfully == true {
+                ProjectManager.sharedInstance.removeProjects([self.currentProjectIndex!])
+                self.invalidateProject()
+                self.deleteProjectIfHasNoMember(project)
+                dispatch_async(dispatch_get_main_queue(), {
+                    alertController.dismissViewControllerAnimated(false, completion: nil)
+                    // MICHELLE: GO TO PROJECT LIST
+                })
+            } else {
+                project.addMember(currentUser)
+                if isAdmin { project.addAdmin(currentUser) }
+                dispatch_async(dispatch_get_main_queue(), {
+                    let failAlert = UIAlertController(title: "Fail to Exit Project", message: "The server cannot be contacted at the moment", preferredStyle: .Alert)
+                    let actionOk = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                    failAlert.addAction(actionOk)
+                    alertController.dismissViewControllerAnimated(true, completion: {
+                        self.presentViewController(failAlert, animated: true, completion: nil)
+                    })
+                })
+            }
+        }
+        worker.startExecution()
+        
+    }
+    
+    private func invalidateProject() {
+        currentProject = nil
+        currentProjectIndex = nil
     }
     
     func deleteSession(sender: UIButton) {
         let session = currentProject!.sessions[sender.tag]
         currentProject!.removeSession(session)
         sessionView.reloadData()
+    }
+    
+    func deleteProjectIfHasNoMember(project: Project) {
+        if project.members.count == 0 {
+            let deleteTask = DeleteTask(item: project)
+            let worker = CloudStorageWorker()
+            worker.enqueueTask(deleteTask)
+            worker.startExecution()
+        }
     }
     
 }
