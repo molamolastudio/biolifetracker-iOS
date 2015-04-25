@@ -25,20 +25,17 @@ class ProjectMngTests: XCTestCase {
         ProjectManager.sharedInstance.saveToArchives()
         XCTAssert(ProjectManager.sharedInstance.projects[0].name == "A Day in a Fiddler Crab life", "Project not added")
 
-        // Edit ProjectManager without saving
+        // Edit ProjectManager
         ProjectManager.sharedInstance.removeProjects([0])
         XCTAssert(ProjectManager.sharedInstance.projects.count == 0, "Project not removed")
         
         // ProjectManager retrieved the state last saved
         UserAuthService.sharedInstance.useDefaultUser()
-        XCTAssert(ProjectManager.sharedInstance.projects.count > 0)
-        if ProjectManager.sharedInstance.projects.count == 0 { return }
-        XCTAssert(ProjectManager.sharedInstance.projects[0].name == "A Day in a Fiddler Crab life", "Project not retrieved properly")
+        XCTAssert(ProjectManager.sharedInstance.projects.count == 0)
         
-        // Edit ProjectManager with saving
+        // Edit ProjectManager
         let project2 = Project(name: "A Day in a Porcelain Fiddler Crab life", ethogram: ethogram)
-        ProjectManager.sharedInstance.updateProject(0, project: project2)
-        ProjectManager.sharedInstance.saveToArchives()
+        ProjectManager.sharedInstance.addProject(project2)
         XCTAssert(ProjectManager.sharedInstance.projects[0].name == "A Day in a Porcelain Fiddler Crab life", "Project not updated")
         
         // ProjectManager retrieved the state last saved
