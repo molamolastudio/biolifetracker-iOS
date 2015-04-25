@@ -21,8 +21,7 @@ class Ethogram: BiolifeModel {
     static let nameKey = "name"
     static let informationKey = "information"
     static let behavioursKey = "behaviours"
-    static let behaviourStatesKey = "behaviourStates"
-    
+
     static let ClassUrl = "ethograms"
     
     // Private attributes
@@ -145,7 +144,7 @@ class Ethogram: BiolifeModel {
         var enumerator: NSEnumerator
         self._name = aDecoder.decodeObjectForKey(Ethogram.nameKey) as! String
         
-        let objectBehavStates: AnyObject = aDecoder.decodeObjectForKey(Ethogram.behaviourStatesKey)!
+        let objectBehavStates: AnyObject = aDecoder.decodeObjectForKey(Ethogram.behavioursKey)!
 
         enumerator = objectBehavStates.objectEnumerator()
         
