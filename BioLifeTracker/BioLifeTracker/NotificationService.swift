@@ -31,7 +31,7 @@ class NotificationService {
             NSTimeInterval(1440) // 24 hours * 60 minutes per hour
         )
         var notificationTime: NSDate
-        var counter = 0
+        var counter = 1
         do {
             notificationTime = NSDate().dateByAddingTimeInterval(
                 NSTimeInterval(counter * session.interval! * 60)
@@ -46,7 +46,7 @@ class NotificationService {
             notification.applicationIconBadgeNumber = 1
             UIApplication.sharedApplication().scheduleLocalNotification(notification)
             counter++
-        } while counter < 128 && sessionExpiryTime.timeIntervalSinceDate(notificationTime) > 0
+        } while counter <= 128 && sessionExpiryTime.timeIntervalSinceDate(notificationTime) > 0
     }
     
     /// Cancels all notifications.
