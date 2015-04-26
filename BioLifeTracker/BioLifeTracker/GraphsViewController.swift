@@ -9,6 +9,9 @@
 import Foundation
 import UIKit
 
+/// Plots the graphs using number of observations per hour/day or behavour state. Observations
+/// are selected from the chosen array of Users, Sessions and Behvaiour States. 
+
 class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotDataSource, CPTBarPlotDelegate, CPTScatterPlotDelegate, CPTScatterPlotDataSource, CPTPlotSpaceDelegate, UIPopoverPresentationControllerDelegate {
     var delegate: GraphsViewControllerDelegate!
     
@@ -98,10 +101,9 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     var StatesBackgroundGreen: UIColor!
     var StatesAxesBrown: UIColor!
     
-    //var GreenSeaHighLight = UIColor(red: 183.0/255.0, green: 88.0/255.0, blue: 77.0/255.0, alpha: 1)
     var PlotSelectRed = UIColor(red: 234.0/255.0, green: 79.0/255.0, blue: 88.0/255.0, alpha: 1)
     
-    // Returns an array of hundred colors at hue of 120
+    /// An array of hundred colors at hue at random
     let colors = randomColorsCount(100, hue: .Random, luminosity: .Light)
     
     override func loadView() {
@@ -119,25 +121,30 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         UnobserveRotation()
     }
     
+    ///To check for rotation.
     func observeRotation() {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "rotated", name: UIDeviceOrientationDidChangeNotification, object: nil)
         UIDevice.currentDevice().beginGeneratingDeviceOrientationNotifications()
     }
     
+    ///Stop checking for rotation
     func UnobserveRotation() {
         UIDevice.currentDevice().endGeneratingDeviceOrientationNotifications()
         NSNotificationCenter.defaultCenter().removeObserver(self, name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
     
-    /********************* SET INITIAL DATA **********************/
-    //Gets the data that conform to what the user provided and 
-    //sets them as conditions for the the graph
+    // SET INITIAL DATA
+    
+    ///Gets the data that conform to what the user provided and 
+    ///sets them as conditions for the graph.
     func initialiseGraph() {
         initConditions()
         prepareNumberOfOccurances()
         drawGraph()
     }
 
+    ///Get initial observations of the graph (all sessions, users and behaviour
+    /// states are chosen).
     func initConditions() {
         setAllUsers()
         setAllSessions()
@@ -197,6 +204,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         return chosenBehaviourStates
     }
     
+    ///Set colours of the graph.
     func setColours() {
         HourBackgroundGreen = LightAliceBlue
         HourAxesBrown = UIColor.blackColor()
@@ -206,7 +214,10 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         StatesAxesBrown = UIColor.blackColor()
     }
     
-    /*********************** UPDATE FOR GRAPH ********************/
+    // UPDATE FOR GRAPH 
+    
+    /// Change the number of observations according to chosen 
+    /// Users, Sessions and Behaviour States. Replot the graph.
     func updateGraph() {
         prepareNumberOfOccurances()
         drawGraph()
@@ -231,7 +242,10 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         threshold = num
     }
     
-    /***************** PREPARE OCCURENCES ************/
+    // PREPARE OCCURENCES
+    
+    /// Prepare the arrays to plot on the graph. Number of occurences correspond to the
+    /// y-axis of the graph.
     func prepareNumberOfOccurances() {
         var occurences = projectInstance.getObservations(sessions: chosenSessions, users: chosenUsers, behaviourStates: chosenBehaviourStates)
         
@@ -303,7 +317,8 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         }
     }
 
-    /********************* HELPER METHODS ********************/
+    // HELPER METHODS
+    
     func getDayOfWeek(date: NSDate) -> Int {
         
         var calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
@@ -372,8 +387,9 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
 
     }
     
-    /********************** CONFIGURE GRAPHS ****************/
+    // CONFIGURE GRAPHS
     
+    ///Create the graph and initialise the area space and color.
     func configureGraph() {
     
         graphHostingView.allowPinchScaling = false
@@ -395,6 +411,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         
     }
     
+    /// Get background color of respective graph.
     func getGraphBackgroundColour() -> CPTFill {
         switch current{
         case .HourPlot:
@@ -406,8 +423,9 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         }
     }
     
-    /**************** CONFIGURE PLOTS *********************/
+    // CONFIGURE PLOTS
     
+    /// Configure plot range and plot line styles
     func configurePlots() {
 
         switch current {
@@ -509,7 +527,6 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         
         statesPlot.dataSource = self
         statesPlot.delegate = self
-        //statesPlot.identifier = "states"
         
         statesPlot.barWidth = 0.5
         statesPlot.barOffset = 0.5
@@ -541,7 +558,10 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         statesPlot.lineStyle = statesLineStyle
     }
     
-    /****************** CONFIGURE AXES **************/
+    // CONFIGURE AXES
+    
+    /// Configure the X and Y axis and set axis style. Using the data given, generate the values for
+    /// X and Y axis to create an optimally sized graph for viewing.
     func configureAxes() {
         
         switch current {
@@ -960,7 +980,9 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
     }
     
     
-    /******************** DATASOURCE AND DELEGATE METHODS ******************/
+    // DATASOURCE AND DELEGATE METHODS
+    
+    /// Sets total number of plots
     func numberOfRecordsForPlot(plot: CPTPlot!) -> UInt {
         switch current {
         case .DayPlot:
@@ -973,6 +995,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         
     }
     
+    /// Plots the data for each plot point.
     func numberForPlot(plot: CPTPlot!, field fieldEnum: UInt, recordIndex idx: UInt) -> AnyObject! {
         var valueCount: UInt
         
@@ -1014,6 +1037,8 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         return x
     }
     
+    /// When bar is selected, show the number of observations of that plot point
+    /// in a popup.
     func barPlot(plot: CPTBarPlot!, barWasSelectedAtRecordIndex idx: UInt) {
 
         var x = Double(idx) + 0.5
@@ -1042,6 +1067,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         plot.graph.reloadData()
     }
     
+    ///Fill bars from the random colour array.
     func barFillForBarPlot(barPlot: CPTBarPlot!, recordIndex idx: UInt) -> CPTFill! {
         
         var number = Int(idx) % colors.count
@@ -1049,6 +1075,8 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         return CPTFill(color: CPTColor(CGColor: chosenColor.CGColor))
     }
     
+    /// Sets plot point symbol. Symbol changes color according to whether 
+    /// it is selected or not.
     func symbolForScatterPlot(plot: CPTScatterPlot!, recordIndex idx: UInt) -> CPTPlotSymbol! {
         
         var symbol = CPTPlotSymbol()
@@ -1067,7 +1095,7 @@ class GraphsViewController:  UIViewController, CPTPlotDataSource, CPTBarPlotData
         return symbol
     }
 
-    
+    /// When plot point is selected, highlight and show a popup of the numebr of observations.
     func scatterPlot(plot: CPTScatterPlot!, plotSymbolWasSelectedAtRecordIndex idx: UInt) {
         
         selectedPoint = Int(idx)

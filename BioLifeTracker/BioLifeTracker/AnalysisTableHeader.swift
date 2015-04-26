@@ -10,8 +10,6 @@ import UIKit
 
 class AnalysisTableHeader: UITableViewHeaderFooterView {
 
-    
-    
     @IBOutlet weak var headerTitle: UILabel!
     
     

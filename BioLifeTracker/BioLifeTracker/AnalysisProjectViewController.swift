@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+///Table view showing the list of Projects for the users to choose from, for
+///analysis.
 class AnalysisProjectViewController: UITableViewController {
     
     var delegate: GraphsViewControllerDelegate?
@@ -24,7 +26,6 @@ class AnalysisProjectViewController: UITableViewController {
         
         self.tableView.registerNib(UINib(nibName: cellReuseIdentifier, bundle: nil), forCellReuseIdentifier: cellReuseIdentifier)
     }
-    
     
     // UITableViewDataSource and UITableViewDelegate METHODS
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

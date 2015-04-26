@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+/// Delegate for when users indicate their preferences of Users, Sessions, 
+/// Behvaiour States for the plotting of graph.
 protocol GraphsViewControllerDelegate {
     func didAddUser(user: User)
     func didRemoveUser(user: User)

@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+/// For display of popover on the graph.
 class PopoverLabelViewController: UIViewController {
 
     @IBOutlet weak var popoverLabel: UILabel!
@@ -18,7 +19,6 @@ class PopoverLabelViewController: UIViewController {
     }
     
     func setLabelMessage(message: String) {
-        
         popoverLabel.text = message
     }
     

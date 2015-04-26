@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+/// Table view showing the list of Users, Sessions of Behaviour States, for the user
+/// to choose from for the plotting of the graph.
 class AnalysisTableViewController: UITableViewController {
     
     enum TableType {
@@ -176,6 +178,8 @@ class AnalysisTableViewController: UITableViewController {
         updateChosen(indexPath.row)
     }
     
+    /// If SelectAll if pressed, all the Users/Sessions/Behaviour States of the Project
+    /// will be chosen for analysis.
     func selectAllPressed(sender: UIButton!) {
         var ttl: Int
         switch tableType {
