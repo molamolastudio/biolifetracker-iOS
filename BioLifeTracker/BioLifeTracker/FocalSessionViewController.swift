@@ -237,7 +237,9 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource,
         }
     }
     
+    
     // MARK: UICollectionViewDataSource METHODS
+    
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
@@ -270,8 +272,6 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource,
         
         var num = indexPath.row % individualColors.count
         cell.backgroundColor = individualColors[num]
-        
- 
         
         return cell
     }
@@ -322,7 +322,9 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource,
         return itemCount
     }
     
+    
     // MARK: UICollectionViewDelegate METHODS
+    
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if collectionView == individualsView {
