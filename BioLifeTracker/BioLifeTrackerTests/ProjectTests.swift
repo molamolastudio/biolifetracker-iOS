@@ -404,7 +404,7 @@ class ProjectTests: XCTestCase {
         XCTAssertNotNil(observation21.id)
     }
     
-    func testDownloadProjectToCloud() {
+    func testDownloadProjectFromCloud() {
         // 1 session, 3 users, 3 bs each
         ethogram.addBehaviourState(state1)
         ethogram.addBehaviourState(state2)

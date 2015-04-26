@@ -12,6 +12,7 @@ import XCTest
 class DownloadTaskTests: XCTestCase {
     
     override func setUp() {
+        UserAuthService.sharedInstance.loginToServerUsingUsername("default", password: "default")
         super.setUp()
     }
     
@@ -21,7 +22,13 @@ class DownloadTaskTests: XCTestCase {
     
     /// Assumes there is at least one dummy item on the server (can be using upload task)
     func testDownloadingSimpleFile() {
-        var task = DownloadTask(classUrl: "dummy", itemId: 1)
+        let originalItem = DummyModel()
+        let uploadTask = UploadTask(item: originalItem)
+        uploadTask.execute()
+        
+        let targetId = originalItem.id!
+        
+        var task = DownloadTask(classUrl: "dummy", itemId: targetId)
         task.execute()
         XCTAssertTrue(task.completedSuccessfully == true)
         if task.completedSuccessfully != true { return }
@@ -29,7 +36,7 @@ class DownloadTaskTests: XCTestCase {
         var results = task.getResults()
         var item = DummyModel(dictionary: results[0])
         
-        XCTAssertEqual(1, item.id!)
+        XCTAssertEqual(targetId, item.id!)
         XCTAssertNotNil(item.stringProperty)
         XCTAssertNotNil(item.intProperty)
         XCTAssertNotNil(item.dateProperty)

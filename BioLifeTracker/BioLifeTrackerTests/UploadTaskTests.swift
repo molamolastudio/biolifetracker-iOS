@@ -12,6 +12,7 @@ import XCTest
 class UploadTaskTests: XCTestCase {
     
     override func setUp() {
+        UserAuthService.sharedInstance.loginToServerUsingUsername("default", password: "default")
         super.setUp()
     }
     

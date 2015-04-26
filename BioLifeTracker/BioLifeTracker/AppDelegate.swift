@@ -13,7 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var initialViewController: SuperController?
-    var incomingFileUrl: NSURL?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
@@ -80,17 +79,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func tryOpenProjectFileInUrl(url: NSURL) -> Bool {
         if url.absoluteString!.hasSuffix(".bltproject") {
-            incomingFileUrl = url
-            var deserializer = BLTProjectDeserializer()
-            if let decodedProject = deserializer.process(url) {
-                ProjectManager.sharedInstance.addProject(decodedProject)
-                initialViewController?.showProjectsPage()
+            let currentUser = UserAuthService.sharedInstance.user
+            if currentUser.id == 0 { // user has not logged in
+                UserAuthService.sharedInstance.setOnLoggedInHandler {
+                    self.importProject(url)
+                }
             } else {
-                initialViewController?.showCorruptFileAlert()
+                importProject(url)
             }
+            
             return true
         }
         return false
+    }
+    
+    func importProject(url: NSURL) {
+        var deserializer = BLTProjectDeserializer()
+        if let decodedProject = deserializer.process(url) {
+            ProjectManager.sharedInstance.addProject(decodedProject)
+            initialViewController?.showProjectsPage()
+        } else {
+            initialViewController?.showCorruptFileAlert()
+        }
     }
 }
 

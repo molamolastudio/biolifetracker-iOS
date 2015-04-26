@@ -24,6 +24,7 @@ class UserAuthService {
     var authProvider: OAuthProvider? {
         get { return _authProvider }
     }
+    var onLoggedInHandler: (() -> ())?
     
     class var sharedInstance: UserAuthService {
         struct Singleton {
@@ -87,6 +88,28 @@ class UserAuthService {
         _authProvider = .Google
     }
     
+    // for testing purposes. Unit test cannot login using facebook / google.
+    func loginToServerUsingUsername(username: String, password: String) {
+        dispatch_async(CloudStorage.networkThread, {
+            let destinationUrl = NSURL(string: CloudStorage.serverUrl)!
+                .URLByAppendingPathComponent("auth")
+                .URLByAppendingPathComponent("login")
+                .URLByAppendingSlash()
+            var postDictionary = NSMutableDictionary()
+            postDictionary.setValue(username, forKey: "username")
+            postDictionary.setValue(password, forKey: "password")
+            let postData = CloudStorage.dictionaryToJsonData(postDictionary)
+            let responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "POST", withPayload: postData)
+            if responseData == nil { return }
+            let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)
+            let serverToken = responseDictionary!["key"] as! String
+            self._accessToken = serverToken
+        })
+    }
+    
+    func setOnLoggedInHandler(handler: (() -> ())?) {
+        self.onLoggedInHandler = handler
+    }
     
     /// [Async] Login to server using the specified OAuth social login provider,
     /// and the corresponding OAuth token from the specified provider.
@@ -112,7 +135,6 @@ class UserAuthService {
             let serverToken = responseDictionary!["key"] as! String
             self._accessToken = serverToken
             self.getCurrentUserFromServer()
-            let user = self.user
             onCompletion?()
         })
     }
@@ -137,6 +159,8 @@ class UserAuthService {
             if let id = responseDictionary!["id"] as? Int {
                 self._user = User(dictionary: responseDictionary!)
                 self.trySaveTokenToDisk()
+                self.onLoggedInHandler?()
+                self.onLoggedInHandler = nil
                 self.initialiseManagers(self.user.id)
             }
         })

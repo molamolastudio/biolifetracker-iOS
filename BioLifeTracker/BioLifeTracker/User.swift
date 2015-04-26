@@ -40,15 +40,20 @@ class User: NSObject, NSCoding {
     }
     
     /// This function initiates a User instance from a dictionary
-    init(dictionary: NSDictionary) {
-        id = dictionary[User.idKey] as! Int
-        email = dictionary[User.emailKey] as! String
-        name = dictionary[User.usernameKey] as! String
-        super.init()
+    convenience init(dictionary: NSDictionary) {
+        self.init(dictionary: dictionary, recursive: false)
     }
     
-    convenience init(dictionary: NSDictionary, recursive: Bool) {
-        self.init(dictionary: dictionary)
+    init(dictionary: NSDictionary, recursive: Bool) {
+        if recursive {
+            id = dictionary[User.idKey] as! Int
+            email = dictionary[User.emailKey] as! String
+            name = dictionary[User.nameKey] as! String
+        } else {
+            id = dictionary[User.idKey] as! Int
+            email = dictionary[User.emailKey] as! String
+            name = dictionary[User.usernameKey] as! String
+        }
     }
     
     /// This function retrieves the Users with specified ids.

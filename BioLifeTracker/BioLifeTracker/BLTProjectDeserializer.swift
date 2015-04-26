@@ -12,6 +12,8 @@ import Foundation
 /// applications using the BioLifeTracker framework.
 class BLTProjectDeserializer {
     
+    var pendingProject: Project?
+    
     init() {}
     
     /// This function should receive a file url indicating where an encoded
@@ -22,6 +24,7 @@ class BLTProjectDeserializer {
         if let data = readDataFromUrl(url) {
             if let dictionary = readFromJsonAsDictionary(data) {
                 let project = Project(dictionary: dictionary, recursive: true)
+                changeProjectOwnership(project)
                 return project
             }
         }
@@ -53,6 +56,29 @@ class BLTProjectDeserializer {
             return nil
         }
         return dictionary
+    }
+    
+    /// Modifies the project's createdBy and updatedBy property of the project
+    /// and its object tree to follow the currently logged in user.
+    func changeProjectOwnership(project: Project) {
+        let currentUser = UserAuthService.sharedInstance.user
+        let admins = project.admins
+        admins.map { project.removeAdmin($0) }
+        let members = project.members
+        members.map { project.removeMember($0) }
+        project.addAdmin(currentUser)
+        project.addMember(currentUser)
+        var stack = [CloudStorable]()
+        stack.append(project)
+        while !stack.isEmpty {
+            let cloudItem = stack.removeLast()
+            if let modelItem = cloudItem as? BiolifeModel {
+                modelItem.changeCreator(currentUser)
+                modelItem.updateInfo(updatedBy: currentUser, updatedAt: NSDate())
+            }
+            cloudItem.getDependencies().map { stack.append($0) }
+        }
+        
     }
 
 }

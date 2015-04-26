@@ -205,7 +205,6 @@
 		AC530C751AE4F424008E1A17 /* bltname_transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C731AE4F424008E1A17 /* bltname_transparent.png */; };
 		AC530C771AE53EAF008E1A17 /* bltlogo.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C761AE53EAF008E1A17 /* bltlogo.png */; };
 		AC530C791AE53EBD008E1A17 /* bltlogo_transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C781AE53EBD008E1A17 /* bltlogo_transparent.png */; };
-		AC6A24B71ADD26B200CF33D6 /* CloudStorageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241208AD1AD15C8A00778360 /* CloudStorageTests.swift */; };
 		AC6A24B81ADD26B400CF33D6 /* DummyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 241208AF1AD15E7A00778360 /* DummyModel.swift */; };
 		AC6A24B91ADD26B600CF33D6 /* DeleteTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24F0F6C91AD7740300C6CC23 /* DeleteTaskTests.swift */; };
 		AC6A24BA1ADD26BA00CF33D6 /* DownloadTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2486AB3E1AD64C3A00573618 /* DownloadTaskTests.swift */; };
@@ -277,7 +276,6 @@
 		241208A61AD1233B00778360 /* CloudStorageTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorageTask.swift; sourceTree = "<group>"; };
 		241208A81AD123D700778360 /* UploadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadTask.swift; sourceTree = "<group>"; };
 		241208AA1AD124A500778360 /* DownloadTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadTask.swift; sourceTree = "<group>"; };
-		241208AD1AD15C8A00778360 /* CloudStorageTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorageTests.swift; sourceTree = "<group>"; };
 		241208AF1AD15E7A00778360 /* DummyModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DummyModel.swift; sourceTree = "<group>"; };
 		242465281AD67EB20035BD2C /* CloudStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
 		242C6E061AC80F050024ECEF /* BiolifeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BiolifeModel.swift; sourceTree = "<group>"; };
@@ -580,7 +578,6 @@
 		241208AC1AD15C7900778360 /* Cloud Storage */ = {
 			isa = PBXGroup;
 			children = (
-				241208AD1AD15C8A00778360 /* CloudStorageTests.swift */,
 				241208AF1AD15E7A00778360 /* DummyModel.swift */,
 				24F0F6C91AD7740300C6CC23 /* DeleteTaskTests.swift */,
 				2486AB3E1AD64C3A00573618 /* DownloadTaskTests.swift */,
@@ -1216,7 +1213,6 @@
 				24F0F6C81AD7728A00C6CC23 /* DeleteTask.swift in Sources */,
 				AC7B6DC11AD25440002D3EE6 /* ObservationTests.swift in Sources */,
 				AC7B6DBD1AD25433002D3EE6 /* TagTests.swift in Sources */,
-				AC6A24B71ADD26B200CF33D6 /* CloudStorageTests.swift in Sources */,
 				AC7B6DC61AD2544E002D3EE6 /* EthogramMngTests.swift in Sources */,
 				AC7B6DE21AD254AF002D3EE6 /* EthogramManager.swift in Sources */,
 				AC7B6DD61AD25482002D3EE6 /* Weather.swift in Sources */,

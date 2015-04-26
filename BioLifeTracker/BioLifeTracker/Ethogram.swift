@@ -21,7 +21,8 @@ class Ethogram: BiolifeModel {
     static let nameKey = "name"
     static let informationKey = "information"
     static let behavioursKey = "behaviours"
-
+    static let projectSetKey = "project_set"
+    
     static let ClassUrl = "ethograms"
     
     // Private attributes
@@ -203,7 +204,7 @@ extension Ethogram: CloudStorable {
         dictionary.setValue(name, forKey: Ethogram.nameKey)
         dictionary.setValue(information, forKey: Ethogram.informationKey)
         dictionary.setValue(behaviourStates.map { $0.id! }, forKey: Ethogram.behavioursKey)
-        dictionary.setValue([], forKey: Ethogram.behavioursKey)
+        dictionary.setValue([], forKey: Ethogram.projectSetKey)
         super.encodeWithDictionary(dictionary)
     }
 }

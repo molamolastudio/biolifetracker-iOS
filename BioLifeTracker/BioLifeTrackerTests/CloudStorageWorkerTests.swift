@@ -12,6 +12,7 @@ import XCTest
 class CloudStorageWorkerTests: XCTestCase {
     
     override func setUp() {
+        UserAuthService.sharedInstance.loginToServerUsingUsername("default", password: "default")
         super.setUp()
     }
     
