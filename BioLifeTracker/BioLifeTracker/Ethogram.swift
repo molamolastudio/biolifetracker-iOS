@@ -122,6 +122,12 @@ class Ethogram: BiolifeModel {
         self._behaviourStates.removeAtIndex(index)
         updateEthogram()
     }
+    
+    /// This method removes all the behaviour states.
+    func removeBehaviourStates() {
+        self._behaviourStates = [BehaviourState]()
+        updateEthogram()
+    }
 
     /// This is a private function to update the instance's createdAt, createdBy
     /// updatedBy and updatedAt.

@@ -6,7 +6,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GraphAnalysisViewController" customModule="BioLifeTracker" customModuleProvider="target">
             <connections>
-                <outlet property="background" destination="zjg-Pj-9I7" id="Seg-yY-gLz"/>
                 <outlet property="graphSwitch" destination="HmU-Ci-fRo" id="GmF-kU-PzP"/>
                 <outlet property="graphsView" destination="Fwg-BZ-hzn" id="DrF-OU-cSx"/>
                 <outlet property="sessionButton" destination="Xkz-gR-Wre" id="5Ml-lc-eZf"/>

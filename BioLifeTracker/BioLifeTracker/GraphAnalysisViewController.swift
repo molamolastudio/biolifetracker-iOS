@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+/// View Controller for the main Analysis Page.
+/// Displays graph view and buttons for users to choose which graph they want to see.
+/// Select between from which Users, Sessions or Behaviour States, do you want to see
+/// number of observation.
+
 class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationControllerDelegate, GraphsViewControllerDelegate {
     
     @IBOutlet weak var graphsView: UIView!
@@ -19,7 +24,6 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
     @IBOutlet weak var userButton: UIButton!
     @IBOutlet weak var sessionButton: UIButton!
     @IBOutlet weak var statesButton: UIButton!
-    @IBOutlet weak var background: UIView!
     var graphsVC: GraphsViewController!
     
     private var currentProject: Project!
@@ -33,26 +37,20 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.background.backgroundColor = UIColor.whiteColor()
-        self.view.backgroundColor = UIColor.whiteColor()
-        self.view.sendSubviewToBack(self.background)
-        
-        //DEVELOPER TEST PROJECT
-//        var stub = ProjectStub()
-//        setProject(stub.project)
-//        setProjectIstub.empty)
 
         if currentProject == nil {
             showSelectProjectView()
         } else {
             showGraphsView();
         }
-    
     }
+    
+    
     func setProject(project: Project) {
         currentProject = project
     }
     
+    /// Set up graph with selected project to display
     func showGraphsView() {
         graphsVC = GraphsViewController()
         graphsVC.setProject(currentProject)
@@ -61,6 +59,7 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
         graphsView.addSubview(graphsVC.view)
     }
     
+    /// If project is not selected, show a table of current projects for user to choose
     func showSelectProjectView() {
         var projectVC = AnalysisProjectViewController()
         projectVC.delegate = self
@@ -69,11 +68,10 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
     }
     
     func hideSelectProjectView() {
-        
         self.dismissViewControllerAnimated(true, completion: nil)
-
     }
     
+    /// Toggle between different types of graphs
     @IBAction func graphIndexChanged(sender: AnyObject) {
         switch graphSwitch.selectedSegmentIndex {
         case 0:
@@ -92,6 +90,7 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
         graphsVC.updateGraph()
     }
     
+    /// Show user and session buttons
     func showUsersAndSessions() {
         userButton.hidden = false
         sessionButton.hidden = false
@@ -99,6 +98,7 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
         sessionLabel.hidden = false
     }
     
+    /// Hide user and session buttons
     func hideUsersAndSessions() {
         userButton.hidden = true
         sessionButton.hidden = true
@@ -112,6 +112,9 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
         // Dispose of any resources that can be recreated.
     }
     
+    /// Show popup table of users/sessions/behaviour states to choose to
+    /// be added to the graph analysis. Automatic update of graph when selection
+    /// is made.
     @IBAction func buttonIsPressed(sender: UIButton) {
         
         var popoverContent = AnalysisTableViewController()
@@ -154,7 +157,8 @@ class GraphAnalysisViewController:  UIViewController, UIPopoverPresentationContr
         self.presentViewController(popoverContent, animated: true, completion: nil)
             
     }
-    
+
+    // DELEGATE METHODS
     
     func didAddUser(user: User) {
         var chosen = graphsVC.getChosenUsers()

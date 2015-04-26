@@ -28,7 +28,7 @@ class NotificationService {
         UIApplication.sharedApplication().cancelAllLocalNotifications()
         
         let sessionExpiryTime = NSDate().dateByAddingTimeInterval(
-            NSTimeInterval(1440) // 24 hours * 60 minutes per hour
+            NSTimeInterval(1440*60) // 24 hours * 60 minutes per hour
         )
         var notificationTime: NSDate
         var counter = 1
