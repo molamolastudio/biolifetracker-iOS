@@ -167,7 +167,6 @@
 		7838E7621AE3501C007C2562 /* GraphsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7838E75A1AE3501C007C2562 /* GraphsView.xib */; };
 		7838E7641AE3501C007C2562 /* GraphsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75B1AE3501C007C2562 /* GraphsViewController.swift */; };
 		7838E7661AE3501C007C2562 /* GraphsViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */; };
-		7838E7681AE3501C007C2562 /* ProjectStub.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E75D1AE3501C007C2562 /* ProjectStub.swift */; };
 		7838E76B1AE3B177007C2562 /* PopoverLabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7838E76A1AE3B177007C2562 /* PopoverLabelViewController.swift */; };
 		785B8C891AE5E65800A204E0 /* AnalysisTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785B8C881AE5E65800A204E0 /* AnalysisTableViewCell.swift */; };
 		785B8C8B1AE5E66800A204E0 /* AnalysisTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 785B8C8A1AE5E66800A204E0 /* AnalysisTableViewCell.xib */; };
@@ -428,7 +427,6 @@
 		7838E75A1AE3501C007C2562 /* GraphsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GraphsView.xib; sourceTree = "<group>"; };
 		7838E75B1AE3501C007C2562 /* GraphsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphsViewController.swift; sourceTree = "<group>"; };
 		7838E75C1AE3501C007C2562 /* GraphsViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphsViewControllerDelegate.swift; sourceTree = "<group>"; };
-		7838E75D1AE3501C007C2562 /* ProjectStub.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProjectStub.swift; sourceTree = "<group>"; };
 		7838E76A1AE3B177007C2562 /* PopoverLabelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopoverLabelViewController.swift; sourceTree = "<group>"; };
 		785B8C881AE5E65800A204E0 /* AnalysisTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnalysisTableViewCell.swift; sourceTree = "<group>"; };
 		785B8C8A1AE5E66800A204E0 /* AnalysisTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AnalysisTableViewCell.xib; sourceTree = "<group>"; };
@@ -877,7 +875,6 @@
 				781FD46B1AE415BE00BBC0E0 /* AnalysisTableViewController.swift */,
 				781FD4651AE3E5C300BBC0E0 /* PopoverLabelView.xib */,
 				7838E76A1AE3B177007C2562 /* PopoverLabelViewController.swift */,
-				7838E75D1AE3501C007C2562 /* ProjectStub.swift */,
 			);
 			name = Analysis;
 			sourceTree = "<group>";
@@ -1168,7 +1165,6 @@
 				32423B871ADFDA3900AFA2F8 /* FormPopupController.swift in Sources */,
 				7838E7601AE3501C007C2562 /* GraphAnalysisViewController.swift in Sources */,
 				7838E7661AE3501C007C2562 /* GraphsViewControllerDelegate.swift in Sources */,
-				7838E7681AE3501C007C2562 /* ProjectStub.swift in Sources */,
 				326773BB1ACAEFB000899745 /* FormCell.swift in Sources */,
 				3205E77A1AAEDA85006F374D /* Observation.swift in Sources */,
 				AC9162AC1ACA6A0400FED714 /* CloudStorable.swift in Sources */,
