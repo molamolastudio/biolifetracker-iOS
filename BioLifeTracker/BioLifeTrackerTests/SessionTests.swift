@@ -134,8 +134,7 @@ class SessionTests: XCTestCase {
         var observation21 = Observation(session: session3, individual: individual3, state: state3, timestamp: NSDate(), information: "")
         
         session3.addObservation([observation16, observation17, observation18, observation19, observation20, observation21])
-        
-        println("/**********************TestTimestamps*************************/")
+
         let timestamps = session3.getTimestamps()
         for timestamp in timestamps {
             println(timestamp)

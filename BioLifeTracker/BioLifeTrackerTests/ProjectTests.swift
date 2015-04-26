@@ -20,93 +20,6 @@ class ProjectTests: XCTestCase {
     let user2 = User(name: "The Hulk", email: "iamgreen@default.com")
     let user3 = User(name: "Black Power Ranger", email: "black.ranger@default.com")
 
-// This test case is meant to check for the correctness of saving individual projects
-// Please uncomment savedToArchives in Project class before using this test case
-    
-//    func testSaveLoadProject() {
-//        ethogram.addBehaviourState(state1)
-//        var project = Project(name: "A Day in a Fiddler Crab life", ethogram: ethogram)
-//
-//        // Testing correctness of project details
-//        var retrieved = Project.loadFromArchives("A Day in a Fiddler Crab life") as Project?
-//        XCTAssert(retrieved?.name == "A Day in a Fiddler Crab life", "Project not saved")
-//        
-//        // Testing correctness of admin and member at initialisation
-//        retrieved = Project.loadFromArchives("A Day in a Fiddler Crab life") as Project?
-//        var containsAdmin = false
-//        for admin in retrieved!.admins {
-//            if admin.toString() == UserAuthService.sharedInstance.user.toString() {
-//                containsAdmin = true
-//            }
-//        }
-//        XCTAssert(containsAdmin == true, "Project not initialised properly")
-//        
-//        var containsMember = false
-//        for member in retrieved!.members {
-//            if member.toString() == UserAuthService.sharedInstance.user.toString() {
-//                containsMember = true
-//            }
-//        }
-//        XCTAssert(containsMember == true, "Project not initialised properly")
-//        
-//        // Testing correctness of adding admin and member
-//        project.addAdmins([user2])
-//        project.addMembers([user3])
-//        
-//        retrieved = Project.loadFromArchives("A Day in a Fiddler Crab life") as Project?
-//        containsAdmin = false
-//        for admin in retrieved!.admins {
-//            if admin.toString() == "The Hulk" {
-//                containsAdmin = true
-//            }
-//        }
-//        XCTAssert(containsAdmin == true, "Admin not added properly")
-//        
-//        containsAdmin = false
-//        for admin in retrieved!.admins {
-//            if admin.toString() == "Black Power Ranger" {
-//                containsAdmin = true
-//            }
-//        }
-//        XCTAssert(containsAdmin == false, "Normal user not added properly, got into admin")
-//        
-//        containsMember = false
-//        for member in retrieved!.members {
-//            if member.toString() == "The Hulk" {
-//                containsMember = true
-//            }
-//        }
-//        XCTAssert(containsMember == true, "Admin not added as member properly")
-//        
-//        containsMember = false
-//        for member in retrieved!.members {
-//            if member.toString() == "Black Power Ranger" {
-//                containsMember = true
-//            }
-//        }
-//        XCTAssert(containsMember == true, "Normal user not added properly")
-//
-//        
-//        // Testing session and observation
-//        var session = Session(project: project, type: SessionType.Scan)
-//        let individual = Individual(label: "M1")
-//        let observation1 = Observation(session: session, individual: individual, state: state1, timestamp: NSDate(), information: "Eating vigourously")
-//        session.addObservation([observation1])
-//        
-//        project.addSessions([session])
-//        retrieved = Project.loadFromArchives("A Day in a Fiddler Crab life") as Project?
-//        
-//        XCTAssert(retrieved?.sessions[0].observations[0].information == "Eating vigourously", "Project not saved properly")
-//        XCTAssert(retrieved?.sessions[0].type == SessionType.Scan, "Project not saved properly")
-//        
-//        
-//        
-//        XCTAssert(retrieved?.ethogram.name == "Fiddler Crabs", "Ethogram in project not saved")
-//        XCTAssert(retrieved?.ethogram.creator.toString() == UserAuthService.sharedInstance.user.toString(), "Ethogram not saved")
-//        
-//        XCTAssert(retrieved?.ethogram.behaviourStates[0].name == "Feeding", "BS in Ethogram not saved")
-//        XCTAssert(retrieved?.ethogram.behaviourStates[0].information == "Small claws bringing food to mouth", "BS in Ethogram not saved")
-//    }
     
     func testInitialization() {
         ethogram.addBehaviourState(state1)
@@ -361,24 +274,24 @@ class ProjectTests: XCTestCase {
         let individual2 = Individual(label: "M2")
         let individual3 = Individual(label: "F1")
         
-        var session3 = Session(project: project, name: "Session3", type: SessionType.Scan)
+        var session = Session(project: project, name: "Session3", type: SessionType.Scan)
         
-        var observation16 = Observation(session: session3, individual: individual1, state: state2, timestamp: NSDate(), information: "")
-        observation16.changeCreator(user1)
-        var observation17 = Observation(session: session3, individual: individual1, state: state3, timestamp: NSDate(), information: "")
-        observation17.changeCreator(user1)
-        var observation18 = Observation(session: session3, individual: individual2, state: state2, timestamp: NSDate(), information: "")
-        observation18.changeCreator(user2)
-        var observation19 = Observation(session: session3, individual: individual2, state: state3, timestamp: NSDate(), information: "")
-        observation19.changeCreator(user2)
-        var observation20 = Observation(session: session3, individual: individual3, state: state2, timestamp: NSDate(), information: "")
-        observation20.changeCreator(user3)
-        var observation21 = Observation(session: session3, individual: individual3, state: state3, timestamp: NSDate(), information: "")
-        observation21.changeCreator(user3)
+        var observation1 = Observation(session: session, individual: individual1, state: state2, timestamp: NSDate(), information: "")
+        observation1.changeCreator(user1)
+        var observation2 = Observation(session: session, individual: individual1, state: state3, timestamp: NSDate(), information: "")
+        observation2.changeCreator(user1)
+        var observation3 = Observation(session: session, individual: individual2, state: state2, timestamp: NSDate(), information: "")
+        observation3.changeCreator(user2)
+        var observation4 = Observation(session: session, individual: individual2, state: state3, timestamp: NSDate(), information: "")
+        observation4.changeCreator(user2)
+        var observation5 = Observation(session: session, individual: individual3, state: state2, timestamp: NSDate(), information: "")
+        observation5.changeCreator(user3)
+        var observation6 = Observation(session: session, individual: individual3, state: state3, timestamp: NSDate(), information: "")
+        observation6.changeCreator(user3)
         
-        session3.addObservation([observation16, observation17, observation18, observation19, observation20, observation21])
+        session.addObservation([observation1, observation2, observation3, observation4, observation5, observation6])
         
-        project.addSessions([session3])
+        project.addSessions([session])
         
         XCTAssert(project == project, "Not equal")
         XCTAssert(project != project1, "Not equal")

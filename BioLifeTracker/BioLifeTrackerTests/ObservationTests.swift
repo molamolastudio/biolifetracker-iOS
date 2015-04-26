@@ -51,15 +51,11 @@ class ObservationTests: XCTestCase {
         observation.updateInformation("Claw dropped off")
         XCTAssert(observation.information == "Claw dropped off", "Observation not initialised properly")
         
-        // Test updatePhoto
-        
         XCTAssert(observation.individual!.label == "M1", "Observation not initialised properly")
         let newIndividual = Individual(label: "M3")
         observation.changeIndividual(newIndividual)
         XCTAssert(observation.individual!.label == "M3", "Observation not initialised properly")
-        
-        // Test changeLocation
-        // Test changeWeather
+
     }
     
     func testEquality() {
