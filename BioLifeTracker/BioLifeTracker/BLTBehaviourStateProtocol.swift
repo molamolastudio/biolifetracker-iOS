@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// This protocol is to be implemented by external applications
+/// that wishes to export their project to BioLifeTracker.
 protocol BLTBehaviourStateProtocol {
     var name: String { get }
     var information: String { get }

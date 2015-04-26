@@ -8,11 +8,11 @@
 
 import Foundation
 
+/// This class deserializes the projects sent from other 
+/// applications using the BioLifeTracker framework.
 class BLTProjectDeserializer {
     
-    init() {
-        
-    }
+    init() {}
     
     /// This function should receive a file url indicating where an encoded
     /// project has been stored. It should read the file, construct a Project

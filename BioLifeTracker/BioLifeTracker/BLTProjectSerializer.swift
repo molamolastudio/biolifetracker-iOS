@@ -8,6 +8,9 @@
 
 import Foundation
 
+/// This class is part of the framework for any application
+/// that wishes to export their projects into the
+/// BioLifeTracker application.
 class BLTProjectSerializer {
     var project: Project
     var targetUrl: NSURL?

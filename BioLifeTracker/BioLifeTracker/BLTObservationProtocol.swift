@@ -8,13 +8,15 @@
 
 import Foundation
 
+/// This protocol is to be implemented by external applications
+/// that wishes to export their project to BioLifeTracker.
 protocol BLTObservationProtocol {
     var session: Session! { get }
     var state: BehaviourState { get }
     var information: String { get }
     var timestamp: NSDate { get }
     var photo: Photo? { get }
-    var individual: Individual { get }
+    var individual: Individual? { get }
     var location: Location? { get }
     var weather: Weather? { get }
     
