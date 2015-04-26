@@ -186,8 +186,10 @@ class Session: BiolifeModel {
         var selectedObs = [Observation]()
         
         for observation in observations {
-            if observation.individual == individual {
-                selectedObs.append(observation)
+            if let observationIndividual = observation.individual {
+                if observationIndividual == individual {
+                    selectedObs.append(observation)
+                }
             }
         }
         return selectedObs
