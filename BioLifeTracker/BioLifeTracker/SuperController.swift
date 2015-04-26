@@ -409,7 +409,7 @@ class SuperController: UIViewController, UISplitViewControllerDelegate,
                 vc.makeEditable(false)
                 
                 EthogramManager.sharedInstance.updateEthogram(selectedEthogram!,
-                                                              ethogram: vc.ethogram)
+                                                              ethogram: vc.originalEthogram!)
                 
                 var btn = UIBarButtonItem(barButtonSystemItem: .Edit, target: self,
                                           action: Selector("updateEditButtonForEthogram"))
