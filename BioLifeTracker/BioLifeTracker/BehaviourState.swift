@@ -110,9 +110,9 @@ class BehaviourState: BiolifeModel {
     
     override func encodeWithCoder(aCoder: NSCoder) {
         super.encodeWithCoder(aCoder)
-        aCoder.encodeObject(_name, forKey: "name")
-        aCoder.encodeObject(_information, forKey: "information")
-        aCoder.encodeObject(_photo, forKey: "photo")
+        aCoder.encodeObject(_name, forKey: BehaviourState.nameKey)
+        aCoder.encodeObject(_information, forKey: BehaviourState.informationKey)
+        aCoder.encodeObject(_photo, forKey: BehaviourState.photoKey)
     }
     
 }
