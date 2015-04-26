@@ -159,7 +159,6 @@ class EthogramDetailsViewController: UIViewController, UITableViewDataSource,
     /// Sets up data in the cells
     func getCellForFirstSection(indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier(nameCellIdentifier) as! SingleLineTextCell
-        println(ethogram.name)
         cell.textField.userInteractionEnabled = editable
         
         cell.label.text = "Name"

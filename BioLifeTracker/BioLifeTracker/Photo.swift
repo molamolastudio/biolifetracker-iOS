@@ -5,14 +5,14 @@
 //  Created by Andhieka Putra on 12/4/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
+
+import Foundation
+
 //  This is a data model class for Photo.
 //  This class contains methods to initialise Photo instances,
 //  get and set instance attributes.
 //  This class also contains methods to store and retrieve saved
 //  Photo instances to the disk.
-
-import Foundation
-
 class Photo: BiolifeModel {
     // Constants
     static let imageKey = "image"

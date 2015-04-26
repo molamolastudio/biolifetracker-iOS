@@ -62,7 +62,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         dispatch_async(ProjectManager.storageThread, {
             EthogramManager.sharedInstance.saveToArchives()
             ProjectManager.sharedInstance.saveToArchives()
-            println("Finished saving projects before going to background.")
         })
     }
 
