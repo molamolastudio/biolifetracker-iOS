@@ -13,5 +13,6 @@ import Foundation
 protocol BLTTagProtocol {
     var name: String { get }
     
+    /// This function encodes the instance into a dictionary.
     func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary)
 }

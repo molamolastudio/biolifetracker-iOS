@@ -18,5 +18,6 @@ protocol BLTProjectProtocol {
     var sessions: [Session] { get }
     var individuals: [Individual] { get }
     
+    /// This function encodes the instance into a dictionary.
     func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary)
 }

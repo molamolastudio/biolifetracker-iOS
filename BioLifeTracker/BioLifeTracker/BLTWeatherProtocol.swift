@@ -13,5 +13,6 @@ import Foundation
 protocol BLTWeatherProtocol {
     var weather: String { get }
     
+    /// This function encodes the instance into a dictionary.
     func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary)
 }

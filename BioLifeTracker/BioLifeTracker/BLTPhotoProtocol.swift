@@ -14,5 +14,6 @@ import UIKit
 protocol BLTPhotoProtocol {
     var image: UIImage { get }
     
+    /// This function encodes the instance into a dictionary.
     func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary)
 }

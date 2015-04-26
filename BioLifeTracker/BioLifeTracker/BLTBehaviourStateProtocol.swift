@@ -15,5 +15,6 @@ protocol BLTBehaviourStateProtocol {
     var information: String { get }
     var photo: Photo? { get }
     
+    /// This function encodes the instance into a dictionary.
     func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary)
 }

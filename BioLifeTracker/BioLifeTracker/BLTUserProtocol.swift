@@ -14,5 +14,6 @@ protocol BLTUserProtocol {
     var name: String { get }
     var email: String { get }
     
+    /// This function encodes the instance into a dictionary.
     func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary)
 }

@@ -13,5 +13,6 @@ import Foundation
 protocol BLTLocationProtocol {
     var location: String { get }
     
+    /// This function encodes the instance into a dictionary.
     func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary)
 }

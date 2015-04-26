@@ -20,5 +20,6 @@ protocol BLTObservationProtocol {
     var location: Location? { get }
     var weather: Weather? { get }
     
+    /// This function encodes the instance into a dictionary.
     func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary)
 }

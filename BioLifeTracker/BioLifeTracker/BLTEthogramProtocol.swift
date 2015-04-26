@@ -15,5 +15,6 @@ protocol BLTEthogramProtocol {
     var information: String { get }
     var behaviourStates: [BehaviourState] { get }
     
+    /// This function encodes the instance into a dictionary.
     func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary)
 }

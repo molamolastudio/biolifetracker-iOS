@@ -17,5 +17,6 @@ protocol BLTSessionProtocol {
     var observations: [Observation] { get }
     var individuals: [Individual] { get }
     
+    /// This function encodes the instance into a dictionary.
     func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary)
 }
