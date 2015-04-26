@@ -117,7 +117,7 @@ class EthogramManager: NSObject, Storable {
     }
     
     
-    // MARK: SAVING TO ARCHIVES
+    // MARK: IMPLEMENTATION OF STORABLE IMPLEMENTATION
     
     
     /// This function asynchronously saves Ethograms list into local storage

@@ -111,18 +111,6 @@ class ProjectManager: NSObject, Storable {
         saveToArchives()
     }
     
-    /// This function checks whether any Project is using a specified
-    /// ethogram.
-    /// Returns true if the given ethogram is being used in a project.
-    func isEthogramInProjects(ethogram: Ethogram) -> Bool {
-        for p in ProjectManager.sharedInstance.projects {
-            if p.ethogram == ethogram {
-                return true
-            }
-        }
-        return false
-    }
-    
     /// This function erases the saved user projects when the user logouts.
     func handleLogOut() {
         ProjectManager.deleteFromArchives(String(
@@ -153,8 +141,20 @@ class ProjectManager: NSObject, Storable {
         return false
     }
     
+    /// This function gets the projects using the ethogram. Returns an array of 
+    /// Projects.
+    func getProjectsUsingEthogram(ethogram: Ethogram) -> [Project] {
+        var projectsInvolved = [Project]()
+        for project in projects {
+            if project.ethogram == ethogram {
+                projectsInvolved.append(project)
+            }
+        }
+        return projectsInvolved
+    }
     
-    // MARK: SAVING TO ARCHIVES
+    
+    // MARK: IMPLEMENTATION OF STORABLE PROTOCOL
     
     
     /// This function asynchronously saves Projects list into local storage

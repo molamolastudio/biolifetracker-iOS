@@ -3,14 +3,31 @@
 //  BioLifeTracker
 //
 //  Created by Michelle Tan on 10/3/15.
+//  Maintained by Li Jia'En, Nicholette.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
 
 import Foundation
 
-class Project: BiolifeModel, Storable {
+///  This is a data model class for Project.
+///  This class contains methods to initialise Project instances,
+///  get and set instance attributes.
+///  This class also contains methods to store and retrieve saved
+///  Project instances to the disk.
+class Project: BiolifeModel {
     static let ClassUrl = "projects"
     
+    // Constants
+    static let archivePrefix = "Project"
+    static let nameKey = "name"
+    static let ethogramKey = "ethogram"
+    static let adminsKey = "admins"
+    static let membersKey = "members"
+    static let sessionsKey = "sessions"
+    static let individualsKey = "individuals"
+    static let sessionSetKey = "session_set"
+    
+    // Private attributes
     private var _name: String
     private var _ethogram: Ethogram
     private var _admins: [User]
@@ -18,6 +35,7 @@ class Project: BiolifeModel, Storable {
     private var _sessions: [Session]
     private var _individuals: [Individual]
     
+    // Accessors
     var name: String { get { return _name } }
     var ethogram: Ethogram { get { return _ethogram } }
     var admins: [User] { get { return _admins } }
@@ -25,7 +43,7 @@ class Project: BiolifeModel, Storable {
     var sessions: [Session] { get { return _sessions } }
     var individuals: [Individual] { get { return _individuals } }
     
-    // Default initializer
+    /// This is the default initialiser of an empty Project
     override init() {
         _name = ""
         _admins = [UserAuthService.sharedInstance.user]
@@ -42,30 +60,29 @@ class Project: BiolifeModel, Storable {
         self._ethogram = ethogram
         self._admins = [UserAuthService.sharedInstance.user]
         self._members = [UserAuthService.sharedInstance.user]
-  //      self.saveToArchives()
     }
     
     override init(dictionary: NSDictionary, recursive: Bool) {
-        _name = dictionary["name"] as! String
+        _name = dictionary[Project.nameKey] as! String
         if recursive {
-            _ethogram = Ethogram(dictionary: dictionary["ethogram"] as! NSDictionary, recursive: true)
-            _name = dictionary["name"] as! String
-            let memberInfos =  dictionary["members"] as! [NSDictionary]
+            _ethogram = Ethogram(dictionary: dictionary[Project.ethogramKey] as! NSDictionary, recursive: true)
+            _name = dictionary[Project.nameKey] as! String
+            let memberInfos =  dictionary[Project.membersKey] as! [NSDictionary]
             _members = memberInfos.map { return User(dictionary: $0, recursive: true) }
-            let adminInfos = dictionary["admins"] as! [NSDictionary]
+            let adminInfos = dictionary[Project.adminsKey] as! [NSDictionary]
             _admins = adminInfos.map { return User(dictionary: $0, recursive: true) }
-            let sessionInfos = dictionary["sessions"] as! [NSDictionary]
+            let sessionInfos = dictionary[Project.sessionsKey] as! [NSDictionary]
             _sessions = sessionInfos.map { return Session(dictionary: $0, recursive: true) }
-            let individualInfos = dictionary["individuals"] as! [NSDictionary]
+            let individualInfos = dictionary[Project.individualsKey] as! [NSDictionary]
             _individuals = individualInfos.map { return Individual(dictionary: $0, recursive: true) }
         } else {
             let manager = CloudStorageManager.sharedInstance
-            _members = User.usersWithIds(dictionary["members"] as! [Int])
-            _admins = User.usersWithIds(dictionary["admins"] as! [Int])
-            _ethogram = Ethogram.ethogramWithId(dictionary["ethogram"] as! Int)
-            let sessionIds = dictionary["session_set"] as! [Int]
+            _members = User.usersWithIds(dictionary[Project.membersKey] as! [Int])
+            _admins = User.usersWithIds(dictionary[Project.adminsKey] as! [Int])
+            _ethogram = Ethogram.ethogramWithId(dictionary[Project.ethogramKey] as! Int)
+            let sessionIds = dictionary[Project.sessionSetKey] as! [Int]
             _sessions = sessionIds.map { Session.sessionWithId($0) }
-            let individualIds = dictionary["individuals"] as! [Int]
+            let individualIds = dictionary[Project.individualsKey] as! [Int]
             _individuals = individualIds.map {
                 let individualInfo = manager.getItemForClass(Individual.ClassUrl, itemId: $0)
                 return Individual(dictionary: individualInfo)
@@ -79,6 +96,7 @@ class Project: BiolifeModel, Storable {
         self.init(dictionary: dictionary, recursive: false)
     }
     
+    /// This function returns the index of the session.
     func getIndexOfSession(session: Session) -> Int? {
         for var i = 0; i < _sessions.count; i++ {
             if _sessions[i] == session {
@@ -88,26 +106,33 @@ class Project: BiolifeModel, Storable {
         return nil
     }
     
+    /// This function returns the display name of the project.
     func getDisplayName() -> String {
         return _name
     }
     
-    /******************Project*********************/
+    
+    // MARK: FUNCTIONS RELATED TO PROJECT
+    
+    
+    /// This function updates the project name.
     func updateName(name: String) {
-        // Project.deleteFromArchives(self._name)
         self._name = name
         updateProject()
     }
     
+    /// This function changes the ethogram used.
     func updateEthogram(ethogram: Ethogram) {
         self._ethogram = ethogram
         updateProject()
     }
     
-    /********************Admins*******************/
-    //
-    /// Adds admin to the project if the admin is not previously contained
-    /// in the project. Otherwise, does nothing. Also adds admin as member
+    
+    // MARK: FUNCTIONS RELATED TO ADMINS
+
+
+    /// This function adds admin to the project if the admin is not previously
+    /// contained in the project. Otherwise, does nothing. Also adds admin as member
     /// if he is not yet a member.
     func addAdmin(admin: User) {
         if !contains(admins, admin) {
@@ -119,12 +144,14 @@ class Project: BiolifeModel, Storable {
         assert(contains(admins, admin))
     }
     
+    /// This function removes the admin specified.
     func removeAdmin(admin: User) {
         _admins = _admins.filter { $0 != admin }
         updateProject()
         assert(!contains(admins, admin))
     }
     
+    /// This function checks whether an admin exists. Returns true if the admin exists.
     func containsAdmin(user: User) -> Bool {
         for admin in admins {
             if admin == user {
@@ -134,8 +161,10 @@ class Project: BiolifeModel, Storable {
         return false
     }
     
-    /********************Members*******************/
-    //
+    
+    // MARK: FUNCTIONS RELATED TO MEMBERS
+    
+    
     /// Adds member to the project if the member is not previously contained
     /// in the project. Otherwise, does nothing.
     func addMember(member: User) {
@@ -146,6 +175,7 @@ class Project: BiolifeModel, Storable {
         assert(contains(members, member))
     }
     
+    /// This function removes the specified member.
     func removeMember(member: User) {
         removeAdmin(member) // non-member can't be admin
         _members = _members.filter { $0 != member }
@@ -154,38 +184,40 @@ class Project: BiolifeModel, Storable {
         assert(!contains(admins, member))
     }
     
-    /******************Session*******************/
-    // new api
+    // MARK: FUNCTIONS RELATED TO MEMBERS
     
-    /// Adds session to the project if the session is not previously contained
-    /// in the project. Otherwise, does nothing.
+    /// This function adds session to the project if the session is not previously
+    /// contained in the project. Otherwise, does nothing.
     func addSession(session: Session) {
         _sessions.append(session)
         updateProject()
         assert(contains(sessions, session))
     }
     
-    /// Remove session from the project if the session is currently inside the 
-    /// project. Otherwise, does nothing.
+    /// This function remove session from the project if the session is currently
+    /// inside the project. Otherwise, does nothing.
     func removeSession(session: Session) {
         _sessions = _sessions.filter { $0 != session }
         updateProject()
     }
     
-    // old api
+    /// This function is used to add sessions for testing.
     func addSessions(sessions: [Session]) {
         self._sessions += sessions
         updateProject()
     }
     
+    /// This function updates the session at the specified index.
     func updateSession(index: Int, updatedSession: Session) {
         self._sessions.removeAtIndex(index)
         self._sessions.insert(updatedSession, atIndex: index)
         updateProject()
     }
     
+    /// This function removes the specified sessions.
     func removeSessions(sessionIndexes: [Int]) {
-        var decreasingIndexes = sorted(sessionIndexes) { $0 > $1 } // sort indexes in non-increasing order
+        // sort indexes in non-increasing order
+        var decreasingIndexes = sorted(sessionIndexes) { $0 > $1 }
         var prev = -1
         for (var i = 0; i < decreasingIndexes.count; i++) {
             let index = decreasingIndexes[i]
@@ -199,20 +231,27 @@ class Project: BiolifeModel, Storable {
         updateProject()
     }
     
-    /******************Individual*******************/
+    
+    // MARK: FUNCTIONS RELATED TO INDIVIDUALS
+    
+    
+    /// This function add individuals to the project.
     func addIndividuals(individuals: [Individual]) {
         self._individuals += individuals
         updateProject()
     }
     
+    /// This function updates the individuals in the project.
     func updateIndividual(index: Int, updatedIndividual: Individual) {
         self._individuals.removeAtIndex(index)
         self._individuals.insert(updatedIndividual, atIndex: index)
         updateProject()
     }
     
+    /// This function removes individuals at the specified indexes.
     func removeIndividuals(individualIndexes: [Int]) {
-        var decreasingIndexes = sorted(individualIndexes) { $0 > $1 } // sort indexes in non-increasing order
+        // sort indexes in non-increasing order
+        var decreasingIndexes = sorted(individualIndexes) { $0 > $1 }
         var prev = -1
         for (var i = 0; i < decreasingIndexes.count; i++) {
             let index = decreasingIndexes[i]
@@ -226,12 +265,18 @@ class Project: BiolifeModel, Storable {
         updateProject()
     }
     
+    /// This is a private function to update the instance's createdAt, createdBy
+    /// updatedBy and updatedAt.
     private func updateProject() {
         updateInfo(updatedBy: UserAuthService.sharedInstance.user, updatedAt: NSDate())
-   //     self.saveToArchives()
     }
     
-    /**************Methods for data analysis**************/
+    
+    // MARK: FUNCTIONS RELATED TO DATA ANALYSIS
+    
+    
+    /// This method gets the number of observations for each behaviour state
+    /// and returns them in a dictionary.
     func getObservationsPerBS() -> [String: Int] {
         var countBS = [String: Int]()
         let observations = getObservations(_sessions)
@@ -249,7 +294,10 @@ class Project: BiolifeModel, Storable {
         return countBS
     }
     
-    func getObservations(#sessions: [Session], users: [User], behaviourStates: [BehaviourState]) -> [Observation] {
+    /// This function gets the observations with the specified sessions,
+    /// users and behaviour states. It returns the observations in a dictionary.
+    func getObservations(#sessions: [Session], users: [User],
+                        behaviourStates: [BehaviourState]) -> [Observation] {
         
         // Create dictionaries of queries for easier searching
         var userDict: [String: Bool] = toDictionary(users) { ($0.name, true) }
@@ -269,6 +317,8 @@ class Project: BiolifeModel, Storable {
         return newObservations
     }
     
+    /// This function gets the observations with the specified sessions.
+    /// It returns the observations in a dictionary.
     func getObservations(selectedSessions: [Session]) -> [Observation] {
         var observations = [Observation]()
         for session in selectedSessions {
@@ -278,85 +328,20 @@ class Project: BiolifeModel, Storable {
         return observations
     }
     
-//    private func convertArrayToDict(array: [AnyObject]) -> [AnyObject:Boolean] {
-//        var dictionary = [AnyObject:Boolean]()
-//        for element in array {
-//            dictionary[element] = true
-//        }
-//        return dictionary
-//    }
     
-    /**************Saving to Archives****************/
-    func saveToArchives() {
-        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
-        
-        if ((dirs) != nil) {
-            let dir = dirs![0]; //documents directory
-            let path = dir.stringByAppendingPathComponent("Project" + self._name);
-            
-            let data = NSMutableData();
-            let archiver = NSKeyedArchiver(forWritingWithMutableData: data)
-            archiver.encodeObject(self, forKey: _name)
-            archiver.finishEncoding()
-            let success = data.writeToFile(path, atomically: true)
-        }
-    }
+    // MARK: IMPLEMENTATION FOR NSKEYEDARCHIVER
     
-    class func loadFromArchives(identifier: String) -> NSObject? {
-        
-        let dirs: [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
-        
-        if (dirs == nil) {
-            return nil
-        }
-        
-        // documents directory
-        let dir = dirs![0]
-        let path = dir.stringByAppendingPathComponent("Project" + identifier)
-        let data = NSMutableData(contentsOfFile: path)
-        
-        if data == nil {
-            return nil
-        }
-        
-        let archiver = NSKeyedUnarchiver(forReadingWithData: data!)
-        let project = archiver.decodeObjectForKey(identifier) as! Project?
-    
-        return project
-    }
-    
-    class func deleteFromArchives(identifier: String) -> Bool {
-        let fileManager = NSFileManager.defaultManager()
-        let dirs: [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
-        
-        if (dirs == nil) {
-            return false
-        }
-        
-        // documents directory
-        let dir = dirs![0]
-        let path = dir.stringByAppendingPathComponent("Project" + identifier)
-        
-        if fileManager.fileExistsAtPath(path) {
-            // Delete the file and see if it was successful
-            var error: NSError?
-            let success :Bool = NSFileManager.defaultManager().removeItemAtPath(path, error: &error)
-        
-            if error != nil {
-                println(error)
-            }
-            return success
-        }
-        return false
-    }
     
     required init(coder aDecoder: NSCoder) {
         var enumerator: NSEnumerator
 
-        self._name = aDecoder.decodeObjectForKey("name") as! String
-        self._ethogram = aDecoder.decodeObjectForKey("ethogram") as! Ethogram
+        self._name = aDecoder.decodeObjectForKey(
+                                                Project.nameKey) as! String
+        self._ethogram = aDecoder.decodeObjectForKey(
+                                                Project.ethogramKey) as! Ethogram
         
-        let objectAdmins: AnyObject = aDecoder.decodeObjectForKey("admins")!
+        let objectAdmins: AnyObject = aDecoder.decodeObjectForKey(
+                                                    Project.adminsKey)!
         enumerator = objectAdmins.objectEnumerator()
         self._admins = Array<User>()
         while true {
@@ -368,7 +353,8 @@ class Project: BiolifeModel, Storable {
             }
         }
         
-        let objectMembers: AnyObject = aDecoder.decodeObjectForKey("members")!
+        let objectMembers: AnyObject = aDecoder.decodeObjectForKey(
+                                                    Project.membersKey)!
         enumerator = objectMembers.objectEnumerator()
         self._members = Array<User>()
         while true {
@@ -380,7 +366,8 @@ class Project: BiolifeModel, Storable {
             }
         }
         
-        let objectSessions: AnyObject = aDecoder.decodeObjectForKey("sessions")!
+        let objectSessions: AnyObject = aDecoder.decodeObjectForKey(
+                                                    Project.sessionsKey)!
         enumerator = objectSessions.objectEnumerator()
         self._sessions = Array<Session>()
         var session: Session?
@@ -392,7 +379,8 @@ class Project: BiolifeModel, Storable {
             self._sessions.append(session!)
         }
         
-        let objectIndividuals: AnyObject = aDecoder.decodeObjectForKey("individuals")!
+        let objectIndividuals: AnyObject = aDecoder.decodeObjectForKey(
+                                                    Project.individualsKey)!
         enumerator = objectIndividuals.objectEnumerator()
         self._individuals = Array<Individual>()
         var individual: Individual?
@@ -410,8 +398,19 @@ class Project: BiolifeModel, Storable {
             session.setProject(self)
         }
     }
+    
+    override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
+        aCoder.encodeObject(_name, forKey: Project.nameKey)
+        aCoder.encodeObject(_ethogram, forKey: Project.ethogramKey)
+        aCoder.encodeObject(_admins, forKey: Project.adminsKey)
+        aCoder.encodeObject(_members, forKey: Project.membersKey)
+        aCoder.encodeObject(_sessions, forKey: Project.sessionsKey)
+        aCoder.encodeObject(_individuals, forKey: Project.individualsKey)
+    }
 }
 
+/// This function checks for Project equality.
 func ==(lhs: Project, rhs: Project) -> Bool {
     if lhs.name != rhs.name { return false }
     if lhs.ethogram != rhs.ethogram { return false }
@@ -421,20 +420,10 @@ func ==(lhs: Project, rhs: Project) -> Bool {
     if lhs.individuals.count != rhs.individuals.count { return false }
     return true
 }
+
+/// This function checks for Project inequality.
 func !=(lhs: Project, rhs: Project) -> Bool {
     return !(lhs == rhs)
-}
-
-extension Project: NSCoding {
-    override func encodeWithCoder(aCoder: NSCoder) {
-        super.encodeWithCoder(aCoder)
-        aCoder.encodeObject(_name, forKey: "name")
-        aCoder.encodeObject(_ethogram, forKey: "ethogram")
-        aCoder.encodeObject(_admins, forKey: "admins")
-        aCoder.encodeObject(_members, forKey: "members")
-        aCoder.encodeObject(_sessions, forKey: "sessions")
-        aCoder.encodeObject(_individuals, forKey: "individuals")
-    }
 }
 
 // Taken from ijohnsmith's GitHub Gist
@@ -468,19 +457,19 @@ extension Project: CloudStorable {
     
     override func encodeWithDictionary(dictionary: NSMutableDictionary) {
         super.encodeWithDictionary(dictionary)
-        dictionary.setValue(name, forKey: "name")
-        dictionary.setValue(sessions.map { $0.id! }, forKey: "session_set")
-        dictionary.setValue(ethogram.id!, forKey: "ethogram")
-        dictionary.setValue(members.map { $0.id }, forKey: "members")
-        dictionary.setValue(admins.map { $0.id }, forKey: "admins")
-        dictionary.setValue(individuals.map { $0.id! }, forKey: "individuals")
+        dictionary.setValue(name, forKey: Project.nameKey)
+        dictionary.setValue(sessions.map { $0.id! }, forKey: Project.sessionSetKey)
+        dictionary.setValue(ethogram.id!, forKey: Project.ethogramKey)
+        dictionary.setValue(members.map { $0.id }, forKey: Project.membersKey)
+        dictionary.setValue(admins.map { $0.id }, forKey: Project.adminsKey)
+        dictionary.setValue(individuals.map { $0.id! }, forKey: Project.individualsKey)
     }
 }
 
 extension Project {
     override func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
         // simple properties 
-        dictionary.setValue(name, forKey: "name")
+        dictionary.setValue(name, forKey: Project.nameKey)
         
         // complex properties
         var membersArray = [NSDictionary]()
@@ -489,7 +478,7 @@ extension Project {
             member.encodeRecursivelyWithDictionary(memberDictionary)
             membersArray.append(memberDictionary)
         }
-        dictionary.setValue(membersArray, forKey: "members")
+        dictionary.setValue(membersArray, forKey: Project.membersKey)
         
         var adminsArray = [NSDictionary]()
         for admin in admins {
@@ -497,7 +486,7 @@ extension Project {
             admin.encodeRecursivelyWithDictionary(adminDictionary)
             adminsArray.append(adminDictionary)
         }
-        dictionary.setValue(adminsArray, forKey: "admins")
+        dictionary.setValue(adminsArray, forKey: Project.adminsKey)
         
         var sessionsArray = [NSDictionary]()
         for session in sessions {
@@ -505,11 +494,11 @@ extension Project {
             session.encodeRecursivelyWithDictionary(sessionDictionary)
             sessionsArray.append(sessionDictionary)
         }
-        dictionary.setValue(sessionsArray, forKey: "sessions")
+        dictionary.setValue(sessionsArray, forKey: Project.sessionsKey)
 
         var ethogramDictionary = NSMutableDictionary()
         ethogram.encodeRecursivelyWithDictionary(ethogramDictionary)
-        dictionary.setValue(ethogramDictionary, forKey: "ethogram")
+        dictionary.setValue(ethogramDictionary, forKey: Project.ethogramKey)
 
         var individualsArray = [NSDictionary]()
         for individual in individuals {
@@ -517,7 +506,7 @@ extension Project {
             individual.encodeRecursivelyWithDictionary(individualDictionary)
             individualsArray.append(individualDictionary)
         }
-        dictionary.setValue(individualsArray, forKey: "individuals")
+        dictionary.setValue(individualsArray, forKey: Project.individualsKey)
         
         super.encodeRecursivelyWithDictionary(dictionary)
     }

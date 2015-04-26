@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// This protocol specifies the necessary methods required to store data
+/// into the disk.
 protocol Storable: NSCoding {
     
     func saveToArchives()

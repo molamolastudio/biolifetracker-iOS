@@ -54,6 +54,8 @@ class EthogramDetailsViewController: UIViewController, UITableViewDataSource,
     var originalEthogram: Ethogram? = nil
     var ethogram = Ethogram()
     
+    var projectsInvolved = [Project]()
+    
     override func loadView() {
         self.view = NSBundle.mainBundle().loadNibNamed("PaddedTableView", owner: self, options: nil).first as! UIView
     }
@@ -100,7 +102,7 @@ class EthogramDetailsViewController: UIViewController, UITableViewDataSource,
     func getData() {
         if originalEthogram != nil {
             // Enables deletion if this ethogram is not being used
-            deletionEnabled = !ProjectManager.sharedInstance.isEthogramInProjects(originalEthogram!)
+            deletionEnabled = !ProjectManager.sharedInstance.hasProjectUsingEthogram(originalEthogram!)
             
             // Copy over original ethogram
             ethogram = Ethogram()
@@ -109,6 +111,9 @@ class EthogramDetailsViewController: UIViewController, UITableViewDataSource,
                 let state = BehaviourState(name: s.name, information: s.information)
                 ethogram.addBehaviourState(state)
             }
+            
+            // Gets the projects using the original ethogram
+            projectsInvolved = ProjectManager.sharedInstance.getProjectsUsingEthogram(originalEthogram!)
         }
     }
     
@@ -118,14 +123,18 @@ class EthogramDetailsViewController: UIViewController, UITableViewDataSource,
             
             originalEthogram!.updateName(ethogram.name)
             
-            for (var i = 0; i < ethogram.behaviourStates.count; i++) {
-                if i < originalEthogram!.behaviourStates.count {
-                    originalEthogram!.behaviourStates[i].updateName(ethogram.behaviourStates[i].name)
-                    originalEthogram!.behaviourStates[i].updateInformation(ethogram.behaviourStates[i].name)
-                } else {
-                    originalEthogram!.addBehaviourState(ethogram.behaviourStates[i])
+            if !ethogram.behaviourStates.isEmpty {
+                originalEthogram!.removeBehaviourStates()
+                
+                for behaviourState in ethogram.behaviourStates {
+                    originalEthogram!.addBehaviourState(behaviourState)
                 }
             }
+            
+            for project in projectsInvolved {
+                project.updateEthogram(originalEthogram!)
+            }
+            
             return true
         } else {
             self.presentViewController(alert, animated: true, completion: nil)
