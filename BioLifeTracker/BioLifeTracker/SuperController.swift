@@ -5,20 +5,19 @@
 //  Created by Michelle Tan on 31/3/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
-//  This class controls all controllers of the application, and
-//  performs the following functions:
-//  - Controls the UISplitViewController of the app
-//  - Controls the navigation stack of the detail view
-//  - Handles touch events from the menu (master view) as a delegate
-//  - Handles touch events from all other VCs as a delegate
-//  - Handles touch events on the navigation bar of detail view
-//  - Keeps track of the current opened project, session and ethogram
-//  - Creates and saves edited model objects to the respective managers
-//  - Presents alerts when required
-//
 
 import UIKit
 
+///  This class controls all controllers of the application, and
+///  performs the following functions:
+///  - Controls the UISplitViewController of the app
+///  - Controls the navigation stack of the detail view
+///  - Handles touch events from the menu (master view) as a delegate
+///  - Handles touch events from all other VCs as a delegate
+///  - Handles touch events on the navigation bar of detail view
+///  - Keeps track of the current opened project, session and ethogram
+///  - Creates and saves edited model objects to the respective managers
+///  - Presents alerts when required
 class SuperController: UIViewController, UISplitViewControllerDelegate,
                        MenuViewControllerDelegate,ProjectsViewControllerDelegate,
                        EthogramsViewControllerDelegate, ProjectHomeViewControllerDelegate,

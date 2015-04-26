@@ -5,11 +5,11 @@
 //  Created by Michelle Tan on 14/4/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
-//  Shows an interface for creating observations within a focal session.
-//  Allows user to create new individuals or observations for an individual.
 
 import UIKit
 
+///  Shows an interface for creating observations within a focal session.
+///  Allows user to create new individuals or observations for an individual.
 class FocalSessionViewController: UIViewController, UITableViewDataSource,
                                   UITableViewDelegate, UICollectionViewDataSource,
                                   UICollectionViewDelegate, UITextViewDelegate,
@@ -346,7 +346,9 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource,
         }
     }
     
+    
     // MARK: UITableViewDataSource AND UITableViewDelegate METHODS
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(textCellIdentifier) as! SingleLineTextCell
@@ -394,7 +396,9 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource,
         return numSections
     }
     
+    
     // MARK: UITextViewDelegate METHODS
+    
     
     // Updates the currently displayed observation's text when user types in the text view.
     func textViewDidChange(textView: UITextView) {
@@ -402,7 +406,9 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource,
         observation.updateInformation(textView.text)
     }
     
+    
     // MARK: WeatherViewControllerDelegate METHODS
+    
     
     // Updates the currently displayed observation's weather when user changes the weather.
     func userDidSelectWeather(weather: Weather?) {
@@ -414,7 +420,9 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource,
         }
     }
     
+    
     // MARK: OTHER METHODS
+    
     
     // Retrieves the observations for the selected individual and reloads the
     // observation view.
@@ -469,7 +477,9 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource,
         statesView.reloadData()
     }
     
+    
     // MARK: METHODS TO TOGGLE VIEWS
+    
     
     func hideObservationSection() {
         observationDisplay.hidden = true
@@ -518,7 +528,9 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource,
         newObservations[individual] = []
     }
     
+    
     // MARK: METHODS FOR IMAGE PICKER
+    
     
     /// Presents an image picker.
     @IBAction func photoBtnPressed(sender: UIButton) {
@@ -564,7 +576,9 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource,
         self.presentViewController(picker, animated: true, completion: nil)
     }
     
+    
     // MARK: UIImagePickerControllerDelegate METHODS
+    
     
     func imagePickerController(picker: UIImagePickerController,
         didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
@@ -583,7 +597,10 @@ class FocalSessionViewController: UIViewController, UITableViewDataSource,
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    
     // MARK: HELPER METHODS
+    
+    
     func getIndexOfState(state: BehaviourState) -> Int {
         for (var i = 0; i < states.count; i++) {
             if states[i] == state {

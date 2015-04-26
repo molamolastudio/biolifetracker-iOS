@@ -5,12 +5,12 @@
 //  Created by Michelle Tan on 11/3/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
-//  This class displays a form to create an ethogram.
-///  The user must enter a name and at least one behaviour state to
-//  create an ethogram, otherwise an alert will be shown.
 
 import UIKit
 
+///  This class displays a form to create an ethogram.
+///  The user must enter a name and at least one behaviour state to
+///  create an ethogram, otherwise an alert will be shown.
 class EthogramFormViewController: UIViewController, UITableViewDataSource,
                                   UITableViewDelegate, UITextFieldDelegate,
                                   UITextViewDelegate {

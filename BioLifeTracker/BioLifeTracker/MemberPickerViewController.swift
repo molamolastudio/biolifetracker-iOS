@@ -5,12 +5,12 @@
 //  Created by Michelle Tan on 20/4/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
-//  Requires: A list of members.
-//  Presents a picker for a list of members to the user.
-//  Informs its delegate of the selected member when the done button is pressed.
 
 import UIKit
 
+///  Requires: A list of members.
+///  Presents a picker for a list of members to the user.
+///  Informs its delegate of the selected member when the done button is pressed.
 class MemberPickerViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var delegate: MemberPickerViewControllerDelegate? = nil
     
@@ -46,7 +46,9 @@ class MemberPickerViewController: UIViewController, UITableViewDataSource, UITab
         }
     }
     
+    
     // MARK: UITableViewDataSource AND UITableViewDelegate METHODS
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! SingleLineTextCell

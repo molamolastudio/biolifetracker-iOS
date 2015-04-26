@@ -5,10 +5,10 @@
 //  Created by Michelle Tan on 14/4/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
-//  Shows a list of scan sessions grouped by timestamp to the user.
 
 import UIKit
 
+///  Shows a list of scan sessions grouped by timestamp to the user.
 class ScanSessionViewController: UIViewController, UITableViewDataSource,
                                  UITableViewDelegate {
     

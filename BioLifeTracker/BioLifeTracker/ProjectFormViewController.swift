@@ -5,10 +5,10 @@
 //  Created by Michelle Tan on 20/4/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
-//  Displays a form for users to create a project.
 
 import UIKit
 
+///  Displays a form for users to create a project.
 class ProjectFormViewController: UIViewController, UITableViewDataSource,
                                  UITableViewDelegate, MemberPickerViewControllerDelegate,
                                  UIPopoverPresentationControllerDelegate {
@@ -44,7 +44,9 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource,
         self.automaticallyAdjustsScrollViewInsets = false
     }
     
+    
     // MARK: VIEW SETUP METHODS
+    
     
     func setupFormVC() {
         form.setFormData(getFormDataForNewProject())
@@ -123,14 +125,18 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource,
         presentViewController(memberPicker, animated: true, completion: nil)
     }
     
+    
     // MARK: MemberPickerViewControllerDelegate METHODS
+    
     
     func userDidSelectMember(member: User) {
         members.append(member)
         membersView.reloadData()
     }
     
+    
     // MARK: UITableViewDataSource and UITableViewDelegate METHODS
+    
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier) as! MemberCell
@@ -210,7 +216,9 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource,
         return .None
     }
     
+    
     // MARK: TARGETS FOR BUTTONS IN CELLS
+    
     
     func removeAdmin(sender: UIButton) {
         let index = sender.tag - 1
@@ -232,7 +240,9 @@ class ProjectFormViewController: UIViewController, UITableViewDataSource,
         membersView.reloadData()
     }
     
+    
     // MARK: HELPER METHODS
+    
     
     func deleteMemberAtIndex(index: Int) {
         if index < admins.count {

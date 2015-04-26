@@ -5,14 +5,14 @@
 //  Created by Michelle Tan on 21/4/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
-//  Requires: A given project.
-//  Presents a form to the user to create a session.
-//  The user must fill in a name and choose a type.
-//  For a scan session, an interval must be filled in. 
-//  If a field is left empty or is invalid, an alert will be shown.
 
 import UIKit
 
+///  Requires: A given project.
+///  Presents a form to the user to create a session.
+///  The user must fill in a name and choose a type.
+///  For a scan session, an interval must be filled in.
+///  If a field is left empty or is invalid, an alert will be shown.
 class CreateSessionViewController: UIViewController {
     var delegate: CreateSessionViewControllerDelegate? = nil
     

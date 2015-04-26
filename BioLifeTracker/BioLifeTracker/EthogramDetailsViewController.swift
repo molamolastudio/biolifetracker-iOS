@@ -5,6 +5,9 @@
 //  Created by Michelle Tan on 11/3/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
+
+import UIKit
+
 //  This class displays a form to edit an ethogram.
 //  It can be made editable or not.
 //  The user must enter a name and at least one behaviour state to
@@ -16,9 +19,6 @@
 //  to indicate the success of the save. If the save was successful, the
 //  original ethogram object has already been updated. If not, an alert
 //  will inform the user of the incomplete form.
-
-import UIKit
-
 class EthogramDetailsViewController: UIViewController, UITableViewDataSource,
                                      UITableViewDelegate, UITextFieldDelegate,
                                      UITextViewDelegate  {

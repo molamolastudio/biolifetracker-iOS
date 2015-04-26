@@ -5,11 +5,11 @@
 //  Created by Michelle Tan on 10/3/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
-//  Displays a list of projects retrieved from ProjectManager.
-//  Informs its delegate if a project is selected.
 
 import UIKit
 
+///  Displays a list of projects retrieved from ProjectManager.
+///  Informs its delegate if a project is selected.
 class ProjectsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     var delegate: ProjectsViewControllerDelegate? = nil
     

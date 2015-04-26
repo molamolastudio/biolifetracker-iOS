@@ -5,16 +5,14 @@
 //  Created by Michelle Tan on 13/4/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
-//  Displays a graph showing a summary of the collected data in this project,
-//  a list of members with options and a list of sessions.
-//
-//  Allows users to add users or create sessions.
-//
-//  Informs its delegate if the user has selected a graph for further analysis,
-//  or a session.
 
 import UIKit
 
+///  Displays a graph showing a summary of the collected data in this project,
+///  a list of members with options and a list of sessions.
+///  Allows users to add users or create sessions.
+///  Informs its delegate if the user has selected a graph for further analysis,
+///  or a session.
 class ProjectHomeViewController: UIViewController, UITableViewDataSource,
                                  UITableViewDelegate, MemberPickerViewControllerDelegate,
                                  UIPopoverPresentationControllerDelegate,

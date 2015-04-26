@@ -5,11 +5,11 @@
 //  Created by Michelle Tan on 14/4/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
-//  Shows an interface for creating observations within a scan session.
-//  Allows user to create multiple observations within a single scan.
 
 import UIKit
 
+///  Shows an interface for creating observations within a scan session.
+///  Allows user to create multiple observations within a single scan.
 class ScanViewController: UIViewController, UICollectionViewDataSource,
                           UICollectionViewDelegate, UITextViewDelegate,
                           WeatherViewControllerDelegate, UIImagePickerControllerDelegate,
@@ -167,7 +167,9 @@ class ScanViewController: UIViewController, UICollectionViewDataSource,
         }
     }
     
+    
     // MARK: UICollectionViewDataSource METHODS
+    
     
     func collectionView(collectionView: UICollectionView,cellForItemAtIndexPath
         indexPath: NSIndexPath) -> UICollectionViewCell {
@@ -264,7 +266,9 @@ class ScanViewController: UIViewController, UICollectionViewDataSource,
         return itemCount
     }
     
+    
     // MARK: UICollectionViewDelegate METHODS
+    
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if collectionView == animalsView {
@@ -286,7 +290,9 @@ class ScanViewController: UIViewController, UICollectionViewDataSource,
         refreshView()
     }
     
+    
     // MARK: UITextViewDelegate METHODS
+    
     
     func textViewDidChange(textView: UITextView) {
         if selectedObservation != nil {
@@ -294,7 +300,9 @@ class ScanViewController: UIViewController, UICollectionViewDataSource,
         }
     }
     
+    
     // MARK: WeatherViewControllerDelegate METHODS
+    
     
     /// Updates the currently displayed observation's weather when user changes the weather.
     func userDidSelectWeather(weather: Weather?) {
@@ -323,7 +331,9 @@ class ScanViewController: UIViewController, UICollectionViewDataSource,
         }
     }
     
+    
     // MARK: ACTIONS FOR ARROW BUTTONS
+    
     
     @IBAction func leftArrowPressed(sender: UIButton) {
         selectedObservation = selectedObservation! - 1
@@ -337,8 +347,10 @@ class ScanViewController: UIViewController, UICollectionViewDataSource,
         refreshView()
     }
     
+    
     // MARK: METHODS FOR SHOWING IMAGE PICKER
 
+    
     /// Shows an image picker.
     @IBAction func photoBtnPressed(sender: UIButton) {
         imagePicker.popoverPresentationController!.sourceView = sender
@@ -382,7 +394,9 @@ class ScanViewController: UIViewController, UICollectionViewDataSource,
         self.presentViewController(picker, animated: true, completion: nil)
     }
     
+    
     // MARK: UIImagePickerControllerDelegate METHODS
+    
     
     /// Sets the selected image after the user picks an image.
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo
@@ -402,7 +416,10 @@ class ScanViewController: UIViewController, UICollectionViewDataSource,
         picker.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    
     // MARK: HELPER METHODS
+    
+    
     func getIndexOfState(state: BehaviourState) -> Int {
         for (var i = 0; i < states.count; i++) {
             if states[i] == state {

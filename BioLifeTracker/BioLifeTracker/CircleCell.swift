@@ -5,15 +5,15 @@
 //  Created by Michelle Tan on 18/4/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
-//  Custom UICollectionViewCell for displaying an individual in
-//  ScanViewController and FocalSessionViewController.
 
 import UIKit
 
+///  Custom UICollectionViewCell for displaying an individual in
+///  ScanViewController and FocalSessionViewController.
 class CircleCell: UICollectionViewCell {
     @IBOutlet weak var label: UILabel!
     
-    // Makes the cell circular.
+    /// Makes the cell circular.
     override func layoutSubviews() {
         super.layoutSubviews()
         

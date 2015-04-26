@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// This is the manager class for cloud storage.
 class CloudStorageManager {
     
     var globalCache: [String: [Int: NSDictionary]]
@@ -18,6 +19,7 @@ class CloudStorageManager {
         individualCache = [Int: Individual]()
     }
     
+    /// Implementation of Singleton Pattern
     class var sharedInstance: CloudStorageManager {
         struct Singleton {
             static let instance = CloudStorageManager()

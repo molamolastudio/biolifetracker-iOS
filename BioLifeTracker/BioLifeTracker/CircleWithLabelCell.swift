@@ -5,17 +5,17 @@
 //  Created by Michelle Tan on 18/4/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
-//  Custom UICollectionViewCell for displaying a behaviour state in 
-//  ScanViewController and FocalSessionViewController.
 
 import UIKit
 
+///  Custom UICollectionViewCell for displaying a behaviour state in
+///  ScanViewController and FocalSessionViewController.
 class CircleWithLabelCell: UICollectionViewCell {
     @IBOutlet weak var circleView: UIView!
     @IBOutlet weak var circleViewLabel: UILabel!
     @IBOutlet weak var label: UILabel!
     
-    // Makes the circleView circular.
+    /// Makes the circleView circular.
     override func layoutSubviews() {
         super.layoutSubviews()
         

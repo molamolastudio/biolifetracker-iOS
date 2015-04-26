@@ -5,12 +5,12 @@
 //  Created by Michelle Tan on 2/3/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
-//  Presents the first view that the user sees upon opening the app.
-//  Contains login buttons for the user. If the user has logged in,
-//  this screen dismisses itself.
 
 import UIKit
 
+///  Presents the first view that the user sees upon opening the app.
+///  Contains login buttons for the user. If the user has logged in,
+///  this screen dismisses itself.
 class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDelegate {
     
     @IBOutlet weak var btnLogin: FBLoginView!
@@ -42,11 +42,13 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: UIAlertControllerStyle.Alert)
     }
     
+    /// This function sets up the Facebook login button to Facebook delegate.
     func setupFacebookLoginButton() {
         self.btnLogin.delegate = self
         self.btnLogin.readPermissions = ["public_profile", "email", "user_friends"]
     }
     
+    /// This function sets up the Google login button to Google delegate.
     func setupGoogleLoginButton() {
         signIn = GPPSignIn.sharedInstance()
         signIn?.shouldFetchGooglePlusUser = true
@@ -57,6 +59,7 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         signIn?.delegate = self
     }
     
+    /// This function dismisses the View Controller.
     func dismissSelf() {
         
         alert?.dismissViewControllerAnimated(true, completion: nil)
@@ -78,7 +81,8 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     }
 
     
-    // FACEBOOK METHODS
+    // MARK: IMPLEMENTATION OF FACEBOOK METHODS
+    
     
     func loginViewShowingLoggedInUser(loginView : FBLoginView!) {
         // this method is called before loginViewFetchedUserInfo
@@ -95,22 +99,20 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
         }
     }
     
-    func loginViewShowingLoggedOutUser(loginView : FBLoginView!) {
-    }
+    func loginViewShowingLoggedOutUser(loginView : FBLoginView!) { }
     
     func loginView(loginView : FBLoginView!, handleError:NSError) {
         println("Error: \(handleError.localizedDescription)")
     }
     
-    // GOOGLE PLUS METHODS
-    func refreshInterfaceBasedOnSignIn() {
-        
-    }
+    
+    // MARK: IMPLEMENTATION OF GOOGLE METHODS
+    
+    
+    func refreshInterfaceBasedOnSignIn() { }
     
     func finishedWithAuth(auth: GTMOAuth2Authentication!, error: NSError!) {
         if error == nil {
-            println("User Logged In")
-            
             // Show loading alert
             self.presentViewController(alert!, animated: false, completion: nil)
             
@@ -127,7 +129,6 @@ class FirstViewController: UIViewController, FBLoginViewDelegate, GPPSignInDeleg
     }
     
     func signOut() {
-        println("User signed out")
         GPPSignIn.sharedInstance().signOut()
     }
     

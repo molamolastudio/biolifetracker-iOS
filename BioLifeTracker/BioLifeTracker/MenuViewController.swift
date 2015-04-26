@@ -5,11 +5,11 @@
 //  Created by Michelle Tan on 31/3/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
-//  Displays the menu for the app. Uses the delegate to return touch events
-//  on the cells to its parent.
 
 import UIKit
 
+///  Displays the menu for the app. Uses the delegate to return touch events
+///  on the cells to its parent.
 class MenuViewController: UITableViewController {
     
     var delegate: MenuViewControllerDelegate? = nil
