@@ -232,7 +232,6 @@ class EthogramFormViewController: UIViewController, UITableViewDataSource,
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        println("did select \(indexPath)")
         if isFirstSection(indexPath.section) {
             let cell = tableView.cellForRowAtIndexPath(indexPath) as! SingleLineTextCell
             cell.textField.becomeFirstResponder()

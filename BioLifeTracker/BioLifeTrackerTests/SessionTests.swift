@@ -136,9 +136,6 @@ class SessionTests: XCTestCase {
         session3.addObservation([observation16, observation17, observation18, observation19, observation20, observation21])
 
         let timestamps = session3.getTimestamps()
-        for timestamp in timestamps {
-            println(timestamp)
-        }
         
     }
     

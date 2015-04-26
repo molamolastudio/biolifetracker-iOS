@@ -6,14 +6,14 @@
 //  Maintained by Li Jia'En, Nicholette.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
+
+import Foundation
+
 //  This is a data model class for Individual.
 //  This class contains methods to initialise Individual instances,
 //  get and set instance attributes.
 //  This class also contains methods to store and retrieve saved
 //  Individual instances to the disk.
-
-import Foundation
-
 class Individual: BiolifeModel {
     // Constants
     static let emptyString = ""
