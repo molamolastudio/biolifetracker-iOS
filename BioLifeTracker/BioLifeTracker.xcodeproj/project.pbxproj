@@ -193,12 +193,12 @@
 		AC40E2D71AECA28E0078A169 /* BLTIndividualProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40E2CD1AECA28E0078A169 /* BLTIndividualProtocol.swift */; };
 		AC40E2D81AECA28E0078A169 /* BLTLocationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40E2CE1AECA28E0078A169 /* BLTLocationProtocol.swift */; };
 		AC40E2D91AECA28E0078A169 /* BLTObservationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40E2CF1AECA28E0078A169 /* BLTObservationProtocol.swift */; };
-		AC40E2DA1AECA28E0078A169 /* BLTPhotoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40E2D01AECA28E0078A169 /* BLTPhotoProtocol.swift */; };
 		AC40E2DB1AECA28E0078A169 /* BLTProjectProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40E2D11AECA28E0078A169 /* BLTProjectProtocol.swift */; };
 		AC40E2DC1AECA28E0078A169 /* BLTSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40E2D21AECA28E0078A169 /* BLTSessionProtocol.swift */; };
 		AC40E2DD1AECA28E0078A169 /* BLTTagProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40E2D31AECA28E0078A169 /* BLTTagProtocol.swift */; };
 		AC40E2DE1AECA28E0078A169 /* BLTWeatherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40E2D41AECA28E0078A169 /* BLTWeatherProtocol.swift */; };
 		AC40E3231AECABB20078A169 /* BLTUserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40E3221AECABB20078A169 /* BLTUserProtocol.swift */; };
+		AC40E36B1AECE5930078A169 /* ExportProjectService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40E36A1AECE5930078A169 /* ExportProjectService.swift */; };
 		AC530C6E1AE4F23C008E1A17 /* bg_horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C6C1AE4F23C008E1A17 /* bg_horizontal.png */; };
 		AC530C6F1AE4F23C008E1A17 /* bg_vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C6D1AE4F23C008E1A17 /* bg_vertical.png */; };
 		AC530C711AE4F281008E1A17 /* bltname.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C701AE4F281008E1A17 /* bltname.png */; };
@@ -452,6 +452,7 @@
 		AC40E2D31AECA28E0078A169 /* BLTTagProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTTagProtocol.swift; sourceTree = "<group>"; };
 		AC40E2D41AECA28E0078A169 /* BLTWeatherProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTWeatherProtocol.swift; sourceTree = "<group>"; };
 		AC40E3221AECABB20078A169 /* BLTUserProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTUserProtocol.swift; sourceTree = "<group>"; };
+		AC40E36A1AECE5930078A169 /* ExportProjectService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExportProjectService.swift; sourceTree = "<group>"; };
 		AC530C6C1AE4F23C008E1A17 /* bg_horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_horizontal.png; sourceTree = "<group>"; };
 		AC530C6D1AE4F23C008E1A17 /* bg_vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_vertical.png; sourceTree = "<group>"; };
 		AC530C701AE4F281008E1A17 /* bltname.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bltname.png; sourceTree = "<group>"; };
@@ -595,6 +596,7 @@
 				248DBBE21ADD5348001CA04F /* BLTProjectSerializer.swift */,
 			);
 			name = Serialization;
+			path = BioLifeTracker;
 			sourceTree = "<group>";
 		};
 		24E32D3B1AB1991C003C4E0A /* Frameworks */ = {
@@ -633,8 +635,6 @@
 		24E32D3C1AB19954003C4E0A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				248DBBE01ADD5331001CA04F /* Serialization */,
-				AC6A24981ADD1A8100CF33D6 /* BLTProtocols */,
 				242C6E061AC80F050024ECEF /* BiolifeModel.swift */,
 				3205E7731AAEDA85006F374D /* Project.swift */,
 				AC188C7B1AC2B11A00CB08C0 /* Storable.swift */,
@@ -654,6 +654,7 @@
 		3205E7391AAED9F9006F374D = {
 			isa = PBXGroup;
 			children = (
+				AC40E3681AECE4760078A169 /* BLT Library */,
 				24C706151AE68E0900E48B94 /* Settings.bundle */,
 				782EEB5D1AE53DA800DB0384 /* RandomColor */,
 				3205E7671AAEDA38006F374D /* Images */,
@@ -868,6 +869,24 @@
 			name = Analysis;
 			sourceTree = "<group>";
 		};
+		AC40E3681AECE4760078A169 /* BLT Library */ = {
+			isa = PBXGroup;
+			children = (
+				AC40E3691AECE4B20078A169 /* BLTService */,
+				AC6A24981ADD1A8100CF33D6 /* BLTProtocols */,
+				248DBBE01ADD5331001CA04F /* Serialization */,
+			);
+			name = "BLT Library";
+			sourceTree = "<group>";
+		};
+		AC40E3691AECE4B20078A169 /* BLTService */ = {
+			isa = PBXGroup;
+			children = (
+				AC40E36A1AECE5930078A169 /* ExportProjectService.swift */,
+			);
+			name = BLTService;
+			sourceTree = "<group>";
+		};
 		AC6A24981ADD1A8100CF33D6 /* BLTProtocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -884,6 +903,7 @@
 				AC40E2D41AECA28E0078A169 /* BLTWeatherProtocol.swift */,
 			);
 			name = BLTProtocols;
+			path = BioLifeTracker;
 			sourceTree = "<group>";
 		};
 		AC9162AA1ACA69BF00FED714 /* Cloud Storage */ = {
@@ -1105,7 +1125,6 @@
 				329B29411AD16058007ADC65 /* FirstViewController.swift in Sources */,
 				326773C11ACAEFB000899745 /* MultiLineTextCell.swift in Sources */,
 				326773BD1ACAEFB000899745 /* FormFieldData.swift in Sources */,
-				AC40E2DA1AECA28E0078A169 /* BLTPhotoProtocol.swift in Sources */,
 				321D62C31AD2615B00CF9BE9 /* ProjectsViewControllerDelegate.swift in Sources */,
 				242C6E091AC86BFD0024ECEF /* Tag.swift in Sources */,
 				781FD46F1AE466EB00BBC0E0 /* AnalysisTableHeader.swift in Sources */,
@@ -1148,6 +1167,7 @@
 				326773C01ACAEFB000899745 /* FormViewController.swift in Sources */,
 				2408193A1AD503DD00DFE8AA /* NSURL+Utils.swift in Sources */,
 				242465291AD67EB20035BD2C /* CloudStorage.swift in Sources */,
+				AC40E36B1AECE5930078A169 /* ExportProjectService.swift in Sources */,
 				2458F4D11AE160EC0006DFC7 /* BLTProjectDeserializer.swift in Sources */,
 				242C6E071AC80F050024ECEF /* BiolifeModel.swift in Sources */,
 				32423B891ADFDC8600AFA2F8 /* CustomPickerPopupCell.swift in Sources */,
