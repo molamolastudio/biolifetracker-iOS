@@ -198,6 +198,7 @@
 		AC40E2DC1AECA28E0078A169 /* BLTSessionProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40E2D21AECA28E0078A169 /* BLTSessionProtocol.swift */; };
 		AC40E2DD1AECA28E0078A169 /* BLTTagProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40E2D31AECA28E0078A169 /* BLTTagProtocol.swift */; };
 		AC40E2DE1AECA28E0078A169 /* BLTWeatherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40E2D41AECA28E0078A169 /* BLTWeatherProtocol.swift */; };
+		AC40E3231AECABB20078A169 /* BLTUserProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40E3221AECABB20078A169 /* BLTUserProtocol.swift */; };
 		AC530C6E1AE4F23C008E1A17 /* bg_horizontal.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C6C1AE4F23C008E1A17 /* bg_horizontal.png */; };
 		AC530C6F1AE4F23C008E1A17 /* bg_vertical.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C6D1AE4F23C008E1A17 /* bg_vertical.png */; };
 		AC530C711AE4F281008E1A17 /* bltname.png in Resources */ = {isa = PBXBuildFile; fileRef = AC530C701AE4F281008E1A17 /* bltname.png */; };
@@ -452,6 +453,7 @@
 		AC40E2D21AECA28E0078A169 /* BLTSessionProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTSessionProtocol.swift; sourceTree = "<group>"; };
 		AC40E2D31AECA28E0078A169 /* BLTTagProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTTagProtocol.swift; sourceTree = "<group>"; };
 		AC40E2D41AECA28E0078A169 /* BLTWeatherProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTWeatherProtocol.swift; sourceTree = "<group>"; };
+		AC40E3221AECABB20078A169 /* BLTUserProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLTUserProtocol.swift; sourceTree = "<group>"; };
 		AC530C6C1AE4F23C008E1A17 /* bg_horizontal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_horizontal.png; sourceTree = "<group>"; };
 		AC530C6D1AE4F23C008E1A17 /* bg_vertical.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_vertical.png; sourceTree = "<group>"; };
 		AC530C701AE4F281008E1A17 /* bltname.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bltname.png; sourceTree = "<group>"; };
@@ -875,6 +877,7 @@
 				AC40E2CB1AECA28E0078A169 /* BLTBehaviourStateProtocol.swift */,
 				AC40E2CC1AECA28E0078A169 /* BLTEthogramProtocol.swift */,
 				AC40E2CD1AECA28E0078A169 /* BLTIndividualProtocol.swift */,
+				AC40E3221AECABB20078A169 /* BLTUserProtocol.swift */,
 				AC40E2CE1AECA28E0078A169 /* BLTLocationProtocol.swift */,
 				AC40E2CF1AECA28E0078A169 /* BLTObservationProtocol.swift */,
 				AC40E2D01AECA28E0078A169 /* BLTPhotoProtocol.swift */,
@@ -1119,6 +1122,7 @@
 				32EA4B4A1AE51E5200EC7B8C /* ProjectFormViewController.swift in Sources */,
 				329B293A1AD15BBF007ADC65 /* PhotoPickerCell.swift in Sources */,
 				32423BAB1AE4F5CF00AFA2F8 /* WeatherViewController.swift in Sources */,
+				AC40E3231AECABB20078A169 /* BLTUserProtocol.swift in Sources */,
 				326773C21ACAEFB000899745 /* SingleLineTextCell.swift in Sources */,
 				AC40E2DD1AECA28E0078A169 /* BLTTagProtocol.swift in Sources */,
 				ACDE13AD1AD0C0540075AC35 /* EthogramManager.swift in Sources */,
