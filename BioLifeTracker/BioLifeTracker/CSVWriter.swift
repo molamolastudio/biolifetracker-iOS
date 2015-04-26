@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// This is a helper class to convert observation objects to
+/// CSV file format.
 class CSVWriter {
     var rows = [String]()
     

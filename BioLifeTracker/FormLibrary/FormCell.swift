@@ -5,13 +5,13 @@
 //  Created by Michelle Tan on 30/3/15.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
-//  Custom UITableViewCell for use in a FormViewController.
-//  Acts as the base class with methods to adjust cell padding and add
-//  rounded corners.
-//  All cells used in FormViewController must inherit from this class.
 
 import UIKit
 
+///  Custom UITableViewCell for use in a FormViewController.
+///  Acts as the base class with methods to adjust cell padding and add
+///  rounded corners.
+///  All cells used in FormViewController must inherit from this class.
 class FormCell: UITableViewCell {
     let radius: CGFloat = 10
     

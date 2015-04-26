@@ -3,11 +3,14 @@
 //  BioLifeTracker
 //
 //  Created by Li Jia'En, Nicholette on 12/4/15.
+//  Maintained by Andhieka Putra.
 //  Copyright (c) 2015 Mola Mola Studios. All rights reserved.
 //
 
 import Foundation
 
+/// This class exports the project's observations in CSV file format,
+/// which can be opened in Microsoft Excel.
 class ExportObservationsService {
     var project: Project
     var plistPath: String
@@ -21,9 +24,12 @@ class ExportObservationsService {
     func openInOtherApps(button: UIBarButtonItem) {
         startWritingCSVToDisk()
         if let fileURL = NSURL.fileURLWithPath(plistPath) {
-            ExportObservationsService.documentInteractionVC = UIDocumentInteractionController(URL: fileURL)
-            ExportObservationsService.documentInteractionVC.UTI = "public.comma-separated-values-text"
-            ExportObservationsService.documentInteractionVC.presentOpenInMenuFromBarButtonItem(button, animated: true)
+            ExportObservationsService.documentInteractionVC =
+                                        UIDocumentInteractionController(URL: fileURL)
+            ExportObservationsService.documentInteractionVC.UTI =
+                                        "public.comma-separated-values-text"
+            ExportObservationsService.documentInteractionVC.presentOpenInMenuFromBarButtonItem(
+                                                                            button, animated: true)
         }
     }
     
@@ -55,7 +61,8 @@ class ExportObservationsService {
             let dispatchQueue = dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)
             dispatch_async(dispatchQueue, {
                 let csvString = self.generateCSV()
-                csvString.writeToFile(self.plistPath, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+                csvString.writeToFile(self.plistPath, atomically: true,
+                                        encoding: NSUTF8StringEncoding, error: nil)
             })
         }
     }
@@ -65,7 +72,8 @@ class ExportObservationsService {
         let dateFormatter = BiolifeDateFormatter()
         
         // Write CSV Header
-        let header = ["Session Name", "Behaviour State", "Information", "Timestamp", "Individual", "Location", "Weather", "Creator"]
+        let header = ["Session Name", "Behaviour State", "Information",
+                        "Timestamp", "Individual", "Location", "Weather", "Creator"]
         csvWriter.addRow(header)
         
         // Write CSV Body
@@ -75,7 +83,8 @@ class ExportObservationsService {
             let state = observation.state.name
             let information = observation.information
             let timestamp = dateFormatter.formatDate(observation.timestamp)
-            let individual = (observation.individual == nil) ? "" : observation.individual!.label
+            let individual = (observation.individual == nil) ? ""
+                                                    : observation.individual!.label
             let location: String
             if let tempLocation = observation.location {
                 location = tempLocation.location
@@ -89,7 +98,8 @@ class ExportObservationsService {
                 weather = ""
             }
             let creator = observation.createdBy.name
-            csvWriter.addRow([sessionName, state, information, timestamp, individual, location, weather, creator])
+            csvWriter.addRow([sessionName, state, information, timestamp,
+                                            individual, location, weather, creator])
         }
         return csvWriter.getResult()
     }
