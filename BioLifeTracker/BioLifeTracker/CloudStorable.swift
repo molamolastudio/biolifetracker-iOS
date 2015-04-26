@@ -10,14 +10,32 @@
 import Foundation
 
 protocol CloudStorable {
+    /// classUrl should return the URL of the class, in the web server.
+    /// Must not include the web server base URL.
     var classUrl: String { get }
+    
+    /// requiresMultipart should return true if the object contains binary
+    /// files, that is not representable in JSON text files.
     var requiresMultipart: Bool { get }
     
+    /// Returns id of the item. An item that has never been saved to server
+    /// should have id = nil.
     var id: Int? { get }
+    
+    /// To be called by CloudStorageTask after operation. Will set the id
+    /// of the item to correspond with ID in the server.
     func setId(id: Int?)
     
+    /// To provide additional security by granting exclusive access of an item
+    /// to a CloudStorageTask.
     var isLocked: Bool { get }
+    
+    /// To be called by CloudStorageTask before processing item. Must set
+    /// isLocked property to true.
     func lock()
+    
+    /// To be called by CloudStorageTask after processing item. Must set
+    /// isLocked property to false.
     func unlock()
     
     /// This function is about LOADING the object. It should read simple properties

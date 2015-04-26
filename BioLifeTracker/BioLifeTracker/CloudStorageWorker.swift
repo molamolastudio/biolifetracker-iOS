@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// Accepts enqueuing of CloudStorage tasks for asynchronous execution.
+/// Provides onProgress and onFinished updates if the handler is provided.
 class CloudStorageWorker {
     var pendingTasks: [CloudStorageTask] = [CloudStorageTask]()
     var locked: Bool = false
