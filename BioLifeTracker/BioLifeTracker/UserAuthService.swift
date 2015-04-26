@@ -8,13 +8,18 @@
 
 import Foundation
 
+/// This class handles the login authentication of the user.
 class UserAuthService {
     enum OAuthProvider {
         case Facebook, Google
     }
+    
+    // Private Attributes
     private var _user: User = User(name: "Default", email: "Default")
     private var _accessToken: String?
     private var _authProvider: OAuthProvider?
+    
+    // Accessors
     var user: User {
         get { return _user }
     }
@@ -26,6 +31,7 @@ class UserAuthService {
     }
     var onLoggedInHandler: (() -> ())?
     
+    // Implementation of Singleton Pattern
     class var sharedInstance: UserAuthService {
         struct Singleton {
             static let instance = UserAuthService()
@@ -43,26 +49,31 @@ class UserAuthService {
         }
     }
     
+    /// This function allows the application to run without a user if required.
     func useDefaultUser() {
         initialiseManagers(user.id)
     }
     
+    /// This function checks whether the user has an access token.
     func hasAccessToken() -> Bool {
         if accessToken == nil {
-           tryLoadTokenFromDisk()
+            tryLoadTokenFromDisk()
         }
         return accessToken != nil
     }
     
+    /// This function initialises the manager with the user id.
     func initialiseManagers(id: Int) {
         if self.user.id == 0 { return } // not logged in
         
-        let loadedProjectMng = ProjectManager.loadFromArchives(String(id)) as? ProjectManager
+        let loadedProjectMng = ProjectManager.loadFromArchives(String(id))
+            as? ProjectManager
         if loadedProjectMng != nil {
             ProjectManager.sharedInstance.updateProjects(loadedProjectMng!.projects)
         }
         
-        let loadedEthogramMng = EthogramManager.loadFromArchives(String(id)) as! EthogramManager?
+        let loadedEthogramMng = EthogramManager.loadFromArchives(String(id))
+            as? EthogramManager
         if loadedEthogramMng != nil {
             EthogramManager.sharedInstance.updateEthograms(loadedEthogramMng!.ethograms)
         }
@@ -74,8 +85,9 @@ class UserAuthService {
         facebookToken: String,
         onCompletion: (() -> ())?) {
             
-        loginToServerWithSocialLogin("facebook", withToken: facebookToken, onCompletion: onCompletion)
-        _authProvider = .Facebook
+            loginToServerWithSocialLogin("facebook", withToken: facebookToken,
+                onCompletion: onCompletion)
+            _authProvider = .Facebook
     }
     
     /// Login to server using Google token asynchronously.
@@ -84,8 +96,9 @@ class UserAuthService {
         googleToken: String,
         onCompletion: (() -> ())?) {
             
-        loginToServerWithSocialLogin("google", withToken: googleToken, onCompletion: onCompletion)
-        _authProvider = .Google
+            loginToServerWithSocialLogin("google", withToken: googleToken,
+                onCompletion: onCompletion)
+            _authProvider = .Google
     }
     
     // for testing purposes. Unit test cannot login using facebook / google.
@@ -120,26 +133,26 @@ class UserAuthService {
         withToken token: String,
         onCompletion: (() -> ())?) {
             
-        dispatch_async(CloudStorage.networkThread, {
-            let destinationUrl = NSURL(string: CloudStorage.serverUrl)!
-                .URLByAppendingPathComponent("auth")
-                .URLByAppendingPathComponent(provider)
-                .URLByAppendingSlash()
-            var postDictionary = NSMutableDictionary()
-            postDictionary.setValue(token, forKey: "access_token")
-            let postData = CloudStorage.dictionaryToJsonData(postDictionary)
-            let responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "POST", withPayload: postData)
-            if responseData == nil { onCompletion?(); return }
-            let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)
-            if responseDictionary == nil { onCompletion?(); return }
-            let serverToken = responseDictionary!["key"] as! String
-            self._accessToken = serverToken
-            self.getCurrentUserFromServer()
-            onCompletion?()
-        })
+            dispatch_async(CloudStorage.networkThread, {
+                let destinationUrl = NSURL(string: CloudStorage.serverUrl)!
+                    .URLByAppendingPathComponent("auth")
+                    .URLByAppendingPathComponent(provider)
+                    .URLByAppendingSlash()
+                var postDictionary = NSMutableDictionary()
+                postDictionary.setValue(token, forKey: "access_token")
+                let postData = CloudStorage.dictionaryToJsonData(postDictionary)
+                let responseData = CloudStorage.makeRequestToUrl(destinationUrl, withMethod: "POST", withPayload: postData)
+                if responseData == nil { onCompletion?(); return }
+                let responseDictionary = CloudStorage.readFromJsonAsDictionary(responseData!)
+                if responseDictionary == nil { onCompletion?(); return }
+                let serverToken = responseDictionary!["key"] as! String
+                self._accessToken = serverToken
+                self.getCurrentUserFromServer()
+                onCompletion?()
+            })
     }
     
-
+    
     /// [Async] Gets the currently logged in user information from server. The server
     /// will deduce the currently logged in user from the access token sent in
     /// HTTP Header. If the token is not accepted, this function will return nil.
@@ -166,18 +179,23 @@ class UserAuthService {
         })
     }
     
+    /// This function handles the clearing up of any remaining user data.
     func handleLogOut() {
         deleteTokenFromDisk()
         _accessToken = nil
         _user = User(name: "Default", email: "Default")
     }
     
+    /// This function attempts to save the token to local disk.
     private func trySaveTokenToDisk() {
-        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(
+            NSSearchPathDirectory.DocumentDirectory,
+            NSSearchPathDomainMask.UserDomainMask, true) as? [String]
         if let token = _accessToken {
             if let dir = dirs?[0] {
                 let path = dir.stringByAppendingPathComponent("servertoken")
-                let success = token.writeToFile(path, atomically: true, encoding: NSUTF8StringEncoding)
+                let success = token.writeToFile(path, atomically: true,
+                    encoding: NSUTF8StringEncoding)
                 if success {
                     saveUserToDisk()
                 }
@@ -185,23 +203,30 @@ class UserAuthService {
         }
     }
     
+    /// This function attempts to load the token from local disk.
     private func tryLoadTokenFromDisk() -> Bool {
-        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(
+            NSSearchPathDirectory.DocumentDirectory,
+            NSSearchPathDomainMask.UserDomainMask, true) as? [String]
         if let dir = dirs?[0] {
             let path = dir.stringByAppendingPathComponent("servertoken")
-            if let token = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil) {
-                let userDataIsAvailable = loadUserFromDisk()
-                if userDataIsAvailable {
-                    _accessToken = token as String
-                    return true
-                }
+            if let token = NSString(contentsOfFile: path,
+                encoding: NSUTF8StringEncoding, error: nil) {
+                    let userDataIsAvailable = loadUserFromDisk()
+                    if userDataIsAvailable {
+                        _accessToken = token as String
+                        return true
+                    }
             }
         }
         return false
     }
     
+    /// This function deletes the user token from disk.
     private func deleteTokenFromDisk() {
-        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(
+            NSSearchPathDirectory.DocumentDirectory,
+            NSSearchPathDomainMask.UserDomainMask, true) as? [String]
         if let dir = dirs?[0] {
             let path = dir.stringByAppendingPathComponent("servertoken")
             let fileManager = NSFileManager.defaultManager()
@@ -214,8 +239,11 @@ class UserAuthService {
         }
     }
     
+    /// This function saves the user to disk.
     private func saveUserToDisk() {
-        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(
+            NSSearchPathDirectory.DocumentDirectory,
+            NSSearchPathDomainMask.UserDomainMask, true) as? [String]
         
         if let dir = dirs?[0] {
             let path = dir.stringByAppendingPathComponent("current_user")
@@ -223,8 +251,11 @@ class UserAuthService {
         }
     }
     
+    /// This function loads the user from disk.
     private func loadUserFromDisk() -> Bool {
-        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(
+            NSSearchPathDirectory.DocumentDirectory,
+            NSSearchPathDomainMask.UserDomainMask, true) as? [String]
         if let dir = dirs?[0] {
             let path = dir.stringByAppendingPathComponent("current_user")
             let user = NSKeyedUnarchiver.unarchiveObjectWithFile(path) as? User
@@ -238,8 +269,11 @@ class UserAuthService {
         return false
     }
     
+    /// This function deletes the user from the disk.
     private func deleteUserFromDisk() {
-        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true) as? [String]
+        let dirs : [String]? = NSSearchPathForDirectoriesInDomains(
+            NSSearchPathDirectory.DocumentDirectory,
+            NSSearchPathDomainMask.UserDomainMask, true) as? [String]
         if let dir = dirs?[0] {
             let path = dir.stringByAppendingPathComponent("current_user")
             let fileManager = NSFileManager.defaultManager()
