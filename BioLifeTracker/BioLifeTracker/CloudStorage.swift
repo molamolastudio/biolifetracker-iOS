@@ -161,7 +161,7 @@ struct CloudStorage {
     static func serializeToJson(dictionary: NSDictionary) -> NSData? {
         var serializationError: NSError?
         let data = NSJSONSerialization.dataWithJSONObject(dictionary,
-            options: NSJSONWritingOptions.PrettyPrinted,
+            options: NSJSONWritingOptions(0),
             error: &serializationError)
         assert(data != nil, "Error serializing to JSON. JSON only allows NSString, NSNumber, NSArray, NSDictionary, or NSNull")
         

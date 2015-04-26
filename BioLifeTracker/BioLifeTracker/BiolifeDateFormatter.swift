@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// Formats date in a format compatible with BioLifeTracker
+/// Web Service API.
 class BiolifeDateFormatter {
     var dateFormatter = NSDateFormatter()
     var dateFormatterNoMillis = NSDateFormatter()
