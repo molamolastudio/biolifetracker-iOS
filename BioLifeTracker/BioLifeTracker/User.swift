@@ -48,7 +48,7 @@ class User: NSObject, NSCoding {
         if recursive {
             id = dictionary[User.idKey] as! Int
             email = dictionary[User.emailKey] as! String
-            name = dictionary[User.nameKey] as! String
+            name = dictionary[User.usernameKey] as! String
         } else {
             id = dictionary[User.idKey] as! Int
             email = dictionary[User.emailKey] as! String
@@ -70,7 +70,7 @@ class User: NSObject, NSCoding {
     func encodeRecursivelyWithDictionary(dictionary: NSMutableDictionary) {
         dictionary.setValue(id, forKey: User.idKey)
         dictionary.setValue(email, forKey: User.emailKey)
-        dictionary.setValue(name, forKey: User.nameKey)
+        dictionary.setValue(name, forKey: User.usernameKey)
     }
     
     
