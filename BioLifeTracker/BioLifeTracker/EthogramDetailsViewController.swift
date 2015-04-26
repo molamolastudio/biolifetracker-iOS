@@ -123,12 +123,11 @@ class EthogramDetailsViewController: UIViewController, UITableViewDataSource,
             
             originalEthogram!.updateName(ethogram.name)
             
-            for (var i = 0; i < ethogram.behaviourStates.count; i++) {
-                if i < originalEthogram!.behaviourStates.count {
-                    originalEthogram!.behaviourStates[i].updateName(ethogram.behaviourStates[i].name)
-                    originalEthogram!.behaviourStates[i].updateInformation(ethogram.behaviourStates[i].name)
-                } else {
-                    originalEthogram!.addBehaviourState(ethogram.behaviourStates[i])
+            if !ethogram.behaviourStates.isEmpty {
+                originalEthogram!.removeBehaviourStates()
+                
+                for behaviourState in ethogram.behaviourStates {
+                    originalEthogram!.addBehaviourState(behaviourState)
                 }
             }
             
